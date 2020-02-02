@@ -348,21 +348,21 @@ public class MediaViewerActivity extends XmppActivity implements AudioManager.On
     }
 
     private void pausePlayer() {
-        if (isVideo && isPlaying()) {
+        if (player != null && isVideo && isPlaying()) {
             player.setPlayWhenReady(false);
             player.getPlaybackState();
         }
     }
 
     private void startPlayer() {
-        if (isVideo && !isPlaying()) {
+        if (player != null && isVideo && !isPlaying()) {
             player.setPlayWhenReady(true);
             player.getPlaybackState();
         }
     }
 
     private void stopPlayer() {
-        if (isVideo) {
+        if (player != null && isVideo) {
             if (isPlaying()) {
                 player.stop(true);
             }
