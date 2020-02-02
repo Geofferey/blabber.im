@@ -865,7 +865,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
     }
 
     private void displayAudioMessage(ViewHolder viewHolder, Message message, boolean darkBackground) {
-        toggleWhisperInfo(viewHolder, message, false, darkBackground);
+        toggleWhisperInfo(viewHolder, message, showTitle(message), darkBackground);
         viewHolder.image.setVisibility(View.GONE);
         viewHolder.gifImage.setVisibility(View.GONE);
         viewHolder.richlinkview.setVisibility(View.GONE);
@@ -875,6 +875,31 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         audioPlayer.setVisibility(View.VISIBLE);
         AudioPlayer.ViewHolder.get(audioPlayer).setTheme(darkBackground, activity.isOrangeTheme());
         this.audioPlayer.init(audioPlayer, message);
+    }
+
+    private boolean showTitle(Message message) {
+        boolean show = false;
+        if (message.getFileParams().subject.length() != 0) {
+            try {
+                byte[] data = Base64.decode(message.getFileParams().subject, Base64.DEFAULT);
+                show = (new String(data, "UTF-8").length() != 0);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        return show;
+    }
+
+    private String getTitle(Message message) {
+        if (message.getFileParams().subject.length() != 0) {
+            try {
+                byte[] data = Base64.decode(message.getFileParams().subject, Base64.DEFAULT);
+                return new String(data, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        return "";
     }
 
     private void displayImageMessage(ViewHolder viewHolder, final Message message, final boolean darkBackground) {
@@ -945,6 +970,12 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
 
     private void toggleWhisperInfo(ViewHolder viewHolder, final Message message, final boolean includeBody, final boolean darkBackground) {
         SpannableStringBuilder messageBody = new SpannableStringBuilder(replaceYoutube(activity.getApplicationContext(), message.getBody()));
+
+        final String mimeType = message.getMimeType();
+        if (mimeType != null && message.getMimeType().contains("audio")) {
+            messageBody.clear();
+            messageBody.append(getTitle(message));
+        }
         Editable body;
         if (darkBackground) {
             viewHolder.messageBody.setTextAppearance(getContext(), R.style.TextAppearance_Conversations_Body1_OnDark);

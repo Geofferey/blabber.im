@@ -873,6 +873,7 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
                 case 6:
                     fileParams.url = parseUrl(parts[0]);
                     fileParams.size = parseLong(parts[1]);
+                    fileParams.runtime = parseInt(parts[4]);
                     fileParams.subject = parseString(parts[5]);
                     break;
 

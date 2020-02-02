@@ -1155,7 +1155,7 @@ public class FileBackend {
                 //fall threw
             }
         } else if (audio) {
-            body.append("|0|0|").append(getMediaRuntime(file));
+            body.append("|0|0|").append(getMediaRuntime(file)).append('|').append(getAudioTitleArtist(file));
         } else if (vcard) {
             body.append("|0|0|0|").append(getVCard(file));
         } else if (apk) {
@@ -1179,6 +1179,33 @@ public class FileBackend {
             return Integer.parseInt(mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
         } catch (RuntimeException e) {
             return 0;
+        }
+    }
+
+    private String getAudioTitleArtist(File file) {
+        try {
+            MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
+            mediaMetadataRetriever.setDataSource(file.toString());
+            StringBuilder builder = new StringBuilder();
+            String artist = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+            String title = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+            if (artist != null && artist.length() > 0) {
+                builder.append(artist);
+            }
+            if (title != null && title.length() > 0) {
+                builder.append(" - ");
+                builder.append(title);
+            }
+            try {
+                byte[] data = builder.toString().trim().getBytes("UTF-8");
+                return Base64.encodeToString(data, Base64.DEFAULT);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+                return "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
         }
     }
 
