@@ -1183,17 +1183,30 @@ public class FileBackend {
     }
 
     private String getAudioTitleArtist(File file) {
+        String artist;
+        String title;
+        StringBuilder builder = new StringBuilder();
         try {
             MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
             mediaMetadataRetriever.setDataSource(file.toString());
-            StringBuilder builder = new StringBuilder();
-            String artist = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-            String title = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+            artist = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+            if (artist == null) {
+                artist = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUMARTIST);
+            }
+            if (artist == null) {
+                artist = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_COMPOSER);
+            }
+            title = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+            mediaMetadataRetriever.release();
+            boolean separator = false;
             if (artist != null && artist.length() > 0) {
                 builder.append(artist);
+                separator = true;
             }
             if (title != null && title.length() > 0) {
-                builder.append(" - ");
+                if (separator) {
+                    builder.append(" - ");
+                }
                 builder.append(title);
             }
             try {
