@@ -62,8 +62,10 @@ public class ExceptionHelper {
             PackageInfo packageInfo;
             String release = Build.VERSION.RELEASE;
             int sdkVersion = Build.VERSION.SDK_INT;
+            String deviceName = getDeviceName();
             try {
                 packageInfo = pm.getPackageInfo(activity.getPackageName(), PackageManager.GET_SIGNATURES);
+                report.append("Device: ").append(deviceName).append('\n');
                 report.append("Android SDK: ").append(sdkVersion).append(" (").append(release).append(")").append('\n');
                 report.append("Version: ").append(packageInfo.versionName).append('\n');
                 report.append("Last Update: ").append(DATE_FORMAT.format(new Date(packageInfo.lastUpdateTime))).append('\n');
@@ -97,6 +99,16 @@ public class ExceptionHelper {
             return true;
         } catch (final IOException ignored) {
             return false;
+        }
+    }
+
+    public static String getDeviceName() {
+        String manufacturer = Build.MANUFACTURER;
+        String model = Build.MODEL;
+        if (model.startsWith(manufacturer)) {
+            return model;
+        } else {
+            return manufacturer + " " + model;
         }
     }
 
