@@ -130,11 +130,11 @@ android {
 
     packagingOptions {
         //X86
-        exclude "lib/x86/libconscrypt_jni.so"
-        exclude "lib/x86/libpl_droidsonroids_gif.so"
+        exclude "lib/x86/**"
         //X86_64
-        exclude "lib/x86_64/libconscrypt_jni.so"
-        exclude "lib/x86_64/libpl_droidsonroids_gif.so"
+        exclude "lib/x86_64/**"
+        //armeabi
+        exclude "lib/armeabi/**"
     }
 
     dexOptions {
