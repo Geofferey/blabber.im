@@ -1182,7 +1182,7 @@ public class FileBackend {
         }
     }
 
-    private String getAudioTitleArtist(File file) {
+    private String getAudioTitleArtist(final File file) {
         String artist;
         String title;
         StringBuilder builder = new StringBuilder();
@@ -1210,7 +1210,8 @@ public class FileBackend {
                 builder.append(title);
             }
             try {
-                byte[] data = builder.toString().trim().getBytes("UTF-8");
+                final String s = builder.substring(0, Math.min(128, builder.length()));
+                final byte[] data = s.trim().getBytes("UTF-8");
                 return Base64.encodeToString(data, Base64.DEFAULT);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
