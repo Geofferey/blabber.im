@@ -860,8 +860,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="@string/clear_other_devices"
-                            android:textColor="@color/accent" />
+                            android:text="@string/clear_other_devices" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>

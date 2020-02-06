@@ -291,13 +291,9 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
 
         }
     };
-    private final OnClickListener mCancelButtonClickListener = new OnClickListener() {
-
-        @Override
-        public void onClick(final View v) {
-            deleteAccountAndReturnIfNecessary();
-            finish();
-        }
+    private final OnClickListener mCancelButtonClickListener = v -> {
+        deleteAccountAndReturnIfNecessary();
+        finish();
     };
     private Toast mFetchingMamPrefsToast;
     private String mSavedInstanceAccount;
