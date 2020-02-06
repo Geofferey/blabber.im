@@ -40,8 +40,8 @@ public class ShowLocationActivity extends XmppActivity {
         double latitude = location.getLatitude();
         String address = "";
         if (latitude != 0 && longitude != 0) {
-            Geocoder geoCoder = new Geocoder(context, Locale.getDefault());
             try {
+                Geocoder geoCoder = new Geocoder(context, Locale.getDefault());
                 List<Address> addresses = geoCoder.getFromLocation(latitude, longitude, 1);
                 if (addresses != null && addresses.size() > 0) {
                     Address Address = addresses.get(0);
