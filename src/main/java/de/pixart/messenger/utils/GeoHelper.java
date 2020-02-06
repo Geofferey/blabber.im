@@ -83,7 +83,7 @@ public class GeoHelper {
         locationPluginIntent.putExtra("longitude", geoPoint.getLongitude());
         if (message.getStatus() != Message.STATUS_RECEIVED) {
             locationPluginIntent.putExtra("jid", conversation.getAccount().getJid().toString());
-            locationPluginIntent.putExtra("name", conversation.getAccount().getJid().getLocal());
+            locationPluginIntent.putExtra("name", context.getString(R.string.me));
         } else {
             Contact contact = message.getContact();
             if (contact != null) {
