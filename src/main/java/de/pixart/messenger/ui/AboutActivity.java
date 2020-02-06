@@ -5,11 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
 import de.pixart.messenger.R;
 import de.pixart.messenger.utils.ThemeHelper;
+import me.drakeet.support.toast.ToastCompat;
 
 public class AboutActivity extends XmppActivity {
 
@@ -41,15 +43,23 @@ public class AboutActivity extends XmppActivity {
 
         privacyButton = findViewById(R.id.show_privacy_policy);
         privacyButton.setOnClickListener(view -> {
-            final Uri uri = Uri.parse("https://jabber.pix-art.de/privacy/");
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-            startActivity(browserIntent);
+            try {
+                final Uri uri = Uri.parse("https://jabber.pix-art.de/privacy/");
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(browserIntent);
+            } catch (Exception e) {
+                ToastCompat.makeText(this, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+            }
         });
         termsOfUseButton = findViewById(R.id.show_terms_of_use);
         termsOfUseButton.setOnClickListener(view -> {
-            final Uri uri = Uri.parse("https://jabber.pix-art.de/termsofuse/");
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-            startActivity(browserIntent);
+            try {
+                final Uri uri = Uri.parse("https://jabber.pix-art.de/termsofuse/");
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(browserIntent);
+            } catch (Exception e) {
+                ToastCompat.makeText(this, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }
