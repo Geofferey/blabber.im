@@ -10,6 +10,7 @@
         <item name="colorControlActivated">@color/accent</item>
         <item name="text_Color_Main">@color/realblack</item>
         <item name="button_text_color_disabled">@color/grey500</item>
+        <item name="chat_bg">@drawable/bg_light_blue</item>
 
         <item name="color_background_primary">@color/grey50</item>
         <item name="color_background_secondary">@color/grey200</item>
@@ -170,6 +171,7 @@
         <item name="text_Color_Main">@color/realwhite</item>
         <item name="button_text_color_disabled">@color/grey500</item>
         <item name="android:navigationBarColor" tools:targetApi="21">@color/black</item>
+        <item name="chat_bg">@drawable/bg_dark_blue</item>
 
         <item name="color_background_primary">@color/grey700</item>
         <item name="color_background_secondary">@color/grey800</item>
@@ -332,6 +334,8 @@
         <item name="color_bubble_dark">@color/lightorange2</item>
         <item name="color_bubble_date">@color/lightgreen</item>
         <item name="color_bubble_warning">@color/lightred</item>
+
+        <item name="chat_bg">@drawable/bg_light_orange</item>
     </style>
 
     <style name="ConversationsTheme.Orange.Dark" parent="ConversationsTheme.Dark">
@@ -345,6 +349,8 @@
         <item name="color_bubble_dark">@color/darkorange</item>
         <item name="color_bubble_date">@color/darkgreen</item>
         <item name="color_bubble_warning">@color/darkred</item>
+
+        <item name="chat_bg">@drawable/bg_dark_orange</item>
     </style>
 
     <style name="ConversationsTheme.Dialog" parent="Theme.MaterialComponents.Light.Dialog">

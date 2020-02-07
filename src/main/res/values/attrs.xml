@@ -26,6 +26,7 @@
     <attr name="edit_text_color" format="reference|color" />
     <attr name="color_warning" format="reference|color" />
     <attr name="EmojiColor" format="reference|color" />
+    <attr name="chat_bg" format="reference|color" />
 
     <attr name="activity_background_search" format="reference" />
     <attr name="activity_background_no_results" format="reference" />
