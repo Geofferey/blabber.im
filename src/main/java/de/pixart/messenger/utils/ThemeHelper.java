@@ -101,7 +101,13 @@ public class ThemeHelper {
     public static int findDialog(Context context) {
         final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         final Resources resources = context.getResources();
-        final boolean dark = sharedPreferences.getString(SettingsActivity.THEME, resources.getString(R.string.theme)).equals("dark");
+        final boolean auto = sharedPreferences.getString(SettingsActivity.THEME, resources.getString(R.string.theme)).equals("auto");
+        boolean dark;
+        if (auto) {
+            dark = nightMode(context);
+        } else {
+            dark = sharedPreferences.getString(SettingsActivity.THEME, resources.getString(R.string.theme)).equals("dark");
+        }
         final String fontSize = sharedPreferences.getString("font_size", resources.getString(R.string.default_font_size));
         final String themeColor = sharedPreferences.getString("theme_color", resources.getString(R.string.theme_color));
         switch (themeColor) {

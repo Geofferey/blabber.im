@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import java.io.File;
@@ -32,7 +33,7 @@ import de.pixart.messenger.persistance.FileBackend;
 import de.pixart.messenger.utils.ThemeHelper;
 import me.drakeet.support.toast.ToastCompat;
 
-public class RecordingActivity extends Activity implements View.OnClickListener {
+public class RecordingActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ActivityRecordingBinding binding;
 
@@ -59,6 +60,7 @@ public class RecordingActivity extends Activity implements View.OnClickListener 
         setTheme(ThemeHelper.findDialog(this));
         super.onCreate(savedInstanceState);
         this.binding = DataBindingUtil.setContentView(this, R.layout.activity_recording);
+        this.setTitle(R.string.attach_record_voice);
         this.binding.cancelButton.setOnClickListener(this);
         this.binding.shareButton.setOnClickListener(this);
         this.setFinishOnTouchOutside(false);
