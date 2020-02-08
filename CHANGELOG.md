@@ -2,20 +2,20 @@
 
 #### Version 2.3.5
 * start removing OTR
-* rework conference and contact details (big avatar is available via long click)
+* rework conference and contact details (big avatar is available via long click) (PAM)
 * resume download of OMEMO encrypted files
 * channels now use '#' as symbol in avatar
 * support for ?register and ?register;preauth XMPP uri parameters
-* use ExoPlayer for video playback
-* show artist - title for audio files
-* UI improvements
+* use ExoPlayer for video playback (PAM)
+* show artist - title for audio files (PAM)
+* UI improvements (PAM)
 * bug fixes
 
 #### Version 2.3.4
 * fixes for Jingle IBB file transfer
 * fixes for repeated corrections filling up the database
 * switched to Last Message Correction v1.1
-* increase mam messages catchup
+* increase mam messages catchup (PAM)
 * bug fixes
 
 #### Version 2.3.3
@@ -30,7 +30,7 @@
 #### Version 2.3.0
 * show name in quotes (PAM)
 * introduce theme based on systems theme (PAM)
-* increase default video quality (720p instead of 360p)
+* increase default video quality (720p instead of 360p) (PAM)
 * replace YouTube links with Invidious links (PAM)
 * rework profile view (PAM)
 * introduce app intro and some help screens (PAM)
