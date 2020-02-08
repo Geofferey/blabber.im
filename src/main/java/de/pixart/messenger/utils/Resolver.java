@@ -429,7 +429,10 @@ public class Resolver {
         @Override
         public Result call() throws Exception {
             this.connect();
-            return this.socket.isConnected() ? this : null;
+            if (this.socket != null && this.socket.isConnected()) {
+                return this;
+            }
+            return null;
         }
 
         public ContentValues toContentValues() {
