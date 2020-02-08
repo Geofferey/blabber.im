@@ -36,6 +36,11 @@
             android:summary="@string/pref_font_size_summary"
             android:title="@string/pref_font_size" />
         <CheckBoxPreference
+            android:defaultValue="@bool/use_unicolored_chatbg"
+            android:key="unicolored_chatbg"
+            android:summary="@string/pref_use_unicolored_chatbg_summary"
+            android:title="@string/pref_use_unicolored_chatbg" />
+        <CheckBoxPreference
             android:defaultValue="@bool/send_button_status"
             android:key="send_button_status"
             android:summary="@string/pref_use_send_button_to_indicate_status_summary"

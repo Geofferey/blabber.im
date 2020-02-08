@@ -58,6 +58,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.inputmethod.InputConnectionCompat;
 import androidx.core.view.inputmethod.InputContentInfoCompat;
 import androidx.databinding.DataBindingUtil;
@@ -111,6 +112,7 @@ import de.pixart.messenger.ui.util.ScrollState;
 import de.pixart.messenger.ui.util.SendButtonAction;
 import de.pixart.messenger.ui.util.SendButtonTool;
 import de.pixart.messenger.ui.util.ShareUtil;
+import de.pixart.messenger.ui.util.StyledAttributes;
 import de.pixart.messenger.ui.util.ViewUtil;
 import de.pixart.messenger.ui.widget.EditMessage;
 import de.pixart.messenger.utils.Compatibility;
@@ -1672,6 +1674,16 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         }
     }
 
+    private void updateChatBG() {
+        if (activity.unicoloredBG()) {
+            binding.conversationsFragment.setBackgroundResource(0);
+            binding.conversationsFragment.setBackgroundColor(StyledAttributes.getColor(activity, R.attr.color_background_tertiary));
+        } else {
+            binding.conversationsFragment.setBackgroundColor(0);
+            binding.conversationsFragment.setBackground(ContextCompat.getDrawable(activity, R.drawable.chatbg));
+        }
+    }
+
     public void startDownloadable(Message message) {
         if (!hasPermissions(REQUEST_START_DOWNLOAD, Manifest.permission.WRITE_EXTERNAL_STORAGE) && !hasPermissions(REQUEST_START_DOWNLOAD, Manifest.permission.READ_EXTERNAL_STORAGE)) {
             this.mPendingDownloadableMessage = message;
@@ -2563,6 +2575,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 return;
             }
         }
+        updateChatBG();
         this.refresh(true);
     }
 

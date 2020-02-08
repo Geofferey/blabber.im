@@ -434,6 +434,10 @@ public abstract class XmppActivity extends ActionBarActivity {
         return getStringPreference("theme_color", R.string.theme_color);
     }
 
+    public boolean unicoloredBG() {
+        return getBooleanPreference("unicolored_chatbg", R.bool.use_unicolored_chatbg);
+    }
+
     public void setBubbleColor(final View v, final int backgroundColor, final int borderColor) {
         GradientDrawable shape = (GradientDrawable) v.getBackground();
         shape.setColor(backgroundColor);

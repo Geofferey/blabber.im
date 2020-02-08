@@ -76,6 +76,7 @@ public class SettingsActivity extends XmppActivity implements
     public static final String USE_INVIDIOUS = "use_invidious";
     public static final String ALLOW_MESSAGE_CORRECTION = "allow_message_correction";
     public static final String ENABLE_OTR_ENCRYPTION = "enable_otr_encryption";
+    public static final String USE_UNICOLORED_CHATBG = "unicolored_chatbg";
 
     public static final int REQUEST_CREATE_BACKUP = 0xbf8701;
     Preference multiAccountPreference;
@@ -512,6 +513,8 @@ public class SettingsActivity extends XmppActivity implements
             xmppConnectionService.expireOldMessages(true);
         } else if (name.equals(THEME) || name.equals(THEME_COLOR)) {
             updateTheme();
+        } else if (name.equals(USE_UNICOLORED_CHATBG)) {
+            xmppConnectionService.updateConversationUi();
         }
     }
 

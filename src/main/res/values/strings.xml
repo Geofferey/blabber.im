@@ -996,4 +996,6 @@
     <string name="account_status_regis_invalid_token">Invalid registration token</string>
     <string name="magic_create_text_fixed">You have been invited to %1$s. A username has already been picked for you. We will guide you through the process of creating an account.\nYou will be able to communicate with users of other providers by giving them your full XMPP address.</string>
     <string name="your_server_invitation">Your server invitation</string>
+    <string name="pref_use_unicolored_chatbg_summary">Use unicolored background in chats.</string>
+    <string name="pref_use_unicolored_chatbg">Use unicolored background</string>
 </resources>

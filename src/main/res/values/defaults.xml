@@ -71,6 +71,7 @@
     <string name="theme_color">blue</string>
     <string name="default_font_size">small</string>
     <string name="default_channel_discovery">JABBER_NETWORK</string>
+    <bool name="use_unicolored_chatbg">false</bool>
 
     <string-array name="domains">
         <item>pix-art.de</item>
