@@ -275,6 +275,10 @@ public class Resolver {
         try {
             result = executor.invokeAny(r);
             executor.shutdown();
+            if (result == null) {
+                Log.i(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball unable to connect to one address");
+                return null;
+            }
             Thread disconnector = new Thread(() -> {
                 while (true) {
                     try {
