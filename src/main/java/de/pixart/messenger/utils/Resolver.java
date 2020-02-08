@@ -151,6 +151,7 @@ public class Resolver {
                 }
             }
         } catch (InterruptedException e) {
+            e.printStackTrace();
             for (Thread thread : threads) {
                 thread.interrupt();
             }
@@ -168,6 +169,7 @@ public class Resolver {
             result.port = port;
             return result;
         } catch (UnknownHostException e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -201,6 +203,7 @@ public class Resolver {
             try {
                 thread.join();
             } catch (InterruptedException e) {
+                e.printStackTrace();
                 return Collections.emptyList();
             }
         }
@@ -274,7 +277,7 @@ public class Resolver {
             return result;
         }
 
-        ExecutorService executor = (ExecutorService) Executors.newFixedThreadPool(4);
+        ExecutorService executor = Executors.newFixedThreadPool(4);
 
         try {
             result = executor.invokeAny(r);
@@ -288,7 +291,9 @@ public class Resolver {
                     try {
                         if (executor.awaitTermination(5, TimeUnit.SECONDS)) break;
                         Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball wait for cleanup ...");
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
                 Log.i(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball cleanup");
                 for (Result re : r) {
@@ -391,7 +396,7 @@ public class Resolver {
         public String toString() {
             return "Result{" +
                     "ip='" + (ip == null ? null : ip.getHostAddress()) + '\'' +
-                    ", hostame='" + (hostname == null ? null : hostname.toString()) + '\'' +
+                    ", hostname='" + (hostname == null ? null : hostname.toString()) + '\'' +
                     ", port=" + port +
                     ", directTls=" + directTls +
                     ", authenticated=" + authenticated +
@@ -411,6 +416,7 @@ public class Resolver {
                 time = System.currentTimeMillis() - time;
                 Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result connect: " + toString() + " after: " + time + " ms");
             } catch (IOException e) {
+                e.printStackTrace();
                 this.disconnect();
             }
         }
