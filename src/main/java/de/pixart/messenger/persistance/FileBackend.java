@@ -14,6 +14,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.graphics.pdf.PdfRenderer;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -63,6 +64,7 @@ import de.pixart.messenger.entities.Message;
 import de.pixart.messenger.services.AttachFileToConversationRunnable;
 import de.pixart.messenger.services.XmppConnectionService;
 import de.pixart.messenger.ui.util.Attachment;
+import de.pixart.messenger.utils.Compatibility;
 import de.pixart.messenger.utils.CryptoHelper;
 import de.pixart.messenger.utils.ExifHelper;
 import de.pixart.messenger.utils.FileUtils;
@@ -651,7 +653,9 @@ public class FileBackend {
                 final String mime = file.getMimeType();
                 if (mime.startsWith("video/")) {
                     thumbnail = getVideoPreview(file, size);
-                } else {
+                } else if ((mime.contains("pdf")) && Compatibility.runsTwentyOne()) {
+                    thumbnail = getPDFPreview(file, size);
+                } else if (mime.startsWith("image/")) {
                     Bitmap fullsize = getFullsizeImagePreview(file, size);
                     if (fullsize == null) {
                         throw new FileNotFoundException();
@@ -669,6 +673,32 @@ public class FileBackend {
             }
         }
         return thumbnail;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private Bitmap getPDFPreview(DownloadableFile file, int size) {
+        try {
+            ParcelFileDescriptor mFileDescriptor = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
+            if (mFileDescriptor == null) {
+                return null;
+            }
+            PdfRenderer renderer = new PdfRenderer(mFileDescriptor);
+            PdfRenderer.Page page = renderer.openPage(0);
+            int width = page.getWidth();
+            int height = page.getHeight();
+            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            bitmap.eraseColor(Color.WHITE);
+            page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
+            drawOverlay(bitmap, R.drawable.show_pdf, 0.75f);
+            page.close();
+            renderer.close();
+            return bitmap;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private Bitmap getFullsizeImagePreview(File file, int size) {

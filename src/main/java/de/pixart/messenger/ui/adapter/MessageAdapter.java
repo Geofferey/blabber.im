@@ -100,6 +100,7 @@ import static de.pixart.messenger.ui.SettingsActivity.SHOW_LINKS_INSIDE;
 import static de.pixart.messenger.ui.SettingsActivity.SHOW_MAPS_INSIDE;
 import static de.pixart.messenger.ui.util.MyLinkify.removeTrailingBracket;
 import static de.pixart.messenger.ui.util.MyLinkify.replaceYoutube;
+import static de.pixart.messenger.utils.Compatibility.runsTwentyOne;
 
 public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextView.CopyHandler {
 
@@ -674,19 +675,14 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
 
     private void displayOpenableMessage(ViewHolder viewHolder, final Message message, final boolean darkBackground) {
         toggleWhisperInfo(viewHolder, message, false, darkBackground);
-        viewHolder.audioPlayer.setVisibility(View.GONE);
-        viewHolder.image.setVisibility(View.GONE);
-        viewHolder.gifImage.setVisibility(View.GONE);
-        viewHolder.richlinkview.setVisibility(View.GONE);
-        viewHolder.progressBar.setVisibility(View.GONE);
-        viewHolder.download_button.setVisibility(View.VISIBLE);
         final String mimeType = message.getMimeType();
         if (mimeType != null && message.getMimeType().contains("pdf")) {
-            Drawable icon = activity.getResources().getDrawable(R.drawable.ic_file_pdf_grey600_48dp);
-            Drawable drawable = DrawableCompat.wrap(icon);
-            DrawableCompat.setTint(drawable, StyledAttributes.getColor(getContext(), R.attr.colorAccent));
-            viewHolder.download_button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-            viewHolder.download_button.setText(activity.getString(R.string.open_x_file, UIHelper.getFileDescriptionString(activity, message)));
+            try {
+                showPDF(message, viewHolder, false);
+            } catch (Exception e) {
+                e.printStackTrace();
+                showPDF(message, viewHolder, true);
+            }
         } else if (mimeType != null && message.getMimeType().contains("vcard")) {
             try {
                 showVCard(message, viewHolder);
@@ -733,7 +729,33 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         viewHolder.download_button.setOnClickListener(v -> openDownloadable(message));
     }
 
-    private void showAPK(final Message message, ViewHolder viewHolder) {
+    private void showPDF(final Message message, final ViewHolder viewHolder, boolean compat) {
+        if (runsTwentyOne() && !compat) {
+            viewHolder.audioPlayer.setVisibility(View.GONE);
+            viewHolder.image.setVisibility(View.VISIBLE);
+            viewHolder.gifImage.setVisibility(View.GONE);
+            viewHolder.richlinkview.setVisibility(View.GONE);
+            viewHolder.progressBar.setVisibility(View.GONE);
+            viewHolder.download_button.setVisibility(View.GONE);
+            activity.loadBitmap(message, viewHolder.image);
+            viewHolder.image.setOnClickListener(v -> openDownloadable(message));
+        } else {
+            viewHolder.audioPlayer.setVisibility(View.GONE);
+            viewHolder.image.setVisibility(View.GONE);
+            viewHolder.gifImage.setVisibility(View.GONE);
+            viewHolder.richlinkview.setVisibility(View.GONE);
+            viewHolder.progressBar.setVisibility(View.GONE);
+            viewHolder.download_button.setVisibility(View.VISIBLE);
+            Drawable icon = activity.getResources().getDrawable(R.drawable.ic_file_pdf_grey600_48dp);
+            Drawable drawable = DrawableCompat.wrap(icon);
+            DrawableCompat.setTint(drawable, StyledAttributes.getColor(getContext(), R.attr.colorAccent));
+            viewHolder.download_button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+            viewHolder.download_button.setText(activity.getString(R.string.open_x_file, UIHelper.getFileDescriptionString(activity, message)));
+            viewHolder.download_button.setOnClickListener(v -> openDownloadable(message));
+        }
+    }
+
+    private void showAPK(final Message message, final ViewHolder viewHolder) {
         String APKName = "";
         if (message.getFileParams().subject.length() != 0) {
             try {
@@ -769,7 +791,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         viewHolder.download_button.setText(activity.getString(R.string.open_x_file, UIHelper.getFileDescriptionString(activity, message) + VCardName));
     }
 
-    private void displayRichLinkMessage(ViewHolder viewHolder, final Message message, boolean darkBackground) {
+    private void displayRichLinkMessage(final ViewHolder viewHolder, final Message message, boolean darkBackground) {
         toggleWhisperInfo(viewHolder, message, true, darkBackground);
         viewHolder.audioPlayer.setVisibility(View.GONE);
         viewHolder.image.setVisibility(View.GONE);
@@ -817,7 +839,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         }
     }
 
-    private void displayLocationMessage(ViewHolder viewHolder, final Message message, final boolean darkBackground) {
+    private void displayLocationMessage(final ViewHolder viewHolder, final Message message, final boolean darkBackground) {
         toggleWhisperInfo(viewHolder, message, false, darkBackground);
         viewHolder.audioPlayer.setVisibility(View.GONE);
         String url = GeoHelper.MapPreviewUri(message);
@@ -864,7 +886,8 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         }
     }
 
-    private void displayAudioMessage(ViewHolder viewHolder, Message message, boolean darkBackground) {
+    private void displayAudioMessage(ViewHolder viewHolder, Message message,
+                                     boolean darkBackground) {
         toggleWhisperInfo(viewHolder, message, showTitle(message), darkBackground);
         viewHolder.image.setVisibility(View.GONE);
         viewHolder.gifImage.setVisibility(View.GONE);
@@ -902,7 +925,8 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         return "";
     }
 
-    private void displayImageMessage(ViewHolder viewHolder, final Message message, final boolean darkBackground) {
+    private void displayImageMessage(ViewHolder viewHolder, final Message message,
+                                     final boolean darkBackground) {
         toggleWhisperInfo(viewHolder, message, false, darkBackground);
         viewHolder.download_button.setVisibility(View.GONE);
         viewHolder.audioPlayer.setVisibility(View.GONE);
@@ -968,7 +992,8 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         }
     }
 
-    private void toggleWhisperInfo(ViewHolder viewHolder, final Message message, final boolean includeBody, final boolean darkBackground) {
+    private void toggleWhisperInfo(ViewHolder viewHolder, final Message message,
+                                   final boolean includeBody, final boolean darkBackground) {
         SpannableStringBuilder messageBody = new SpannableStringBuilder(replaceYoutube(activity.getApplicationContext(), message.getBody()));
 
         final String mimeType = message.getMimeType();
@@ -1495,7 +1520,8 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         }
     }
 
-    public void setBubbleBackgroundColor(final View viewHolder, final int type, final boolean isPrivateMessage, final boolean isInValidSession) {
+    public void setBubbleBackgroundColor(final View viewHolder, final int type,
+                                         final boolean isPrivateMessage, final boolean isInValidSession) {
         if (type == RECEIVED) {
             if (isInValidSession) {
                 if (isPrivateMessage) {
