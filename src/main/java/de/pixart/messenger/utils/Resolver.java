@@ -139,14 +139,12 @@ public class Resolver {
                 threads[2].interrupt();
                 synchronized (results) {
                     Collections.sort(results);
-                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": " + results.toString());
                     return happyEyeball(results);
                 }
             } else {
                 threads[2].join();
                 synchronized (fallbackResults) {
                     Collections.sort(fallbackResults);
-                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": " + fallbackResults.toString());
                     return happyEyeball(fallbackResults);
                 }
             }
@@ -268,6 +266,8 @@ public class Resolver {
     }
 
     private static Result happyEyeball(List<Result> r) {
+        String logID = Long.toHexString(Double.doubleToLongBits(Math.random()));
+        Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball (" + logID + ") with " + r.toString());
         if (r.size() == 0) return null;
 
         Result result;
@@ -282,32 +282,28 @@ public class Resolver {
         try {
             result = executor.invokeAny(r);
             executor.shutdown();
-            if (result == null) {
-                Log.i(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball unable to connect to one address");
-                return null;
-            }
             Thread disconnector = new Thread(() -> {
                 while (true) {
                     try {
                         if (executor.awaitTermination(5, TimeUnit.SECONDS)) break;
-                        Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball wait for cleanup ...");
+                        Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball (" + logID + ") wait for cleanup ...");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                Log.i(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball cleanup");
+                Log.i(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball (" + logID + ") cleanup");
                 for (Result re : r) {
                     if(!re.equals(result)) re.disconnect();
                 }
             });
             disconnector.start();
-            Log.i(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball used: " + result.toString());
+            Log.i(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball (" + logID + ") used: " + result.toString());
             return result;
         } catch (InterruptedException e) {
-            Log.e(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball failed: ", e);
+            Log.e(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball (" + logID + ") failed: ", e);
             return null;
         } catch (ExecutionException e) {
-            Log.e(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball failed: ", e);
+            Log.i(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball (" + logID + ") unable to connect to one address");
             return null;
         }
     }
@@ -422,10 +418,17 @@ public class Resolver {
         }
 
         public void disconnect() {
+            this.disconnect("");
+        }
+        public void disconnect(String logID) {
             if (this.socket != null ) {
                 FileBackend.close(this.socket);
                 this.socket = null;
-                Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result disconnect: " + toString());
+                if (!logID.isEmpty()) {
+                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result (" + logID + ") disconnect: " + toString());
+                } else {
+                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result disconnect: " + toString());
+                }
             }
         }
 
@@ -447,7 +450,7 @@ public class Resolver {
             if (this.socket != null && this.socket.isConnected()) {
                 return this;
             }
-            return null;
+            throw new Exception("Resolver.Result was not possible to connect - should be catched by executor");
         }
 
         public ContentValues toContentValues() {
