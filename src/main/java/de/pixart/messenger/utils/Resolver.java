@@ -282,10 +282,6 @@ public class Resolver {
         try {
             result = executor.invokeAny(r);
             executor.shutdown();
-            if (result == null) {
-                Log.i(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball unable to connect to one address");
-                return null;
-            }
             Thread disconnector = new Thread(() -> {
                 while (true) {
                     try {
@@ -307,7 +303,7 @@ public class Resolver {
             Log.e(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball failed: ", e);
             return null;
         } catch (ExecutionException e) {
-            Log.e(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball failed: ", e);
+            Log.i(Config.LOGTAG, Resolver.class.getSimpleName() + ": happy eyeball unable to connect to one address");
             return null;
         }
     }
@@ -447,7 +443,7 @@ public class Resolver {
             if (this.socket != null && this.socket.isConnected()) {
                 return this;
             }
-            return null;
+            throw new Exception("Resolver.Result was not possible to connect - should be catched by executor");
         }
 
         public ContentValues toContentValues() {
