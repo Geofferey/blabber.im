@@ -273,8 +273,13 @@ public class Resolver {
         Result result;
         if (r.size() == 1) {
             result = r.get(0);
+            result.setLogID(logID);
             result.connect();
             return result;
+        }
+
+        for (Result res : r) {
+            res.setLogID(logID);
         }
 
         ExecutorService executor = Executors.newFixedThreadPool(4);
@@ -327,6 +332,8 @@ public class Resolver {
         private boolean authenticated = false;
         private int priority;
         private Socket socket;
+
+        private String logID;
 
         static Result fromRecord(SRV srv, boolean directTls) {
             Result result = new Result();
@@ -410,7 +417,11 @@ public class Resolver {
                 long time = System.currentTimeMillis();
                 this.socket.connect(addr, Config.SOCKET_TIMEOUT * 1000);
                 time = System.currentTimeMillis() - time;
-                Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result connect: " + toString() + " after: " + time + " ms");
+                if (!this.logID.isEmpty()) {
+                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result (" + this.logID + ") connect: " + toString() + " after: " + time + " ms");
+                } else {
+                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result connect: " + toString() + " after: " + time + " ms");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 this.disconnect();
@@ -418,18 +429,19 @@ public class Resolver {
         }
 
         public void disconnect() {
-            this.disconnect("");
-        }
-        public void disconnect(String logID) {
             if (this.socket != null ) {
                 FileBackend.close(this.socket);
                 this.socket = null;
-                if (!logID.isEmpty()) {
-                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result (" + logID + ") disconnect: " + toString());
+                if (!this.logID.isEmpty()) {
+                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result (" + this.logID + ") disconnect: " + toString());
                 } else {
                     Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result disconnect: " + toString());
                 }
             }
+        }
+
+        public void setLogID(String logID) {
+            this.logID = logID;
         }
 
         @Override
