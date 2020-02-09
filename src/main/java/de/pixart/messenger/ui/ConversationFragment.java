@@ -1799,6 +1799,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 break;
             case ATTACHMENT_CHOICE_RECORD_VOICE:
                 intent = new Intent(getActivity(), RecordingActivity.class);
+                intent.putExtra("ALTERNATIVE_CODEC", activity.xmppConnectionService.alternativeVoiceSettings());
                 break;
             case ATTACHMENT_CHOICE_LOCATION:
                 intent = new Intent(getActivity(), ShareLocationActivity.class);

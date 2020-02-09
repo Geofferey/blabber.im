@@ -251,6 +251,11 @@
             android:key="video_compression"
             android:summary="@string/pref_video_quality_summary"
             android:title="@string/pref_video_quality" />
+        <CheckBoxPreference
+            android:defaultValue="@bool/alternative_voice_settings"
+            android:key="alternative_voice_settings"
+            android:summary="@string/pref_alternative_voice_settings_summary"
+            android:title="@string/pref_alternative_voice_settings" />
     </PreferenceScreen>
     <!--status-->
     <PreferenceScreen

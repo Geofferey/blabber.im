@@ -1009,6 +1009,10 @@ public class XmppConnectionService extends Service {
         return getBooleanPreference(SettingsActivity.AWAY_WHEN_SCREEN_IS_OFF, R.bool.away_when_screen_off);
     }
 
+    public boolean alternativeVoiceSettings() {
+        return getBooleanPreference("alternative_voice_settings", R.bool.alternative_voice_settings);
+    }
+
     public int getCompressImageResolutionPreference() {
         switch (getPreferences().getString("image_compression", getResources().getString(R.string.image_compression))) {
             case "low":

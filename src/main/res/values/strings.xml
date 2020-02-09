@@ -998,4 +998,6 @@
     <string name="your_server_invitation">Your server invitation</string>
     <string name="pref_use_unicolored_chatbg_summary">Use unicolored background in chats.</string>
     <string name="pref_use_unicolored_chatbg">Use unicolored background</string>
+    <string name="pref_alternative_voice_settings_summary">If you have problems during voice recording, use this setting to change the codec.</string>
+    <string name="pref_alternative_voice_settings">Alternative voice recording method</string>
 </resources>
