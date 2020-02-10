@@ -8,6 +8,7 @@
 * support for ?register and ?register;preauth XMPP uri parameters
 * use ExoPlayer for video playback (PAM)
 * show artist - title for audio files (PAM)
+* show PDF preview in chat (PAM)
 * UI improvements (PAM)
 * bug fixes
 
