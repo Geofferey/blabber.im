@@ -238,6 +238,8 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         final Transferable transferable = message.getTransferable();
         boolean multiReceived = message.getConversation().getMode() == Conversation.MODE_MULTI
                 && message.getMergedStatus() <= Message.STATUS_RECEIVED;
+        boolean singleReceived = message.getConversation().getMode() == Conversation.MODE_SINGLE
+                && message.getMergedStatus() <= Message.STATUS_RECEIVED;
         if (message.isFileOrImage() || transferable != null || MessageUtils.unInitiatedButKnownSize(message)) {
             FileParams params = message.getFileParams();
             filesize = params.size > 0 ? UIHelper.filesizeToString(params.size) : null;
@@ -305,7 +307,8 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                 if (multiReceived) {
                     viewHolder.username.setVisibility(View.VISIBLE);
                     viewHolder.username.setText(UIHelper.getColoredUsername(message));
-                } else {
+                }
+                if (singleReceived){
                     viewHolder.username.setVisibility(View.GONE);
                 }
                 break;
