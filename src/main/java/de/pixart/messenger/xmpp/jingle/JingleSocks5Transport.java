@@ -173,7 +173,7 @@ public class JingleSocks5Transport extends JingleTransport {
                 socket.setSoTimeout(0);
                 isEstablished = true;
                 callback.established();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 callback.failed();
             }
         }).start();
