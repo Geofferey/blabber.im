@@ -657,7 +657,7 @@ public class NotificationService {
                 builder.setUri(uri.toString());
             }
         } else {
-            builder.setName(UIHelper.getMessageDisplayName(message));
+            builder.setName(UIHelper.getColoredUsername(message));
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             builder.setIcon(IconCompat.createWithBitmap(mXmppConnectionService.getAvatarService().get(message, AvatarService.getSystemUiAvatarSize(mXmppConnectionService), false)));
@@ -704,17 +704,15 @@ public class NotificationService {
                 final NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle();
                 SpannableString styledString;
                 for (Message message : messages) {
-                    final String name = UIHelper.getMessageDisplayName(message);
+                    final SpannableString name = UIHelper.getColoredUsername(message);
                     styledString = new SpannableString(name + ": " + message.getBody());
-                    styledString.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), 0);
                     style.addLine(styledString);
                 }
                 builder.setStyle(style);
                 int count = messages.size();
                 if (count == 1) {
-                    final String name = UIHelper.getMessageDisplayName(messages.get(0));
+                    final SpannableString name = UIHelper.getColoredUsername(messages.get(0));
                     styledString = new SpannableString(name + ": " + messages.get(0).getBody());
-                    styledString.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), 0);
                     builder.setContentText(styledString);
                     builder.setTicker(styledString);
                 } else {

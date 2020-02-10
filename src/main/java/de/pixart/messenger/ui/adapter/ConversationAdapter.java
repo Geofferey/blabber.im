@@ -3,6 +3,7 @@ package de.pixart.messenger.ui.adapter;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
+import android.text.SpannableStringBuilder;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -182,7 +183,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             if (message.getStatus() == Message.STATUS_RECEIVED) {
                 if (conversation.getMode() == Conversation.MODE_MULTI) {
                     viewHolder.binding.senderName.setVisibility(View.VISIBLE);
-                    viewHolder.binding.senderName.setText(UIHelper.getMessageDisplayName(message).split("\\s+")[0] + ':');
+                    viewHolder.binding.senderName.setText(UIHelper.getColoredUsername(message));
                 } else {
                     viewHolder.binding.senderName.setVisibility(View.GONE);
                 }

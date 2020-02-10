@@ -303,7 +303,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                 break;
             default:
                 if (multiReceived) {
-                    info = UIHelper.getMessageDisplayName(message);
+                    viewHolder.username.setText(UIHelper.getColoredUsername(message));
                 }
                 break;
         }
@@ -578,7 +578,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         viewHolder.messageBody.setHighlightColor(darkBackground ? type == SENT ? StyledAttributes.getColor(activity, R.attr.colorAccent) : StyledAttributes.getColor(activity, R.attr.colorAccent) : StyledAttributes.getColor(activity, R.attr.colorAccent));
         viewHolder.messageBody.setTypeface(null, Typeface.NORMAL);
         if (message.getBody() != null) {
-            final String nick = UIHelper.getMessageDisplayName(message);
+            final SpannableString nick = UIHelper.getColoredUsername(message);
             SpannableStringBuilder body = new SpannableStringBuilder(replaceYoutube(activity.getApplicationContext(), message.getMergedBody().toString()));
             if (message.getBody().equals(DELETED_MESSAGE_BODY)) {
                 body = body.replace(0, DELETED_MESSAGE_BODY.length(), activity.getString(R.string.message_deleted));
@@ -1103,6 +1103,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                     view = activity.getLayoutInflater().inflate(R.layout.message_received, parent, false);
                     viewHolder.message_box = view.findViewById(R.id.message_box);
                     viewHolder.contact_picture = view.findViewById(R.id.message_photo);
+                    viewHolder.username = view.findViewById(R.id.username);
                     viewHolder.audioPlayer = view.findViewById(R.id.audio_player);
                     viewHolder.download_button = view.findViewById(R.id.download_button);
                     viewHolder.answer_button = view.findViewById(R.id.answer);
@@ -1463,6 +1464,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         protected TextView time;
         protected CopyTextView messageBody;
         protected TextView user;
+        protected TextView username;
         protected ImageView contact_picture;
         protected TextView status_message;
         protected TextView encryption;
