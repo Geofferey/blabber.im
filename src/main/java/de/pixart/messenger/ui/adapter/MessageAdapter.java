@@ -303,7 +303,10 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                 break;
             default:
                 if (multiReceived) {
+                    viewHolder.username.setVisibility(View.VISIBLE);
                     viewHolder.username.setText(UIHelper.getColoredUsername(message));
+                } else {
+                    viewHolder.username.setVisibility(View.GONE);
                 }
                 break;
         }
