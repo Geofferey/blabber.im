@@ -29,6 +29,7 @@ import de.measite.minidns.DNSName;
 import de.measite.minidns.Question;
 import de.measite.minidns.Record;
 import de.measite.minidns.dnssec.DNSSECResultNotAuthenticException;
+import de.measite.minidns.dnsserverlookup.AndroidUsingExec;
 import de.measite.minidns.hla.DnssecResolverApi;
 import de.measite.minidns.hla.ResolverApi;
 import de.measite.minidns.hla.ResolverResult;
@@ -56,6 +57,9 @@ public class Resolver {
 
     public static void init(XmppConnectionService service) {
         Resolver.SERVICE = service;
+        DNSClient.removeDNSServerLookupMechanism(AndroidUsingExec.INSTANCE);
+        DNSClient.addDnsServerLookupMechanism(AndroidUsingExecLowPriority.INSTANCE);
+        DNSClient.addDnsServerLookupMechanism(new AndroidUsingLinkProperties(service));
         final AbstractDNSClient client = ResolverApi.INSTANCE.getClient();
         if (client instanceof ReliableDNSClient) {
             disableHardcodedDnsServers((ReliableDNSClient) client);
@@ -177,8 +181,12 @@ public class Resolver {
         ResolverResult<SRV> result = resolveWithFallback(dnsName, SRV.class);
         final List<Result> results = new ArrayList<>();
         final List<Thread> threads = new ArrayList<>();
+
+        final List<Result> fallbackResults = new ArrayList<>();
+        final List<Thread> fallbackThreads = new ArrayList<>();
+
         for (SRV record : result.getAnswersOrEmptySet()) {
-            if (record.name.length() == 0 && record.priority == 0) {
+            if (record.name.length() == 0) {
                 continue;
             }
             threads.add(new Thread(() -> {
@@ -193,6 +201,22 @@ public class Resolver {
                     results.addAll(ipv4s);
                 }
             }));
+            fallbackThreads.add(new Thread(() -> {
+                try {
+                    for (CNAME cname : resolveWithFallback(record.name, CNAME.class, result.isAuthenticData()).getAnswersOrEmptySet()) {
+                        final List<Result> ipv6s = resolveIp(record, cname.name, AAAA.class, result.isAuthenticData(), directTls);
+                        synchronized (fallbackResults) {
+                            fallbackResults.addAll(ipv6s);
+                        }
+                        final List<Result> ipv4s = resolveIp(record, cname.name, A.class, result.isAuthenticData(), directTls);
+                        synchronized (results) {
+                            fallbackResults.addAll(ipv4s);
+                        }
+                    }
+                } catch (Throwable throwable) {
+                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + "error resolving srv cname-fallback records", throwable);
+                }
+            }));
         }
         for (Thread thread : threads) {
             thread.start();
@@ -205,13 +229,30 @@ public class Resolver {
                 return Collections.emptyList();
             }
         }
-        return results;
+        if (results.size() > 0) {
+            return results;
+        }
+        for (Thread thread : fallbackThreads) {
+            thread.start();
+        }
+        for (Thread thread : fallbackThreads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                return Collections.emptyList();
+            }
+        }
+        return fallbackResults;
     }
 
     private static <D extends InternetAddressRR> List<Result> resolveIp(SRV srv, Class<D> type, boolean authenticated, boolean directTls) {
+        return resolveIp(srv, srv.name, type, authenticated, directTls);
+    }
+
+    private static <D extends InternetAddressRR> List<Result> resolveIp(SRV srv, DNSName hostname, Class<D> type, boolean authenticated, boolean directTls) {
         List<Result> list = new ArrayList<>();
         try {
-            ResolverResult<D> results = resolveWithFallback(srv.name, type, authenticated);
+            ResolverResult<D> results = resolveWithFallback(hostname, type, authenticated);
             for (D record : results.getAnswersOrEmptySet()) {
                 Result resolverResult = Result.fromRecord(srv, directTls);
                 resolverResult.authenticated = results.isAuthenticData() && authenticated;
@@ -273,8 +314,13 @@ public class Resolver {
         Result result;
         if (r.size() == 1) {
             result = r.get(0);
+            result.setLogID(logID);
             result.connect();
             return result;
+        }
+
+        for (Result res : r) {
+            res.setLogID(logID);
         }
 
         ExecutorService executor = Executors.newFixedThreadPool(4);
@@ -327,6 +373,8 @@ public class Resolver {
         private boolean authenticated = false;
         private int priority;
         private Socket socket;
+
+        private String logID;
 
         static Result fromRecord(SRV srv, boolean directTls) {
             Result result = new Result();
@@ -410,7 +458,11 @@ public class Resolver {
                 long time = System.currentTimeMillis();
                 this.socket.connect(addr, Config.SOCKET_TIMEOUT * 1000);
                 time = System.currentTimeMillis() - time;
-                Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result connect: " + toString() + " after: " + time + " ms");
+                if (!this.logID.isEmpty()) {
+                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result (" + this.logID + ") connect: " + toString() + " after: " + time + " ms");
+                } else {
+                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result connect: " + toString() + " after: " + time + " ms");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 this.disconnect();
@@ -418,18 +470,19 @@ public class Resolver {
         }
 
         public void disconnect() {
-            this.disconnect("");
-        }
-        public void disconnect(String logID) {
             if (this.socket != null ) {
                 FileBackend.close(this.socket);
                 this.socket = null;
-                if (!logID.isEmpty()) {
-                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result (" + logID + ") disconnect: " + toString());
+                if (!this.logID.isEmpty()) {
+                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result (" + this.logID + ") disconnect: " + toString());
                 } else {
                     Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": Result disconnect: " + toString());
                 }
             }
+        }
+
+        public void setLogID(String logID) {
+            this.logID = logID;
         }
 
         @Override
