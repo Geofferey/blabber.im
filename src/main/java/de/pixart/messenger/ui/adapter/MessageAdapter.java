@@ -308,7 +308,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                     viewHolder.username.setVisibility(View.VISIBLE);
                     viewHolder.username.setText(UIHelper.getColoredUsername(message));
                 }
-                if (singleReceived){
+                if (singleReceived) {
                     viewHolder.username.setVisibility(View.GONE);
                 }
                 break;
@@ -446,8 +446,8 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         } else {
             viewHolder.messageBody.setTextAppearance(getContext(), R.style.TextAppearance_Conversations_Body1_Emoji);
         }
-        Spannable span = new SpannableString(body);
-        float size = Emoticons.isEmoji(body) ? 3.0f : 2.0f;
+        final Spannable span = new SpannableString(body);
+        final float size = Emoticons.isEmoji(body) ? 3.0f : 2.0f;
         span.setSpan(new RelativeSizeSpan(size), 0, body.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         viewHolder.messageBody.setText(EmojiWrapper.transform(span));
     }
@@ -462,18 +462,18 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
             group = false;
         }
         contact = contact.split("\\?")[0];
-        String add_contact = activity.getString(R.string.add_to_contact_list) + " (" + contact + ")";
+        final String add_contact = activity.getString(R.string.add_to_contact_list) + " (" + contact + ")";
         viewHolder.audioPlayer.setVisibility(View.GONE);
         viewHolder.download_button.setVisibility(View.VISIBLE);
         viewHolder.download_button.setText(add_contact);
         if (group) {
-            Drawable icon = activity.getResources().getDrawable(R.drawable.ic_account_multiple_plus_grey600_48dp);
-            Drawable drawable = DrawableCompat.wrap(icon);
+            final Drawable icon = activity.getResources().getDrawable(R.drawable.ic_account_multiple_plus_grey600_48dp);
+            final Drawable drawable = DrawableCompat.wrap(icon);
             DrawableCompat.setTint(drawable, StyledAttributes.getColor(getContext(), R.attr.colorAccent));
             viewHolder.download_button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
         } else {
-            Drawable icon = activity.getResources().getDrawable(R.drawable.ic_account_plus_grey600_48dp);
-            Drawable drawable = DrawableCompat.wrap(icon);
+            final Drawable icon = activity.getResources().getDrawable(R.drawable.ic_account_plus_grey600_48dp);
+            final Drawable drawable = DrawableCompat.wrap(icon);
             DrawableCompat.setTint(drawable, StyledAttributes.getColor(getContext(), R.attr.colorAccent));
             viewHolder.download_button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
         }
@@ -512,7 +512,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         } else {
             color = darkBackground ? this.getMessageTextColor(darkBackground, false) : ContextCompat.getColor(activity, R.color.darkblue);
         }
-        DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
+        final DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
         body.setSpan(new QuoteSpan(color, metrics), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
@@ -597,13 +597,13 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                     body = new SpannableStringBuilder(body, 0, Config.MAX_DISPLAY_MESSAGE_CHARS);
                     body.append("\u2026");
                 }
-                Message.MergeSeparator[] mergeSeparators = body.getSpans(0, body.length(), Message.MergeSeparator.class);
+            final Message.MergeSeparator[] mergeSeparators = body.getSpans(0, body.length(), Message.MergeSeparator.class);
                 for (Message.MergeSeparator mergeSeparator : mergeSeparators) {
                     int start = body.getSpanStart(mergeSeparator);
                     int end = body.getSpanEnd(mergeSeparator);
                     body.setSpan(new DividerSpan(true), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
-                boolean startsWithQuote = handleTextQuotes(body, darkBackground);
+                final boolean startsWithQuote = handleTextQuotes(body, darkBackground);
                 if (!message.isPrivateMessage()) {
                     if (hasMeCommand) {
                         body.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 0, nick.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -617,7 +617,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                         privateMarker = activity.getString(R.string.private_message_to, Strings.nullToEmpty(cp == null ? null : cp.getResource()));
                     }
                     body.insert(0, privateMarker);
-                    int privateMarkerIndex = privateMarker.length();
+                    final int privateMarkerIndex = privateMarker.length();
                     if (startsWithQuote) {
                         body.insert(privateMarkerIndex, "\n\n");
                         body.setSpan(new DividerSpan(false), privateMarkerIndex, privateMarkerIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -633,14 +633,14 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                 if (message.getConversation().getMode() == Conversation.MODE_MULTI && message.getStatus() == Message.STATUS_RECEIVED) {
                     if (message.getConversation() instanceof Conversation) {
                         final Conversation conversation = (Conversation) message.getConversation();
-                        Pattern pattern = NotificationService.generateNickHighlightPattern(conversation.getMucOptions().getActualNick());
-                        Matcher matcher = pattern.matcher(body);
+                        final Pattern pattern = NotificationService.generateNickHighlightPattern(conversation.getMucOptions().getActualNick());
+                        final Matcher matcher = pattern.matcher(body);
                         while (matcher.find()) {
                             body.setSpan(new StyleSpan(Typeface.BOLD), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         }
                     }
                 }
-                Matcher matcher = Emoticons.getEmojiPattern(body).matcher(body);
+                final Matcher matcher = Emoticons.getEmojiPattern(body).matcher(body);
                 while (matcher.find()) {
                     if (matcher.start() < matcher.end()) {
                         body.setSpan(new RelativeSizeSpan(1.5f), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -672,8 +672,8 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         viewHolder.progressBar.setVisibility(View.GONE);
         viewHolder.download_button.setVisibility(View.VISIBLE);
         viewHolder.download_button.setText(text);
-        Drawable icon = activity.getResources().getDrawable(R.drawable.ic_download_grey600_48dp);
-        Drawable drawable = DrawableCompat.wrap(icon);
+        final Drawable icon = activity.getResources().getDrawable(R.drawable.ic_download_grey600_48dp);
+        final Drawable drawable = DrawableCompat.wrap(icon);
         DrawableCompat.setTint(drawable, StyledAttributes.getColor(getContext(), R.attr.colorAccent));
         viewHolder.download_button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
         viewHolder.download_button.setOnClickListener(v -> ConversationFragment.downloadFile(activity, message));
@@ -696,8 +696,8 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                 e.printStackTrace();
             }
         } else if (mimeType != null && message.getMimeType().contains("calendar")) {
-            Drawable icon = activity.getResources().getDrawable(R.drawable.ic_calendar_grey600_48dp);
-            Drawable drawable = DrawableCompat.wrap(icon);
+            final Drawable icon = activity.getResources().getDrawable(R.drawable.ic_calendar_grey600_48dp);
+            final Drawable drawable = DrawableCompat.wrap(icon);
             DrawableCompat.setTint(drawable, StyledAttributes.getColor(getContext(), R.attr.colorAccent));
             viewHolder.download_button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
             viewHolder.download_button.setText(activity.getString(R.string.open_x_file, UIHelper.getFileDescriptionString(activity, message)));
@@ -708,26 +708,26 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                 e.printStackTrace();
             }
         } else if (mimeType != null && message.getMimeType().contains("video")) {
-            Drawable icon = activity.getResources().getDrawable(R.drawable.ic_video_grey600_48dp);
-            Drawable drawable = DrawableCompat.wrap(icon);
+            final Drawable icon = activity.getResources().getDrawable(R.drawable.ic_video_grey600_48dp);
+            final Drawable drawable = DrawableCompat.wrap(icon);
             DrawableCompat.setTint(drawable, StyledAttributes.getColor(getContext(), R.attr.colorAccent));
             viewHolder.download_button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
             viewHolder.download_button.setText(activity.getString(R.string.open_x_file, UIHelper.getFileDescriptionString(activity, message)));
         } else if (mimeType != null && message.getMimeType().contains("image")) {
-            Drawable icon = activity.getResources().getDrawable(R.drawable.ic_image_grey600_48dp);
-            Drawable drawable = DrawableCompat.wrap(icon);
+            final Drawable icon = activity.getResources().getDrawable(R.drawable.ic_image_grey600_48dp);
+            final Drawable drawable = DrawableCompat.wrap(icon);
             DrawableCompat.setTint(drawable, StyledAttributes.getColor(getContext(), R.attr.colorAccent));
             viewHolder.download_button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
             viewHolder.download_button.setText(activity.getString(R.string.open_x_file, UIHelper.getFileDescriptionString(activity, message)));
         } else if (mimeType != null && message.getMimeType().contains("audio")) {
-            Drawable icon = activity.getResources().getDrawable(R.drawable.ic_audio_grey600_48dp);
-            Drawable drawable = DrawableCompat.wrap(icon);
+            final Drawable icon = activity.getResources().getDrawable(R.drawable.ic_audio_grey600_48dp);
+            final Drawable drawable = DrawableCompat.wrap(icon);
             DrawableCompat.setTint(drawable, StyledAttributes.getColor(getContext(), R.attr.colorAccent));
             viewHolder.download_button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
             viewHolder.download_button.setText(activity.getString(R.string.open_x_file, UIHelper.getFileDescriptionString(activity, message)));
         } else {
-            Drawable icon = activity.getResources().getDrawable(R.drawable.ic_file_grey600_48dp);
-            Drawable drawable = DrawableCompat.wrap(icon);
+            final Drawable icon = activity.getResources().getDrawable(R.drawable.ic_file_grey600_48dp);
+            final  Drawable drawable = DrawableCompat.wrap(icon);
             DrawableCompat.setTint(drawable, StyledAttributes.getColor(getContext(), R.attr.colorAccent));
             viewHolder.download_button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
             viewHolder.download_button.setText(activity.getString(R.string.open_x_file, UIHelper.getFileDescriptionString(activity, message)));
@@ -752,8 +752,8 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
             viewHolder.richlinkview.setVisibility(View.GONE);
             viewHolder.progressBar.setVisibility(View.GONE);
             viewHolder.download_button.setVisibility(View.VISIBLE);
-            Drawable icon = activity.getResources().getDrawable(R.drawable.ic_file_pdf_grey600_48dp);
-            Drawable drawable = DrawableCompat.wrap(icon);
+            final Drawable icon = activity.getResources().getDrawable(R.drawable.ic_file_pdf_grey600_48dp);
+            final Drawable drawable = DrawableCompat.wrap(icon);
             DrawableCompat.setTint(drawable, StyledAttributes.getColor(getContext(), R.attr.colorAccent));
             viewHolder.download_button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
             viewHolder.download_button.setText(activity.getString(R.string.open_x_file, UIHelper.getFileDescriptionString(activity, message)));
@@ -772,8 +772,8 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                 e.printStackTrace();
             }
         }
-        Drawable icon = activity.getResources().getDrawable(R.drawable.ic_android_grey600_48dp);
-        Drawable drawable = DrawableCompat.wrap(icon);
+        final Drawable icon = activity.getResources().getDrawable(R.drawable.ic_android_grey600_48dp);
+        final Drawable drawable = DrawableCompat.wrap(icon);
         DrawableCompat.setTint(drawable, StyledAttributes.getColor(getContext(), R.attr.colorAccent));
         viewHolder.download_button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
         viewHolder.download_button.setText(activity.getString(R.string.open_x_file, UIHelper.getFileDescriptionString(activity, message) + APKName));
@@ -790,8 +790,8 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                 e.printStackTrace();
             }
         }
-        Drawable icon = activity.getResources().getDrawable(R.drawable.ic_account_card_details_grey600_48dp);
-        Drawable drawable = DrawableCompat.wrap(icon);
+        final  Drawable icon = activity.getResources().getDrawable(R.drawable.ic_account_card_details_grey600_48dp);
+        final  Drawable drawable = DrawableCompat.wrap(icon);
         DrawableCompat.setTint(drawable, StyledAttributes.getColor(getContext(), R.attr.colorAccent));
         viewHolder.download_button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
         viewHolder.download_button.setText(activity.getString(R.string.open_x_file, UIHelper.getFileDescriptionString(activity, message) + VCardName));
@@ -804,12 +804,12 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         viewHolder.gifImage.setVisibility(View.GONE);
         viewHolder.download_button.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
-        SpannableStringBuilder body = new SpannableStringBuilder(replaceYoutube(activity.getApplicationContext(), message.getMergedBody().toString()));
+        final SpannableStringBuilder body = new SpannableStringBuilder(replaceYoutube(activity.getApplicationContext(), message.getMergedBody().toString()));
         final boolean dataSaverDisabled = activity.xmppConnectionService.isDataSaverDisabled();
         viewHolder.richlinkview.setVisibility(View.VISIBLE);
         if (mShowLinksInside) {
-            double target = metrics.density * 200;
-            int scaledH;
+            final double target = metrics.density * 200;
+            final int scaledH;
             if (Math.max(100, 100) * metrics.density <= target) {
                 scaledH = (int) (100 * metrics.density);
             } else if (Math.max(100, 100) <= target) {
@@ -821,7 +821,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
             layoutParams.setMargins(0, (int) (metrics.density * 4), 0, (int) (metrics.density * 4));
             viewHolder.richlinkview.setLayoutParams(layoutParams);
             final String url = body.toString();
-            String weburl;
+            final String weburl;
             final String lcUrl = url.toLowerCase(Locale.US).trim();
             if (lcUrl.startsWith("http://") || lcUrl.startsWith("https://")) {
                 weburl = removeTrailingBracket(url);
@@ -848,15 +848,15 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
     private void displayLocationMessage(final ViewHolder viewHolder, final Message message, final boolean darkBackground) {
         toggleWhisperInfo(viewHolder, message, false, darkBackground);
         viewHolder.audioPlayer.setVisibility(View.GONE);
-        String url = GeoHelper.MapPreviewUri(message);
+        final String url = GeoHelper.MapPreviewUri(message);
         viewHolder.gifImage.setVisibility(View.GONE);
         viewHolder.richlinkview.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
         if (mShowMapsInside) {
             viewHolder.image.setVisibility(View.VISIBLE);
-            double target = metrics.density * 200;
-            int scaledW;
-            int scaledH;
+            final double target = metrics.density * 200;
+            final int scaledW;
+            final int scaledH;
             if (Math.max(500, 500) * metrics.density <= target) {
                 scaledW = (int) (500 * metrics.density);
                 scaledH = (int) (500 * metrics.density);
@@ -884,16 +884,15 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
             viewHolder.image.setVisibility(View.GONE);
             viewHolder.download_button.setVisibility(View.VISIBLE);
             viewHolder.download_button.setText(R.string.show_location);
-            Drawable icon = activity.getResources().getDrawable(R.drawable.ic_map_marker_grey600_48dp);
-            Drawable drawable = DrawableCompat.wrap(icon);
+            final Drawable icon = activity.getResources().getDrawable(R.drawable.ic_map_marker_grey600_48dp);
+            final Drawable drawable = DrawableCompat.wrap(icon);
             DrawableCompat.setTint(drawable, StyledAttributes.getColor(getContext(), R.attr.colorAccent));
             viewHolder.download_button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
             viewHolder.download_button.setOnClickListener(v -> showLocation(message));
         }
     }
 
-    private void displayAudioMessage(ViewHolder viewHolder, Message message,
-                                     boolean darkBackground) {
+    private void displayAudioMessage(ViewHolder viewHolder, Message message, boolean darkBackground) {
         toggleWhisperInfo(viewHolder, message, showTitle(message), darkBackground);
         viewHolder.image.setVisibility(View.GONE);
         viewHolder.gifImage.setVisibility(View.GONE);
@@ -931,27 +930,26 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         return "";
     }
 
-    private void displayImageMessage(ViewHolder viewHolder, final Message message,
-                                     final boolean darkBackground) {
+    private void displayMediaPreviewMessage(ViewHolder viewHolder, final Message message, final boolean darkBackground) {
         toggleWhisperInfo(viewHolder, message, false, darkBackground);
         viewHolder.download_button.setVisibility(View.GONE);
         viewHolder.audioPlayer.setVisibility(View.GONE);
         viewHolder.richlinkview.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
-        DownloadableFile file = activity.xmppConnectionService.getFileBackend().getFile(message);
+        final DownloadableFile file = activity.xmppConnectionService.getFileBackend().getFile(message);
         if (!file.exists()) {
             ToastCompat.makeText(activity, R.string.file_deleted, Toast.LENGTH_SHORT).show();
             return;
         }
-        String mime = file.getMimeType();
+        final String mime = file.getMimeType();
         if (mime != null && mime.equals("image/gif") && mPlayGifInside) {
             Log.d(Config.LOGTAG, "Gif Image file");
             viewHolder.image.setVisibility(View.GONE);
             viewHolder.gifImage.setVisibility(View.VISIBLE);
-            FileParams params = message.getFileParams();
-            double target = metrics.density * 200;
-            int scaledW;
-            int scaledH;
+            final FileParams params = message.getFileParams();
+            final double target = metrics.density * 200;
+            final int scaledW;
+            final int scaledH;
             if (Math.max(params.height, params.width) * metrics.density <= target) {
                 scaledW = (int) (params.width * metrics.density);
                 scaledH = (int) (params.height * metrics.density);
@@ -1224,7 +1222,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
             }
         } else if (message.isFileOrImage() && message.getEncryption() != Message.ENCRYPTION_PGP && message.getEncryption() != Message.ENCRYPTION_DECRYPTION_FAILED) {
             if (message.getFileParams().width > 0 && message.getFileParams().height > 0) {
-                displayImageMessage(viewHolder, message, darkBackground);
+                displayMediaPreviewMessage(viewHolder, message, darkBackground);
             } else if (message.getFileParams().runtime > 0) {
                 displayAudioMessage(viewHolder, message, darkBackground);
             } else {
