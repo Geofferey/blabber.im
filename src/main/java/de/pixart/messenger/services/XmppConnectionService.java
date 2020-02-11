@@ -1013,6 +1013,10 @@ public class XmppConnectionService extends Service {
         return getBooleanPreference("alternative_voice_settings", R.bool.alternative_voice_settings);
     }
 
+    public boolean colored_muc_names() {
+        return getBooleanPreference("colored_muc_names", R.bool.use_colored_muc_names);
+    }
+
     public int getCompressImageResolutionPreference() {
         switch (getPreferences().getString("image_compression", getResources().getString(R.string.image_compression))) {
             case "low":

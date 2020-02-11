@@ -41,6 +41,11 @@
             android:summary="@string/pref_use_unicolored_chatbg_summary"
             android:title="@string/pref_use_unicolored_chatbg" />
         <CheckBoxPreference
+            android:defaultValue="@bool/use_colored_muc_names"
+            android:key="colored_muc_names"
+            android:summary="@string/pref_use_colored_muc_names_summary"
+            android:title="@string/pref_use_colored_muc_names" />
+        <CheckBoxPreference
             android:defaultValue="@bool/send_button_status"
             android:key="send_button_status"
             android:summary="@string/pref_use_send_button_to_indicate_status_summary"

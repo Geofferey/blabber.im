@@ -34,6 +34,7 @@ import de.pixart.messenger.entities.MucOptions;
 import de.pixart.messenger.entities.Presence;
 import de.pixart.messenger.entities.Transferable;
 import de.pixart.messenger.services.ExportBackupService;
+import de.pixart.messenger.services.XmppConnectionService;
 import rocks.xmpp.addr.Jid;
 
 import static de.pixart.messenger.entities.Message.DELETED_MESSAGE_BODY;
@@ -504,11 +505,13 @@ public class UIHelper {
         }
     }
 
-    public static SpannableString getColoredUsername(final Message message) {
+    public static SpannableString getColoredUsername(final XmppConnectionService service, final Message message) {
         final SpannableString user;
         user = SpannableString.valueOf(UIHelper.getMessageDisplayName(message));
         user.setSpan(new StyleSpan(Typeface.BOLD), 0, user.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        user.setSpan(new ForegroundColorSpan(message.getAvatarBackgroundColor()), 0, user.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        if (service.colored_muc_names()) {
+            user.setSpan(new ForegroundColorSpan(message.getAvatarBackgroundColor()), 0, user.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
         return user;
     }
 

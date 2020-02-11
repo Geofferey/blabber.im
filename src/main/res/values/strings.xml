@@ -1000,4 +1000,6 @@
     <string name="pref_use_unicolored_chatbg">Use unicolored background</string>
     <string name="pref_alternative_voice_settings_summary">If you have problems during voice recording, use this setting to change the codec.</string>
     <string name="pref_alternative_voice_settings">Alternative voice recording method</string>
+    <string name="pref_use_colored_muc_names_summary">Colorize nicknames in group chats or channels like default avatar backgrounds.</string>
+    <string name="pref_use_colored_muc_names">Colorize nicknames</string>
 </resources>

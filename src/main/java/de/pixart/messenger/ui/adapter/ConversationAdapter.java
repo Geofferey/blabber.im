@@ -3,7 +3,10 @@ package de.pixart.messenger.ui.adapter;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.style.StyleSpan;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -183,13 +186,18 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             if (message.getStatus() == Message.STATUS_RECEIVED) {
                 if (conversation.getMode() == Conversation.MODE_MULTI) {
                     viewHolder.binding.senderName.setVisibility(View.VISIBLE);
-                    viewHolder.binding.senderName.setText(UIHelper.getColoredUsername(message));
+                    viewHolder.binding.senderName.setText(UIHelper.getColoredUsername(activity.xmppConnectionService, message));
+                    viewHolder.binding.senderName.append(":");
                 } else {
                     viewHolder.binding.senderName.setVisibility(View.GONE);
                 }
             } else if (message.getType() != Message.TYPE_STATUS) {
                 viewHolder.binding.senderName.setVisibility(View.VISIBLE);
-                viewHolder.binding.senderName.setText(activity.getString(R.string.me) + ':');
+                final SpannableString me;
+                me = SpannableString.valueOf(activity.getString(R.string.me));
+                me.setSpan(new StyleSpan(Typeface.BOLD), 0, me.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                viewHolder.binding.senderName.setText(me);
+                viewHolder.binding.senderName.append(":");
             } else {
                 viewHolder.binding.senderName.setVisibility(View.GONE);
             }
