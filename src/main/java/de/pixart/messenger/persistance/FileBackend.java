@@ -305,12 +305,12 @@ public class FileBackend {
         return true;
     }
 
-    public List<Attachment> convertToAttachments(List<DatabaseBackend.FilePath> relativeFilePaths) {
-        List<Attachment> attachments = new ArrayList<>();
+    public List<Attachment> convertToAttachments(final List<DatabaseBackend.FilePath> relativeFilePaths) {
+        final List<Attachment> attachments = new ArrayList<>();
         for (DatabaseBackend.FilePath relativeFilePath : relativeFilePaths) {
             final String mime = MimeUtils.guessMimeTypeFromExtension(MimeUtils.extractRelevantExtension(relativeFilePath.path));
             final File file = getFileForPath(relativeFilePath.path, mime);
-            if (file.exists() && mime != null && (mime.startsWith("image/") || mime.startsWith("video/"))) {
+            if (file.exists()) {
                 attachments.add(Attachment.of(relativeFilePath.uuid, file, mime));
             }
         }
