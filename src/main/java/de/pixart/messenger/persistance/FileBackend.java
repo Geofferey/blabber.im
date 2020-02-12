@@ -1383,7 +1383,10 @@ public class FileBackend {
         if (bitmap != null || cacheOnly) {
             return bitmap;
         }
-        if (attachment.getMime() != null && attachment.getMime().startsWith("video/")) {
+        DownloadableFile file = new DownloadableFile(attachment.getUri().getPath());
+        if ("application/pdf".equals(attachment.getMime()) && Compatibility.runsTwentyOne()) {
+            bitmap = cropCenterSquare(getPDFPreview(file, size), size);
+        } else if (attachment.getMime() != null && attachment.getMime().startsWith("video/")) {
             bitmap = cropCenterSquareVideo(attachment.getUri(), size);
             drawOverlay(bitmap, R.drawable.play_video, 0.75f);
         } else {

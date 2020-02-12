@@ -158,7 +158,7 @@ public class Attachment implements Parcelable {
     }
 
     public boolean renderThumbnail() {
-        return type == Type.IMAGE || (type == Type.FILE && mime != null && (mime.startsWith("video/") || mime.startsWith("image/")));
+        return type == Type.IMAGE || (type == Type.FILE && mime != null && (mime.startsWith("video/") || mime.startsWith("image/") || mime.contains("pdf")));
     }
 
     public Uri getUri() {
