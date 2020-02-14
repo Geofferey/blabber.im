@@ -237,14 +237,14 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
             startActivity(intent);
         });
         this.binding.detailsMucAvatar.setOnLongClickListener(v -> {
-            ImageView view = new ImageView(ConferenceDetailsActivity.this);
+            final ImageView view = new ImageView(ConferenceDetailsActivity.this);
             view.setAdjustViewBounds(true);
             view.setMaxHeight(R.dimen.avatar_big);
             view.setMaxWidth(R.dimen.avatar_big);
             view.setBackgroundColor(Color.WHITE);
             view.setScaleType(ImageView.ScaleType.FIT_XY);
             AvatarWorkerTask.loadAvatar(mConversation, view, R.dimen.avatar_big);
-            AlertDialog.Builder builder = new AlertDialog.Builder(ConferenceDetailsActivity.this);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(ConferenceDetailsActivity.this);
             builder.setView(view);
             builder.create().show();
             return true;

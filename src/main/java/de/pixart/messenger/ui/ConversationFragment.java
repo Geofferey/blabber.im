@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
@@ -46,6 +47,7 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
@@ -101,6 +103,7 @@ import de.pixart.messenger.ui.adapter.MediaPreviewAdapter;
 import de.pixart.messenger.ui.adapter.MessageAdapter;
 import de.pixart.messenger.ui.util.ActivityResult;
 import de.pixart.messenger.ui.util.Attachment;
+import de.pixart.messenger.ui.util.AvatarWorkerTask;
 import de.pixart.messenger.ui.util.ConversationMenuConfigurator;
 import de.pixart.messenger.ui.util.DateSeparator;
 import de.pixart.messenger.ui.util.EditMessageActionModeCallback;
@@ -3141,6 +3144,18 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 popupMenu.inflate(R.menu.one_on_one_context);
                 popupMenu.setOnMenuItemClickListener(item -> {
                     switch (item.getItemId()) {
+                        case R.id.action_show_avatar:
+                            final ImageView view = new ImageView(activity);
+                            view.setAdjustViewBounds(true);
+                            view.setMaxHeight(R.dimen.avatar_big);
+                            view.setMaxWidth(R.dimen.avatar_big);
+                            view.setBackgroundColor(Color.WHITE);
+                            view.setScaleType(ImageView.ScaleType.FIT_XY);
+                            AvatarWorkerTask.loadAvatar(contact, view, R.dimen.avatar_big);
+                            final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                            builder.setView(view);
+                            builder.create().show();
+                            break;
                         case R.id.action_contact_details:
                             activity.switchToContactDetails(message.getContact(), fingerprint);
                             break;
@@ -3156,6 +3171,8 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             final Menu menu = popupMenu.getMenu();
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
+
+
                     case R.id.action_show_qr_code:
                         activity.showQrCode(conversation.getAccount().getShareableUri());
                         break;

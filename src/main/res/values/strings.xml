@@ -1003,4 +1003,5 @@
     <string name="pref_use_colored_muc_names_summary">Colorize nicknames in group chats or channels like default avatar backgrounds.</string>
     <string name="pref_use_colored_muc_names">Colorize nicknames</string>
     <string name="show_videos_images_only">Only images/videos</string>
+    <string name="show_avatar">Show avatar</string>
 </resources>
