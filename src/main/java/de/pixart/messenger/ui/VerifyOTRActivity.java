@@ -422,7 +422,7 @@ public class VerifyOTRActivity extends XmppActivity implements XmppConnectionSer
     }
 
     private void showManuallyVerifyDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.manually_verify);
         builder.setMessage(R.string.are_you_sure_verify_fingerprint);
         builder.setNegativeButton(R.string.cancel, null);

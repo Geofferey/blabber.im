@@ -424,7 +424,7 @@ public class SettingsActivity extends XmppActivity implements
     }
 
     private boolean deleteOmemoIdentities() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.pref_delete_omemo_identities);
         final List<CharSequence> accounts = new ArrayList<>();
         for (Account account : xmppConnectionService.getAccounts()) {
@@ -460,7 +460,7 @@ public class SettingsActivity extends XmppActivity implements
                 }
             }
         });
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.show();
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
         return true;

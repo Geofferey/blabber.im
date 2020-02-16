@@ -80,7 +80,7 @@ public class StartUI extends AppCompatActivity
     @Override
     public void onPermissionsDenied(int requestCode, List<String> list) {
         Log.d(Config.LOGTAG, "Permissions denied:" + requestCode);
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setMessage(getString(R.string.request_permissions_message_again))
                 .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                     @Override

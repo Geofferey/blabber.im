@@ -75,7 +75,7 @@ public class JoinConferenceDialog extends DialogFragment implements OnBackendCon
         builder.setView(binding.getRoot());
         builder.setPositiveButton(R.string.join, null);
         builder.setNegativeButton(R.string.cancel, null);
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.show();
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(view -> mListener.onJoinDialogPositiveClick(dialog, binding.account, binding.accountJidLayout, binding.jid, binding.bookmark.isChecked()));
         binding.jid.setOnEditorActionListener((v, actionId, event) -> {

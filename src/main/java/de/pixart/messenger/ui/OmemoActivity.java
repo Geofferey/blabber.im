@@ -193,7 +193,7 @@ public abstract class OmemoActivity extends XmppActivity {
     }
 
     public void showPurgeKeyDialog(final Account account, final String fingerprint) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.distrust_omemo_key);
         builder.setMessage(R.string.distrust_omemo_key_text);
         builder.setNegativeButton(getString(R.string.cancel), null);

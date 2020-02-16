@@ -150,7 +150,7 @@ public class ImportBackupActivity extends XmppActivity implements ServiceConnect
         final DialogEnterPasswordBinding enterPasswordBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_enter_password, null, false);
         Log.d(Config.LOGTAG, "attempting to import " + backupFile.getUri());
         enterPasswordBinding.explain.setText(getString(R.string.enter_password_to_restore, backupFile.getHeader().getJid().toString()));
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(enterPasswordBinding.getRoot());
         builder.setTitle(R.string.enter_password);
         builder.setNegativeButton(R.string.cancel, (dialog, which) -> {

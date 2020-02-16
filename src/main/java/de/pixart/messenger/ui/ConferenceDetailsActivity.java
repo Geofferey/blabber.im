@@ -115,7 +115,7 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
     private OnClickListener mNotifyStatusClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(ConferenceDetailsActivity.this);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(ConferenceDetailsActivity.this);
             builder.setTitle(R.string.pref_notification_settings);
             String[] choices = {
                     getString(R.string.notify_on_all_messages),
@@ -132,7 +132,7 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
             builder.setNegativeButton(R.string.cancel, null);
             builder.setPositiveButton(R.string.ok, (dialog, which) -> {
                 if (choice.get() == 2) {
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(ConferenceDetailsActivity.this);
+                    final AlertDialog.Builder builder1 = new AlertDialog.Builder(ConferenceDetailsActivity.this);
                     builder1.setTitle(R.string.disable_notifications);
                     final int[] durations = getResources().getIntArray(R.array.mute_options_durations);
                     final CharSequence[] labels = new CharSequence[durations.length];
@@ -170,14 +170,14 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
         @Override
         public void onClick(View v) {
             final MucOptions mucOptions = mConversation.getMucOptions();
-            AlertDialog.Builder builder = new AlertDialog.Builder(ConferenceDetailsActivity.this);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(ConferenceDetailsActivity.this);
             MucConfiguration configuration = MucConfiguration.get(ConferenceDetailsActivity.this, mAdvancedMode, mucOptions);
             builder.setTitle(configuration.title);
             final boolean[] values = configuration.values;
             builder.setMultiChoiceItems(configuration.names, values, (dialog, which, isChecked) -> values[which] = isChecked);
             builder.setNegativeButton(R.string.cancel, null);
             builder.setPositiveButton(R.string.confirm, (dialog, which) -> {
-                Bundle options = configuration.toBundle(values);
+                final Bundle options = configuration.toBundle(values);
                 options.putString("muc#roomconfig_persistentroom", "1");
                 xmppConnectionService.pushConferenceConfiguration(mConversation,
                         options,

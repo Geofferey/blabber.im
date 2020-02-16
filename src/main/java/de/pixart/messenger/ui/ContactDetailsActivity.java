@@ -156,15 +156,14 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
         public void onClick(View v) {
             Uri systemAccount = contact.getSystemAccount();
             if (systemAccount == null) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(
-                        ContactDetailsActivity.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(ContactDetailsActivity.this);
                 builder.setTitle(getString(R.string.action_add_phone_book));
                 builder.setMessage(getString(R.string.add_phone_book_text, contact.getJid().toString()));
                 builder.setNegativeButton(getString(R.string.cancel), null);
                 builder.setPositiveButton(getString(R.string.add), addToPhonebook);
                 builder.create().show();
             } else {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
+                final Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(systemAccount);
                 try {
                     startActivity(intent);
@@ -179,7 +178,7 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
     private OnClickListener mNotifyStatusClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(ContactDetailsActivity.this);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(ContactDetailsActivity.this);
             builder.setTitle(R.string.pref_notification_settings);
             String[] choices = {
                     getString(R.string.notify_on_all_messages),
@@ -195,7 +194,7 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
             builder.setNegativeButton(R.string.cancel, null);
             builder.setPositiveButton(R.string.ok, (DialogInterface.OnClickListener) (dialog, which) -> {
                 if (choice.get() == 1) {
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(ContactDetailsActivity.this);
+                    final AlertDialog.Builder builder1 = new AlertDialog.Builder(ContactDetailsActivity.this);
                     builder1.setTitle(R.string.disable_notifications);
                     final int[] durations = getResources().getIntArray(R.array.mute_options_durations);
                     final CharSequence[] labels = new CharSequence[durations.length];
@@ -673,7 +672,7 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
     }
 
     protected void confirmToDeleteFingerprint(final String fingerprint) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.delete_fingerprint);
         builder.setMessage(R.string.sure_delete_fingerprint);
         builder.setNegativeButton(R.string.cancel, null);

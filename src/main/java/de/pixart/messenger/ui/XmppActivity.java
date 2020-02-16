@@ -270,7 +270,7 @@ public abstract class XmppActivity extends ActionBarActivity {
     }
 
     public void showInstallPgpDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.openkeychain_required));
         builder.setIconAttribute(android.R.attr.alertDialogIcon);
         builder.setMessage(getText(R.string.openkeychain_required_long));
@@ -685,7 +685,7 @@ public abstract class XmppActivity extends ActionBarActivity {
 
     protected void displayErrorDialog(final int errorCode) {
         runOnUiThread(() -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(XmppActivity.this);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(XmppActivity.this);
             builder.setIconAttribute(android.R.attr.alertDialogIcon);
             builder.setTitle(getString(R.string.error));
             builder.setMessage(errorCode);
@@ -703,7 +703,7 @@ public abstract class XmppActivity extends ActionBarActivity {
         if (contact == null) {
             return;
         }
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(contact.getJid().toString());
         builder.setMessage(getString(R.string.not_in_roster));
         builder.setNegativeButton(getString(R.string.cancel), null);
@@ -712,7 +712,7 @@ public abstract class XmppActivity extends ActionBarActivity {
     }
 
     private void showAskForPresenceDialog(final Contact contact) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(contact.getJid().toString());
         builder.setMessage(R.string.request_presence_updates);
         builder.setNegativeButton(R.string.cancel, null);
@@ -730,7 +730,7 @@ public abstract class XmppActivity extends ActionBarActivity {
 
     private void warnMutalPresenceSubscription(final Conversation conversation,
                                                final OnPresenceSelected listener) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(conversation.getContact().getJid().toString());
         builder.setMessage(R.string.without_mutual_presence_updates);
         builder.setNegativeButton(R.string.cancel, null);
@@ -761,7 +761,7 @@ public abstract class XmppActivity extends ActionBarActivity {
                            final @StringRes int hint,
                            boolean password,
                            boolean permitEmpty) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         DialogQuickeditBinding binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.dialog_quickedit, null, false);
         if (password) {
             binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -887,7 +887,7 @@ public abstract class XmppActivity extends ActionBarActivity {
 
     private void showPresenceSelectionDialog(Presences presences, final Conversation conversation, final OnPresenceSelected listener) {
         final Contact contact = conversation.getContact();
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.choose_presence));
         final String[] resourceArray = presences.toResourceArray();
         Pair<Map<String, String>, Map<String, String>> typeAndName = presences.toTypeAndNameMap();
@@ -1190,7 +1190,7 @@ public abstract class XmppActivity extends ActionBarActivity {
         ImageView view = new ImageView(this);
         view.setBackgroundColor(Color.WHITE);
         view.setImageBitmap(bitmap);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(view);
         builder.create().show();
     }
@@ -1396,7 +1396,7 @@ public abstract class XmppActivity extends ActionBarActivity {
             ShowToast = "false";
         }
         if (!installFromUnknownSourceAllowed() && xmppConnectionService.installedFrom() == null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.install_from_unknown_sources_disabled);
             builder.setMessage(R.string.install_from_unknown_sources_disabled_dialog);
             builder.setPositiveButton(R.string.next, (dialog, which) -> {

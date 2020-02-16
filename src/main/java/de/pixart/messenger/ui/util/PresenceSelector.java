@@ -30,7 +30,7 @@
 package de.pixart.messenger.ui.util;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.content.Context;
 import android.util.Pair;
 
@@ -50,7 +50,7 @@ public class PresenceSelector {
     public static void showPresenceSelectionDialog(Activity activity, final Conversation conversation, final OnPresenceSelected listener) {
         final Contact contact = conversation.getContact();
         final Presences presences = contact.getPresences();
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(activity.getString(R.string.choose_presence));
         final String[] resourceArray = presences.toResourceArray();
         Pair<Map<String, String>, Map<String, String>> typeAndName = presences.toTypeAndNameMap();
@@ -99,7 +99,7 @@ public class PresenceSelector {
     }
 
     public static void warnMutualPresenceSubscription(Activity activity, final Conversation conversation, final OnPresenceSelected listener) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(conversation.getContact().getJid().toString());
         builder.setMessage(R.string.without_mutual_presence_updates);
         builder.setNegativeButton(R.string.cancel, null);

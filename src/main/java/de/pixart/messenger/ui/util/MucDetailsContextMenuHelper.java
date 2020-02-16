@@ -257,7 +257,7 @@ public final class MucDetailsContextMenuHelper {
     private static void kickFromRoom(final User user, XmppActivity
             activity, XmppConnectionService.OnAffiliationChanged onAffiliationChanged) {
         final Conversation conversation = user.getConversation();
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.kick_from_conference);
         String jid = user.getRealJid().asBareJid().toString();
         SpannableString message;
@@ -284,7 +284,7 @@ public final class MucDetailsContextMenuHelper {
     private static void banFromRoom(final User user, XmppActivity
             activity, XmppConnectionService.OnAffiliationChanged onAffiliationChanged) {
         final Conversation conversation = user.getConversation();
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.ban_from_conference);
         String jid = user.getRealJid().asBareJid().toString();
         SpannableString message;

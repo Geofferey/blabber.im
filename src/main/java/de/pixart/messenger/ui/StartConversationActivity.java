@@ -463,8 +463,7 @@ public class StartConversationActivity extends XmppActivity implements XmppConne
     protected void deleteConference() {
         int position = conference_context_id;
         final Bookmark bookmark = (Bookmark) conferences.get(position);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setNegativeButton(R.string.cancel, null);
         builder.setTitle(R.string.delete_bookmark);
         builder.setMessage(JidDialog.style(this, R.string.remove_bookmark_text, bookmark.getJid().toEscapedString()));
@@ -729,7 +728,7 @@ public class StartConversationActivity extends XmppActivity implements XmppConne
             if (checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
                 if (mRequestedContactsPermission.compareAndSet(false, true)) {
                     if (shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                         builder.setTitle(R.string.sync_with_contacts);
                         builder.setMessage(R.string.sync_with_contacts_long);
                         builder.setPositiveButton(R.string.next, (dialog, which) -> requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, REQUEST_SYNC_CONTACTS));
@@ -865,11 +864,11 @@ public class StartConversationActivity extends XmppActivity implements XmppConne
     }
 
     private void displayVerificationWarningDialog(final Contact contact, final Invite invite) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.verify_omemo_keys);
-        View view = getLayoutInflater().inflate(R.layout.dialog_verify_fingerprints, null);
+        final View view = getLayoutInflater().inflate(R.layout.dialog_verify_fingerprints, null);
         final CheckBox isTrustedSource = view.findViewById(R.id.trusted_source);
-        TextView warning = view.findViewById(R.id.warning);
+        final TextView warning = view.findViewById(R.id.warning);
         warning.setText(JidDialog.style(this, R.string.verifying_omemo_keys_trusted_source, contact.getJid().asBareJid().toEscapedString(), contact.getDisplayName()));
         builder.setView(view);
         builder.setPositiveButton(R.string.confirm, (dialog, which) -> {
@@ -879,7 +878,7 @@ public class StartConversationActivity extends XmppActivity implements XmppConne
             switchToConversationDoNotAppend(contact, invite.getBody());
         });
         builder.setNegativeButton(R.string.cancel, (dialog, which) -> StartConversationActivity.this.finish());
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         dialog.setOnCancelListener(dialog1 -> StartConversationActivity.this.finish());
         dialog.show();

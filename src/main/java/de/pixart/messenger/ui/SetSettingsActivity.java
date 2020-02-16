@@ -131,7 +131,7 @@ public class SetSettingsActivity extends XmppActivity implements XmppConnectionS
                 message = getString(R.string.error);
         }
         Log.d(Config.LOGTAG, "STRING value " + title);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setNeutralButton(getString(R.string.ok), null);

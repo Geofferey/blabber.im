@@ -134,7 +134,7 @@ public class MagicCreateActivity extends XmppActivity implements TextWatcher, Ad
                     intent.putExtra("existing", false);
                     intent.putExtra("useownprovider", useOwnProvider);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setTitle(getString(R.string.create_account));
                     builder.setCancelable(false);
                     StringBuilder messasge = new StringBuilder();

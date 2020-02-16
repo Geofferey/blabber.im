@@ -1,6 +1,6 @@
 package de.pixart.messenger.ui;
 
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -255,7 +255,7 @@ public class TrustKeysActivity extends OmemoActivity implements OnKeyStatusUpdat
     }
 
     private void disableEncryptionDialog(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.disable_encryption);
         builder.setMessage(R.string.disable_encryption_message);
         builder.setPositiveButton(R.string.disable_now, (dialog, which) -> {

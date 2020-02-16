@@ -119,7 +119,7 @@ public class UpdaterActivity extends XmppActivity {
             }
 
             //oh yeah we do need an upgrade, let the user know send an alert message
-            AlertDialog.Builder builder = new AlertDialog.Builder(UpdaterActivity.this);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(UpdaterActivity.this);
             builder.setCancelable(false);
             //open link to changelog
             //if the user agrees to upgrade
@@ -248,7 +248,7 @@ public class UpdaterActivity extends XmppActivity {
     }
 
     private void showCancelDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.cancel_update)
                 .setCancelable(false)
                 .setPositiveButton(R.string.yes, (dialog, id) -> {
@@ -261,7 +261,7 @@ public class UpdaterActivity extends XmppActivity {
                     UpdaterActivity.this.finish();
                 })
                 .setNegativeButton(R.string.no, (dialog, id) -> dialog.cancel());
-        AlertDialog alert = builder.create();
+        final AlertDialog alert = builder.create();
         alert.show();
     }
 

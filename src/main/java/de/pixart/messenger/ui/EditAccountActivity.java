@@ -962,7 +962,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                 publishOpenPGPPublicKey(mAccount);
                 return true;
             case R.id.mgmt_account_password_forgotten:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(R.string.password_forgotten_title);
                 builder.setMessage(R.string.password_forgotten_text);
                 builder.setNegativeButton(R.string.cancel, null);
@@ -1032,7 +1032,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
     private void changePresence() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean manualStatus = sharedPreferences.getBoolean(SettingsActivity.MANUALLY_CHANGE_PRESENCE, getResources().getBoolean(R.bool.manually_change_presence));
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final DialogPresenceBinding binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.dialog_presence, null, false);
         final String current = mAccount.getPresenceStatusMessage();
         if (current != null && !current.trim().isEmpty()) {
@@ -1416,7 +1416,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
     }
 
     private void showDeletePgpDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.unpublish_pgp);
         builder.setMessage(R.string.unpublish_pgp_message);
         builder.setNegativeButton(R.string.cancel, null);
@@ -1464,7 +1464,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
     }
 
     public void showWipePepDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.clear_other_devices));
         builder.setIconAttribute(android.R.attr.alertDialogIcon);
         builder.setMessage(getString(R.string.clear_other_devices_desc));
@@ -1481,9 +1481,9 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
     }
 
     private void showPassword() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = getLayoutInflater().inflate(R.layout.dialog_show_password, null);
-        TextView password = view.findViewById(R.id.password);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final View view = getLayoutInflater().inflate(R.layout.dialog_show_password, null);
+        final TextView password = view.findViewById(R.id.password);
         password.setText(mAccount.getPassword());
         builder.setTitle(R.string.password);
         builder.setView(view);
@@ -1556,9 +1556,9 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
             if (mFetchingMamPrefsToast != null) {
                 mFetchingMamPrefsToast.cancel();
             }
-            AlertDialog.Builder builder = new AlertDialog.Builder(EditAccountActivity.this);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(EditAccountActivity.this);
             builder.setTitle(R.string.server_side_mam_prefs);
-            String defaultAttr = prefs.getAttribute("default");
+            final String defaultAttr = prefs.getAttribute("default");
             final List<String> defaults = Arrays.asList("never", "roster", "always");
             final AtomicInteger choice = new AtomicInteger(Math.max(0, defaults.indexOf(defaultAttr)));
             builder.setSingleChoiceItems(R.array.mam_prefs, choice.get(), (dialog, which) -> choice.set(which));
