@@ -37,6 +37,7 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.leinardi.android.speeddial.SpeedDialActionItem;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -109,28 +110,7 @@ public class MediaViewerActivity extends XmppActivity implements AudioManager.On
         getWindow().setAttributes(layout);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        binding.speedDial.inflate(R.menu.media_viewer);
-        binding.speedDial.setOnActionSelectedListener(actionItem -> {
-            switch (actionItem.getId()) {
-                case R.id.action_share:
-                    share();
-                    break;
-                case R.id.action_open:
-                    open();
-                    break;
-                /*
-                case R.id.action_delete:
-                    if (mFile == null || !mFile.toString().startsWith("/") || mFile.toString().contains(FileBackend.getConversationsDirectory("null"))) {
-                        deleteFile();
-                    }
-                    break;
-                    */
-                default:
-                    return false;
-            }
-            return false;
-        });
-        showFab();
+        //binding.speedDial.inflate(R.menu.media_viewer);
     }
 
     private void share() {
@@ -146,7 +126,7 @@ public class MediaViewerActivity extends XmppActivity implements AudioManager.On
     }
 
     private void deleteFile() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setNegativeButton(R.string.cancel, null);
         builder.setTitle(R.string.delete_file_dialog);
         builder.setMessage(R.string.delete_file_dialog_msg);
@@ -228,6 +208,54 @@ public class MediaViewerActivity extends XmppActivity implements AudioManager.On
                 }
             }
         }
+        if (isDeletableFile(mFile)) {
+            binding.speedDial.addActionItem(new SpeedDialActionItem.Builder(R.id.action_delete, R.drawable.ic_delete_white_24dp)
+                    .setLabel(R.string.action_delete)
+                    .create()
+            );
+        }
+        binding.speedDial.addActionItem(new SpeedDialActionItem.Builder(R.id.action_open, R.drawable.ic_open_in_new_white_24dp)
+                .setLabel(R.string.open_with)
+                .create()
+        );
+        binding.speedDial.addActionItem(new SpeedDialActionItem.Builder(R.id.action_share, R.drawable.ic_share_white_24dp)
+                .setLabel(R.string.share)
+                .create()
+        );
+
+        if (isDeletableFile(mFile)) {
+            binding.speedDial.setOnActionSelectedListener(actionItem -> {
+                switch (actionItem.getId()) {
+                    case R.id.action_share:
+                        share();
+                        break;
+                    case R.id.action_open:
+                        open();
+                        break;
+                    case R.id.action_delete:
+                        deleteFile();
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            });
+        } else {
+            binding.speedDial.setOnActionSelectedListener(actionItem -> {
+                switch (actionItem.getId()) {
+                    case R.id.action_share:
+                        share();
+                        break;
+                    case R.id.action_open:
+                        open();
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            });
+        }
+        showFab();
     }
 
     private void DisplayImage(final File file, final Uri uri) {
@@ -309,14 +337,18 @@ public class MediaViewerActivity extends XmppActivity implements AudioManager.On
 
     private void releaseAudiFocus() {
         AudioManager am = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
-        am.abandonAudioFocus(this);
+        if (am != null) {
+            am.abandonAudioFocus(this);
+        }
     }
 
     private void requestAudioFocus() {
         AudioManager am = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
-        am.requestAudioFocus(this,
-                AudioManager.STREAM_MUSIC,
-                AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+        if (am != null) {
+            am.requestAudioFocus(this,
+                    AudioManager.STREAM_MUSIC,
+                    AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+        }
     }
 
     private int getRotation(Uri image) {
@@ -461,5 +493,9 @@ public class MediaViewerActivity extends XmppActivity implements AudioManager.On
         } else if (focusChange == AudioManager.AUDIOFOCUS_REQUEST_FAILED) {
             Log.i(Config.LOGTAG, "Audio focus failed.");
         }
+    }
+
+    private boolean isDeletableFile(File file) {
+        return (file == null || !file.toString().startsWith("/") || file.toString().contains(FileBackend.getConversationsDirectory("null")));
     }
 }
