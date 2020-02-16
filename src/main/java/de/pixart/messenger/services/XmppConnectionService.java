@@ -1168,7 +1168,7 @@ public class XmppConnectionService extends Service {
 
     public void expireOldMessages(final boolean resetHasMessagesLeftOnServer) {
         mLastExpiryRun.set(SystemClock.elapsedRealtime());
-        Runnable runnable = () -> {
+        final Runnable runnable = () -> {
             long timestamp = getAutomaticMessageDeletionDate();
             if (timestamp > 0) {
                 expireOldMessages(timestamp, true);
@@ -1793,22 +1793,23 @@ public class XmppConnectionService extends Service {
     }
 
     private void sendUnsentMessages(final Conversation conversation) {
-        new Thread(() -> {
+        final Runnable runnable = () -> {
             conversation.findWaitingMessages(message -> resendMessage(message, true));
-        }).start();
+        };
+        mDatabaseWriterExecutor.execute((runnable));
+
     }
 
     private void resendFailedFileMessages(final Conversation conversation) {
-        conversation.findFailedMessagesWithFiles(new Conversation.OnMessageFound() {
-
-            @Override
-            public void onMessageFound(Message message) {
+        final Runnable runnable = () -> {
+            conversation.findFailedMessagesWithFiles(message -> {
                 if (mHttpConnectionManager.getAutoAcceptFileSize() >= message.getFileParams().size) {
                     Log.d(Config.LOGTAG, "Resend failed message with size " + message.getFileParams().size + " bytes for " + conversation.getJid());
                     resendMessage(message, true);
                 }
-            }
-        });
+            });
+        };
+        mDatabaseWriterExecutor.execute((runnable));
     }
 
     public void resendMessage(final Message message, final boolean delay) {
@@ -2037,18 +2038,15 @@ public class XmppConnectionService extends Service {
                 final long startMessageRestore = SystemClock.elapsedRealtime();
                 final Conversation quickLoad = QuickLoader.get(this.conversations);
                 if (quickLoad != null) {
-                    new Thread(() -> {
-                        restoreMessages(quickLoad);
-                    }).start();
+
+                    restoreMessages(quickLoad);
                     updateConversationUi();
                     final long diffMessageRestore = SystemClock.elapsedRealtime() - startMessageRestore;
                     Log.d(Config.LOGTAG, "quickly restored " + quickLoad.getName() + " after " + diffMessageRestore + "ms");
                 }
                 for (Conversation conversation : this.conversations) {
                     if (quickLoad != conversation) {
-                        new Thread(() -> {
-                            restoreMessages(conversation);
-                        }).start();
+                        restoreMessages(conversation);
                     }
                 }
                 mNotificationService.finishBacklog(false);
@@ -4451,7 +4449,7 @@ public class XmppConnectionService extends Service {
         }
         final List<Message> readMessages = conversation.markRead(upToUuid);
         if (readMessages.size() > 0) {
-            Runnable runnable = () -> {
+            final Runnable runnable = () -> {
                 for (Message message : readMessages) {
                     databaseBackend.updateMessage(message, false);
                 }
@@ -4465,7 +4463,7 @@ public class XmppConnectionService extends Service {
     }
 
     public synchronized void updateUnreadCountBadge() {
-        new Thread(() -> {
+        final Runnable runnable = () -> {
             int count = unreadCount();
             if (unreadCount != count) {
                 Log.d(Config.LOGTAG, "update unread count to " + count);
@@ -4476,7 +4474,8 @@ public class XmppConnectionService extends Service {
                 }
                 unreadCount = count;
             }
-        }).start();
+        };
+        mDatabaseWriterExecutor.execute(runnable);
     }
 
     public void sendReadMarker(final Conversation conversation, String upToUuid) {
@@ -4736,7 +4735,7 @@ public class XmppConnectionService extends Service {
     public void deleteMessage(final Conversation conversation, final Message message) {
         conversation.deleteMessage(message);
         message.setMessageDeleted(true);
-        Runnable runnable = () -> {
+        final Runnable runnable = () -> {
             databaseBackend.deleteMessageInConversation(message);
             databaseBackend.updateConversation(conversation);
         };
@@ -4758,7 +4757,7 @@ public class XmppConnectionService extends Service {
             conversation.clearMessages();
             conversation.setHasMessagesLeftOnServer(false); //avoid messages getting loaded through mam
             conversation.setLastClearHistory(clearDate, reference);
-            Runnable runnable = () -> {
+            final Runnable runnable = () -> {
                 databaseBackend.deleteMessagesInConversation(conversation);
                 databaseBackend.updateConversation(conversation);
             };
