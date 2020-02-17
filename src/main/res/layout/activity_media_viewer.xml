@@ -26,6 +26,10 @@
             android:id="@+id/messageVideoView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:played_color="?attr/colorAccent"
+            app:scrubber_color="?attr/colorAccent"
+            app:show_shuffle_button="false"
+            app:show_buffering="never"
             android:visibility="gone" />
 
         <com.leinardi.android.speeddial.SpeedDialOverlayLayout

@@ -154,4 +154,12 @@
     <style name="Conversations.Dialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert" >
         <item name="android:buttonStyle">@style/Widget.Conversations.Button.Borderless</item>
     </style>
+
+    <style name="ExoMediaButton.Previous">
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="ExoMediaButton.Next">
+        <item name="android:visibility">gone</item>
+    </style>
 </resources>
