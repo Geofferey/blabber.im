@@ -336,6 +336,9 @@
         <item name="color_bubble_warning">@color/lightred</item>
 
         <item name="chat_bg">@drawable/bg_light_orange</item>
+
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:actionModeBackground">@color/accent_orange</item>
     </style>
 
     <style name="ConversationsTheme.Orange.Dark" parent="ConversationsTheme.Dark">
@@ -351,6 +354,9 @@
         <item name="color_bubble_warning">@color/darkred</item>
 
         <item name="chat_bg">@drawable/bg_dark_orange</item>
+
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:actionModeBackground">@color/accent_orange</item>
     </style>
 
     <style name="ConversationsTheme.Dialog" parent="Theme.MaterialComponents.Light.Dialog">
