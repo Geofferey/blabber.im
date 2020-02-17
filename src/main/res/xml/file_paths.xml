@@ -11,7 +11,7 @@
         path="Images/" />
     <files-path
         name="videos"
-        path="Videos" />
+        path="Videos/" />
     <files-path
         name="files"
         path="Files/" />
