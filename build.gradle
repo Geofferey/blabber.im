@@ -69,7 +69,7 @@ dependencies {
     implementation 'androidx.emoji:emoji:1.0.0'
     gitImplementation 'androidx.emoji:emoji-appcompat:1.0.0'
     gitImplementation 'androidx.emoji:emoji-bundled:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0' // higher versions cause strange fab design
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
     implementation 'com.google.android.exoplayer:exoplayer-core:2.11.1'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.11.1'
@@ -104,9 +104,9 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
 
-        versionCode 292
+        versionCode 293
         versionName "2.3.5"
-        versionNameSuffix " beta (2020-02-11)" //" beta (XXXX-XX-XX)"
+        versionNameSuffix " beta (2020-02-17)" //" beta (XXXX-XX-XX)"
         //resConfigs "en"
 
         archivesBaseName += "-$versionName"

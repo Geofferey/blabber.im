@@ -6,10 +6,12 @@
 * resume download of OMEMO encrypted files
 * channels now use '#' as symbol in avatar
 * support for ?register and ?register;preauth XMPP uri parameters
+* update connection settings
 * use ExoPlayer for video playback (PAM)
 * show artist - title for audio files (PAM)
-* show PDF preview in chat (PAM)
-* UI improvements (PAM)
+* show PDF previews (PAM)
+* minor UI improvements (PAM)
+* use 12 byte IV for OMEMO
 * bug fixes
 
 #### Version 2.3.4
