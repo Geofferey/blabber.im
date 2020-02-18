@@ -493,7 +493,6 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         viewHolder.richlinkview.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
         viewHolder.messageBody.setVisibility(View.GONE);
-
     }
 
     private void applyQuoteSpan(SpannableStringBuilder body, int start, int end, boolean darkBackground) {
@@ -681,6 +680,12 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
 
     private void displayOpenableMessage(ViewHolder viewHolder, final Message message, final boolean darkBackground) {
         toggleWhisperInfo(viewHolder, message, false, darkBackground);
+        viewHolder.download_button.setVisibility(View.VISIBLE);
+        viewHolder.audioPlayer.setVisibility(View.GONE);
+        viewHolder.image.setVisibility(View.GONE);
+        viewHolder.gifImage.setVisibility(View.GONE);
+        viewHolder.richlinkview.setVisibility(View.GONE);
+        viewHolder.progressBar.setVisibility(View.GONE);
         final String mimeType = message.getMimeType();
         if (mimeType != null && message.getMimeType().contains("vcard")) {
             try {
