@@ -111,6 +111,7 @@ public abstract class XmppActivity extends ActionBarActivity {
     public static final String EXTRA_ACCOUNT = "account";
 
     public XmppConnectionService xmppConnectionService;
+    public MediaBrowserActivity mediaBrowserActivity;
     public boolean xmppConnectionServiceBound = false;
 
     protected int mColorWarningButton;

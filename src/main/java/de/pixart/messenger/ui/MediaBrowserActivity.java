@@ -38,6 +38,15 @@ public class MediaBrowserActivity extends XmppActivity implements OnMediaLoaded 
     private String account;
     private String jid;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getPreferences().edit().putBoolean("show_videos_images_only", OnlyImagesVideos).apply();
+        filter(OnlyImagesVideos);
+        invalidateOptionsMenu();
+        refreshUiReal();
+    }
+
     public static void launch(Context context, Contact contact) {
         launch(context, contact.getAccount(), contact.getJid().asBareJid().toEscapedString());
     }
@@ -79,7 +88,7 @@ public class MediaBrowserActivity extends XmppActivity implements OnMediaLoaded 
     }
 
     @Override
-    protected void refreshUiReal() {
+    public void refreshUiReal() {
         mMediaAdapter.notifyDataSetChanged();
     }
 
@@ -145,19 +154,18 @@ public class MediaBrowserActivity extends XmppActivity implements OnMediaLoaded 
 
     @Override
     public void onMediaLoaded(List<Attachment> attachments) {
+        allAttachments.clear();
         allAttachments.addAll(attachments);
         runOnUiThread(() -> {
-            if (OnlyImagesVideos) {
-                filter(OnlyImagesVideos);
-            } else {
-                loadAttachments(allAttachments);
-            }
+            filter(OnlyImagesVideos);
         });
     }
 
     private void loadAttachments(List<Attachment> attachments) {
         if (attachments.size() > 0) {
-            mMediaAdapter.setAttachments(attachments);
+            if (mMediaAdapter.getItemCount() != attachments.size()) {
+                mMediaAdapter.setAttachments(attachments);
+            }
             this.binding.noMedia.setVisibility(View.GONE);
             this.binding.progressbar.setVisibility(View.GONE);
         } else {
@@ -172,20 +180,26 @@ public class MediaBrowserActivity extends XmppActivity implements OnMediaLoaded 
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        filter(OnlyImagesVideos);
+    }
+
     protected void filterAttachments(boolean needle) {
         if (allAttachments.size() > 0) {
-            final ArrayList<Attachment> attachments = new ArrayList<>(allAttachments);
-            filteredAttachments.clear();
             if (needle) {
+                final ArrayList<Attachment> attachments = new ArrayList<>(allAttachments);
+                filteredAttachments.clear();
                 for (Attachment attachment : attachments) {
                     if (attachment.getMime() != null && (attachment.getMime().startsWith("image/") || attachment.getMime().startsWith("video/"))) {
                         filteredAttachments.add(attachment);
                     }
                 }
+                loadAttachments(filteredAttachments);
             } else {
-                filteredAttachments.addAll(allAttachments);
+                loadAttachments(allAttachments);
             }
-            loadAttachments(filteredAttachments);
         }
     }
 }
