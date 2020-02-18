@@ -216,7 +216,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="channel_bare_jid_example">channel@conference.example.com</string>
     <string name="save_as_bookmark">Dodaj jako zakładkę</string>
     <string name="delete_bookmark">Usuń zakładkę</string>
-    <string name="bookmark_already_exists">Zakładka już istnieje</string>
     <string name="topic">Temat</string>
     <string name="joining_conference">Dołączenie do czatu grupowego…</string>
     <string name="leave">Opuść pokój</string>
