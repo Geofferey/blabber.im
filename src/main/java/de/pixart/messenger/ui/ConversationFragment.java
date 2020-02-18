@@ -2141,12 +2141,16 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
     public void onStart() {
         super.onStart();
         if (this.reInitRequiredOnStart && this.conversation != null) {
+            if (activity != null) {
+                updateChatBG();
+            }
             final Bundle extras = pendingExtras.pop();
             reInit(this.conversation, extras != null);
             if (extras != null) {
                 processExtras(extras);
             }
         } else if (conversation == null && activity != null && activity.xmppConnectionService != null) {
+            updateChatBG();
             final String uuid = pendingConversationsUuid.pop();
             Log.d(Config.LOGTAG, "ConversationFragment.onStart() - activity was bound but no conversation loaded. uuid=" + uuid);
             if (uuid != null) {
