@@ -212,7 +212,6 @@
     <string name="channel_bare_jid_example">canal@conference.example.com</string>
     <string name="save_as_bookmark">Enregistrer comme favori</string>
     <string name="delete_bookmark">Supprimer le favori</string>
-    <string name="bookmark_already_exists">Le favori existe déjà</string>
     <string name="topic">Sujet</string>
     <string name="leave">Partir</string>
     <string name="contact_added_you">Votre correspondant vous a ajouté dans sa liste de contacts</string>
