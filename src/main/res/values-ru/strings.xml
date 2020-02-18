@@ -215,7 +215,6 @@
     <string name="channel_bare_jid_example">канал@конференция.example.com</string>
     <string name="save_as_bookmark">Сохранить как закладку</string>
     <string name="delete_bookmark">Удалить закладку</string>
-    <string name="bookmark_already_exists">Эта закладка уже создана</string>
     <string name="topic">Тема</string>
     <string name="joining_conference">Подключение к групповому чату…</string>
     <string name="leave">Покинуть</string>
