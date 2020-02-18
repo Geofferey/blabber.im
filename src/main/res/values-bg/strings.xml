@@ -213,7 +213,6 @@
     <string name="channel_bare_jid_example">channel@conference.example.com</string>
     <string name="save_as_bookmark">Запази в бележника</string>
     <string name="delete_bookmark">Изтрий от бележника </string>
-    <string name="bookmark_already_exists">Това нещо в бележника вече съществува</string>
     <string name="topic">Тема</string>
     <string name="joining_conference">Влезни в групов разговор...</string>
     <string name="leave">Излени</string>
