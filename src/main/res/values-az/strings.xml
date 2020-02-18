@@ -217,7 +217,6 @@
     <string name="channel_bare_jid_example">channel@conference.example.com</string>
     <string name="save_as_bookmark">Əlfəcin kimi saxla</string>
     <string name="delete_bookmark">Əlfəcini sil</string>
-    <string name="bookmark_already_exists">Bu əlfəcin artıq mövcuddur</string>
     <string name="topic">Mövzu</string>
     <string name="joining_conference">Söhbət qrupuna qoşulur…</string>
     <string name="leave">Tərk et</string>
