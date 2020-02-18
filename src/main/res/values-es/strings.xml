@@ -215,7 +215,6 @@
     <string name="channel_bare_jid_example">canal@conference.example.com</string>
     <string name="save_as_bookmark">Guardar en marcadores</string>
     <string name="delete_bookmark">Eliminar marcador</string>
-    <string name="bookmark_already_exists">Este marcador ya existe</string>
     <string name="topic">Tema</string>
     <string name="joining_conference">Unirse al chat de grupo…</string>
     <string name="leave">Salir</string>
@@ -1004,4 +1003,5 @@
     <string name="show_videos_images_only">Solo imágenes o vídeos</string>
     <string name="show_avatar">Mostrar avatar</string>
     <string name="action_delete">Borrar</string>
+    <string name="hosted_on">alojado en %s</string>
 </resources>
