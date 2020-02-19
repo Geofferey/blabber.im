@@ -1004,5 +1004,4 @@
     <string name="show_videos_images_only">Only images/videos</string>
     <string name="show_avatar">Show avatar</string>
     <string name="action_delete">Delete</string>
-    <string name="hosted_on">hosted on %s</string>
 </resources>
