@@ -993,5 +993,4 @@
     <string name="pref_use_colored_muc_names_summary">Розфарбовувати псевдо у групових чатах та каналах подібно до типового тла у аватарі.</string>
     <string name="pref_use_colored_muc_names">Розфарбовувати псевдо</string>
     <string name="show_videos_images_only">Лише зображення або відео</string>
-    <string name="hosted_on">розміщено на %s</string>
 </resources>
