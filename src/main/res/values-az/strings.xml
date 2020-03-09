@@ -309,6 +309,7 @@
     <string name="notification_restored_backup_title">Nüsxəniz bərpa edildi</string>
     <string name="notification_restored_backup_subtitle">Hesabı aktivləşdirməyi unutmayın.</string>
     <string name="choose_file">Fail seçin</string>
+    <string name="receiving_file">Qəbul olundu %1$s</string>
     <string name="download_x_file">%s Endirilir</string>
     <string name="delete_x_file">%s silinsin</string>
     <string name="file">fayl</string>
@@ -600,6 +601,9 @@
     <string name="invalid_barcode">Yararsız QR kodu</string>
     <string name="verify_with_qr_code">QR kodu ilə yoxlayın</string>
     <string name="i_followed_this_link_from_a_trusted_source">Bu linki etibarlı mənbədən izlədim</string>
+    <string name="verifying_omemo_keys_trusted_source">Bağlantıyı tıkladıktan sonra OMEMO %1$s düymələrini yoxlayacaqsınız. Yalnız %2$s bu linki dərc edə bilər bir etibarlı mənbədən bu link köçürüldüyü halda təhlükəsizdir.</string>
+    <string name="verify_omemo_keys">OMEMO izlərini doğrulayın</string>
+    <string name="show_inactive_devices">Aktiv omayanı göstər</string>
     <string name="block_jabber_id">Jabber-ID blokla</string>
     <string name="corresponding_conversations_closed">Müvafiq söhbətlər bağlandı.</string>
     <string name="contact_blocked_past_tense">Əlaqə bloklandı.</string>
@@ -721,4 +725,5 @@
     <string name="action_add_existing_account">Mövcud hesabı əlavə edin</string>
     <string name="add_anway">Əlavə et</string>
     <string name="magic_create_text_on_x">Siz %1$s - yə dəvət olunmusunuz. Bir hesab yaratma müddətində sizə yol göstərəcəyik.\nTayerçi olaraq %1$s seçərkən digər provayderlərin istifadəçiləri ilə tam XMPP ünvanınızı verərək əlaqə qura biləcəksiniz.</string>
+    <string name="show_videos_images_only">Только фото/видео</string>
 </resources>
