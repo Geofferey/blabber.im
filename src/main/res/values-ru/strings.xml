@@ -307,6 +307,7 @@
     <string name="notification_restored_backup_title">Ваша резервная копия была восстановлена</string>
     <string name="notification_restored_backup_subtitle">Не забудьте активировать аккаунт.</string>
     <string name="choose_file">Выбрать файл</string>
+    <string name="receiving_file">Получено %1$s</string>
     <string name="download_x_file">Скачать %s</string>
     <string name="delete_x_file">Удалить %s</string>
     <string name="file">файл</string>
@@ -951,6 +952,8 @@
     <string name="please_enter_password">Пожалуйста, введите пароль для этого аккаунта</string>
     <string name="unable_to_perform_this_action">Не удается выполнить это действие</string>
     <string name="waiting_for_transfer">Ожидание передачи</string>
+    <string name="x_has_written">%s написал:</string>
+    <string name="i_have_written">Я написал:</string>
     <string name="your_status">Ваш статус</string>
     <string name="pref_use_invidious">Заменить ссылки YouTube на Invidious</string>
     <string name="pref_use_invidious_summary">Invidious - это дружественная к конфиденциальности альтернатива YouTube</string>
@@ -1009,4 +1012,13 @@
     <string name="account_status_regis_invalid_token">Неверный токен регистрации</string>
     <string name="magic_create_text_fixed">Вы приглашены в %1$s. имя пользователя уже выбрано для вас. Мы проведем вас через процесс создания учетной записи.\nВы сможете общаться с пользователями других провайдеров, предоставляя им свой полный XMPP адрес.</string>
     <string name="your_server_invitation">Ваше приглашение на сервер</string>
+    <string name="pref_use_unicolored_chatbg_summary">Используйте одноцветный фон в чатах.</string>
+    <string name="pref_use_unicolored_chatbg">Используйте однотонный фон</string>
+    <string name="pref_alternative_voice_settings_summary">Если у вас возникли проблемы во время записи голоса, используйте эту настройку для изменения кодека.</string>
+    <string name="pref_alternative_voice_settings">Альтернативный способ записи голоса</string>
+    <string name="pref_use_colored_muc_names_summary">Раскрасьте ники в групповых чатах или каналах, как фон аватара по умолчанию.</string>
+    <string name="pref_use_colored_muc_names">Раскрасить ники</string>
+    <string name="show_videos_images_only">Только фото/видео</string>
+    <string name="show_avatar">Показать аватар</string>
+    <string name="action_delete">Удалить</string>
 </resources>
