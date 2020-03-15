@@ -870,8 +870,17 @@
     <string name="allow_participants_to_edit_subject">Hər kəsin mövzunu redaktə etməyə icazə verin</string>
     <string name="allow_participants_to_invite_others">Hər kəsə dəvət etməyə icazə verin</string>
     <string name="anyone_can_edit_subject">Hər kəs mövzu redaktə edə bilər.</string>
+    <string name="owners_can_edit_subject">Sahiblər mövzunu redaktə edə bilərlər.</string>
     <string name="admins_can_edit_subject">Adminlər bu topiki redaktə edə bilər.</string>
+    <string name="owners_can_invite_others">Sahiblər başqa adamları dəvət edə bilərlər.</string>
     <string name="anyone_can_invite_others">Hər kəs başqalarını dəvət edə bilər.</string>
+    <string name="jabber_ids_are_visible_to_admins">Jabber-İD adminlərə görünür.</string>
+    <string name="jabber_ids_are_visible_to_anyone">Jabber-İD hər kəsə görünür.</string>
+    <string name="no_users_hint_channel">Bu ictimai kanalın iştirakçıları yoxdur. Kontaktlarınızı dəvət edin və ya XMPP ünvanını yaymaq üçün paylaş düyməsini istifadə edin.</string>
+    <string name="no_users_hint_group_chat">Bu şəxsi qrupun iştirakçıları yoxdur.</string>
+    <string name="grant_owner_privileges">Sahibinə imtiyazlar verin</string>
+    <string name="remove_owner_privileges">Sahib imtiyazlarını ləğv edin</string>
+    <string name="remove_from_channel">Kanaldan çıxarmaq</string>
     <string name="ban_from_channel">Kanaldan qadağan</string>
     <string name="action_end_conversation_channel">Kanaldan çıxın</string>
     <string name="autojoin_channel">Avtomatik olaraq bu kanala qoşulun</string>
