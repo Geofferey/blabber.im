@@ -234,7 +234,7 @@
                                 android:textAppearance="@style/TextAppearance.Conversations.Body1" />
 
                             <ImageButton
-                                android:id="@+id/action_info_invideous"
+                                android:id="@+id/action_info_invidious"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:alpha="?attr/icon_alpha"
@@ -244,7 +244,7 @@
                                 android:src="?attr/icon_help" />
 
                             <androidx.appcompat.widget.AppCompatCheckBox
-                                android:id="@+id/invideous"
+                                android:id="@+id/invidious"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical" />

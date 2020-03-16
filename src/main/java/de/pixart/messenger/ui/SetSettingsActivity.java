@@ -36,7 +36,7 @@ public class SetSettingsActivity extends XmppActivity implements XmppConnectionS
     static final int CHATSTATES = 4;
     static final int CONFIRMMESSAGES = 5;
     static final int LASTSEEN = 6;
-    static final int INVIDEOUS = 7;
+    static final int INVIDIOUS = 7;
 
     @Override
     protected void refreshUiReal() {
@@ -66,7 +66,7 @@ public class SetSettingsActivity extends XmppActivity implements XmppConnectionS
         this.binding.actionInfoChatStates.setOnClickListener(string -> showInfo(CHATSTATES));
         this.binding.actionInfoConfirmMessages.setOnClickListener(string -> showInfo(CONFIRMMESSAGES));
         this.binding.actionInfoLastSeen.setOnClickListener(string -> showInfo(LASTSEEN));
-        this.binding.actionInfoInvideous.setOnClickListener(string -> showInfo(INVIDEOUS));
+        this.binding.actionInfoInvidious.setOnClickListener(string -> showInfo(INVIDIOUS));
     }
 
     private void getDefaults() {
@@ -76,7 +76,7 @@ public class SetSettingsActivity extends XmppActivity implements XmppConnectionS
         this.binding.chatStates.setChecked(getResources().getBoolean(R.bool.chat_states));
         this.binding.confirmMessages.setChecked(getResources().getBoolean(R.bool.confirm_messages));
         this.binding.lastSeen.setChecked(getResources().getBoolean(R.bool.last_activity));
-        this.binding.invideous.setChecked(getResources().getBoolean(R.bool.use_invidious));
+        this.binding.invidious.setChecked(getResources().getBoolean(R.bool.use_invidious));
     }
 
     private void next(View view) {
@@ -122,7 +122,7 @@ public class SetSettingsActivity extends XmppActivity implements XmppConnectionS
                 title = getString(R.string.pref_broadcast_last_activity);
                 message = getString(R.string.pref_broadcast_last_activity_summary);
                 break;
-            case INVIDEOUS:
+            case INVIDIOUS:
                 title = getString(R.string.pref_use_invidious);
                 message = getString(R.string.pref_use_invidious_summary);
                 break;
@@ -171,7 +171,7 @@ public class SetSettingsActivity extends XmppActivity implements XmppConnectionS
         } else {
             preferences.edit().putBoolean(BROADCAST_LAST_ACTIVITY, false).apply();
         }
-        if (this.binding.invideous.isChecked()) {
+        if (this.binding.invidious.isChecked()) {
             preferences.edit().putBoolean(USE_INVIDIOUS, true).apply();
         } else {
             preferences.edit().putBoolean(USE_INVIDIOUS, false).apply();

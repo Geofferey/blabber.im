@@ -59,9 +59,12 @@ import de.pixart.messenger.ui.EditAccountActivity;
 import de.pixart.messenger.ui.TimePreference;
 import de.pixart.messenger.utils.AccountUtils;
 import de.pixart.messenger.utils.Compatibility;
+import de.pixart.messenger.utils.EmojiWrapper;
 import de.pixart.messenger.utils.GeoHelper;
 import de.pixart.messenger.utils.UIHelper;
 import de.pixart.messenger.xmpp.XmppConnection;
+
+import static de.pixart.messenger.ui.util.MyLinkify.replaceYoutube;
 
 public class NotificationService {
 
@@ -705,14 +708,14 @@ public class NotificationService {
                 SpannableString styledString;
                 for (Message message : messages) {
                     final SpannableString name = UIHelper.getColoredUsername(mXmppConnectionService, message);
-                    styledString = new SpannableString(name + ": " + message.getBody());
+                    styledString = new SpannableString(name + ": " + EmojiWrapper.transform(replaceYoutube(mXmppConnectionService, message.getBody())));
                     style.addLine(styledString);
                 }
                 builder.setStyle(style);
                 int count = messages.size();
                 if (count == 1) {
                     final SpannableString name = UIHelper.getColoredUsername(mXmppConnectionService, messages.get(0));
-                    styledString = new SpannableString(name + ": " + messages.get(0).getBody());
+                    styledString = new SpannableString(name + ": " + EmojiWrapper.transform(replaceYoutube(mXmppConnectionService, messages.get(0).getBody())));
                     builder.setContentText(styledString);
                     builder.setTicker(styledString);
                 } else {
