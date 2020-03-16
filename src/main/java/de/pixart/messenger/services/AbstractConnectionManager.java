@@ -5,6 +5,14 @@ import android.os.PowerManager;
 import android.os.SystemClock;
 import android.util.Log;
 
+import org.bouncycastle.crypto.engines.AESEngine;
+import org.bouncycastle.crypto.io.CipherInputStream;
+import org.bouncycastle.crypto.io.CipherOutputStream;
+import org.bouncycastle.crypto.modes.AEADBlockCipher;
+import org.bouncycastle.crypto.modes.GCMBlockCipher;
+import org.bouncycastle.crypto.params.AEADParameters;
+import org.bouncycastle.crypto.params.KeyParameter;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -15,12 +23,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.crypto.Cipher;
-import javax.crypto.CipherInputStream;
-import javax.crypto.CipherOutputStream;
 import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
 
 import de.pixart.messenger.Config;
 import de.pixart.messenger.R;
@@ -28,9 +31,6 @@ import de.pixart.messenger.entities.DownloadableFile;
 import de.pixart.messenger.utils.Compatibility;
 
 public class AbstractConnectionManager {
-    private static final String KEYTYPE = "AES";
-    private static final String CIPHERMODE = "AES/GCM/NoPadding";
-    private static final String PROVIDER = "BC";
     private static final int UI_REFRESH_THRESHOLD = Config.REFRESH_UI_INTERVAL;
     private static final AtomicLong LAST_UI_UPDATE_CALL = new AtomicLong(0);
     protected XmppConnectionService mXmppConnectionService;
@@ -41,10 +41,8 @@ public class AbstractConnectionManager {
 
     public static InputStream upgrade(DownloadableFile file, InputStream is) throws InvalidAlgorithmParameterException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, NoSuchProviderException {
         if (file.getKey() != null && file.getIv() != null) {
-            final Cipher cipher = Compatibility.twentyEight() ? Cipher.getInstance(CIPHERMODE) : Cipher.getInstance(CIPHERMODE, PROVIDER);
-            SecretKeySpec keySpec = new SecretKeySpec(file.getKey(), KEYTYPE);
-            IvParameterSpec ivSpec = new IvParameterSpec(file.getIv());
-            cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
+            AEADBlockCipher cipher = new GCMBlockCipher(new AESEngine());
+            cipher.init(true, new AEADParameters(new KeyParameter(file.getKey()), 128, file.getIv()));
             return new CipherInputStream(is, cipher);
         } else {
             return is;
@@ -63,10 +61,8 @@ public class AbstractConnectionManager {
             return null;
         }
         try {
-            final Cipher cipher = Compatibility.twentyEight() ? Cipher.getInstance(CIPHERMODE) : Cipher.getInstance(CIPHERMODE, PROVIDER);
-            SecretKeySpec keySpec = new SecretKeySpec(file.getKey(), KEYTYPE);
-            IvParameterSpec ivSpec = new IvParameterSpec(file.getIv());
-            cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
+            AEADBlockCipher cipher = new GCMBlockCipher(new AESEngine());
+            cipher.init(false, new AEADParameters(new KeyParameter(file.getKey()), 128, file.getIv()));
             return new CipherOutputStream(os, cipher);
         } catch (Exception e) {
             Log.d(Config.LOGTAG, "unable to create cipher output stream", e);
