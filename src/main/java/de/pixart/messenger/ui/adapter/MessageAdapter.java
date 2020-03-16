@@ -1304,9 +1304,10 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
     }
 
     private void markFileExisting(Message message) {
-        Log.d(Config.LOGTAG, "Found and restored orphaned file");
+        Log.d(Config.LOGTAG, "Found and restored orphaned file " + message.getRelativeFilePath());
         message.setFileDeleted(false);
         activity.xmppConnectionService.updateMessage(message, false);
+        activity.xmppConnectionService.updateConversation((Conversation) message.getConversation());
     }
 
     private boolean checkFileExistence(Message message, View view, ViewHolder viewHolder) {
