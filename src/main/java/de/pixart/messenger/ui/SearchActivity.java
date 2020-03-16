@@ -33,6 +33,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,6 +48,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.pixart.messenger.Config;
 import de.pixart.messenger.R;
 import de.pixart.messenger.databinding.ActivitySearchBinding;
 import de.pixart.messenger.entities.Contact;
@@ -64,6 +66,7 @@ import de.pixart.messenger.ui.util.ShareUtil;
 import de.pixart.messenger.ui.util.StyledAttributes;
 import de.pixart.messenger.utils.FtsUtils;
 import de.pixart.messenger.utils.MessageUtils;
+import de.pixart.messenger.utils.UIHelper;
 
 import static de.pixart.messenger.ui.util.SoftKeyboardUtils.hideSoftKeyboard;
 import static de.pixart.messenger.ui.util.SoftKeyboardUtils.showKeyboard;
@@ -115,9 +118,7 @@ public class SearchActivity extends XmppActivity implements TextWatcher, OnSearc
         searchField.addTextChangedListener(this);
         searchField.setHint(R.string.search_messages);
         searchField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
-        if (term == null) {
-            showKeyboard(searchField);
-        }
+        showKeyboard(searchField);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -150,7 +151,8 @@ public class SearchActivity extends XmppActivity implements TextWatcher, OnSearc
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         final Message message = selectedMessageReference.get();
-        final String user = selectedMessageReference.get().getConversation().getContact().getDisplayName();
+        final boolean multi = message.getConversation().getMode() == Conversational.MODE_MULTI;
+        final String user = multi ? UIHelper.getDisplayedMucCounterpart(message.getCounterpart()) : null;
         if (message != null) {
             switch (item.getItemId()) {
                 case R.id.open_conversation:
@@ -183,6 +185,7 @@ public class SearchActivity extends XmppActivity implements TextWatcher, OnSearc
     }
 
     private void quote(Message message, String user) {
+        Log.d(Config.LOGTAG, "Quote User: " + user);
         switchToConversationAndQuote(wrap(message.getConversation()), MessageUtils.prepareQuote(message), user);
     }
 

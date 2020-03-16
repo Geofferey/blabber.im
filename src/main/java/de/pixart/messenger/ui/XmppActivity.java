@@ -529,10 +529,10 @@ public abstract class XmppActivity extends ActionBarActivity {
             intent.putExtra(Intent.EXTRA_TEXT, text);
             if (asQuote) {
                 intent.putExtra(ConversationsActivity.EXTRA_AS_QUOTE, true);
-                intent.putExtra(ConversationsActivity.EXTRA_ACCOUNT, nick);
+                intent.putExtra(ConversationsActivity.EXTRA_USER, nick);
             }
         }
-        if (nick != null) {
+        if (nick != null && !asQuote) {
             intent.putExtra(ConversationsActivity.EXTRA_NICK, nick);
             intent.putExtra(ConversationsActivity.EXTRA_IS_PRIVATE_MESSAGE, pm);
         }
