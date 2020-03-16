@@ -637,6 +637,8 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
                         !this.isGeoUri() &&
                         !message.isWebUri() &&
                         !this.isWebUri() &&
+                        !message.isOOb() &&
+                        !this.isOOb() &&
                         !message.treatAsDownloadable() &&
                         !this.treatAsDownloadable() &&
                         !message.getBody().startsWith(ME_COMMAND) &&
