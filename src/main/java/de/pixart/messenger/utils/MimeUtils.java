@@ -278,6 +278,8 @@ public final class MimeUtils {
         add("image/jpeg", "jpg");
         add("image/jpeg", "jpeg");
         add("image/jpeg", "jpe");
+        add("image/jpeg", "jfif");
+        add("image/jpeg", "jif");
         add("image/pcx", "pcx");
         add("image/png", "png");
         add("image/svg+xml", "svg");
