@@ -1093,8 +1093,8 @@ public abstract class XmppActivity extends ActionBarActivity {
         protected String doInBackground(XmppConnection... params) {
             String uri = null;
             if (this.connection != null) {
-                XmppConnection.Features features = connection.getFeatures();
-                if (features.adhocinvite) {
+                XmppConnection.Features features = this.connection.getFeatures();
+                if (features != null && features.adhocinvite) {
                     int i = 0;
                     uri = this.connection.getAdHocInviteUrl(Jid.ofDomain(this.account.getJid().getDomain()));
                     try {
