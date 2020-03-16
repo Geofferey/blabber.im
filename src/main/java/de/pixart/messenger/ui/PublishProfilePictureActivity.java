@@ -1,8 +1,10 @@
 package de.pixart.messenger.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +29,8 @@ import de.pixart.messenger.utils.PhoneHelper;
 import me.drakeet.support.toast.ToastCompat;
 
 public class PublishProfilePictureActivity extends XmppActivity implements XmppConnectionService.OnAccountUpdate, OnAvatarPublication {
+
+    public static final int REQUEST_CHOOSE_PICTURE = 0x1337;
 
     private ImageView avatar;
     private TextView hintOrWarning;
@@ -108,7 +112,7 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
             }
             finish();
         });
-        this.avatar.setOnClickListener(v -> chooseAvatar());
+        this.avatar.setOnClickListener(v -> chooseAvatar(this));
         this.defaultUri = PhoneHelper.getProfilePictureUri(getApplicationContext());
         if (savedInstanceState != null) {
             this.avatarUri = savedInstanceState.getParcelable("uri");
@@ -141,15 +145,28 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
                     ToastCompat.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
+        } else if (requestCode == REQUEST_CHOOSE_PICTURE) {
+            if (resultCode == RESULT_OK) {
+                cropUri(this, data.getData());
+            }
         }
     }
 
-    private void chooseAvatar() {
-        CropImage.activity()
-                .setOutputCompressFormat(Bitmap.CompressFormat.PNG)
-                .setAspectRatio(1, 1)
-                .setMinCropResultSize(Config.AVATAR_SIZE, Config.AVATAR_SIZE)
-                .start(this);
+    public static void chooseAvatar(final Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            activity.startActivityForResult(
+                    Intent.createChooser(intent, activity.getString(R.string.attach_choose_picture)),
+                    REQUEST_CHOOSE_PICTURE
+            );
+        } else {
+            CropImage.activity()
+                    .setOutputCompressFormat(Bitmap.CompressFormat.PNG)
+                    .setAspectRatio(1, 1)
+                    .setMinCropResultSize(Config.AVATAR_SIZE, Config.AVATAR_SIZE)
+                    .start(activity);
+        }
     }
 
     @Override
@@ -183,10 +200,7 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
         final Uri uri = intent != null ? intent.getData() : null;
 
         if (uri != null && handledExternalUri.compareAndSet(false, true)) {
-            CropImage.activity(uri).setOutputCompressFormat(Bitmap.CompressFormat.PNG)
-                    .setAspectRatio(1, 1)
-                    .setMinCropResultSize(Config.AVATAR_SIZE, Config.AVATAR_SIZE)
-                    .start(this);
+            cropUri(this, uri);
             return;
         }
 
@@ -194,6 +208,13 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
             this.cancelButton.setText(R.string.skip);
         }
         configureActionBar(getSupportActionBar(), !this.mInitialAccountSetup && !handledExternalUri.get());
+    }
+
+    public static void cropUri(final Activity activity, final Uri uri) {
+        CropImage.activity(uri).setOutputCompressFormat(Bitmap.CompressFormat.PNG)
+                .setAspectRatio(1, 1)
+                .setMinCropResultSize(Config.AVATAR_SIZE, Config.AVATAR_SIZE)
+                .start(activity);
     }
 
     protected void loadImageIntoPreview(Uri uri) {

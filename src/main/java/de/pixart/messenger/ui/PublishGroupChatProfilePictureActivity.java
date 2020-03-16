@@ -51,6 +51,8 @@ import de.pixart.messenger.ui.interfaces.OnAvatarPublication;
 import de.pixart.messenger.ui.util.PendingItem;
 import me.drakeet.support.toast.ToastCompat;
 
+import static de.pixart.messenger.ui.PublishProfilePictureActivity.REQUEST_CHOOSE_PICTURE;
+
 public class PublishGroupChatProfilePictureActivity extends XmppActivity implements OnAvatarPublication {
 
     private final PendingItem<String> pendingConversationUuid = new PendingItem<>();
@@ -96,7 +98,7 @@ public class PublishGroupChatProfilePictureActivity extends XmppActivity impleme
         configureActionBar(getSupportActionBar());
         this.binding.cancelButton.setOnClickListener((v) -> this.finish());
         this.binding.secondaryHint.setVisibility(View.GONE);
-        this.binding.accountImage.setOnClickListener((v) -> this.chooseAvatar());
+        this.binding.accountImage.setOnClickListener((v) -> PublishProfilePictureActivity.chooseAvatar(this));
         Intent intent = getIntent();
         String uuid = intent == null ? null : intent.getStringExtra("uuid");
         if (uuid != null) {
@@ -116,7 +118,7 @@ public class PublishGroupChatProfilePictureActivity extends XmppActivity impleme
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            final CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 this.uri = result.getUri();
                 if (xmppConnectionServiceBound) {
@@ -128,15 +130,11 @@ public class PublishGroupChatProfilePictureActivity extends XmppActivity impleme
                     ToastCompat.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
+        } else if (requestCode == REQUEST_CHOOSE_PICTURE) {
+            if (resultCode == RESULT_OK) {
+                PublishProfilePictureActivity.cropUri(this, data.getData());
+            }
         }
-    }
-
-    private void chooseAvatar() {
-        CropImage.activity()
-                .setOutputCompressFormat(Bitmap.CompressFormat.PNG)
-                .setAspectRatio(1, 1)
-                .setMinCropResultSize(Config.AVATAR_SIZE, Config.AVATAR_SIZE)
-                .start(this);
     }
 
     @Override
