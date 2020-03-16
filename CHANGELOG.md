@@ -12,7 +12,7 @@
 * show PDF previews (PAM)
 * minor UI improvements (PAM)
 * use 12 byte IV for OMEMO
-* bug fixes
+* a lot of bug fixes
 
 #### Version 2.3.4
 * fixes for Jingle IBB file transfer
