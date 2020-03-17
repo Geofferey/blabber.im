@@ -946,8 +946,12 @@
     <string name="welcome_header">\nPix-Art Messenger-ə xoş gəlmisən</string>
     <string name="intro_required_permissions">Tələb olunan icazələr</string>
     <string name="intro_account">Sənin hesabın</string>
+    <string name="intro_desc_account">Artıq bir hesabınız varsa, sadəcə Jabber-ID və şifrənizlə daxil ola bilərsiniz</string>
     <string name="intro_start_chatting">Yazışmağa başla</string>
+    <string name="intro_desc_start_chatting">Əlaqə icazələrini vermiş olsanız, artıq mövcud olan Jabber kontaktları avtomatik olaraq ünvan kitabınızda göstəriləcək. Əks halda, yalnız Jabber-ID-ləri əlavə edin</string>
+    <string name="intro_desc_open_chat">İndi çat etməyə, yerləri, faylları, videoları və şəkilləri paylaşa və ya səsli mesajlar göndərə bilərsiniz.</string>
     <string name="intro_chat_details">Çat məlumatları</string>
+    <string name="intro_desc_chat_details">Çat detallarını açmaq istəyirsiniz? Yuxarıda göstərilən chat adına toxunun.</string>
     <string name="intro_highlight_user">İstifadəçini vurğulamaq</string>
     <string name="pref_show_intro_summary">Yenidən intro ekranlarını göstərin</string>
     <string name="pref_show_intro">Intronu yenidən göstər</string>
