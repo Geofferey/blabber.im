@@ -967,6 +967,7 @@
     <string name="sharing_application_not_grant_permission">Paylaşma tətbiqi bu faylı əldə etməyə icazə vermədi.</string>
     <string name="jabber_network">jabber.network</string>
     <string name="local_server">Yerli server</string>
+    <string name="pref_channel_discovery">Kanal kəşf etmə metodu</string>
     <string name="gp_disable">Qeyri aktiv</string>
     <string name="gp_short">Qısa</string>
     <string name="gp_medium">Orta</string>
