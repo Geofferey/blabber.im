@@ -15,4 +15,6 @@ Some limitations of OTR: [wikipedia.org/wiki/Off-the-Record](https://en.wikipedi
 
 Please inform your contacts who may also use it.
 
+[Coy.im](https://coy.im/) still supports OTR, [Pigdin](https://github.com/gkdr/lurch/) more or less, too.
+
 Mastodon: https://social.tchncs.de/@pixart
