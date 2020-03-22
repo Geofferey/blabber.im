@@ -3,6 +3,7 @@ package de.pixart.messenger.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.databinding.DataBindingUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.pixart.messenger.Config;
 import de.pixart.messenger.R;
 import de.pixart.messenger.databinding.ActivityMediaBrowserBinding;
 import de.pixart.messenger.entities.Account;
@@ -41,7 +43,6 @@ public class MediaBrowserActivity extends XmppActivity implements OnMediaLoaded 
     @Override
     protected void onStart() {
         super.onStart();
-        getPreferences().edit().putBoolean("show_videos_images_only", OnlyImagesVideos).apply();
         filter(OnlyImagesVideos);
         invalidateOptionsMenu();
         refreshUiReal();
@@ -200,6 +201,8 @@ public class MediaBrowserActivity extends XmppActivity implements OnMediaLoaded 
             } else {
                 loadAttachments(allAttachments);
             }
+        } else {
+            loadAttachments(allAttachments);
         }
     }
 }
