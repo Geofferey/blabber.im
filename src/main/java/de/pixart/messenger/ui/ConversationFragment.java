@@ -632,6 +632,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         popup.setOnMenuItemClickListener(attachmentItem -> {
             switch (attachmentItem.getItemId()) {
                 case R.id.attach_choose_picture:
+                case R.id.attach_choose_video:
                 case R.id.attach_take_picture:
                 case R.id.attach_record_video:
                 case R.id.attach_choose_file:
@@ -996,6 +997,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             case ATTACHMENT_CHOICE_CHOOSE_FILE:
             case ATTACHMENT_CHOICE_RECORD_VIDEO:
             case ATTACHMENT_CHOICE_RECORD_VOICE:
+            case ATTACHMENT_CHOICE_CHOOSE_VIDEO:
                 final Attachment.Type type = requestCode == ATTACHMENT_CHOICE_RECORD_VOICE ? Attachment.Type.RECORDING : Attachment.Type.FILE;
                 final List<Attachment> fileUris = Attachment.extractAttachments(getActivity(), data, type);
                 mediaPreviewAdapter.addMediaPreviews(fileUris);
@@ -1434,6 +1436,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 handleEncryptionSelection(item);
                 break;
             case R.id.attach_choose_picture:
+            case R.id.attach_choose_video:
             case R.id.attach_take_picture:
             case R.id.attach_record_video:
             case R.id.attach_choose_file:
@@ -1493,6 +1496,9 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         switch (item.getItemId()) {
             case R.id.attach_choose_picture:
                 attachFile(ATTACHMENT_CHOICE_CHOOSE_IMAGE);
+                break;
+            case R.id.attach_choose_video:
+                attachFile(ATTACHMENT_CHOICE_CHOOSE_VIDEO);
                 break;
             case R.id.attach_take_picture:
                 attachFile(ATTACHMENT_CHOICE_TAKE_PHOTO);
