@@ -994,6 +994,7 @@
     <string name="pref_enable_otr">OTR şifrələməsini aktivləşdirin</string>
     <string name="magic_create_text_on_x">Siz %1$s - yə dəvət olunmusunuz. Bir hesab yaratma müddətində sizə yol göstərəcəyik.\nTayerçi olaraq %1$s seçərkən digər provayderlərin istifadəçiləri ilə tam XMPP ünvanınızı verərək əlaqə qura biləcəksiniz.</string>
     <string name="account_status_regis_invalid_token">Yanlış qeydiyyat simvolu</string>
+    <string name="magic_create_text_fixed">Siz %1$s dəvət olunduz. Bütün hesab yaratma prosesi vasitəsilə sizi keçirəcəyik.\nYou, digər provayderlərin istifadəçiləri ilə tam XMPP ünvanını istifadə etməklə ünsiyyət qura bilərsiniz.</string>
     <string name="your_server_invitation">Server dəvətiniz</string>
     <string name="pref_use_unicolored_chatbg_summary">Çatlarda rəngsiz fondan istifadə edin.</string>
     <string name="pref_use_unicolored_chatbg">Rəngsiz fon istifadə edin</string>
@@ -1004,4 +1005,5 @@
     <string name="show_videos_images_only">Только фото/видео</string>
     <string name="show_avatar">Avatarı göstər</string>
     <string name="action_delete">Silmək</string>
+    <string name="attach_choose_video">Video seçin</string>
 </resources>
