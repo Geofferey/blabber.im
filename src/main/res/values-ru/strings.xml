@@ -1021,4 +1021,5 @@
     <string name="show_videos_images_only">Только фото/видео</string>
     <string name="show_avatar">Показать аватар</string>
     <string name="action_delete">Удалить</string>
+    <string name="attach_choose_video">Выбор видео</string>
 </resources>
