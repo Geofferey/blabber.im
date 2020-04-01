@@ -36,6 +36,7 @@ import de.pixart.messenger.ui.adapter.ChannelSearchResultAdapter;
 import de.pixart.messenger.ui.util.PendingItem;
 import de.pixart.messenger.ui.util.SoftKeyboardUtils;
 import de.pixart.messenger.utils.AccountUtils;
+import me.drakeet.support.toast.ToastCompat;
 import rocks.xmpp.addr.Jid;
 
 public class ChannelDiscoveryActivity extends XmppActivity implements MenuItem.OnActionExpandListener, TextView.OnEditorActionListener, ChannelDiscoveryService.OnChannelSearchResultsFound, ChannelSearchResultAdapter.OnChannelSearchResultSelected {
@@ -219,10 +220,12 @@ public class ChannelDiscoveryActivity extends XmppActivity implements MenuItem.O
 
     @Override
     public void onChannelSearchResult(final Room result) {
-        List<String> accounts = AccountUtils.getEnabledAccounts(xmppConnectionService);
+        final List<String> accounts = AccountUtils.getEnabledAccounts(xmppConnectionService);
         if (accounts.size() == 1) {
             joinChannelSearchResult(accounts.get(0), result);
-        } else if (accounts.size() > 0) {
+        } else if (accounts.size() == 0) {
+            ToastCompat.makeText(this, R.string.please_enable_an_account, ToastCompat.LENGTH_LONG).show();
+        } else {
             final AtomicReference<String> account = new AtomicReference<>(accounts.get(0));
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.choose_account);

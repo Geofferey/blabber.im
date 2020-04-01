@@ -1005,4 +1005,5 @@
     <string name="show_avatar">Show avatar</string>
     <string name="action_delete">Delete</string>
     <string name="attach_choose_video">Choose video</string>
+    <string name="please_enable_an_account">Please enable an account</string>
 </resources>
