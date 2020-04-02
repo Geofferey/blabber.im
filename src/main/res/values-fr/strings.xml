@@ -896,5 +896,14 @@
     <string name="this_looks_like_channel">Il semble que ce soit une adresse d\'un canal</string>
     <string name="this_device">Cet appareil</string>
     <string name="intro_required_permissions">Autorisations Requises</string>
+    <string name="intro_start_chatting">Commencer à chatter</string>
+    <string name="intro_desc_start_chatting">Si vous avez donné les autorisations de contact, les contacts Jabber déjà existants sont automatiquement affichés dans votre carnet d\'adresses. Sinon, il suffit d\'ajouter les identifiants Jabber</string>
+    <string name="intro_desc_open_chat">Vous pouvez désormais commencer à chatter, partager des lieux, des fichiers, des vidéos et des images ou envoyer des messages vocaux.</string>
+    <string name="intro_chat_details">Détails du chat</string>
+    <string name="pref_alternative_voice_settings_summary">Si vous avez des problèmes pendant l\'enregistrement vocal, utilisez ce paramètre pour modifier le codec.</string>
+    <string name="pref_alternative_voice_settings">Méthode alternative d\'enregistrement de la voix</string>
+    <string name="pref_use_colored_muc_names_summary">Coloriez les surnoms dans les chats de groupe ou les canaux comme les arrière-plans d\'avatars par défaut.</string>
+    <string name="pref_use_colored_muc_names">Colorier les surnoms</string>
+    <string name="action_delete">Supprimer</string>
     <string name="attach_choose_video">Choisissez la Vidéo</string>
 </resources>
