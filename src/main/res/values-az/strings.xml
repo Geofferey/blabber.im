@@ -1006,4 +1006,5 @@
     <string name="show_avatar">Avatarı göstər</string>
     <string name="action_delete">Silmək</string>
     <string name="attach_choose_video">Video seçin</string>
+    <string name="please_enable_an_account">Zəhmət olmasa hesabı aktivləşdirin</string>
 </resources>
