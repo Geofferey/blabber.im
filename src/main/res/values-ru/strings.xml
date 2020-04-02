@@ -1022,4 +1022,5 @@
     <string name="show_avatar">Показать аватар</string>
     <string name="action_delete">Удалить</string>
     <string name="attach_choose_video">Выбор видео</string>
+    <string name="please_enable_an_account">Пожалуйста, включите учетную запись</string>
 </resources>
