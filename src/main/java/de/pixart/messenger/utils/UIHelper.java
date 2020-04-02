@@ -35,6 +35,7 @@ import de.pixart.messenger.entities.Presence;
 import de.pixart.messenger.entities.Transferable;
 import de.pixart.messenger.services.ExportBackupService;
 import de.pixart.messenger.services.XmppConnectionService;
+import de.pixart.messenger.ui.util.MyLinkify;
 import rocks.xmpp.addr.Jid;
 
 import static de.pixart.messenger.entities.Message.DELETED_MESSAGE_BODY;
@@ -316,7 +317,7 @@ public class UIHelper {
                 return new Pair<>(context.getString(R.string.x_file_offered_for_download,
                         getFileDescriptionString(context, message)), true);
             } else {
-                SpannableStringBuilder styledBody = new SpannableStringBuilder(body);
+                SpannableStringBuilder styledBody = new SpannableStringBuilder(MyLinkify.replaceYoutube(context, body));
                 if (textColor != 0) {
                     StylingHelper.format(styledBody, 0, styledBody.length() - 1, textColor);
                 }
