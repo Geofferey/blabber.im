@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.google.android.material.card.MaterialCardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/editor"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -307,9 +307,9 @@
                             android:layout_marginTop="8dp"
                             android:text="@string/register_account" />
                     </RelativeLayout>
-                </com.google.android.material.card.MaterialCardView>
+                </androidx.cardview.widget.CardView>
 
-                <com.google.android.material.card.MaterialCardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/os_optimization"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -369,9 +369,9 @@
                                 android:textColor="@color/accent" />
                         </LinearLayout>
                     </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                </androidx.cardview.widget.CardView>
 
-                <com.google.android.material.card.MaterialCardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/stats"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
@@ -819,9 +819,9 @@
                             </LinearLayout>
                         </RelativeLayout>
                     </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                </androidx.cardview.widget.CardView>
 
-                <com.google.android.material.card.MaterialCardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/other_device_keys_card"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -862,7 +862,7 @@
                             android:layout_gravity="center_horizontal"
                             android:text="@string/clear_other_devices" />
                     </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
         </ScrollView>
 
