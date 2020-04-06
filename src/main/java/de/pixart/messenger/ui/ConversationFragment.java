@@ -139,6 +139,7 @@ import static de.pixart.messenger.ui.SettingsActivity.WARN_UNENCRYPTED_CHAT;
 import static de.pixart.messenger.ui.XmppActivity.EXTRA_ACCOUNT;
 import static de.pixart.messenger.ui.XmppActivity.REQUEST_INVITE_TO_CONVERSATION;
 import static de.pixart.messenger.ui.util.SoftKeyboardUtils.hideSoftKeyboard;
+import static de.pixart.messenger.utils.Compatibility.runsTwentyOne;
 import static de.pixart.messenger.utils.PermissionUtils.allGranted;
 import static de.pixart.messenger.utils.PermissionUtils.getFirstDenied;
 import static de.pixart.messenger.utils.PermissionUtils.readGranted;
@@ -1684,7 +1685,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
     }
 
     private void updateChatBG() {
-        if (activity.unicoloredBG()) {
+        if (activity.unicoloredBG() || !runsTwentyOne()) {
             binding.conversationsFragment.setBackgroundResource(0);
             binding.conversationsFragment.setBackgroundColor(StyledAttributes.getColor(activity, R.attr.color_background_tertiary));
         } else {
