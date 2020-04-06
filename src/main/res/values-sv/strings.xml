@@ -185,7 +185,6 @@
     <string name="join">Gå med</string>
     <string name="save_as_bookmark">Spara som bokmärke</string>
     <string name="delete_bookmark">Ta bort bokmärke</string>
-    <string name="bookmark_already_exists">Detta bokmärke finns redan</string>
     <string name="leave">Lämna</string>
     <string name="contact_added_you">Kontakten lade till dig i sin kontaktlista</string>
     <string name="add_back">Addera tillbaka</string>

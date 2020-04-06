@@ -215,7 +215,6 @@
     <string name="channel_bare_jid_example">canale@conferenza.esempio.com</string>
     <string name="save_as_bookmark">Salva come segnalibro</string>
     <string name="delete_bookmark">Elimina segnalibro</string>
-    <string name="bookmark_already_exists">Questo segnalibro esiste già</string>
     <string name="topic">Argomento</string>
     <string name="joining_conference">Ingresso nella conversazione di gruppo…</string>
     <string name="leave">Abbandona</string>
@@ -1004,4 +1003,6 @@
     <string name="show_videos_images_only">Solo immagini/video</string>
     <string name="show_avatar">Mostra immagine di profilo</string>
     <string name="action_delete">Elimina</string>
+    <string name="attach_choose_video">Scegli video</string>
+    <string name="please_enable_an_account">Per favore abilita un account</string>
 </resources>

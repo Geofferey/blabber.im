@@ -25,6 +25,7 @@
     <string name="just_now">à l’instant</string>
     <string name="minute_ago">Il y a 1 minute</string>
     <string name="minutes_ago">Il y a %d minutes</string>
+    <string name="x_unread_conversations">%d conversations non lus</string>
     <string name="sending">Envoi…</string>
     <string name="message_decrypting">Déchiffrement du message. Veuillez patienter...</string>
     <string name="pgp_message">Message chiffré avec OpenPGP</string>
@@ -108,6 +109,7 @@
     <string name="pref_sound">Sonnerie</string>
     <string name="pref_sound_summary">Jouer un son lors de la réception d’un nouveau message</string>
     <string name="pref_send_crash">Envoyer les rapports de plantage</string>
+    <string name="pref_send_crash_summary">En envoyant des traces d\'appel vous aidez au développement en cours de Pix-Art Messenger</string>
     <string name="pref_confirm_messages">Confirmation de lecture</string>
     <string name="pref_confirm_messages_summary">Informer vos contacts quand vous avez reçu et lu leurs messages</string>
     <string name="pref_ui_options">Interface</string>
@@ -212,7 +214,6 @@
     <string name="channel_bare_jid_example">canal@conference.example.com</string>
     <string name="save_as_bookmark">Enregistrer comme favori</string>
     <string name="delete_bookmark">Supprimer le favori</string>
-    <string name="bookmark_already_exists">Le favori existe déjà</string>
     <string name="topic">Sujet</string>
     <string name="leave">Partir</string>
     <string name="contact_added_you">Votre correspondant vous a ajouté dans sa liste de contacts</string>
@@ -478,8 +479,13 @@
     <string name="pref_picture_quality_summary">Redimensionner et compresser les images</string>
     <string name="pref_video_quality">Qualité de la vidéo</string>
     <string name="pref_video_quality_summary">Redimensionner et compresser les vidéos</string>
+    <string name="video_very_low">Très basse (144p)</string>
+    <string name="video_low">Basse (360p)</string>
+    <string name="video_mid">Moyenne (720p)</string>
+    <string name="video_high">Haute (1080p)</string>
     <string name="video_original">original (non compressé)</string>
     <string name="always">Toujours</string>
+    <string name="always_off">Toujours désactivé</string>
     <string name="battery_optimizations_enabled">Optimisations de batterie activées</string>
     <string name="battery_optimizations_enabled_explained">Votre appareil applique sur Pix-Art Messenger des optimisations de batterie très strictes qui pourraient provoquer des retards dans les notifications, voire des pertes de messages.\nNous vous recommandons de les désactiver.</string>
     <string name="battery_optimizations_enabled_dialog">Votre appareil applique sur Pix-Art Messenger des optimisations de batterie très strictes qui pourraient provoquer des retards dans les notifications, voire des pertes de messages.\nVous allez maintenant avoir la possibilité de les désactiver.</string>
@@ -712,8 +718,12 @@
     <string name="pref_omemo_setting_summary_always">OMEMO sera toujours utilisé dans les discussions privées à deux.</string>
     <string name="pref_omemo_setting_summary_default_on">OMEMO sera utilisé par défaut dans les nouvelles discussions.</string>
     <string name="pref_omemo_setting_summary_default_off">OMEMO devra être activé explicitement pour les nouvelles conversations.</string>
+    <string name="pref_omemo_setting_summary_always_off">OMEMO ne sera jamais utilisé.</string>
     <string name="default_on">Activé par défaut</string>
     <string name="default_off">Désactivé par défaut</string>
+    <string name="pref_theme_light">Clair</string>
+    <string name="pref_theme_dark">Sombre</string>
+    <string name="pref_theme_auto">Automatique</string>
     <string name="pref_theme_options_summary">Sélectionner la palette de couleurs</string>
     <string name="pref_theme_options">Thème</string>
     <string name="chooce_account">Choisir un compte</string>
@@ -816,6 +826,10 @@
     <string name="unable_to_decrypt_backup">Impossible de déchiffrer la sauvegarde. Vérifiez que le mot de passe est correct.</string>
     <string name="pref_prefer_xmpp_avatar_summary">Préférer l\'avatar XMPP des utilisateur·rice·s au lieu de celui figurant sur votre carnet d\'adresses</string>
     <string name="pref_prefer_xmpp_avatar">Préférer l\'avatar XMPP</string>
+    <plurals name="view_users">
+        <item quantity="one">Voir %1$d Participant</item>
+        <item quantity="other">Voir %1$d Participants</item>
+    </plurals>
     <string name="group_chat_members">Participants</string>
     <string name="message_deleted">Le message a été supprimé</string>
     <string name="channel_details">Détails du canal</string>
@@ -866,6 +880,7 @@
     <string name="mgmt_account_password_forgotten">Mot de passe oublié</string>
     <string name="password_forgotten_title">Mot de passe oublié</string>
     <string name="password_forgotten_text">Vous avez oublié le mot de passe de votre compte ? Nous allons maintenant essayer d\'ouvrir le site Web d\'assistance de votre fournisseur.</string>
+    <string name="pref_show_mappreview_inside_summary">Montrer l\'aperçu des cartes directement dans le chat, une connexion au serveur Pix-Art sera établie.</string>
     <string name="pref_show_mappreview_inside">Afficher les aperçus localisations au sein de la discussion</string>
     <string name="pref_use_internal_updater_summary">Laisser le messager vérifier la disponibilité de mise à jour une fois par jour</string>
     <string name="pref_use_internal_updater">rechercher des mise à jour</string>
@@ -879,4 +894,31 @@
     <string name="this_looks_like_a_domain">Il semble que ce soit une adresse d\'un domaine</string>
     <string name="add_anway">Ajouter quand même</string>
     <string name="this_looks_like_channel">Il semble que ce soit une adresse d\'un canal</string>
+    <string name="this_device">Cet appareil</string>
+    <string name="intro_required_permissions">Autorisations Requises</string>
+    <string name="intro_start_chatting">Commencer à chatter</string>
+    <string name="intro_desc_start_chatting">Si vous avez donné les autorisations de contact, les contacts Jabber déjà existants sont automatiquement affichés dans votre carnet d\'adresses. Sinon, il suffit d\'ajouter les identifiants Jabber</string>
+    <string name="intro_desc_open_chat">Vous pouvez désormais commencer à chatter, partager des lieux, des fichiers, des vidéos et des images ou envoyer des messages vocaux.</string>
+    <string name="intro_chat_details">Détails du chat</string>
+    <string name="intro_desc_chat_details">Vous voulez ouvrir les détails du chat ? Il vous suffit d\'indiquer le nom du chat dans la barre de menu du haut.</string>
+    <string name="intro_highlight_user">Mettre en évidence l’utilisateur·rice</string>
+    <string name="intro_desc_highlight_user">Si vous souhaitez mettre en évidence un utilisateur dans une discussion de groupe, il vous suffit de toucher l\'avatar de l\'utilisateur dans la discussion. Sinon, surtout si l\'utilisateur n\'est pas dans le chat, passez aux détails du chat et cherchez l\'utilisateur dans la liste des participants. Une longue pression sur l\'avatar de l\'utilisateur fera apparaître un menu contextuel dans lequel vous pourrez le mettre en évidence.</string>
+    <string name="intro_desc_open_chat_details">Vous avez ouvert les détails du chat. Vous pouvez y voir les détails du chat, modifier le comportement de notification des nouveaux messages, ajouter ou supprimer le chat de votre liste de contacts et bien plus encore.</string>
+    <string name="pref_show_intro_summary">Revoir les écrans d\'introduction</string>
+    <string name="pref_show_intro">Remontrer Intro</string>
+    <string name="show_intro_again">Les écrans d\'introduction seront à nouveau diffusés</string>
+    <string name="intro_desc_whats_xmpp">XMPP, également appelé jabber, est un réseau de communication décentralisé et fonctionne comme le courrier électronique. Vous avez besoin d\'une adresse appelée Jabber-ID, d\'un mot de passe et d\'un messager. Plus d\'informations à ce sujet plus tard.</string>
+    <string name="intro_whats_xmpp">Qu\'est-ce que XMPP / Jabber / Pix-Art Messenger ?</string>
+    <string name="intro_desc_optional_permissions">Pour lire les Jabber-ID (le cas échéant) de vos contacts, vous devez obtenir une autorisation de lecture de votre carnet d\'adresses. Les contacts ne sont jamais partagés, téléchargés ou copiés.</string>
+    <string name="intro_desc_account2">Vous pouvez créer un nouveau profil en sélectionnant un serveur personnalisé ou un serveur dans le menu déroulant et en entrant un surnom.</string>
+    <string name="intro_desc_start_chatting2">Vous pouvez également ajouter, créer ou rejoindre des chats multi-utilisateurs - appelés MUC. On distingue les chats de groupe privés et les chats de groupe publics, appelés \"canaux\".</string>
+    <string name="intro_desc_privacy">Pix-Art Messenger ne vendra ni n\'analysera vos données et c\'est vous qui décidez des autorisations que vous accordez.</string>
+    <string name="sharing_application_not_grant_permission">La demande de partage n\'a pas permis d\'accéder à ce fichier.</string>
+    <string name="pref_channel_discovery_summary">La plupart des utilisateurs devraient choisir \"jabber.network\" pour obtenir de meilleures suggestions de la part de l\'ensemble de l\'écosystème public XMPP.</string>
+    <string name="pref_alternative_voice_settings_summary">Si vous avez des problèmes pendant l\'enregistrement vocal, utilisez ce paramètre pour modifier le codec.</string>
+    <string name="pref_alternative_voice_settings">Méthode alternative d\'enregistrement de la voix</string>
+    <string name="pref_use_colored_muc_names_summary">Coloriez les surnoms dans les chats de groupe ou les canaux comme les arrière-plans d\'avatars par défaut.</string>
+    <string name="pref_use_colored_muc_names">Colorier les surnoms</string>
+    <string name="action_delete">Supprimer</string>
+    <string name="attach_choose_video">Choisissez la Vidéo</string>
 </resources>

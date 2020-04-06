@@ -200,7 +200,6 @@
     <string name="join">Deelnemen</string>
     <string name="save_as_bookmark">Opslaan als bladwijzer</string>
     <string name="delete_bookmark">Bladwijzer verwijderen</string>
-    <string name="bookmark_already_exists">Deze bladwijzer bestaat al</string>
     <string name="topic">Onderwerp</string>
     <string name="joining_conference">Deelnemen aan groepsgesprek…</string>
     <string name="leave">Verlaten</string>

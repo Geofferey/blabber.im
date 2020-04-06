@@ -214,7 +214,6 @@
     <string name="channel_bare_jid_example">canal@conference.example.com</string>
     <string name="save_as_bookmark">Guardar a marcadors</string>
     <string name="delete_bookmark">Eliminar marcador</string>
-    <string name="bookmark_already_exists">Aquest marcador ja existeix</string>
     <string name="topic">Tema</string>
     <string name="joining_conference">Unir-se al xat de grup…</string>
     <string name="leave">Sortir</string>

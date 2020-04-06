@@ -207,7 +207,6 @@
     <string name="channel_bare_jid_example">canal@conferinta.exemplu.ro</string>
     <string name="save_as_bookmark">Salvează semn de carte</string>
     <string name="delete_bookmark">Șterge semn de carte</string>
-    <string name="bookmark_already_exists">Acest semn de carte există deja</string>
     <string name="topic">Subiect discuție</string>
     <string name="joining_conference">Vă alăturați discuției de grup...</string>
     <string name="leave">Paraseste</string>

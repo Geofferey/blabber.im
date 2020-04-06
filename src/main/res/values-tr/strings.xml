@@ -197,7 +197,6 @@
     <string name="join">Katıl</string>
     <string name="save_as_bookmark">Yer imi olarak kaydet</string>
     <string name="delete_bookmark">Yer imini sil</string>
-    <string name="bookmark_already_exists">Bu yer işareti zaten var</string>
     <string name="joining_conference">Sohbet Grubuna bağlanılıyor…</string>
     <string name="leave">Ayrıl</string>
     <string name="contact_added_you">Kişi sizi listesine ekledi</string>

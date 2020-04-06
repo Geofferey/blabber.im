@@ -215,7 +215,6 @@
     <string name="channel_bare_jid_example">channel@conference.domain.de</string>
     <string name="save_as_bookmark">Zur Kontaktliste hinzufügen</string>
     <string name="delete_bookmark">Von Kontaktliste entfernen</string>
-    <string name="bookmark_already_exists">Die Konferenz befindet sich bereits auf deiner Kontaktliste</string>
     <string name="topic">Thema</string>
     <string name="joining_conference">Gruppenchat beitreten…</string>
     <string name="leave">Verlassen</string>
@@ -1004,4 +1003,6 @@
     <string name="show_videos_images_only">Nur Bilder/Videos</string>
     <string name="show_avatar">Profilbild anzeigen</string>
     <string name="action_delete">Löschen</string>
+    <string name="attach_choose_video">Video auswählen</string>
+    <string name="please_enable_an_account">Bitte ein Profil aktivieren</string>
 </resources>
