@@ -1,5 +1,8 @@
 ### Changelog
 
+#### Version 2.3.6
+* bug fixes
+
 #### Version 2.3.5
 * start removing OTR
 * rework conference and contact details (big avatar is available via long click) (PAM)
