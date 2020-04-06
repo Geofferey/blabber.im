@@ -1004,5 +1004,5 @@
     <string name="show_avatar">Profilbild anzeigen</string>
     <string name="action_delete">Löschen</string>
     <string name="attach_choose_video">Video auswählen</string>
-    <string name="please_enable_an_account">Bitte wählen Sie ein Konto</string>
+    <string name="please_enable_an_account">Bitte ein Profil aktivieren</string>
 </resources>
