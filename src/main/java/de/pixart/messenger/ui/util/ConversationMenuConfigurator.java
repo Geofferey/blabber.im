@@ -29,6 +29,7 @@
 
 package de.pixart.messenger.ui.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.view.Menu;
@@ -42,8 +43,7 @@ import de.pixart.messenger.crypto.OmemoSetting;
 import de.pixart.messenger.entities.Conversation;
 import de.pixart.messenger.entities.Conversational;
 import de.pixart.messenger.entities.Message;
-
-import static de.pixart.messenger.ui.SettingsActivity.ENABLE_OTR_ENCRYPTION;
+import de.pixart.messenger.ui.XmppActivity;
 
 public class ConversationMenuConfigurator {
 
@@ -93,7 +93,7 @@ public class ConversationMenuConfigurator {
         menu.findItem(R.id.attach_location).setVisible(locationAvailable);
     }
 
-    public static void configureEncryptionMenu(@NonNull Conversation conversation, Menu menu) {
+    public static void configureEncryptionMenu(@NonNull Conversation conversation, Menu menu, final XmppActivity activity) {
         final MenuItem menuSecure = menu.findItem(R.id.action_security);
         final boolean participating = conversation.getMode() == Conversational.MODE_SINGLE || conversation.getMucOptions().participating();
         if (!participating) {
@@ -130,7 +130,7 @@ public class ConversationMenuConfigurator {
             menuSecure.setIcon(R.drawable.ic_lock_white_24dp);
         }
 
-        otr.setVisible(Config.supportOtr() && conversation.getBooleanAttribute(ENABLE_OTR_ENCRYPTION, false));
+        otr.setVisible(Config.supportOtr() && activity.enableOTR());
         if (conversation.getMode() == Conversation.MODE_MULTI) {
             otr.setVisible(false);
         }

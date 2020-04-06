@@ -97,6 +97,7 @@ import me.drakeet.support.toast.ToastCompat;
 import pl.droidsonroids.gif.GifDrawable;
 import rocks.xmpp.addr.Jid;
 
+import static de.pixart.messenger.ui.SettingsActivity.ENABLE_OTR_ENCRYPTION;
 import static de.pixart.messenger.ui.SettingsActivity.USE_BUNDLED_EMOJIS;
 import static de.pixart.messenger.ui.SettingsActivity.USE_INTERNAL_UPDATER;
 
@@ -437,6 +438,10 @@ public abstract class XmppActivity extends ActionBarActivity {
 
     public boolean unicoloredBG() {
         return getBooleanPreference("unicolored_chatbg", R.bool.use_unicolored_chatbg);
+    }
+
+    public boolean enableOTR() {
+        return getBooleanPreference(ENABLE_OTR_ENCRYPTION, R.bool.enable_otr);
     }
 
     public void setBubbleColor(final View v, final int backgroundColor, final int borderColor) {

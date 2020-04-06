@@ -1154,7 +1154,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             menuNeedHelp.setVisible(true);
             menuSearchUpdates.setVisible(false);
             ConversationMenuConfigurator.configureAttachmentMenu(conversation, menu, activity.xmppConnectionService.getAttachmentChoicePreference(), hasAttachments);
-            ConversationMenuConfigurator.configureEncryptionMenu(conversation, menu);
+            ConversationMenuConfigurator.configureEncryptionMenu(conversation, menu, activity);
         } else {
             menuNeedHelp.setVisible(false);
             menuSearchUpdates.setVisible(true);
