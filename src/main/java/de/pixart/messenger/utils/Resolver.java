@@ -128,9 +128,13 @@ public class Resolver {
             }
         });
         threads[2] = new Thread(() -> {
-            List<Result> list = resolveNoSrvRecords(DNSName.from(domain), DEFAULT_PORT_XMPP, true);
-            synchronized (fallbackResults) {
-                fallbackResults.addAll(list);
+            try {
+                final List<Result> list = resolveNoSrvRecords(DNSName.from(domain), DEFAULT_PORT_XMPP, true);
+                synchronized (fallbackResults) {
+                    fallbackResults.addAll(list);
+                }
+            } catch (Throwable throwable) {
+                Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": resolving no SRV record (STARTTLS)", throwable);
             }
         });
         for (Thread thread : threads) {
@@ -187,7 +191,7 @@ public class Resolver {
         final List<Thread> fallbackThreads = new ArrayList<>();
 
         for (SRV record : result.getAnswersOrEmptySet()) {
-            if (record.name.length() == 0) {
+            if (record.name.length() == 0 && record.priority == 0) {
                 continue;
             }
             threads.add(new Thread(() -> {
@@ -198,6 +202,11 @@ public class Resolver {
             }));
             threads.add(new Thread(() -> {
                 final List<Result> ipv4s = resolveIp(record, A.class, result.isAuthenticData(), directTls);
+                if (ipv4s.size() == 0) {
+                    Result resolverResult = Result.fromRecord(record, directTls);
+                    resolverResult.authenticated = result.isAuthenticData();
+                    ipv4s.add(resolverResult);
+                }
                 synchronized (results) {
                     results.addAll(ipv4s);
                 }
@@ -211,13 +220,13 @@ public class Resolver {
                             fallbackResults.addAll(ipv6s);
                         }
                         final List<Result> ipv4s = resolveIp(record, cname.name, A.class, cnames.isAuthenticData(), directTls);
-                        synchronized (results) {
+                        synchronized (fallbackResults) {
                             fallbackResults.addAll(ipv4s);
                         }
                     }
-                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + "cname in srv (agains RFC2782) - run slow fallback");
+                    Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + " cname in srv (against RFC2782) - run slow fallback");
                 } catch (Throwable throwable) {
-                    Log.i(Config.LOGTAG, Resolver.class.getSimpleName() + "error resolving srv cname-fallback records", throwable);
+                    Log.i(Config.LOGTAG, Resolver.class.getSimpleName() + " error resolving srv cname-fallback records", throwable);
                 }
             }));
         }
@@ -285,6 +294,7 @@ public class Resolver {
         } catch (Throwable throwable) {
             Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + "error resolving fallback records", throwable);
         }
+        results.add(Result.createDefault(dnsName, port));
         return results;
     }
 
@@ -315,7 +325,7 @@ public class Resolver {
         if (r.size() == 0) return null;
 
         Result result;
-        if (r.size() == 1) {
+        if (r.size() == 1 && r.get(0).ip != null) {
             result = r.get(0);
             result.setLogID(logID);
             result.connect();
@@ -387,9 +397,25 @@ public class Resolver {
             result.timeRequested = System.currentTimeMillis();
             result.port = srv.port;
             result.hostname = srv.name;
+            try {
+                result.ip = InetAddress.getByName(result.hostname.toString());
+            } catch (UnknownHostException e) {
+                result.ip = null;
+                e.printStackTrace();
+            }
             result.directTls = directTls;
             result.priority = srv.priority;
             return result;
+        }
+
+        static Result createDefault(final DNSName hostname, final int port) {
+            InetAddress ip = null;
+            try {
+                ip = InetAddress.getByName(hostname.toString());
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
+            return createDefault(hostname, ip, port);
         }
 
         static Result createDefault(final DNSName hostname, final InetAddress ip, final int port) {
@@ -463,6 +489,10 @@ public class Resolver {
         public void connect() {
             if (this.socket != null) {
                 this.disconnect();
+            }
+            if (this.ip == null || this.port == 0) {
+                Log.d(Config.LOGTAG, "Resolver did not get IP:port (" + this.ip + ":" + this.port + ")");
+                return;
             }
             final InetSocketAddress addr = new InetSocketAddress(this.ip, this.port);
             this.socket = new Socket();

@@ -18,7 +18,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ConnectException;
-import java.net.IDN;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
@@ -317,20 +316,35 @@ public class XmppConnection implements Runnable {
                 }
             } else {
                 final String domain = account.getJid().getDomain();
-                final Resolver.Result storedBackupResult = mXmppConnectionService.databaseBackend.findResolverResult(domain);
-                Resolver.Result result = null;
+                Resolver.Result results;
                 final boolean hardcoded = extended && !account.getHostname().isEmpty();
                 if (hardcoded) {
-                    result = Resolver.fromHardCoded(account.getHostname(), account.getPort());
-                } else if (storedBackupResult != null && !storedBackupResult.isOutdated()) {
-                    storedBackupResult.connect();
-                    result = storedBackupResult;
-                    Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": loaded backup resolver result from db: " + storedBackupResult);
+                    results = Resolver.fromHardCoded(account.getHostname(), account.getPort());
+                } else {
+                    results = Resolver.resolve(domain);
                 }
-                if (result == null || result.getSocket() == null) {
-                    result = Resolver.resolve(domain);
+                if (Thread.currentThread().isInterrupted()) {
+                    Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": Thread was interrupted");
+                    return;
                 }
-                if (result == null) {
+                if (results == null) {
+                    Log.e(Config.LOGTAG,account.getJid().asBareJid()+": Resolver results were empty");
+                    return;
+                }
+                final Resolver.Result storedBackupResult;
+                if (hardcoded) {
+                    storedBackupResult = null;
+                } else {
+                    storedBackupResult = mXmppConnectionService.databaseBackend.findResolverResult(domain);
+                    if (storedBackupResult != null && results != storedBackupResult && !storedBackupResult.isOutdated()) {
+                        results = storedBackupResult;
+                        Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": loaded backup resolver result from db: " + storedBackupResult);
+                    }
+                }
+                if (results == null || results.getSocket() == null) {
+                    results = Resolver.resolve(domain);
+                }
+                if (results == null) {
                     throw new UnknownHostException();
                 }
                 if (Thread.currentThread().isInterrupted()) {
@@ -339,13 +353,13 @@ public class XmppConnection implements Runnable {
                 }
                 try {
                     // if tls is true, encryption is implied and must not be started
-                    features.encryptionEnabled = result.isDirectTls();
-                    verifiedHostname = result.isAuthenticated() ? result.getHostname().toString() : null;
+                    features.encryptionEnabled = results.isDirectTls();
+                    verifiedHostname = results.isAuthenticated() ? results.getHostname().toString() : null;
                     Log.d(Config.LOGTAG,"verified hostname " + verifiedHostname);
                     Log.d(Config.LOGTAG, account.getJid().asBareJid().toString()
-                            + ": using values from resolver " + result.toString());
+                            + ": using values from resolver " + results.toString());
 
-                    localSocket = result.getSocket();
+                    localSocket = results.getSocket();
 
                     if (features.encryptionEnabled) {
                         localSocket = upgradeSocketToTls(localSocket);
@@ -354,8 +368,8 @@ public class XmppConnection implements Runnable {
                     localSocket.setSoTimeout(Config.SOCKET_TIMEOUT * 1000);
                     if (startXmpp(localSocket)) {
                         localSocket.setSoTimeout(0); //reset to 0; once the connection is established we don’t want this
-                        if (!hardcoded && !result.equals(storedBackupResult)) {
-                            mXmppConnectionService.databaseBackend.saveResolverResult(domain, result);
+                        if (!hardcoded && !results.equals(storedBackupResult)) {
+                            mXmppConnectionService.databaseBackend.saveResolverResult(domain, results);
                         }
                         // successfully connected to server that speaks xmpp
                     } else {
