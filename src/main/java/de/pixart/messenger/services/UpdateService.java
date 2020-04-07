@@ -15,13 +15,18 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 
 import de.pixart.messenger.BuildConfig;
 import de.pixart.messenger.Config;
 import de.pixart.messenger.R;
+import de.pixart.messenger.http.NoSSLv3SocketFactory;
 import de.pixart.messenger.ui.UpdaterActivity;
 import me.drakeet.support.toast.ToastCompat;
 
@@ -32,6 +37,7 @@ public class UpdateService extends AsyncTask<String, Object, UpdateService.Wrapp
     private Context context;
     private String store;
     private NotificationService getNotificationService;
+
     public UpdateService() {
     }
 
@@ -52,9 +58,19 @@ public class UpdateService extends AsyncTask<String, Object, UpdateService.Wrapp
         if (params[0].equals("true")) {
             showNoUpdateToast = true;
         }
-
+        SSLContext sslcontext = null;
+        SSLSocketFactory NoSSLv3Factory = null;
+        try {
+            sslcontext = SSLContext.getInstance("TLSv1");
+            if (sslcontext != null) {
+                sslcontext.init(null, null, null);
+                NoSSLv3Factory = new NoSSLv3SocketFactory(sslcontext.getSocketFactory());
+            }
+        } catch (NoSuchAlgorithmException | KeyManagementException e) {
+            e.printStackTrace();
+        }
+        HttpsURLConnection.setDefaultSSLSocketFactory(NoSSLv3Factory);
         HttpsURLConnection connection = null;
-
         try {
             URL url = new URL(Config.UPDATE_URL);
             if (mUseTor) {
@@ -163,7 +179,7 @@ public class UpdateService extends AsyncTask<String, Object, UpdateService.Wrapp
         String[] remoteV = null;
         String[] installedV = null;
         try {
-            installedV = installedVersion.split(" ");
+            installedV = installedVersion.split("-");
             Log.d(Config.LOGTAG, "AppUpdater: Version installed: " + installedV[0]);
             installed = installedV[0].split("\\.");
         } catch (Exception e) {
@@ -172,7 +188,7 @@ public class UpdateService extends AsyncTask<String, Object, UpdateService.Wrapp
         try {
             remoteV = remoteVersion.split(" ");
             if (installedV != null && installedV.length > 1) {
-                if (installedV[1] != null) {
+                if (installedV[1] != null && installedV[1].toLowerCase().contains("beta")) {
                     remoteV[0] = remoteV[0] + ".1";
                 }
             }

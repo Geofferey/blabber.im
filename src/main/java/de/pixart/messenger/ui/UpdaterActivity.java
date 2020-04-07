@@ -25,12 +25,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 
 import de.pixart.messenger.Config;
 import de.pixart.messenger.R;
+import de.pixart.messenger.http.NoSSLv3SocketFactory;
 import de.pixart.messenger.persistance.FileBackend;
 import de.pixart.messenger.services.XmppConnectionService;
 import de.pixart.messenger.utils.WakeLockHelper;
@@ -284,7 +290,7 @@ public class UpdaterActivity extends XmppActivity {
     }
 
     private class DownloadTask extends AsyncTask<String, Integer, String> {
-
+        XmppActivity activity;
         File dir = new File(FileBackend.getAppUpdateDirectory());
         File file = new File(dir, FileName);
         XmppConnectionService xmppConnectionService;
@@ -325,7 +331,19 @@ public class UpdaterActivity extends XmppActivity {
         protected String doInBackground(String... sUrl) {
             InputStream is = null;
             OutputStream os = null;
-            HttpURLConnection connection = null;
+            SSLContext sslcontext = null;
+            SSLSocketFactory NoSSLv3Factory = null;
+            try {
+                sslcontext = SSLContext.getInstance("TLSv1");
+                if (sslcontext != null) {
+                    sslcontext.init(null, null, null);
+                    NoSSLv3Factory = new NoSSLv3SocketFactory(sslcontext.getSocketFactory());
+                }
+            } catch (NoSuchAlgorithmException | KeyManagementException e) {
+                e.printStackTrace();
+            }
+            HttpsURLConnection.setDefaultSSLSocketFactory(NoSSLv3Factory);
+            HttpsURLConnection connection = null;
             try {
                 Log.d(Config.LOGTAG, "AppUpdater: save file to " + file.toString());
                 Log.d(Config.LOGTAG, "AppUpdater: download update from url: " + sUrl[0] + " to file name: " + file.toString());
@@ -333,15 +351,18 @@ public class UpdaterActivity extends XmppActivity {
                 URL url = new URL(sUrl[0]);
 
                 if (mUseTor) {
-                    connection = (HttpURLConnection) url.openConnection(getProxy());
+                    connection = (HttpsURLConnection) url.openConnection(getProxy());
                 } else {
-                    connection = (HttpURLConnection) url.openConnection();
+                    connection = (HttpsURLConnection) url.openConnection();
                 }
+                connection.setConnectTimeout(Config.SOCKET_TIMEOUT * 1000);
+                connection.setReadTimeout(Config.SOCKET_TIMEOUT * 1000);
+                connection.setRequestProperty("User-Agent", context.getString(R.string.app_name));
                 connection.connect();
 
                 // expect HTTP 200 OK, so we don't mistakenly save error report
                 // instead of the file
-                if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                if (connection.getResponseCode() != HttpsURLConnection.HTTP_OK) {
                     ToastCompat.makeText(getApplicationContext(), getText(R.string.failed), Toast.LENGTH_LONG).show();
                     return connection.getResponseCode() + ": " + connection.getResponseMessage();
                 }
@@ -355,7 +376,7 @@ public class UpdaterActivity extends XmppActivity {
                 if (parentDirectory.mkdirs()) {
                     Log.d(Config.LOGTAG, "created " + parentDirectory.getAbsolutePath());
                 }
-                
+
                 // download the file
                 is = connection.getInputStream();
                 os = new FileOutputStream(file);
