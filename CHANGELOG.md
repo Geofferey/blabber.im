@@ -1,5 +1,8 @@
 ### Changelog
 
+#### Version 2.3.7
+* bug fixes
+
 #### Version 2.3.6
 * bug fixes
 
