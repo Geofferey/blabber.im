@@ -203,7 +203,7 @@ public class Resolver {
             threads.add(new Thread(() -> {
                 final List<Result> ipv4s = resolveIp(record, A.class, result.isAuthenticData(), directTls);
                 if (ipv4s.size() == 0) {
-                    Result resolverResult = Result.fromRecord(record, directTls);
+                    Result resolverResult = Result.fromRecord(record, directTls, true);
                     resolverResult.authenticated = result.isAuthenticData();
                     ipv4s.add(resolverResult);
                 }
@@ -266,7 +266,8 @@ public class Resolver {
         try {
             ResolverResult<D> results = resolveWithFallback(hostname, type, authenticated);
             for (D record : results.getAnswersOrEmptySet()) {
-                Result resolverResult = Result.fromRecord(srv, directTls);
+                boolean ipv4 = type == A.class;
+                Result resolverResult = Result.fromRecord(srv, directTls, ipv4);
                 resolverResult.authenticated = results.isAuthenticData() && authenticated;
                 resolverResult.ip = record.getInetAddress();
                 list.add(resolverResult);
@@ -392,16 +393,17 @@ public class Resolver {
 
         private String logID = "";
 
-        static Result fromRecord(final SRV srv, final boolean directTls) {
+        static Result fromRecord(final SRV srv, final boolean directTls, final boolean ipv4) {
             Result result = new Result();
             result.timeRequested = System.currentTimeMillis();
             result.port = srv.port;
             result.hostname = srv.name;
-            try {
-                result.ip = InetAddress.getByName(result.hostname.toString());
-            } catch (UnknownHostException e) {
-                result.ip = null;
-                e.printStackTrace();
+            if (ipv4) {
+                try {
+                    result.ip = InetAddress.getByName(result.hostname.toString());
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }
             }
             result.directTls = directTls;
             result.priority = srv.priority;
