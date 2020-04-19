@@ -107,7 +107,7 @@ android {
 
         versionCode 299
         versionName "2.3.7"
-        versionNameSuffix "beta_(2020-04-01)" // "-beta_(XXXX-XX-XX)"
+        //versionNameSuffix "beta_(2020-04-01)" // "-beta_(XXXX-XX-XX)" // activate for beta versions
         //resConfigs "en"
 
         archivesBaseName += "-$versionName"
