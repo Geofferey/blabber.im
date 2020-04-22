@@ -150,7 +150,7 @@
                         </LinearLayout>
                     </RelativeLayout>
 
-                    <de.pixart.messenger.ui.widget.UnreadCountCustomView
+                    <eu.siacs.conversations.ui.widget.UnreadCountCustomView
                         android:id="@+id/unread_count"
                         android:layout_width="?attr/IconSize"
                         android:layout_height="?attr/IconSize"
@@ -165,7 +165,7 @@
                         android:visibility="gone"
                         app:backgroundColor="?attr/colorAccent" />
 
-                    <de.pixart.messenger.ui.widget.FailedCountCustomView
+                    <eu.siacs.conversations.ui.widget.FailedCountCustomView
                         android:id="@+id/failed_count"
                         android:layout_width="?attr/IconSize"
                         android:layout_height="?attr/IconSize"

@@ -56,7 +56,7 @@
                 app:errorTextAppearance="@style/TextAppearance.Conversations.Design.Error"
                 app:hintTextAppearance="@style/TextAppearance.Conversations.Design.Hint">
 
-                <de.pixart.messenger.ui.widget.ImmediateAutoCompleteTextView
+                <eu.siacs.conversations.ui.widget.ImmediateAutoCompleteTextView
                     android:id="@+id/status_message"
                     style="@style/Widget.Conversations.EditText"
                     android:layout_width="match_parent"

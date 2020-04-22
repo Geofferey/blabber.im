@@ -37,7 +37,7 @@
             app:fabSize="mini"
             app:useCompatPadding="true" />
 
-        <de.pixart.messenger.ui.widget.UnreadCountCustomView
+        <eu.siacs.conversations.ui.widget.UnreadCountCustomView
             android:id="@+id/unread_count_custom_view"
             android:layout_width="?attr/IconSize"
             android:layout_height="?attr/IconSize"
@@ -116,7 +116,7 @@
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/media_preview" />
 
-                    <de.pixart.messenger.ui.widget.EditMessage
+                    <eu.siacs.conversations.ui.widget.EditMessage
                         android:id="@+id/textinput"
                         style="@style/Widget.Conversations.EditText"
                         android:layout_width="match_parent"
@@ -137,7 +137,7 @@
                         android:textColor="?attr/text_Color_Main">
 
                         <requestFocus />
-                    </de.pixart.messenger.ui.widget.EditMessage>
+                    </eu.siacs.conversations.ui.widget.EditMessage>
                 </LinearLayout>
 
                 <ImageButton

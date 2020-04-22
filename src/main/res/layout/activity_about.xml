@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="?attr/color_background_tertiary"
     android:orientation="vertical"
-    tools:context="de.pixart.messenger.ui.AboutActivity">
+    tools:context="eu.siacs.conversations.ui.AboutActivity">
 
     <include layout="@layout/toolbar" />
 

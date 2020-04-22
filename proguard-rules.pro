@@ -1,6 +1,7 @@
 -dontobfuscate
 
 -keep class de.pixart.messenger.**
+-keep class eu.siacs.conversations.**
 -keep class org.whispersystems.**
 -keep class com.kyleduo.switchbutton.Configuration
 -keep class com.soundcloud.android.crop.**
@@ -24,7 +25,7 @@
 -dontwarn java.lang.**
 -dontwarn javax.lang.**
 
--keepclassmembers class de.pixart.messenger.http.services.** {
+-keepclassmembers class eu.siacs.conversations.http.services.** {
   !transient <fields>;
 }
 

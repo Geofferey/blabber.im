@@ -16,9 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
-import de.pixart.messenger.Config;
-import de.pixart.messenger.R;
-import de.pixart.messenger.ui.util.IntroHelper;
+import eu.siacs.conversations.Config;
+import eu.siacs.conversations.R;
+import eu.siacs.conversations.ui.ConversationsActivity;
+import eu.siacs.conversations.ui.util.IntroHelper;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 

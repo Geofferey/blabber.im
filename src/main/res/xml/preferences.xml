@@ -8,7 +8,7 @@
         android:title="@string/pref_ui_options">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="de.pixart.messenger.ui.SettingsActivity"
+            android:targetClass="eu.siacs.conversations.ui.SettingsActivity"
             android:targetPackage="@string/applicationId">
             <extra
                 android:name="page"
@@ -120,7 +120,7 @@
         android:title="@string/pref_notification_settings">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="de.pixart.messenger.ui.SettingsActivity"
+            android:targetClass="eu.siacs.conversations.ui.SettingsActivity"
             android:targetPackage="@string/applicationId">
             <extra
                 android:name="page"
@@ -137,7 +137,7 @@
             android:title="@string/title_pref_quiet_hours">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetClass="de.pixart.messenger.ui.SettingsActivity"
+                android:targetClass="eu.siacs.conversations.ui.SettingsActivity"
                 android:targetPackage="@string/applicationId">
                 <extra
                     android:name="page"
@@ -148,13 +148,13 @@
                 android:key="enable_quiet_hours"
                 android:summary="@string/pref_quiet_hours_summary"
                 android:title="@string/title_pref_enable_quiet_hours" />
-            <de.pixart.messenger.ui.TimePreference
+            <eu.siacs.conversations.ui.TimePreference
                 android:dependency="enable_quiet_hours"
                 android:key="quiet_hours_start"
                 android:negativeButtonText="@string/cancel"
                 android:positiveButtonText="@string/set"
                 android:title="@string/title_pref_quiet_hours_start_time" />
-            <de.pixart.messenger.ui.TimePreference
+            <eu.siacs.conversations.ui.TimePreference
                 android:dependency="enable_quiet_hours"
                 android:key="quiet_hours_end"
                 android:negativeButtonText="@string/cancel"
@@ -215,7 +215,7 @@
         android:title="@string/pref_attachments">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="de.pixart.messenger.ui.SettingsActivity"
+            android:targetClass="eu.siacs.conversations.ui.SettingsActivity"
             android:targetPackage="@string/applicationId">
             <extra
                 android:name="page"
@@ -269,7 +269,7 @@
         android:title="@string/pref_presence_settings">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="de.pixart.messenger.ui.SettingsActivity"
+            android:targetClass="eu.siacs.conversations.ui.SettingsActivity"
             android:targetPackage="@string/applicationId">
             <extra
                 android:name="page"
@@ -307,7 +307,7 @@
         android:title="@string/pref_security_settings">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="de.pixart.messenger.ui.SettingsActivity"
+            android:targetClass="eu.siacs.conversations.ui.SettingsActivity"
             android:targetPackage="@string/applicationId">
             <extra
                 android:name="page"
@@ -406,7 +406,7 @@
         android:title="@string/pref_expert_options">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="de.pixart.messenger.ui.SettingsActivity"
+            android:targetClass="eu.siacs.conversations.ui.SettingsActivity"
             android:targetPackage="@string/applicationId">
             <extra
                 android:name="page"
@@ -518,7 +518,7 @@
         </PreferenceCategory>
     </PreferenceScreen>
     <!--About-->
-    <de.pixart.messenger.ui.AboutPreference
+    <eu.siacs.conversations.ui.AboutPreference
         android:icon="?attr/ic_settings_about"
         android:summary="@string/pref_about_conversations_summary"
         android:title="@string/title_activity_about" />
