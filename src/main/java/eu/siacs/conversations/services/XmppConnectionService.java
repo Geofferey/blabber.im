@@ -2502,7 +2502,7 @@ public class XmppConnectionService extends Service {
                     return;
                 }
                 if (findAccountByJid(info.first) == null) {
-                    Account account = new Account(info.first, "");
+                    final Account account = new Account(info.first, "");
                     account.setPrivateKeyAlias(alias);
                     account.setOption(Account.OPTION_DISABLED, true);
                     account.setDisplayName(info.second);
@@ -2519,7 +2519,6 @@ public class XmppConnectionService extends Service {
                     callback.informUser(R.string.account_already_exists);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
                 callback.informUser(R.string.unable_to_parse_certificate);
             }
         }).start();
