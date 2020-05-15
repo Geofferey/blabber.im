@@ -29,6 +29,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -279,6 +280,7 @@ public class MediaViewerActivity extends XmppActivity implements AudioManager.On
             } else {
                 binding.messageImageView.setVisibility(View.VISIBLE);
                 binding.messageImageView.setImage(ImageSource.uri(uri));
+                binding.messageImageView.setOrientation(SubsamplingScaleImageView.ORIENTATION_USE_EXIF);
                 binding.messageImageView.setOnTouchListener((view, motionEvent) -> gestureDetector.onTouchEvent(motionEvent));
             }
         } catch (Exception e) {
@@ -371,7 +373,7 @@ public class MediaViewerActivity extends XmppActivity implements AudioManager.On
             } else {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
             }
-        } else if (width <= height) {
+        } else {
             if (rotation == 90 || rotation == 270) {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
             } else {
