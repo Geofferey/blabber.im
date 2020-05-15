@@ -277,7 +277,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
         if (Config.DOMAIN_LOCK != null) {
             accountname = account.getJid().getLocal();
         } else {
-            accountname = account.getJid().asBareJid().toString();
+            accountname = account.getJid().asBareJid().toEscapedString();
         }
         binding.detailsAccount.setText(getString(R.string.using_account, accountname));
         if (xmppConnectionService.multipleAccounts()) {

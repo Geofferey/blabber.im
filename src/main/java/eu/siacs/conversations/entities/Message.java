@@ -28,6 +28,7 @@ import eu.siacs.conversations.utils.MessageUtils;
 import eu.siacs.conversations.utils.MimeUtils;
 import eu.siacs.conversations.utils.Patterns;
 import eu.siacs.conversations.utils.UIHelper;
+import eu.siacs.conversations.utils.XmppUri;
 import eu.siacs.conversations.xmpp.Jid;
 
 public class Message extends AbstractEntity implements AvatarService.Avatarable {

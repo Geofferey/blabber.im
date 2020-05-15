@@ -50,7 +50,7 @@ public final class MucDetailsContextMenuHelper {
             if (contact != null && contact.showInContactList()) {
                 name = contact.getDisplayName();
             } else if (user.getRealJid() != null) {
-                name = user.getRealJid().asBareJid().toString();
+                name = user.getRealJid().asBareJid().toEscapedString();
             } else {
                 name = user.getName();
             }
@@ -259,7 +259,7 @@ public final class MucDetailsContextMenuHelper {
         final Conversation conversation = user.getConversation();
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.kick_from_conference);
-        String jid = user.getRealJid().asBareJid().toString();
+        String jid = user.getRealJid().asBareJid().toEscapedString();
         SpannableString message;
         if (conversation.getMucOptions().membersOnly()) {
             message = new SpannableString(activity.getString(R.string.kicking_from_conference, jid));

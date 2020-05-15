@@ -719,7 +719,7 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
 
     @Override
     public void onAffiliationChangeFailed(Jid jid, int resId) {
-        displayToast(getString(resId, jid.asBareJid().toString()));
+        displayToast(getString(resId, jid.asBareJid().toEscapedString()));
     }
 
     @Override

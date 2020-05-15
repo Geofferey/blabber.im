@@ -497,7 +497,7 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
 
     @Override
     public void onAffiliationChangeFailed(Jid jid, int resId) {
-        displayToast(getString(resId, jid.asBareJid().toString()));
+        displayToast(getString(resId, jid.asBareJid().toEscapedString()));
     }
 
     private void openConversation(Conversation conversation, Bundle extras) {
