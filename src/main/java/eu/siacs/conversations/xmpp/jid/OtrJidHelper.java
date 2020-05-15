@@ -2,7 +2,7 @@ package eu.siacs.conversations.xmpp.jid;
 
 import net.java.otr4j.session.SessionID;
 
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 public final class OtrJidHelper {
 

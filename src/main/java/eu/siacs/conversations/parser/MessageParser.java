@@ -55,7 +55,7 @@ import eu.siacs.conversations.xmpp.jingle.JingleConnectionManager;
 import eu.siacs.conversations.xmpp.jingle.JingleRtpConnection;
 import eu.siacs.conversations.xmpp.pep.Avatar;
 import eu.siacs.conversations.xmpp.stanzas.MessagePacket;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 import static eu.siacs.conversations.entities.Message.DELETED_MESSAGE_BODY;
 import static eu.siacs.conversations.entities.Message.DELETED_MESSAGE_BODY_OLD;

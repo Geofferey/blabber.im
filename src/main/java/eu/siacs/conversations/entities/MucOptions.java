@@ -24,7 +24,7 @@ import eu.siacs.conversations.xmpp.chatstate.ChatState;
 import eu.siacs.conversations.xmpp.forms.Data;
 import eu.siacs.conversations.xmpp.forms.Field;
 import eu.siacs.conversations.xmpp.pep.Avatar;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 @SuppressLint("DefaultLocale")
 public class MucOptions {

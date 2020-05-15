@@ -44,7 +44,7 @@ import eu.siacs.conversations.entities.Room;
 import eu.siacs.conversations.utils.UIHelper;
 import eu.siacs.conversations.xmpp.OnAdvancedStreamFeaturesLoaded;
 import eu.siacs.conversations.xmpp.XmppConnection;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 import static eu.siacs.conversations.ui.SettingsActivity.PREFER_XMPP_AVATAR;
 

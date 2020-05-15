@@ -93,10 +93,10 @@ import eu.siacs.conversations.utils.MenuDoubleTabUtil;
 import eu.siacs.conversations.utils.ThemeHelper;
 import eu.siacs.conversations.xmpp.OnKeyStatusUpdated;
 import eu.siacs.conversations.xmpp.OnUpdateBlocklist;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.XmppConnection;
 import me.drakeet.support.toast.ToastCompat;
 import pl.droidsonroids.gif.GifDrawable;
-import rocks.xmpp.addr.Jid;
 
 import static eu.siacs.conversations.ui.SettingsActivity.ENABLE_OTR_ENCRYPTION;
 import static eu.siacs.conversations.ui.SettingsActivity.USE_BUNDLED_EMOJIS;

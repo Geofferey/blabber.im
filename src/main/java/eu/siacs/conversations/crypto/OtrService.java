@@ -31,10 +31,10 @@ import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.entities.Conversation;
 import eu.siacs.conversations.generator.MessageGenerator;
 import eu.siacs.conversations.services.XmppConnectionService;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.chatstate.ChatState;
 import eu.siacs.conversations.xmpp.jid.OtrJidHelper;
 import eu.siacs.conversations.xmpp.stanzas.MessagePacket;
-import rocks.xmpp.addr.Jid;
 
 public class OtrService extends OtrCryptoEngineImpl implements OtrEngineHost {
 

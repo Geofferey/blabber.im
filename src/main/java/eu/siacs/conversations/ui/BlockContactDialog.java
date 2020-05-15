@@ -13,7 +13,7 @@ import eu.siacs.conversations.entities.Blockable;
 import eu.siacs.conversations.entities.Conversation;
 import eu.siacs.conversations.ui.util.JidDialog;
 import me.drakeet.support.toast.ToastCompat;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 public final class BlockContactDialog {
     public static void show(final XmppActivity xmppActivity, final Blockable blockable) {

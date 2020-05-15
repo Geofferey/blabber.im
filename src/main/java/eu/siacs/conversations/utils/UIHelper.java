@@ -37,7 +37,7 @@ import eu.siacs.conversations.entities.Transferable;
 import eu.siacs.conversations.services.ExportBackupService;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.ui.util.MyLinkify;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 import static eu.siacs.conversations.entities.Message.DELETED_MESSAGE_BODY;
 import static eu.siacs.conversations.entities.Message.DELETED_MESSAGE_BODY_OLD;

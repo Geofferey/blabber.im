@@ -91,9 +91,9 @@ import eu.siacs.conversations.utils.StylingHelper;
 import eu.siacs.conversations.utils.TimeFrameUtils;
 import eu.siacs.conversations.utils.UIHelper;
 import eu.siacs.conversations.xmpp.mam.MamReference;
+import eu.siacs.conversations.xmpp.Jid;
 import me.drakeet.support.toast.ToastCompat;
 import pl.droidsonroids.gif.GifImageView;
-import rocks.xmpp.addr.Jid;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static eu.siacs.conversations.entities.Message.DELETED_MESSAGE_BODY;

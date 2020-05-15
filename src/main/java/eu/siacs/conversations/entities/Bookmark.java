@@ -18,7 +18,7 @@ import eu.siacs.conversations.utils.StringUtils;
 import eu.siacs.conversations.utils.UIHelper;
 import eu.siacs.conversations.xml.Element;
 import eu.siacs.conversations.xmpp.InvalidJid;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 public class Bookmark extends Element implements ListItem {
 

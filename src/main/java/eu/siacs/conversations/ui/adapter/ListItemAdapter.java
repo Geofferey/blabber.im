@@ -24,7 +24,7 @@ import eu.siacs.conversations.ui.util.AvatarWorkerTask;
 import eu.siacs.conversations.ui.util.StyledAttributes;
 import eu.siacs.conversations.utils.EmojiWrapper;
 import eu.siacs.conversations.utils.IrregularUnicodeDetector;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 public class ListItemAdapter extends ArrayAdapter<ListItem> {
 

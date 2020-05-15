@@ -31,8 +31,8 @@ import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.utils.InstallReferrerUtils;
 import eu.siacs.conversations.utils.SignupUtils;
 import eu.siacs.conversations.utils.XmppUri;
+import eu.siacs.conversations.xmpp.Jid;
 import me.drakeet.support.toast.ToastCompat;
-import rocks.xmpp.addr.Jid;
 
 import static eu.siacs.conversations.Config.DISALLOW_REGISTRATION_IN_UI;
 import static eu.siacs.conversations.utils.PermissionUtils.allGranted;

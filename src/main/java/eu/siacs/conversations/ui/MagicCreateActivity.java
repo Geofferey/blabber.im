@@ -25,7 +25,7 @@ import eu.siacs.conversations.databinding.ActivityMagicCreateBinding;
 import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.utils.CryptoHelper;
 import eu.siacs.conversations.utils.InstallReferrerUtils;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 public class MagicCreateActivity extends XmppActivity implements TextWatcher, AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
 

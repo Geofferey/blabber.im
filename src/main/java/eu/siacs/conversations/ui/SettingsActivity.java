@@ -39,8 +39,8 @@ import eu.siacs.conversations.services.ExportBackupService;
 import eu.siacs.conversations.services.MemorizingTrustManager;
 import eu.siacs.conversations.ui.util.StyledAttributes;
 import eu.siacs.conversations.utils.TimeFrameUtils;
+import eu.siacs.conversations.xmpp.Jid;
 import me.drakeet.support.toast.ToastCompat;
-import rocks.xmpp.addr.Jid;
 
 public class SettingsActivity extends XmppActivity implements
         OnSharedPreferenceChangeListener {

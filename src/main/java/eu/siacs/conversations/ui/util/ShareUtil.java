@@ -43,8 +43,8 @@ import eu.siacs.conversations.ui.ConversationsActivity;
 import eu.siacs.conversations.ui.XmppActivity;
 import eu.siacs.conversations.utils.Patterns;
 import eu.siacs.conversations.utils.XmppUri;
+import eu.siacs.conversations.xmpp.Jid;
 import me.drakeet.support.toast.ToastCompat;
-import rocks.xmpp.addr.Jid;
 
 public class ShareUtil {
 

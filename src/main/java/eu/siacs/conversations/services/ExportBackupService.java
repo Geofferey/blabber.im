@@ -56,7 +56,7 @@ import eu.siacs.conversations.persistance.FileBackend;
 import eu.siacs.conversations.utils.BackupFileHeader;
 import eu.siacs.conversations.utils.Compatibility;
 import eu.siacs.conversations.utils.WakeLockHelper;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 import static eu.siacs.conversations.utils.Compatibility.runsTwentySix;
 

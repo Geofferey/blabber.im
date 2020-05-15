@@ -43,7 +43,7 @@ import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.utils.Namespace;
 import eu.siacs.conversations.xml.Element;
 import eu.siacs.conversations.xmpp.stanzas.IqPacket;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 public class SlotRequester {
 

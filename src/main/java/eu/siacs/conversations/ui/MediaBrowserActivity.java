@@ -25,7 +25,7 @@ import eu.siacs.conversations.ui.interfaces.OnMediaLoaded;
 import eu.siacs.conversations.ui.util.Attachment;
 import eu.siacs.conversations.ui.util.GridManager;
 import eu.siacs.conversations.utils.MenuDoubleTabUtil;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 
 public class MediaBrowserActivity extends XmppActivity implements OnMediaLoaded {

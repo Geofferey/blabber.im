@@ -20,8 +20,8 @@ import eu.siacs.conversations.R;
 import eu.siacs.conversations.persistance.DatabaseBackend;
 import eu.siacs.conversations.utils.SignupUtils;
 import eu.siacs.conversations.utils.XmppUri;
+import eu.siacs.conversations.xmpp.Jid;
 import me.drakeet.support.toast.ToastCompat;
-import rocks.xmpp.addr.Jid;
 
 public class UriHandlerActivity extends AppCompatActivity {
 

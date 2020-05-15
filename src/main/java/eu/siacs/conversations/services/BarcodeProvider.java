@@ -32,7 +32,7 @@ import java.util.Hashtable;
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.utils.CryptoHelper;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 public class BarcodeProvider extends ContentProvider implements ServiceConnection {
 

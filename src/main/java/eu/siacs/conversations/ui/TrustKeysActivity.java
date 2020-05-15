@@ -39,8 +39,8 @@ import eu.siacs.conversations.utils.CryptoHelper;
 import eu.siacs.conversations.utils.IrregularUnicodeDetector;
 import eu.siacs.conversations.utils.XmppUri;
 import eu.siacs.conversations.xmpp.OnKeyStatusUpdated;
+import eu.siacs.conversations.xmpp.Jid;
 import me.drakeet.support.toast.ToastCompat;
-import rocks.xmpp.addr.Jid;
 
 public class TrustKeysActivity extends OmemoActivity implements OnKeyStatusUpdated {
     private final Map<String, Boolean> ownKeysToTrust = new HashMap<>();

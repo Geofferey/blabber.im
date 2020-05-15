@@ -10,7 +10,7 @@ import eu.siacs.conversations.R;
 import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.entities.Conversation;
 import eu.siacs.conversations.ui.adapter.AccountAdapter;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 public class ShareViaAccountActivity extends XmppActivity {
     public static final String EXTRA_CONTACT = "contact";

@@ -77,7 +77,7 @@ dependencies {
     implementation 'pub.devrel:easypermissions:3.0.0' // version >= 3.0.0 needs android X libraries
     implementation 'com.wefika:flowlayout:0.4.1'
     implementation 'com.googlecode.ez-vcard:ez-vcard:0.10.5'
-    implementation project(':libs:xmpp-addr')
+    implementation 'org.jxmpp:jxmpp-jid:0.6.4'
     implementation 'org.hsluv:hsluv:0.2'
     implementation 'org.conscrypt:conscrypt-android:2.2.1'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15' // 1.2.15 is last working version for minSDK 16

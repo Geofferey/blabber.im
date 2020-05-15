@@ -54,7 +54,7 @@ import eu.siacs.conversations.utils.StylingHelper;
 import eu.siacs.conversations.utils.TimeFrameUtils;
 import eu.siacs.conversations.utils.XmppUri;
 import me.drakeet.support.toast.ToastCompat;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 import static eu.siacs.conversations.entities.Bookmark.printableValue;
 import static eu.siacs.conversations.ui.util.IntroHelper.showIntro;

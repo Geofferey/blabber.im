@@ -17,7 +17,7 @@ import eu.siacs.conversations.entities.RawBlockable;
 import eu.siacs.conversations.ui.interfaces.OnBackendConnected;
 import eu.siacs.conversations.xmpp.OnUpdateBlocklist;
 import me.drakeet.support.toast.ToastCompat;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 public class BlocklistActivity extends AbstractSearchableListItemActivity implements OnUpdateBlocklist {
     private Account account = null;

@@ -7,7 +7,7 @@ import com.google.common.collect.ComparisonChain;
 import eu.siacs.conversations.services.AvatarService;
 import eu.siacs.conversations.utils.LanguageUtils;
 import eu.siacs.conversations.utils.UIHelper;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 public class Room implements AvatarService.Avatarable, Comparable<Room> {
 

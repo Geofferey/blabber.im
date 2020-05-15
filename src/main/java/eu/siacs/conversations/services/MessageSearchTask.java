@@ -48,7 +48,7 @@ import eu.siacs.conversations.ui.interfaces.OnSearchResultsAvailable;
 import eu.siacs.conversations.utils.Cancellable;
 import eu.siacs.conversations.utils.MessageUtils;
 import eu.siacs.conversations.utils.ReplacingSerialSingleThreadExecutor;
-import rocks.xmpp.addr.Jid;
+import eu.siacs.conversations.xmpp.Jid;
 
 public class MessageSearchTask implements Runnable, Cancellable {
 
