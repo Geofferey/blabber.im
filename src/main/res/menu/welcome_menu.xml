@@ -8,4 +8,10 @@
         android:orderInCategory="10"
         android:title="@string/scan_qr_code"
         android:visible="@bool/show_qr_code_scan" />
+
+    <item
+        android:id="@+id/action_add_account_with_cert"
+        android:title="@string/action_add_account_with_certificate"
+        android:visible="true"
+        app:showAsAction="never" />
 </menu>
