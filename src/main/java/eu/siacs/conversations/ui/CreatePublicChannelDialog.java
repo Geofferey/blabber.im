@@ -46,10 +46,11 @@ public class CreatePublicChannelDialog extends DialogFragment implements OnBacke
     private boolean skipTetxWatcher = false;
     private static final SecureRandom RANDOM = new SecureRandom();
 
-    public static CreatePublicChannelDialog newInstance(List<String> accounts) {
+    public static CreatePublicChannelDialog newInstance(List<String> accounts, boolean multipleAccounts) {
         CreatePublicChannelDialog dialog = new CreatePublicChannelDialog();
         Bundle bundle = new Bundle();
         bundle.putStringArrayList(ACCOUNTS_LIST_KEY, (ArrayList<String>) accounts);
+        bundle.putBoolean(MULTIPLE_ACCOUNTS, multipleAccounts);
         dialog.setArguments(bundle);
         return dialog;
     }

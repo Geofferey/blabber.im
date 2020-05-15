@@ -564,7 +564,7 @@ public class StartConversationActivity extends XmppActivity implements XmppConne
             ft.remove(prev);
         }
         ft.addToBackStack(null);
-        CreatePublicChannelDialog dialog = CreatePublicChannelDialog.newInstance(mActivatedAccounts);
+        CreatePublicChannelDialog dialog = CreatePublicChannelDialog.newInstance(mActivatedAccounts, xmppConnectionService.multipleAccounts());
         dialog.show(ft, FRAGMENT_TAG_DIALOG);
     }
 
