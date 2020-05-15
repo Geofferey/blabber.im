@@ -518,9 +518,9 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
         final User self = mucOptions.getSelf();
         String account;
         if (Config.DOMAIN_LOCK != null) {
-            account = mConversation.getAccount().getJid().getLocal();
+            account = mConversation.getAccount().getJid().getEscapedLocal();
         } else {
-            account = mConversation.getAccount().getJid().asBareJid().toString();
+            account = mConversation.getAccount().getJid().asBareJid().toEscapedString();
         }
         setTitle(mucOptions.isPrivateAndNonAnonymous() ? R.string.conference_details : R.string.channel_details);
         this.binding.editMucNameButton.setVisibility((self.getAffiliation().ranks(MucOptions.Affiliation.OWNER) || mucOptions.canChangeSubject()) ? View.VISIBLE : View.INVISIBLE);
