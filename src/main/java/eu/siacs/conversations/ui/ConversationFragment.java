@@ -1139,6 +1139,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         final MenuItem menuOngoingCall = menu.findItem(R.id.action_ongoing_call);
         final MenuItem menuVideoCall = menu.findItem(R.id.action_video_call);
         final MenuItem menuMediaBrowser = menu.findItem(R.id.action_mediabrowser);
+        final MenuItem menuTogglePinned = menu.findItem(R.id.action_toggle_pinned);
 
         if (conversation != null) {
             if (conversation.getMode() == Conversation.MODE_MULTI) {
@@ -1179,6 +1180,11 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             menuSearchUpdates.setVisible(false);
             ConversationMenuConfigurator.configureAttachmentMenu(conversation, menu, activity.xmppConnectionService.getAttachmentChoicePreference(), hasAttachments);
             ConversationMenuConfigurator.configureEncryptionMenu(conversation, menu, activity);
+            if (conversation.getBooleanAttribute(Conversation.ATTRIBUTE_PINNED_ON_TOP, false)) {
+                menuTogglePinned.setTitle(R.string.remove_from_favorites);
+            } else {
+                menuTogglePinned.setTitle(R.string.add_to_favorites);
+            }
         } else {
             menuNeedHelp.setVisible(true);
             menuSearchUpdates.setVisible(true);
@@ -1520,6 +1526,9 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             case R.id.action_ongoing_call:
                 returnToOngoingCall();
                 break;
+            case R.id.action_toggle_pinned:
+                togglePinned();
+                break;
             default:
                 break;
         }
@@ -1546,6 +1555,12 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             startActivity(intent);
         }
 
+    }
+
+    private void togglePinned() {
+        final boolean pinned = conversation.getBooleanAttribute(Conversation.ATTRIBUTE_PINNED_ON_TOP, false);
+        conversation.setAttribute(Conversation.ATTRIBUTE_PINNED_ON_TOP, !pinned);
+        activity.xmppConnectionService.updateConversation(conversation);
     }
 
     private void checkPermissionAndTriggerAudioCall() {

@@ -6,6 +6,8 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import com.google.common.collect.ComparisonChain;
+
 
 import net.java.otr4j.OtrException;
 import net.java.otr4j.crypto.OtrCryptoException;
@@ -58,9 +60,9 @@ public class Conversation extends AbstractEntity implements Blockable, Comparabl
 
     public static final String ATTRIBUTE_MUTED_TILL = "muted_till";
     public static final String ATTRIBUTE_ALWAYS_NOTIFY = "always_notify";
-    public static final String ATTRIBUTE_PUSH_NODE = "push_node";
     public static final String ATTRIBUTE_LAST_CLEAR_HISTORY = "last_clear_history";
     public static final String ATTRIBUTE_FORMERLY_PRIVATE_NON_ANONYMOUS = "formerly_private_non_anonymous";
+    public static final String ATTRIBUTE_PINNED_ON_TOP = "pinned_on_top";
     static final String ATTRIBUTE_MUC_PASSWORD = "muc_password";
     static final String ATTRIBUTE_MEMBERS_ONLY = "members_only";
     static final String ATTRIBUTE_MODERATED = "moderated";
@@ -549,7 +551,10 @@ public class Conversation extends AbstractEntity implements Blockable, Comparabl
 
     @Override
     public int compareTo(@NonNull Conversation another) {
-        return Long.compare(another.getSortableTime(), getSortableTime());
+        return ComparisonChain.start()
+                .compareFalseFirst(another.getBooleanAttribute(ATTRIBUTE_PINNED_ON_TOP, false), getBooleanAttribute(ATTRIBUTE_PINNED_ON_TOP,false))
+                .compare(another.getSortableTime(), getSortableTime())
+                .result();
     }
 
     private long getSortableTime() {

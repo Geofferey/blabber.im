@@ -165,6 +165,7 @@
         <item name="icon_enable_undecided_device" type="reference">
             @drawable/ic_new_releases_black_24dp
         </item>
+        <item name="icon_pinned_on_top" type="reference">@drawable/ic_star_black_24dp</item>
         <item name="ic_settings_about" type="reference">@drawable/ic_help_black_24dp</item>
     </style>
 
@@ -323,6 +324,7 @@
         <item name="icon_enable_undecided_device" type="reference">
             @drawable/ic_new_releases_white_24dp
         </item>
+        <item name="icon_pinned_on_top" type="reference">@drawable/ic_star_white_24dp</item>
 
         <!-- settings-->
         <item name="ic_settings_ui" type="reference">@drawable/ic_image_white_24dp</item>
