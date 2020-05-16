@@ -72,6 +72,8 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
 
     private static final int CALL_DURATION_UPDATE_INTERVAL = 333;
 
+    private boolean shouldAllowBack = false;
+
     private static final List<RtpEndUserState> END_CARD = Arrays.asList(
             RtpEndUserState.APPLICATION_ERROR,
             RtpEndUserState.DECLINED_OR_BUSY,
@@ -372,8 +374,9 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
 
     @Override
     public void onBackPressed() {
-        endCall();
-        super.onBackPressed();
+        if (shouldAllowBack) {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -475,6 +478,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
     private void updateStateDisplay(final RtpEndUserState state, final Set<Media> media) {
         switch (state) {
             case INCOMING_CALL:
+                shouldAllowBack = false;
                 Preconditions.checkArgument(media.size() > 0, "Media must not be empty");
                 if (media.contains(Media.VIDEO)) {
                     setTitle(R.string.rtp_state_incoming_video_call);
@@ -483,36 +487,47 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
                 }
                 break;
             case CONNECTING:
+                shouldAllowBack = false;
                 setTitle(R.string.rtp_state_connecting);
                 break;
             case CONNECTED:
+                shouldAllowBack = false;
                 setTitle(R.string.rtp_state_connected);
                 break;
             case ACCEPTING_CALL:
+                shouldAllowBack = false;
                 setTitle(R.string.rtp_state_accepting_call);
                 break;
             case ENDING_CALL:
+                shouldAllowBack = false;
                 setTitle(R.string.rtp_state_ending_call);
                 break;
             case FINDING_DEVICE:
+                shouldAllowBack = false;
                 setTitle(R.string.rtp_state_finding_device);
                 break;
             case RINGING:
+                shouldAllowBack = false;
                 setTitle(R.string.rtp_state_ringing);
                 break;
             case DECLINED_OR_BUSY:
+                shouldAllowBack = true;
                 setTitle(R.string.rtp_state_declined_or_busy);
                 break;
             case CONNECTIVITY_ERROR:
+                shouldAllowBack = true;
                 setTitle(R.string.rtp_state_connectivity_error);
                 break;
             case RETRACTED:
+                shouldAllowBack = false;
                 setTitle(R.string.rtp_state_retracted);
                 break;
             case APPLICATION_ERROR:
+                shouldAllowBack = true;
                 setTitle(R.string.rtp_state_application_failure);
                 break;
             case ENDED:
+                shouldAllowBack = true;
                 throw new IllegalStateException("Activity should have called finishAndReleaseWakeLock();");
             default:
                 throw new IllegalStateException(String.format("State %s has not been handled in UI", state));
