@@ -169,6 +169,9 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
     private OnClickListener mChangeConferenceSettings = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            if (mConversation == null) {
+                return;
+            }
             final MucOptions mucOptions = mConversation.getMucOptions();
             final AlertDialog.Builder builder = new AlertDialog.Builder(ConferenceDetailsActivity.this);
             MucConfiguration configuration = MucConfiguration.get(ConferenceDetailsActivity.this, mAdvancedMode, mucOptions);
@@ -213,28 +216,40 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
         this.binding.addContactButton.setVisibility(View.GONE);
         setSupportActionBar((Toolbar) binding.toolbar);
         configureActionBar(getSupportActionBar());
-        this.binding.editNickButton.setOnClickListener(v -> quickEdit(mConversation.getMucOptions().getActualNick(),
-                R.string.nickname,
-                value -> {
-                    if (xmppConnectionService.renameInMuc(mConversation, value, renameCallback)) {
-                        return null;
-                    } else {
-                        return getString(R.string.invalid_muc_nick);
-                    }
-                }));
+        this.binding.editNickButton.setOnClickListener(v -> {
+            try {
+                quickEdit(mConversation.getMucOptions().getActualNick(),
+                        R.string.nickname,
+                        value -> {
+                            if (xmppConnectionService.renameInMuc(mConversation, value, renameCallback)) {
+                                return null;
+                            } else {
+                                return getString(R.string.invalid_muc_nick);
+                            }
+                        });
+            } catch (Exception e) {
+                ToastCompat.makeText(this, R.string.unable_to_perform_this_action, Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        });
         this.binding.detailsMucAvatar.setOnClickListener(v -> {
-            final MucOptions mucOptions = mConversation.getMucOptions();
-            if (!mucOptions.hasVCards()) {
-                ToastCompat.makeText(this, R.string.host_does_not_support_group_chat_avatars, Toast.LENGTH_SHORT).show();
-                return;
+            try {
+                final MucOptions mucOptions = mConversation.getMucOptions();
+                if (!mucOptions.hasVCards()) {
+                    ToastCompat.makeText(this, R.string.host_does_not_support_group_chat_avatars, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!mucOptions.getSelf().getAffiliation().ranks(MucOptions.Affiliation.OWNER)) {
+                    ToastCompat.makeText(this, R.string.only_the_owner_can_change_group_chat_avatar, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                final Intent intent = new Intent(this, PublishGroupChatProfilePictureActivity.class);
+                intent.putExtra("uuid", mConversation.getUuid());
+                startActivity(intent);
+            } catch (Exception e) {
+                ToastCompat.makeText(this, R.string.unable_to_perform_this_action, Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
             }
-            if (!mucOptions.getSelf().getAffiliation().ranks(MucOptions.Affiliation.OWNER)) {
-                ToastCompat.makeText(this, R.string.only_the_owner_can_change_group_chat_avatar, Toast.LENGTH_SHORT).show();
-                return;
-            }
-            final Intent intent = new Intent(this, PublishGroupChatProfilePictureActivity.class);
-            intent.putExtra("uuid", mConversation.getUuid());
-            startActivity(intent);
         });
         this.binding.detailsMucAvatar.setOnLongClickListener(v -> {
             final ImageView view = new ImageView(ConferenceDetailsActivity.this);
