@@ -17,7 +17,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -59,6 +61,7 @@ import eu.siacs.conversations.ui.ConversationsActivity;
 import eu.siacs.conversations.ui.EditAccountActivity;
 import eu.siacs.conversations.ui.RtpSessionActivity;
 import eu.siacs.conversations.ui.TimePreference;
+import eu.siacs.conversations.ui.util.StyledAttributes;
 import eu.siacs.conversations.utils.AccountUtils;
 import eu.siacs.conversations.utils.Compatibility;
 import eu.siacs.conversations.utils.EmojiWrapper;
@@ -377,14 +380,20 @@ public class NotificationService {
         builder.setFullScreenIntent(pendingIntent, true);
         builder.setContentIntent(pendingIntent); //old androids need this?
         builder.setOngoing(true);
+        final String dismissString = mXmppConnectionService.getString(R.string.dismiss_call);
+        final SpannableString dismiss = new SpannableString(dismissString);
+        dismiss.setSpan(new ForegroundColorSpan(mXmppConnectionService.getResources().getColor(R.color.red700)), 0, dismissString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.addAction(new NotificationCompat.Action.Builder(
                 R.drawable.ic_call_end_white_48dp,
-                mXmppConnectionService.getString(R.string.dismiss_call),
+                dismiss,
                 createCallAction(id.sessionId, XmppConnectionService.ACTION_DISMISS_CALL, 102))
                 .build());
+        final String acceptString = mXmppConnectionService.getString(R.string.answer_call);
+        final SpannableString accept = new SpannableString(acceptString);
+        accept.setSpan(new ForegroundColorSpan(mXmppConnectionService.getResources().getColor(R.color.green500)), 0, acceptString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.addAction(new NotificationCompat.Action.Builder(
                 R.drawable.ic_call_white_24dp,
-                mXmppConnectionService.getString(R.string.answer_call),
+                accept,
                 createPendingRtpSession(id, RtpSessionActivity.ACTION_ACCEPT_CALL, 103))
                 .build());
         modifyIncomingCall(builder);
