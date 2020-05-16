@@ -1189,6 +1189,9 @@ public class JingleRtpConnection extends AbstractJingleConnection implements Web
 
     private void writeLogMessageMissed() {
         this.message.setBody(new RtpSessionStatus(false, 0).toString());
+        if (this.state != State.REJECTED) {
+            xmppConnectionService.getNotificationService().push(message);
+        }
         this.writeMessage();
     }
 
