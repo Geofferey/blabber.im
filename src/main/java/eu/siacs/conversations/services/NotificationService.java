@@ -363,7 +363,13 @@ public class NotificationService {
         if (systemAccount != null) {
             builder.addPerson(systemAccount.toString());
         }
-        builder.setContentText(id.account.getRoster().getContact(id.with).getDisplayName());
+        String string = id.account.getRoster().getContact(id.with).getDisplayName();
+        if (mXmppConnectionService.multipleAccounts()) {
+            string += " (";
+            string += id.account.getJid().asBareJid().toString();
+            string += ")";
+        }
+        builder.setContentText(string);
         builder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
         builder.setPriority(NotificationCompat.PRIORITY_HIGH);
         builder.setCategory(NotificationCompat.CATEGORY_CALL);

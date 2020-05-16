@@ -84,6 +84,18 @@
                 android:layout_centerInParent="true"
                 app:riv_corner_radius="@dimen/incoming_call_radius" />
 
+            <TextView
+                android:id="@+id/details_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:gravity="bottom"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="8dp"
+                android:text="@string/using_account"
+                android:textAppearance="@style/TextAppearance.Conversations.Caption" />
+
         </RelativeLayout>
 
 

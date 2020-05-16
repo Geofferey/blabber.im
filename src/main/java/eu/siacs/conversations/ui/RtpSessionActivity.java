@@ -271,6 +271,18 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
         final Account account = extractAccount(intent);
         final Jid with = Jid.of(intent.getStringExtra(EXTRA_WITH));
         final String sessionId = intent.getStringExtra(EXTRA_SESSION_ID);
+        String accountname;
+        if (Config.DOMAIN_LOCK != null) {
+            accountname = account.getJid().getLocal();
+        } else {
+            accountname = account.getJid().asBareJid().toString();
+        }
+        binding.detailsAccount.setText(getString(R.string.using_account, accountname));
+        if (xmppConnectionService.multipleAccounts()) {
+            binding.detailsAccount.setVisibility(View.VISIBLE);
+        } else {
+            binding.detailsAccount.setVisibility(View.GONE);
+        }
         if (sessionId != null) {
             if (initializeActivityWithRunningRtpSession(account, with, sessionId)) {
                 return;
