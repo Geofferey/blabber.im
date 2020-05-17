@@ -139,7 +139,7 @@ public class Contact implements ListItem, Blockable {
         } else if (jid.getLocal() != null) {
             return JidHelper.localPartOrFallback(jid);
         } else {
-            return jid.getDomain();
+            return jid.getDomain().toEscapedString();
         }
     }
 
@@ -461,7 +461,7 @@ public class Contact implements ListItem, Blockable {
     }
 
     public String getServer() {
-        return getJid().getDomain();
+        return getJid().getDomain().toEscapedString();
     }
 
     public boolean setAvatar(Avatar avatar) {

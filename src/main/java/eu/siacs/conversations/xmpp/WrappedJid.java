@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import org.jxmpp.jid.Jid;
 import org.jxmpp.jid.impl.JidCreate;
-import org.jxmpp.jid.parts.Domainpart;
 import org.jxmpp.jid.parts.Localpart;
 import org.jxmpp.jid.parts.Resourcepart;
 import org.jxmpp.stringprep.XmppStringprepException;
@@ -64,9 +63,8 @@ public class WrappedJid implements eu.siacs.conversations.xmpp.Jid {
     }
 
     @Override
-    public String getDomain() {
-        final Domainpart domainpart = inner.getDomain();
-        return domainpart == null ? null : domainpart.toString();
+    public eu.siacs.conversations.xmpp.Jid getDomain() {
+        return new WrappedJid(inner.asDomainBareJid());
     }
 
     @Override

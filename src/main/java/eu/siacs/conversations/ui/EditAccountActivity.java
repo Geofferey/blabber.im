@@ -515,7 +515,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
         if (this.binding.accountRegisterNew.isChecked() && this.binding.accountJid.getText().length() > 0 && !this.binding.accountJid.getText().toString().contains("@")) {
             try {
                 final String jid = this.binding.accountJid.getText().toString();
-                if (!mUsernameMode && Jid.of(jid).getDomain().toLowerCase().equals("pix-art.de")) {
+                if (!mUsernameMode && Jid.of(jid).getDomain().toEscapedString().toLowerCase().equals("pix-art.de")) {
                     this.binding.showPrivacyPolicy.setVisibility(View.VISIBLE);
                     this.binding.showTermsOfUse.setVisibility(View.VISIBLE);
                 }
@@ -565,7 +565,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                     if (!accountInfoEdited) {
                         this.binding.saveButton.setEnabled(false);
                     }
-                    if (!mUsernameMode && Jid.of(mAccount.getJid()).getDomain().toLowerCase().equals("pix-art.de")) {
+                    if (!mUsernameMode && Jid.of(mAccount.getJid()).getDomain().toEscapedString().toLowerCase().equals("pix-art.de")) {
                         this.binding.showPrivacyPolicy.setVisibility(View.VISIBLE);
                         this.binding.showTermsOfUse.setVisibility(View.VISIBLE);
                     }
@@ -895,7 +895,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
 
     private String getUserModeDomain() {
         if (mAccount != null && mAccount.getJid().getDomain() != null) {
-            return mAccount.getJid().getDomain();
+            return mAccount.getServer();
         } else {
             return Config.DOMAIN_LOCK;
         }
@@ -963,7 +963,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                 builder.setNegativeButton(R.string.cancel, null);
                 builder.setPositiveButton(R.string.confirm, (dialog, which) -> {
                     try {
-                        Uri uri = Uri.parse(getSupportSite(mAccount.getJid().getDomain()));
+                        Uri uri = Uri.parse(getSupportSite(mAccount.getJid().getDomain().toEscapedString()));
                         final Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                     } catch (Exception e) {

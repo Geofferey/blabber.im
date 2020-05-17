@@ -1025,7 +1025,7 @@ public abstract class XmppActivity extends ActionBarActivity {
         if (!xmppConnectionService.multipleAccounts()) {
             Account mAccount = xmppConnectionService.getAccounts().get(0);
             String user = Jid.ofEscaped(mAccount.getJid()).getLocal();
-            String domain = Jid.ofEscaped(mAccount.getJid()).getDomain();
+            String domain = Jid.ofEscaped(mAccount.getJid()).getDomain().toEscapedString();
             String inviteURL;
             try {
                 inviteURL = new getAdHocInviteUri(mAccount.getXmppConnection(), mAccount).execute().get();
@@ -1069,7 +1069,7 @@ public abstract class XmppActivity extends ActionBarActivity {
                         String selection = spinner.getSelectedItem().toString();
                         Account mAccount = xmppConnectionService.findAccountByJid(Jid.of(selection).asBareJid());
                         String user = Jid.of(mAccount.getJid()).getLocal();
-                        String domain = Jid.of(mAccount.getJid()).getDomain();
+                        String domain = Jid.of(mAccount.getJid()).getDomain().toEscapedString();
                         String inviteURL;
                         try {
                             inviteURL = new getAdHocInviteUri(mAccount.getXmppConnection(), mAccount).execute().get();
@@ -1222,7 +1222,7 @@ public abstract class XmppActivity extends ActionBarActivity {
     protected Account extractAccount(Intent intent) {
 		final String jid = intent != null ? intent.getStringExtra(EXTRA_ACCOUNT) : null;
         try {
-            return jid != null ? xmppConnectionService.findAccountByJid(Jid.of(jid)) : null;
+            return jid != null ? xmppConnectionService.findAccountByJid(Jid.ofEscaped(jid)) : null;
         } catch (IllegalArgumentException e) {
             return null;
         }
