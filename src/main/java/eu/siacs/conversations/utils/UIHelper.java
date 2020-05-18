@@ -552,7 +552,7 @@ public class UIHelper {
                     if (jid.getLocal() != null) {
                         return jid.getLocal();
                     } else {
-                        return Jid.ofDomain(jid.getDomain()).toString();
+                        return jid.getDomain().toString();
                     }
                 }
             }
