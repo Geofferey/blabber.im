@@ -1981,11 +1981,7 @@ public class XmppConnectionService extends Service {
         for (Bookmark bookmark : account.getBookmarks()) {
             storage.addChild(bookmark);
         }
-        pushNodeAndEnforcePublishOptions(account, Namespace.BOOKMARKS, storage, PublishOptions.persistentWhitelistAccess());
-    }
-
-    private void pushNodeAndEnforcePublishOptions(final Account account, final String node, final Element element, final Bundle options) {
-        pushNodeAndEnforcePublishOptions(account, node, element, null, options, true);
+        pushNodeAndEnforcePublishOptions(account, Namespace.BOOKMARKS, storage, "current", PublishOptions.persistentWhitelistAccess());
 
     }
 
