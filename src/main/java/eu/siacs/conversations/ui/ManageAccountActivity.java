@@ -87,7 +87,7 @@ public class ManageAccountActivity extends XmppActivity implements OnAccountUpda
             String jid = savedInstanceState.getString(STATE_SELECTED_ACCOUNT);
             if (jid != null) {
                 try {
-                    this.selectedAccountJid = Jid.of(jid);
+                    this.selectedAccountJid = Jid.ofEscaped(jid);
                 } catch (IllegalArgumentException e) {
                     this.selectedAccountJid = null;
                 }
@@ -113,7 +113,7 @@ public class ManageAccountActivity extends XmppActivity implements OnAccountUpda
     @Override
     public void onSaveInstanceState(final Bundle savedInstanceState) {
         if (selectedAccount != null) {
-            savedInstanceState.putString(STATE_SELECTED_ACCOUNT, selectedAccount.getJid().asBareJid().toString());
+            savedInstanceState.putString(STATE_SELECTED_ACCOUNT, selectedAccount.getJid().asBareJid().toEscapedString());
         }
         super.onSaveInstanceState(savedInstanceState);
     }
@@ -272,7 +272,7 @@ public class ManageAccountActivity extends XmppActivity implements OnAccountUpda
     private void publishAvatar(Account account) {
         Intent intent = new Intent(getApplicationContext(),
                 PublishProfilePictureActivity.class);
-        intent.putExtra(EXTRA_ACCOUNT, account.getJid().toString());
+        intent.putExtra(EXTRA_ACCOUNT, account.getJid().asBareJid().toEscapedString());
         startActivity(intent);
         overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
     }

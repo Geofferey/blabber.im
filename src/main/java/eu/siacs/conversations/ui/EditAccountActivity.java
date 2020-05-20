@@ -437,7 +437,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
         public void onClick(final View view) {
             if (mAccount != null) {
                 final Intent intent = new Intent(getApplicationContext(), PublishProfilePictureActivity.class);
-                intent.putExtra(EXTRA_ACCOUNT, mAccount.getJid().asBareJid().toString());
+                intent.putExtra(EXTRA_ACCOUNT, mAccount.getJid().asBareJid().toEscapedString());
                 startActivity(intent);
                 overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
             }
@@ -458,7 +458,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                 intent.putExtra(EXTRA_ACCOUNT, mAccount.getJid().asBareJid().toEscapedString());
             } else {
                 intent = new Intent(getApplicationContext(), PublishProfilePictureActivity.class);
-                intent.putExtra(EXTRA_ACCOUNT, mAccount.getJid().asBareJid().toString());
+                intent.putExtra(EXTRA_ACCOUNT, mAccount.getJid().asBareJid().toEscapedString());
                 intent.putExtra("setup", true);
             }
             if (wasFirstAccount) {
@@ -767,7 +767,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
             recreate();
         } else if (intent != null) {
             try {
-                this.jidToEdit = Jid.of(intent.getStringExtra("jid"));
+                this.jidToEdit = Jid.ofEscaped(intent.getStringExtra("jid"));
             } catch (final IllegalArgumentException ignored) {
                 this.jidToEdit = null;
             } catch (final NullPointerException ignored) {
@@ -836,7 +836,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
     @Override
     public void onSaveInstanceState(final Bundle savedInstanceState) {
         if (mAccount != null) {
-            savedInstanceState.putString("account", mAccount.getJid().asBareJid().toString());
+            savedInstanceState.putString("account", mAccount.getJid().asBareJid().toEscapedString());
             savedInstanceState.putBoolean("existing", mExisting);
             savedInstanceState.putBoolean("initMode", mInitMode);
             savedInstanceState.putBoolean("showMoreTable", binding.serverInfoMore.getVisibility() == View.VISIBLE);
@@ -848,7 +848,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
         boolean init = true;
         if (mSavedInstanceAccount != null) {
             try {
-                this.mAccount = xmppConnectionService.findAccountByJid(Jid.of(mSavedInstanceAccount));
+                this.mAccount = xmppConnectionService.findAccountByJid(Jid.ofEscaped(mSavedInstanceAccount));
                 this.mInitMode = mSavedInstanceInit;
                 init = false;
             } catch (IllegalArgumentException e) {
@@ -925,7 +925,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                 break;
             case R.id.action_show_block_list:
                 final Intent showBlocklistIntent = new Intent(this, BlocklistActivity.class);
-                showBlocklistIntent.putExtra(EXTRA_ACCOUNT, mAccount.getJid().toString());
+                showBlocklistIntent.putExtra(EXTRA_ACCOUNT, mAccount.getJid().toEscapedString());
                 startActivity(showBlocklistIntent);
                 overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
                 break;
@@ -1012,7 +1012,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
 
     private void gotoChangePassword(String newPassword) {
         final Intent changePasswordIntent = new Intent(this, ChangePasswordActivity.class);
-        changePasswordIntent.putExtra(EXTRA_ACCOUNT, mAccount.getJid().toString());
+        changePasswordIntent.putExtra(EXTRA_ACCOUNT, mAccount.getJid().toEscapedString());
         if (newPassword != null) {
             changePasswordIntent.putExtra("password", newPassword);
         }
