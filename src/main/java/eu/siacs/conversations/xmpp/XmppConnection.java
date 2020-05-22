@@ -327,7 +327,7 @@ public class XmppConnection implements Runnable {
                     return;
                 }
                 if (results == null) {
-                    Log.e(Config.LOGTAG,account.getJid().asBareJid()+": Resolver results were empty");
+                    Log.e(Config.LOGTAG, account.getJid().asBareJid() + ": Resolver results were empty");
                     return;
                 }
                 final Resolver.Result storedBackupResult;
@@ -354,7 +354,7 @@ public class XmppConnection implements Runnable {
                     // if tls is true, encryption is implied and must not be started
                     features.encryptionEnabled = results.isDirectTls();
                     verifiedHostname = results.isAuthenticated() ? results.getHostname().toString() : null;
-                    Log.d(Config.LOGTAG,"verified hostname " + verifiedHostname);
+                    Log.d(Config.LOGTAG, "verified hostname " + verifiedHostname);
                     Log.d(Config.LOGTAG, account.getJid().asBareJid().toString()
                             + ": using values from resolver " + results.toString());
 
@@ -918,7 +918,7 @@ public class XmppConnection implements Runnable {
             }
             tagWriter.writeElement(auth);
         } else {
-            Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": unable to find SASL mechanism " + saslMechanism.toString());
+            Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": unable to find supported SASL mechanism in " + mechanisms);
             throw new StateChangingException(Account.State.INCOMPATIBLE_SERVER);
         }
     }
@@ -1447,11 +1447,30 @@ public class XmppConnection implements Runnable {
             final String text = streamError.findChildContent("text");
             if (text != null) {
                 Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": policy violation. " + text);
+                failPendingMessages(text);
             }
             throw new StateChangingException(Account.State.POLICY_VIOLATION);
         } else {
             Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": stream error " + streamError.toString());
             throw new StateChangingException(Account.State.STREAM_ERROR);
+        }
+    }
+
+    private void failPendingMessages(final String error) {
+        synchronized (this.mStanzaQueue) {
+            for (int i = 0; i < mStanzaQueue.size(); ++i) {
+                final AbstractAcknowledgeableStanza stanza = mStanzaQueue.valueAt(i);
+                if (stanza instanceof MessagePacket) {
+                    final MessagePacket packet = (MessagePacket) stanza;
+                    final String id = packet.getId();
+                    final Jid to = packet.getTo();
+                    mXmppConnectionService.markMessage(account,
+                            to.asBareJid(),
+                            id,
+                            Message.STATUS_SEND_FAILED,
+                            error);
+                }
+            }
         }
     }
 
@@ -2012,7 +2031,7 @@ public class XmppConnection implements Runnable {
         }
 
         public boolean externalServiceDiscovery() {
-            return hasDiscoFeature(account.getDomain(),Namespace.EXTERNAL_SERVICE_DISCOVERY);
+            return hasDiscoFeature(account.getDomain(), Namespace.EXTERNAL_SERVICE_DISCOVERY);
         }
     }
 }
