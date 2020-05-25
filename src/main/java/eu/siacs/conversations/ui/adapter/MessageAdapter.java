@@ -90,9 +90,9 @@ import eu.siacs.conversations.utils.RichPreview;
 import eu.siacs.conversations.utils.StylingHelper;
 import eu.siacs.conversations.utils.TimeFrameUtils;
 import eu.siacs.conversations.utils.UIHelper;
-import eu.siacs.conversations.xmpp.mam.MamReference;
 import eu.siacs.conversations.xmpp.Jid;
 import me.drakeet.support.toast.ToastCompat;
+import eu.siacs.conversations.xmpp.mam.MamReference;
 import pl.droidsonroids.gif.GifImageView;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -155,6 +155,10 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
 
     public void flagScreenOff() {
         activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+
+    public void setVolumeControl(final int stream) {
+        activity.setVolumeControlStream(stream);
     }
 
     public void setOnContactPictureClicked(OnContactPictureClicked listener) {
