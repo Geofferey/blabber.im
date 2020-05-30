@@ -110,6 +110,8 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
     public static final String EXTRA_USER = "user";
     public static final String EXTRA_IS_PRIVATE_MESSAGE = "pm";
     public static final String EXTRA_DO_NOT_APPEND = "do_not_append";
+    public static final String EXTRA_POST_INIT_ACTION = "post_init_action";
+    public static final String POST_ACTION_RECORD_VOICE = "record_voice";
     public static final String ACTION_DESTROY_MUC = "eu.siacs.conversations.DESTROY_MUC";
     public static final int REQUEST_OPEN_MESSAGE = 0x9876;
     public static final int REQUEST_PLAY_PAUSE = 0x5432;
