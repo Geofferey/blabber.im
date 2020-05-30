@@ -125,11 +125,13 @@ import eu.siacs.conversations.utils.Compatibility;
 import eu.siacs.conversations.utils.GeoHelper;
 import eu.siacs.conversations.utils.MenuDoubleTabUtil;
 import eu.siacs.conversations.utils.MessageUtils;
+import eu.siacs.conversations.utils.Namespace;
 import eu.siacs.conversations.utils.NickValidityChecker;
 import eu.siacs.conversations.utils.Patterns;
 import eu.siacs.conversations.utils.QuickLoader;
 import eu.siacs.conversations.utils.StylingHelper;
 import eu.siacs.conversations.utils.UIHelper;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.XmppConnection;
 import eu.siacs.conversations.xmpp.chatstate.ChatState;
 import eu.siacs.conversations.xmpp.jingle.AbstractJingleConnection;
@@ -139,7 +141,6 @@ import eu.siacs.conversations.xmpp.jingle.Media;
 import eu.siacs.conversations.xmpp.jingle.OngoingRtpSession;
 import eu.siacs.conversations.xmpp.jingle.RtpCapability;
 import me.drakeet.support.toast.ToastCompat;
-import eu.siacs.conversations.xmpp.Jid;
 
 import static eu.siacs.conversations.entities.Message.DELETED_MESSAGE_BODY;
 import static eu.siacs.conversations.ui.SettingsActivity.HIDE_YOU_ARE_NOT_PARTICIPATING;
@@ -1601,11 +1602,28 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             Toast.makeText(getActivity(), R.string.only_one_call_at_a_time, Toast.LENGTH_LONG).show();
             return;
         }
+
         final Contact contact = conversation.getContact();
+        if (contact.getPresences().anySupport(Namespace.JINGLE_MESSAGE)) {
+            triggerRtpSession(contact.getAccount(),contact.getJid().asBareJid(),action);
+        } else {
+            final RtpCapability.Capability capability;
+            if (action.equals(RtpSessionActivity.ACTION_MAKE_VIDEO_CALL)) {
+                capability = RtpCapability.Capability.VIDEO;
+            } else {
+                capability = RtpCapability.Capability.AUDIO;
+            }
+            PresenceSelector.selectFullJidForDirectRtpConnection(activity, contact, capability, fullJid -> {
+                triggerRtpSession(contact.getAccount(), fullJid, action);
+            });
+        }
+    }
+
+    private void triggerRtpSession(final Account account, final Jid with, final String action) {
         final Intent intent = new Intent(activity, RtpSessionActivity.class);
         intent.setAction(action);
-        intent.putExtra(RtpSessionActivity.EXTRA_ACCOUNT, contact.getAccount().getJid().toEscapedString());
-        intent.putExtra(RtpSessionActivity.EXTRA_WITH, contact.getJid().asBareJid().toEscapedString());
+        intent.putExtra(RtpSessionActivity.EXTRA_ACCOUNT, account.getJid().toEscapedString());
+        intent.putExtra(RtpSessionActivity.EXTRA_WITH, with.toEscapedString());
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

@@ -44,11 +44,29 @@ import eu.siacs.conversations.entities.Conversation;
 import eu.siacs.conversations.entities.Presences;
 import eu.siacs.conversations.utils.CryptoHelper;
 import eu.siacs.conversations.xmpp.Jid;
+import eu.siacs.conversations.xmpp.jingle.RtpCapability;
 
 public class PresenceSelector {
 
     public static void showPresenceSelectionDialog(Activity activity, final Conversation conversation, final OnPresenceSelected listener) {
         final Contact contact = conversation.getContact();
+        final String[] resourceArray = contact.getPresences().toResourceArray();
+        showPresenceSelectionDialog(activity, contact, resourceArray, fullJid -> {
+            conversation.setNextCounterpart(fullJid);
+            listener.onPresenceSelected();
+        });
+    }
+
+    public static void selectFullJidForDirectRtpConnection(final Activity activity, final Contact contact, final RtpCapability.Capability required, final OnFullJidSelected onFullJidSelected) {
+        final String[] resources = RtpCapability.filterPresences(contact, required);
+        if (resources.length == 1) {
+            onFullJidSelected.onFullJidSelected(contact.getJid().withResource(resources[0]));
+        } else {
+            showPresenceSelectionDialog(activity, contact, resources, onFullJidSelected);
+        }
+    }
+
+    private static void showPresenceSelectionDialog(final Activity activity, final Contact contact, final String[] resourceArray, final OnFullJidSelected onFullJidSelected) {
         final Presences presences = contact.getPresences();
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(activity.getString(R.string.choose_presence));
@@ -86,15 +104,12 @@ public class PresenceSelector {
                 selectedResource.get(),
                 (dialog, which) -> selectedResource.set(which));
         builder.setNegativeButton(R.string.cancel, null);
-        builder.setPositiveButton(R.string.ok, (dialog, which) -> {
-            try {
-                Jid next = Jid.of(contact.getJid().getLocal(), contact.getJid().getDomain(), resourceArray[selectedResource.get()]);
-                conversation.setNextCounterpart(next);
-            } catch (IllegalArgumentException e) {
-                conversation.setNextCounterpart(null);
-            }
-            listener.onPresenceSelected();
-        });
+        builder.setPositiveButton(
+                R.string.ok,
+                (dialog, which) -> onFullJidSelected.onFullJidSelected(
+                        Jid.of(contact.getJid().getLocal(), contact.getJid().getDomain(), resourceArray[selectedResource.get()])
+                )
+        );
         builder.create().show();
     }
 
@@ -131,5 +146,9 @@ public class PresenceSelector {
 
     public interface OnPresenceSelected {
         void onPresenceSelected();
+    }
+
+    public interface OnFullJidSelected {
+        void onFullJidSelected(Jid jid);
     }
 }
