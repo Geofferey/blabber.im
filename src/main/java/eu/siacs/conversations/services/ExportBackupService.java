@@ -18,6 +18,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import com.google.common.base.Strings;
 
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
@@ -107,7 +108,7 @@ public class ExportBackupService extends Service {
         return Arrays.asList(openIntent, amazeIntent, systemFallBack);
     }
 
-    private static void accountExport(SQLiteDatabase db, String uuid, PrintWriter writer) {
+    private static void accountExport(final SQLiteDatabase db, final String uuid, final PrintWriter writer) {
         final StringBuilder builder = new StringBuilder();
         final Cursor accountCursor = db.query(Account.TABLENAME, null, Account.UUID + "=?", new String[]{uuid}, null, null, null);
         while (accountCursor != null && accountCursor.moveToNext()) {
@@ -156,29 +157,28 @@ public class ExportBackupService extends Service {
         }
     }
 
-    public static byte[] getKey(String password, byte[] salt) {
+    public static byte[] getKey(final String password, final byte[] salt) throws InvalidKeySpecException {
+        final SecretKeyFactory factory;
         try {
-            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            return factory.generateSecret(new PBEKeySpec(password.toCharArray(), salt, 1024, 128)).getEncoded();
+            factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         } catch (NoSuchAlgorithmException e) {
-            throw new AssertionError(e);
-        } catch (InvalidKeySpecException e) {
-            throw new AssertionError(e);
+            throw new IllegalStateException(e);
         }
+        return factory.generateSecret(new PBEKeySpec(password.toCharArray(), salt, 1024, 128)).getEncoded();
     }
 
-    private static String cursorToString(String tablename, Cursor cursor, int max) {
-        return cursorToString(tablename, cursor, max, false);
+    private static String cursorToString(final String table, final Cursor cursor, final int max) {
+        return cursorToString(table, cursor, max, false);
     }
 
-    private static String cursorToString(final String tablename, final Cursor cursor, int max, boolean ignore) {
-        final boolean identities = SQLiteAxolotlStore.IDENTITIES_TABLENAME.equals(tablename);
+    private static String cursorToString(final String table, final Cursor cursor, int max, boolean ignore) {
+        final boolean identities = SQLiteAxolotlStore.IDENTITIES_TABLENAME.equals(table);
         StringBuilder builder = new StringBuilder();
         builder.append("INSERT ");
         if (ignore) {
             builder.append("OR IGNORE ");
         }
-        builder.append("INTO ").append(tablename).append("(");
+        builder.append("INTO ").append(table).append("(");
         int skipColumn = -1;
         for (int i = 0; i < cursor.getColumnCount(); ++i) {
             final String name = cursor.getColumnName(i);
@@ -258,7 +258,8 @@ public class ExportBackupService extends Service {
                 try {
                     files = export();
                     success = files != null;
-                } catch (Exception e) {
+                } catch (final Exception e) {
+                    Log.d(Config.LOGTAG, "unable to create backup", e);
                     success = false;
                     files = Collections.emptyList();
                 }
@@ -273,6 +274,8 @@ public class ExportBackupService extends Service {
                 stopSelf();
             }).start();
             return START_STICKY;
+        } else {
+            Log.d(Config.LOGTAG, "ExportBackupService. ignoring start command because already running");
         }
         return START_NOT_STICKY;
     }
@@ -293,7 +296,7 @@ public class ExportBackupService extends Service {
             cursor = db.rawQuery("select messages.* from messages join conversations on conversations.uuid=messages.conversationUuid where conversations.accountUuid=?", new String[]{uuid});
         }
         int size = cursor != null ? cursor.getCount() : 0;
-        Log.d(Config.LOGTAG, "exporting " + size + " messages");
+        Log.d(Config.LOGTAG, "exporting " + size + " messages for account " + uuid);
         int i = 0;
         int p = 0;
         while (cursor != null && cursor.moveToNext()) {
@@ -334,11 +337,14 @@ public class ExportBackupService extends Service {
             }
         }
         final List<File> files = new ArrayList<>();
-        for (Account account : this.mAccounts) {
+        Log.d(Config.LOGTAG, "starting backup for " + max + " accounts");
+        for (final Account account : this.mAccounts) {
             final String password = account.getPassword();
-            if (password.isEmpty() || password.equals("")) {
-                return null;
+            if (Strings.nullToEmpty(password).trim().isEmpty()) {
+                Log.d(Config.LOGTAG, String.format("skipping backup for %s because password is empty. unable to encrypt", account.getJid().asBareJid()));
+                continue;
             }
+            Log.d(Config.LOGTAG, String.format("exporting data for account %s (%s)", account.getJid().asBareJid(), account.getUuid()));
             final byte[] IV = new byte[12];
             final byte[] salt = new byte[16];
             secureRandom.nextBytes(IV);
@@ -347,8 +353,9 @@ public class ExportBackupService extends Service {
             final Progress progress = new Progress(mBuilder, max, count);
             final File file = new File(FileBackend.getBackupDirectory() + account.getJid().asBareJid().toEscapedString() + ".ceb");
             files.add(file);
-            if (file.getParentFile().mkdirs()) {
-                Log.d(Config.LOGTAG, "created backup directory " + file.getParentFile().getAbsolutePath());
+            final File directory = file.getParentFile();
+            if (directory != null && directory.mkdirs()) {
+                Log.d(Config.LOGTAG, "created backup directory " + directory.getAbsolutePath());
             }
             final FileOutputStream fileOutputStream = new FileOutputStream(file);
             final DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream);
@@ -356,7 +363,7 @@ public class ExportBackupService extends Service {
             dataOutputStream.flush();
 
             final Cipher cipher = Compatibility.twentyEight() ? Cipher.getInstance(CIPHERMODE) : Cipher.getInstance(CIPHERMODE, PROVIDER);
-            byte[] key = getKey(password, salt);
+            final byte[] key = getKey(password, salt);
             Log.d(Config.LOGTAG, backupFileHeader.toString());
             SecretKeySpec keySpec = new SecretKeySpec(key, KEYTYPE);
             IvParameterSpec ivSpec = new IvParameterSpec(IV);
@@ -381,7 +388,7 @@ public class ExportBackupService extends Service {
         return files;
     }
 
-    private void notifySuccess(List<File> files, final boolean notify) {
+    private void notifySuccess(final List<File> files) {
         if (!notify) {
             return;
         }
@@ -506,7 +513,7 @@ public class ExportBackupService extends Service {
         return null;
     }
 
-    private class Progress {
+    private static class Progress {
         private final NotificationCompat.Builder builder;
         private final int max;
         private final int count;
