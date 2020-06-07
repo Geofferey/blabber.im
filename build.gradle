@@ -17,9 +17,8 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
-        maven {
-            url "https://jitpack.io"
-        }
+        maven { url "https://jitpack.io" }
+        maven { url "https://raw.github.com/abdularis/libwebrtc-android/repo/" }
     }
 }
 
@@ -27,9 +26,8 @@ repositories {
     google()
     jcenter()
     mavenCentral()
-    maven {
-        url "https://jitpack.io"
-    }
+    maven { url "https://jitpack.io" }
+    maven { url "https://raw.github.com/abdularis/libwebrtc-android/repo/" }
 }
 
 configurations {
@@ -90,6 +88,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.4'
     implementation 'com.google.guava:guava:28.2-android'
     implementation 'com.github.AppIntro:AppIntro:5.1.0'
+    //implementation 'com.aar.app:google-webrtc:M83'
     implementation fileTree(include: ['libwebrtc-m81.aar'], dir: 'libs')
 }
 
@@ -106,9 +105,9 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
 
-        versionCode 301
-        versionName "2.4.0"
-        //versionNameSuffix " beta_(2020-05-07)" // " beta_(XXXX-XX-XX)" // activate for beta versions
+        versionCode 302
+        versionName "2.4.1"
+        //versionNameSuffix " beta_(2020-06-07)" // " beta_(XXXX-XX-XX)" // activate for beta versions
         //resConfigs "en"
 
         archivesBaseName += "-$versionName"
@@ -135,7 +134,7 @@ android {
         //X86_64
         exclude "lib/x86_64/**"
         //armeabi
-        exclude "lib/armeabi/**"
+        //exclude "lib/armeabi/**"
     }
 
     dexOptions {
