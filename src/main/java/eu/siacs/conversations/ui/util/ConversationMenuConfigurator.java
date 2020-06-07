@@ -29,7 +29,6 @@
 
 package eu.siacs.conversations.ui.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.view.Menu;
@@ -72,12 +71,16 @@ public class ConversationMenuConfigurator {
             return;
         }
         final MenuItem menuAttach = menu.findItem(R.id.action_attach_file);
-        final boolean isPM = conversation.getMode() == Conversation.MODE_MULTI && conversation.getNextCounterpart() != null;
+        boolean isPM = false;
+        try {
+            isPM = conversation.getMode() == Conversation.MODE_MULTI && conversation.getNextCounterpart() != null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (Quick_share_attachment_choice && !hasAttachments && !isPM) {
             menuAttach.setVisible(false);
             return;
         }
-
         final boolean visible;
         if (conversation.getMode() == Conversation.MODE_MULTI) {
             visible = conversation.getAccount().httpUploadAvailable() && conversation.getMucOptions().participating()
