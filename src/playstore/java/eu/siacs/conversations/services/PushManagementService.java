@@ -117,22 +117,6 @@ public class PushManagementService {
         });
     }
 
-    public void disablePushOnServer(final Conversation conversation) {
-        final Jid muc = conversation.getJid().asBareJid();
-        final String node = conversation.getAttribute(Conversation.ATTRIBUTE_PUSH_NODE);
-        if (node != null) {
-            final IqPacket disable = mXmppConnectionService.getIqGenerator().disablePush(getAppServer(), node);
-            disable.setTo(muc);
-            mXmppConnectionService.sendIqPacket(conversation.getAccount(), disable, (account, response) -> {
-                if (response.getType() == IqPacket.TYPE.ERROR) {
-                    Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": unable to disable push for room " + muc);
-                }
-            });
-        } else {
-            Log.d(Config.LOGTAG, conversation.getAccount().getJid().asBareJid() + ": room " + muc + " has no stored node. unable to disable push");
-        }
-    }
-
     private void retrieveFcmInstanceToken(final OnGcmInstanceTokenRetrieved instanceTokenRetrieved) {
         final FirebaseInstanceId firebaseInstanceId;
         try {

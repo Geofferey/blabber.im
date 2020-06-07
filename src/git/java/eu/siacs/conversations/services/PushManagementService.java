@@ -23,10 +23,6 @@ public class PushManagementService {
         //stub implementation. only affects playstore flavor
     }
 
-    void disablePushOnServer(Conversation conversation) {
-        //stub implementation. only affects playstore flavor
-    }
-
     public boolean available(Account account) {
         return false;
     }
