@@ -1,6 +1,6 @@
 Dear users,
 
-Pix-Art Messenger will remove the implementation of OTR encryption by 30th June of 2020. 
+Pix-Art Messenger will remove the implementation of OTR encryption by 30th June of 2020 with version 2.5.0. 
 
 Unfortunately, it does not make sense to continue support on a rather out-dated technology, even as we see some users keep using it. For the moment, OTR (as well as OpenPGP) can be activated via the expert settings for advanced users. Pix-Art Messenger always tries to be usable for even [non-technical users](https://github.com/kriztan/Pix-Art-Messenger/issues/227), OTR however is not counted as appropriate for this.
 
