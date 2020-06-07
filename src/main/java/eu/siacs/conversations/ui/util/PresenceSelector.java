@@ -30,9 +30,10 @@
 package eu.siacs.conversations.ui.util;
 
 import android.app.Activity;
-import androidx.appcompat.app.AlertDialog;
 import android.content.Context;
 import android.util.Pair;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.Collections;
 import java.util.Map;
@@ -70,7 +71,6 @@ public class PresenceSelector {
         final Presences presences = contact.getPresences();
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(activity.getString(R.string.choose_presence));
-        final String[] resourceArray = presences.toResourceArray();
         Pair<Map<String, String>, Map<String, String>> typeAndName = presences.toTypeAndNameMap();
         final Map<String, String> resourceTypeMap = typeAndName.first;
         final Map<String, String> resourceNameMap = typeAndName.second;

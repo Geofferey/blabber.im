@@ -388,7 +388,7 @@ public class ExportBackupService extends Service {
         return files;
     }
 
-    private void notifySuccess(final List<File> files) {
+    private void notifySuccess(final List<File> files, final boolean notify) {
         if (!notify) {
             return;
         }

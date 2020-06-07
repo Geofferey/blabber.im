@@ -112,7 +112,7 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
         if (resource == null) {
             return false;
         }
-        Presence presence = account.getRoster().getContact(from).getPresences().getPresences().get(resource);
+        Presence presence = account.getRoster().getContact(from).getPresences().getPresencesMap().get(resource);
         ServiceDiscoveryResult disco = presence == null ? null : presence.getServiceDiscoveryResult();
         if (disco == null) {
             return false;

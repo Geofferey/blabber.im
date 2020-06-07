@@ -52,7 +52,7 @@ import eu.siacs.conversations.ui.util.AvatarWorkerTask;
 import eu.siacs.conversations.ui.util.MainThreadExecutor;
 import eu.siacs.conversations.utils.PermissionUtils;
 import eu.siacs.conversations.utils.TimeFrameUtils;
-import eu.siacs.conversations.xml.Namespace;
+import eu.siacs.conversations.utils.Namespace;
 import eu.siacs.conversations.xmpp.jingle.AbstractJingleConnection;
 import eu.siacs.conversations.xmpp.jingle.JingleRtpConnection;
 import eu.siacs.conversations.xmpp.jingle.Media;
