@@ -1001,6 +1001,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 final Uri takePhotoUri = pendingTakePhotoUri.pop();
                 if (takePhotoUri != null) {
                     mediaPreviewAdapter.addMediaPreviews(Attachment.of(getActivity(), takePhotoUri, Attachment.Type.IMAGE));
+                    activity.xmppConnectionService.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, takePhotoUri));
                     toggleInputMethod();
                 } else {
                     Log.d(Config.LOGTAG, "lost take photo uri. unable to to attach");
