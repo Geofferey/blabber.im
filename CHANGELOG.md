@@ -1,4 +1,19 @@
 ### Changelog
+#### Version 2.4.1
+* move call icon to the left in order to keep other toolbar icons in a consistent place
+* show call duration during audio calls
+* tie breaking for A/V calls (the same two people calling each other at the same time)
+* add ability to pin chats on top (add to favorites)
+* offer to record voice message when callee is busy
+* reduce echo during calls on some devices
+* fix login when passwords contains special characters
+* play dial and busy tones on speaker during video calls
+* move channel discovery choice to ChannelDiscoveryActivity menu (PAM)
+* colorize accept/dismiss actions in call notification (PAM)
+* don't end call on pressing back key (PAM)
+* show used account for calls (PAM)
+* notify on missed calls (PAM)
+* bug fixes
 
 #### Version 2.4.0
 * Audio/Video calls (Requires server support in form of STUN and TURN servers discoverable via XEP-0215)
