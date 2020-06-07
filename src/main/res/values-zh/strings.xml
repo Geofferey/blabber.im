@@ -465,7 +465,6 @@
     <string name="changelog">改动</string>
     <string name="account_settings_hostname">主机名</string>
     <string name="account_settings_port">端口</string>
-    <string name="hostname_or_onion">服务器或.onion地址</string>
     <string name="not_a_valid_port">这不是有效的端口号</string>
     <string name="not_valid_hostname">这不是有效的主机名</string>
     <string name="connected_accounts">已连接%2$d个帐户中的%1$d</string>
@@ -572,7 +571,6 @@
     <string name="message">消息</string>
     <string name="quote">引用</string>
     <string name="show_error_message">显示错误消息</string>
-    <string name="error_message">错误消息</string>
     <string name="data_saver_enabled">节省流量模式已启用</string>
     <string name="data_saver_enabled_explained">您的设备禁止此应用在后台时上网。要接收新消息通知，需要在启用节省流量模式时允许Pix-Art聊天的无限制访问。\\n\nPix-Art聊天本仍会努力节省流量。</string>
     <string name="device_does_not_support_data_saver">您的设备不支持禁用Pix-Art聊天的节省流量模式。</string>
@@ -625,7 +623,6 @@
     <string name="today">今天</string>
     <string name="pref_use_max_brightness_summary">在全屏观看视频或图像时切换到最大亮度。</string>
     <string name="pref_use_max_brightness">最大亮度</string>
-    <string name="block_jabber_id">封禁Jabber用户名</string>
     <string name="corresponding_conversations_closed">相关对话已结束</string>
     <string name="contact_blocked_past_tense">联系人被封禁</string>
     <string name="pref_notifications_from_strangers">来自陌生人的通知</string>
@@ -633,7 +630,6 @@
     <string name="received_message_from_stranger">已收到陌生人的消息</string>
     <string name="contacts_are_typing">%s正在输入…</string>
     <string name="contact_is_typing">%s正在输入…</string>
-    <string name="one_participant">一名参加者</string>
     <string name="more_participants">%d参加者</string>
     <string name="presence_offline">离线</string>
     <string name="block_stranger">封禁陌生人</string>
@@ -835,9 +831,6 @@
     <string name="unable_to_decrypt_backup">无法解密备份。密码是否正确？</string>
     <string name="pref_prefer_xmpp_avatar_summary">首选用户的XMPP头像而不是通讯录中的头像</string>
     <string name="pref_prefer_xmpp_avatar">首选XMPP头像</string>
-    <plurals name="view_users">
-        <item quantity="other">查看 %1$d 名参与者</item>
-    </plurals>
     <string name="group_chat_members">参与者</string>
     <string name="message_deleted">消息已删除</string>
     <string name="channel_details">群聊详情</string>
@@ -925,8 +918,6 @@
     <string name="please_enter_password">请输入此帐户的密码</string>
     <string name="unable_to_perform_this_action">无法执行此操作</string>
     <string name="waiting_for_transfer">等待传输</string>
-    <string name="x_has_written">%s 写道：</string>
-    <string name="i_have_written">我写道：</string>
     <string name="your_status">您的状态</string>
     <string name="pref_use_invidious">用 Invidio 链接替换 Youtube 链接</string>
     <string name="pref_use_invidious_summary">Invidious是一个更注重隐私的YouTube替代品</string>

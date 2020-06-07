@@ -468,7 +468,7 @@
     <string name="changelog">Изменения</string>
     <string name="account_settings_hostname">Имя хоста</string>
     <string name="account_settings_port">Порт</string>
-    <string name="hostname_or_onion">Сервер или .onion-адрес</string>
+    <string name="hostname_or_onion">Имя хоста или onion-адрес</string>
     <string name="not_a_valid_port">Некорректный номер порта</string>
     <string name="not_valid_hostname">Некорректное имя хоста</string>
     <string name="connected_accounts">%1$d из %2$d аккаунтов подключены</string>
@@ -657,7 +657,7 @@
     <string name="received_message_from_stranger">Принимать сообщения от незнакомых контактов</string>
     <string name="contacts_are_typing">%s набирают сообщение...</string>
     <string name="contact_is_typing">%s набирает сообщение...</string>
-    <string name="one_participant">один участник</string>
+    <string name="one_participant">Один участник</string>
     <string name="more_participants">%d участников</string>
     <string name="presence_offline">Оффлайн</string>
     <string name="block_stranger">Заблокировать незнакомца</string>
@@ -859,12 +859,6 @@
     <string name="unable_to_decrypt_backup">Невозможно расшифровать резервную копию. Пароль верный?</string>
     <string name="pref_prefer_xmpp_avatar_summary">Предпочитать XMPP аватар пользователя вместо аватара из вашей адресной книги</string>
     <string name="pref_prefer_xmpp_avatar">Предпочитаемый XMPP аватар</string>
-    <plurals name="view_users">
-        <item quantity="one">Просмотр %1$d участника</item>
-        <item quantity="few">View %1$d Participants</item>
-        <item quantity="many">Участники %1$d</item>
-        <item quantity="other">Просмотр %1$s участника</item>
-    </plurals>
     <string name="group_chat_members">Участники</string>
     <string name="message_deleted">Сообщение было удалено</string>
     <string name="channel_details">Сведения о канале</string>
@@ -1049,7 +1043,7 @@
     <string name="rtp_state_connected">Подключено</string>
     <string name="rtp_state_accepting_call">Прием вызова</string>
     <string name="rtp_state_ending_call">Завершение вызова</string>
-    <string name="rtp_state_finding_device">Обнаружение устройства</string>
+    <string name="rtp_state_finding_device">Найденные устройства</string>
     <string name="rtp_state_ringing">Звонящий</string>
     <string name="rtp_state_declined_or_busy">Занят</string>
     <string name="rtp_state_connectivity_error">Не удается подключиться</string>
@@ -1065,4 +1059,6 @@
     <string name="only_one_call_at_a_time">У вас может быть только один звонок за один раз.</string>
     <string name="missed_call">Пропущенный звонок</string>
     <string name="could_not_switch_camera">Не удалось переключить камеру</string>
+    <string name="otr_warning">Поддержка шифрования OTR закончится в июне 2020 года. Нажмите кнопку подробнее, чтобы получить дополнительную информацию. Откроется ссылка в браузере.</string>
+    <string name="readmore">Подробнее</string>
 </resources>
