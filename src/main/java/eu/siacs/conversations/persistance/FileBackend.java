@@ -518,7 +518,7 @@ public class FileBackend {
         return pos > 0 ? filename.substring(pos + 1) : null;
     }
 
-    private void copyImageToPrivateStorage(File file, Uri image, int sampleSize) throws FileCopyException {
+    private void copyImageToPrivateStorage(File file, Uri image, int sampleSize) throws FileCopyException, NotAnImageFileException {
         file.getParentFile().mkdirs();
         InputStream is = null;
         OutputStream os = null;
@@ -538,7 +538,7 @@ public class FileBackend {
             originalBitmap = BitmapFactory.decodeStream(is, null, options);
             is.close();
             if (originalBitmap == null) {
-                throw new FileCopyException(R.string.error_not_an_image_file);
+                throw new NotAnImageFileException();
             }
             int size;
             if (mXmppConnectionService.getCompressImageResolutionPreference() == 0) {
@@ -584,12 +584,12 @@ public class FileBackend {
         }
     }
 
-    public void copyImageToPrivateStorage(File file, Uri image) throws FileCopyException {
+    public void copyImageToPrivateStorage(File file, Uri image) throws FileCopyException, NotAnImageFileException {
         Log.d(Config.LOGTAG, "copy image (" + image.toString() + ") to private storage " + file.getAbsolutePath());
         copyImageToPrivateStorage(file, image, 0);
     }
 
-    public void copyImageToPrivateStorage(Message message, Uri image) throws FileCopyException {
+    public void copyImageToPrivateStorage(Message message, Uri image) throws FileCopyException, NotAnImageFileException {
         String filename = "Sent/" + fileDateFormat.format(new Date(message.getTimeSent())) + "_" + message.getUuid().substring(0, 4);
         switch (Config.IMAGE_FORMAT) {
             case JPEG:
@@ -1505,11 +1505,14 @@ public class FileBackend {
         }
     }
 
-    public class FileCopyException extends Exception {
-        private static final long serialVersionUID = -1010013599132881427L;
+    public static class NotAnImageFileException extends Exception {
+
+    }
+
+    public static class FileCopyException extends Exception {
         private int resId;
 
-        public FileCopyException(int resId) {
+        private FileCopyException(int resId) {
             this.resId = resId;
         }
 

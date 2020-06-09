@@ -35,7 +35,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -43,7 +42,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import eu.siacs.conversations.Config;
 import eu.siacs.conversations.utils.MimeUtils;
 
 public class Attachment implements Parcelable {
@@ -102,13 +100,13 @@ public class Attachment implements Parcelable {
         List<Attachment> attachments = new ArrayList<>();
         for (Uri uri : uris) {
             final String mime = MimeUtils.guessMimeTypeFromUri(context, uri);
-            attachments.add(new Attachment(uri, mime != null && mime.startsWith("image/") ? Type.IMAGE : Type.FILE, mime));
+            attachments.add(new Attachment(uri, mime != null && isImage(mime) ? Type.IMAGE : Type.FILE, mime));
         }
         return attachments;
     }
 
     public static Attachment of(UUID uuid, final File file, String mime) {
-        return new Attachment(uuid, Uri.fromFile(file), mime != null && (mime.startsWith("image/") || mime.startsWith("video/")) ? Type.IMAGE : Type.FILE, mime);
+        return new Attachment(uuid, Uri.fromFile(file), mime != null && (isImage(mime) || mime.startsWith("video/")) ? Type.IMAGE : Type.FILE, mime);
     }
 
     public static List<Attachment> extractAttachments(final Context context, final Intent intent, Type type) {
@@ -125,7 +123,6 @@ public class Attachment implements Parcelable {
                     final Uri uri = clipData.getItemAt(i).getUri();
                     Log.d(Config.LOGTAG, "uri=" + uri + " contentType=" + contentType);
                     final String mime = MimeUtils.guessMimeTypeFromUriAndMime(context, uri, contentType);
-                    Log.d(Config.LOGTAG, "mime=" + mime);
                     uris.add(new Attachment(uri, type, mime));
                 }
             }
@@ -137,11 +134,7 @@ public class Attachment implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(uri, flags);
-        dest.writeString(mime);
-        dest.writeString(uuid.toString());
-        dest.writeString(type.toString());
+        return type == Type.IMAGE || (type == Type.FILE && mime != null && renderFileThumbnail(mime));
     }
 
     @Override
@@ -157,8 +150,10 @@ public class Attachment implements Parcelable {
         return type;
     }
 
-    public boolean renderThumbnail() {
-        return type == Type.IMAGE || (type == Type.FILE && mime != null && (mime.startsWith("video/") || mime.startsWith("image/") || mime.contains("pdf")));
+   private static boolean renderFileThumbnail(final String mime) {
+        return mime.startsWith("video/")
+                || isImage(mime)
+                || (Compatibility.runsTwentyOne() && "application/pdf".equals(mime));
     }
 
     public Uri getUri() {
@@ -167,6 +162,10 @@ public class Attachment implements Parcelable {
 
     public UUID getUuid() {
         return uuid;
+    }
+
+    private static boolean isImage(final String mime) {
+        return mime.startsWith("image/") && !mime.equals("image/svg+xml");
     }
 
     public enum Type {
