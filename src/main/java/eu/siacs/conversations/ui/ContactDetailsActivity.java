@@ -60,7 +60,6 @@ import eu.siacs.conversations.ui.util.AvatarWorkerTask;
 import eu.siacs.conversations.ui.util.GridManager;
 import eu.siacs.conversations.ui.util.JidDialog;
 import eu.siacs.conversations.utils.Compatibility;
-import eu.siacs.conversations.utils.CryptoHelper;
 import eu.siacs.conversations.utils.EmojiWrapper;
 import eu.siacs.conversations.utils.Emoticons;
 import eu.siacs.conversations.utils.IrregularUnicodeDetector;
@@ -69,11 +68,11 @@ import eu.siacs.conversations.utils.Namespace;
 import eu.siacs.conversations.utils.TimeFrameUtils;
 import eu.siacs.conversations.utils.UIHelper;
 import eu.siacs.conversations.utils.XmppUri;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.OnKeyStatusUpdated;
 import eu.siacs.conversations.xmpp.OnUpdateBlocklist;
 import eu.siacs.conversations.xmpp.XmppConnection;
 import me.drakeet.support.toast.ToastCompat;
-import eu.siacs.conversations.xmpp.Jid;
 
 import static eu.siacs.conversations.ui.util.IntroHelper.showIntro;
 
@@ -577,26 +576,6 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
         binding.detailsContactKeys.removeAllViews();
         boolean hasKeys = false;
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (Config.supportOtr()) {
-            for (final String otrFingerprint : contact.getOtrFingerprints()) {
-                hasKeys = true;
-                View view = inflater.inflate(R.layout.contact_key, binding.detailsContactKeys, false);
-                TextView key = view.findViewById(R.id.key);
-                TextView keyType = view.findViewById(R.id.key_type);
-                ImageButton removeButton = view
-                        .findViewById(R.id.button_remove);
-                removeButton.setVisibility(View.VISIBLE);
-                key.setText(CryptoHelper.prettifyFingerprint(otrFingerprint));
-                if (otrFingerprint != null && otrFingerprint.equalsIgnoreCase(messageFingerprint)) {
-                    keyType.setText(R.string.otr_fingerprint_selected_message);
-                    keyType.setTextColor(ContextCompat.getColor(this, R.color.accent));
-                } else {
-                    keyType.setText(R.string.otr_fingerprint);
-                }
-                binding.detailsContactKeys.addView(view);
-                removeButton.setOnClickListener(v -> confirmToDeleteFingerprint(otrFingerprint));
-            }
-        }
         final AxolotlService axolotlService = contact.getAccount().getAxolotlService();
         if (Config.supportOmemo() && axolotlService != null) {
             final Collection<XmppAxolotlSession> sessions = axolotlService.findSessionsForContact(contact);
@@ -669,21 +648,6 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
                 binding.tags.addView(tv);
             }
         }
-    }
-
-    protected void confirmToDeleteFingerprint(final String fingerprint) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.delete_fingerprint);
-        builder.setMessage(R.string.sure_delete_fingerprint);
-        builder.setNegativeButton(R.string.cancel, null);
-        builder.setPositiveButton(R.string.delete,
-                (dialog, which) -> {
-                    if (contact.deleteOtrFingerprint(fingerprint)) {
-                        populateView();
-                        xmppConnectionService.syncRosterToDisk(contact.getAccount());
-                    }
-                });
-        builder.create().show();
     }
 
     public void onBackendConnected() {

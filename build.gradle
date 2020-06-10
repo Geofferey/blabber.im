@@ -50,7 +50,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'exifinterface'
     }
     implementation 'org.bouncycastle:bcmail-jdk15on:1.64'
-    implementation 'org.jitsi:org.otr4j:0.22'
     implementation 'org.gnu.inet:libidn:1.15'
     implementation 'com.google.zxing:core:3.3.3' // > 3.3.x not working below SDK 24
     implementation 'de.measite.minidns:minidns-hla:0.2.4'

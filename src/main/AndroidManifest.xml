@@ -244,10 +244,6 @@
             android:name=".ui.PublishGroupChatProfilePictureActivity"
             android:label="@string/group_chat_avatar" />
         <activity
-            android:name=".ui.VerifyOTRActivity"
-            android:label="@string/verify_otr"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
             android:name=".ui.ShareWithActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop">

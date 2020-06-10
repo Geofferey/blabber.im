@@ -77,7 +77,6 @@
     <string name="choose_presence">Choose device</string>
     <string name="send_unencrypted_message">Send unencrypted message</string>
     <string name="send_message_to_x">Send message to %s</string>
-    <string name="send_otr_message">Send OTR encrypted message</string>
     <string name="send_omemo_message">Send OMEMO encrypted message</string>
     <string name="send_omemo_x509_message">Send v\\OMEMO encrypted message</string>
     <string name="send_pgp_message">Send OpenPGP encrypted message</string>
@@ -184,11 +183,8 @@
     <string name="last_seen_day">1 day ago</string>
     <string name="last_seen_days">%d days ago</string>
     <string name="install_openkeychain">Encrypted message. Please install OpenKeychain to decrypt.</string>
-    <string name="unknown_otr_fingerprint">Unknown OTR fingerprint</string>
     <string name="openpgp_messages_found">OpenPGP encrypted messages found</string>
     <string name="your_fingerprint">Your fingerprint</string>
-    <string name="otr_fingerprint">OTR fingerprint</string>
-    <string name="otr_fingerprint_selected_message">OTR fingerprint of message</string>
     <string name="openpgp_key_id">OpenPGP Key ID</string>
     <string name="omemo_fingerprint">OMEMO fingerprint</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO fingerprint</string>
@@ -266,7 +262,6 @@
     <string name="pref_expert_options_other">Other</string>
     <string name="pref_autojoin">Synchronize with bookmarks</string>
     <string name="pref_autojoin_summary">Join and leave group chats according to auto-join flag in your bookmarks.</string>
-    <string name="toast_message_otr_fingerprint">OTR fingerprint copied to clipboard!</string>
     <string name="toast_message_omemo_fingerprint">OMEMO fingerprint copied to clipboard!</string>
     <string name="conference_banned">You are banned from this group chat</string>
     <string name="conference_members_only">This group chat is members only</string>
@@ -286,7 +281,6 @@
     <string name="show_qr_code">Show QR code</string>
     <string name="show_block_list">Show block list</string>
     <string name="account_details">Account details</string>
-    <string name="verify_otr">Verify OTR</string>
     <string name="remote_fingerprint">Remote Fingerprint</string>
     <string name="shared_secret_hint">Hint or Question</string>
     <string name="shared_secret_secret">Shared Secret</string>
@@ -299,7 +293,6 @@
     <string name="finish">Finish</string>
     <string name="verified">Verified!</string>
     <string name="smp_requested">Contact requested SMP verification</string>
-    <string name="no_otr_session_found">No valid OTR session has been found!</string>
     <string name="conversations_foreground_service" translatable="false">Pix-Art Messenger</string>
     <string name="pref_create_backup">Create backup</string>
     <string name="pref_create_backup_summary">Write backup files to %s</string>
@@ -321,13 +314,11 @@
     <string name="no_application_found_to_open_file">No application found to open file</string>
     <string name="could_not_verify_fingerprint">Could not verify fingerprint</string>
     <string name="manually_verify">Manually verify</string>
-    <string name="are_you_sure_verify_fingerprint">Are you sure that you want to verify your contacts OTR fingerprint?</string>
     <string name="pref_show_dynamic_tags">Show dynamic tags</string>
     <string name="pref_show_dynamic_tags_summary">Display read-only tags underneath contacts</string>
     <string name="no_conference_server_found">No group chat server found</string>
     <string name="conference_creation_failed">Group chat creation failed!</string>
     <string name="account_image_description">Account avatar</string>
-    <string name="copy_otr_clipboard_description">Copy OTR fingerprint to clipboard</string>
     <string name="copy_omemo_clipboard_description">Copy OMEMO fingerprint to clipboard</string>
     <string name="regenerate_omemo_key">Regenerate OMEMO key</string>
     <string name="clear_other_devices">Clear devices</string>
@@ -341,7 +332,6 @@
     <string name="updating">Updating…</string>
     <string name="password_changed">Password changed!</string>
     <string name="could_not_change_password">Could not change password</string>
-    <string name="otr_session_not_started">Send a message to start an encrypted chat</string>
     <string name="ask_question">Ask question</string>
     <string name="smp_explain_question">If you and your contact have a secret in common that no one else knows (like an inside joke or simply what you had for lunch the last time you met) you can use that secret to verify each other’s fingerprints.\n\nYou provide a hint or a question for your contact who will respond with a case-sensitive answer.</string>
     <string name="smp_explain_answer">Your contact would like to verify your fingerprint by challenging you with a shared secret. Your contact provided the following hint or question for that secret.</string>
@@ -989,8 +979,6 @@
     <string name="pref_theme_orange">Orange</string>
     <string name="pref_theme_color_options_summary">Select the theme color palette</string>
     <string name="pref_theme_color_options">Theme color</string>
-    <string name="pref_enable_otr_summary">Enable OTR encryption for message encryption</string>
-    <string name="pref_enable_otr">Enable OTR encryption</string>
     <string name="magic_create_text_on_x">You have been invited to %1$s. We will guide you through the process of creating an account.\nWhen picking %1$s as a provider you will be able to communicate with users of other providers by giving them your full XMPP address.</string>
     <string name="account_status_regis_invalid_token">Invalid registration token</string>
     <string name="magic_create_text_fixed">You have been invited to %1$s. A username has already been picked for you. We will guide you through the process of creating an account.\nYou will be able to communicate with users of other providers by giving them your full XMPP address.</string>
@@ -1048,7 +1036,6 @@
     <string name="only_one_call_at_a_time">You can only have one call at a time.</string>
     <string name="missed_call">Missed call</string>
     <string name="could_not_switch_camera">Could not switch camera</string>
-    <string name="otr_warning">The support of OTR encryption will drop in June 2020. Click read more to get more information. A link in a browser will open.</string>
     <string name="readmore">Read more</string>
     <string name="add_to_favorites">Add to favorites</string>
     <string name="remove_from_favorites">Remove from favorites</string>

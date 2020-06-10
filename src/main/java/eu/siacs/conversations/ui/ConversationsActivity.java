@@ -60,8 +60,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 
-import net.java.otr4j.session.SessionStatus;
-
 import org.openintents.openpgp.util.OpenPgpApi;
 
 import java.util.Arrays;
@@ -806,33 +804,6 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
             actionBar.setSubtitle(null);
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
-    }
-
-    public void verifyOtrSessionDialog(final Conversation conversation, View view) {
-        if (!conversation.hasValidOtrSession() || conversation.getOtrSession().getSessionStatus() != SessionStatus.ENCRYPTED) {
-            ToastCompat.makeText(this, R.string.otr_session_not_started, Toast.LENGTH_LONG).show();
-            return;
-        }
-        if (view == null) {
-            return;
-        }
-        PopupMenu popup = new PopupMenu(this, view);
-        popup.inflate(R.menu.verification_choices);
-        popup.setOnMenuItemClickListener(menuItem -> {
-            Intent intent = new Intent(ConversationsActivity.this, VerifyOTRActivity.class);
-            intent.setAction(VerifyOTRActivity.ACTION_VERIFY_CONTACT);
-            intent.putExtra("contact", conversation.getContact().getJid().asBareJid().toString());
-            intent.putExtra(EXTRA_ACCOUNT, conversation.getAccount().getJid().asBareJid().toString());
-            switch (menuItem.getItemId()) {
-                case R.id.ask_question:
-                    intent.putExtra("mode", VerifyOTRActivity.MODE_ASK_QUESTION);
-                    break;
-            }
-            startActivity(intent);
-            overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
-            return true;
-        });
-        popup.show();
     }
 
     @Override

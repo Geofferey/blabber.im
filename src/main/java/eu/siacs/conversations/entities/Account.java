@@ -6,27 +6,20 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.util.Pair;
 
-import net.java.otr4j.crypto.OtrCryptoEngineImpl;
-import net.java.otr4j.crypto.OtrCryptoException;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.PublicKey;
-import java.security.interfaces.DSAPublicKey;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
-import eu.siacs.conversations.crypto.OtrService;
 import eu.siacs.conversations.crypto.PgpDecryptionService;
 import eu.siacs.conversations.crypto.axolotl.AxolotlService;
 import eu.siacs.conversations.crypto.axolotl.XmppAxolotlSession;
@@ -34,9 +27,9 @@ import eu.siacs.conversations.services.AvatarService;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.utils.UIHelper;
 import eu.siacs.conversations.utils.XmppUri;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.XmppConnection;
 import eu.siacs.conversations.xmpp.jingle.RtpCapability;
-import eu.siacs.conversations.xmpp.Jid;
 
 public class Account extends AbstractEntity implements AvatarService.Avatarable {
 
@@ -89,7 +82,6 @@ public class Account extends AbstractEntity implements AvatarService.Avatarable 
     protected String hostname = null;
     protected int port = 5222;
     protected boolean online = false;
-    private OtrService mOtrService = null;
     private String rosterVersion;
     private String displayName = null;
     private AxolotlService axolotlService = null;
@@ -404,16 +396,11 @@ public class Account extends AbstractEntity implements AvatarService.Avatarable 
     }
 
     public void initAccountServices(final XmppConnectionService context) {
-        this.mOtrService = new OtrService(context, this);
         this.axolotlService = new AxolotlService(this, context);
         this.pgpDecryptionService = new PgpDecryptionService(context);
         if (xmppConnection != null) {
             xmppConnection.addOnAdvancedStreamFeaturesAvailableListener(axolotlService);
         }
-    }
-
-    public OtrService getOtrService() {
-        return this.mOtrService;
     }
 
     public PgpDecryptionService getPgpDecryptionService() {
@@ -426,26 +413,6 @@ public class Account extends AbstractEntity implements AvatarService.Avatarable 
 
     public void setXmppConnection(final XmppConnection connection) {
         this.xmppConnection = connection;
-    }
-
-    public String getOtrFingerprint() {
-        if (this.otrFingerprint == null) {
-            try {
-                if (this.mOtrService == null) {
-                    return null;
-                }
-                final PublicKey publicKey = this.mOtrService.getPublicKey();
-                if (publicKey == null || !(publicKey instanceof DSAPublicKey)) {
-                    return null;
-                }
-                this.otrFingerprint = new OtrCryptoEngineImpl().getFingerprint(publicKey).toLowerCase(Locale.US);
-                return this.otrFingerprint;
-            } catch (final OtrCryptoException ignored) {
-                return null;
-            }
-        } else {
-            return this.otrFingerprint;
-        }
     }
 
     public String getRosterVersion() {
@@ -611,10 +578,6 @@ public class Account extends AbstractEntity implements AvatarService.Avatarable 
 
     private List<XmppUri.Fingerprint> getFingerprints() {
         ArrayList<XmppUri.Fingerprint> fingerprints = new ArrayList<>();
-        final String otr = this.getOtrFingerprint();
-        if (otr != null) {
-            fingerprints.add(new XmppUri.Fingerprint(XmppUri.FingerprintType.OTR, otr));
-        }
         if (axolotlService == null) {
             return fingerprints;
         }

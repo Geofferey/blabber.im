@@ -1297,25 +1297,6 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
             } else {
                 this.binding.pgpFingerprintBox.setVisibility(View.GONE);
             }
-            final String otrFingerprint = this.mAccount.getOtrFingerprint();
-            if (otrFingerprint != null && Config.supportOtr()) {
-                if ("otr".equals(messageFingerprint)) {
-                    this.binding.otrFingerprintDesc.setTextColor(ContextCompat.getColor(this, R.color.accent));
-                }
-                this.binding.otrFingerprintBox.setVisibility(View.VISIBLE);
-                this.binding.otrFingerprint.setText(CryptoHelper.prettifyFingerprint(otrFingerprint));
-                this.binding.actionCopyToClipboard.setVisibility(View.VISIBLE);
-                this.binding.actionCopyToClipboard.setOnClickListener(v -> {
-                    if (copyTextToClipboard(CryptoHelper.prettifyFingerprint(otrFingerprint), R.string.otr_fingerprint)) {
-                        ToastCompat.makeText(
-                                EditAccountActivity.this,
-                                R.string.toast_message_otr_fingerprint,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } else {
-                this.binding.otrFingerprintBox.setVisibility(View.GONE);
-            }
             final String ownAxolotlFingerprint = this.mAccount.getAxolotlService().getOwnFingerprint();
             if (ownAxolotlFingerprint != null && Config.supportOmemo()) {
                 this.binding.axolotlFingerprintBox.setVisibility(View.VISIBLE);
