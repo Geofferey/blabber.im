@@ -1,6 +1,7 @@
 package eu.siacs.conversations;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,6 +43,7 @@ public final class Config {
     public static final String LOGTAG = BuildConfig.LOGTAG;
 
     public static final Jid BUG_REPORTS = Jid.of("bugs@pix-art.de");
+    public static final Uri HELP = Uri.parse("https://help.conversations.im");
 
     public static final String inviteUserURL = "https://jabber.pix-art.de/i/";
     public static final String inviteMUCURL = "https://jabber.pix-art.de/j/";
