@@ -1024,6 +1024,7 @@
     <string name="rtp_state_ringing">Ringing</string>
     <string name="rtp_state_declined_or_busy">Busy</string>
     <string name="rtp_state_connectivity_error">Unable to connect call</string>
+    <string name="rtp_state_connectivity_lost_error">Connection lost</string>
     <string name="rtp_state_retracted">Retracted call</string>
     <string name="rtp_state_application_failure">Application failure</string>
     <string name="incoming_call_duration">%s · Incoming call · %s</string>
