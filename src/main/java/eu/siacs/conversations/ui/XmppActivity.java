@@ -238,8 +238,8 @@ public abstract class XmppActivity extends ActionBarActivity {
             this.registerListeners();
             this.onBackendConnected();
         }
-		this.mUsingEnterKey = usingEnterKey();
-		this.mUseTor = useTor();
+        this.mUsingEnterKey = usingEnterKey();
+        this.mUseTor = useTor();
     }
 
     public void connectToBackend() {
@@ -333,9 +333,9 @@ public abstract class XmppActivity extends ActionBarActivity {
         if (this instanceof OnKeyStatusUpdated) {
             this.xmppConnectionService.setOnKeyStatusUpdatedListener((OnKeyStatusUpdated) this);
         }
-		if (this instanceof XmppConnectionService.OnJingleRtpConnectionUpdate) {
-			this.xmppConnectionService.setOnRtpConnectionUpdateListener((XmppConnectionService.OnJingleRtpConnectionUpdate) this);
-		}
+        if (this instanceof XmppConnectionService.OnJingleRtpConnectionUpdate) {
+            this.xmppConnectionService.setOnRtpConnectionUpdateListener((XmppConnectionService.OnJingleRtpConnectionUpdate) this);
+        }
     }
 
     protected void unregisterListeners() {
@@ -363,9 +363,9 @@ public abstract class XmppActivity extends ActionBarActivity {
         if (this instanceof OnKeyStatusUpdated) {
             this.xmppConnectionService.removeOnNewKeysAvailableListener((OnKeyStatusUpdated) this);
         }
-		if (this instanceof XmppConnectionService.OnJingleRtpConnectionUpdate) {
-			this.xmppConnectionService.removeRtpConnectionUpdateListener((XmppConnectionService.OnJingleRtpConnectionUpdate) this);
-		}
+        if (this instanceof XmppConnectionService.OnJingleRtpConnectionUpdate) {
+            this.xmppConnectionService.removeRtpConnectionUpdateListener((XmppConnectionService.OnJingleRtpConnectionUpdate) this);
+        }
     }
 
     @Override
@@ -401,7 +401,7 @@ public abstract class XmppActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-	@SuppressLint("UnsupportedChromeOsCameraSystemFeature")
+    @SuppressLint("UnsupportedChromeOsCameraSystemFeature")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -410,11 +410,11 @@ public abstract class XmppActivity extends ActionBarActivity {
         metrics = getResources().getDisplayMetrics();
         ExceptionHelper.init(getApplicationContext());
         new EmojiService(this).init(getPreferences().getBoolean(USE_BUNDLED_EMOJIS, getResources().getBoolean(R.bool.use_bundled_emoji)));
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-			this.isCameraFeatureAvailable = getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY);
-		} else {
-			this.isCameraFeatureAvailable = getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
-		}
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            this.isCameraFeatureAvailable = getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY);
+        } else {
+            this.isCameraFeatureAvailable = getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
+        }
         if (isDarkTheme()) {
             mColorWarningButton = ContextCompat.getColor(this, R.color.warning_button_dark);
             mColorWarningText = ContextCompat.getColor(this, R.color.warning_button);
@@ -468,8 +468,8 @@ public abstract class XmppActivity extends ActionBarActivity {
 
     protected boolean isOptimizingBattery() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
-            return !pm.isIgnoringBatteryOptimizations(getPackageName());
+            final PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
+            return pm != null && !pm.isIgnoringBatteryOptimizations(getPackageName());
         } else {
             return false;
         }
@@ -477,8 +477,9 @@ public abstract class XmppActivity extends ActionBarActivity {
 
     protected boolean isAffectedByDataSaver() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            return cm.isActiveNetworkMetered()
+            final ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            return cm != null
+                    && cm.isActiveNetworkMetered()
                     && cm.getRestrictBackgroundStatus() == ConnectivityManager.RESTRICT_BACKGROUND_STATUS_ENABLED;
         } else {
             return false;
@@ -492,9 +493,10 @@ public abstract class XmppActivity extends ActionBarActivity {
     public boolean useInternalUpdater() {
         return getBooleanPreference(USE_INTERNAL_UPDATER, R.bool.use_internal_updater);
     }
-	private boolean useTor() {
-		return QuickConversationsService.isConversations() && getBooleanPreference("use_tor", R.bool.use_tor);
-	}
+
+    private boolean useTor() {
+        return QuickConversationsService.isConversations() && getBooleanPreference("use_tor", R.bool.use_tor);
+    }
 
     public SharedPreferences getPreferences() {
         return PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -873,12 +875,8 @@ public abstract class XmppActivity extends ActionBarActivity {
                     listener.onPresenceSelected();
                 }
             } else if (presences.size() == 1) {
-                String presence = presences.toResourceArray()[0];
-                try {
-                    conversation.setNextCounterpart(Jid.of(contact.getJid().getLocal(), contact.getJid().getDomain(), presence));
-                } catch (IllegalArgumentException e) {
-                    conversation.setNextCounterpart(null);
-                }
+                final String presence = presences.toResourceArray()[0];
+                conversation.setNextCounterpart(PresenceSelector.getNextCounterpart(contact, presence));
                 listener.onPresenceSelected();
             } else {
                 PresenceSelector.showPresenceSelectionDialog(this, conversation, listener);
@@ -1147,7 +1145,7 @@ public abstract class XmppActivity extends ActionBarActivity {
     }
 
     protected Account extractAccount(Intent intent) {
-		final String jid = intent != null ? intent.getStringExtra(EXTRA_ACCOUNT) : null;
+        final String jid = intent != null ? intent.getStringExtra(EXTRA_ACCOUNT) : null;
         try {
             return jid != null ? xmppConnectionService.findAccountByJid(Jid.ofEscaped(jid)) : null;
         } catch (IllegalArgumentException e) {
@@ -1277,11 +1275,9 @@ public abstract class XmppActivity extends ActionBarActivity {
     private static class AsyncDrawable extends BitmapDrawable {
         private final WeakReference<BitmapWorkerTask> bitmapWorkerTaskReference;
 
-        AsyncDrawable(Resources res, Bitmap bitmap,
-                      BitmapWorkerTask bitmapWorkerTask) {
+        AsyncDrawable(Resources res, Bitmap bitmap, BitmapWorkerTask bitmapWorkerTask) {
             super(res, bitmap);
-            bitmapWorkerTaskReference = new WeakReference<>(
-                    bitmapWorkerTask);
+            bitmapWorkerTaskReference = new WeakReference<>(bitmapWorkerTask);
         }
 
         BitmapWorkerTask getBitmapWorkerTask() {
