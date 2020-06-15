@@ -203,7 +203,7 @@ public class JingleFileTransferConnection extends AbstractJingleConnection imple
         }
     };
 
-    public JingleFileTransferConnection(JingleConnectionManager jingleConnectionManager, Id id, Jid initiator) {
+    JingleFileTransferConnection(JingleConnectionManager jingleConnectionManager, Id id, Jid initiator) {
         super(jingleConnectionManager, id, initiator);
     }
 
@@ -649,10 +649,14 @@ public class JingleFileTransferConnection extends AbstractJingleConnection imple
 
         final JinglePacket packet = this.bootstrapPacket(JinglePacket.Action.SESSION_INFO);
         packet.addJingleChild(checksum);
-        this.sendJinglePacket(packet);
+        xmppConnectionService.sendIqPacket(id.account, packet, (account, response) -> {
+            if (response.getType() == IqPacket.TYPE.ERROR) {
+                Log.d(Config.LOGTAG,account.getJid().asBareJid()+": ignoring error response to our session-info (hash transmission)");
+            }
+        });
     }
 
-    public Collection<JingleCandidate> getOurCandidates() {
+    private Collection<JingleCandidate> getOurCandidates() {
         return Collections2.filter(this.candidates, c -> c != null && c.isOurs());
     }
 
@@ -1038,7 +1042,7 @@ public class JingleFileTransferConnection extends AbstractJingleConnection imple
         abort(Reason.CANCEL);
     }
 
-    void abort(final Reason reason) {
+    private void abort(final Reason reason) {
         this.disconnectSocks5Connections();
         if (this.transport instanceof JingleInBandTransport) {
             this.transport.disconnect();
@@ -1182,7 +1186,7 @@ public class JingleFileTransferConnection extends AbstractJingleConnection imple
         }
     }
 
-    public int getJingleStatus() {
+    private int getJingleStatus() {
         return this.mJingleStatus;
     }
 
@@ -1225,11 +1229,11 @@ public class JingleFileTransferConnection extends AbstractJingleConnection imple
         jingleConnectionManager.updateConversationUi(false);
     }
 
-    public String getTransportId() {
+    String getTransportId() {
         return this.transportId;
     }
 
-    public FileTransferDescription.Version getFtVersion() {
+    FileTransferDescription.Version getFtVersion() {
         return this.description.getVersion();
     }
 
