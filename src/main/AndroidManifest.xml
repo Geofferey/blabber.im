@@ -187,6 +187,40 @@
                 <data android:mimeType="application/vnd.conversations.backup" />
                 <data android:scheme="file" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="content" />
+                <data android:host="*" />
+                <data android:mimeType="*/*" />
+                <data android:pathPattern=".*\\.ceb" />
+                <data android:pathPattern=".*\\..*\\.ceb" />
+                <data android:pathPattern=".*\\..*\\..*\\.ceb" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.ceb" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.ceb" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.ceb" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.ceb" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="file" />
+                <data android:host="*" />
+                <data android:mimeType="*/*" />
+                <data android:pathPattern=".*\\.ceb" />
+                <data android:pathPattern=".*\\..*\\.ceb" />
+                <data android:pathPattern=".*\\..*\\..*\\.ceb" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.ceb" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.ceb" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.ceb" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.ceb" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.SettingsActivity"
@@ -345,9 +379,10 @@
             android:name=".ui.ChannelDiscoveryActivity"
             android:label="@string/discover_channels"
             android:launchMode="singleTask" />
-        <activity android:name=".ui.IntroActivity"
-            android:launchMode="singleTask"
-            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.IntroActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" />
 
         <service android:name=".services.ExportBackupService" />
         <service android:name=".services.ImportBackupService" />
@@ -373,6 +408,7 @@
             android:authorities="${applicationId}.barcodes"
             android:exported="false"
             android:grantUriPermissions="true" />
+
         <activity
             android:name=".ui.RtpSessionActivity"
             android:autoRemoveFromRecents="true"
