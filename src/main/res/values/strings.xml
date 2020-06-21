@@ -1041,4 +1041,5 @@
     <string name="readmore">Read more</string>
     <string name="add_to_favorites">Add to favorites</string>
     <string name="remove_from_favorites">Remove from favorites</string>
+    <string name="improperly_formatted_provisioning">Improperly formatted provisioning code</string>
 </resources>
