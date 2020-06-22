@@ -279,11 +279,15 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
     private void releaseProximityWakeLock() {
         if (this.mProximityWakeLock != null && mProximityWakeLock.isHeld()) {
             Log.d(Config.LOGTAG, "releasing proximity wake lock");
-            this.mProximityWakeLock.release(PowerManager.RELEASE_FLAG_WAIT_FOR_NO_PROXIMITY);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                this.mProximityWakeLock.release(PowerManager.RELEASE_FLAG_WAIT_FOR_NO_PROXIMITY);
+            } else {
+                this.mProximityWakeLock.release();
+            }
             this.mProximityWakeLock = null;
         }
     }
-    
+
     private void putProximityWakeLockInProperState(final AppRTCAudioManager.AudioDevice audioDevice) {
         if (audioDevice == AppRTCAudioManager.AudioDevice.EARPIECE) {
             acquireProximityWakeLock();
@@ -417,10 +421,6 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
         final JingleRtpConnection jingleRtpConnection = weakReference == null ? null : weakReference.get();
         if (jingleRtpConnection != null) {
             releaseVideoTracks(jingleRtpConnection);
-        } else if (!isChangingConfigurations()) {
-            if (xmppConnectionService != null) {
-                retractSessionProposal();
-            }
         }
         releaseProximityWakeLock();
         super.onStop();
@@ -446,11 +446,14 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
 
     @Override
     public void onUserLeaveHint() {
+        super.onUserLeaveHint();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && deviceSupportsPictureInPicture()) {
             if (shouldBePictureInPicture()) {
                 startPictureInPicture();
+                return;
             }
         }
+        retractSessionProposal();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -461,7 +464,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
                             .setAspectRatio(new Rational(10, 16))
                             .build()
             );
-        } catch (IllegalStateException e) {
+        } catch (final IllegalStateException e) {
             //this sometimes happens on Samsung phones (possibly when Knox is enabled)
             Log.w(Config.LOGTAG, "unable to enter picture in picture mode", e);
         }
@@ -483,7 +486,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
                     RtpEndUserState.CONNECTING,
                     RtpEndUserState.CONNECTED
             ).contains(rtpConnection.getEndUserState());
-        } catch (IllegalStateException e) {
+        } catch (final IllegalStateException e) {
             return false;
         }
     }
