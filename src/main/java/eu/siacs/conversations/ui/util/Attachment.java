@@ -35,6 +35,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import eu.siacs.conversations.Config;
+import eu.siacs.conversations.utils.Compatibility;
 import eu.siacs.conversations.utils.MimeUtils;
 
 public class Attachment implements Parcelable {
@@ -134,7 +137,11 @@ public class Attachment implements Parcelable {
     }
 
     @Override
-        return type == Type.IMAGE || (type == Type.FILE && mime != null && renderFileThumbnail(mime));
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(uri, flags);
+        dest.writeString(mime);
+        dest.writeString(uuid.toString());
+        dest.writeString(type.toString());
     }
 
     @Override
@@ -150,7 +157,11 @@ public class Attachment implements Parcelable {
         return type;
     }
 
-   private static boolean renderFileThumbnail(final String mime) {
+    public boolean renderThumbnail() {
+        return type == Type.IMAGE || (type == Type.FILE && mime != null && renderFileThumbnail(mime));
+    }
+
+    private static boolean renderFileThumbnail(final String mime) {
         return mime.startsWith("video/")
                 || isImage(mime)
                 || (Compatibility.runsTwentyOne() && "application/pdf".equals(mime));
