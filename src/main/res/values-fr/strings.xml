@@ -77,7 +77,6 @@
     <string name="choose_presence">Choisir un appareil</string>
     <string name="send_unencrypted_message">Envoyer un message en clair</string>
     <string name="send_message_to_x">Envoyer un message à %s</string>
-    <string name="send_otr_message">Envoyer un message chiffré avec OTR</string>
     <string name="send_omemo_message">Envoyer un message chiffré avec OMEMO</string>
     <string name="send_omemo_x509_message">Envoyer un message chiffré avec v\\OMEMO</string>
     <string name="send_pgp_message">Envoyer un message chiffré avec OpenPGP</string>
@@ -184,11 +183,8 @@
     <string name="last_seen_day">en ligne hier</string>
     <string name="last_seen_days">en ligne il y a %d jours</string>
     <string name="install_openkeychain">Message chiffré. Veuillez installer OpenKeychain pour le déchiffrer.</string>
-    <string name="unknown_otr_fingerprint">Empreinte OTR inconnue.</string>
     <string name="openpgp_messages_found">Messages chiffrés avec OpenPGP détectés.</string>
     <string name="your_fingerprint">Votre empreinte</string>
-    <string name="otr_fingerprint">Empreinte OTR</string>
-    <string name="otr_fingerprint_selected_message">Empreinte OTR du message</string>
     <string name="openpgp_key_id">ID Clef OpenPGP</string>
     <string name="omemo_fingerprint">Empreinte OMEMO</string>
     <string name="omemo_fingerprint_x509">v\\Empreinte OMEMO</string>
@@ -266,7 +262,6 @@
     <string name="pref_expert_options_other">Autres</string>
     <string name="pref_autojoin">Synchroniser les favoris</string>
     <string name="pref_autojoin_summary">Rejoindre et quitter des discussions selon le paramètre Rejoindre automatiquement définit les détails de la discussion.</string>
-    <string name="toast_message_otr_fingerprint">Empreinte OTR copiée dans le presse-papier !</string>
     <string name="toast_message_omemo_fingerprint">Empreinte OMEMO copiée dans le presse-papier !</string>
     <string name="conference_banned">Vous êtes banni de cette conférence</string>
     <string name="conference_members_only">Cette conférence est autorisée aux membres uniquement</string>
@@ -286,7 +281,6 @@
     <string name="show_qr_code">Afficher le code QR</string>
     <string name="show_block_list">Afficher la liste des contacts bloqués</string>
     <string name="account_details">Détails du compte</string>
-    <string name="verify_otr">Vérifier l’OTR</string>
     <string name="remote_fingerprint">Empreinte distante</string>
     <string name="shared_secret_hint">Indice ou question</string>
     <string name="shared_secret_secret">Secret partagé</string>
@@ -299,14 +293,13 @@
     <string name="finish">Terminé</string>
     <string name="verified">Vérifié !</string>
     <string name="smp_requested">Le contact requiert la vérification du SMP</string>
-    <string name="no_otr_session_found">Aucune session OTR valide n\'a été trouvée !</string>
     <string name="pref_create_backup">Effectuer une sauvegarde</string>
     <string name="pref_create_backup_summary">Faire la sauvegarde dans le dossier %s</string>
     <string name="notification_create_backup_title">Sauvegarde en cours...</string>
     <string name="restoring_backup">Restauration de la sauvegarde</string>
     <string name="notification_restored_backup_title">Votre sauvegarde a été restaurée</string>
     <string name="notification_restored_backup_subtitle">N\'oubliez pas d\'activer le compte.</string>
-    <string name="choose_file">Choix du fichier</string>
+    <string name="choose_file">Choisir un fichier</string>
     <string name="receiving_file">Réception de %1$s</string>
     <string name="download_x_file">Télécharger %s</string>
     <string name="delete_x_file">Effacer %s</string>
@@ -320,13 +313,11 @@
     <string name="no_application_found_to_open_file">Aucune application disponible pour ouvrir le fichier</string>
     <string name="could_not_verify_fingerprint">Impossible de vérifier l’empreinte</string>
     <string name="manually_verify">Vérifier manuellement</string>
-    <string name="are_you_sure_verify_fingerprint">Êtes-vous sûr de vouloir vérifier l’empreinte OTR de votre contact ?</string>
     <string name="pref_show_dynamic_tags">Afficher les tags dynamiques</string>
     <string name="pref_show_dynamic_tags_summary">Affiche des tags en lecture seule en dessous des contacts.</string>
     <string name="no_conference_server_found">Aucun serveur de conférences n’a été trouvé</string>
     <string name="conference_creation_failed">Échec de la création de la conférence !</string>
     <string name="account_image_description">Avatar du compte</string>
-    <string name="copy_otr_clipboard_description">Copier l’empreinte OTR dans le presse-papier</string>
     <string name="copy_omemo_clipboard_description">Copier l’empreinte OMEMO dans le presse-papier</string>
     <string name="regenerate_omemo_key">Renouveler la clef OMEMO</string>
     <string name="clear_other_devices">Supprimer les appareils</string>
@@ -340,7 +331,6 @@
     <string name="updating">Mise à jour…</string>
     <string name="password_changed">Mot de passe modifié !</string>
     <string name="could_not_change_password">Impossible de changer le mot de passe</string>
-    <string name="otr_session_not_started">Envoyez un message pour commencer une discussion chiffrée</string>
     <string name="ask_question">Poser une question</string>
     <string name="smp_explain_question">Si vous et votre contact avez en commun un secret que personne d’autre ne connaît (comme une blague ou ce que vous avez mangé lors de votre dernière rencontre), vous pouvez utiliser ce secret pour vérifier vos empreintes respectives.\n\nVous donnez un indice ou posez votre question à votre contact, qui répondra en faisant attention à la casse.</string>
     <string name="smp_explain_answer">Votre contact souhaite confirmer votre identité grâce à un secret partagé. Il vous a envoyé le message/indice suivant concernant ce secret.</string>
@@ -427,7 +417,7 @@
     <string name="download_failed_server_not_found">Échec du téléchargement : impossible de trouver le serveur</string>
     <string name="download_failed_file_not_found">Échec du téléchargement : impossible de trouver le fichier</string>
     <string name="download_failed_could_not_connect">Échec du téléchargement : impossible de se connecter à l’hôte</string>
-    <string name="download_failed_could_not_write_file">Échec du téléchargement : Écriture impossible</string>
+    <string name="download_failed_could_not_write_file">Échec du téléchargement : écriture impossible</string>
     <string name="action_check_update">Vérifier les mises à jour</string>
     <string name="title_activity_updater">Mise à jour du service</string>
     <string name="update_available">La version %1$s est disponible.\n\nTaille du fichier : %2$s\n\nMettre à jour vers la version %1$s maintenant ?</string>
@@ -535,7 +525,7 @@
     <string name="action_end_conversation_muc">Quitter la conférence</string>
     <string name="leave_conference_warning">Désirez-vous quitter ce groupe de discussion ? Vous ne serez plus notifié de l’arrivée des nouveaux messages jusqu’à ce que vous rejoignez à nouveau la discussion.</string>
     <string name="show_password">Afficher le mot de passe</string>
-    <string name="registration_please_wait">L’enregistrement a échoué : Réessayer plus tard</string>
+    <string name="registration_please_wait">L’enregistrement a échoué : réessayer plus tard</string>
     <string name="registration_password_too_weak">Échec de l’enregistrement : le mot de passe n’est pas assez fort</string>
     <string name="choose_participants">Choisir les participants</string>
     <string name="creating_conference">Création du groupe de discussion…</string>
@@ -631,7 +621,7 @@
         <item quantity="other">%d mois</item>
     </plurals>
     <string name="today">Aujourd’hui</string>
-    <string name="pref_use_max_brightness_summary">Bascule en mode luminosité maximale lors de l\'affichage des vidéos ou des images en mode plein écran.</string>
+    <string name="pref_use_max_brightness_summary">Active la luminosité maximale lors de l\'affichage de vidéos ou d\'images en plein écran.</string>
     <string name="pref_use_max_brightness">Luminosité maximale</string>
     <string name="block_jabber_id">Bloquer l’identifiant Jabber</string>
     <string name="corresponding_conversations_closed">Conversations correspondantes fermées.</string>
@@ -646,7 +636,7 @@
     <string name="presence_offline">Hors-ligne</string>
     <string name="block_stranger">Bloquer l’inconnu</string>
     <string name="block_entire_domain">Bloquer le domaine entier</string>
-    <string name="pref_use_auto_rotate_summary">Rotation automatique des images et vidéos en mode plein écran pour s’adapter à la taille de celui-ci.</string>
+    <string name="pref_use_auto_rotate_summary">Rotation automatique des images et vidéos en plein écran pour s’adapter à la taille de celui-ci.</string>
     <string name="pref_use_auto_rotate">Rotation des médias en plein écran</string>
     <string name="pref_use_tor">Connexion via Tor</string>
     <string name="pref_use_tor_summary">Redirige toutes les connexions vers le réseau Tor. Nécessite l\'application Orbot.</string>
@@ -663,8 +653,8 @@
     <string name="retry_decryption">Nouvelle tentative de déchiffrement</string>
     <string name="session_failure">Échec de la session</string>
     <string name="sasl_downgrade">Mécanisme SASL dégradé</string>
-    <string name="action_take_photo">prendre une photo</string>
-    <string name="action_take_video">enregistrer une vidéo</string>
+    <string name="action_take_photo">Prendre une photo</string>
+    <string name="action_take_video">Enregistrer une vidéo</string>
     <string name="account_status_regis_web">Le serveur nécessite une identification sur son site web </string>
     <string name="application_found_to_open_website">Aucune application trouvée pour afficher le site web</string>
     <string name="open_website">Ouvrir le site web</string>
@@ -712,7 +702,7 @@
     <string name="mtm_cert_details">Détails du certificat :</string>
     <string name="once">Une fois</string>
     <string name="qr_code_scanner_needs_access_to_camera">Le lecteur de code QR a besoin d’accéder à votre appareil photo</string>
-    <string name="pref_scroll_to_bottom_summary">Défiler en bas une fois le message envoyé.</string>
+    <string name="pref_scroll_to_bottom_summary">Aller en bas de la discussion une fois le message envoyé.</string>
     <string name="pref_scroll_to_bottom">Défiler vers le bas</string>
     <string name="no_camera_permission">Pix-Art Messenger a besoin d’accéder à l’appareil photo</string>
     <string name="edit_status_message_title">Modifier votre message de statut</string>
@@ -777,8 +767,8 @@
     <string name="no_application_found_to_view_contact">Aucune application permettant d’afficher ce contact n’a été trouvée</string>
     <string name="welcome_server_info">Nous vous recommandons d’utiliser blabber.im en tant que votre fournisseur.</string>
     <string name="no_location_permission">Pix-Art Messenger a besoin d’accéder aux services de géolocalisation</string>
-    <string name="pref_show_record_voice_btn_summary">Affiche le bouton Enregistrement vocal en tant qu’action rapide dans les conversations.</string>
-    <string name="pref_show_record_voice_btn">Afficher le bouton Enregistrement vocal</string>
+    <string name="pref_show_record_voice_btn_summary">Affiche le bouton Enregistrement audio en tant qu’action rapide dans les conversations.</string>
+    <string name="pref_show_record_voice_btn">Bouton Enregistrement audio</string>
     <string name="pref_use_quick_share_attachment_choice_summary">Remplacer le bouton Envoyer par le bouton Joindre si aucun texte n\'est tapé. Sinon montrer le bouton d\'action rapide qui peut être configuré.</string>
     <string name="pref_quick_share_attachment_choice">Choix des fichiers joints</string>
     <string name="unable_to_save_recording">Impossible de sauvegarder l’enregistrement</string>
@@ -908,7 +898,7 @@
     <string name="discover_channels">Découvrir des canaux</string>
     <string name="search_channels">Rechercher des canaux</string>
     <string name="channel_discovery_opt_in_title">Avis de confidentialité</string>
-    <string name="channel_discover_opt_in_message"><![CDATA[La découverte de canaux utilise l’appel au service tiers <a href="https://search.jabber.network">search.jabber.network</a>.<br><br>L’usage de cette fonction transmettra votre adresse IP et les termes recherchés à ce service. Consulter la <a href="https://search.jabber.network/privacy">politique de confidentialité</a> correspondante pour plus d’information.]]></string>
+    <string name="channel_discover_opt_in_message"><![CDATA[La découverte de canaux utilise l’appel au service tiers <a href="https://search.jabber.network">search.jabber.network</a>.<br><br>L’usage de cette fonction transmettra à ce service votre adresse IP et les termes recherchés. Consulter la <a href="https://search.jabber.network/privacy">politique de confidentialité</a> correspondante pour plus d’informations.]]></string>
     <string name="action_add_existing_account">Ajouter un compte existant</string>
     <string name="use_own_provider">Recourir à un fournisseur personnalisé</string>
     <string name="this_looks_like_a_domain">Il semble que ce soit une adresse de domaine</string>
@@ -935,7 +925,7 @@
     <string name="unable_to_perform_this_action">Impossible d\'effectuer cette action</string>
     <string name="waiting_for_transfer">En attente de l\'envoi</string>
     <string name="x_has_written">%s a écrit :</string>
-    <string name="i_have_written">J\'ai écrit:</string>
+    <string name="i_have_written">J\'ai écrit :</string>
     <string name="your_status">Votre statut</string>
     <string name="pref_use_invidious">Remplacer les liens YouTube par Invidious</string>
     <string name="pref_use_invidious_summary">Invidious est une alternative à Youtube et respecte la vie privée.</string>
@@ -952,10 +942,10 @@
     <string name="intro_chat_details">Détails du chat</string>
     <string name="intro_desc_chat_details">Vous voulez voir les détails d\'un chat ? Il vous suffit d\'appuyer sur le nom du chat dans la barre de menu du haut.</string>
     <string name="intro_highlight_user">Mettre en évidence l’utilisateur/trice</string>
-    <string name="intro_desc_highlight_user">Si vous souhaitez mettre en évidence un·e utilisateur/trice dans une discussion, toucher son avatar dans la discussion. Si l\'utilisateur/trice n\'est pas visible dans la discussion, passez aux détails du chat et cherchez l\'utilisateur/trice dans la liste des participant·e·s. Une pression longue sur son avatar fera apparaître un menu contextuel dans lequel vous pourrez le/la mettre en évidence.</string>
+    <string name="intro_desc_highlight_user">Si vous souhaitez mettre en évidence un·e utilisateur/trice dans une discussion, toucher son avatar dans la discussion. Si celui-ci n\'est pas visible, passez aux détails du chat et cherchez l\'utilisateur/trice parmi les participant·e·s. Une pression longue sur son avatar fera apparaître un menu permettant de le/la mettre en évidence.</string>
     <string name="intro_desc_open_chat_details">Vous avez ouvert les détails du chat. Vous pouvez y voir les détails de ce chat, modifier le comportement des notifications de nouveaux messages, ajouter ou supprimer le chat de votre liste de contacts et bien plus encore.</string>
     <string name="pref_show_intro_summary">Revoir les messages d\'introduction et de présentation.</string>
-    <string name="pref_show_intro">Revoir l\'Introduction</string>
+    <string name="pref_show_intro">Revoir l\'introduction</string>
     <string name="show_intro_again">Les messages d\'introduction seront affichés à nouveau</string>
     <string name="show_intro_again_failed">La réactivation des messages d\'introduction a échoué. Ré-essayez…</string>
     <string name="intro_desc_whats_xmpp">XMPP, également appelé Jabber, est un réseau de communication décentralisé et fonctionne comme le courrier électronique. Vous avez besoin d\'une adresse appelée identifiant Jabber, d\'un mot de passe et d\'un messager. Nous reviendrons plus tard sur ce sujet.</string>
@@ -988,16 +978,14 @@
     <string name="pref_theme_orange">Orange</string>
     <string name="pref_theme_color_options_summary">Choisissez la palette de couleurs du thème.</string>
     <string name="pref_theme_color_options">Couleurs du thème</string>
-    <string name="pref_enable_otr_summary">Active le chiffrement avec OTR pour la protection des messages.</string>
-    <string name="pref_enable_otr">Activer le chiffrement avec OTR</string>
     <string name="magic_create_text_on_x">Vous avez été invité chez %1$s. Nous vous guiderons pour créer un compte.\nAvec %1$s pour fournisseur pour pourrez communiquer avec des utilisateurs/trices d\'autres fournisseurs en leur indiquant votre adresse XMPP complète.</string>
     <string name="account_status_regis_invalid_token">Jeton d\'enregistrement invalide</string>
     <string name="magic_create_text_fixed">Vous avez été invité chez %1$s. Un nom d\'utilisateur/trice a déjà été créé pour vous. Nous vous guiderons pour créer un compte.\nVous pourrez communiquer avec des utilisateurs/trices d\'autres fournisseurs en leur indiquant votre adresse XMPP complète.</string>
     <string name="your_server_invitation">Votre invitation sur un serveur</string>
     <string name="pref_use_unicolored_chatbg_summary">Avoir des arrière-plans de discussions uniformes.</string>
     <string name="pref_use_unicolored_chatbg">Arrière-plans uniformes</string>
-    <string name="pref_alternative_voice_settings_summary">Si vous avez des problèmes pendant un enregistrement vocal, sélectionner cette option pour modifier le codec.</string>
-    <string name="pref_alternative_voice_settings">Méthode alternative d\'enregistrement vocal</string>
+    <string name="pref_alternative_voice_settings_summary">Si vous avez des problèmes pendant un enregistrement audio, sélectionner cette option pour modifier le codec.</string>
+    <string name="pref_alternative_voice_settings">Méthode alternative d\'enregistrement audio</string>
     <string name="pref_use_colored_muc_names_summary">Colorer les surnoms dans les discussions ou les canaux comme les arrière-plans d\'avatars par défaut.</string>
     <string name="pref_use_colored_muc_names">Colorer les surnoms</string>
     <string name="show_videos_images_only">Uniquement images/vidéos</string>
@@ -1012,9 +1000,9 @@
     <string name="video_call">Appel vidéo</string>
     <string name="pref_message_notification_settings">Paramètres de notification des messages</string>
     <string name="pref_incoming_call_notification_settings">Paramètres de notification des appels entrants</string>
-    <string name="pref_notification_sound_summary">Son de notification des nouveaux messages</string>
+    <string name="pref_notification_sound_summary">Son de notification des nouveaux messages.</string>
     <string name="pref_notification_sound">Son de notification</string>
-    <string name="pref_call_ringtone_summary">Sonnerie d\'un appel entrants</string>
+    <string name="pref_call_ringtone_summary">Choisir la sonnerie d\'un appel entrant.</string>
     <string name="pref_ringtone">Sonnerie</string>
     <string name="incoming_calls_channel_name">Appels entrants</string>
     <string name="ongoing_calls_channel_name">Appels en cours</string>
@@ -1035,6 +1023,7 @@
     <string name="rtp_state_ringing">Appel en cours</string>
     <string name="rtp_state_declined_or_busy">Occupé</string>
     <string name="rtp_state_connectivity_error">Impossible d\'établir l\'appel</string>
+    <string name="rtp_state_connectivity_lost_error">Connexion perdue</string>
     <string name="rtp_state_retracted">Appel refusé</string>
     <string name="rtp_state_application_failure">Erreur de l\'application</string>
     <string name="incoming_call_duration">%s · Appel entrant · %s</string>
@@ -1044,9 +1033,11 @@
     <string name="outgoing_call_time">%s · Appel sortant</string>
     <string name="outgoing_call">Appel sortant</string>
     <string name="disable_tor_to_make_call">Désactiver Tor pour passer des appels</string>
+    <string name="help">Aide</string>
     <string name="only_one_call_at_a_time">Vous ne pouvez avoir qu\'un appel à la fois.</string>
     <string name="missed_call">Appel manqué</string>
     <string name="could_not_switch_camera">Impossible de changer la caméra</string>
-    <string name="otr_warning">L\'utilisation du chiffrement avec OTR sera abandonnée en juin 2020. Pour en savoir plus, cliquer sur Plus d\'informations. Cela ouvrira un lien dans un navigateur.</string>
     <string name="readmore">Plus d\'informations</string>
+    <string name="add_to_favorites">Ajouter aux favoris</string>
+    <string name="remove_from_favorites">Enlever des favoris</string>
 </resources>

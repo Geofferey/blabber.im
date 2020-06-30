@@ -77,7 +77,6 @@
     <string name="choose_presence">Escolher dispositivo</string>
     <string name="send_unencrypted_message">Enviar mensagem não cifrada</string>
     <string name="send_message_to_x">Enviar mensagem para %s</string>
-    <string name="send_otr_message">Enviar mensagem cifrada com OTR</string>
     <string name="send_omemo_message">Enviar mensagem cifrada com OMEMO</string>
     <string name="send_omemo_x509_message">Enviar mensagem cifrada com v\\OMEMO</string>
     <string name="send_pgp_message">Enviar mensagem cifrada com OpenPGP</string>
@@ -178,10 +177,8 @@
     <string name="last_seen_day">visto há 1 dia atrás</string>
     <string name="last_seen_days">visto %d dias atrás</string>
     <string name="install_openkeychain">Mensagem criptografada. Por favor instale o OpenKeychain para desencriptar</string>
-    <string name="unknown_otr_fingerprint">Impressão digital OTR desconhecida</string>
     <string name="openpgp_messages_found">Mensagens encriptadas com OpenPGP encontradas</string>
     <string name="your_fingerprint">A sua impressão digital</string>
-    <string name="otr_fingerprint">Impressão digital OTR</string>
     <string name="omemo_fingerprint">Impressão digital OMEMO</string>
     <string name="omemo_fingerprint_x509">Impressão digital v\\OMEMO</string>
     <string name="omemo_fingerprint_selected_message">Impressão digital OMEMO da mensagem</string>
@@ -250,7 +247,6 @@
     <string name="pref_use_send_button_to_indicate_status_summary">Colorir o botão de enviar para indicar o estado do contacto</string>
     <string name="pref_expert_options_other">Outros</string>
     <string name="pref_autojoin">Sincronizar marcadores</string>
-    <string name="toast_message_otr_fingerprint">Impressão digital OTR copiada para a área de transferência!</string>
     <string name="toast_message_omemo_fingerprint">Impressão digital OMEMO copiada para a área de transferência!</string>
     <string name="conference_banned">Foi banido deste grupo</string>
     <string name="conference_members_only">Este grupo é so para membros</string>
@@ -268,7 +264,6 @@
     <string name="show_qr_code">Mostrar código QR</string>
     <string name="show_block_list">Mostar lista de bloqueios</string>
     <string name="account_details">Detalhes da conta</string>
-    <string name="verify_otr">Verificar OTR</string>
     <string name="remote_fingerprint">Impressão digital remota</string>
     <string name="shared_secret_hint">Dica ou Questão</string>
     <string name="shared_secret_secret">Segredo Partilhado</string>
@@ -281,7 +276,6 @@
     <string name="finish">Finalizar</string>
     <string name="verified">Verificado!</string>
     <string name="smp_requested">O contacto pediu uma verificação SMP</string>
-    <string name="no_otr_session_found">Não foi encontrada nenhuma sessão OTR válida!</string>
     <string name="choose_file">Escolher ficheiro</string>
     <string name="download_x_file">Transferir %s</string>
     <string name="delete_x_file">Remover %s</string>
@@ -298,7 +292,6 @@
     <string name="pref_show_dynamic_tags">Mostrar tags dinâmicas</string>
     <string name="pref_show_dynamic_tags_summary">Mostrar tags read-only debaixo dos contactos</string>
     <string name="account_image_description">Avatar da conta</string>
-    <string name="copy_otr_clipboard_description">Copiar a impressão digital OTR para a área de transferência</string>
     <string name="copy_omemo_clipboard_description">Copiar a impressão digital OMEMO para a área de transferência</string>
     <string name="regenerate_omemo_key">Regenerar a chave OMEMO</string>
     <string name="clear_other_devices">Apagar dispositivos</string>
@@ -308,7 +301,6 @@
     <string name="updating">A atualizar...</string>
     <string name="password_changed">Palavra-passe alterada!</string>
     <string name="could_not_change_password">Não foi possível alterar a palavra-passe</string>
-    <string name="otr_session_not_started">Enviar uma mensagem para começar uma conversa cifrada</string>
     <string name="ask_question">Fazer pergunta</string>
     <string name="smp_explain_question">Se tiver um segredo em comum com o seu contacto que mais ninguém saiba (como uma piada entre vocês ou simplesmente o que comeram ao almoço da última vez que se encontraram) pode usar esse segredo para verificar as impressões digitais um do outro.\n\nForneça uma dica ou uma questão para o seu contacto que irá responder com uma resposta sensível a maiúsculas e minúsculas.</string>
     <string name="smp_explain_answer">O seu contacto gostaria de verificar a sua impressão digital desafiando-o com um segredo partilhado. O seu contacto forneceu a seguinte dica ou questão para esse segredo.</string>
