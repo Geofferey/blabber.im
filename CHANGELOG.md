@@ -1,4 +1,13 @@
 ### Changelog
+
+#### Version 2.5.0
+* remove OTR encryption (PAM)
+* show help button if A/V call fails
+* fixed some annoying crashes
+* fixed Jingle connections (file transfer + calls) with bare JIDs
+* fixed notifications not showing up under certain conditions
+* fixed compatibility issues and crashes related to A/V calls
+
 #### Version 2.4.1
 * move call icon to the left in order to keep other toolbar icons in a consistent place
 * show call duration during audio calls
