@@ -31,7 +31,6 @@ package eu.siacs.conversations.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import androidx.appcompat.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -50,13 +49,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 
@@ -74,6 +73,7 @@ import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.entities.Conversation;
 import eu.siacs.conversations.entities.Conversational;
 import eu.siacs.conversations.entities.MucOptions;
+import eu.siacs.conversations.entities.Presence;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.ui.interfaces.OnBackendConnected;
 import eu.siacs.conversations.ui.interfaces.OnConversationArchived;
@@ -91,9 +91,9 @@ import eu.siacs.conversations.utils.Namespace;
 import eu.siacs.conversations.utils.SignupUtils;
 import eu.siacs.conversations.utils.UIHelper;
 import eu.siacs.conversations.utils.XmppUri;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.OnUpdateBlocklist;
 import eu.siacs.conversations.xmpp.chatstate.ChatState;
-import eu.siacs.conversations.xmpp.Jid;
 import me.drakeet.support.toast.ToastCompat;
 
 import static eu.siacs.conversations.ui.ConversationFragment.REQUEST_DECRYPT_PGP;
@@ -716,40 +716,43 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
                     abtitle.setSelected(true);
                     if (conversation.getMode() == Conversation.MODE_SINGLE && !conversation.withSelf()) {
                         ChatState state = conversation.getIncomingChatState();
-                        if (state == ChatState.COMPOSING) {
-                            absubtitle.setText(getString(R.string.is_typing));
-                            absubtitle.setTypeface(null, Typeface.BOLD_ITALIC);
-                            absubtitle.setSelected(true);
-                            absubtitle.setOnClickListener(view13 -> {
-                                if (conversation.getMode() == Conversation.MODE_SINGLE) {
-                                    switchToContactDetails(conversation.getContact());
-                                } else if (conversation.getMode() == Conversation.MODE_MULTI) {
-                                    Intent intent = new Intent(ConversationsActivity.this, ConferenceDetailsActivity.class);
-                                    intent.setAction(ConferenceDetailsActivity.ACTION_VIEW_MUC);
-                                    intent.putExtra("uuid", conversation.getUuid());
-                                    startActivity(intent);
-                                    overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
-                                }
-                            });
-                        } else {
-                            if (showLastSeen && conversation.getContact().getLastseen() > 0 && conversation.getContact().getPresences().allOrNonSupport(Namespace.IDLE)) {
-                                absubtitle.setText(UIHelper.lastseen(getApplicationContext(), conversation.getContact().isActive(), conversation.getContact().getLastseen()));
+                            if (state == ChatState.COMPOSING) {
+                                absubtitle.setText(getString(R.string.is_typing));
+                                absubtitle.setVisibility(View.VISIBLE);
+                                absubtitle.setTypeface(null, Typeface.BOLD_ITALIC);
+                                absubtitle.setSelected(true);
+                                absubtitle.setOnClickListener(view13 -> {
+                                    if (conversation.getMode() == Conversation.MODE_SINGLE) {
+                                        switchToContactDetails(conversation.getContact());
+                                    } else if (conversation.getMode() == Conversation.MODE_MULTI) {
+                                        Intent intent = new Intent(ConversationsActivity.this, ConferenceDetailsActivity.class);
+                                        intent.setAction(ConferenceDetailsActivity.ACTION_VIEW_MUC);
+                                        intent.putExtra("uuid", conversation.getUuid());
+                                        startActivity(intent);
+                                        overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
+                                    }
+                                });
                             } else {
-                                absubtitle.setText(getString(R.string.account_status_online));
-                            }
-                            absubtitle.setSelected(true);
-                            absubtitle.setOnClickListener(view14 -> {
-                                if (conversation.getMode() == Conversation.MODE_SINGLE) {
-                                    switchToContactDetails(conversation.getContact());
-                                } else if (conversation.getMode() == Conversation.MODE_MULTI) {
-                                    Intent intent = new Intent(ConversationsActivity.this, ConferenceDetailsActivity.class);
-                                    intent.setAction(ConferenceDetailsActivity.ACTION_VIEW_MUC);
-                                    intent.putExtra("uuid", conversation.getUuid());
-                                    startActivity(intent);
-                                    overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
+                                if (showLastSeen && conversation.getContact().getLastseen() > 0 && conversation.getContact().getPresences().allOrNonSupport(Namespace.IDLE)) {
+                                    absubtitle.setText(UIHelper.lastseen(getApplicationContext(), conversation.getContact().isActive(), conversation.getContact().getLastseen()));
+                                    absubtitle.setVisibility(View.VISIBLE);
+                                } else {
+                                    absubtitle.setText(null);
+                                    absubtitle.setVisibility(View.GONE);
                                 }
-                            });
-                        }
+                                absubtitle.setSelected(true);
+                                absubtitle.setOnClickListener(view14 -> {
+                                    if (conversation.getMode() == Conversation.MODE_SINGLE) {
+                                        switchToContactDetails(conversation.getContact());
+                                    } else if (conversation.getMode() == Conversation.MODE_MULTI) {
+                                        Intent intent = new Intent(ConversationsActivity.this, ConferenceDetailsActivity.class);
+                                        intent.setAction(ConferenceDetailsActivity.ACTION_VIEW_MUC);
+                                        intent.putExtra("uuid", conversation.getUuid());
+                                        startActivity(intent);
+                                        overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
+                                    }
+                                });
+                            }
                     } else {
                         ChatState state = ChatState.COMPOSING;
                         List<MucOptions.User> userWithChatStates = conversation.getMucOptions().getUsersWithChatState(state, 5);
@@ -763,6 +766,7 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
                                 if (userWithChatStates.size() == 1) {
                                     MucOptions.User user = userWithChatStates.get(0);
                                     absubtitle.setText(EmojiWrapper.transform(getString(R.string.contact_is_typing, UIHelper.getDisplayName(user))));
+                                    absubtitle.setVisibility(View.VISIBLE);
                                 } else {
                                     StringBuilder builder = new StringBuilder();
                                     for (MucOptions.User user : userWithChatStates) {
@@ -772,14 +776,17 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
                                         builder.append(UIHelper.getDisplayName(user));
                                     }
                                     absubtitle.setText(EmojiWrapper.transform(getString(R.string.contacts_are_typing, builder.toString())));
+                                    absubtitle.setVisibility(View.VISIBLE);
                                 }
                             }
                         } else {
                             if (users.size() == 0) {
                                 absubtitle.setText(getString(R.string.one_participant));
+                                absubtitle.setVisibility(View.VISIBLE);
                             } else {
                                 int size = users.size() + 1;
                                 absubtitle.setText(getString(R.string.more_participants, size));
+                                absubtitle.setVisibility(View.VISIBLE);
                             }
                         }
                         absubtitle.setSelected(true);

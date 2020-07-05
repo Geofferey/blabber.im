@@ -534,13 +534,11 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
             binding.detailsLastseen.setVisibility(View.VISIBLE);
             binding.detailsLastseen.setText(R.string.contact_blocked);
         } else {
-            if (showLastSeen
-                    && contact.getLastseen() > 0
-                    && contact.getPresences().allOrNonSupport(Namespace.IDLE)) {
+            if (showLastSeen && contact.getLastseen() > 0 && contact.getPresences().allOrNonSupport(Namespace.IDLE)) {
                 binding.detailsLastseen.setVisibility(View.VISIBLE);
                 binding.detailsLastseen.setText(UIHelper.lastseen(getApplicationContext(), contact.isActive(), contact.getLastseen()));
             } else {
-                binding.detailsLastseen.setText(getString(R.string.account_status_online));
+                binding.detailsLastseen.setVisibility(View.GONE);
             }
         }
 
