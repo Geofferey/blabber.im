@@ -1061,11 +1061,11 @@ public class XmppConnectionService extends Service {
             case "verylow":
                 return 100000;
             case "low":
-                return 100000;
-            case "mid":
                 return 500000;
-            case "high":
+            case "mid":
                 return 2000000;
+            case "high":
+                return 4000000;
             case "uncompressed":
                 return 0;
             default:
