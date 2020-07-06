@@ -56,9 +56,6 @@ public abstract class AbstractGenerator {
     private final String[] PRIVACY_SENSITIVE = {
             "urn:xmpp:time" //XEP-0202: Entity Time leaks time zone
     };
-    private final String[] OTR = {
-            "urn:xmpp:otr:0"
-    };
     private final String[] VOIP_NAMESPACES = {
             Namespace.JINGLE_TRANSPORT_ICE_UDP,
             Namespace.JINGLE_FEATURE_AUDIO,
@@ -135,9 +132,6 @@ public abstract class AbstractGenerator {
         if (!mXmppConnectionService.useTorToConnect() && !account.isOnion()) {
             features.addAll(Arrays.asList(PRIVACY_SENSITIVE));
             features.addAll(Arrays.asList(VOIP_NAMESPACES));
-        }
-        if (Config.supportOtr()) {
-            features.addAll(Arrays.asList(OTR));
         }
         if (mXmppConnectionService.broadcastLastActivity()) {
             features.add(Namespace.IDLE);
