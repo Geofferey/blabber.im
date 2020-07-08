@@ -8,7 +8,7 @@ Please consider to use OMEMO in the future, many other clients has implemented t
 
 Please consider the differences between encryption protocols and also advantages of OMEMO: 
 
-<img src="https://github.com/kriztan/Pix-Art-Messenger/blob/master/art/Feature_OMEMO.png" width="400">
+<img src="https://codeberg.org/kriztan/Pix-Art-Messenger/raw/branch/master/art/Feature_OMEMO.png" width="400">
 Source: [https://conversations.im/omemo](https://conversations.im/omemo)
 
 Some limitations of OTR: [wikipedia.org/wiki/Off-the-Record](https://en.wikipedia.org/wiki/Off-the-Record_Messaging#Limitations)
