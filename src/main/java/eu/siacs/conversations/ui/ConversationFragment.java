@@ -1814,7 +1814,6 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             binding.conversationsFragment.setBackgroundResource(0);
             binding.conversationsFragment.setBackgroundColor(StyledAttributes.getColor(activity, R.attr.color_background_tertiary));
         } else {
-            binding.conversationsFragment.setBackgroundColor(0);
             binding.conversationsFragment.setBackground(ContextCompat.getDrawable(activity, R.drawable.chatbg));
         }
     }
