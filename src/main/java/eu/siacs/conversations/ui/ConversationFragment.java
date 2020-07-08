@@ -2554,7 +2554,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
 
     private boolean showBlockSubmenu(View view) {
         final Jid jid = conversation.getJid();
-        final boolean showReject = !conversation.isWithStranger() && conversation.getContact().getOption(Contact.Options.PENDING_SUBSCRIPTION_REQUEST);
+        final boolean showReject = conversation.getContact().getOption(Contact.Options.PENDING_SUBSCRIPTION_REQUEST);
         PopupMenu popupMenu = new PopupMenu(getActivity(), view);
         popupMenu.inflate(R.menu.block);
         popupMenu.getMenu().findItem(R.id.block_contact).setVisible(jid.getLocal() != null);
