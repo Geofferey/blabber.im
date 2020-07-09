@@ -31,6 +31,8 @@ package eu.siacs.conversations.utils;
 
 import android.util.LruCache;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -81,7 +83,7 @@ public class Emoticons {
     private static final int BLACK_FLAG = 0x1F3F4;
     private static final UnicodeRange FITZPATRICK = new UnicodeRange(0x1F3FB, 0x1F3FF);
 
-    private static final LruCache<CharSequence,Pattern> CACHE = new LruCache<>(256);
+    private static final LruCache<CharSequence, Pattern> CACHE = new LruCache<>(256);
 
     private static List<Symbol> parse(String input) {
         List<Symbol> symbols = new ArrayList<>();
@@ -105,7 +107,7 @@ public class Emoticons {
         return symbols;
     }
 
-    public static Pattern getEmojiPattern(CharSequence input) {
+    public static Pattern getEmojiPattern(final CharSequence input) {
         Pattern pattern = CACHE.get(input);
         if (pattern == null) {
             pattern = generatePattern(input);
@@ -117,7 +119,7 @@ public class Emoticons {
     private static Pattern generatePattern(CharSequence input) {
         final HashSet<String> emojis = new HashSet<>();
         int i = 0;
-        for (Symbol symbol : parse(input.toString())) {
+        for (final Symbol symbol : parse(input.toString())) {
             if (symbol instanceof Emoji) {
                 emojis.add(symbol.toString());
                 if (++i >= MAX_EMOIJS) {
@@ -154,9 +156,9 @@ public class Emoticons {
 
         private final String value;
 
-        public Symbol(List<Integer> codepoints) {
-            StringBuilder builder = new StringBuilder();
-            for (Integer codepoint : codepoints) {
+        Symbol(List<Integer> codepoints) {
+            final StringBuilder builder = new StringBuilder();
+            for (final Integer codepoint : codepoints) {
                 builder.appendCodePoint(codepoint);
             }
             this.value = builder.toString();
@@ -164,6 +166,7 @@ public class Emoticons {
 
         abstract boolean isEmoji();
 
+        @NonNull
         @Override
         public String toString() {
             return value;
@@ -219,7 +222,7 @@ public class Emoticons {
                 } else if (REGIONAL_INDICATORS.contains(previous) && REGIONAL_INDICATORS.contains(codepoint)) {
                     add = codepoints.size() == 1;
                 } else if (previous == VARIATION_16) {
-                    add = isMerger(codepoint);
+                    add = isMerger(codepoint) || codepoint == VARIATION_16;
                 } else if (FITZPATRICK.contains(previous)) {
                     add = codepoint == ZWJ;
                 } else if (ZWJ == previous) {
@@ -255,13 +258,13 @@ public class Emoticons {
     public static class UnicodeBlocks implements UnicodeSet {
         final UnicodeSet[] unicodeSets;
 
-        public UnicodeBlocks(UnicodeSet... sets) {
+        UnicodeBlocks(final UnicodeSet... sets) {
             this.unicodeSets = sets;
         }
 
         @Override
         public boolean contains(int codepoint) {
-            for(UnicodeSet unicodeSet : unicodeSets) {
+            for (UnicodeSet unicodeSet : unicodeSets) {
                 if (unicodeSet.contains(codepoint)) {
                     return true;
                 }
@@ -278,7 +281,7 @@ public class Emoticons {
 
         private final List<Integer> list;
 
-        public UnicodeList(Integer... codes) {
+        UnicodeList(final Integer... codes) {
             this.list = Arrays.asList(codes);
         }
 
