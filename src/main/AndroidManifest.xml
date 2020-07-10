@@ -317,7 +317,8 @@
         <activity
             android:name=".ui.SearchActivity"
             android:label="@string/search_messages"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".ui.MediaViewerActivity"
             android:configChanges="orientation|screenSize"
