@@ -7,14 +7,14 @@ deshalb erzwingen wir verschlüsselte Verbindungen zwischen Messenger und Server
 was es nahezu unmöglich macht, deine Nachrichten durch Fremde abzufangen und zu
 lesen.
 Wem das nicht genug ist, kann auf die integrierte Nachrichtenverschlüsselung von
-Ende-zu-Ende, wie OMEMO, OTR oder OpenPGP, zurückgreifen.
+Ende-zu-Ende, wie OMEMO oder OpenPGP, zurückgreifen.
 Damit lassen sich Nachrichten auf dem Sendegerät verschlüsseln und nur durch das
 für den Empfang bestimmte Empfangsgerät entschlüsseln.
 Seit Version 1.20.0 wird ein Hinweis direkt im Chat angezeigt, sofern du
 unverschlüsselt schreibst und eine Verschlüsselung möglich ist.
 
 Features:
-* Ende-zu-Ende Verschlüsselung entweder mit <a href="http://conversations.im/omemo/">OMEMO</a>, <a href="https://otr.cypherpunks.ca/">OTR</a> oder <a href="http://openpgp.org/about/">OpenPGP</a>
+* Ende-zu-Ende Verschlüsselung entweder mit <a href="http://conversations.im/omemo/">OMEMO</a> oder <a href="http://openpgp.org/about/">OpenPGP</a>
 * Austausch von Bildern sowie anderen Dateien
 * Standorte senden und empfangen
 * Sprachnachrichten senden und empfangen
@@ -22,6 +22,7 @@ Features:
 * Synchronisiere Nachrichtenverlauf mit anderen Clients
 * Konferenzen bzw. Gruppenchats
 * Adressbuchintegration (ein Austausch deines Adressbuches mit dem Server findet nicht statt)
+* Audio/Video Telefonie seit Version 2.4.0
 * sehr geringe Akku-Belastung
 * Status Nachrichten
 * tägliches Backup der Datenbank auf den lokalen Speicher

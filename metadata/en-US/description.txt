@@ -4,14 +4,14 @@ to improve usability.
 Connection security and the protection of personal data are very important for
 us, so we enforce encrypted connections between messenger and server, making it
 almost impossible to intercept and read your messages by strangers.
-If that's not enough for you, end-to-end message encryption such as OMEMO, OTR
+If that's not enough for you, end-to-end message encryption such as OMEMO
 or OpenPGP can be used. This allows messages to be encrypted on the sending
 device and decrypted only by the receiving device intended for reception.
 Since version 1.20.0, a hint is displayed directly in the chat, as long as you
 write unencrypted and encryption is possible.
 
 Features:
-* End-to-end encryption with either <a href="http://conversations.im/omemo/">OMEMO</a>, <a href="https://otr.cypherpunks.ca/">OTR</a> or <a href="http://openpgp.org/about/">OpenPGP</a>
+* End-to-end encryption with either <a href="http://conversations.im/omemo/">OMEMO</a> or <a href="http://openpgp.org/about/">OpenPGP</a>
 * Send and receive images as well as other files
 * Send and receive locations
 * Send and receive voice messages
@@ -19,6 +19,7 @@ Features:
 * Synchronize message history with other clients
 * Conferences or group chats
 * Address book integration (there is no exchange of your address book with the server)
+* Audio/Video calls since version 2.4.0
 * Very low battery consumption
 * Status messages
 * Daily backup of database to local storage
