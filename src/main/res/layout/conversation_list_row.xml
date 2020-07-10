@@ -13,6 +13,7 @@
             android:background="?attr/color_background_secondary">
 
             <RelativeLayout
+                android:id="@+id/chat"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:selectableItemBackground"

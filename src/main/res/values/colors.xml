@@ -9,8 +9,10 @@
     <color name="primary_orange_dark">#ffb97700</color>
     <color name="primary_dark_orange_dark">#ffa06700</color>
     <color name="accent_orange">#ffffa500</color>
+    <color name="accent_light_orange">#1affa500</color>
 
     <color name="accent">#ff0091ea</color> <!-- light blue accent -->
+    <color name="accent_light">#1a0091ea</color> <!-- light blue accent -->
     <color name="black">#ff000000</color>
     <color name="black87">#de000309</color>
     <color name="black54">#8a000309</color>

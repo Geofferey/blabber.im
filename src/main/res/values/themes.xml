@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
+        <item name="colorAccentLight">@color/accent_light</item>
         <item name="popupOverlayStyle">@style/ThemeOverlay.MaterialComponents.Light</item>
         <item name="colorControlNormal">@color/accent</item>
         <item name="colorControlActivated">@color/accent</item>
@@ -174,6 +175,7 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
+        <item name="colorAccentLight">@color/accent_light</item>
         <item name="popupOverlayStyle">@style/ThemeOverlay.MaterialComponents.Dark</item>
         <item name="colorControlNormal">@color/accent</item>
         <item name="colorControlActivated">@color/accent</item>
@@ -345,6 +347,7 @@
         <item name="colorPrimary">@color/primary_orange</item>
         <item name="colorPrimaryDark">@color/primary_dark_orange</item>
         <item name="colorAccent">@color/accent_orange</item>
+        <item name="colorAccentLight">@color/accent_light_orange</item>
         <item name="colorControlNormal">@color/accent_orange</item>
         <item name="colorControlActivated">@color/accent_orange</item>
 
@@ -363,6 +366,7 @@
         <item name="colorPrimary">@color/primary_orange_dark</item>
         <item name="colorPrimaryDark">@color/primary_dark_orange_dark</item>
         <item name="colorAccent">@color/accent_orange</item>
+        <item name="colorAccentLight">@color/accent_light_orange</item>
         <item name="colorControlNormal">@color/accent_orange</item>
         <item name="colorControlActivated">@color/accent_orange</item>
 
@@ -381,6 +385,7 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
+        <item name="colorAccentLight">@color/accent_light</item>
         <item name="color_background_primary">@color/grey50</item>
         <item name="divider">@color/black12</item>
         <item name="TextSizeTitle">18sp</item>
@@ -393,12 +398,14 @@
         <item name="colorPrimary">@color/primary_orange</item>
         <item name="colorPrimaryDark">@color/primary_dark_orange</item>
         <item name="colorAccent">@color/accent_orange</item>
+        <item name="colorAccentLight">@color/accent_light_orange</item>
     </style>
 
     <style name="ConversationsTheme.Dark.Dialog" parent="Theme.MaterialComponents.Dialog">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
+        <item name="colorAccentLight">@color/accent_light</item>
         <item name="color_background_primary">@color/grey800</item>
         <item name="divider">@color/white12</item>
         <item name="TextSizeBody2">14sp</item>
@@ -410,6 +417,7 @@
         <item name="colorPrimary">@color/primary_orange_dark</item>
         <item name="colorPrimaryDark">@color/primary_dark_orange_dark</item>
         <item name="colorAccent">@color/accent_orange</item>
+        <item name="colorAccentLight">@color/accent_light_orange</item>
     </style>
 
     <style name="ConversationsTheme.Dialog.Medium" parent="ConversationsTheme.Dialog">
