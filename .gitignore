@@ -45,3 +45,4 @@ import-summary.txt
 src/main/res/values/api_keys.xml
 src/standardPush/res/values/gcm.xml
 /libs/libwebrtc*
+/.github/ISSUE_TEMPLATE.md
