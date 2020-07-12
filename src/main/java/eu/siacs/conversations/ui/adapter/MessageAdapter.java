@@ -929,7 +929,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
             viewHolder.image.setVisibility(View.GONE);
             viewHolder.gifImage.setVisibility(View.VISIBLE);
             final FileParams params = message.getFileParams();
-            final double target = metrics.density * 200;
+        final float target = activity.getResources().getDimension(R.dimen.image_preview_width);
             final int scaledW;
             final int scaledH;
             if (Math.max(params.height, params.width) * metrics.density <= target) {
@@ -945,7 +945,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                 scaledW = (int) target;
                 scaledH = (int) (params.height / ((double) params.width / target));
             }
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(scaledW, scaledH);
+        final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(scaledW, scaledH);
             layoutParams.setMargins(0, (int) (metrics.density * 4), 0, (int) (metrics.density * 4));
             viewHolder.gifImage.setLayoutParams(layoutParams);
             activity.loadGif(file, viewHolder.gifImage);
