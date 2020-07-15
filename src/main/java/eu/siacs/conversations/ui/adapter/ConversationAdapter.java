@@ -249,6 +249,8 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         final boolean isPinned = conversation.getBooleanAttribute(Conversation.ATTRIBUTE_PINNED_ON_TOP,false);
         if (isPinned) {
             viewHolder.binding.chat.setBackgroundColor(StyledAttributes.getColor(this.activity, R.attr.colorAccentLight));
+        } else {
+            viewHolder.binding.chat.setBackgroundColor(0);
         }
         viewHolder.binding.pinnedOnTop.setVisibility(isPinned ? View.VISIBLE : View.GONE);
         viewHolder.binding.conversationLastupdate.setText(UIHelper.readableTimeDifference(activity, timestamp));
