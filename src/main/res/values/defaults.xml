@@ -75,6 +75,14 @@
     <bool name="alternative_voice_settings">false</bool>
     <bool name="use_colored_muc_names">false</bool>
     <bool name="show_videos_images_only">false</bool>
+    <integer name="verylow_video_bitrate">100000</integer>
+    <integer name="low_video_bitrate">500000</integer>
+    <integer name="mid_video_bitrate">2000000</integer>
+    <integer name="high_video_bitrate">4000000</integer>
+    <integer name="verylow_video_res">144</integer>
+    <integer name="low_video_res">360</integer>
+    <integer name="mid_video_res">720</integer>
+    <integer name="high_video_res">1080</integer>
 
     <string-array name="domains">
         <item>pix-art.de</item>

@@ -545,12 +545,17 @@ public class XmppConnectionService extends Service {
         }
         Log.d(Config.LOGTAG, "attachFile: type=" + message.getType());
         Log.d(Config.LOGTAG, "counterpart=" + message.getCounterpart());
-        final AttachFileToConversationRunnable runnable = new AttachFileToConversationRunnable(this, uri, type, message, callback);
+        final AttachFileToConversationRunnable runnable = new AttachFileToConversationRunnable(this, uri, type, message, callback, getMaxHttpUploadSize(conversation));
         if (runnable.isVideoMessage()) {
             mVideoCompressionExecutor.execute(runnable);
         } else {
             mFileAddingExecutor.execute(runnable);
         }
+    }
+
+    public long getMaxHttpUploadSize(Conversation conversation) {
+        final XmppConnection connection = conversation.getAccount().getXmppConnection();
+        return connection == null ? -1 : connection.getFeatures().getMaxHttpUploadSize();
     }
 
     public void attachImageToConversation(final Conversation conversation, final Uri uri, final UiCallback<Message> callback) {
@@ -1042,34 +1047,34 @@ public class XmppConnectionService extends Service {
     public int getCompressVideoResolutionPreference() {
         switch (getPreferences().getString("video_compression", getResources().getString(R.string.video_compression))) {
             case "verylow":
-                return 144;
+                return getResources().getInteger(R.integer.verylow_video_res);
             case "low":
-                return 360;
+                return getResources().getInteger(R.integer.low_video_res);
             case "mid":
-                return 720;
+                return getResources().getInteger(R.integer.mid_video_res);
             case "high":
-                return 1080;
+                return getResources().getInteger(R.integer.high_video_res);
             case "uncompressed":
                 return 0;
             default:
-                return 720;
+                return getResources().getInteger(R.integer.mid_video_res);
         }
     }
 
     public int getCompressVideoBitratePreference() {
         switch (getPreferences().getString("video_compression", getResources().getString(R.string.video_compression))) {
             case "verylow":
-                return 100000;
+                return getResources().getInteger(R.integer.verylow_video_bitrate);
             case "low":
-                return 500000;
+                return getResources().getInteger(R.integer.low_video_bitrate);
             case "mid":
-                return 2000000;
+                return getResources().getInteger(R.integer.mid_video_bitrate);
             case "high":
-                return 4000000;
+                return getResources().getInteger(R.integer.high_video_bitrate);
             case "uncompressed":
                 return 0;
             default:
-                return 500000;
+                return getResources().getInteger(R.integer.mid_video_bitrate);
         }
     }
 
