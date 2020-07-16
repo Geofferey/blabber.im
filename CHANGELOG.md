@@ -4,6 +4,7 @@
 * rework lastseen and don't show offline as online (PAM)
 * improve video quality a bit (PAM)
 * add ability to reject all contact requests via long press (PAM)
+* colorize pinned chats (PAM)
 * add 'Return to chat' to audio call screen
 * improve keyboard shortcuts
 * bug fixes
