@@ -1,5 +1,13 @@
 ### Changelog
 
+#### Version 2.5.1
+* rework lastseen and don't show offline as online (PAM)
+* improve video quality a bit (PAM)
+* add ability to reject all contact requests via long press (PAM)
+* add 'Return to chat' to audio call screen
+* improve keyboard shortcuts
+* bug fixes
+
 #### Version 2.5.0
 * remove OTR encryption (PAM)
 * show help button if A/V call fails
