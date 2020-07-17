@@ -121,7 +121,7 @@ public class PushManagementService {
         final FirebaseInstanceId firebaseInstanceId;
         try {
             firebaseInstanceId = FirebaseInstanceId.getInstance();
-        } catch (IllegalStateException e) {
+        } catch (Exception e) {
             Log.d(Config.LOGTAG, "unable to get firebase instance token ", e);
             return;
         }
