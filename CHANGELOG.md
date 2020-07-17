@@ -1,5 +1,8 @@
 ### Changelog
 
+#### Version 2.5.2
+* fix crash on PlayStore version  
+
 #### Version 2.5.1
 * rework lastseen and don't show offline as online (PAM)
 * improve video quality a bit (PAM)
