@@ -55,6 +55,7 @@ public final class MimeUtils {
         add("application/andrew-inset", "ez");
         add("application/dsptype", "tsp");
         add("application/epub+zip", "epub");
+        add("application/gpx+xml", "gpx");
         add("application/hta", "hta");
         add("application/mac-binhex40", "hqx");
         add("application/mathematica", "nb");

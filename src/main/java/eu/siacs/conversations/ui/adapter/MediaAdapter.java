@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,8 +68,9 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
         this.mediaSize = Math.round(activity.getResources().getDimension(mediaSize));
     }
 
+    @SuppressWarnings("rawtypes")
     public static void setMediaSize(RecyclerView recyclerView, int mediaSize) {
-        RecyclerView.Adapter adapter = recyclerView.getAdapter();
+        final RecyclerView.Adapter adapter = recyclerView.getAdapter();
         if (adapter instanceof MediaAdapter) {
             ((MediaAdapter) adapter).setMediaSize(mediaSize);
         }
@@ -83,6 +85,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
             attr = R.attr.media_preview_recording;
         } else {
             final String mime = attachment.getMime();
+            Log.d(Config.LOGTAG, "mime=" + mime);
             if (mime == null) {
                 attr = R.attr.media_preview_unknown;
             } else if (mime.startsWith("audio/")) {
@@ -101,6 +104,8 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
                 attr = R.attr.media_preview_backup;
             } else if (DOCUMENT_MIMES.contains(mime)) {
                 attr = R.attr.media_preview_document;
+            } else if (mime.equals("application/gpx+xml")) {
+                attr = R.attr.media_preview_tour;
             } else {
                 attr = R.attr.media_preview_unknown;
             }

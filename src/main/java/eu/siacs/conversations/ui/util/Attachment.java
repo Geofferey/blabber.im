@@ -37,6 +37,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.google.common.base.MoreObjects;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,7 +50,28 @@ import eu.siacs.conversations.utils.Compatibility;
 import eu.siacs.conversations.utils.MimeUtils;
 
 public class Attachment implements Parcelable {
-    public static final Creator<Attachment> CREATOR = new Parcelable.Creator<Attachment>() {
+
+    Attachment(Parcel in) {
+        uri = in.readParcelable(Uri.class.getClassLoader());
+        mime = in.readString();
+        uuid = UUID.fromString(in.readString());
+        type = Type.valueOf(in.readString());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(uri, flags);
+        dest.writeString(mime);
+        dest.writeString(uuid.toString());
+        dest.writeString(type.toString());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Attachment> CREATOR = new Creator<Attachment>() {
         @Override
         public Attachment createFromParcel(Parcel in) {
             return new Attachment(in);
@@ -59,17 +82,33 @@ public class Attachment implements Parcelable {
             return new Attachment[size];
         }
     };
+
+    public String getMime() {
+        return mime;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("uri", uri)
+                .add("type", type)
+                .add("uuid", uuid)
+                .add("mime", mime)
+                .toString();
+    }
+
+    public enum Type {
+        FILE, IMAGE, LOCATION, RECORDING
+    }
+
     private final Uri uri;
     private final Type type;
     private final UUID uuid;
     private final String mime;
-
-    Attachment(Parcel in) {
-        uri = in.readParcelable(Uri.class.getClassLoader());
-        mime = in.readString();
-        uuid = UUID.fromString(in.readString());
-        type = Type.valueOf(in.readString());
-    }
 
     private Attachment(UUID uuid, Uri uri, Type type, String mime) {
         this.uri = uri;
@@ -136,27 +175,6 @@ public class Attachment implements Parcelable {
         return uris;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(uri, flags);
-        dest.writeString(mime);
-        dest.writeString(uuid.toString());
-        dest.writeString(type.toString());
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public String getMime() {
-        return mime;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
     public boolean renderThumbnail() {
         return type == Type.IMAGE || (type == Type.FILE && mime != null && renderFileThumbnail(mime));
     }
@@ -177,9 +195,5 @@ public class Attachment implements Parcelable {
 
     private static boolean isImage(final String mime) {
         return mime.startsWith("image/") && !mime.equals("image/svg+xml");
-    }
-
-    public enum Type {
-        FILE, IMAGE, LOCATION, RECORDING
     }
 }

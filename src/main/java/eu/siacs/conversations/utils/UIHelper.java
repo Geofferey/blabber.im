@@ -305,14 +305,14 @@ public class UIHelper {
             return new Pair<>(context.getString(R.string.omemo_decryption_failed), true);
         } else if (message.isFileOrImage()) {
             return new Pair<>(getFileDescriptionString(context, message), true);
-		} else if (message.getType() == Message.TYPE_RTP_SESSION) {
-			RtpSessionStatus rtpSessionStatus = RtpSessionStatus.of(message.getBody());
-			final boolean received = message.getStatus() == Message.STATUS_RECEIVED;
-			if (!rtpSessionStatus.successful && received) {
-				return new Pair<>(context.getString(R.string.missed_call),true);
-			} else {
-				return new Pair<>(context.getString(received ? R.string.incoming_call : R.string.outgoing_call), true);
-			}
+        } else if (message.getType() == Message.TYPE_RTP_SESSION) {
+            RtpSessionStatus rtpSessionStatus = RtpSessionStatus.of(message.getBody());
+            final boolean received = message.getStatus() == Message.STATUS_RECEIVED;
+            if (!rtpSessionStatus.successful && received) {
+                return new Pair<>(context.getString(R.string.missed_call), true);
+            } else {
+                return new Pair<>(context.getString(received ? R.string.incoming_call : R.string.outgoing_call), true);
+            }
         } else {
             final String body = MessageUtils.filterLtrRtl(message.getBody());
             if (message.getBody().equals(DELETED_MESSAGE_BODY) || message.getBody().equals(DELETED_MESSAGE_BODY_OLD)) {
@@ -511,6 +511,8 @@ public class UIHelper {
             return context.getString(R.string.event);
         } else if (mime.equals("application/epub+zip") || mime.equals("application/vnd.amazon.mobi8-ebook")) {
             return context.getString(R.string.ebook);
+        } else if (mime.equals("application/gpx+xml")) {
+            return context.getString(R.string.gpx_track);
         } else {
             return mime;
         }
