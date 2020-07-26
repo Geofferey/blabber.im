@@ -1044,4 +1044,5 @@
     <string name="remove_from_favorites">Remove from favorites</string>
     <string name="improperly_formatted_provisioning">Improperly formatted provisioning code</string>
     <string name="gpx_track">GPX track</string>
+    <string name="could_not_correct_message">Could not correct message</string>
 </resources>
