@@ -32,10 +32,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.common.base.CharMatcher;
 
 import org.openintents.openpgp.util.OpenPgpUtils;
 
@@ -73,13 +73,13 @@ import eu.siacs.conversations.utils.TorServiceUtils;
 import eu.siacs.conversations.utils.UIHelper;
 import eu.siacs.conversations.utils.XmppUri;
 import eu.siacs.conversations.xml.Element;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.OnKeyStatusUpdated;
 import eu.siacs.conversations.xmpp.OnUpdateBlocklist;
 import eu.siacs.conversations.xmpp.XmppConnection;
 import eu.siacs.conversations.xmpp.XmppConnection.Features;
 import eu.siacs.conversations.xmpp.forms.Data;
 import eu.siacs.conversations.xmpp.pep.Avatar;
-import eu.siacs.conversations.xmpp.Jid;
 import me.drakeet.support.toast.ToastCompat;
 
 import static eu.siacs.conversations.utils.PermissionUtils.allGranted;
@@ -201,12 +201,12 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                 removeErrorsOnAllBut(binding.accountJidLayout);
                 return;
             }
-            String hostname = null;
+            final String hostname;
             int numericPort = 5222;
             if (mShowOptions) {
-                hostname = binding.hostname.getText().toString().replaceAll("\\s", "");
-                final String port = binding.port.getText().toString().replaceAll("\\s", "");
-                if (hostname.contains(" ")) {
+                hostname = CharMatcher.whitespace().removeFrom(binding.hostname.getText());
+                final String port = CharMatcher.whitespace().removeFrom(binding.port.getText());
+                if (Resolver.invalidHostname(hostname)) {
                     binding.hostnameLayout.setError(getString(R.string.not_valid_hostname));
                     binding.hostname.requestFocus();
                     removeErrorsOnAllBut(binding.hostnameLayout);
@@ -228,6 +228,8 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                         return;
                     }
                 }
+            } else {
+                hostname = null;
             }
 
             if (jid.getLocal() == null) {

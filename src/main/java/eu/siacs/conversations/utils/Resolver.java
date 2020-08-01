@@ -93,6 +93,15 @@ public class Resolver {
         return happyEyeball(resolveNoSrvRecords(DNSName.from(hostname), port, true));
     }
 
+    public static boolean invalidHostname(final String hostname) {
+        try {
+            DNSName.from(hostname);
+            return false;
+        } catch (IllegalArgumentException e) {
+            return true;
+        }
+    }
+
 
     public static boolean useDirectTls(final int port) {
         return port == 443 || port == 5223;
