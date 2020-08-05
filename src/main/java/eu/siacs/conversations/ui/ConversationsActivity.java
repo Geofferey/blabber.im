@@ -331,8 +331,8 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
 
     private boolean processViewIntent(Intent intent) {
         Log.d(Config.LOGTAG, "process view intent");
-        String uuid = intent.getStringExtra(EXTRA_CONVERSATION);
-        Conversation conversation = uuid != null ? xmppConnectionService.findConversationByUuid(uuid) : null;
+        final String uuid = intent.getStringExtra(EXTRA_CONVERSATION);
+        final Conversation conversation = uuid != null ? xmppConnectionService.findConversationByUuid(uuid) : null;
         if (conversation == null) {
             Log.d(Config.LOGTAG, "unable to view conversation with uuid:" + uuid);
             return false;
