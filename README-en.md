@@ -1,7 +1,7 @@
-![logo](/art/icon.png) 
+![logo](art/icon.png)
 # Pix-Art Messenger [![CircleCI](https://circleci.com/gh/kriztan/Pix-Art-Messenger/tree/master.svg?style=shield)](https://circleci.com/gh/kriztan/Pix-Art-Messenger/tree/master)
 
-🇩🇪 <a href='README.md' style="font-size:150%">Deutsche Version der Readme hier verfügbar.</a>
+🇩🇪… [Deutsche Version der Readme hier verfügbar.](README.md)
 
 Pix-Art Messenger is a fork of [Conversations](https://github.com/siacs/Conversations).
 The changes aim to improve usability and ease transition from pre-installed and other widespread messengers. Here are some screenshots:
