@@ -1,7 +1,7 @@
-![logo](/art/icon.png) 
+![logo](art/icon.png)
 # Pix-Art Messenger [![CircleCI](https://circleci.com/gh/kriztan/Pix-Art-Messenger/tree/master.svg?style=shield)](https://circleci.com/gh/kriztan/Pix-Art-Messenger/tree/master)
 
-🇬🇧🇺🇸… <a href='README-en.md' style="font-size:150%">English Readme version available here</a>
+🇬🇧🇺🇸… [English Readme version available here](README-en.md)
 
 Pix-Art Messenger ist eine Kopie der offiziellen Android-App [Conversations](https://github.com/siacs/Conversations) mit einigen Änderungen, insbesondere zur Verbesserung der Benutzerfreundlichkeit, um den Umstieg von oftmals vorinstallierten Messengern zu erleichtern. Die folgenden Bilder geben erste Eindrücke der App:
 
