@@ -33,6 +33,8 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.security.KeyChain;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -280,6 +282,13 @@ public class XmppConnectionService extends Service {
                 }
             }
             return false;
+        }
+    };
+    private final AtomicBoolean isPhoneInCall = new AtomicBoolean(false);
+    private final PhoneStateListener phoneStateListener = new PhoneStateListener() {
+        @Override
+        public void onCallStateChanged(final int state, final String phoneNumber) {
+            isPhoneInCall.set(state != 0);
         }
     };
     //Ui callback listeners
@@ -1355,10 +1364,23 @@ public class XmppConnectionService extends Service {
         registerReceiver(this.mInternalEventReceiver, intentFilter);
         mForceDuringOnCreate.set(false);
         toggleForegroundService();
+        setupPhoneStateListener();
         //start export log service every day at given time
         ScheduleAutomaticExport();
         // cancel scheduled exporter
         CancelAutomaticExport(false);
+    }
+
+
+    private void setupPhoneStateListener() {
+        final TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        if (telephonyManager != null) {
+            telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+        }
+    }
+
+    public boolean isPhoneInCall() {
+        return isPhoneInCall.get();
     }
 
     private void checkForDeletedFiles() {
