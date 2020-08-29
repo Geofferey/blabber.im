@@ -1045,4 +1045,6 @@
     <string name="improperly_formatted_provisioning">Improperly formatted provisioning code</string>
     <string name="gpx_track">GPX track</string>
     <string name="could_not_correct_message">Could not correct message</string>
+    <string name="search_all_conversations">All conversations</string>
+    <string name="search_this_conversation">This conversation</string>
 </resources>

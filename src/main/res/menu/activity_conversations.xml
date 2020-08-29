@@ -9,6 +9,21 @@
         android:visible="@bool/show_qr_code_scan"
         app:showAsAction="always" />
     <item
+        android:icon="?attr/icon_search"
+        android:orderInCategory="11"
+        android:title="@string/search_messages"
+        android:visible="@bool/show_combined_search_options"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/action_search_all_conversations"
+                android:title="@string/search_all_conversations" />
+            <item
+                android:id="@+id/action_search_this_conversation"
+                android:title="@string/search_this_conversation" />
+        </menu>
+    </item>
+    <item
         android:id="@+id/action_accounts"
         android:orderInCategory="90"
         android:title="@string/action_accounts"

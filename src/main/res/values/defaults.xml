@@ -44,6 +44,8 @@
     <bool name="use_bundled_emoji">true</bool>
     <bool name="enable_multi_accounts">false</bool>
     <bool name="show_qr_code_scan">true</bool>
+    <bool name="show_individual_search_options">true</bool>
+    <bool name="show_combined_search_options">false</bool>
     <bool name="scroll_to_bottom">true</bool>
     <bool name="start_searching">false</bool>
     <bool name="show_record_voice_btn">true</bool>
