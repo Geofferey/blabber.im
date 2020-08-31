@@ -1049,4 +1049,7 @@
     <string name="search_this_conversation">This conversation</string>
     <string name="your_avatar">Your avatar</string>
     <string name="avatar_for_x">Avatar for %s</string>
+    <string name="encrypted_with_omemo">Encrypted with OMEMO</string>
+    <string name="encrypted_with_openpgp">Encrypted with OpenPGP</string>
+    <string name="not_encrypted">Not encrypted</string>
 </resources>
