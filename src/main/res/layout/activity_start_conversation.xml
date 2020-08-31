@@ -51,5 +51,6 @@
             app:sdMainFabOpenedBackgroundColor="?attr/colorAccent"
             app:sdOverlayLayout="@id/overlay"
             app:sdUseReverseAnimationOnClose="true" />
+            android:contentDescription="@string/add_contact_or_create_or_join_group_chat"
     </RelativeLayout>
 </layout>

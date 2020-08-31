@@ -1052,4 +1052,5 @@
     <string name="encrypted_with_omemo">Encrypted with OMEMO</string>
     <string name="encrypted_with_openpgp">Encrypted with OpenPGP</string>
     <string name="not_encrypted">Not encrypted</string>
+    <string name="add_contact_or_create_or_join_group_chat">Add contact, create or join group chat, or discover channels</string>
 </resources>
