@@ -374,7 +374,7 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
         final Element result = MessageArchiveService.Version.findResult(original);
         final MessageArchiveService.Query query = result == null ? null : mXmppConnectionService.getMessageArchiveService().findQuery(result.getAttribute("queryid"));
         if (query != null && query.validFrom(original.getFrom())) {
-            Pair<MessagePacket, Long> f = original.getForwardedMessagePacket("result", query.version.namespace);
+            final Pair<MessagePacket, Long> f = original.getForwardedMessagePacket("result", query.version.namespace);
             if (f == null) {
                 return;
             }
@@ -383,6 +383,9 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
             isForwarded = true;
             serverMsgId = result.getAttribute("id");
             query.incrementMessageCount();
+            if (handleErrorMessage(account, packet)) {
+                return;
+            }
         } else if (query != null) {
             Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": received mam result from invalid sender");
             return;
