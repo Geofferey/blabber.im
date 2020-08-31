@@ -689,5 +689,6 @@ public class AvatarService implements OnAdvancedStreamFeaturesLoaded {
     public interface Avatarable {
         @ColorInt
         int getAvatarBackgroundColor();
+		String getAvatarName();
     }
 }

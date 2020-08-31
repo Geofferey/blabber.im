@@ -902,5 +902,10 @@ public class MucOptions {
             final String seed = realJid != null ? realJid.asBareJid().toString() : null;
             return UIHelper.getColorForName(seed == null ? getName() : seed);
         }
+
+        @Override
+        public String getAvatarName() {
+            return getConversation().getName().toString();
+        }
     }
 }

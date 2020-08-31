@@ -1,5 +1,6 @@
 package eu.siacs.conversations.ui.util;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,6 +14,7 @@ import java.lang.ref.WeakReference;
 import java.util.concurrent.RejectedExecutionException;
 
 import eu.siacs.conversations.R;
+import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.services.AvatarService;
 import eu.siacs.conversations.ui.XmppActivity;
 
@@ -84,6 +86,7 @@ public class AvatarWorkerTask extends AsyncTask<AvatarService.Avatarable, Void, 
                 return;
             }
             final Bitmap bm = activity.avatarService().get(avatarable, (int) activity.getResources().getDimension(size), false);
+            setContentDescription(avatarable, imageView);
             if (bm != null) {
                 cancelPotentialWork(avatarable, imageView);
                 if (overlay) {
@@ -109,6 +112,15 @@ public class AvatarWorkerTask extends AsyncTask<AvatarService.Avatarable, Void, 
                 } catch (final RejectedExecutionException ignored) {
                 }
             }
+        }
+    }
+
+    private static void setContentDescription(final AvatarService.Avatarable avatarable, final ImageView imageView) {
+        final Context context = imageView.getContext();
+        if (avatarable instanceof Account) {
+            imageView.setContentDescription(context.getString(R.string.your_avatar));
+        } else {
+            imageView.setContentDescription(context.getString(R.string.avatar_for_x, avatarable.getAvatarName()));
         }
     }
 

@@ -1047,4 +1047,6 @@
     <string name="could_not_correct_message">Could not correct message</string>
     <string name="search_all_conversations">All conversations</string>
     <string name="search_this_conversation">This conversation</string>
+    <string name="your_avatar">Your avatar</string>
+    <string name="avatar_for_x">Avatar for %s</string>
 </resources>
