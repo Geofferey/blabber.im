@@ -4191,7 +4191,7 @@ public class XmppConnectionService extends Service {
         markMessage(message, status, null);
     }
 
-    public void markMessage(Message message, int status, String errorMessage) {
+    public void markMessage(final Message message, final int status, final String errorMessage) {
         final int oldStatus = message.getStatus();
         if (status == Message.STATUS_SEND_FAILED && (oldStatus == Message.STATUS_SEND_RECEIVED || oldStatus == Message.STATUS_SEND_DISPLAYED)) {
             return;
@@ -4203,6 +4203,9 @@ public class XmppConnectionService extends Service {
         message.setStatus(status);
         databaseBackend.updateMessage(message, false);
         updateConversationUi();
+        if (oldStatus != status && status == Message.STATUS_SEND_FAILED) {
+            mNotificationService.pushFailedDelivery(message);
+        }
     }
 
     public SharedPreferences getPreferences() {
