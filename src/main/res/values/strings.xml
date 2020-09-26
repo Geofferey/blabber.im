@@ -1059,4 +1059,9 @@
         <item quantity="other">Some messages could not be delivered</item>
     </plurals>
     <string name="failed_deliveries">Failed deliveries</string>
+    <string name="missed_calls_channel_name">Missed calls</string>
+    <string name="missed_call_from_x">Missed call from %s</string>
+    <string name="n_missed_calls_from_x">%1$d missed calls from %2$s</string>
+    <string name="n_missed_calls">%d missed calls</string>
+    <string name="n_missed_calls_from_m_contacts">%1$d missed calls from %2$d contacts</string>
 </resources>
