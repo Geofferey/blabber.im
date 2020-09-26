@@ -34,6 +34,6 @@
         android:visible="@bool/show_individual_search_options"
         android:orderInCategory="50"
         android:title="@string/search_messages"
-        android:icon="@drawable/ic_search_white_24dp"
+        android:icon="?attr/icon_search"
         app:showAsAction="always" />
 </menu>
