@@ -370,6 +370,7 @@
     <string name="until_further_notice">Jusqu’à nouvel ordre</string>
     <string name="pref_input_options">Saisie</string>
     <string name="pref_enter_is_send">Touche Entrée pour envoyer</string>
+    <string name="pref_enter_is_send_summary">Utilisez la touche Entrée pour envoyer le message. Vous pouvez toujours utiliser Ctrl+Entrée pour envoyer un message, même si cette option est désactivée.</string>
     <string name="pref_display_enter_key">Afficher la touche Entrée</string>
     <string name="pref_display_enter_key_summary">Remplace la touche Émoticônes par la touche Entrée.</string>
     <string name="audio">audio</string>
@@ -1033,6 +1034,7 @@
     <string name="outgoing_call">Appel sortant</string>
     <string name="disable_tor_to_make_call">Désactiver Tor pour passer des appels</string>
     <string name="help">Aide</string>
+    <string name="switch_to_conversation">Passer à la conversation</string>
     <string name="only_one_call_at_a_time">Vous ne pouvez avoir qu\'un appel à la fois.</string>
     <string name="missed_call">Appel manqué</string>
     <string name="could_not_switch_camera">Impossible de changer la caméra</string>
