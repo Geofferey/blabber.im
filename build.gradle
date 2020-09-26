@@ -6,7 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.2'
+        classpath 'com.android.tools.build:gradle:4.0.1'
     }
 }
 
@@ -38,7 +38,7 @@ configurations {
 
 dependencies {
     implementation project(':libs:android-transcoder')
-    playstoreImplementation('com.google.firebase:firebase-messaging:20.1.3') {
+    playstoreImplementation('com.google.firebase:firebase-messaging:20.1.3') { ///higher versions are causing crashes due to missing project IDs
         exclude group: 'com.google.firebase', module: 'firebase-core'
         exclude group: 'com.google.firebase', module: 'firebase-analytics'
         exclude group: 'com.google.firebase', module: 'firebase-measurement-connector'
@@ -87,7 +87,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.4'
     implementation 'com.google.guava:guava:28.2-android'
     implementation 'com.github.AppIntro:AppIntro:6.0.0'
-    implementation fileTree(include: ['libwebrtc-m84.aar'], dir: 'libs')
+    implementation fileTree(include: ['libwebrtc-m85.aar'], dir: 'libs')
 }
 
 ext {
