@@ -79,7 +79,6 @@ import eu.siacs.conversations.ui.util.StyledAttributes;
 import eu.siacs.conversations.ui.util.ViewUtil;
 import eu.siacs.conversations.ui.widget.ClickableMovementMethod;
 import eu.siacs.conversations.ui.widget.CopyTextView;
-import eu.siacs.conversations.ui.widget.ListSelectionManager;
 import eu.siacs.conversations.ui.widget.RichLinkView;
 import eu.siacs.conversations.utils.CryptoHelper;
 import eu.siacs.conversations.utils.EmojiWrapper;
@@ -115,7 +114,6 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
     boolean isResendable = false;
 
     private final XmppActivity activity;
-    private final ListSelectionManager listSelectionManager = new ListSelectionManager();
     private final AudioPlayer audioPlayer;
     private List<String> highlightedTerm = null;
     private DisplayMetrics metrics;
@@ -663,9 +661,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
             MyLinkify.addLinks(body, true);
             viewHolder.messageBody.setAutoLinkMask(0);
             viewHolder.messageBody.setText(EmojiWrapper.transform(body));
-            viewHolder.messageBody.setTextIsSelectable(true);
             viewHolder.messageBody.setMovementMethod(ClickableMovementMethod.getInstance());
-            listSelectionManager.onUpdate(viewHolder.messageBody, message);
         } else {
             viewHolder.messageBody.setText("");
             viewHolder.messageBody.setTextIsSelectable(false);
@@ -1014,7 +1010,6 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
             viewHolder.messageBody.setText(body);
             viewHolder.messageBody.setTextIsSelectable(true);
             viewHolder.messageBody.setMovementMethod(ClickableMovementMethod.getInstance());
-            listSelectionManager.onUpdate(viewHolder.messageBody, message);
         } else {
             if (includeBody) {
                 viewHolder.messageBody.setVisibility(View.VISIBLE);
@@ -1024,7 +1019,6 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                 viewHolder.messageBody.setText(body);
                 viewHolder.messageBody.setTextIsSelectable(true);
                 viewHolder.messageBody.setMovementMethod(ClickableMovementMethod.getInstance());
-                listSelectionManager.onUpdate(viewHolder.messageBody, message);
             } else {
                 viewHolder.messageBody.setVisibility(View.GONE);
             }
@@ -1122,8 +1116,6 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                     throw new AssertionError("Unknown view type");
             }
             if (viewHolder.messageBody != null) {
-                final boolean multi = message.getConversation().getMode() == Conversation.MODE_MULTI;
-                listSelectionManager.onCreate(viewHolder.messageBody, new MessageBodyActionModeCallback(viewHolder.messageBody, viewHolder.user, multi));
                 viewHolder.messageBody.setCopyHandler(this);
             }
             view.setTag(viewHolder);
@@ -1362,13 +1354,6 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
 
     private void promptOpenKeychainInstall(View view) {
         activity.showInstallPgpDialog();
-    }
-
-    @Override
-    public void notifyDataSetChanged() {
-        listSelectionManager.onBeforeNotifyDataSetChanged();
-        super.notifyDataSetChanged();
-        listSelectionManager.onAfterNotifyDataSetChanged();
     }
 
     private String transformText(CharSequence text, int start, int end, boolean forCopy) {
