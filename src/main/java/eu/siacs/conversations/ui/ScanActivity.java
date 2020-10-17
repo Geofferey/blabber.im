@@ -75,7 +75,8 @@ public final class ScanActivity extends Activity implements SurfaceTextureListen
 
     private static final long VIBRATE_DURATION = 50L;
     private static final long AUTO_FOCUS_INTERVAL_MS = 2500L;
-    private static boolean DISABLE_CONTINUOUS_AUTOFOCUS = Build.MODEL.equals("GT-I9100") // Galaxy S2
+    private static boolean DISABLE_CONTINUOUS_AUTOFOCUS =
+            Build.MODEL.equals("GT-I9100") // Galaxy S2
             || Build.MODEL.equals("SGH-T989") // Galaxy S2
             || Build.MODEL.equals("SGH-T989D") // Galaxy S2 X
             || Build.MODEL.equals("SAMSUNG-SGH-I727") // Galaxy S2 Skyrocket

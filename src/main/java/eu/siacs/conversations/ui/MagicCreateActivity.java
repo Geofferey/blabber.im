@@ -73,6 +73,11 @@ public class MagicCreateActivity extends XmppActivity implements TextWatcher, Ad
         Collections.sort(domains, String::compareToIgnoreCase);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_selectable_list_item, domains);
         int defaultServer = adapter.getPosition("blabber.im");
+        if (this.preAuth != null && domain != null) {
+            binding.server.setEnabled(false);
+            binding.useOwn.setEnabled(false);
+            binding.useOwn.setChecked(true);
+        }
         binding.useOwn.setOnCheckedChangeListener(this);
         binding.server.setAdapter(adapter);
         binding.server.setSelection(defaultServer);
@@ -191,7 +196,9 @@ public class MagicCreateActivity extends XmppActivity implements TextWatcher, Ad
     }
 
     private void updateFullJidInformation(String username) {
-        this.domain = binding.server.getSelectedItem().toString();
+        if (this.preAuth == null) {
+            this.domain = binding.server.getSelectedItem().toString();
+        }
         if (username.trim().isEmpty()) {
             binding.fullJid.setVisibility(View.INVISIBLE);
         } else {
