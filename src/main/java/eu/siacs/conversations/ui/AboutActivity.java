@@ -44,7 +44,7 @@ public class AboutActivity extends XmppActivity {
         privacyButton = findViewById(R.id.show_privacy_policy);
         privacyButton.setOnClickListener(view -> {
             try {
-                final Uri uri = Uri.parse("https://jabber.pix-art.de/privacy/");
+                final Uri uri = Uri.parse("https://blabber.im/datenschutz/");
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(browserIntent);
             } catch (Exception e) {
@@ -54,7 +54,7 @@ public class AboutActivity extends XmppActivity {
         termsOfUseButton = findViewById(R.id.show_terms_of_use);
         termsOfUseButton.setOnClickListener(view -> {
             try {
-                final Uri uri = Uri.parse("https://jabber.pix-art.de/termsofuse/");
+                final Uri uri = Uri.parse("https://blabber.im/nutzungsbedingungen/");
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(browserIntent);
             } catch (Exception e) {

@@ -103,23 +103,23 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
 
-        versionCode 306
-        versionName "2.5.2"
-        //versionNameSuffix " beta_(2020-07-15)" // " beta_(XXXX-XX-XX)" // activate for beta versions
+        versionCode 310
+        versionName "3.0.0"
+        versionNameSuffix " beta_(2020-10-25)" // " beta_(XXXX-XX-XX)" // activate for beta versions
         //resConfigs "en"
 
         archivesBaseName += "-$versionName"
-        //archivesBaseName += "$versionNameSuffix"  // activate for beta versions
+        archivesBaseName += "$versionNameSuffix"  // activate for beta versions
         applicationId "de.pixart.messenger"
         multiDexEnabled true
 
-        buildConfigField("String", "LOGTAG", '"Pix-Art_Messenger"')
+        buildConfigField("String", "LOGTAG", '"blabber.im"')
         buildConfigField("String", "DOMAIN_LOCK", 'null')
         buildConfigField("String", "MAGIC_CREATE_DOMAIN", '"blabber.im"')
         buildConfigField("boolean", "SHOW_INTRO", 'true')
-        buildConfigField("String", "UPDATE_URL", '"https://xmpp.pix-art.de/Pix-Art_Messenger/update/"')
+        buildConfigField("String", "UPDATE_URL", '"https://blabber.im/update/"')
         resValue "string", "applicationId", applicationId
-        resValue "string", "app_name", "Pix-Art Messenger"
+        resValue "string", "app_name", "blabber.im"
     }
 
     dataBinding {

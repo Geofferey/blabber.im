@@ -53,6 +53,7 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.X509KeyManager;
 import javax.net.ssl.X509TrustManager;
 
+import eu.siacs.conversations.BuildConfig;
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.crypto.DomainHostnameVerifier;
@@ -191,8 +192,11 @@ public class XmppConnection implements Runnable {
         this.mXmppConnectionService = service;
     }
 
-    private static void fixResource(Context context, Account account) {
+    private void fixResource(Context context, Account account) {
         String resource = account.getResource();
+        if (resource != null && !resource.contains(context.getString(R.string.app_name) + '[' + BuildConfig.VERSION_NAME + ']')) {
+            account.setResource(createNewResource());
+        }
         int fixedPartLength = context.getString(R.string.app_name).length() + 1; //include the trailing dot
         int randomPartLength = 4; // 3 bytes
         if (resource != null && resource.length() > fixedPartLength + randomPartLength) {
@@ -1487,7 +1491,7 @@ public class XmppConnection implements Runnable {
     }
 
     private String createNewResource() {
-        return mXmppConnectionService.getString(R.string.app_name) + '.' + nextRandomId(true);
+        return mXmppConnectionService.getString(R.string.app_name) + '[' + BuildConfig.VERSION_NAME + ']' + '.' + nextRandomId(true);
     }
 
     private String nextRandomId() {

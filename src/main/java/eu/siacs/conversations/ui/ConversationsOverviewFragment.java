@@ -135,7 +135,7 @@ public class ConversationsOverviewFragment extends XmppFragment {
 		super.onDestroy();
 
 	}
-	
+
     @Override
     public void onPause() {
         Log.d(Config.LOGTAG, "ConversationsOverviewFragment.onPause()");

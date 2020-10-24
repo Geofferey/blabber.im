@@ -30,14 +30,17 @@ public class IntroActivity extends AppIntro2 {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final int backgroundColor = getResources().getColor(R.color.primary_dark);
-        final int barColor = getResources().getColor(R.color.primary);
+        final int backgroundColor = getResources().getColor(R.color.primary_dark_orange);
+        final int barColor = getResources().getColor(R.color.primary_orange);
+        final int indicatorColorActive = getResources().getColor(R.color.primary_dark_orange);
+        final int indicatorColorUsed = getResources().getColor(R.color.darkorange);
 
         setBarColor(barColor);
+        setIndicatorColor(indicatorColorActive, indicatorColorUsed);
         setButtonsEnabled(true);
         setImmersiveMode();
         setSystemBackButtonLocked(true);
-        setProgressIndicator();
+        //setProgressIndicator();
 
         final Intent intent = getIntent();
         if (intent != null) {

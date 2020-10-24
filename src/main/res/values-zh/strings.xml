@@ -157,7 +157,7 @@
     <string name="mgmt_account_delete_confirm_message">如果您删除了帐户，则本地对话历史记录将丢失。\n\n如果您从服务器删除帐户，则您的帐户也将从服务器中删除，在注册新帐户之前，您将无法登录。</string>
     <string name="attach_record_voice">语音录制</string>
     <string name="account_settings_jabber_id">Jabber用户名</string>
-    <string name="account_settings_example_jabber_id">username@pix-art.de</string>
+    <string name="account_settings_example_jabber_id">username@blabber.im</string>
     <string name="password">密码</string>
     <string name="invalid_jid">Jabber用户名无效</string>
     <string name="error_out_of_memory">内存不足。图像太大了</string>
@@ -435,7 +435,7 @@
     <string name="pref_dnd_on_silent_mode_summary">当设备静音时，将您标记为“请勿打扰”状态</string>
     <string name="pref_treat_vibrate_as_silent">将振动看作静音</string>
     <string name="pref_treat_vibrate_as_dnd_summary">当设备处于振动状态时，将您标记为“请勿打扰”</string>
-    <string name="hostname_example">xmpp.pix-art.de</string>
+    <string name="hostname_example">blabber.im</string>
     <string name="action_add_account_with_certificate">用证书添加帐户</string>
     <string name="unable_to_parse_certificate">无法解析证书</string>
     <string name="authenticate_with_certificate">留空以验证w/证书</string>
@@ -931,7 +931,7 @@ Pix-Arr Messenger</string>
     <string name="show_intro_again">将重新显示入门指南</string>
     <string name="show_intro_again_failed">设置重新显示入门指南时失败。正在重试……</string>
     <string name="intro_desc_whats_xmpp">XMPP，也叫 jabber，是一种去中心化的通讯网络（就像电子邮件一样）。您需要一个被称作 Jabber-ID 的地址，一个密码和一个客户端。之后我们有更多关于此的。</string>
-    <string name="intro_whats_xmpp">XMPP / Jabber / Pix-Art Messenger 是什么？</string>
+    <string name="intro_whats_xmpp">XMPP / Jabber / blabber.im 是什么？</string>
     <string name="intro_desc_optional_permissions">读取通讯录的权限用于从您的通讯录中读取 Jabber-ID（如果有）。通讯录的内容不会被分享、上传或复制。</string>
     <string name="intro_desc_account2">您可以通过自定义或从下拉菜单中选择一个服务器然后输入一个昵称来新建一个一份配置。</string>
     <string name="open_join_dialog">加入公共群聊</string>

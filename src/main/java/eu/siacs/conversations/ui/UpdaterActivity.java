@@ -144,7 +144,7 @@ public class UpdaterActivity extends XmppActivity {
                                     startActivity(marketIntent);
                                     overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
                                 } else {
-                                    uri = Uri.parse("https://jabber.pix-art.de/");
+                                    uri = Uri.parse("https://blabber.im/");
                                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
                                     startActivity(browserIntent);
                                     overridePendingTransition(R.animator.fade_in, R.animator.fade_out);

@@ -366,7 +366,7 @@
                                 android:paddingEnd="16dp"
                                 android:paddingRight="16dp"
                                 android:text="@string/disable"
-                                android:textColor="@color/accent" />
+                                android:textColor="?attr/colorAccent" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

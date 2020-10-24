@@ -58,8 +58,8 @@
     <string name="unblock">Unblock</string>
     <string name="save">Save</string>
     <string name="ok">OK</string>
-    <string name="crash_report_title">Pix-Art Messenger has crashed</string>
-    <string name="crash_report_message">By sending in stack traces you are helping the ongoing development of Pix-Art Messenger\n<b>Warning:</b> This will use your XMPP account to send the stack trace to the developer.</string>
+    <string name="crash_report_title">blabber.im has crashed</string>
+    <string name="crash_report_message">By sending in stack traces you are helping the ongoing development of blabber.im\n<b>Warning:</b> This will use your XMPP account to send the stack trace to the developer.</string>
     <string name="send_now">Send now</string>
     <string name="send_never">Never ask again</string>
     <string name="problem_connecting_to_account">Unable to connect to account</string>
@@ -84,13 +84,13 @@
     <string name="send_unencrypted">Send unencrypted</string>
     <string name="decryption_failed">Decryption failed. Maybe you don’t have the proper private key.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">Pix-Art Messenger utilizes a third party app called <b>OpenKeychain</b> to encrypt and decrypt messages and to manage your public keys.\n\nOpenKeychain is licensed under GPLv3 and available on F-Droid and Google Play.\n\n<small>(Please restart Pix-Art Messenger afterwards.)</small></string>
+    <string name="openkeychain_required_long">blabber.im utilizes a third party app called <b>OpenKeychain</b> to encrypt and decrypt messages and to manage your public keys.\n\nOpenKeychain is licensed under GPLv3 and available on F-Droid and Google Play.\n\n<small>(Please restart blabber.im afterwards.)</small></string>
     <string name="restart">Restart</string>
     <string name="install">Install</string>
     <string name="offering">offering…</string>
     <string name="waiting">waiting…</string>
     <string name="no_pgp_key">No OpenPGP Key found</string>
-    <string name="contact_has_no_pgp_key">Pix-Art Messenger is unable to encrypt your messages because your contact is not announcing his or hers public key.\n\n<small>Please ask your contact to setup OpenPGP.</small></string>
+    <string name="contact_has_no_pgp_key">blabber.im is unable to encrypt your messages because your contact is not announcing his or hers public key.\n\n<small>Please ask your contact to setup OpenPGP.</small></string>
     <string name="no_pgp_keys">No OpenPGP Keys found</string>
     <string name="pref_general">General</string>
     <string name="pref_accept_files_wifi">Accept files in WiFi connections</string>
@@ -108,7 +108,7 @@
     <string name="pref_sound">Ringtone</string>
     <string name="pref_sound_summary">Play sound when a new message arrives</string>
     <string name="pref_send_crash">Send crash reports</string>
-    <string name="pref_send_crash_summary">By sending stack traces you are helping the ongoing development of Pix-Art Messenger</string>
+    <string name="pref_send_crash_summary">By sending stack traces you are helping the ongoing development of blabber.im</string>
     <string name="pref_confirm_messages">Confirm Messages</string>
     <string name="pref_confirm_messages_summary">Let your contacts know when you have received and read their messages</string>
     <string name="pref_ui_options">UI</string>
@@ -157,7 +157,7 @@
     <string name="mgmt_account_delete_confirm_message">If you delete your account, your entire local conversation history will be lost.\n\nIf you delete your account from server, your entire account will be deleted from server too, you will not be able to login anymore until you register a new account.</string>
     <string name="attach_record_voice">Record voice</string>
     <string name="account_settings_jabber_id">Jabber-ID</string>
-    <string name="account_settings_example_jabber_id">username@pix-art.de</string>
+    <string name="account_settings_example_jabber_id">username@blabber.im</string>
     <string name="password">Password</string>
     <string name="invalid_jid">This is not a valid Jabber-ID</string>
     <string name="error_out_of_memory">Out of memory. Image is too large</string>
@@ -293,7 +293,7 @@
     <string name="finish">Finish</string>
     <string name="verified">Verified!</string>
     <string name="smp_requested">Contact requested SMP verification</string>
-    <string name="conversations_foreground_service" translatable="false">Pix-Art Messenger</string>
+    <string name="conversations_foreground_service" translatable="false">blabber.im</string>
     <string name="pref_create_backup">Create backup</string>
     <string name="pref_create_backup_summary">Write backup files to %s</string>
     <string name="notification_create_backup_title">Creating backup files</string>
@@ -434,11 +434,11 @@
     <string name="pref_away_when_screen_off">Away when screen is off</string>
     <string name="pref_away_when_screen_off_summary">Marks your resource as away when the screen is turned off</string>
     <string name="pref_dnd_on_silent_mode">\"Do not disturb\" in silent mode</string>
-    <string name="update_info">Pix-Art Messenger is downloading and installing the new version automatically.\n\nPlease wait…</string>
+    <string name="update_info">blabber.im is downloading and installing the new version automatically.\n\nPlease wait…</string>
     <string name="pref_dnd_on_silent_mode_summary">Marks your resource as \"Do not disturb\" when device is in silent mode</string>
     <string name="pref_treat_vibrate_as_silent">Treat vibrate as silent mode</string>
     <string name="pref_treat_vibrate_as_dnd_summary">Marks your resource as \"Do not disturb\" when device is on vibrate</string>
-    <string name="hostname_example">xmpp.pix-art.de</string>
+    <string name="hostname_example">blabber.im</string>
     <string name="action_add_account_with_certificate">Add account with certificate</string>
     <string name="unable_to_parse_certificate">Unable to parse certificate</string>
     <string name="authenticate_with_certificate">Leave empty to authenticate w/ certificate</string>
@@ -466,9 +466,9 @@
         <item quantity="other">%d messages</item>
     </plurals>
     <string name="load_more_messages">Load more messages</string>
-    <string name="no_storage_permission">Pix-Art Messenger needs access to external storage</string>
+    <string name="no_storage_permission">blabber.im needs access to external storage</string>
     <string name="sync_with_contacts">Synchronize with contacts</string>
-    <string name="sync_with_contacts_long">Pix-Art Messenger wants to match your XMPP roster with your contacts to show their full names and avatars.\n\nPix-Art Messenger will only read your contacts and match them locally without uploading them to your server.\n\nYou will now be asked to grant permission to access your contacts.</string>
+    <string name="sync_with_contacts_long">blabber.im wants to match your XMPP roster with your contacts to show their full names and avatars.\n\nblabber.im will only read your contacts and match them locally without uploading them to your server.\n\nYou will now be asked to grant permission to access your contacts.</string>
     <string name="notify_on_all_messages">Notify on all messages</string>
     <string name="notify_only_when_highlighted">Notify only when mentioned</string>
     <string name="notify_never">Notifications disabled</string>
@@ -485,8 +485,8 @@
     <string name="always">Always</string>
     <string name="always_off">Always off</string>
     <string name="battery_optimizations_enabled">Battery optimizations enabled</string>
-    <string name="battery_optimizations_enabled_explained">Your device is doing some heavy battery optimizations on Pix-Art Messenger that might lead to delayed notifications or even message loss.\nIt is recommended to disable those.</string>
-    <string name="battery_optimizations_enabled_dialog">Your device is doing some heavy battery optimizations on Pix-Art Messenger that might lead to delayed notifications or even message loss.\n\nYou will now be asked to disable those.</string>
+    <string name="battery_optimizations_enabled_explained">Your device is doing some heavy battery optimizations on blabber.im that might lead to delayed notifications or even message loss.\nIt is recommended to disable those.</string>
+    <string name="battery_optimizations_enabled_dialog">Your device is doing some heavy battery optimizations on blabber.im that might lead to delayed notifications or even message loss.\n\nYou will now be asked to disable those.</string>
     <string name="install_from_unknown_sources_disabled">Install from unknown sources disabled</string>
     <string name="install_from_unknown_sources_disabled_dialog">Your device is configured to not allow app installs from unknown sources except from Google PlayStore. This will cause problems with the in app updater.\n\nYou will now be asked to allow app installs from unknown sources.</string>
     <string name="disable">Disable</string>
@@ -498,7 +498,7 @@
     <string name="correct_message">Correct message</string>
     <string name="send_corrected_message">Send corrected message</string>
     <string name="no_keys_just_confirm">You already trust this contact. By selecting ’done’ you are just confirming that %s is part of this group chat.</string>
-    <string name="contacts_have_no_pgp_keys">Pix-Art Messenger is unable to encrypt your messages because your contacts are not announcing their public keys.\n\n</string>
+    <string name="contacts_have_no_pgp_keys">blabber.im is unable to encrypt your messages because your contacts are not announcing their public keys.\n\n</string>
     <string name="this_account_is_disabled">You have disabled this account</string>
     <string name="no_application_to_share_uri">No application found to share URI</string>
     <string name="share_uri_with">Share URI with…</string>
@@ -534,12 +534,12 @@
     <string name="import_database">Import backup</string>
     <string name="invite_again">Invite again</string>
     <string name="inviteUser_Subject">has invited you via</string>
-    <string name="InviteText">Hello,\n\nthe user %s has invited you to Pix-Art Messenger. If you are using Android, give it a try and click the following link to start over…</string>
+    <string name="InviteText">Hello,\n\nthe user %s has invited you to blabber.im. Just click the following link…</string>
     <string name="pref_broadcast_last_activity">Broadcast Last User Interaction</string>
-    <string name="pref_broadcast_last_activity_summary">Let all your contacts know when use Pix-Art Messenger</string>
-    <string name="invite_user">Invite to Pix-Art Messenger</string>
-    <string name="request_permissions_message">Pix-Art Messenger will ask you to allow a few permissions. It is important that you allow all these permissions to use all features of this messenger. If you deny any of these permissions the app will close itself.</string>
-    <string name="request_permissions_message_again">You have denied some or all permissions needed for Pix-Art Messenger. Would you like to jump to the settings and allow these permissions? If you denie any of these permissions, the app will close itself.</string>
+    <string name="pref_broadcast_last_activity_summary">Let all your contacts know when use blabber.im</string>
+    <string name="invite_user">Invite to blabber.im</string>
+    <string name="request_permissions_message">blabber.im will ask you to allow a few permissions. It is important that you allow all these permissions to use all features of this messenger. If you deny any of these permissions the app will close itself.</string>
+    <string name="request_permissions_message_again">You have denied some or all permissions needed for blabber.im. Would you like to jump to the settings and allow these permissions? If you denie any of these permissions, the app will close itself.</string>
     <string name="unable_to_connect_to_keychain">Unable to connect to OpenKeychain</string>
     <string name="this_device_is_no_longer_in_use">This device is no longer in use</string>
     <string name="please_wait">Please wait…</string>
@@ -567,8 +567,8 @@
     <string name="show_error_message">Show error message</string>
     <string name="error_message">Error message</string>
     <string name="data_saver_enabled">Data saver enabled</string>
-    <string name="data_saver_enabled_explained">Your operating system is restricting Pix-Art Messenger from accessing the Internet when in background. To receive notifications of new messages you should allow Pix-Art Messenger unrestricted access when Data saver is on.\n\nPix-Art Messenger will still make an effort to save data when possible.</string>
-    <string name="device_does_not_support_data_saver">Your device does not supporting disabling data saver for Pix-Art Messenger.</string>
+    <string name="data_saver_enabled_explained">Your operating system is restricting blabber.im from accessing the Internet when in background. To receive notifications of new messages you should allow blabber.im unrestricted access when Data saver is on.\n\nblabber.im will still make an effort to save data when possible.</string>
+    <string name="device_does_not_support_data_saver">Your device does not supporting disabling data saver for blabber.im.</string>
     <string name="add_to_contact_list">Add to contact list</string>
     <string name="contact">Contact</string>
     <string name="unable_to_start_recording">Unable to start recording</string>
@@ -670,7 +670,7 @@
     <string name="server_info_partial">partial</string>
     <string name="pref_show_foreground_service_summary">Some Android devices will close some apps after a period of time and you won’t be able to receive new messages. If you have such problems, try to activate the foreground service. But keep in mind, that you will have a permanent notification with this option checked.</string>
     <string name="pref_show_foreground_service">Use foreground service</string>
-    <string name="update_service">Pix-Art Messenger update service</string>
+    <string name="update_service">blabber.im update service</string>
     <string name="install_update">Install update?</string>
     <string name="highlight_in_muc">highlight user</string>
     <string name="no_application_found_to_open_link">No application found to open link</string>
@@ -692,7 +692,7 @@
     <string name="no_write_access_in_public_muc">You are not participating this group chat and have no write access at the moment.\nPlease go to the group chat details by pressing <b>OK</b> and send a private message to a moderator, administrator or owner by long clicking one of the members name at the top/front of the list to ask for write access.</string>
     <string name="snooze">Snooze</string>
     <string name="huawei_protected_apps">Protected Apps</string>
-    <string name="huawei_protected_apps_summary">To keep receiving notifications, even when the screen is turned off, you need to add Pix-Art Messenger to the list of protected apps.</string>
+    <string name="huawei_protected_apps_summary">To keep receiving notifications, even when the screen is turned off, you need to add blabber.im to the list of protected apps.</string>
     <string name="pref_enable_multi_accounts_title">Enable multiple accounts</string>
     <string name="pref_enable_multi_accounts_summary">Do you want to use multiple accounts?</string>
     <string name="mtm_accept_cert">Accept Unknown Certificate?</string>
@@ -705,12 +705,12 @@
     <string name="qr_code_scanner_needs_access_to_camera">The QR code scanner needs access to the camera</string>
     <string name="pref_scroll_to_bottom_summary">Scroll down after sending a message</string>
     <string name="pref_scroll_to_bottom">Scroll to bottom</string>
-    <string name="no_camera_permission">Pix-Art Messenger needs access to the camera</string>
+    <string name="no_camera_permission">blabber.im needs access to the camera</string>
     <string name="edit_status_message_title">Edit Status Message</string>
     <string name="pref_automatically_delete_messages_description">Automatically delete messages from this device that are older than the configured time frame.</string>
     <string name="pref_automatically_delete_messages">Automatic message deletion</string>
     <string name="disable_encryption">Disable encryption</string>
-    <string name="error_trustkey_general">Pix-Art Messenger is unable to send encrypted messages to %1$s. This may be due to your contact using an outdated server or client that can not handle OMEMO.</string>
+    <string name="error_trustkey_general">blabber.im is unable to send encrypted messages to %1$s. This may be due to your contact using an outdated server or client that can not handle OMEMO.</string>
     <string name="error_trustkey_device_list">Unable to fetch device list</string>
     <string name="error_trustkey_bundle">Unable to fetch device bundles</string>
     <string name="error_trustkey_hint_mutual">Hint: In some cases this can be fixed by adding each other your contact lists.</string>
@@ -737,7 +737,7 @@
     <string name="large">Large</string>
     <string name="create_shortcut">Create Shortcut</string>
     <string name="not_encrypted_for_this_device">Message was not encrypted for this device.</string>
-    <string name="no_microphone_permission">Pix-Art Messenger needs access to the microphone</string>
+    <string name="no_microphone_permission">blabber.im needs access to the microphone</string>
     <string name="search_messages">Search messages</string>
     <string name="gif">GIF</string>
     <string name="view_conversation">View conversation</string>
@@ -767,14 +767,14 @@
     <string name="conference_destroyed">This group chat has been destroyed</string>
     <string name="no_application_found_to_view_contact">No application found to view contact</string>
     <string name="welcome_server_info">We recommend the use of blabber.im as your provider.</string>
-    <string name="no_location_permission">Pix-Art Messenger needs access to location services</string>
+    <string name="no_location_permission">blabber.im needs access to location services</string>
     <string name="pref_show_record_voice_btn_summary">Show record voice button in chats as quick action</string>
     <string name="pref_show_record_voice_btn">Show record voice button</string>
     <string name="pref_use_quick_share_attachment_choice_summary">Replace send button with attachment choice if no message is typed. Otherwise show quick actions, which can be cofigured in the following setting.</string>
     <string name="pref_quick_share_attachment_choice">Attachment choice</string>
     <string name="unable_to_save_recording">Unable to save recording</string>
     <string name="foreground_service_channel_name">Foreground service</string>
-    <string name="foreground_service_channel_description">This notification category is used to display a permanent notification indicating that Pix-Art Messenger is running.</string>
+    <string name="foreground_service_channel_description">This notification category is used to display a permanent notification indicating that blabber.im is running.</string>
     <string name="notification_group_status_information">Status Information</string>
     <string name="error_channel_name">Connectivity Problems</string>
     <string name="error_channel_description">This notification category is used to display a notification in case there is a problem connecting to an account.</string>
@@ -826,7 +826,7 @@
     <string name="open_with">Open with…</string>
     <string name="server_info_adhoc_invite">XEP-0050: Ad-Hoc Commands: user invite</string>
     <string name="choose_account">Choose account</string>
-    <string name="set_profile_picture">Pix-Art Messenger profile picture</string>
+    <string name="set_profile_picture">blabber.im profile picture</string>
     <string name="restore_backup">Restore backup</string>
     <string name="restore">Restore</string>
     <string name="enter_password_to_restore">Enter your password for the account %s to restore the backup.</string>
@@ -916,12 +916,12 @@
     <string name="action_unblock_participant">Unblock participant</string>
     <string name="action_block_participant">Block participant</string>
     <string name="share_backup_files">Share backup files</string>
-    <string name="conversations_backup">Pix-Art Messenger backup</string>
+    <string name="conversations_backup">blabber.im backup</string>
     <string name="event">Event</string>
     <string name="pref_vibrate_in_chat_summary">Vibrate when a new message arrives in an open chat</string>
     <string name="pref_vibrate_in_chat">Vibrate in open chat</string>
     <string name="open_backup">Open backup</string>
-    <string name="not_a_backup_file">The file you selected is not a Pix-Art Messenger backup file</string>
+    <string name="not_a_backup_file">The file you selected is not a blabber.im backup file</string>
     <string name="account_already_setup">This account has already been setup</string>
     <string name="please_enter_password">Please enter the password for this account</string>
     <string name="unable_to_perform_this_action">Unable to perform this action</string>
@@ -933,7 +933,7 @@
     <string name="pref_use_invidious_summary">Invidious is a privacy friendly alternative to YouTube</string>
     <string name="this_device">This device</string>
     <string name="intro_desc_main">Learn more…</string>
-    <string name="welcome_header">Welcome to\nPix-Art Messenger</string>
+    <string name="welcome_header">Welcome to\nblabber.im</string>
     <string name="intro_required_permissions">Required permissions</string>
     <string name="intro_desc_required_permissions">At the end of the intro you will be asked to grant storage permissions (mandatory), if you have not already given them. Addition permissions are requested as needed and are optional.</string>
     <string name="intro_account">Your account</string>
@@ -951,9 +951,9 @@
     <string name="show_intro_again">Intro screens will be shown again</string>
     <string name="show_intro_again_failed">Resetting intro screens failed. Try again…</string>
     <string name="intro_desc_whats_xmpp">XMPP, also called jabber, is a decentralized communication network and works like e-mail. You need an address called Jabber-ID, a password and a messenger. More about this later.</string>
-    <string name="intro_whats_xmpp">What is XMPP / Jabber / Pix-Art Messenger?</string>
+    <string name="intro_whats_xmpp">What is XMPP / Jabber / blabber.im?</string>
     <string name="intro_desc_optional_permissions">Permissions to read your address book are required to read Jabber-IDs (if any) from your contacts. Contacts are never shared, uploaded or copied.</string>
-    <string name="intro_desc_account2">You can create a new profile by selecting a custom server or one from the drop-down menu and entering a nickname.</string>
+    <string name="intro_desc_account2">You can create a new profile on blabber.im just by entering a nickname.</string>
     <string name="open_join_dialog">Join public channel…</string>
     <string name="intro_optional_permissions">Optional permissions</string>
     <string name="intro_desc_optional_permissions2">Permissions for your location is needed if you would like to share your location.\nFor sharing voice messages it is required to get access to your microphone.</string>
@@ -961,7 +961,7 @@
     <string name="intro_desc_start_chatting2">You can also add, create or join multi user chats - so-called MUCs. They where distinguished  between private group chats and public group chats - so called channels.</string>
     <string name="intro_desc_start_chatting3">Congratulations!\nHere we go and have fun…</string>
     <string name="intro_privacy">Your privacy\nYour sovereignty</string>
-    <string name="intro_desc_privacy">Pix-Art Messenger will neither sell nor analyze your data and you decide which permissions you grant.</string>
+    <string name="intro_desc_privacy">blabber.im will neither sell nor analyze your data and you decide which permissions you grant.</string>
     <string name="no_results">No results</string>
     <string name="file_transmission_cancelled">file transmission cancelled</string>
     <string name="sharing_application_not_grant_permission">The sharing application did not grant permission to access this file.</string>

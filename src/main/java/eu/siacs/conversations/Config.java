@@ -42,12 +42,12 @@ public final class Config {
 
     public static final String LOGTAG = BuildConfig.LOGTAG;
 
-    public static final Jid BUG_REPORTS = Jid.of("bugs@pix-art.de");
+    public static final Jid BUG_REPORTS = Jid.of("bugs@blabber.im");
     public static final Uri HELP = Uri.parse("https://help.conversations.im");
 
-    public static final String inviteUserURL = "https://jabber.pix-art.de/i/";
-    public static final String inviteMUCURL = "https://jabber.pix-art.de/j/";
-    public static final String inviteHostURL = "jabber.pix-art.de"; // without http(s)
+    public static final String inviteUserURL = "https://blabber.im/i/";
+    public static final String inviteMUCURL = "https://blabber.im/j/";
+    public static final String inviteHostURL = "blabber.im"; // without http(s)
     public static final String CHANGELOG_URL = "https://github.com/kriztan/Pix-Art-Messenger/blob/master/CHANGELOG.md";
 
     public static final String XMPP_IP = null; //BuildConfig.XMPP_IP; // set to null means disable
@@ -56,7 +56,7 @@ public final class Config {
     public static final String MAGIC_CREATE_DOMAIN = BuildConfig.MAGIC_CREATE_DOMAIN; //"blabber.im";
     public static final String QUICKSY_DOMAIN = "quicksy.im";
     public static final String CHANNEL_DISCOVERY = "https://search.jabber.network";
-    public static final String DEFAULT_INVIDIOUS_HOST = "invidio.us";
+    public static final String DEFAULT_INVIDIOUS_HOST = "invidious.snopyta.org";
     public static final boolean DISALLOW_REGISTRATION_IN_UI = false; //hide the register checkbox
     public static final boolean SHOW_INTRO = BuildConfig.SHOW_INTRO;
 
@@ -151,7 +151,7 @@ public final class Config {
     public static final String UPDATE_URL = BuildConfig.UPDATE_URL;
     public static final long UPDATE_CHECK_TIMER = 24 * 60 * 60; // 24 h in seconds
 
-    public static final String ISSUE_URL = "xmpp://support@room.pix-art.de?join";
+    public static final String ISSUE_URL = "xmpp://blabber@conference.blabber.im?join";
 
     public static final String[] ENABLED_CIPHERS = {
             "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",

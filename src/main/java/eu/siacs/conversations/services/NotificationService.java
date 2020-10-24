@@ -625,7 +625,11 @@ public class NotificationService {
     }
 
     private void setNotificationColor(final Builder mBuilder) {
-        mBuilder.setColor(ContextCompat.getColor(mXmppConnectionService, R.color.primary));
+        if (mXmppConnectionService.isOrangeTheme()) {
+            mBuilder.setColor(ContextCompat.getColor(mXmppConnectionService, R.color.primary_dark_orange));
+        } else {
+            mBuilder.setColor(ContextCompat.getColor(mXmppConnectionService, R.color.primary));
+        }
     }
 
     public void updateNotification() {

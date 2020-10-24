@@ -74,7 +74,6 @@ import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.entities.Conversation;
 import eu.siacs.conversations.entities.Conversational;
 import eu.siacs.conversations.entities.MucOptions;
-import eu.siacs.conversations.entities.Presence;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.ui.interfaces.OnBackendConnected;
 import eu.siacs.conversations.ui.interfaces.OnConversationArchived;
@@ -721,6 +720,7 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
                     actionBar.setDisplayHomeAsUpEnabled(true);
                     final View view = getLayoutInflater().inflate(R.layout.ab_title, null);
                     getSupportActionBar().setCustomView(view);
+                    actionBar.setIcon(null);
                     actionBar.setDisplayShowTitleEnabled(false);
                     actionBar.setDisplayShowCustomEnabled(true);
                     TextView abtitle = findViewById(android.R.id.text1);
@@ -832,6 +832,7 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setDisplayShowCustomEnabled(false);
             actionBar.setTitle(R.string.app_name);
+            actionBar.setIcon(R.drawable.ic_notification);
             actionBar.setSubtitle(null);
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
