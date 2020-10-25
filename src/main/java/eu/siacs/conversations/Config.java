@@ -56,7 +56,6 @@ public final class Config {
     public static final String MAGIC_CREATE_DOMAIN = BuildConfig.MAGIC_CREATE_DOMAIN; //"blabber.im";
     public static final String QUICKSY_DOMAIN = "quicksy.im";
     public static final String CHANNEL_DISCOVERY = "https://search.jabber.network";
-    public static final String DEFAULT_INVIDIOUS_HOST = "invidious.snopyta.org";
     public static final boolean DISALLOW_REGISTRATION_IN_UI = false; //hide the register checkbox
     public static final boolean SHOW_INTRO = BuildConfig.SHOW_INTRO;
 

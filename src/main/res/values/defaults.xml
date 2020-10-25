@@ -36,6 +36,7 @@
     <bool name="auto_rotate">false</bool>
     <bool name="send_crashreport">true</bool>
     <bool name="use_invidious">false</bool>
+    <string name="invidious_host">invidious.snopyta.org</string>
     <bool name="plain_text_logs">false</bool>
     <bool name="validate_hostname">false</bool>
     <bool name="show_foreground_service">true</bool>

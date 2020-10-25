@@ -394,9 +394,17 @@
             android:title="@string/pref_send_crash" />
         <CheckBoxPreference
             android:defaultValue="@bool/use_invidious"
+            android:disableDependentsState="false"
             android:key="use_invidious"
             android:summary="@string/pref_use_invidious_summary"
             android:title="@string/pref_use_invidious" />
+        <EditTextPreference
+            android:dependency="use_invidious"
+            android:defaultValue="@string/invidious_host"
+            android:key="invidious_host"
+            android:summary="@string/pref_invidious_host_summary"
+            android:title="@string/pref_invidious_host" />
+
         <PreferenceCategory android:title="@string/pref_create_backup">
             <Preference
                 android:key="create_backup"

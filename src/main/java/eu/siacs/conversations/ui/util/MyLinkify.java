@@ -36,6 +36,8 @@ import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.util.Linkify;
+import android.util.Log;
+import android.webkit.URLUtil;
 
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -56,19 +58,37 @@ public class MyLinkify {
     public static SpannableString replaceYoutube(Context context, String url) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         boolean invidious = sharedPreferences.getBoolean(SettingsActivity.USE_INVIDIOUS, context.getResources().getBoolean(R.bool.use_invidious));
+        String invidioushost = sharedPreferences.getString(SettingsActivity.INVIDIOUS_HOST, context.getResources().getString(R.string.invidious_host));
+        if (invidioushost.length() == 0) {
+            invidioushost = context.getResources().getString(R.string.invidious_host);
+        }
         if (invidious) {
             Matcher matcher = youtubePattern.matcher(url);
             while (matcher.find()) {
                 final String youtubeId = matcher.group(3);
-                String invidiousHost = Config.DEFAULT_INVIDIOUS_HOST.toLowerCase();
-                if (matcher.group(2) != null && matcher.group(2).equals("youtu.be")) {
-                    return new SpannableString(url.replaceAll("https://" + Pattern.quote(matcher.group()), Matcher.quoteReplacement("https://" + invidiousHost + "/watch?v=" + youtubeId + "&local=true")));
+                String invidiousHost = invidioushost.toLowerCase();
+                if (isValid(invidiousHost)) {
+                    if (matcher.group(2) != null && matcher.group(2).equalsIgnoreCase("youtu.be")) {
+                        return new SpannableString(url.replaceAll("https://" + Pattern.quote(matcher.group()), Matcher.quoteReplacement("https://" + invidiousHost + "/watch?v=" + youtubeId + "&local=true")));
+                    } else {
+                        return new SpannableString(url.replaceAll("https://" + Pattern.quote(matcher.group()), Matcher.quoteReplacement("https://" + invidiousHost + "/" + youtubeId + "&local=true")));
+                    }
                 } else {
-                    return new SpannableString(url.replaceAll("https://" + Pattern.quote(matcher.group()), Matcher.quoteReplacement("https://" + invidiousHost + "/" + youtubeId + "&local=true")));
+                    return new SpannableString(url.replaceAll("https://" + Pattern.quote(matcher.group()), Matcher.quoteReplacement("https://www.youtube-nocookie.com/embed/" + youtubeId + "&local=true")));
                 }
             }
         }
         return new SpannableString(url);
+    }
+
+    private static boolean isValid(String url) {
+        String urlstring = "https://" + url;
+        try {
+            return URLUtil.isValidUrl(urlstring) && Patterns.WEB_URL.matcher(urlstring).matches();
+        } catch (Exception e) {
+            Log.d(Config.LOGTAG, "Could not use invidious host and using youtube-nocookie " + e);
+        }
+        return false;
     }
 
     private static final Linkify.TransformFilter WEBURL_TRANSFORM_FILTER = (matcher, url) -> {

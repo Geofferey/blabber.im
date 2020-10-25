@@ -1064,4 +1064,6 @@
     <string name="n_missed_calls_from_x">%1$d missed calls from %2$s</string>
     <string name="n_missed_calls">%d missed calls</string>
     <string name="n_missed_calls_from_m_contacts">%1$d missed calls from %2$d contacts</string>
+    <string name="pref_invidious_host_summary">Use a custom invidious host</string>
+    <string name="pref_invidious_host">Invidious host</string>
 </resources>
