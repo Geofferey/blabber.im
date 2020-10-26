@@ -1,5 +1,16 @@
 ### Changelog
 
+#### Version 3.0.0
+* Pix-Art Messenger is now blabber.im
+* rework missed call notifications (PAM)
+* UI improvements (PAM)
+* search individual conversations
+* notify user if message delivery fails
+* remember display names (nicks) from Quicksy users across restarts
+* add button to start Orbot (Tor) from notification if necessary
+* handle GPX files
+* bug fixes
+
 #### Version 2.5.2
 * fix crash on PlayStore version  
 
@@ -10,6 +21,7 @@
 * colorize pinned chats (PAM)
 * add 'Return to chat' to audio call screen
 * improve keyboard shortcuts
+* improve performance for backup restore
 * bug fixes
 
 #### Version 2.5.0

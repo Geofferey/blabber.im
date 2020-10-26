@@ -28,7 +28,7 @@
 
     <style name="TextAppearance.Conversations.Body1" parent="TextAppearance.AppCompat.Body1">
         <item name="android:textSize">?TextSizeBody1</item>
-        <item name="android:textColorLink">?android:textColorPrimary</item>
+        <item name="android:textColorLink">?text_Color_Main</item>
     </style>
 
     <style name="TextAppearance.Conversations.Body1.Warning" parent="TextAppearance.AppCompat.Body1">

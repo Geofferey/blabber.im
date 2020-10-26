@@ -40,6 +40,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -84,6 +85,7 @@ import eu.siacs.conversations.ui.util.ActivityResult;
 import eu.siacs.conversations.ui.util.ConversationMenuConfigurator;
 import eu.siacs.conversations.ui.util.IntroHelper;
 import eu.siacs.conversations.ui.util.PendingItem;
+import eu.siacs.conversations.ui.util.StyledAttributes;
 import eu.siacs.conversations.utils.EmojiWrapper;
 import eu.siacs.conversations.utils.ExceptionHelper;
 import eu.siacs.conversations.utils.MenuDoubleTabUtil;
@@ -721,6 +723,7 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
                     final View view = getLayoutInflater().inflate(R.layout.ab_title, null);
                     getSupportActionBar().setCustomView(view);
                     actionBar.setIcon(null);
+                    actionBar.setBackgroundDrawable(new ColorDrawable(StyledAttributes.getColor(this, R.attr.colorPrimary)));
                     actionBar.setDisplayShowTitleEnabled(false);
                     actionBar.setDisplayShowCustomEnabled(true);
                     TextView abtitle = findViewById(android.R.id.text1);
@@ -831,8 +834,9 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
             }
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setDisplayShowCustomEnabled(false);
-            actionBar.setTitle(R.string.app_name);
-            actionBar.setIcon(R.drawable.ic_notification);
+            actionBar.setTitle(null);
+            actionBar.setIcon(R.drawable.logo_800);
+            actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.header_background)));
             actionBar.setSubtitle(null);
             actionBar.setDisplayHomeAsUpEnabled(false);
         }

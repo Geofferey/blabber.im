@@ -3,9 +3,9 @@
     <stroke android:width="2dp" android:color="@color/accent"/>
     <corners
         android:topLeftRadius="0dp"
-        android:topRightRadius="5dp"
-        android:bottomRightRadius="5dp"
-        android:bottomLeftRadius="5dp" />
+        android:topRightRadius="15dp"
+        android:bottomRightRadius="15dp"
+        android:bottomLeftRadius="15dp" />
     <padding
         android:bottom="4dp"
         android:left="6dp"

@@ -17,7 +17,7 @@
         android:paddingTop="1dp"
         android:scrollHorizontally="true"
         android:singleLine="true"
-        android:textColor="@color/grey200" />
+        android:textColor="@color/realwhite" />
 
     <TextView
         android:id="@android:id/text2"
@@ -32,6 +32,6 @@
         android:paddingBottom="1dp"
         android:scrollHorizontally="true"
         android:singleLine="true"
-        android:textColor="@color/grey50"
+        android:textColor="@color/realwhite"
         android:textSize="12sp" />
 </RelativeLayout>

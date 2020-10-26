@@ -30,9 +30,9 @@ public class IntroActivity extends AppIntro2 {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final int backgroundColor = getResources().getColor(R.color.primary_dark_orange);
-        final int barColor = getResources().getColor(R.color.primary_orange);
-        final int indicatorColorActive = getResources().getColor(R.color.primary_dark_orange);
+        final int backgroundColor = getResources().getColor(R.color.header_background);
+        final int barColor = getResources().getColor(R.color.accent_orange);
+        final int indicatorColorActive = getResources().getColor(R.color.darkorange);
         final int indicatorColorUsed = getResources().getColor(R.color.darkorange);
 
         setBarColor(barColor);
@@ -55,7 +55,7 @@ public class IntroActivity extends AppIntro2 {
                 SliderPage welcome = new SliderPage();
                 welcome.setTitle(getString(R.string.welcome_header));
                 welcome.setDescription(getString(R.string.intro_desc_main));
-                welcome.setImageDrawable(R.drawable.main_logo);
+                welcome.setImageDrawable(R.drawable.logo_800);
                 welcome.setBackgroundColor(backgroundColor);
                 addSlide(AppIntroFragment.newInstance(welcome));
 
@@ -177,6 +177,7 @@ public class IntroActivity extends AppIntro2 {
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
+        SaveIntroShown(getBaseContext(), activity, mode_multi);
         finish();
     }
 
