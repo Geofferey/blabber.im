@@ -17,7 +17,7 @@ Euer blabber.im Team
 
 -----
 
-![logo](art/icon.png)
+<img src="art/logo_android.png" width="100">
 # Pix-Art Messenger [![CircleCI](https://circleci.com/gh/kriztan/Pix-Art-Messenger/tree/master.svg?style=shield)](https://circleci.com/gh/kriztan/Pix-Art-Messenger/tree/master)
 
 🇬🇧🇺🇸… [English Readme version available here](README-en.md)
