@@ -890,7 +890,7 @@
     <string name="password_forgotten_title">Password forgotten</string>
     <string name="password_forgotten_text">You have forgotten your account password? We will now try to open the support website of your provider.</string>
     <string name="set_settings_intro">Here you can set some important privacy settings to your needs. All the settings can also be modified later.</string>
-    <string name="pref_show_mappreview_inside_summary">Show map previews directly inside the chat view, a connection to the Pix-Art-Server will be established.</string>
+    <string name="pref_show_mappreview_inside_summary">Show map previews directly inside the chat view, a connection to the blabber.im-Server will be established.</string>
     <string name="pref_show_mappreview_inside">Show previews of locations in chat</string>
     <string name="pref_use_internal_updater_summary">Let the messenger look for new app updates once a day</string>
     <string name="pref_use_internal_updater">Look for updates</string>
