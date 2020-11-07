@@ -31,6 +31,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.LruCache;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 
@@ -329,8 +330,14 @@ public class FileBackend {
         return Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + APP_DIRECTORY + File.separator + "Media" + File.separator;
     }
 
-    public static String getBackupDirectory() {
-        return Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + APP_DIRECTORY + File.separator + "Database" + File.separator;
+    public static String getBackupDirectory(@Nullable String app) {
+        if (app != null && (app.equalsIgnoreCase("conversations") || app.equalsIgnoreCase("Quicksy"))) {
+            return Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + app + "/Backup/";
+        } else if (app != null && (app.equalsIgnoreCase("Pix-Art Messenger"))) {
+            return Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + app + File.separator + "Database" + File.separator;
+        } else {
+            return Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + APP_DIRECTORY + File.separator + "Database" + File.separator;
+        }
     }
 
     public static String getAppLogsDirectory() {
