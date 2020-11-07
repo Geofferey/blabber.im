@@ -31,10 +31,12 @@ package eu.siacs.conversations.ui.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.webkit.URLUtil;
@@ -49,6 +51,7 @@ import eu.siacs.conversations.ui.SettingsActivity;
 import eu.siacs.conversations.ui.text.FixedURLSpan;
 import eu.siacs.conversations.utils.GeoHelper;
 import eu.siacs.conversations.utils.Patterns;
+import eu.siacs.conversations.utils.TrackingHelper;
 import eu.siacs.conversations.utils.XmppUri;
 
 public class MyLinkify {
@@ -81,6 +84,69 @@ public class MyLinkify {
         return new SpannableString(url);
     }
 
+    // https://github.com/M66B/FairEmail/blob/master/app/src/main/java/eu/faircode/email/AdapterMessage.java
+    public static SpannableString removeTrackingParameter(Uri uri) {
+        boolean changed = false;
+        Uri url;
+        Uri.Builder builder;
+        if (uri.getHost() != null &&
+                uri.getHost().endsWith("safelinks.protection.outlook.com") &&
+                !TextUtils.isEmpty(uri.getQueryParameter("url"))) {
+            changed = true;
+            url = Uri.parse(uri.getQueryParameter("url"));
+        } else if ("https".equals(uri.getScheme()) &&
+                "www.google.com".equals(uri.getHost()) &&
+                uri.getPath() != null &&
+                uri.getPath().startsWith("/amp/")) {
+            // https://blog.amp.dev/2017/02/06/whats-in-an-amp-url/
+            Uri result = null;
+            String u = uri.toString();
+            u = u.replace("https://www.google.com/amp/", "");
+            int p = u.indexOf("/");
+            while (p > 0) {
+                String segment = u.substring(0, p);
+                if (segment.contains(".")) {
+                    result = Uri.parse("https://" + u);
+                    break;
+                }
+                u = u.substring(p + 1);
+                p = u.indexOf("/");
+            }
+            changed = (result != null);
+            url = (result == null ? uri : result);
+        } else {
+            url = uri;
+        }
+        if (url.isOpaque()) {
+            return new SpannableString(uri.toString());
+            //return uri;
+        }
+        builder = url.buildUpon();
+        builder.clearQuery();
+        for (String key : url.getQueryParameterNames())
+            // https://en.wikipedia.org/wiki/UTM_parameters
+            // https://docs.oracle.com/en/cloud/saas/marketing/eloqua-user/Help/EloquaAsynchronousTrackingScripts/EloquaTrackingParameters.htm
+            if (key.toLowerCase(Locale.ROOT).startsWith("utm_") ||
+                    key.toLowerCase(Locale.ROOT).startsWith("elq") ||
+                    TrackingHelper.TRACKIN_PARAMETER.contains(key.toLowerCase(Locale.ROOT)) ||
+                    ("snr".equals(key) && "store.steampowered.com".equals(uri.getHost())))
+                changed = true;
+            else if (!TextUtils.isEmpty(key))
+                for (String value : url.getQueryParameters(key)) {
+                    Log.i(Config.LOGTAG, "Query " + key + "=" + value);
+                    Uri suri = Uri.parse(value);
+                    if ("http".equals(suri.getScheme()) || "https".equals(suri.getScheme())) {
+                        Uri s = Uri.parse(removeTrackingParameter(suri).toString());
+                        if (s != null) {
+                            changed = true;
+                            value = s.toString();
+                        }
+                    }
+                    builder.appendQueryParameter(key, value);
+                }
+        return (changed ? new SpannableString(builder.build().toString()) : new SpannableString(uri.toString()));
+    }
+
     private static boolean isValid(String url) {
         String urlstring = "https://" + url;
         try {
@@ -97,9 +163,9 @@ public class MyLinkify {
         }
         final String lcUrl = url.toLowerCase(Locale.US);
         if (lcUrl.startsWith("http://") || lcUrl.startsWith("https://")) {
-            return removeTrailingBracket(url);
+            return removeTrailingBracket(removeTrackingParameter(Uri.parse(url)).toString());
         } else {
-            return "http://" + removeTrailingBracket(url);
+            return "http://" + removeTrailingBracket(removeTrackingParameter(Uri.parse(url)).toString());
         }
     };
 
