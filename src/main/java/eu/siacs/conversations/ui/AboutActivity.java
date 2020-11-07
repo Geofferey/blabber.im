@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.utils.ThemeHelper;
 import me.drakeet.support.toast.ToastCompat;
@@ -44,7 +45,7 @@ public class AboutActivity extends XmppActivity {
         privacyButton = findViewById(R.id.show_privacy_policy);
         privacyButton.setOnClickListener(view -> {
             try {
-                final Uri uri = Uri.parse("https://blabber.im/en/datenschutz/");
+                final Uri uri = Uri.parse(Config.privacyURL);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(browserIntent);
             } catch (Exception e) {
@@ -54,7 +55,7 @@ public class AboutActivity extends XmppActivity {
         termsOfUseButton = findViewById(R.id.show_terms_of_use);
         termsOfUseButton.setOnClickListener(view -> {
             try {
-                final Uri uri = Uri.parse("https://blabber.im/en/nutzungsbedingungen/");
+                final Uri uri = Uri.parse(Config.termsOfUseURL);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(browserIntent);
             } catch (Exception e) {

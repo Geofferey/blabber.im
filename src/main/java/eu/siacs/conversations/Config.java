@@ -5,6 +5,7 @@ import android.net.Uri;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import eu.siacs.conversations.xmpp.chatstate.ChatState;
 import eu.siacs.conversations.xmpp.Jid;
@@ -40,15 +41,28 @@ public final class Config {
         return (ENCRYPTION_MASK & (ENCRYPTION_MASK - 1)) != 0;
     }
 
+    public static String blabber() {
+        if (Locale.getDefault().getLanguage().equalsIgnoreCase("de")) {
+            return "blabber.im";
+        } else {
+            return "blabber.im/en";
+        }
+    }
+
     public static final String LOGTAG = BuildConfig.LOGTAG;
 
     public static final Jid BUG_REPORTS = Jid.of("bugs@blabber.im");
     public static final Uri HELP = Uri.parse("https://help.conversations.im");
 
-    public static final String inviteUserURL = "https://blabber.im/i/";
-    public static final String inviteMUCURL = "https://blabber.im/j/";
-    public static final String inviteHostURL = "blabber.im"; // without http(s)
-    public static final String CHANGELOG_URL = "https://github.com/kriztan/Pix-Art-Messenger/blob/master/CHANGELOG.md";
+    public static final String inviteUserURL = "https://" + blabber() + "/i/";
+    public static final String inviteMUCURL = "https://" + blabber() + "/j/";
+    public static final String inviteHostURL = blabber(); // without http(s)
+    public static final String termsOfUseURL = "https://" + blabber() + "/nutzungsbedingungen/";
+    public static final String privacyURL = "https://" + blabber() + "/datenschutz/";
+    public static final String migrationURL = "https://" + blabber() + "/quick-start/migration-pixart-blabber/";
+
+    public static final String CHANGELOG_URL = "https://codeberg.org/kriztan/blabber.im/src/branch/master/CHANGELOG.md";
+    public static final String GIT_URL = "https://codeberg.org/kriztan/blabber.im/";
 
     public static final String XMPP_IP = null; //BuildConfig.XMPP_IP; // set to null means disable
     public static final Integer[] XMPP_Ports = null; //BuildConfig.XMPP_Ports; // set to null means disable
