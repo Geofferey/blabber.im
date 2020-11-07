@@ -1057,7 +1057,8 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
 
             @Override
             public void error(int errorCode, String object) {
-
+                Log.d(Config.LOGTAG, mAccount.getJid().asBareJid() + ": error generating signature. Code: " + errorCode + " Object: " + object);
+                xmppConnectionService.changeStatus(mAccount, template, null);
             }
 
             @Override
