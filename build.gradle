@@ -105,7 +105,7 @@ android {
 
         versionCode 310
         versionName "3.0.0"
-        versionNameSuffix " beta_(2020-11-02)" // " beta_(XXXX-XX-XX)" // activate for beta versions
+        versionNameSuffix " beta_(2020-11-07)" // " beta_(XXXX-XX-XX)" // activate for beta versions
         //resConfigs "en"
 
         archivesBaseName += "-$versionName"

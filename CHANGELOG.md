@@ -4,6 +4,8 @@
 * Pix-Art Messenger is now blabber.im
 * rework missed call notifications (PAM)
 * UI improvements (PAM)
+* show backups from other messengers (PAM)
+* automatically remove URL tracking parameters for sent/received links
 * search individual conversations
 * notify user if message delivery fails
 * remember display names (nicks) from Quicksy users across restarts
