@@ -1067,4 +1067,6 @@
     <string name="pref_invidious_host_summary">Use a custom invidious host</string>
     <string name="pref_invidious_host">Invidious host</string>
     <string name="updated_to_blabber">We have successfully updated Pix-Art Messenger to blabber.im\n\nThe cooperation of the two projects blabber.im and Pix-Art Messenger was expanded in November 2020. In the future, the Android app Pix-Art Messenger will be continued under the name blabber.im.\n\nWhat you can expect:\n- Range of functions remains the same\n- Support chat rooms are merged\n- Colors and logos are adapted to blabber.im\n- App is still available for free in Google Play Store and F-Droid Store\n\nYour blabber.im Team</string>
+    <string name="updated_to_blabber_google">We have to apologize that we could not update directly to blabber.im. Under the following link you will receive instructions on how to transfer all your profiles from Pix-Art Messenger to blabber.im.</string>
+    <string name="link">Link</string>
 </resources>

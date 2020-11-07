@@ -1,6 +1,7 @@
 package eu.siacs.conversations.ui;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -29,6 +30,7 @@ import eu.siacs.conversations.databinding.WelcomeBinding;
 import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.ui.util.IntroHelper;
 import eu.siacs.conversations.services.XmppConnectionService;
+import eu.siacs.conversations.ui.util.UpdateHelper;
 import eu.siacs.conversations.utils.Compatibility;
 import eu.siacs.conversations.utils.InstallReferrerUtils;
 import eu.siacs.conversations.utils.SignupUtils;
@@ -124,6 +126,7 @@ public class WelcomeActivity extends XmppActivity implements XmppConnectionServi
             ab.setDisplayHomeAsUpEnabled(false);
         }
         IntroHelper.showIntro(this, false);
+        UpdateHelper.showPopup(this);
         if (hasStoragePermission(REQUEST_IMPORT_BACKUP)) {
             binding.importDatabase.setVisibility(View.VISIBLE);
             binding.importText.setVisibility(View.VISIBLE);

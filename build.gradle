@@ -153,9 +153,13 @@ android {
         playstore {
             dimension "distribution"
             versionNameSuffix "-playstore"
+            applicationId "im.blabber.messenger"
+            buildConfigField("boolean", "SHOW_MIGRATION_INFO", 'false')
+            resValue "string", "applicationId", applicationId
         }
         git {
             dimension "distribution"
+            buildConfigField("boolean", "SHOW_MIGRATION_INFO", 'true')
         }
     }
     if (project.hasProperty('mStoreFile') &&
