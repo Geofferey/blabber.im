@@ -58,8 +58,6 @@
     <string name="unblock">Desbloquear</string>
     <string name="save">Guardar</string>
     <string name="ok">OK</string>
-    <string name="crash_report_title">blabber.im teve um problema e deixou de funcionar</string>
-    <string name="crash_report_message">Ao enviar os stack traces você ajudará o desenvolvimento do aplicativo\n<b>Atenção:</b> Isso usará a sua conta XMPP para enviar o stack trace para o desenvolvedor.</string>
     <string name="send_now">Enviar agora</string>
     <string name="send_never">Não perguntar novamente</string>
     <string name="problem_connecting_to_account">Não foi possível ligar-se à conta</string>
@@ -84,13 +82,11 @@
     <string name="send_unencrypted">Enviar não cifrada</string>
     <string name="decryption_failed">A decifragem falhou. Talvez  não tenha a chave privada correta.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">blabber.im utiliza uma aplicação de terceiros chamada <b>OpenKeychain</b> para cifrar e decifrar mensagens e gerir as suas chaves públicas.\n\nOpenKeychain é licenciado sob a licença GPLv3 e está disponível no F-Droid e Google Play.\n\n<small>(Por favor reinicie blabber.im em seguida)</small></string>
     <string name="restart">Reiniciar</string>
     <string name="install">Instalar</string>
     <string name="offering">oferecendo...</string>
     <string name="waiting">aguardando...</string>
     <string name="no_pgp_key">Nenhuma chave OpenPGP encontrada</string>
-    <string name="contact_has_no_pgp_key">blabber.im não é capaz de cifrar as suas mensagens porque o seu contacto não está a anunciar a sua chave pública.\n\n<small>Por favor peça ao seu contacto para configurar o OpenPGP.</small></string>
     <string name="no_pgp_keys">Não foram encontradas chaves OpenPGP</string>
     <string name="pref_general">Geral</string>
     <string name="pref_accept_files_wifi">Ao usar uma rede wi-fi descarregar ficheiros</string>
@@ -151,7 +147,6 @@
     <string name="mgmt_account_delete_confirm_message">Se apagar a sua conta, todo o histórico de mensagens será apagado.\n\nSe apagar a sua conta do servidor, não poderá mais voltar a ligar-se ao serviço até criar uma nova conta.</string>
     <string name="attach_record_voice">Gravar voz</string>
     <string name="account_settings_jabber_id">ID Jabber</string>
-    <string name="account_settings_example_jabber_id">nomedeutilizador@exemplo.com</string>
     <string name="password">Palavra-passe</string>
     <string name="invalid_jid">Esse não é um ID Jabber válido</string>
     <string name="error_out_of_memory">Memória insuficiente. A imagem é muito grande</string>
@@ -234,7 +229,7 @@
     <string name="pref_allow_message_correction">Permitir a correção de mensagens</string>
     <string name="pref_allow_message_correction_summary">Permitir que os seus contactos editem as suas mensagens depois de enviadas</string>
     <string name="pref_expert_options">Definições avançadas</string>
-    <string name="title_activity_about">Sobre blabber.im</string>
+    <string name="title_activity_about">Sobre</string>
     <string name="pref_about_conversations_summary">Informação de licença e construção</string>
     <string name="title_pref_quiet_hours">Horas de tranquilidade</string>
     <string name="title_pref_quiet_hours_start_time">Hora de início</string>
@@ -375,7 +370,6 @@
     <string name="pref_away_when_screen_off">Ausente quando o ecrã está desligado</string>
     <string name="pref_away_when_screen_off_summary">Define o seu recurso como ausente quando o ecrã está desligado</string>
     <string name="pref_treat_vibrate_as_silent">Tratar vibrar como modo silencioso</string>
-    <string name="hostname_example">xmpp.exemplo.com</string>
     <string name="action_add_account_with_certificate">Adicionar conta com certificado</string>
     <string name="unable_to_parse_certificate">Não foi possível processar o certificado</string>
     <string name="authenticate_with_certificate">Deixar vazio para autenticar com certificado</string>
@@ -400,9 +394,7 @@
         <item quantity="other">%d mensagens</item>
     </plurals>
     <string name="load_more_messages">Carregar mais mensagens</string>
-    <string name="no_storage_permission">blabber.im necessita de acesso ao armazenamento externo</string>
     <string name="sync_with_contacts">Sincronizar com contactos</string>
-    <string name="sync_with_contacts_long">A aplicação blabber.im deseja fazer a correspondência entre a sua lista de contactos XMPP e os seus contactos para mostrar os seus nomes completos e os seus avatares.\n\nA aplicação blabber.im irá apenas ler os seus contactos e fazer a correspondência localmente sem enviar os dados para o seu servidor.\n\nIrá agora ser-lhe pedido para dar permissão para aceder aos seus contactos.</string>
     <string name="notify_on_all_messages">Notificar em todas as mensagens</string>
     <string name="notify_never">Notificações desativadas</string>
     <string name="notify_paused">Notificações interrompidas</string>
@@ -414,8 +406,6 @@
     <string name="video_high">Alta (1080p)</string>
     <string name="always">Sempre</string>
     <string name="battery_optimizations_enabled">Otimizações da bateria ativadas</string>
-    <string name="battery_optimizations_enabled_explained">O seu dispositivo está a fazer otimizações de bateria bastante agressivas na aplicação blabber.im que poderão levar a notificações atrasadas ou até mesmo a perda de mensagens.\nÉ recomendado que as desative.</string>
-    <string name="battery_optimizations_enabled_dialog">O seu dispositivo está a fazer otimizações de bateria bastantes agressivas na aplicação blabber.im que poderão levar a notificações atrasadas ou até mesmo perda de mensagens.\n\nIrá-lhe agora ser pedido para desativá-las.</string>
     <string name="disable">Desativar</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
@@ -440,7 +430,6 @@
     <string name="choose_participants">Escolher participantes</string>
     <string name="import_database">Importar cópia de segurança</string>
     <string name="invite_again">Convidar novamente</string>
-    <string name="invite_user">Convidar ao blabber.im</string>
     <string name="this_device_is_no_longer_in_use">Este aparelho já não está em uso</string>
     <string name="me">Eu</string>
     <string name="error_file_corrupt">Este ficheiro parece estar danificado.</string>
