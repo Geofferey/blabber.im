@@ -311,8 +311,13 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                 break;
             default:
                 if (multiReceived) {
+                    final int shadowSize = 10;
                     viewHolder.username.setVisibility(View.VISIBLE);
                     viewHolder.username.setText(UIHelper.getColoredUsername(activity.xmppConnectionService, message));
+                    if (activity.xmppConnectionService.colored_muc_names()) {
+                        viewHolder.username.setShadowLayer(shadowSize, 0, 0, ContextCompat.getColor(activity, R.color.realwhite));
+                        viewHolder.username.setPadding(shadowSize / 2, shadowSize / 2, shadowSize / 2, shadowSize / 2);
+                    }
                 }
                 if (singleReceived) {
                     viewHolder.username.setVisibility(View.GONE);
