@@ -5201,12 +5201,4 @@ public class XmppConnectionService extends Service {
             databaseBackend.expireOldMessages(timestamp);
         }
     }
-
-    protected String getStringPreference(String name, int res) {
-        return getPreferences().getString(name, getResources().getString(res));
-    }
-
-    public boolean isOrangeTheme() {
-        return getStringPreference("theme_color", R.string.theme_color).equals("orange");
-    }
 }

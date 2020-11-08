@@ -61,11 +61,11 @@ import eu.siacs.conversations.ui.ConversationsActivity;
 import eu.siacs.conversations.ui.EditAccountActivity;
 import eu.siacs.conversations.ui.RtpSessionActivity;
 import eu.siacs.conversations.ui.TimePreference;
-import eu.siacs.conversations.ui.util.StyledAttributes;
 import eu.siacs.conversations.utils.AccountUtils;
 import eu.siacs.conversations.utils.Compatibility;
 import eu.siacs.conversations.utils.EmojiWrapper;
 import eu.siacs.conversations.utils.GeoHelper;
+import eu.siacs.conversations.utils.ThemeHelper;
 import eu.siacs.conversations.utils.TorServiceUtils;
 import eu.siacs.conversations.utils.UIHelper;
 import eu.siacs.conversations.xmpp.XmppConnection;
@@ -625,11 +625,7 @@ public class NotificationService {
     }
 
     private void setNotificationColor(final Builder mBuilder) {
-        if (mXmppConnectionService.isOrangeTheme()) {
-            mBuilder.setColor(ContextCompat.getColor(mXmppConnectionService, R.color.primary_dark_orange));
-        } else {
-            mBuilder.setColor(ContextCompat.getColor(mXmppConnectionService, R.color.primary));
-        }
+        mBuilder.setColor(ContextCompat.getColor(mXmppConnectionService, ThemeHelper.notificationColor(mXmppConnectionService)));
     }
 
     public void updateNotification() {

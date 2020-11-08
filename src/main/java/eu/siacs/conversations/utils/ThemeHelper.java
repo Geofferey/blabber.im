@@ -31,6 +31,7 @@ package eu.siacs.conversations.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -70,6 +71,15 @@ public class ThemeHelper {
                     default:
                         return dark ? R.style.ConversationsTheme_Dark : R.style.ConversationsTheme;
                 }
+            case "blabber":
+                switch (fontSize) {
+                    case "medium":
+                        return dark ? R.style.ConversationsTheme_Blabber_Dark_Medium : R.style.ConversationsTheme_Blabber_Medium;
+                    case "large":
+                        return dark ? R.style.ConversationsTheme_Blabber_Dark_Large : R.style.ConversationsTheme_Blabber_Large;
+                    default:
+                        return dark ? R.style.ConversationsTheme_Blabber_Dark : R.style.ConversationsTheme_Blabber;
+                }
             case "orange":
                 switch (fontSize) {
                     case "medium":
@@ -79,8 +89,26 @@ public class ThemeHelper {
                     default:
                         return dark ? R.style.ConversationsTheme_Orange_Dark : R.style.ConversationsTheme_Orange;
                 }
+            case "grey":
+                switch (fontSize) {
+                    case "medium":
+                        return dark ? R.style.ConversationsTheme_Grey_Dark_Medium : R.style.ConversationsTheme_Grey_Medium;
+                    case "large":
+                        return dark ? R.style.ConversationsTheme_Grey_Dark_Large : R.style.ConversationsTheme_Grey_Large;
+                    default:
+                        return dark ? R.style.ConversationsTheme_Grey_Dark : R.style.ConversationsTheme_Grey;
+                }
+            case "pink":
+                switch (fontSize) {
+                    case "medium":
+                        return dark ? R.style.ConversationsTheme_Pink_Dark_Medium : R.style.ConversationsTheme_Pink_Medium;
+                    case "large":
+                        return dark ? R.style.ConversationsTheme_Pink_Dark_Large : R.style.ConversationsTheme_Pink_Large;
+                    default:
+                        return dark ? R.style.ConversationsTheme_Pink_Dark : R.style.ConversationsTheme_Pink;
+                }
             default:
-                return dark ? R.style.ConversationsTheme_Dark : R.style.ConversationsTheme;
+                return dark ? R.style.ConversationsTheme_Blabber_Dark : R.style.ConversationsTheme_Blabber;
         }
     }
 
@@ -120,6 +148,15 @@ public class ThemeHelper {
                     default:
                         return dark ? R.style.ConversationsTheme_Dark_Dialog : R.style.ConversationsTheme_Dialog;
                 }
+            case "blabber":
+                switch (fontSize) {
+                    case "medium":
+                        return dark ? R.style.ConversationsTheme_Blabber_Dark_Dialog_Medium : R.style.ConversationsTheme_Blabber_Dialog_Medium;
+                    case "large":
+                        return dark ? R.style.ConversationsTheme_Blabber_Dark_Dialog_Large : R.style.ConversationsTheme_Blabber_Dialog_Large;
+                    default:
+                        return dark ? R.style.ConversationsTheme_Blabber_Dark_Dialog : R.style.ConversationsTheme_Blabber_Dialog;
+                }
             case "orange":
                 switch (fontSize) {
                     case "medium":
@@ -129,22 +166,141 @@ public class ThemeHelper {
                     default:
                         return dark ? R.style.ConversationsTheme_Orange_Dark_Dialog : R.style.ConversationsTheme_Orange_Dialog;
                 }
+            case "grey":
+                switch (fontSize) {
+                    case "medium":
+                        return dark ? R.style.ConversationsTheme_Grey_Dark_Dialog_Medium : R.style.ConversationsTheme_Grey_Dialog_Medium;
+                    case "large":
+                        return dark ? R.style.ConversationsTheme_Grey_Dark_Dialog_Large : R.style.ConversationsTheme_Grey_Dialog_Large;
+                    default:
+                        return dark ? R.style.ConversationsTheme_Grey_Dark_Dialog : R.style.ConversationsTheme_Grey_Dialog;
+                }
+            case "pink":
+                switch (fontSize) {
+                    case "medium":
+                        return dark ? R.style.ConversationsTheme_Pink_Dark_Dialog_Medium : R.style.ConversationsTheme_Pink_Dialog_Medium;
+                    case "large":
+                        return dark ? R.style.ConversationsTheme_Pink_Dark_Dialog_Large : R.style.ConversationsTheme_Pink_Dialog_Large;
+                    default:
+                        return dark ? R.style.ConversationsTheme_Pink_Dark_Dialog : R.style.ConversationsTheme_Pink_Dialog;
+                }
             default:
-                return dark ? R.style.ConversationsTheme_Dark_Dialog : R.style.ConversationsTheme_Dialog;
+                return dark ? R.style.ConversationsTheme_Blabber_Dark_Dialog : R.style.ConversationsTheme_Blabber_Dialog;
         }
     }
 
     public static boolean isDark(@StyleRes int id) {
         switch (id) {
+            //blue
             case R.style.ConversationsTheme_Dark:
             case R.style.ConversationsTheme_Dark_Large:
             case R.style.ConversationsTheme_Dark_Medium:
+                //blabber
+            case R.style.ConversationsTheme_Blabber_Dark:
+            case R.style.ConversationsTheme_Blabber_Dark_Large:
+            case R.style.ConversationsTheme_Blabber_Dark_Medium:
+                //orange
             case R.style.ConversationsTheme_Orange_Dark:
             case R.style.ConversationsTheme_Orange_Dark_Large:
             case R.style.ConversationsTheme_Orange_Dark_Medium:
+                //grey
+            case R.style.ConversationsTheme_Grey_Dark:
+            case R.style.ConversationsTheme_Grey_Dark_Large:
+            case R.style.ConversationsTheme_Grey_Dark_Medium:
+                //pink
+            case R.style.ConversationsTheme_Pink_Dark:
+            case R.style.ConversationsTheme_Pink_Dark_Large:
+            case R.style.ConversationsTheme_Pink_Dark_Medium:
                 return true;
             default:
                 return false;
+        }
+    }
+
+    public static ColorStateList AudioPlayerColor(Context context) {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        final Resources resources = context.getResources();
+        final boolean auto = sharedPreferences.getString(SettingsActivity.THEME, resources.getString(R.string.theme)).equals("auto");
+        boolean dark;
+        if (auto) {
+            dark = nightMode(context);
+        } else {
+            dark = sharedPreferences.getString(SettingsActivity.THEME, resources.getString(R.string.theme)).equals("dark");
+        }
+        final String themeColor = sharedPreferences.getString("theme_color", resources.getString(R.string.theme_color));
+        switch (themeColor) {
+            case "blue":
+                return dark ? ContextCompat.getColorStateList(context, R.color.white70) : ContextCompat.getColorStateList(context, R.color.darkblue);
+            case "blabber":
+                return dark ? ContextCompat.getColorStateList(context, R.color.white70) : ContextCompat.getColorStateList(context, R.color.darkblabber);
+            case "orange":
+                return dark ? ContextCompat.getColorStateList(context, R.color.white70) : ContextCompat.getColorStateList(context, R.color.darkorange);
+            case "grey":
+                return dark ? ContextCompat.getColorStateList(context, R.color.white70) : ContextCompat.getColorStateList(context, R.color.darkgrey);
+            case "pink":
+                return dark ? ContextCompat.getColorStateList(context, R.color.white70) : ContextCompat.getColorStateList(context, R.color.darkpink);
+            default:
+                return dark ? ContextCompat.getColorStateList(context, R.color.white70) : ContextCompat.getColorStateList(context, R.color.darkblabber);
+        }
+    }
+
+    public SharedPreferences getPreferences(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    public static int notificationColor(Context context) {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        final Resources resources = context.getResources();
+        final boolean auto = sharedPreferences.getString(SettingsActivity.THEME, resources.getString(R.string.theme)).equals("auto");
+        final String themeColor = sharedPreferences.getString("theme_color", resources.getString(R.string.theme_color));
+        switch (themeColor) {
+            case "blue":
+                return R.color.primary;
+            case "blabber":
+                return R.color.primary_blabber;
+            case "orange":
+                return R.color.primary_orange;
+            case "grey":
+                return R.color.primary_grey;
+            case "pink":
+                return R.color.primary_pink;
+            default:
+                return R.color.primary_blabber;
+        }
+    }
+
+    public static int getMessageTextColor(Context context, boolean onDark, boolean primary) {
+        if (onDark) {
+            return ContextCompat.getColor(context, primary ? R.color.white : R.color.white70);
+        } else {
+            return ContextCompat.getColor(context, primary ? R.color.black87 : R.color.black54);
+        }
+    }
+
+    public static int messageTextColor(Context context) {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        final Resources resources = context.getResources();
+        final boolean auto = sharedPreferences.getString(SettingsActivity.THEME, resources.getString(R.string.theme)).equals("auto");
+        boolean dark;
+        if (auto) {
+            dark = nightMode(context);
+        } else {
+            dark = sharedPreferences.getString(SettingsActivity.THEME, resources.getString(R.string.theme)).equals("dark");
+        }
+        final String themeColor = sharedPreferences.getString("theme_color", resources.getString(R.string.theme_color));
+        switch (themeColor) {
+            case "blue":
+                return dark ? getMessageTextColor(context, dark, false) : ContextCompat.getColor(context, R.color.darkblue);
+            case "blabber":
+                return dark ? getMessageTextColor(context, dark, false) : ContextCompat.getColor(context, R.color.darkblabber);
+            case "orange":
+                return dark ? getMessageTextColor(context, dark, false) : ContextCompat.getColor(context, R.color.darkorange);
+            case "grey":
+                return dark ? getMessageTextColor(context, dark, false) : ContextCompat.getColor(context, R.color.darkgrey);
+            case "pink":
+                return dark ? getMessageTextColor(context, dark, false) : ContextCompat.getColor(context, R.color.darkpink);
+            default:
+                return dark ? getMessageTextColor(context, dark, false) : ContextCompat.getColor(context, R.color.darkblabber);
         }
     }
 

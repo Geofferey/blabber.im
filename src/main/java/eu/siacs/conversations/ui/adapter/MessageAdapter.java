@@ -87,6 +87,7 @@ import eu.siacs.conversations.utils.GeoHelper;
 import eu.siacs.conversations.utils.MessageUtils;
 import eu.siacs.conversations.utils.RichPreview;
 import eu.siacs.conversations.utils.StylingHelper;
+import eu.siacs.conversations.utils.ThemeHelper;
 import eu.siacs.conversations.utils.TimeFrameUtils;
 import eu.siacs.conversations.utils.UIHelper;
 import eu.siacs.conversations.xmpp.Jid;
@@ -200,14 +201,6 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
     @Override
     public int getItemViewType(int position) {
         return this.getItemViewType(getItem(position));
-    }
-
-    private int getMessageTextColor(boolean onDark, boolean primary) {
-        if (onDark) {
-            return ContextCompat.getColor(activity, primary ? R.color.white : R.color.white70);
-        } else {
-            return ContextCompat.getColor(activity, primary ? R.color.black87 : R.color.black54);
-        }
     }
 
     private int getMessageTextColorPrivate() {
@@ -355,7 +348,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
             } else {
                 viewHolder.time.setTextAppearance(getContext(), R.style.TextAppearance_Conversations_Caption);
             }
-            viewHolder.time.setTextColor(this.getMessageTextColor(darkBackground, false));
+            viewHolder.time.setTextColor(ThemeHelper.getMessageTextColor(getContext(), darkBackground, false));
         }
         if (!error && type == SENT) {
             viewHolder.resend_button.setVisibility(View.GONE);
@@ -516,12 +509,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
             body.insert(end, "\n");
             body.setSpan(new DividerSpan(false), end, end + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
-        int color;
-        if (activity.isOrangeTheme()) {
-            color = darkBackground ? this.getMessageTextColor(darkBackground, false) : ContextCompat.getColor(activity, R.color.darkorange);
-        } else {
-            color = darkBackground ? this.getMessageTextColor(darkBackground, false) : ContextCompat.getColor(activity, R.color.darkblue);
-        }
+        int color = ThemeHelper.messageTextColor(activity);
         final DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
         body.setSpan(new QuoteSpan(color, metrics), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
@@ -884,7 +872,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         viewHolder.download_button.setVisibility(View.GONE);
         final RelativeLayout audioPlayer = viewHolder.audioPlayer;
         audioPlayer.setVisibility(View.VISIBLE);
-        AudioPlayer.ViewHolder.get(audioPlayer).setTheme(darkBackground, activity.isOrangeTheme());
+        AudioPlayer.ViewHolder.get(audioPlayer).setTheme(darkBackground);
         this.audioPlayer.init(audioPlayer, message);
     }
 
@@ -1320,7 +1308,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
             if (isInValidSession) {
                 setBubbleBackgroundColor(viewHolder.message_box, type, message.isPrivateMessage(), isInValidSession);
                 viewHolder.encryption.setVisibility(View.GONE);
-                viewHolder.encryption.setTextColor(this.getMessageTextColor(darkBackground, false));
+                viewHolder.encryption.setTextColor(ThemeHelper.getMessageTextColor(activity, darkBackground, false));
             } else {
                 setBubbleBackgroundColor(viewHolder.message_box, type, message.isPrivateMessage(), isInValidSession);
                 viewHolder.encryption.setVisibility(View.VISIBLE);

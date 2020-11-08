@@ -71,7 +71,7 @@
     <string name="quick_action">recent</string>
     <string name="omemo_setting_default">default_on</string>
     <string name="theme">auto</string>
-    <string name="theme_color">orange</string>
+    <string name="theme_color">blabber</string>
     <string name="default_font_size">small</string>
     <string name="default_channel_discovery">JABBER_NETWORK</string>
     <bool name="use_unicolored_chatbg">false</bool>

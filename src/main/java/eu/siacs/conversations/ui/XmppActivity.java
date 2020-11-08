@@ -435,10 +435,6 @@ public abstract class XmppActivity extends ActionBarActivity {
         return ThemeHelper.isDark(mTheme);
     }
 
-    public boolean isOrangeTheme() {
-        return xmppConnectionService.isOrangeTheme();
-    }
-
     public String getThemeColor() {
         return getStringPreference("theme_color", R.string.theme_color);
     }
