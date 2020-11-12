@@ -998,12 +998,13 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
                     } else if (!counterpart.isBareJid() && trueJid != null) {
                         final ReadByMarker readByMarker = ReadByMarker.from(counterpart, trueJid);
                         if (message.addReadByMarker(readByMarker)) {
+                            if (message.getStatus() >= Message.STATUS_SEND_RECEIVED) {
+                                mXmppConnectionService.markMessage(message, Message.STATUS_SEND_DISPLAYED);
+                            }
                             mXmppConnectionService.updateMessage(message, false);
-                                updateReadMarker(account, from, id, selfAddressed, counterpart, query);
                         }
                     }
                 }
-
             } else {
                 final Message displayedMessage = mXmppConnectionService.markMessage(account, from.asBareJid(), id, Message.STATUS_SEND_DISPLAYED);
                 Message message = displayedMessage == null ? null : displayedMessage.prev();
