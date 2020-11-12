@@ -6,7 +6,8 @@
     2. blabber
     3. orange
     4. grey
-    5. pink
+    5. black
+    6. pink
     -->
 
     <!-- fullscreen -->
@@ -909,7 +910,79 @@
         <item name="TextSizeHeadline">22sp</item>
     </style>
 
-    <!-- 5. pink -->
+    <!-- 5. black -->
+    <!-- black theme -->
+    <style name="ConversationsTheme.Black.Dark" parent="ConversationsTheme.Dark">
+        <item name="colorPrimary">@color/primary_black</item>
+        <item name="colorPrimaryDark">@color/primary_dark_black</item>
+        <item name="colorAccent">@color/accent_black</item>
+        <item name="colorAccentLight">@color/accent_light_black</item>
+        <item name="color_background_primary">@color/primary_black</item>
+        <item name="color_background_secondary">@color/primary_black</item>
+        <item name="color_background_tertiary">@color/primary_black</item>
+        <item name="colorControlNormal">@color/accent_black</item>
+        <item name="colorControlActivated">@color/accent_black</item>
+
+        <item name="color_bubble_light">@color/middleblack</item>
+        <item name="color_bubble_dark">@color/darkblack</item>
+        <item name="color_bubble_date">@color/lightgreen</item>
+        <item name="color_bubble_warning">@color/lightred</item>
+
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:actionModeBackground">@color/accent_black</item>
+    </style>
+
+    <!-- black dialog -->
+    <style name="ConversationsTheme.Black.Dark.Dialog" parent="ConversationsTheme.Dark.Dialog">
+        <item name="colorPrimary">@color/primary_black</item>
+        <item name="colorPrimaryDark">@color/primary_dark_black</item>
+        <item name="colorAccent">@color/accent_black</item>
+        <item name="colorAccentLight">@color/accent_light_black</item>
+    </style>
+
+    <!-- black dialog medium font -->
+    <style name="ConversationsTheme.Black.Dark.Dialog.Medium" parent="ConversationsTheme.Black.Dark.Dialog">
+        <item name="TextSizeBody2">16sp</item>
+        <item name="TextSizeDisplay2">51sp</item>
+    </style>
+
+    <!-- black dialog large font -->
+    <style name="ConversationsTheme.Black.Dark.Dialog.Large" parent="ConversationsTheme.Black.Dark.Dialog">
+        <item name="TextSizeBody2">18sp</item>
+        <item name="TextSizeTitle">56sp</item>
+    </style>
+
+    <!-- black medium font -->
+    <style name="ConversationsTheme.Black.Dark.Medium" parent="ConversationsTheme.Black.Dark">
+        <item name="TextSizeCaption">14sp</item>
+        <item name="TextSizeBody1">16sp</item>
+        <item name="TextSizeBody2">16sp</item>
+        <item name="TextSizeSubhead">18sp</item>
+        <item name="TextSizeTitle">22sp</item>
+        <item name="TextSizeInput">18sp</item>
+        <item name="TextSeparation">6sp</item>
+        <item name="IconSize">20sp</item>
+        <item name="TextSizeInfo">14sp</item>
+        <item name="TextSizeBody">16sp</item>
+        <item name="TextSizeHeadline">20sp</item>
+    </style>
+
+    <!-- black large font -->
+    <style name="ConversationsTheme.Black.Dark.Large" parent="ConversationsTheme.Black.Dark">
+        <item name="TextSizeCaption">16sp</item>
+        <item name="TextSizeBody1">18sp</item>
+        <item name="TextSizeBody2">18sp</item>
+        <item name="TextSizeSubhead">20sp</item>
+        <item name="TextSizeTitle">24sp</item>
+        <item name="TextSizeInput">20sp</item>
+        <item name="TextSeparation">7sp</item>
+        <item name="IconSize">22sp</item>
+        <item name="TextSizeInfo">16sp</item>
+        <item name="TextSizeBody">18sp</item>
+        <item name="TextSizeHeadline">22sp</item>
+    </style>
+
+    <!-- 6. pink -->
     <!-- pink theme -->
     <style name="ConversationsTheme.Pink" parent="ConversationsTheme">
         <item name="colorPrimary">@color/primary_pink</item>

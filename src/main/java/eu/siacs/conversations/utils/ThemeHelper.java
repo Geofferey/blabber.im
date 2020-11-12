@@ -98,6 +98,15 @@ public class ThemeHelper {
                     default:
                         return dark ? R.style.ConversationsTheme_Grey_Dark : R.style.ConversationsTheme_Grey;
                 }
+            case "black":
+                switch (fontSize) {
+                    case "medium":
+                        return R.style.ConversationsTheme_Black_Dark_Medium;
+                    case "large":
+                        return R.style.ConversationsTheme_Black_Dark_Large;
+                    default:
+                        return R.style.ConversationsTheme_Black_Dark;
+                }
             case "pink":
                 switch (fontSize) {
                     case "medium":
@@ -175,6 +184,15 @@ public class ThemeHelper {
                     default:
                         return dark ? R.style.ConversationsTheme_Grey_Dark_Dialog : R.style.ConversationsTheme_Grey_Dialog;
                 }
+            case "black":
+                switch (fontSize) {
+                    case "medium":
+                        return R.style.ConversationsTheme_Black_Dark_Dialog_Medium;
+                    case "large":
+                        return R.style.ConversationsTheme_Black_Dark_Dialog_Large;
+                    default:
+                        return R.style.ConversationsTheme_Black_Dark_Dialog;
+                }
             case "pink":
                 switch (fontSize) {
                     case "medium":
@@ -207,6 +225,10 @@ public class ThemeHelper {
             case R.style.ConversationsTheme_Grey_Dark:
             case R.style.ConversationsTheme_Grey_Dark_Large:
             case R.style.ConversationsTheme_Grey_Dark_Medium:
+                //black
+            case R.style.ConversationsTheme_Black_Dark:
+            case R.style.ConversationsTheme_Black_Dark_Large:
+            case R.style.ConversationsTheme_Black_Dark_Medium:
                 //pink
             case R.style.ConversationsTheme_Pink_Dark:
             case R.style.ConversationsTheme_Pink_Dark_Large:
@@ -237,6 +259,8 @@ public class ThemeHelper {
                 return dark ? ContextCompat.getColorStateList(context, R.color.white70) : ContextCompat.getColorStateList(context, R.color.darkorange);
             case "grey":
                 return dark ? ContextCompat.getColorStateList(context, R.color.white70) : ContextCompat.getColorStateList(context, R.color.darkgrey);
+            case "black":
+                return ContextCompat.getColorStateList(context, R.color.white70);
             case "pink":
                 return dark ? ContextCompat.getColorStateList(context, R.color.white70) : ContextCompat.getColorStateList(context, R.color.darkpink);
             default:
@@ -262,6 +286,8 @@ public class ThemeHelper {
                 return R.color.primary_orange;
             case "grey":
                 return R.color.primary_grey;
+            case "black":
+                return R.color.primary_black;
             case "pink":
                 return R.color.primary_pink;
             default:
@@ -297,6 +323,8 @@ public class ThemeHelper {
                 return dark ? getMessageTextColor(context, dark, false) : ContextCompat.getColor(context, R.color.darkorange);
             case "grey":
                 return dark ? getMessageTextColor(context, dark, false) : ContextCompat.getColor(context, R.color.darkgrey);
+            case "black":
+                return ContextCompat.getColor(context, R.color.darkblack);
             case "pink":
                 return dark ? getMessageTextColor(context, dark, false) : ContextCompat.getColor(context, R.color.darkpink);
             default:

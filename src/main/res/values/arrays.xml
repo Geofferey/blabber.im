@@ -15,6 +15,7 @@
         <item>@string/pref_theme_blue</item>
         <item>@string/pref_theme_orange</item>
         <item>@string/pref_theme_grey</item>
+        <item>@string/pref_theme_black</item>
         <item>@string/pref_theme_pink</item>
     </string-array>
     <string-array name="themecolor_values">
@@ -22,6 +23,7 @@
         <item>blue</item>
         <item>orange</item>
         <item>grey</item>
+        <item>black</item>
         <item>pink</item>
     </string-array>
 
@@ -152,7 +154,4 @@
         <item>610</item>
         <item>2584</item>
     </string-array>
-    <string name="pref_theme_blabber">blabber.im</string>
-    <string name="pref_theme_grey">Grey</string>
-    <string name="pref_theme_pink">Pink</string>
 </resources>
