@@ -203,7 +203,11 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
             retractSessionProposal();
             finish();
         } else {
-            requireRtpConnection().endCall();
+            try {
+                requireRtpConnection().endCall();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
