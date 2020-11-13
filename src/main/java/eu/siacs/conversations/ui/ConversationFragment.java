@@ -1216,10 +1216,11 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         }
         return binding.getRoot();
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.d(Config.LOGTAG,"ConversationFragment.onDestroyView()");
+        Log.d(Config.LOGTAG, "ConversationFragment.onDestroyView()");
         messageListAdapter.setOnContactPictureClicked(null);
         messageListAdapter.setOnContactPictureLongClicked(null);
         messageListAdapter.setOnQuoteListener(null);
@@ -1958,7 +1959,10 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 break;
         }
         final Context context = getActivity();
-        if (context != null && intent.resolveActivity(context.getPackageManager()) != null) {
+        if (context == null) {
+            return;
+        }        
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
             Log.d(Config.LOGTAG, "Attachment: " + attachmentChoice);
             if (chooser) {
                 startActivityForResult(
@@ -1969,6 +1973,8 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 startActivityForResult(intent, attachmentChoice);
                 activity.overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
             }
+        } else {
+            Toast.makeText(context, R.string.no_application_found, Toast.LENGTH_LONG).show();
         }
     }
 
