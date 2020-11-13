@@ -75,6 +75,7 @@ import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.WeakHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CountDownLatch;
@@ -5003,11 +5004,13 @@ public class XmppConnectionService extends Service {
                 try {
                     Calendar now = Calendar.getInstance();
                     now.setTimeInMillis(System.currentTimeMillis());
+                    now.setTimeZone(TimeZone.getDefault());
                     Calendar timetoexport = Calendar.getInstance();
                     timetoexport.setTimeInMillis(System.currentTimeMillis());
+                    timetoexport.setTimeZone(TimeZone.getDefault());
                     Intent intent = new Intent(this, AlarmReceiver.class);
                     intent.setAction("exportlogs");
-                    Log.d(Config.LOGTAG, "Schedule automatic export logs at " + Config.ExportLogs_Hour + ":" + Config.ExportLogs_Minute);
+                    Log.d(Config.LOGTAG, "Schedule automatic export logs at " + Config.ExportLogs_Hour + ":" + Config.ExportLogs_Minute + " (" + timetoexport.getTimeZone().getDisplayName() + ")");
                     timetoexport.set(Calendar.HOUR_OF_DAY, Config.ExportLogs_Hour);
                     timetoexport.set(Calendar.MINUTE, Config.ExportLogs_Minute);
                     if (timetoexport.before(now)) {
