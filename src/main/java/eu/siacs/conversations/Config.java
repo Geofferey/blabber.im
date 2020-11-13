@@ -128,7 +128,7 @@ public final class Config {
     public static final boolean PUT_AUTH_TAG_INTO_KEY = true;
     public static final boolean TWELVE_BYTE_IV = true;
 
-    public static final int MAX_DISPLAY_MESSAGE_CHARS = 4096;
+    public static final int MAX_DISPLAY_MESSAGE_CHARS = 2 * 4096; //why only 4096? --> increased
     public static final int MAX_STORAGE_MESSAGE_CHARS = 2 * 1024 * 1024; //2MB
 
     public static final boolean ExportLogs = true; // automatically export logs
