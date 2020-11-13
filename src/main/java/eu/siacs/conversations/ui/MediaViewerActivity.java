@@ -474,18 +474,11 @@ public class MediaViewerActivity extends XmppActivity implements AudioManager.On
     }
 
     private void showFab() {
-        binding.speedDial.show();
-        hideFab();
-    }
-
-    private void hideFab() {
-        new Handler().postDelayed(() -> {
-            if (binding.speedDial.isOpen()) {
-                hideFab();
-            } else {
-                binding.speedDial.hide();
-            }
-        }, 3000);
+        if (binding.speedDial.isShown()) {
+            binding.speedDial.hide();
+        } else {
+            binding.speedDial.show();
+        }
     }
 
 
