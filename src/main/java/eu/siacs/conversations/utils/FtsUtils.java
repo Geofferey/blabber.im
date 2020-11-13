@@ -65,7 +65,7 @@ public class FtsUtils {
             } else if (term.contains("*") || term.startsWith("-")) {
                 builder.append(term);
             } else {
-                builder.append('*').append(term).append('*');
+                builder.append(term).append('*');
             }
         }
         return builder.toString();
