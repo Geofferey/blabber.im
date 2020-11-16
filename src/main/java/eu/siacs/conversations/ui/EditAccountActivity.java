@@ -8,6 +8,7 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -65,6 +66,7 @@ import eu.siacs.conversations.ui.adapter.PresenceTemplateAdapter;
 import eu.siacs.conversations.ui.util.AvatarWorkerTask;
 import eu.siacs.conversations.ui.util.PendingItem;
 import eu.siacs.conversations.ui.util.SoftKeyboardUtils;
+import eu.siacs.conversations.utils.CharSequenceUtils;
 import eu.siacs.conversations.utils.CryptoHelper;
 import eu.siacs.conversations.utils.MenuDoubleTabUtil;
 import eu.siacs.conversations.utils.Resolver;
@@ -1146,6 +1148,10 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
 
         }
 
+        if (!mInitMode && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            this.binding.accountPassword.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
+        }
+
         final boolean editable = !mAccount.isOptionSet(Account.OPTION_LOGGED_IN_SUCCESSFULLY) && !mAccount.isOptionSet(Account.OPTION_FIXED_USERNAME) && QuickConversationsService.isConversations();
         this.binding.accountJid.setEnabled(editable);
         this.binding.accountJid.setFocusable(editable);
@@ -1157,9 +1163,9 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
         final String presenceStatus = getPresenceStatus(mAccount.getPresenceStatus());
         final String presenceStatusMessage = mAccount.getPresenceStatusMessage();
         updatePresenceStatus(presenceStatus, presenceStatusMessage);
-        final boolean tooglePassword = mAccount.isOptionSet(Account.OPTION_MAGIC_CREATE) || !mAccount.isOptionSet(Account.OPTION_LOGGED_IN_SUCCESSFULLY);
+        final boolean togglePassword = mAccount.isOptionSet(Account.OPTION_MAGIC_CREATE) || !mAccount.isOptionSet(Account.OPTION_LOGGED_IN_SUCCESSFULLY);
         final boolean editPassword = !mAccount.isOptionSet(Account.OPTION_MAGIC_CREATE) || (!mAccount.isOptionSet(Account.OPTION_LOGGED_IN_SUCCESSFULLY) && QuickConversationsService.isConversations()) || mAccount.getLastErrorStatus() == Account.State.UNAUTHORIZED;
-        this.binding.accountPasswordLayout.setPasswordVisibilityToggleEnabled(tooglePassword);
+        this.binding.accountPasswordLayout.setPasswordVisibilityToggleEnabled(togglePassword);
         this.binding.accountPassword.setFocusable(editPassword);
         this.binding.accountPassword.setFocusableInTouchMode(editPassword);
         this.binding.accountPassword.setCursorVisible(editPassword);
