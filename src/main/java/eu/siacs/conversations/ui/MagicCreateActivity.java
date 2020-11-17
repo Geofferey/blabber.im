@@ -107,12 +107,7 @@ public class MagicCreateActivity extends XmppActivity implements TextWatcher, Ad
                     jid = Jid.ofLocalAndDomainEscaped(username, this.domain);
                 } else {
                     fixedUsername = false;
-                    if (domain == null && !useOwnProvider) {
-                        domain = Config.MAGIC_CREATE_DOMAIN;
-                    }
-                    if (useOwnProvider) {
-                        domain = "your-domain.com";
-                    }
+                    domain = updateDomain();
                     jid = Jid.ofLocalAndDomainEscaped(username, domain);
                 }
                 if (!jid.getEscapedLocal().equals(jid.getLocal()) || (this.username == null && username.length() < 3)) {
@@ -170,6 +165,17 @@ public class MagicCreateActivity extends XmppActivity implements TextWatcher, Ad
         binding.username.addTextChangedListener(this);
     }
 
+    private String updateDomain() {
+        String getUpdatedDomain = null;
+        if (domain == null && !useOwnProvider) {
+            getUpdatedDomain = Config.MAGIC_CREATE_DOMAIN;
+        }
+        if (useOwnProvider) {
+            getUpdatedDomain = "your-domain.com";
+        }
+        return getUpdatedDomain;
+    }
+
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -197,7 +203,11 @@ public class MagicCreateActivity extends XmppActivity implements TextWatcher, Ad
 
     private void updateFullJidInformation(String username) {
         if (this.preAuth == null) {
-            this.domain = binding.server.getSelectedItem().toString();
+            if (useOwnProvider) {
+                this.domain = updateDomain();
+            } else {
+                this.domain = binding.server.getSelectedItem().toString();
+            }
         }
         if (username.trim().isEmpty()) {
             binding.fullJid.setVisibility(View.INVISIBLE);
@@ -235,5 +245,6 @@ public class MagicCreateActivity extends XmppActivity implements TextWatcher, Ad
             binding.fullJid.setVisibility(View.VISIBLE);
             useOwnProvider = false;
         }
+        updateFullJidInformation(binding.username.getText().toString());
     }
 }
