@@ -1766,11 +1766,13 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
     }
 
     private void updateChatBG() {
-        if (activity.unicoloredBG() || !runsTwentyOne()) {
-            binding.conversationsFragment.setBackgroundResource(0);
-            binding.conversationsFragment.setBackgroundColor(StyledAttributes.getColor(activity, R.attr.color_background_tertiary));
-        } else {
-            binding.conversationsFragment.setBackground(ContextCompat.getDrawable(activity, R.drawable.chatbg));
+        if (activity != null) {
+            if (activity.unicoloredBG() || !runsTwentyOne()) {
+                binding.conversationsFragment.setBackgroundResource(0);
+                binding.conversationsFragment.setBackgroundColor(StyledAttributes.getColor(activity, R.attr.color_background_tertiary));
+            } else {
+                binding.conversationsFragment.setBackground(ContextCompat.getDrawable(activity, R.drawable.chatbg));
+            }
         }
     }
 
@@ -1918,6 +1920,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
     @Override
     public void onResume() {
         super.onResume();
+        updateChatBG();
         binding.messagesView.post(this::fireReadEvent);
     }
 
@@ -2232,17 +2235,14 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
     @Override
     public void onStart() {
         super.onStart();
+        updateChatBG();
         if (this.reInitRequiredOnStart && this.conversation != null) {
-            if (activity != null) {
-                updateChatBG();
-            }
             final Bundle extras = pendingExtras.pop();
             reInit(this.conversation, extras != null);
             if (extras != null) {
                 processExtras(extras);
             }
         } else if (conversation == null && activity != null && activity.xmppConnectionService != null) {
-            updateChatBG();
             final String uuid = pendingConversationsUuid.pop();
             Log.d(Config.LOGTAG, "ConversationFragment.onStart() - activity was bound but no conversation loaded. uuid=" + uuid);
             if (uuid != null) {
@@ -2662,13 +2662,13 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             Log.d(Config.LOGTAG, "ConversationFragment.refresh() skipped updated because view binding was null");
             return;
         }
+        updateChatBG();
         if (this.conversation != null && this.activity != null && this.activity.xmppConnectionService != null) {
             if (!activity.xmppConnectionService.isConversationStillOpen(this.conversation)) {
                 activity.onConversationArchived(this.conversation);
                 return;
             }
         }
-        updateChatBG();
         this.refresh(true);
     }
 
