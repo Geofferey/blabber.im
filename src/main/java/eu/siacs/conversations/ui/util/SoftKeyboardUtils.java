@@ -60,9 +60,11 @@ public class SoftKeyboardUtils {
 
     public static void showKeyboard(EditText editText) {
         editText.requestFocus();
-        InputMethodManager inputMethodManager = (InputMethodManager) editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (inputMethodManager != null) {
-            inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+        try {
+            final InputMethodManager inputMethodManager = (InputMethodManager) editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
