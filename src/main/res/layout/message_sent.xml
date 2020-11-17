@@ -89,9 +89,10 @@
                     android:layout_width="?attr/TextSizeCaption"
                     android:layout_height="?attr/TextSizeCaption"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="4sp"
-                    android:layout_marginLeft="4sp"
-                    android:alpha="0.54"
+                    android:layout_marginStart="1sp"
+                    android:layout_marginLeft="1sp"
+                    android:padding="1dp"
+                    android:alpha="?attr/icon_alpha"
                     android:gravity="center_vertical"
                     android:src="@drawable/ic_lock_black_18dp" />
 
@@ -100,32 +101,19 @@
                     android:layout_width="?attr/TextSizeCaption"
                     android:layout_height="?attr/TextSizeCaption"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="4sp"
-                    android:layout_marginLeft="4sp"
-                    android:alpha="0.54"
+                    android:padding="1dp"
+                    android:alpha="?attr/icon_alpha"
                     android:gravity="center_vertical"
                     android:src="@drawable/ic_mode_edit_black_18dp" />
 
                 <ImageView
                     android:id="@+id/indicator_received"
-                    android:layout_width="?attr/TextSizeCaption"
-                    android:layout_height="?attr/TextSizeCaption"
+                    android:layout_width="?attr/IconSize"
+                    android:layout_height="?attr/IconSize"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="4sp"
-                    android:layout_marginLeft="4sp"
+                    android:alpha="?attr/icon_alpha"
                     android:gravity="center_vertical"
-                    android:src="@drawable/ic_received_indicator" />
-
-                <ImageView
-                    android:id="@+id/indicator_read"
-                    android:layout_width="?attr/TextSizeCaption"
-                    android:layout_height="?attr/TextSizeCaption"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="-8sp"
-                    android:layout_marginLeft="-8sp"
-                    android:adjustViewBounds="false"
-                    android:gravity="center_vertical"
-                    android:src="@drawable/ic_read_indicator" />
+                    android:src="@drawable/ic_check_black_18dp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

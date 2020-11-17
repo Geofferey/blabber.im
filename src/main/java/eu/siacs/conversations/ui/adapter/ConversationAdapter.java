@@ -93,7 +93,6 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         final Conversation.Draft draft = isRead ? conversation.getDraft() : null;
 
         viewHolder.binding.indicatorReceived.setVisibility(View.GONE);
-        viewHolder.binding.indicatorRead.setVisibility(View.GONE);
         viewHolder.binding.unreadCount.setVisibility(View.GONE);
         viewHolder.binding.failedCount.setVisibility(View.GONE);
 
@@ -286,15 +285,21 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         if (activity.xmppConnectionService.indicateReceived()) {
             switch (message.getMergedStatus()) {
                 case Message.STATUS_SEND_RECEIVED:
-                    viewHolder.binding.indicatorReceived.setVisibility(View.VISIBLE);
+                        if (viewHolder.binding.indicatorReceived != null) {
+                            viewHolder.binding.indicatorReceived.setVisibility(View.VISIBLE);
+                            viewHolder.binding.indicatorReceived.setImageResource(activity.isDarkTheme() ? R.drawable.ic_check_white_18dp : R.drawable.ic_check_black_18dp);
+                            viewHolder.binding.indicatorReceived.setAlpha(activity.isDarkTheme() ? 0.7f : 0.57f);
+                        }
                     break;
                 case Message.STATUS_SEND_DISPLAYED:
-                    viewHolder.binding.indicatorReceived.setVisibility(View.VISIBLE);
-                    viewHolder.binding.indicatorRead.setVisibility(View.VISIBLE);
+                        if (viewHolder.binding.indicatorReceived != null) {
+                            viewHolder.binding.indicatorReceived.setVisibility(View.VISIBLE);
+                            viewHolder.binding.indicatorReceived.setImageResource(activity.isDarkTheme() ? R.drawable.ic_check_all_white_18dp : R.drawable.ic_check_all_black_18dp);
+                            viewHolder.binding.indicatorReceived.setAlpha(activity.isDarkTheme() ? 0.7f : 0.57f);
+                        }
                     break;
                 default:
                     viewHolder.binding.indicatorReceived.setVisibility(View.GONE);
-                    viewHolder.binding.indicatorRead.setVisibility(View.GONE);
             }
         }
         if (conversation.getMode() == Conversation.MODE_SINGLE) {

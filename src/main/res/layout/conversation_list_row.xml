@@ -121,24 +121,14 @@
 
                             <ImageView
                                 android:id="@+id/indicator_received"
-                                android:layout_width="?attr/TextSizeInfo"
-                                android:layout_height="?attr/TextSizeInfo"
+                                android:layout_width="?attr/IconSize"
+                                android:layout_height="?attr/IconSize"
                                 android:layout_gravity="center_vertical"
-                                android:layout_marginStart="4dp"
-                                android:layout_marginLeft="4dp"
+                                android:layout_marginStart="1sp"
+                                android:layout_marginLeft="1sp"
+                                android:alpha="?attr/icon_alpha"
                                 android:gravity="center_vertical"
-                                android:src="@drawable/ic_received_indicator" />
-
-                            <ImageView
-                                android:id="@+id/indicator_read"
-                                android:layout_width="?attr/TextSizeInfo"
-                                android:layout_height="?attr/TextSizeInfo"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="-8dp"
-                                android:layout_marginLeft="-8dp"
-                                android:adjustViewBounds="false"
-                                android:gravity="center_vertical"
-                                android:src="@drawable/ic_read_indicator" />
+                                android:src="@drawable/ic_check_black_18dp" />
 
                             <ImageView
                                 android:id="@+id/notification_status"
@@ -146,8 +136,8 @@
                                 android:layout_height="?attr/IconSize"
                                 android:layout_alignWithParentIfMissing="true"
                                 android:layout_centerVertical="true"
-                                android:layout_marginStart="4dp"
-                                android:layout_marginLeft="4dp"
+                                android:layout_marginStart="1sp"
+                                android:layout_marginLeft="1sp"
                                 android:layout_toLeftOf="@+id/pinned_on_top"
                                 android:alpha="?attr/icon_alpha"
                                 android:src="@drawable/ic_notifications_grey600_24dp" />
@@ -158,7 +148,8 @@
                                 android:layout_height="?attr/IconSize"
                                 android:layout_alignWithParentIfMissing="true"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="4dp"
+                                android:layout_marginLeft="1sp"
+                                android:layout_marginStart="1sp"
                                 android:layout_toLeftOf="@+id/unread_count"
                                 android:alpha="?attr/icon_alpha"
                                 android:src="?attr/icon_pinned_on_top"

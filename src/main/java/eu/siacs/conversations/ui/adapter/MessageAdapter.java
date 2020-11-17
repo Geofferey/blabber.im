@@ -222,9 +222,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         viewHolder.user.setText(UIHelper.getDisplayedMucCounterpart(message.getCounterpart()));
         if (viewHolder.indicatorReceived != null) {
             viewHolder.indicatorReceived.setVisibility(View.GONE);
-            viewHolder.indicatorRead.setVisibility(View.GONE);
         }
-
         if (viewHolder.edit_indicator != null) {
             if (message.edited()) {
                 viewHolder.edit_indicator.setVisibility(View.VISIBLE);
@@ -263,13 +261,24 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                 break;
             case Message.STATUS_SEND_RECEIVED:
                 if (mIndicateReceived) {
-                    viewHolder.indicatorReceived.setVisibility(View.VISIBLE);
+                    if (viewHolder.indicatorReceived != null) {
+                        viewHolder.indicatorReceived.setVisibility(View.VISIBLE);
+                        viewHolder.indicatorReceived.setImageResource(darkBackground ? R.drawable.ic_check_white_18dp : R.drawable.ic_check_black_18dp);
+                        viewHolder.indicatorReceived.setAlpha(darkBackground ? 0.7f : 0.57f);
+                    }
+                } else {
+                    viewHolder.indicatorReceived.setVisibility(View.GONE);
                 }
                 break;
             case Message.STATUS_SEND_DISPLAYED:
                 if (mIndicateReceived) {
-                    viewHolder.indicatorReceived.setVisibility(View.VISIBLE);
-                    viewHolder.indicatorRead.setVisibility(View.VISIBLE);
+                    if (viewHolder.indicatorReceived != null) {
+                        viewHolder.indicatorReceived.setVisibility(View.VISIBLE);
+                        viewHolder.indicatorReceived.setImageResource(darkBackground ? R.drawable.ic_check_all_white_18dp : R.drawable.ic_check_all_black_18dp);
+                        viewHolder.indicatorReceived.setAlpha(darkBackground ? 0.7f : 0.57f);
+                    }
+                } else {
+                    viewHolder.indicatorReceived.setVisibility(View.GONE);
                 }
                 break;
             case Message.STATUS_SEND_FAILED:
@@ -1080,7 +1089,6 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                     viewHolder.user = view.findViewById(R.id.message_user);
                     viewHolder.time = view.findViewById(R.id.message_time);
                     viewHolder.indicatorReceived = view.findViewById(R.id.indicator_received);
-                    viewHolder.indicatorRead = view.findViewById(R.id.indicator_read);
                     viewHolder.progressBar = view.findViewById(R.id.progressBar);
                     break;
                 case RECEIVED:
@@ -1457,7 +1465,6 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         protected RichLinkView richlinkview;
         protected ImageView indicator;
         protected ImageView indicatorReceived;
-        protected ImageView indicatorRead;
         protected TextView time;
         protected CopyTextView messageBody;
         protected TextView user;
