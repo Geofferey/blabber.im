@@ -19,6 +19,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.crypto.axolotl.FingerprintStatus;
@@ -122,6 +124,7 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
     private Boolean isGeoUri = null;
     private Boolean isXmppUri = null;
     private Boolean isWebUri = null;
+    private String WebUri = "";
     private Boolean isEmojisOnly = null;
     private Boolean treatAsDownloadable = null;
     private FileParams fileParams = null;
@@ -863,9 +866,22 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
 
     public synchronized boolean isWebUri() {
         if (isWebUri == null) {
-            isWebUri = Patterns.WEB_URL.matcher(body).matches();
+            Pattern pattern = Patterns.WEB_URL;
+            Matcher matcher = pattern.matcher(body);
+            isWebUri = matcher.find();
         }
         return isWebUri;
+    }
+
+    public synchronized String getWebUri() {
+        if (isWebUri) {
+            Pattern pattern = Patterns.WEB_URL;
+            Matcher matcher = pattern.matcher(body);
+            if (WebUri.equalsIgnoreCase("") && matcher.find()) {
+                WebUri = matcher.group(0);
+            };
+        }
+        return WebUri;
     }
 
     public synchronized void resetFileParams() {

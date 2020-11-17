@@ -651,6 +651,9 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                     StylingHelper.highlight(activity, body, highlightedTerm, StylingHelper.isDarkText(viewHolder.messageBody));
                 }
             }
+            if (message.isWebUri() && (message.getWebUri() != null || message.getWebUri().equalsIgnoreCase(""))) {
+                displayRichLinkMessage(viewHolder, message, darkBackground);
+            }
             MyLinkify.addLinks(body, true);
             viewHolder.messageBody.setAutoLinkMask(0);
             viewHolder.messageBody.setText(EmojiWrapper.transform(body));
@@ -775,7 +778,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         viewHolder.gifImage.setVisibility(View.GONE);
         viewHolder.download_button.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
-        final SpannableStringBuilder body = new SpannableStringBuilder(replaceYoutube(activity.getApplicationContext(), message.getMergedBody().toString()));
+        final SpannableStringBuilder body = new SpannableStringBuilder(replaceYoutube(activity.getApplicationContext(), message.getWebUri()));
         final boolean dataSaverDisabled = activity.xmppConnectionService.isDataSaverDisabled();
         viewHolder.richlinkview.setVisibility(View.VISIBLE);
         if (mShowLinksInside) {
@@ -793,12 +796,13 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
             viewHolder.richlinkview.setLayoutParams(layoutParams);
             final String url = body.toString();
             final String weburl;
-            final String lcUrl = url.toLowerCase(Locale.US).trim();
+            final String lcUrl = url.trim();
             if (lcUrl.startsWith("http://") || lcUrl.startsWith("https://")) {
                 weburl = removeTrailingBracket(url);
             } else {
                 weburl = "http://" + removeTrailingBracket(url);
             }
+            Log.d(Config.LOGTAG, "Weburi: " + weburl);
             viewHolder.richlinkview.setLink(weburl, message.getUuid(), dataSaverDisabled, activity.xmppConnectionService, new RichPreview.ViewListener() {
 
                 @Override
@@ -1274,8 +1278,6 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                                     UIHelper.getFileDescriptionString(activity, message)),
                             darkBackground);
                 }
-            } else if (message.isWebUri()) {
-                displayRichLinkMessage(viewHolder, message, darkBackground);
             } else {
                 displayTextMessage(viewHolder, message, darkBackground, type);
             }
