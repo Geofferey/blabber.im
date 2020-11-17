@@ -106,6 +106,7 @@ import eu.siacs.conversations.ui.adapter.MessageAdapter;
 import eu.siacs.conversations.ui.util.ActivityResult;
 import eu.siacs.conversations.ui.util.Attachment;
 import eu.siacs.conversations.ui.util.AvatarWorkerTask;
+import eu.siacs.conversations.ui.util.CallManager;
 import eu.siacs.conversations.ui.util.ConversationMenuConfigurator;
 import eu.siacs.conversations.ui.util.DateSeparator;
 import eu.siacs.conversations.ui.util.EditMessageActionModeCallback;
@@ -1454,6 +1455,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
+        Activity mXmppActivity = getActivity();
         if (MenuDoubleTabUtil.shouldIgnoreTap()) {
             return false;
         } else if (conversation == null) {
@@ -1514,19 +1516,24 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 break;
             case R.id.action_block:
             case R.id.action_unblock:
-                final Activity activity = getActivity();
-                if (activity instanceof XmppActivity) {
-                    BlockContactDialog.show((XmppActivity) activity, conversation);
+                if (mXmppActivity instanceof XmppActivity) {
+                    BlockContactDialog.show((XmppActivity) mXmppActivity, conversation);
                 }
                 break;
             case R.id.action_audio_call:
-                checkPermissionAndTriggerAudioCall();
+                if (mXmppActivity instanceof XmppActivity) {
+                    CallManager.checkPermissionAndTriggerAudioCall((XmppActivity) mXmppActivity, conversation);
+                }
                 break;
             case R.id.action_video_call:
-                checkPermissionAndTriggerVideoCall();
+                if (mXmppActivity instanceof XmppActivity) {
+                    CallManager.checkPermissionAndTriggerVideoCall((XmppActivity) mXmppActivity, conversation);
+                }
                 break;
             case R.id.action_ongoing_call:
-                returnToOngoingCall();
+                if (mXmppActivity instanceof XmppActivity) {
+                    CallManager.returnToOngoingCall((XmppActivity) mXmppActivity, conversation);
+                }
                 break;
             case R.id.action_toggle_pinned:
                 togglePinned();
@@ -1543,86 +1550,11 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         startActivity(intent);
     }
 
-    private void returnToOngoingCall() {
-        final Optional<OngoingRtpSession> ongoingRtpSession = activity.xmppConnectionService.getJingleConnectionManager().getOngoingRtpConnection(conversation.getContact());
-        if (ongoingRtpSession.isPresent()) {
-            final OngoingRtpSession id = ongoingRtpSession.get();
-            final Intent intent = new Intent(getActivity(), RtpSessionActivity.class);
-            intent.putExtra(RtpSessionActivity.EXTRA_ACCOUNT, id.getAccount().getJid().asBareJid().toEscapedString());
-            intent.putExtra(RtpSessionActivity.EXTRA_WITH, id.getWith().toEscapedString());
-            if (id instanceof AbstractJingleConnection.Id) {
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.putExtra(RtpSessionActivity.EXTRA_SESSION_ID, id.getSessionId());
-            } else if (id instanceof JingleConnectionManager.RtpSessionProposal) {
-                if (((JingleConnectionManager.RtpSessionProposal) id).media.contains(Media.VIDEO)) {
-                    intent.setAction(RtpSessionActivity.ACTION_MAKE_VIDEO_CALL);
-                } else {
-                    intent.setAction(RtpSessionActivity.ACTION_MAKE_VOICE_CALL);
-                }
-            }
-            startActivity(intent);
-        }
-
-    }
-
     private void togglePinned() {
         final boolean pinned = conversation.getBooleanAttribute(Conversation.ATTRIBUTE_PINNED_ON_TOP, false);
         conversation.setAttribute(Conversation.ATTRIBUTE_PINNED_ON_TOP, !pinned);
         activity.xmppConnectionService.updateConversation(conversation);
         activity.invalidateOptionsMenu();
-    }
-
-    private void checkPermissionAndTriggerAudioCall() {
-        if (activity.mUseTor || conversation.getAccount().isOnion()) {
-            Toast.makeText(activity, R.string.disable_tor_to_make_call, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (hasPermissions(REQUEST_START_AUDIO_CALL, Manifest.permission.RECORD_AUDIO)) {
-            triggerRtpSession(RtpSessionActivity.ACTION_MAKE_VOICE_CALL);
-        }
-    }
-
-    private void checkPermissionAndTriggerVideoCall() {
-        if (activity.mUseTor || conversation.getAccount().isOnion()) {
-            Toast.makeText(activity, R.string.disable_tor_to_make_call, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (hasPermissions(REQUEST_START_VIDEO_CALL, Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)) {
-            triggerRtpSession(RtpSessionActivity.ACTION_MAKE_VIDEO_CALL);
-        }
-    }
-
-
-    private void triggerRtpSession(final String action) {
-        if (activity.xmppConnectionService.getJingleConnectionManager().isBusy()) {
-            Toast.makeText(getActivity(), R.string.only_one_call_at_a_time, Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        final Contact contact = conversation.getContact();
-        if (contact.getPresences().anySupport(Namespace.JINGLE_MESSAGE)) {
-            triggerRtpSession(contact.getAccount(), contact.getJid().asBareJid(), action);
-        } else {
-            final RtpCapability.Capability capability;
-            if (action.equals(RtpSessionActivity.ACTION_MAKE_VIDEO_CALL)) {
-                capability = RtpCapability.Capability.VIDEO;
-            } else {
-                capability = RtpCapability.Capability.AUDIO;
-            }
-            PresenceSelector.selectFullJidForDirectRtpConnection(activity, contact, capability, fullJid -> {
-                triggerRtpSession(contact.getAccount(), fullJid, action);
-            });
-        }
-    }
-
-    private void triggerRtpSession(final Account account, final Jid with, final String action) {
-        final Intent intent = new Intent(activity, RtpSessionActivity.class);
-        intent.setAction(action);
-        intent.putExtra(RtpSessionActivity.EXTRA_ACCOUNT, account.getJid().toEscapedString());
-        intent.putExtra(RtpSessionActivity.EXTRA_WITH, with.toEscapedString());
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
     }
 
     private void handleAttachmentSelection(MenuItem item) {
@@ -1780,6 +1712,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (grantResults.length > 0) {
             if (allGranted(grantResults)) {
+                Activity mXmppActivity = getActivity();
                 switch (requestCode) {
                     case REQUEST_START_DOWNLOAD:
                         if (this.mPendingDownloadableMessage != null) {
@@ -1795,10 +1728,14 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                         commitAttachments();
                         break;
                     case REQUEST_START_AUDIO_CALL:
-                        triggerRtpSession(RtpSessionActivity.ACTION_MAKE_VOICE_CALL);
+                        if (mXmppActivity instanceof XmppActivity) {
+                            CallManager.triggerRtpSession(RtpSessionActivity.ACTION_MAKE_VOICE_CALL, (XmppActivity) mXmppActivity, conversation);
+                        }
                         break;
                     case REQUEST_START_VIDEO_CALL:
-                        triggerRtpSession(RtpSessionActivity.ACTION_MAKE_VIDEO_CALL);
+                        if (mXmppActivity instanceof XmppActivity) {
+                            CallManager.triggerRtpSession(RtpSessionActivity.ACTION_MAKE_VIDEO_CALL, (XmppActivity) mXmppActivity, conversation);
+                        }
                         break;
                     default:
                         attachFile(requestCode);
@@ -1961,7 +1898,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         final Context context = getActivity();
         if (context == null) {
             return;
-        }        
+        }
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             Log.d(Config.LOGTAG, "Attachment: " + attachmentChoice);
             if (chooser) {

@@ -119,7 +119,7 @@ public abstract class XmppActivity extends ActionBarActivity {
 
     protected int mTheme;
     protected boolean mUsingEnterKey = false;
-    protected boolean mUseTor = false;
+    public boolean mUseTor = false;
 
     protected Toast mToast;
     protected Runnable onOpenPGPKeyPublished = () -> ToastCompat.makeText(XmppActivity.this, R.string.openpgp_has_been_published, Toast.LENGTH_SHORT).show();

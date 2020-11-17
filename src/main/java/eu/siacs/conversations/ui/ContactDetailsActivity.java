@@ -38,6 +38,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
+import com.google.common.base.Optional;
+
 import org.openintents.openpgp.util.OpenPgpUtils;
 
 import java.util.Collection;
@@ -61,6 +63,7 @@ import eu.siacs.conversations.ui.adapter.MediaAdapter;
 import eu.siacs.conversations.ui.interfaces.OnMediaLoaded;
 import eu.siacs.conversations.ui.util.Attachment;
 import eu.siacs.conversations.ui.util.AvatarWorkerTask;
+import eu.siacs.conversations.ui.util.CallManager;
 import eu.siacs.conversations.ui.util.GridManager;
 import eu.siacs.conversations.ui.util.JidDialog;
 import eu.siacs.conversations.utils.Compatibility;
@@ -76,6 +79,8 @@ import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.OnKeyStatusUpdated;
 import eu.siacs.conversations.xmpp.OnUpdateBlocklist;
 import eu.siacs.conversations.xmpp.XmppConnection;
+import eu.siacs.conversations.xmpp.jingle.OngoingRtpSession;
+import eu.siacs.conversations.xmpp.jingle.RtpCapability;
 import me.drakeet.support.toast.ToastCompat;
 
 import static eu.siacs.conversations.ui.util.IntroHelper.showIntro;
@@ -86,6 +91,7 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
 
     private Contact contact;
     private Conversation mConversation;
+    private ConversationFragment mConversationFragment;
     ActivityContactDetailsBinding binding;
     private MediaAdapter mMediaAdapter;
     private boolean mAdvancedMode = false;
@@ -333,6 +339,15 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
             case android.R.id.home:
                 finish();
                 break;
+            case R.id.action_audio_call:
+                CallManager.checkPermissionAndTriggerAudioCall(this, mConversation);
+                break;
+            case R.id.action_video_call:
+                CallManager.checkPermissionAndTriggerVideoCall(this, mConversation);
+                break;
+            case R.id.action_ongoing_call:
+                CallManager.returnToOngoingCall(this, mConversation);
+                break;
             case R.id.action_share_http:
                 shareLink(true);
                 break;
@@ -391,10 +406,30 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.contact_details, menu);
-        MenuItem block = menu.findItem(R.id.action_block);
-        MenuItem unblock = menu.findItem(R.id.action_unblock);
+        final MenuItem block = menu.findItem(R.id.action_block);
+        final MenuItem unblock = menu.findItem(R.id.action_unblock);
+        final MenuItem menuCall = menu.findItem(R.id.action_call);
+        final MenuItem menuOngoingCall = menu.findItem(R.id.action_ongoing_call);
+        final MenuItem menuVideoCall = menu.findItem(R.id.action_video_call);
         if (contact == null) {
             return true;
+        }
+        if (this.mConversation != null) {
+            if (this.mConversation.getMode() == Conversation.MODE_MULTI || !xmppConnectionService.hasInternetConnection()) {
+                menuCall.setVisible(false);
+                menuOngoingCall.setVisible(false);
+            } else {
+                final Optional<OngoingRtpSession> ongoingRtpSession = xmppConnectionService.getJingleConnectionManager().getOngoingRtpConnection(this.mConversation.getContact());
+                if (ongoingRtpSession.isPresent()) {
+                    menuOngoingCall.setVisible(true);
+                    menuCall.setVisible(false);
+                } else {
+                    menuOngoingCall.setVisible(false);
+                    final RtpCapability.Capability rtpCapability = RtpCapability.check(this.mConversation.getContact());
+                    menuCall.setVisible(rtpCapability != RtpCapability.Capability.NONE);
+                    menuVideoCall.setVisible(rtpCapability == RtpCapability.Capability.VIDEO);
+                }
+            }
         }
         final XmppConnection connection = contact.getAccount().getXmppConnection();
         if (connection != null && connection.getFeatures().blocking()) {
