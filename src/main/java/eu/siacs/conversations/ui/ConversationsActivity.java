@@ -505,6 +505,7 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
     }
 
     private void openConversation(Conversation conversation, Bundle extras) {
+        xmppConnectionService.updateNotificationChannels();
         ConversationFragment conversationFragment = (ConversationFragment) getFragmentManager().findFragmentById(R.id.secondary_fragment);
         final boolean mainNeedsRefresh;
         if (conversationFragment == null) {

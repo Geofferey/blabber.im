@@ -22,12 +22,14 @@
             android:adjustViewBounds="true"
             android:visibility="gone" />
 
-        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        <com.google.android.exoplayer2.ui.PlayerView
             android:id="@+id/messageVideoView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:played_color="?attr/colorAccent"
             app:scrubber_color="?attr/colorAccent"
+            app:show_vr_button="false"
+            app:show_subtitle_button="false"
             app:show_shuffle_button="false"
             app:show_buffering="never"
             android:visibility="gone" />

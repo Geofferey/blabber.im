@@ -210,6 +210,7 @@ public class XmppConnectionService extends Service {
     public final SerialSingleThreadExecutor mUploadExecutor = new SerialSingleThreadExecutor("FileUpload");
     public final SerialSingleThreadExecutor mDownloadExecutor = new SerialSingleThreadExecutor("FileDownload");
     public final SerialSingleThreadExecutor mWebPreviewExecutor = new SerialSingleThreadExecutor("WebPreview");
+    public final SerialSingleThreadExecutor mNotificationChannelExecutor = new SerialSingleThreadExecutor("updateNotificationChannels");
     private final ReplacingTaskManager mRosterSyncTaskManager = new ReplacingTaskManager();
     private final IBinder mBinder = new XmppConnectionBinder();
     private final List<Conversation> conversations = new CopyOnWriteArrayList<>();
@@ -1296,9 +1297,7 @@ public class XmppConnectionService extends Service {
     @SuppressLint("TrulyRandom")
     @Override
     public void onCreate() {
-        if (Compatibility.runsTwentySix()) {
-            mNotificationService.initializeChannels();
-        }
+        updateNotificationChannels();
         mChannelDiscoveryService.initializeMuclumbusService();
         mForceDuringOnCreate.set(Compatibility.runsAndTargetsTwentySix(this));
         toggleForegroundService();
@@ -1390,6 +1389,12 @@ public class XmppConnectionService extends Service {
         ScheduleAutomaticExport();
         // cancel scheduled exporter
         CancelAutomaticExport(false);
+    }
+
+    public void updateNotificationChannels() {
+        if (Compatibility.runsTwentySix()) {
+            mNotificationService.updateChannels();
+        }
     }
 
 
@@ -2447,6 +2452,9 @@ public class XmppConnectionService extends Service {
         getNotificationService().clear(conversation);
         conversation.setStatus(Conversation.STATUS_ARCHIVED);
         conversation.setNextMessage(null);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            mNotificationService.cleanNotificationChannels(this, conversation.getUuid());
+        }
         synchronized (this.conversations) {
             getMessageArchiveService().kill(conversation);
             if (conversation.getMode() == Conversation.MODE_MULTI) {
@@ -2628,6 +2636,9 @@ public class XmppConnectionService extends Service {
             for (final Conversation conversation : conversations) {
                 if (conversation.getAccount() == account) {
                     if (conversation.getMode() == Conversation.MODE_MULTI) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            mNotificationService.cleanNotificationChannels(this, conversation.getUuid());
+                        }
                         if (connected) {
                             leaveMuc(conversation);
                         }
@@ -3290,6 +3301,9 @@ public class XmppConnectionService extends Service {
     }
 
     private void leaveMuc(Conversation conversation, boolean now) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            mNotificationService.cleanNotificationChannels(this, conversation.getUuid());
+        }
         final Account account = conversation.getAccount();
         synchronized (account.pendingConferenceJoins) {
             account.pendingConferenceJoins.remove(conversation);

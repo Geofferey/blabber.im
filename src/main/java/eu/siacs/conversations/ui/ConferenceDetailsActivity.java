@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
@@ -33,6 +35,7 @@ import eu.siacs.conversations.entities.Bookmark;
 import eu.siacs.conversations.entities.Conversation;
 import eu.siacs.conversations.entities.MucOptions;
 import eu.siacs.conversations.entities.MucOptions.User;
+import eu.siacs.conversations.services.NotificationService;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.services.XmppConnectionService.OnConversationUpdate;
 import eu.siacs.conversations.services.XmppConnectionService.OnMucRosterUpdate;
@@ -342,6 +345,15 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
                 invalidateOptionsMenu();
                 updateView();
                 break;
+            case R.id.action_message_notifications:
+                Intent messageNotificationIntent = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    messageNotificationIntent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+                            .putExtra(Settings.EXTRA_APP_PACKAGE, this.getPackageName())
+                            .putExtra(Settings.EXTRA_CHANNEL_ID, NotificationService.INDIVIDUAL_NOTIFICATION_PREFIX + NotificationService.MESSAGES_CHANNEL_ID + '_' + mConversation.getUuid());
+                }
+                startActivity(messageNotificationIntent);
+                break;
         }
         return super.onOptionsItemSelected(menuItem);
     }
@@ -443,6 +455,10 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
         getMenuInflater().inflate(R.menu.muc_details, menu);
         final MenuItem share = menu.findItem(R.id.action_share);
         share.setVisible(!groupChat);
+        final MenuItem menuMessageNotification = menu.findItem(R.id.action_message_notifications);
+        if (this.mConversation != null) {
+            menuMessageNotification.setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 

@@ -64,4 +64,14 @@
         android:orderInCategory="85"
         android:title="@string/advanced_mode"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_message_notifications"
+        android:orderInCategory="110"
+        android:title="@string/pref_message_notification_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_call_notifications"
+        android:orderInCategory="110"
+        android:title="@string/pref_incoming_call_notification_settings"
+        app:showAsAction="never" />
 </menu>

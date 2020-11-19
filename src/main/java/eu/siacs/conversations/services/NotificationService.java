@@ -65,6 +65,7 @@ import eu.siacs.conversations.utils.AccountUtils;
 import eu.siacs.conversations.utils.Compatibility;
 import eu.siacs.conversations.utils.EmojiWrapper;
 import eu.siacs.conversations.utils.GeoHelper;
+import eu.siacs.conversations.utils.RichPreview;
 import eu.siacs.conversations.utils.ThemeHelper;
 import eu.siacs.conversations.utils.TorServiceUtils;
 import eu.siacs.conversations.utils.UIHelper;
@@ -78,11 +79,14 @@ public class NotificationService {
 
     public static final Object CATCHUP_LOCK = new Object();
     public static final String MESSAGES_CHANNEL_ID = "messages";
+    public static final String SILENT_MESSAGES_CHANNEL_ID = "silent_messages";
+    public static final String INCOMING_CALLS_CHANNEL_ID = "incoming_calls";
     public static final String FOREGROUND_CHANNEL_ID = "foreground";
     public static final String BACKUP_CHANNEL_ID = "backup";
     public static final String UPDATE_CHANNEL_ID = "appupdate";
     public static final String VIDEOCOMPRESSION_CHANNEL_ID = "compression";
     public static final String ERROR_CHANNEL_ID = "error";
+    public static final String INDIVIDUAL_NOTIFICATION_PREFIX = "xxXx_"; // x, Xx, xXx,
     private static final int CALL_DAT = 120;
     private static final long[] CALL_PATTERN = {0, 3 * CALL_DAT, CALL_DAT, CALL_DAT, 3 * CALL_DAT, CALL_DAT, CALL_DAT};
 
@@ -126,6 +130,11 @@ public class NotificationService {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
+    void updateChannels() {
+        mXmppConnectionService.mNotificationChannelExecutor.execute(this::initializeChannels);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     void initializeChannels() {
         final Context c = mXmppConnectionService;
         final NotificationManager notificationManager = c.getSystemService(NotificationManager.class);
@@ -135,116 +144,243 @@ public class NotificationService {
         notificationManager.createNotificationChannelGroup(new NotificationChannelGroup("status", c.getString(R.string.notification_group_status_information)));
         notificationManager.createNotificationChannelGroup(new NotificationChannelGroup("chats", c.getString(R.string.notification_group_messages)));
         notificationManager.createNotificationChannelGroup(new NotificationChannelGroup("calls", c.getString(R.string.notification_group_calls)));
-        final NotificationChannel foregroundServiceChannel = new NotificationChannel(FOREGROUND_CHANNEL_ID,
-                c.getString(R.string.foreground_service_channel_name),
-                NotificationManager.IMPORTANCE_MIN);
-        foregroundServiceChannel.setDescription(c.getString(R.string.foreground_service_channel_description));
-        foregroundServiceChannel.setShowBadge(false);
-        foregroundServiceChannel.setGroup("status");
-        notificationManager.createNotificationChannel(foregroundServiceChannel);
 
-        final NotificationChannel backupChannel = new NotificationChannel(BACKUP_CHANNEL_ID,
-                c.getString(R.string.backup_channel_name),
-                NotificationManager.IMPORTANCE_LOW);
-        backupChannel.setShowBadge(false);
-        backupChannel.setGroup("status");
-        notificationManager.createNotificationChannel(backupChannel);
+        NotificationChannel foregroundServiceChannel = notificationManager.getNotificationChannel(FOREGROUND_CHANNEL_ID);
+        if (foregroundServiceChannel == null) {
+            foregroundServiceChannel = new NotificationChannel(FOREGROUND_CHANNEL_ID,
+                    c.getString(R.string.foreground_service_channel_name),
+                    NotificationManager.IMPORTANCE_MIN);
+            foregroundServiceChannel.setDescription(c.getString(R.string.foreground_service_channel_description));
+            foregroundServiceChannel.setShowBadge(false);
+            foregroundServiceChannel.setGroup("status");
+            notificationManager.createNotificationChannel(foregroundServiceChannel);
+        }
 
-        final NotificationChannel videoCompressionChannel = new NotificationChannel(VIDEOCOMPRESSION_CHANNEL_ID,
-                c.getString(R.string.video_compression_channel_name),
-                NotificationManager.IMPORTANCE_LOW);
-        videoCompressionChannel.setShowBadge(false);
-        videoCompressionChannel.setGroup("status");
-        notificationManager.createNotificationChannel(videoCompressionChannel);
+        NotificationChannel backupChannel = notificationManager.getNotificationChannel(BACKUP_CHANNEL_ID);
+        if (backupChannel == null) {
+            backupChannel = new NotificationChannel(BACKUP_CHANNEL_ID,
+                    c.getString(R.string.backup_channel_name),
+                    NotificationManager.IMPORTANCE_LOW);
+            backupChannel.setShowBadge(false);
+            backupChannel.setGroup("status");
+            notificationManager.createNotificationChannel(backupChannel);
+        }
 
-        final NotificationChannel AppUpdateChannel = new NotificationChannel(UPDATE_CHANNEL_ID,
-                c.getString(R.string.app_update_channel_name),
-                NotificationManager.IMPORTANCE_LOW);
-        AppUpdateChannel.setShowBadge(false);
-        AppUpdateChannel.setGroup("status");
-        notificationManager.createNotificationChannel(AppUpdateChannel);
+        NotificationChannel videoCompressionChannel = notificationManager.getNotificationChannel(VIDEOCOMPRESSION_CHANNEL_ID);
+        if (videoCompressionChannel == null) {
+            videoCompressionChannel = new NotificationChannel(VIDEOCOMPRESSION_CHANNEL_ID,
+                    c.getString(R.string.video_compression_channel_name),
+                    NotificationManager.IMPORTANCE_LOW);
+            videoCompressionChannel.setShowBadge(false);
+            videoCompressionChannel.setGroup("status");
+            notificationManager.createNotificationChannel(videoCompressionChannel);
+        }
 
-        final NotificationChannel incomingCallsChannel = new NotificationChannel("incoming_calls",
-                c.getString(R.string.incoming_calls_channel_name),
-                NotificationManager.IMPORTANCE_HIGH);
-        incomingCallsChannel.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE), new AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
-                .build());
-        incomingCallsChannel.setShowBadge(false);
-        incomingCallsChannel.setLightColor(LED_COLOR);
-        incomingCallsChannel.enableLights(true);
-        incomingCallsChannel.setGroup("calls");
-        incomingCallsChannel.setBypassDnd(true);
-        incomingCallsChannel.enableVibration(true);
-        incomingCallsChannel.setVibrationPattern(CALL_PATTERN);
-        notificationManager.createNotificationChannel(incomingCallsChannel);
+        NotificationChannel AppUpdateChannel = notificationManager.getNotificationChannel(UPDATE_CHANNEL_ID);
+        if (AppUpdateChannel == null) {
+            AppUpdateChannel = new NotificationChannel(UPDATE_CHANNEL_ID,
+                    c.getString(R.string.app_update_channel_name),
+                    NotificationManager.IMPORTANCE_LOW);
+            AppUpdateChannel.setShowBadge(false);
+            AppUpdateChannel.setGroup("status");
+            notificationManager.createNotificationChannel(AppUpdateChannel);
+        }
 
-        final NotificationChannel ongoingCallsChannel = new NotificationChannel("ongoing_calls",
-                c.getString(R.string.ongoing_calls_channel_name),
-                NotificationManager.IMPORTANCE_LOW);
-        ongoingCallsChannel.setShowBadge(false);
-        ongoingCallsChannel.setGroup("calls");
-        notificationManager.createNotificationChannel(ongoingCallsChannel);
+        NotificationChannel ongoingCallsChannel = notificationManager.getNotificationChannel("ongoing_calls");
+        if (ongoingCallsChannel == null) {
+            ongoingCallsChannel = new NotificationChannel("ongoing_calls",
+                    c.getString(R.string.ongoing_calls_channel_name),
+                    NotificationManager.IMPORTANCE_LOW);
+            ongoingCallsChannel.setShowBadge(false);
+            ongoingCallsChannel.setGroup("calls");
+            notificationManager.createNotificationChannel(ongoingCallsChannel);
+        }
 
-        final NotificationChannel missedCallsChannel = new NotificationChannel("missed_calls",
-                c.getString(R.string.missed_calls_channel_name),
-                NotificationManager.IMPORTANCE_HIGH);
-        missedCallsChannel.setShowBadge(true);
-        missedCallsChannel.setSound(null, null);
-        missedCallsChannel.setLightColor(LED_COLOR);
-        missedCallsChannel.enableLights(true);
-        missedCallsChannel.setGroup("calls");
-        notificationManager.createNotificationChannel(missedCallsChannel);
+        NotificationChannel missedCallsChannel = notificationManager.getNotificationChannel("missed_calls");
+        if (missedCallsChannel == null) {
+            missedCallsChannel = new NotificationChannel("missed_calls",
+                    c.getString(R.string.missed_calls_channel_name),
+                    NotificationManager.IMPORTANCE_HIGH);
+            missedCallsChannel.setShowBadge(true);
+            missedCallsChannel.setSound(null, null);
+            missedCallsChannel.setLightColor(LED_COLOR);
+            missedCallsChannel.enableLights(true);
+            missedCallsChannel.setGroup("calls");
+            notificationManager.createNotificationChannel(missedCallsChannel);
+        }
 
-        final NotificationChannel messagesChannel = new NotificationChannel("messages",
-                c.getString(R.string.messages_channel_name),
-                NotificationManager.IMPORTANCE_HIGH);
-        messagesChannel.setShowBadge(true);
-        messagesChannel.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION), new AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .setUsage(AudioAttributes.USAGE_NOTIFICATION_COMMUNICATION_INSTANT)
-                .build());
-        messagesChannel.setLightColor(LED_COLOR);
-        final int dat = 70;
-        final long[] pattern = {0, 3 * dat, dat, dat};
-        messagesChannel.setVibrationPattern(pattern);
-        messagesChannel.enableVibration(true);
-        messagesChannel.enableLights(true);
-        messagesChannel.setGroup("chats");
-        notificationManager.createNotificationChannel(messagesChannel);
+        NotificationChannel silentMessagesChannel = notificationManager.getNotificationChannel(SILENT_MESSAGES_CHANNEL_ID);
+        if (silentMessagesChannel == null) {
+            silentMessagesChannel = new NotificationChannel(SILENT_MESSAGES_CHANNEL_ID,
+                    c.getString(R.string.silent_messages_channel_name),
+                    NotificationManager.IMPORTANCE_LOW);
+            silentMessagesChannel.setDescription(c.getString(R.string.silent_messages_channel_description));
+            silentMessagesChannel.setShowBadge(true);
+            silentMessagesChannel.setLightColor(LED_COLOR);
+            silentMessagesChannel.enableLights(true);
+            silentMessagesChannel.setGroup("chats");
+            notificationManager.createNotificationChannel(silentMessagesChannel);
+        }
 
-        final NotificationChannel silentMessagesChannel = new NotificationChannel("silent_messages",
-                c.getString(R.string.silent_messages_channel_name),
-                NotificationManager.IMPORTANCE_LOW);
-        silentMessagesChannel.setDescription(c.getString(R.string.silent_messages_channel_description));
-        silentMessagesChannel.setShowBadge(true);
-        silentMessagesChannel.setLightColor(LED_COLOR);
-        silentMessagesChannel.enableLights(true);
-        silentMessagesChannel.setGroup("chats");
-        notificationManager.createNotificationChannel(silentMessagesChannel);
+        NotificationChannel quietHoursChannel = notificationManager.getNotificationChannel("quiet_hours");
+        if (quietHoursChannel == null) {
+            quietHoursChannel = new NotificationChannel("quiet_hours",
+                    c.getString(R.string.title_pref_quiet_hours),
+                    NotificationManager.IMPORTANCE_LOW);
+            quietHoursChannel.setShowBadge(true);
+            quietHoursChannel.setLightColor(LED_COLOR);
+            quietHoursChannel.enableLights(true);
+            quietHoursChannel.setGroup("chats");
+            quietHoursChannel.enableVibration(false);
+            quietHoursChannel.setSound(null, null);
+            notificationManager.createNotificationChannel(quietHoursChannel);
+        }
 
-        final NotificationChannel quietHoursChannel = new NotificationChannel("quiet_hours",
-                c.getString(R.string.title_pref_quiet_hours),
-                NotificationManager.IMPORTANCE_LOW);
-        quietHoursChannel.setShowBadge(true);
-        quietHoursChannel.setLightColor(LED_COLOR);
-        quietHoursChannel.enableLights(true);
-        quietHoursChannel.setGroup("chats");
-        quietHoursChannel.enableVibration(false);
-        quietHoursChannel.setSound(null, null);
-        notificationManager.createNotificationChannel(quietHoursChannel);
+        NotificationChannel deliveryFailedChannel = notificationManager.getNotificationChannel("delivery_failed");
+        if (deliveryFailedChannel == null) {
+            deliveryFailedChannel = new NotificationChannel("delivery_failed",
+                    c.getString(R.string.delivery_failed_channel_name),
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            deliveryFailedChannel.setShowBadge(false);
+            deliveryFailedChannel.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION), new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION_COMMUNICATION_INSTANT)
+                    .build());
+            deliveryFailedChannel.setGroup("chats");
+            notificationManager.createNotificationChannel(deliveryFailedChannel);
+        }
+        createIndividualNotificationChannels(notificationManager);
+    }
 
-        final NotificationChannel deliveryFailedChannel = new NotificationChannel("delivery_failed",
-                c.getString(R.string.delivery_failed_channel_name),
-                NotificationManager.IMPORTANCE_DEFAULT);
-        deliveryFailedChannel.setShowBadge(false);
-        deliveryFailedChannel.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION), new AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .setUsage(AudioAttributes.USAGE_NOTIFICATION_COMMUNICATION_INSTANT)
-                .build());
-        deliveryFailedChannel.setGroup("chats");
-        notificationManager.createNotificationChannel(deliveryFailedChannel);
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void createIndividualNotificationChannels(NotificationManager notificationManager) {
+        int chats = mXmppConnectionService.getConversations().size();
+        for (int i = 0; i < chats; i++) {
+            if (mXmppConnectionService.getConversations().get(i).getMode() == Conversation.MODE_SINGLE) {
+                createCallNotificationChannels(notificationManager, i);
+            }
+            createMessageNotificationChannels(notificationManager, i);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void createCallNotificationChannels(NotificationManager notificationManager, int i) {
+        final String uuid = mXmppConnectionService.getConversations().get(i).getUuid();
+        final String jid = mXmppConnectionService.getConversations().get(i).getAccount().getJid().asBareJid().toString();
+        final String name = mXmppConnectionService.getConversations().get(i).getName().toString().toLowerCase();
+        final String channelID = INDIVIDUAL_NOTIFICATION_PREFIX + INCOMING_CALLS_CHANNEL_ID + "_" + uuid;
+        try {
+            final NotificationChannel incomingCallsChannel = new NotificationChannel(channelID,
+                    mXmppConnectionService.getString(R.string.notification_group_calls),
+                    NotificationManager.IMPORTANCE_HIGH);
+            incomingCallsChannel.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE), new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
+                    .build());
+            incomingCallsChannel.setShowBadge(false);
+            incomingCallsChannel.setLightColor(LED_COLOR);
+            incomingCallsChannel.enableLights(true);
+            notificationManager.createNotificationChannelGroup(new NotificationChannelGroup(INDIVIDUAL_NOTIFICATION_PREFIX + name + uuid, name + " (" + jid + ")"));
+            incomingCallsChannel.setGroup(INDIVIDUAL_NOTIFICATION_PREFIX + name + uuid);
+            incomingCallsChannel.setBypassDnd(true);
+            incomingCallsChannel.enableVibration(true);
+            incomingCallsChannel.setVibrationPattern(CALL_PATTERN);
+            notificationManager.createNotificationChannel(incomingCallsChannel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void createMessageNotificationChannels(NotificationManager notificationManager, int i) {
+        final String uuid = mXmppConnectionService.getConversations().get(i).getUuid();
+        final String jid = mXmppConnectionService.getConversations().get(i).getAccount().getJid().asBareJid().toString();
+        final String name = mXmppConnectionService.getConversations().get(i).getName().toString().toLowerCase();
+        final String channelID = INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + "_" + uuid;
+        try {
+            final NotificationChannel messagesChannel = new NotificationChannel(channelID,
+                    mXmppConnectionService.getString(R.string.notification_group_messages),
+                    NotificationManager.IMPORTANCE_HIGH);
+            messagesChannel.setShowBadge(true);
+            messagesChannel.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION), new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION_COMMUNICATION_INSTANT)
+                    .build());
+            messagesChannel.setLightColor(LED_COLOR);
+            final int dat = 70;
+            final long[] pattern = {0, 3 * dat, dat, dat};
+            messagesChannel.setVibrationPattern(pattern);
+            messagesChannel.enableVibration(true);
+            messagesChannel.enableLights(true);
+            notificationManager.createNotificationChannelGroup(new NotificationChannelGroup(INDIVIDUAL_NOTIFICATION_PREFIX + name + uuid, name + " (" + jid + ")"));
+            messagesChannel.setGroup(INDIVIDUAL_NOTIFICATION_PREFIX + name + uuid);
+            notificationManager.createNotificationChannel(messagesChannel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void cleanNotificationChannels(Context context, String uuid) {
+        final NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+        cleanCallNotificationChannels(notificationManager, uuid);
+        cleanMessageNotificationChannels(notificationManager, uuid);
+        cleanNotificationGroup(notificationManager, uuid);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void cleanNotificationGroup(NotificationManager notificationManager, String uuid) {
+        final String name = mXmppConnectionService.findConversationByUuid(uuid).getName().toString().toLowerCase();
+        final String groupID = INDIVIDUAL_NOTIFICATION_PREFIX + name + uuid;
+        try {
+            List<NotificationChannelGroup> list = notificationManager.getNotificationChannelGroups();
+            int count = list.size();
+            for (int a = 0; a < count; a++) {
+                final NotificationChannelGroup group = list.get(a);
+                final String id = group.getId();
+                if (id.startsWith(groupID) || id.startsWith(uuid)) {
+                    notificationManager.deleteNotificationChannelGroup(id);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void cleanCallNotificationChannels(NotificationManager notificationManager, String uuid) {
+        final String channelID = INDIVIDUAL_NOTIFICATION_PREFIX + INCOMING_CALLS_CHANNEL_ID + "_" + uuid;
+        try {
+            final List<NotificationChannel> list = notificationManager.getNotificationChannels();
+            final int count = list.size();
+            for (int a = 0; a < count; a++) {
+                final NotificationChannel channel = list.get(a);
+                final String id = channel.getId();
+                if (id.startsWith(channelID) || id.startsWith(INCOMING_CALLS_CHANNEL_ID + "_" + uuid)) {
+                    notificationManager.deleteNotificationChannel(id);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void cleanMessageNotificationChannels(NotificationManager notificationManager, String uuid) {
+        final String channelID = INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + "_" + uuid;
+        try {
+            final List<NotificationChannel> list = notificationManager.getNotificationChannels();
+            final int count = list.size();
+            for (int a = 0; a < count; a++) {
+                final NotificationChannel channel = list.get(a);
+                final String id = channel.getId();
+                if (id.startsWith(channelID) || id.startsWith(MESSAGES_CHANNEL_ID + "_" + uuid)) {
+                    notificationManager.deleteNotificationChannel(id);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean notifyMessage(final Message message) {
@@ -418,7 +554,8 @@ public class NotificationService {
         fullScreenIntent.putExtra(RtpSessionActivity.EXTRA_SESSION_ID, id.sessionId);
         fullScreenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         fullScreenIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        final NotificationCompat.Builder builder = new NotificationCompat.Builder(mXmppConnectionService, "incoming_calls");
+        String uuid = mXmppConnectionService.findConversation(id.account, id.with, false).toString();
+        final NotificationCompat.Builder builder = new NotificationCompat.Builder(mXmppConnectionService, INDIVIDUAL_NOTIFICATION_PREFIX + INCOMING_CALLS_CHANNEL_ID + '_' + uuid);
         if (media.contains(Media.VIDEO)) {
             builder.setSmallIcon(R.drawable.ic_videocam_white_24dp);
             builder.setContentTitle(mXmppConnectionService.getString(R.string.rtp_state_incoming_video_call));
@@ -861,7 +998,7 @@ public class NotificationService {
     }
 
     private Builder buildMultipleConversation(final boolean notify, final boolean quietHours) {
-        final Builder mBuilder = new NotificationCompat.Builder(mXmppConnectionService, quietHours ? "quiet_hours" : (notify ? "messages" : "silent_messages"));
+        Builder mBuilder = null;
         final NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle();
         style.setBigContentTitle(mXmppConnectionService.getString(R.string.x_unread_conversations, notifications.size()));
         final StringBuilder names = new StringBuilder();
@@ -869,6 +1006,7 @@ public class NotificationService {
         for (final ArrayList<Message> messages : notifications.values()) {
             if (messages.size() > 0) {
                 conversation = (Conversation) messages.get(0).getConversation();
+                mBuilder = new NotificationCompat.Builder(mXmppConnectionService, quietHours ? "quiet_hours" : (notify ? (INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + '_' + conversation.getUuid()) : SILENT_MESSAGES_CHANNEL_ID));
                 final String name = conversation.getName().toString();
                 SpannableString styledString;
                 if (Config.HIDE_MESSAGE_TEXT_IN_NOTIFICATION) {
@@ -903,9 +1041,10 @@ public class NotificationService {
     }
 
     private Builder buildSingleConversations(final ArrayList<Message> messages, final boolean notify, final boolean quietHours) {
-        final Builder mBuilder = new NotificationCompat.Builder(mXmppConnectionService, quietHours ? "quiet_hours" : (notify ? "messages" : "silent_messages"));
+        Builder mBuilder = null;
         if (messages.size() >= 1) {
             final Conversation conversation = (Conversation) messages.get(0).getConversation();
+            mBuilder = new NotificationCompat.Builder(mXmppConnectionService, quietHours ? "quiet_hours" : (notify ? (INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + '_' + conversation.getUuid()) : SILENT_MESSAGES_CHANNEL_ID));
             mBuilder.setLargeIcon(mXmppConnectionService.getAvatarService().get(conversation, AvatarService.getSystemUiAvatarSize(mXmppConnectionService)));
             mBuilder.setContentTitle(conversation.getName());
             if (Config.HIDE_MESSAGE_TEXT_IN_NOTIFICATION) {

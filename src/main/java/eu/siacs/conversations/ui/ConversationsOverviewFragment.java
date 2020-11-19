@@ -160,6 +160,9 @@ public class ConversationsOverviewFragment extends XmppFragment {
         this.binding = DataBindingUtil.inflate(inflater, R.layout.fragment_conversations_overview, container, false);
         this.binding.fab.setOnClickListener((view) -> StartConversationActivity.launch(getActivity()));
         this.conversationsAdapter = new ConversationAdapter(this.activity, this.conversations);
+        if (this.conversations.size() > 0) {
+            this.activity.xmppConnectionService.updateNotificationChannels();
+        }
         this.conversationsAdapter.setConversationClickListener((view, conversation) -> {
             if (activity instanceof OnConversationSelected) {
                 ((OnConversationSelected) activity).onConversationSelected(conversation);
@@ -248,6 +251,9 @@ public class ConversationsOverviewFragment extends XmppFragment {
             return;
         }
         this.activity.xmppConnectionService.populateWithOrderedConversations(this.conversations);
+        if (this.conversations.size() > 0) {
+            this.activity.xmppConnectionService.updateNotificationChannels();
+        }
         this.conversationsAdapter.notifyDataSetChanged();
         ScrollState scrollState = pendingScrollState.pop();
         if (scrollState != null) {
