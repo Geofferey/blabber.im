@@ -101,6 +101,7 @@ import static eu.siacs.conversations.entities.Message.DELETED_MESSAGE_BODY_OLD;
 import static eu.siacs.conversations.ui.SettingsActivity.PLAY_GIF_INSIDE;
 import static eu.siacs.conversations.ui.SettingsActivity.SHOW_LINKS_INSIDE;
 import static eu.siacs.conversations.ui.SettingsActivity.SHOW_MAPS_INSIDE;
+import static eu.siacs.conversations.ui.util.MyLinkify.removeTrackingParameter;
 import static eu.siacs.conversations.ui.util.MyLinkify.removeTrailingBracket;
 import static eu.siacs.conversations.ui.util.MyLinkify.replaceYoutube;
 
@@ -660,7 +661,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                     StylingHelper.highlight(activity, body, highlightedTerm, StylingHelper.isDarkText(viewHolder.messageBody));
                 }
             }
-            if (message.isWebUri() && (message.getWebUri() != null || message.getWebUri().equalsIgnoreCase(""))) {
+            if (message.isWebUri() || message.getWebUri() != null) {
                 displayRichLinkMessage(viewHolder, message, darkBackground);
             }
             MyLinkify.addLinks(body, true);
@@ -787,10 +788,17 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         viewHolder.gifImage.setVisibility(View.GONE);
         viewHolder.download_button.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
-        final SpannableStringBuilder body = new SpannableStringBuilder(replaceYoutube(activity.getApplicationContext(), message.getWebUri()));
+        String url;
+        if (message.isWebUri()) {
+            url = removeTrackingParameter(Uri.parse(message.getBody().trim())).toString();
+        } else {
+            url = removeTrackingParameter(Uri.parse(message.getWebUri())).toString();
+        }
+        final SpannableStringBuilder body = new SpannableStringBuilder(replaceYoutube(activity.getApplicationContext(), url));
         final boolean dataSaverDisabled = activity.xmppConnectionService.isDataSaverDisabled();
-        viewHolder.richlinkview.setVisibility(View.VISIBLE);
+        viewHolder.richlinkview.setVisibility(mShowLinksInside ? View.VISIBLE : View.GONE);
         if (mShowLinksInside) {
+            final int color = ThemeHelper.getMessageTextColor(activity, darkBackground, false);
             final double target = metrics.density * 200;
             final int scaledH;
             if (Math.max(100, 100) * metrics.density <= target) {
@@ -803,16 +811,15 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(WRAP_CONTENT, scaledH);
             layoutParams.setMargins(0, (int) (metrics.density * 4), 0, (int) (metrics.density * 4));
             viewHolder.richlinkview.setLayoutParams(layoutParams);
-            final String url = body.toString();
             final String weburl;
-            final String lcUrl = url.trim();
+            final String lcUrl = body.toString();
             if (lcUrl.startsWith("http://") || lcUrl.startsWith("https://")) {
                 weburl = removeTrailingBracket(url);
             } else {
                 weburl = "http://" + removeTrailingBracket(url);
             }
-            Log.d(Config.LOGTAG, "Weburi: " + weburl);
-            viewHolder.richlinkview.setLink(weburl, message.getUuid(), dataSaverDisabled, activity.xmppConnectionService, new RichPreview.ViewListener() {
+            Log.d(Config.LOGTAG, "Weburi for preview: " + weburl);
+            viewHolder.richlinkview.setLink(weburl, message.getUuid(), dataSaverDisabled, activity.xmppConnectionService, color, new RichPreview.ViewListener() {
 
                 @Override
                 public void onSuccess(boolean status) {
@@ -824,8 +831,6 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                     viewHolder.richlinkview.setVisibility(View.GONE);
                 }
             });
-        } else {
-            viewHolder.richlinkview.setVisibility(View.GONE);
         }
     }
 

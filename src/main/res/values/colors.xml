@@ -72,7 +72,7 @@
     <!-- grey theme -->
     <color name="lightgrey">#fffcfcfc</color> <!-- light theme other -->
     <color name="lightgrey2">#ffeaeaea</color> <!-- light theme me -->
-    <color name="middlegrey">#ff727272</color> <!-- dark theme other -->
+    <color name="middlegrey">#ff5b5b5b</color> <!-- dark theme other -->
     <color name="darkgrey">#ff444444</color> <!-- dark theme me -->
 
     <!-- black theme -->

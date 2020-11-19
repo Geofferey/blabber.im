@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TrackingHelper {
     // https://github.com/newhouse/url-tracking-stripper
-    public static final List<String> TRACKIN_PARAMETER = Collections.unmodifiableList(Arrays.asList(
+    public static final List<String> TRACKING_PARAMETER = Collections.unmodifiableList(Arrays.asList(
             // https://en.wikipedia.org/wiki/UTM_parameters
             "icid", // Adobe
             "gclid", // Google

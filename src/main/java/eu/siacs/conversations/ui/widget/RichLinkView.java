@@ -38,6 +38,7 @@ public class RichLinkView extends RelativeLayout {
     ImageView imageView;
     TextView textViewTitle;
     TextView textViewDesp;
+    View quoteMessage;
 
     private String main_url;
 
@@ -72,7 +73,7 @@ public class RichLinkView extends RelativeLayout {
     }
 
 
-    public void initView(final boolean dataSaverDisabled) {
+    public void initView(final boolean dataSaverDisabled, final int color) {
         if (findLinearLayoutChild() != null) {
             this.view = findLinearLayoutChild();
         } else {
@@ -82,7 +83,11 @@ public class RichLinkView extends RelativeLayout {
         linearLayout = findViewById(R.id.rich_link_card);
         imageView = findViewById(R.id.rich_link_image);
         textViewTitle = findViewById(R.id.rich_link_title);
+        textViewTitle.setTextColor(color);
         textViewDesp = findViewById(R.id.rich_link_desp);
+        textViewDesp.setTextColor(color);
+        quoteMessage = findViewById(R.id.quote_message);
+        quoteMessage.setBackgroundColor(color);
         imageView.setAdjustViewBounds(true);
         if (meta.getImageurl() != null && !meta.getImageurl().equals("") && !meta.getImageurl().isEmpty()) {
             if (!dataSaverDisabled) {
@@ -156,16 +161,18 @@ public class RichLinkView extends RelativeLayout {
         return null;
     }
 
+    /*
     public void setLinkFromMeta(MetaData metaData) {
         meta = metaData;
         initView(true);
     }
+    */
 
     public MetaData getMetaData() {
         return meta;
     }
 
-    public void setLink(final String url, final String filename, final boolean dataSaverDisabled, final XmppConnectionService mXmppConnectionService, final RichPreview.ViewListener viewListener) {
+    public void setLink(final String url, final String filename, final boolean dataSaverDisabled, final XmppConnectionService mXmppConnectionService, final int color, final RichPreview.ViewListener viewListener) {
         main_url = url;
         RichPreview richPreview = new RichPreview(new RichPreview.ResponseListener() {
             @Override
@@ -174,7 +181,7 @@ public class RichLinkView extends RelativeLayout {
                 if (!meta.getTitle().isEmpty() || !meta.getTitle().equals("")) {
                     viewListener.onSuccess(true);
                 }
-                initView(dataSaverDisabled);
+                initView(dataSaverDisabled, color);
             }
 
             @Override

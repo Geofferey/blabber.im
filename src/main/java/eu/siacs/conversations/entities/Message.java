@@ -124,7 +124,7 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
     private Boolean isGeoUri = null;
     private Boolean isXmppUri = null;
     private Boolean isWebUri = null;
-    private String WebUri = "";
+    private String WebUri = null;
     private Boolean isEmojisOnly = null;
     private Boolean treatAsDownloadable = null;
     private FileParams fileParams = null;
@@ -866,20 +866,22 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
 
     public synchronized boolean isWebUri() {
         if (isWebUri == null) {
-            Pattern pattern = Patterns.WEB_URL;
-            Matcher matcher = pattern.matcher(body);
-            isWebUri = matcher.find();
+            isWebUri = Patterns.WEB_URL.matcher(body).matches();
         }
         return isWebUri;
     }
 
     public synchronized String getWebUri() {
-        if (isWebUri) {
-            Pattern pattern = Patterns.WEB_URL;
-            Matcher matcher = pattern.matcher(body);
-            if (WebUri.equalsIgnoreCase("") && matcher.find()) {
-                WebUri = matcher.group(0);
-            };
+        final Pattern urlPattern = Pattern.compile(
+                "(?:(?:https?):\\/\\/|www\\.)(?:\\([-A-Z0-9+&@#\\/%=~_|$?!:,.]*\\)|[-A-Z0-9+&@#\\/%=~_|$?!:,.])*(?:\\([-A-Z0-9+&@#\\/%=~_|$?!:,.]*\\)|[A-Z0-9+&@#\\/%=~_|$])",
+                Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+        Matcher m = urlPattern.matcher(body);
+        while (m.find()) {
+            if (WebUri == null) {
+                WebUri = m.group(0);
+                Log.d(Config.LOGTAG, "Weburi Message: " + WebUri);
+                return WebUri;
+            }
         }
         return WebUri;
     }
