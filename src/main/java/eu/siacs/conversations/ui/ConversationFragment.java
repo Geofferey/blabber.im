@@ -1165,13 +1165,14 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                     menuGroupDetails.setVisible(false);
                     menuContactDetails.setVisible(!this.conversation.withSelf());
                 }
+                menuSearchUpdates.setVisible(true);
             } else {
                 menuGroupDetails.setVisible(false);
                 menuContactDetails.setVisible(false);
+                menuSearchUpdates.setVisible(false);
             }
             menuMediaBrowser.setVisible(true);
             menuNeedHelp.setVisible(false);
-            menuSearchUpdates.setVisible(false);
             ConversationMenuConfigurator.configureAttachmentMenu(conversation, menu, activity.xmppConnectionService.getAttachmentChoicePreference(), hasAttachments);
             ConversationMenuConfigurator.configureEncryptionMenu(conversation, menu, activity);
             if (conversation.getBooleanAttribute(Conversation.ATTRIBUTE_PINNED_ON_TOP, false)) {
