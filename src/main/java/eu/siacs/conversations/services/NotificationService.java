@@ -330,9 +330,9 @@ public class NotificationService {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void cleanNotificationGroup(NotificationManager notificationManager, String uuid) {
-        final String name = mXmppConnectionService.findConversationByUuid(uuid).getName().toString().toLowerCase();
-        final String groupID = INDIVIDUAL_NOTIFICATION_PREFIX + name + uuid;
         try {
+            final String name = mXmppConnectionService.findConversationByUuid(uuid).getName().toString().toLowerCase();
+            final String groupID = INDIVIDUAL_NOTIFICATION_PREFIX + name + uuid;
             List<NotificationChannelGroup> list = notificationManager.getNotificationChannelGroups();
             int count = list.size();
             for (int a = 0; a < count; a++) {
@@ -547,15 +547,18 @@ public class NotificationService {
         notify(DELIVERY_FAILED_NOTIFICATION_ID, summaryNotification);
     }
 
-    public void showIncomingCallNotification(final AbstractJingleConnection.Id id, final Set<Media> media) {
+    public void showIncomingCallNotification(final AbstractJingleConnection.Id id, final Set<Media> media, final String uuid) {
         final Intent fullScreenIntent = new Intent(mXmppConnectionService, RtpSessionActivity.class);
         fullScreenIntent.putExtra(RtpSessionActivity.EXTRA_ACCOUNT, id.account.getJid().asBareJid().toEscapedString());
         fullScreenIntent.putExtra(RtpSessionActivity.EXTRA_WITH, id.with.toEscapedString());
         fullScreenIntent.putExtra(RtpSessionActivity.EXTRA_SESSION_ID, id.sessionId);
         fullScreenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         fullScreenIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        String uuid = mXmppConnectionService.findConversation(id.account, id.with, false).toString();
-        final NotificationCompat.Builder builder = new NotificationCompat.Builder(mXmppConnectionService, INDIVIDUAL_NOTIFICATION_PREFIX + INCOMING_CALLS_CHANNEL_ID + '_' + uuid);
+        String olduuid = mXmppConnectionService.findConversation(id.account, id.with, false).toString();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            cleanNotificationChannels(mXmppConnectionService, olduuid);
+        }
+        final Builder builder = new Builder(mXmppConnectionService, INDIVIDUAL_NOTIFICATION_PREFIX + INCOMING_CALLS_CHANNEL_ID + '_' + uuid);
         if (media.contains(Media.VIDEO)) {
             builder.setSmallIcon(R.drawable.ic_videocam_white_24dp);
             builder.setContentTitle(mXmppConnectionService.getString(R.string.rtp_state_incoming_video_call));
