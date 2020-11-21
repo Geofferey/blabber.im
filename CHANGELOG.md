@@ -2,32 +2,35 @@
 
 #### Version 3.0.0
 * Pix-Art Messenger is now blabber.im
-* rework missed call notifications (PAM)
-* UI improvements (PAM)
-* show backups from other messengers (PAM)
-* automatically remove URL tracking parameters for sent/received links
+* rework missed call notifications (blabber.im)
+* a lot UI improvements (blabber.im)
+* show backups from other messengers (blabber.im)
+* customize notifications for each contact/channel > Android O (blabber.im)
+* automatically remove URL tracking parameters for sent/received links (blabber.im)
 * search individual conversations
 * notify user if message delivery fails
 * remember display names (nicks) from Quicksy users across restarts
 * add button to start Orbot (Tor) from notification if necessary
 * handle GPX files
+* fixed search on Android <= 5
+* optimize memory consumption
 * bug fixes
 
 #### Version 2.5.2
 * fix crash on PlayStore version  
 
 #### Version 2.5.1
-* rework lastseen and don't show offline as online (PAM)
-* improve video quality a bit (PAM)
-* add ability to reject all contact requests via long press (PAM)
-* colorize pinned chats (PAM)
+* rework lastseen and don't show offline as online (blabber.im)
+* improve video quality a bit (blabber.im)
+* add ability to reject all contact requests via long press (blabber.im)
+* colorize pinned chats (blabber.im)
 * add 'Return to chat' to audio call screen
 * improve keyboard shortcuts
 * improve performance for backup restore
 * bug fixes
 
 #### Version 2.5.0
-* remove OTR encryption (PAM)
+* remove OTR encryption (blabber.im)
 * show help button if A/V call fails
 * fixed some annoying crashes
 * fixed Jingle connections (file transfer + calls) with bare JIDs
@@ -43,11 +46,11 @@
 * reduce echo during calls on some devices
 * fix login when passwords contains special characters
 * play dial and busy tones on speaker during video calls
-* move channel discovery choice to ChannelDiscoveryActivity menu (PAM)
-* colorize accept/dismiss actions in call notification (PAM)
-* don't end call on pressing back key (PAM)
-* show used account for calls (PAM)
-* notify on missed calls (PAM)
+* move channel discovery choice to ChannelDiscoveryActivity menu (blabber.im)
+* colorize accept/dismiss actions in call notification (blabber.im)
+* don't end call on pressing back key (blabber.im)
+* show used account for calls (blabber.im)
+* notify on missed calls (blabber.im)
 * bug fixes
 
 #### Version 2.4.0
@@ -62,15 +65,15 @@
 
 #### Version 2.3.5
 * start removing OTR
-* rework conference and contact details (big avatar is available via long click) (PAM)
+* rework conference and contact details (big avatar is available via long click) (blabber.im)
 * resume download of OMEMO encrypted files
 * channels now use '#' as symbol in avatar
 * support for ?register and ?register;preauth XMPP uri parameters
 * update connection settings
-* use ExoPlayer for video playback (PAM)
-* show artist - title for audio files (PAM)
-* show PDF previews (PAM)
-* minor UI improvements (PAM)
+* use ExoPlayer for video playback (blabber.im)
+* show artist - title for audio files (blabber.im)
+* show PDF previews (blabber.im)
+* minor UI improvements (blabber.im)
 * use 12 byte IV for OMEMO
 * a lot of bug fixes
 
@@ -78,7 +81,7 @@
 * fixes for Jingle IBB file transfer
 * fixes for repeated corrections filling up the database
 * switched to Last Message Correction v1.1
-* increase mam messages catchup (PAM)
+* increase mam messages catchup (blabber.im)
 * bug fixes
 
 #### Version 2.3.3
@@ -91,17 +94,17 @@
 * bug fixes
 
 #### Version 2.3.0
-* show name in quotes (PAM)
-* introduce theme based on systems theme (PAM)
-* increase default video quality (720p instead of 360p) (PAM)
-* replace YouTube links with Invidious links (PAM)
-* rework profile view (PAM)
-* introduce app intro and some help screens (PAM)
+* show name in quotes (blabber.im)
+* introduce theme based on systems theme (blabber.im)
+* increase default video quality (720p instead of 360p) (blabber.im)
+* replace YouTube links with Invidious links (blabber.im)
+* rework profile view (blabber.im)
+* introduce app intro and some help screens (blabber.im)
 * fixed minor security issues
 * share XMPP uri from channel search by long pressing a result
 * fixed OMEMO self healing (after backup restore) on servers w/o MAM
 * introduce expert setting to perform channel discovery on local server instead of [search.jabber.network](https://search.jabber.network)
-* introduce new orange theme color (PAM)
+* introduce new orange theme color (blabber.im)
 * bug fixes
 
 #### Version 2.2.9
@@ -110,12 +113,12 @@
 #### Version 2.2.8
 * stability improvements for group chats and channels
 * allow backups to be restored from anywhere
-* make short vibrate in open chat configurable and respect silent mode (PAM)
+* make short vibrate in open chat configurable and respect silent mode (blabber.im)
 * fixes for Jingle file transfer
 * fixed some rare crashes
 * when sharing a message from and to messenger insert it as quote
-* find orphaned files and show them in the chat again instead of showing them deleted (PAM)
-* introduce file uploads/downloads with queue (PAM)
+* find orphaned files and show them in the chat again instead of showing them deleted (blabber.im)
+* introduce file uploads/downloads with queue (blabber.im)
 * fixed connection issues over Tor
 * P2P file transfer (Jingle) now offers direct candidates
 * support XEP-0396: Jingle Encrypted Transports - OMEMO
@@ -129,7 +132,7 @@
 * fix broken updater
 
 #### Version 2.2.5
-* make backup compatible to Conversations (only works for Android >= 8) (PAM)
+* make backup compatible to Conversations (only works for Android >= 8) (blabber.im)
 * bug fix
 
 #### Version 2.2.4
@@ -139,7 +142,7 @@
 * set own OMEMO devices to inactive after not seeing them for 60 days. (was 7 days)
 * bug fixes for peer to peer file transfer (Jingle)
 * fixed server info for unlimited/unknown max file size
-* make backup compatible to Conversations (PAM)
+* make backup compatible to Conversations (blabber.im)
 * performance improvements
 * bug fixes
 
@@ -147,37 +150,37 @@
 * bug fixes
 
 #### Version 2.2.2
-* add activity to define some important privacy settings on first start (PAM)
-* add ability to delete account also from server (PAM)
-* add ability to kick users from room and not just ban them (PAM)
+* add activity to define some important privacy settings on first start (blabber.im)
+* add ability to delete account also from server (blabber.im)
+* add ability to kick users from room and not just ban them (blabber.im)
 * bug fixes
 
 #### Version 2.2.1
-* use extra activity for enter name during registration (PAM)
+* use extra activity for enter name during registration (blabber.im)
 * bug fixes
 
 #### Version 2.2.0
-* add ability to set/edit nickname in own profile (PAM)
-* add ability to configure autojoin flag in groupchat details (PAM)
+* add ability to set/edit nickname in own profile (blabber.im)
+* add ability to configure autojoin flag in groupchat details (blabber.im)
 * support for Android 9 'message style' notifications
 * OMEMO stability improvements
 * do not show deleted files in media browser
-* added 'Keep Original' as image and video quality choice (PAM)
+* added 'Keep Original' as image and video quality choice (blabber.im)
 * fixed avatar not being refreshed in group chats
-* make users avatars configurable (prefer either from xmpp or addressbook) (PAM)
-* integrate last message deletion on remote devices (server and client need support for message correction) (PAM)
+* make users avatars configurable (prefer either from xmpp or addressbook) (blabber.im)
+* integrate last message deletion on remote devices (server and client need support for message correction) (blabber.im)
 * clearly distinguish between (private) group chats and (public) channels
 * redesigned participants view for group chats and channels
 * redesigned create new contact/group chat/channel flow in Start Conversation screen
 * reworked backup & restore
-* use Ad-Hoc Commands to invite new users (PAM)
-* show link preview in chat (PAM)
+* use Ad-Hoc Commands to invite new users (blabber.im)
+* show link preview in chat (blabber.im)
 * bug fixes
 
 #### Version 2.1.5
 * improved handling of bookmark nicks
 * long press on 'allow' or 'add back' snackbar to bring up 'reject'
-* let the user forbid android from taking screenshots (PAM)
+* let the user forbid android from taking screenshots (blabber.im)
 * make PEP avatars public to play nice with Prosody 0.11
 * fixed re-sending failed files in group chats
 * OMEMO stability improvements
@@ -194,22 +197,22 @@
 * fixed group chat mentions when nick ends in . (dot)
 * fixed not asking for permissions after direct share
 * fixed CVE-2018-18467
-* implement message deletion (PAM)
+* implement message deletion (blabber.im)
 * bug fixes
 
 #### Version 2.1.2
 * fix crash with updater
 
 #### Version 2.1.1
-* make quick actions/attachment choice configurable (PAM)
-* add a hideable separate quick button for voice messages (PAM)
+* make quick actions/attachment choice configurable (blabber.im)
+* add a hideable separate quick button for voice messages (blabber.im)
 * switch between speaker/earpiece while playing audios/voice messages
 * store bookmarks in PEP if server has ability to convert to old bookmarks
 * show Jabber IDs from address book in address book
 * preview and ask for confirmation before sending media files
 * view per conversation media files in contact and conference details screens
 * enable foreground service by default for Android 8 (notification can be disabled by long pressing it)
-* reworked MediaViewer (PAM)
+* reworked MediaViewer (blabber.im)
 * support TLSv1.3 (ejabberd ≤ 18.06 is incompatible with openssl 1.1.1 - Update ejabberd or downgrade openssl if you get ›Stream opening error‹)
 * add push messages for playstore versions
 * bug fixes
@@ -232,7 +235,7 @@
 
 #### Version 2.0.1
 * improved recording quality
-* let the user select a public server for account creation (PAM)
+* let the user select a public server for account creation (blabber.im)
 * add possibility to de-/activate accounts in multi account mode
 * bug fixes 
 
@@ -243,7 +246,7 @@
 * reworked message search
 * added splash screen at startup
 * integrate dark theme
-* keep OTR, but without further development and support, just for compatibility (PAM)
+* keep OTR, but without further development and support, just for compatibility (blabber.im)
 * added configurable font size
 * added global OMEMO preference
 * added scroll to bottom button
@@ -256,7 +259,7 @@
 * bug fixes
 
 #### Version 1.22.0
-* integrated expert option to enable multiple account (PAM)
+* integrated expert option to enable multiple account (blabber.im)
 * some UI improvements
 * improved MAM support
 * bug fixes 
@@ -270,20 +273,20 @@
 * bug fixes
 
 #### Version 1.21.1
-* don't use integrated updater if Messenger is installed from F-Droid (PAM)
-* check if app installs from unknown sources are allowed, if not open settings to allow this (PAM)
-* show hint in chatview if private message is activated (PAM)
+* don't use integrated updater if Messenger is installed from F-Droid (blabber.im)
+* check if app installs from unknown sources are allowed, if not open settings to allow this (blabber.im)
+* show hint in chatview if private message is activated (blabber.im)
 * send delivery receipts after MAM catchup
 * reduce number of wake locks
-* add possibility to destroy group chats (PAM)
-* show progress dialog while downloading update with internal updater (PAM)
-* implemented message search (PAM)
+* add possibility to destroy group chats (blabber.im)
+* show progress dialog while downloading update with internal updater (blabber.im)
+* implemented message search (blabber.im)
 * improved self chat
 * bug fixes
 
 #### Version 1.21.0
-* replaced google maps location service with open street map services via leaflet (PAM)
-* let screen on while playing audio files (PAM)
+* replaced google maps location service with open street map services via leaflet (blabber.im)
+* let screen on while playing audio files (blabber.im)
 * add Turkish translations
 * bug fixes
 
@@ -301,7 +304,7 @@
 * bug fixes
 
 #### Version 1.20.0
-* reworked AppUpdater and show a notification if there is an update available (PAM)
+* reworked AppUpdater and show a notification if there is an update available (blabber.im)
 * some UI and performance improvements
 * add french and spanish translations
 * text markup *bold*, _italic_,`monospace` and ~strikethrough~
@@ -309,7 +312,7 @@
 * always open URLs in new tab
 * bring back quick share (default off) and return to previous app after sharing
 * send and show read markers in private, non-anonymous groups
-* warn if chat is unencrypted and switch to OMEMO if available after pressing OK (warning can be disabled in settings) (PAM)
+* warn if chat is unencrypted and switch to OMEMO if available after pressing OK (warning can be disabled in settings) (blabber.im)
 * support sending and receiving opus file
 * bug fixes
 
@@ -353,7 +356,7 @@
 
 #### Version 1.18.0
 * enable OTR and OpenPGP again
-* fix bug with updater on devices < SDK 21 (PAM)
+* fix bug with updater on devices < SDK 21 (blabber.im)
 * Show colored contact names for their presence status (via settings)
 * treat URL as file if URL is in oob or contains key
 * added support for Android Auto
@@ -362,30 +365,30 @@
 * bug fixes
 
 #### Version 1.17.1
-* grey out offline contacts in StartConversation (PAM)
+* grey out offline contacts in StartConversation (blabber.im)
 * change emoji library which supports newer emojis
 * change avatar images to circles
 * Switch Aztec to QR for faster scans
-* make automatic fullscreen media rotation configurable (PAM)
+* make automatic fullscreen media rotation configurable (blabber.im)
 * open version can use tor networks
-* make image compression configurable (PAM)
-* show read/received markers in chatlist (PAM)
+* make image compression configurable (blabber.im)
+* show read/received markers in chatlist (blabber.im)
 * OMEMO: put auth tag into key (verify auth tag as well)
 * offer to block entire domain in message from stanger snackbar
 * bug fixes
 
 #### Version 1.17.0
-* add date bubbles in chat view (PAM)
+* add date bubbles in chat view (blabber.im)
 * show last used resource in contact details
-* make brightness overwrite in image/video viewer configurable (PAM)
-* make video resolution configurable (PAM)
+* make brightness overwrite in image/video viewer configurable (blabber.im)
+* make video resolution configurable (blabber.im)
 * do not notify for messages from strangers by default
 * blocking a JID closes the corresponding conversation
 * show message sender in conversation overview
 * Support for the latest MAM namespace
 * Icons for attach menu
 * send typing notifications in private, non-anonymous MUCs
-* change media directory names (PAM)
+* change media directory names (blabber.im)
 * bug fixes
 
 #### Version 1.16.5
@@ -393,8 +396,8 @@
 * bug fixes 
 
 #### Version 1.16.4
-* show failed file uploads in chatlist (PAM)
-* resend failed file uploads automatically (PAM)
+* show failed file uploads in chatlist (blabber.im)
+* resend failed file uploads automatically (blabber.im)
 * preview files in chatlist
 * move (un)mute settings to contact-/conference details
 * UI performance fixes
@@ -412,15 +415,15 @@
 * bug fixes
 
 #### Version 1.16.0
-* show unread messages in chatlist (PAM)
-* increase image size to 4k UHD (PAM)
+* show unread messages in chatlist (blabber.im)
+* increase image size to 4k UHD (blabber.im)
 * add support for GIF files
-* reworked video compression (PAM)
+* reworked video compression (blabber.im)
 * reworked app updater
 * bug fixes
 
 #### Version 1.15.4
-* improve video compression quality (PAM)
+* improve video compression quality (blabber.im)
 * support for POSH (RFC7711)
 * support for quoting messages (via select text)
 * verified messages show shield icon; unverified messages show lock
@@ -442,9 +445,9 @@
 #### Version 1.15.0
 * make OMEMO working with other clients
 * make OMEMO encryption standard for 1:1 chats as default
-* start navigation app directly from show location activity (PAM)
-* show map preview on shared locations (PAM)
-* show contacts name on shared VCARDs (PAM)
+* start navigation app directly from show location activity (blabber.im)
+* show map preview on shared locations (blabber.im)
+* show contacts name on shared VCARDs (blabber.im)
 * send text directly via ShareWithActivity
 * bug fixes 
 
@@ -458,9 +461,9 @@
 * bug fixes
 
 #### Version 1.14.3
-* set different auto-download-sizes for mobile, roaming and WiFi connections (PAM)
-* add ability to report errors and bugs directly from menu (PAM)
-* XEP-0377: Spam Reporting
+* set different auto-download-sizes for mobile, roaming and WiFi connections (blabber.im)
+* add ability to report errors and bugs directly from menu (blabber.im)
+* XEP-0377: Sblabber.im Reporting
 * fix rare start up crashes
 * bug fixes
 
@@ -469,7 +472,7 @@
 * add custom Emojis
 * scroll long actionbar titles
 * some performance improvements
-* some video compression improvements (PAM)
+* some video compression improvements (blabber.im)
 * bug fixes
 
 #### Version 1.14.1
@@ -484,8 +487,8 @@
 
 #### Version 1.13.9
 * add icons for files in chat view
-* reworked backup service to automatically backup database encrypted to local storage at 4 am each day (PAM)
-* make human readable log export optional (PAM)
+* reworked backup service to automatically backup database encrypted to local storage at 4 am each day (blabber.im)
+* make human readable log export optional (blabber.im)
 * bug fixes
 
 #### Version 1.13.8
@@ -496,16 +499,16 @@
 * bug fixes
 
 #### Version 1.13.6
-* share image/video directly from fullscreen view (PAM)
+* share image/video directly from fullscreen view (blabber.im)
 * show online status in foreground service
 * support jingle ft:4
 * show contact as DND if one resource is
 * bug fixes
 
 #### Version 1.13.5
-* add image preview before sending single images directly (PAM)
-* add vibrate notification when app is open (PAM)
-* hide actionbar in fullscreen image/video view (PAM)
+* add image preview before sending single images directly (blabber.im)
+* add vibrate notification when app is open (blabber.im)
+* hide actionbar in fullscreen image/video view (blabber.im)
 * bug fixes
 
 #### Version 1.13.4
@@ -513,7 +516,7 @@
 * bug fixes
 
 #### Version 1.13.3
-* new permission check and request at startup (PAM)
+* new permission check and request at startup (blabber.im)
 * bug fixes
 
 #### Version 1.13.2
@@ -524,15 +527,15 @@
 * bug fixes
 
 #### Version 1.13.0
-* changed applicationId (PAM)
-* play videos directly without touching play button (PAM)
-* add database importer from local storage as backup (PAM)
-* changed files directories and names (PAM)
+* changed applicationId (blabber.im)
+* play videos directly without touching play button (blabber.im)
+* add database importer from local storage as backup (blabber.im)
+* changed files directories and names (blabber.im)
 * bug fixes
 
 #### Version 1.12.6
 * bug fixes
-* add database exporter to local storage as backup (PAM)
+* add database exporter to local storage as backup (blabber.im)
 
 #### Version 1.12.5
 * bug fixes
@@ -542,7 +545,7 @@
 * show first unread message on top
 * show geo uri as links
 * circumvent long message DOS
-* integrate simple videoplayer and image viewer (PAM)
+* integrate simple videoplayer and image viewer (blabber.im)
 
 #### Version 1.12.3
 * show offline members in conferences
@@ -552,17 +555,17 @@
 * make omemo default when all resources support it
 * show presence of other resources as template
 * start typing in StartConversationsActivity to search
-* show addresses in locations (PAM)
+* show addresses in locations (blabber.im)
 * show video previews in chats
 * various bug fixes and improvements
 * fixed pgp presence signing
 
 #### Version 1.12.1
 * expert setting to modify presence
-* added simple audio player (PAM)
-* added audio recorder (PAM)
-* added location services (PAM)
-* changed theme color from green to blue (PAM)
+* added simple audio player (blabber.im)
+* added audio recorder (blabber.im)
+* added location services (blabber.im)
+* changed theme color from green to blue (blabber.im)
 * small bug fixes
 
 #### Version 1.12.0
@@ -575,7 +578,7 @@
 * Share xmpp uri from conference details
 * add setting to allow quick sharing
 * use material design icons for android < lollipop
-* make foreground service always activated (PAM)
+* make foreground service always activated (blabber.im)
 * disable account deactivation
 * UI improvements
 * various bug fixes
@@ -632,8 +635,8 @@
 #### Version 1.9.2
 * prevent startup crash on Sailfish OS
 * minor bug fixes
-* removed contact-/conferece-details button (PAM)
-* touch contact name or conference name in action bar opens contact-/conference-details (PAM)
+* removed contact-/conferece-details button (blabber.im)
+* touch contact name or conference name in action bar opens contact-/conference-details (blabber.im)
 
 #### Version 1.9.1
 * minor bug fixes incl. a workaround for nimbuzz.com
@@ -675,9 +678,9 @@
 * bug fixes
 
 #### Versrion 1.7.3
-* changed app name from Conversations to Pix-Art Messenger (PAM)
+* changed app name from Conversations to Pix-Art Messenger (blabber.im)
 * changed chat background to light yellow
-* added own name for sent locations (PAM)
+* added own name for sent locations (blabber.im)
 
 #### Version 1.7.2
 * let users crop their avatars
