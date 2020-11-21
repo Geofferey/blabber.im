@@ -1,5 +1,6 @@
 ### Changelog
 
+#### Version 3.0.1
 #### Version 3.0.0
 * Pix-Art Messenger is now blabber.im
 * rework missed call notifications (blabber.im)
