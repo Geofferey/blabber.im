@@ -324,7 +324,7 @@ public class ThemeHelper {
             case "grey":
                 return dark ? getMessageTextColor(context, dark, false) : ContextCompat.getColor(context, R.color.darkgrey);
             case "black":
-                return ContextCompat.getColor(context, R.color.darkblack);
+                return getMessageTextColor(context, true, false);
             case "pink":
                 return dark ? getMessageTextColor(context, dark, false) : ContextCompat.getColor(context, R.color.darkpink);
             default:
