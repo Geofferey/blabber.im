@@ -194,7 +194,7 @@ public class XmppConnection implements Runnable {
 
     private void fixResource(Context context, Account account) {
         String resource = account.getResource();
-        if (resource != null && !resource.contains(context.getString(R.string.app_name) + '[' + BuildConfig.VERSION_NAME + ']')) {
+        if (resource != null && !resource.startsWith(context.getString(R.string.app_name) + '[' + BuildConfig.VERSION_NAME + ']')) {
             account.setResource(createNewResource());
         }
         int fixedPartLength = context.getString(R.string.app_name).length() + 1; //include the trailing dot
