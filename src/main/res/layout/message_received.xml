@@ -78,8 +78,9 @@
                     android:layout_width="?attr/TextSizeCaption"
                     android:layout_height="?attr/TextSizeCaption"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="4sp"
-                    android:layout_marginRight="4sp"
+                    android:layout_marginEnd="1sp"
+                    android:layout_marginRight="1sp"
+                    android:padding="1dp"
                     android:alpha="0.70"
                     android:gravity="center_vertical"
                     android:src="@drawable/ic_lock_black_18dp" />
@@ -89,8 +90,7 @@
                     android:layout_width="?attr/TextSizeCaption"
                     android:layout_height="?attr/TextSizeCaption"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="4sp"
-                    android:layout_marginRight="4sp"
+                    android:padding="1dp"
                     android:alpha="0.70"
                     android:gravity="center_vertical"
                     android:src="@drawable/ic_mode_edit_black_18dp" />
