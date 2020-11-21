@@ -254,6 +254,6 @@ public class UpdateHelper {
         String Message = "message_shown_" + message;
         SharedPreferences.Editor e = getPrefs.edit();
         e.putBoolean(Message, false);
-        //e.apply();
+        e.apply();
     }
 }
