@@ -17,7 +17,7 @@ Euer blabber.im Team
 
 -----
 
-<img src="art/logo_android.png" width="100">
+# <img src="art/logo_android.png" width="24"> blabber.im
 
 🇬🇧🇺🇸… [English Readme version available here](README-en.md)
 
