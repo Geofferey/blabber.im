@@ -17,8 +17,7 @@ Your blabber.im Team
 
 -----
 
-![logo](art/icon.png)
-# Pix-Art Messenger [![CircleCI](https://circleci.com/gh/kriztan/Pix-Art-Messenger/tree/master.svg?style=shield)](https://circleci.com/gh/kriztan/Pix-Art-Messenger/tree/master)
+# <img src="art/logo_android.png" width="24"> blabber.im
 
 🇩🇪… [Deutsche Version der Readme hier verfügbar.](README.md)
 
