@@ -22,7 +22,7 @@ Euer blabber.im Team
 
 🇬🇧🇺🇸… [English Readme version available here](README-en.md)
 
-Pix-Art Messenger ist eine Kopie der offiziellen Android-App [Conversations](https://github.com/siacs/Conversations) mit einigen Änderungen, insbesondere zur Verbesserung der Benutzerfreundlichkeit, um den Umstieg von oftmals vorinstallierten Messengern zu erleichtern. Die folgenden Bilder geben erste Eindrücke der App:
+blabber.im ist eine Kopie der offiziellen Android-App [Conversations](https://github.com/siacs/Conversations) mit einigen Änderungen, insbesondere zur Verbesserung der Benutzerfreundlichkeit, um den Umstieg von oftmals vorinstallierten Messengern zu erleichtern. Die folgenden Bilder geben erste Eindrücke der App:
 
 <img src="metadata/en-US/phoneScreenshots/00.png" width="200" /> <img src="metadata/en-US/phoneScreenshots/01.png" width="200" /> <img src="metadata/en-US/phoneScreenshots/02.png" width="200" /> <img src="metadata/en-US/phoneScreenshots/03.png" width="200" /> <img src="metadata/en-US/phoneScreenshots/04.png" width="200" /> <img src="metadata/en-US/phoneScreenshots/05.png" width="200" /> <img src="metadata/en-US/phoneScreenshots/06.png" width="200" />
 
@@ -30,20 +30,20 @@ Pix-Art Messenger ist eine Kopie der offiziellen Android-App [Conversations](htt
 
 Download ist hier möglich:
 
-<a href='https://play.google.com/store/apps/details?id=de.pixart.messenger'><img alt='Jeztz bei Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/de_badge_web_generic.png' height="100"/></a> <a href="https://f-droid.org/app/de.pixart.messenger"><img src="https://f-droid.org/badge/get-it-on-de.png" alt="Jetzt bei F-Droid" height="100"></a>
+<a href='https://play.google.com/store/apps/details?id=im.blabber.messenger'><img alt='Jeztz bei Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/de_badge_web_generic.png' height="100"/></a> <a href="https://f-droid.org/app/de.pixart.messenger"><img src="https://f-droid.org/badge/get-it-on-de.png" alt="Jetzt bei F-Droid" height="100"></a>
 
-Alternativ kannst du den Messenger auch direkt hier von GitHub unter [Releases](https://github.com/kriztan/Pix-Art-Messenger/releases/latest) herunterladen.
+Alternativ kannst du den Messenger auch direkt hier von Codeberg unter [Releases](https://codeberg.org/kriztan/blabber.im/releases/latest) herunterladen.
 
-<a rel="me" href="https://social.tchncs.de/@pixart">Pix-Art Messenger bei Mastodon</a> 
+<a rel="me" href="https://kanoa.de/@blabber">blabber.im bei Mastodon</a> 
 
-#### Pix-Art-Messenger nightly bzw. beta
+#### blabber.im nightly bzw. beta
 
 Scanne den QR-Code und füge es zu deinen F-Droid Quellen hinzu: 
 
 <img src="https://raw.githubusercontent.com/kriztan/Pix-Art-Messenger-nightly/master/icon.png" width="220">
 
 Google-Nutzer können dem Betaprogramm beitreten:
-[Pix-Art Messenger beta](https://play.google.com/apps/testing/de.pixart.messenger)
+[blabber.im beta](https://play.google.com/apps/testing/im.blabber.messenger)
 
 #### Wie kann ich bei der Übersetzung helfen?
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/pix-art-messenger/localized.svg)](https://crowdin.com/project/pix-art-messenger)
@@ -55,19 +55,14 @@ Google-Nutzer können dem Betaprogramm beitreten:
 #### Ich habe Probleme, was soll ich tun?
 Am einfachsten ist es, wenn du unserer Support-Gruppe beitrittst, dort werden deine Probleme mit Sicherheit schnell gelöst. 
 
-Support-Chat: [support@room.pix-art.de](https://jabber.pix-art.de/j/support@room.pix-art.de?join)     
-[![Users in muc](https://inverse.chat/badge.svg?room=support@room.pix-art.de)](https://jabber.pix-art.de/j/support@room.pix-art.de?join)
+Support-Chat: [blabber@conference.blabber.im](https://blabber.im/j/blabber@conference.blabber.im?join)     
+[![Users in muc](https://inverse.chat/badge.svg?room=blabber@conference.blabber.im)](https://blabber.im/j/blabber@conference.blabber.im?join)
 
-Development-Chat:  [development@room.pix-art.de](https://jabber.pix-art.de/j/development@room.pix-art.de?join)     
-[![Users in muc](https://inverse.chat/badge.svg?room=development@room.pix-art.de)](https://jabber.pix-art.de/j/development@room.pix-art.de?join)
-
-Scanne den QR-Code um in den Support-Chat zu gelangen:
-
-<img src="art/qr-code_suport_small.png" width="220">
+Development-Chat:  [blabber-dev@conference.blabber.im](https://blabber.im/j/blabber-dev@conference.blabber.im?join)     
+[![Users in muc](https://inverse.chat/badge.svg?room=blabber-dev@conference.blabber.im)](https://blabber.im/j/blabber-dev@conference.blabber.im?join)
 
 
-
-Solltest du dort nicht weiter kommen kannst du hier ein Issue erstellen, in welchem du dein Problem genau beschreibst und welche Schritte erforderlich sind, um zu dem Problem zu gelangen. 
+Solltest du dort nicht weiter kommen kannst du [hier](https://codeberg.org/kriztan/blabber.im/issues) ein Issue erstellen, in welchem du dein Problem genau beschreibst und welche Schritte erforderlich sind, um zu dem Problem zu gelangen. 
 
 #### Wie erstelle ich Debug- bzw. ADB-Logs?
 
@@ -97,7 +92,7 @@ Solltest du dort nicht weiter kommen kannst du hier ein Issue erstellen, in welc
 3. Folge den Schritten [6] bis [10] unter [Windows]. s.u.
 4. Nun kannst du mit der Ausgabe der Debug-Logs beginnen. Nenne die Log-Datei bspw `logcat.txt`:
    ```
-   $ adb -d logcat -v time | grep -i Pix-Art > logcat.txt
+   $ adb -d logcat -v time | grep -i blabber.im > logcat.txt
    ```
 5. Fahre nun mit den verbliebenen Schritten unter [Windows] ab Schritt [12] fort.
 
@@ -135,10 +130,10 @@ Solltest du dort nicht weiter kommen kannst du hier ein Issue erstellen, in welc
     ```   
 11. Nun kannst du mit der Ausgabe der Debug-Logs beginnen. Dazu gibst du im CMD folgendes ein und die Ausgabe beginnt in die Datei `logcat.txt` im Verzeichnis `C:\ADB`:
     ```
-    > adb -d logcat -v time | FINDSTR Pix-Art > logcat.txt
+    > adb -d logcat -v time | FINDSTR blabber.im > logcat.txt
     ``` 
 12. Führe nun die Schritte aus, die zum Fehler führen.
 
 13. Nachdem der Fehler reproduziert wurde, kann das Loggen im Terminal mit `Strg+C` beendet werden.
 
-14. Zum Schluss schaue dir die `logcat.txt` an, lösche ggf. persönliche Angaben und sende diese Datei zur Problemlösung mit einer Beschreibung des Fehlers und was man tun muss, um diesen Fehler zu erhalten, an mich. Nutz dafür den Menüpunkt [Issues](https://github.com/kriztan/Pix-Art-Messenger/issues)
+14. Zum Schluss schaue dir die `logcat.txt` an, lösche ggf. persönliche Angaben und sende diese Datei zur Problemlösung mit einer Beschreibung des Fehlers und was man tun muss, um diesen Fehler zu erhalten, an mich. Nutz dafür den Menüpunkt [Issues](https://codeberg.org/kriztan/blabber.im/issues)
