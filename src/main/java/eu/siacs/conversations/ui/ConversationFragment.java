@@ -1915,7 +1915,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 activity.overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
             }
         } else {
-            Toast.makeText(context, R.string.no_application_found, Toast.LENGTH_LONG).show();
+            //ignore Toast.makeText(context, R.string.no_application_found, Toast.LENGTH_LONG).show();
         }
     }
 
