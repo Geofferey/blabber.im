@@ -77,7 +77,7 @@
 
     <!-- black theme -->
     <color name="middleblack">#ff323232</color> <!-- dark theme other -->
-    <color name="darkblack">#ff191919</color> <!-- dark theme me -->
+    <color name="darkblack">#ff252525</color> <!-- dark theme me -->
 
     <!-- pink theme -->
     <color name="lightpink">#fffff4fc</color> <!-- light theme other -->

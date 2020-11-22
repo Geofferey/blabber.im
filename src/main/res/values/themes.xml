@@ -6,8 +6,7 @@
     2. blabber
     3. orange
     4. grey
-    5. black
-    6. pink
+    5. pink
     -->
 
     <!-- fullscreen -->
@@ -42,7 +41,6 @@
         <item name="button_text_color_disabled">@color/grey500</item>
         <item name="chat_bg">@drawable/bg_light_blue</item>
         <item name="icon_tint">@color/black54</item>
-
         <item name="color_background_primary">@color/grey50</item>
         <item name="color_background_secondary">@color/grey200</item>
         <item name="color_background_tertiary">@color/grey300</item>
@@ -51,23 +49,17 @@
         <item name="TextColorOnline">@color/green500</item>
         <item name="TextColorError">@color/red800</item>
         <item name="edit_text_color">@color/black87</item>
-
         <item name="activity_background_search">@drawable/search_background_light</item>
         <item name="activity_background_no_results">@drawable/no_results_background_light</item>
         <item name="list_item_background">@drawable/list_item_background_light</item>
-
         <item name="EmojiColor">@color/realblack</item>
-
         <item name="color_bubble_light">@color/lightwhite</item>
         <item name="color_bubble_dark">@color/lightblue</item>
         <item name="color_bubble_date">@color/lightgreen</item>
         <item name="color_bubble_warning">@color/lightred</item>
-
         <item name="color_border">@color/grey500</item>
-
         <item name="windowActionModeOverlay">true</item>
         <item name="android:actionModeBackground">@color/accent</item>
-
         <item name="android:homeAsUpIndicator" type="reference">@drawable/ic_arrow_back_white_24dp
         </item>
 
@@ -82,7 +74,6 @@
         <item name="TextSizeInfo">12sp</item>
         <item name="TextSizeBody">14sp</item>
         <item name="TextSizeHeadline">18sp</item>
-
         <!--<item type="reference" name="infocard_border">@drawable/infocard_border</item>-->
         <item name="divider">@color/black12</item>
 
@@ -99,7 +90,6 @@
         <item name="ic_send_videocam_offline" type="reference">@drawable/ic_send_videocam_offline
         </item>
         <item name="ic_send_voice_offline" type="reference">@drawable/ic_send_voice_offline</item>
-
         <item name="media_preview_document" type="reference">@drawable/ic_description_black_48dp
         </item>
         <item name="media_preview_recording" type="reference">@drawable/ic_mic_black_48dp</item>
@@ -113,7 +103,6 @@
         <item name="media_preview_ebook" type="reference">@drawable/ic_book_black_48dp</item>
         <item name="media_preview_unknown" type="reference">@drawable/ic_help_black_48dp</item>
         <item name="media_preview_backup" type="reference">@drawable/ic_backup_black_48dp</item>
-
         <item name="icon_add_group" type="reference">@drawable/ic_group_add_white_24dp</item>
         <item name="icon_add_person" type="reference">@drawable/ic_person_add_white_24dp</item>
         <item name="icon_cancel" type="reference">@drawable/ic_cancel_black_24dp</item>
@@ -215,7 +204,6 @@
         <item name="android:navigationBarColor" tools:targetApi="21">@color/black</item>
         <item name="chat_bg">@drawable/bg_dark_blue</item>
         <item name="icon_tint">@color/white70</item>
-
         <item name="color_background_primary">@color/grey700</item>
         <item name="color_background_secondary">@color/grey800</item>
         <item name="color_background_tertiary">@color/grey900</item>
@@ -224,23 +212,17 @@
         <item name="TextColorOnline">@color/green500</item>
         <item name="TextColorError">@color/red500</item>
         <item name="edit_text_color">@color/white</item>
-
         <item name="activity_background_search">@drawable/search_background_dark</item>
         <item name="activity_background_no_results">@drawable/no_results_background_dark</item>
         <item name="list_item_background">@drawable/list_item_background_dark</item>
-
         <item name="EmojiColor">@color/realwhite</item>
-
         <item name="color_bubble_light">@color/darkwhite</item>
         <item name="color_bubble_dark">@color/darkblue</item>
         <item name="color_bubble_date">@color/darkgreen</item>
         <item name="color_bubble_warning">@color/darkred</item>
-
         <item name="color_border">@color/grey700</item>
-
         <item name="windowActionModeOverlay">true</item>
         <item name="android:actionModeBackground">@color/accent</item>
-
         <item name="android:homeAsUpIndicator" type="reference">@drawable/ic_arrow_back_white_24dp
         </item>
 
@@ -375,6 +357,17 @@
         <item name="ic_settings_about" type="reference">@drawable/ic_help_circle_white_24dp</item>
     </style>
 
+    <!-- blue theme - black -->
+    <style name="ConversationsTheme.Black" parent="ConversationsTheme.Dark">
+        <item name="colorPrimary">@color/primary_black</item>
+        <item name="colorPrimaryDark">@color/primary_dark_black</item>
+        <item name="color_background_primary">@color/primary_black</item>
+        <item name="color_background_secondary">@color/primary_black</item>
+        <item name="color_background_tertiary">@color/primary_black</item>
+        <item name="color_bubble_light">@color/middleblack</item>
+        <item name="color_bubble_dark">@color/darkblack</item>
+    </style>
+
     <!-- blue dialog -->
     <style name="ConversationsTheme.Dialog" parent="Theme.MaterialComponents.Light.Dialog">
         <item name="colorPrimary">@color/primary</item>
@@ -402,6 +395,13 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <!-- blue dialog - black -->
+    <style name="ConversationsTheme.Black.Dialog" parent="ConversationsTheme.Dark.Dialog">
+        <item name="colorPrimary">@color/primary_black</item>
+        <item name="colorPrimaryDark">@color/primary_black</item>
+        <item name="color_background_primary">@color/primary_black</item>
+    </style>
+
     <!-- blue dialog medium font -->
     <style name="ConversationsTheme.Dialog.Medium" parent="ConversationsTheme.Dialog">
         <item name="TextSizeBody2">16sp</item>
@@ -414,6 +414,9 @@
         <item name="TextSizeDisplay2">51sp</item>
     </style>
 
+    <!-- blue dialog medium font - black -->
+    <style name="ConversationsTheme.Black.Dialog.Medium" parent="ConversationsTheme.Dark.Dialog.Medium" />
+
     <!-- blue dialog large font -->
     <style name="ConversationsTheme.Dialog.Large" parent="ConversationsTheme.Dialog">
         <item name="TextSizeBody2">18sp</item>
@@ -425,6 +428,9 @@
         <item name="TextSizeBody2">18sp</item>
         <item name="TextSizeTitle">56sp</item>
     </style>
+
+    <!-- blue dialog large font - black -->
+    <style name="ConversationsTheme.Black.Dialog.Large" parent="ConversationsTheme.Dark.Dialog.Large" />
 
     <!-- blue medium font -->
     <style name="ConversationsTheme.Medium" parent="ConversationsTheme">
@@ -456,6 +462,9 @@
         <item name="TextSizeHeadline">20sp</item>
     </style>
 
+    <!-- blue medium font - black -->
+    <style name="ConversationsTheme.Black.Medium" parent="ConversationsTheme.Dark.Medium" />
+
     <!-- blue large font -->
     <style name="ConversationsTheme.Large" parent="ConversationsTheme">
         <item name="TextSizeCaption">16sp</item>
@@ -486,6 +495,8 @@
         <item name="TextSizeHeadline">22sp</item>
     </style>
 
+    <!-- blue large font - black -->
+    <style name="ConversationsTheme.Black.Large" parent="ConversationsTheme.Dark.Large" />
 
     <!-- 2. blabber -->
     <!-- blabber theme -->
@@ -496,15 +507,11 @@
         <item name="colorAccentLight">@color/accent_light_blabber</item>
         <item name="colorControlNormal">@color/accent_blabber</item>
         <item name="colorControlActivated">@color/accent_blabber</item>
-
         <item name="color_bubble_light">@color/lightblabber</item>
         <item name="color_bubble_dark">@color/lightblabber2</item>
         <item name="color_bubble_date">@color/lightgreen</item>
         <item name="color_bubble_warning">@color/lightred</item>
-
         <item name="chat_bg">@drawable/bg_light_orange</item>
-
-        <item name="windowActionModeOverlay">true</item>
         <item name="android:actionModeBackground">@color/accent_blabber</item>
     </style>
 
@@ -516,15 +523,18 @@
         <item name="colorAccentLight">@color/accent_light_blabber</item>
         <item name="colorControlNormal">@color/accent_blabber</item>
         <item name="colorControlActivated">@color/accent_blabber</item>
-
         <item name="color_bubble_light">@color/middleblabber</item>
         <item name="color_bubble_dark">@color/darkblabber</item>
-        <item name="color_bubble_date">@color/darkgreen</item>
-        <item name="color_bubble_warning">@color/darkred</item>
-
         <item name="chat_bg">@drawable/bg_dark_orange</item>
+        <item name="android:actionModeBackground">@color/accent_blabber</item>
+    </style>
 
-        <item name="windowActionModeOverlay">true</item>
+    <!-- blabber theme - black -->
+    <style name="ConversationsTheme.Blabber.Black" parent="ConversationsTheme.Black">
+        <item name="colorAccent">@color/accent_blabber</item>
+        <item name="colorAccentLight">@color/accent_light_blabber</item>
+        <item name="colorControlNormal">@color/accent_blabber</item>
+        <item name="colorControlActivated">@color/accent_blabber</item>
         <item name="android:actionModeBackground">@color/accent_blabber</item>
     </style>
 
@@ -544,6 +554,12 @@
         <item name="colorAccentLight">@color/accent_light_blabber</item>
     </style>
 
+    <!-- blabber dialog - black -->
+    <style name="ConversationsTheme.Blabber.Black.Dialog" parent="ConversationsTheme.Black.Dialog">
+        <item name="colorAccent">@color/accent_blabber</item>
+        <item name="colorAccentLight">@color/accent_light_blabber</item>
+    </style>
+
     <!-- blabber dialog medium font -->
     <style name="ConversationsTheme.Blabber.Dialog.Medium" parent="ConversationsTheme.Blabber.Dialog">
         <item name="TextSizeBody2">16sp</item>
@@ -556,6 +572,9 @@
         <item name="TextSizeDisplay2">51sp</item>
     </style>
 
+    <!-- blabber dialog medium font - black -->
+    <style name="ConversationsTheme.Blabber.Black.Dialog.Medium" parent="ConversationsTheme.Blabber.Dark.Dialog.Medium" />
+
     <!-- blabber dialog large font -->
     <style name="ConversationsTheme.Blabber.Dialog.Large" parent="ConversationsTheme.Blabber.Dialog">
         <item name="TextSizeBody2">18sp</item>
@@ -567,6 +586,9 @@
         <item name="TextSizeBody2">18sp</item>
         <item name="TextSizeTitle">56sp</item>
     </style>
+
+    <!-- blabber dialog large font - black -->
+    <style name="ConversationsTheme.Blabber.Black.Dialog.Large" parent="ConversationsTheme.Blabber.Dark.Dialog.Large" />
 
     <!-- blabber medium font -->
     <style name="ConversationsTheme.Blabber.Medium" parent="ConversationsTheme.Blabber">
@@ -598,6 +620,9 @@
         <item name="TextSizeHeadline">20sp</item>
     </style>
 
+    <!-- blabber medium font - black -->
+    <style name="ConversationsTheme.Blabber.Black.Medium" parent="ConversationsTheme.Blabber.Dark.Medium" />
+
     <!-- blabber large font -->
     <style name="ConversationsTheme.Blabber.Large" parent="ConversationsTheme.Blabber">
         <item name="TextSizeCaption">16sp</item>
@@ -628,6 +653,9 @@
         <item name="TextSizeHeadline">22sp</item>
     </style>
 
+    <!-- blabber large font - black -->
+    <style name="ConversationsTheme.Blabber.Black.Large" parent="ConversationsTheme.Blabber.Dark.Large" />
+
     <!-- 3. orange -->
     <!-- orange theme -->
     <style name="ConversationsTheme.Orange" parent="ConversationsTheme">
@@ -637,15 +665,11 @@
         <item name="colorAccentLight">@color/accent_light_orange</item>
         <item name="colorControlNormal">@color/accent_orange</item>
         <item name="colorControlActivated">@color/accent_orange</item>
-
         <item name="color_bubble_light">@color/lightorange</item>
         <item name="color_bubble_dark">@color/lightorange2</item>
         <item name="color_bubble_date">@color/lightgreen</item>
         <item name="color_bubble_warning">@color/lightred</item>
-
         <item name="chat_bg">@drawable/bg_light_orange</item>
-
-        <item name="windowActionModeOverlay">true</item>
         <item name="android:actionModeBackground">@color/accent_orange</item>
     </style>
 
@@ -657,15 +681,18 @@
         <item name="colorAccentLight">@color/accent_light_orange</item>
         <item name="colorControlNormal">@color/accent_orange</item>
         <item name="colorControlActivated">@color/accent_orange</item>
-
         <item name="color_bubble_light">@color/middleorange</item>
         <item name="color_bubble_dark">@color/darkorange</item>
-        <item name="color_bubble_date">@color/darkgreen</item>
-        <item name="color_bubble_warning">@color/darkred</item>
-
         <item name="chat_bg">@drawable/bg_dark_orange</item>
+        <item name="android:actionModeBackground">@color/accent_orange</item>
+    </style>
 
-        <item name="windowActionModeOverlay">true</item>
+    <!-- orange theme - black -->
+    <style name="ConversationsTheme.Orange.Black" parent="ConversationsTheme.Black">
+        <item name="colorAccent">@color/accent_orange</item>
+        <item name="colorAccentLight">@color/accent_light_orange</item>
+        <item name="colorControlNormal">@color/accent_orange</item>
+        <item name="colorControlActivated">@color/accent_orange</item>
         <item name="android:actionModeBackground">@color/accent_orange</item>
     </style>
 
@@ -685,6 +712,12 @@
         <item name="colorAccentLight">@color/accent_light_orange</item>
     </style>
 
+    <!-- orange dialog - black -->
+    <style name="ConversationsTheme.Orange.Black.Dialog" parent="ConversationsTheme.Black.Dialog">
+        <item name="colorAccent">@color/accent_orange</item>
+        <item name="colorAccentLight">@color/accent_light_orange</item>
+    </style>
+
     <!-- orange dialog medium font -->
     <style name="ConversationsTheme.Orange.Dialog.Medium" parent="ConversationsTheme.Orange.Dialog">
         <item name="TextSizeBody2">16sp</item>
@@ -697,6 +730,9 @@
         <item name="TextSizeDisplay2">51sp</item>
     </style>
 
+    <!-- orange dialog medium font - black -->
+    <style name="ConversationsTheme.Orange.Black.Dialog.Medium" parent="ConversationsTheme.Orange.Dark.Dialog.Medium" />
+
     <!-- orange dialog large font -->
     <style name="ConversationsTheme.Orange.Dialog.Large" parent="ConversationsTheme.Orange.Dialog">
         <item name="TextSizeBody2">18sp</item>
@@ -708,6 +744,9 @@
         <item name="TextSizeBody2">18sp</item>
         <item name="TextSizeTitle">56sp</item>
     </style>
+
+    <!-- orange dialog large font - black -->
+    <style name="ConversationsTheme.Orange.Black.Dialog.Large" parent="ConversationsTheme.Orange.Dark.Dialog.Large" />
 
     <!-- orange medium font -->
     <style name="ConversationsTheme.Orange.Medium" parent="ConversationsTheme.Orange">
@@ -739,6 +778,9 @@
         <item name="TextSizeHeadline">20sp</item>
     </style>
 
+    <!-- orange medium font - black -->
+    <style name="ConversationsTheme.Orange.Black.Medium" parent="ConversationsTheme.Orange.Dark.Medium" />
+
     <!-- orange large font -->
     <style name="ConversationsTheme.Orange.Large" parent="ConversationsTheme.Orange">
         <item name="TextSizeCaption">16sp</item>
@@ -769,6 +811,9 @@
         <item name="TextSizeHeadline">22sp</item>
     </style>
 
+    <!-- orange large font - black -->
+    <style name="ConversationsTheme.Orange.Black.Large" parent="ConversationsTheme.Orange.Dark.Large" />
+
     <!-- 4. grey -->
     <!-- grey theme -->
     <style name="ConversationsTheme.Grey" parent="ConversationsTheme">
@@ -778,15 +823,9 @@
         <item name="colorAccentLight">@color/accent_light_grey</item>
         <item name="colorControlNormal">@color/accent_grey</item>
         <item name="colorControlActivated">@color/accent_grey</item>
-
         <item name="color_bubble_light">@color/lightgrey</item>
         <item name="color_bubble_dark">@color/lightgrey2</item>
-        <item name="color_bubble_date">@color/lightgreen</item>
-        <item name="color_bubble_warning">@color/lightred</item>
-
         <item name="chat_bg">@drawable/bg_light_grey</item>
-
-        <item name="windowActionModeOverlay">true</item>
         <item name="android:actionModeBackground">@color/accent_grey</item>
     </style>
 
@@ -798,15 +837,18 @@
         <item name="colorAccentLight">@color/accent_light_grey</item>
         <item name="colorControlNormal">@color/accent_grey</item>
         <item name="colorControlActivated">@color/accent_grey</item>
-
         <item name="color_bubble_light">@color/middlegrey</item>
         <item name="color_bubble_dark">@color/darkgrey</item>
-        <item name="color_bubble_date">@color/darkgreen</item>
-        <item name="color_bubble_warning">@color/darkred</item>
-
         <item name="chat_bg">@drawable/bg_dark_grey</item>
+        <item name="android:actionModeBackground">@color/accent_grey</item>
+    </style>
 
-        <item name="windowActionModeOverlay">true</item>
+    <!-- grey theme - black -->
+    <style name="ConversationsTheme.Grey.Black" parent="ConversationsTheme.Black">
+        <item name="colorAccent">@color/accent_grey</item>
+        <item name="colorAccentLight">@color/accent_light_grey</item>
+        <item name="colorControlNormal">@color/accent_grey</item>
+        <item name="colorControlActivated">@color/accent_grey</item>
         <item name="android:actionModeBackground">@color/accent_grey</item>
     </style>
 
@@ -826,6 +868,12 @@
         <item name="colorAccentLight">@color/accent_light_grey</item>
     </style>
 
+    <!-- grey dialog - black -->
+    <style name="ConversationsTheme.Grey.Black.Dialog" parent="ConversationsTheme.Black.Dialog">
+        <item name="colorAccent">@color/accent_grey</item>
+        <item name="colorAccentLight">@color/accent_light_grey</item>
+    </style>
+
     <!-- grey dialog medium font -->
     <style name="ConversationsTheme.Grey.Dialog.Medium" parent="ConversationsTheme.Grey.Dialog">
         <item name="TextSizeBody2">16sp</item>
@@ -838,6 +886,9 @@
         <item name="TextSizeDisplay2">51sp</item>
     </style>
 
+    <!-- grey dialog medium font - black -->
+    <style name="ConversationsTheme.Grey.Black.Dialog.Medium" parent="ConversationsTheme.Grey.Dark.Dialog.Medium" />
+
     <!-- grey dialog large font -->
     <style name="ConversationsTheme.Grey.Dialog.Large" parent="ConversationsTheme.Grey.Dialog">
         <item name="TextSizeBody2">18sp</item>
@@ -849,6 +900,9 @@
         <item name="TextSizeBody2">18sp</item>
         <item name="TextSizeTitle">56sp</item>
     </style>
+
+    <!-- grey dialog large font - black -->
+    <style name="ConversationsTheme.Grey.Black.Dialog.Large" parent="ConversationsTheme.Grey.Dark.Dialog.Large" />
 
     <!-- grey medium font -->
     <style name="ConversationsTheme.Grey.Medium" parent="ConversationsTheme.Grey">
@@ -880,6 +934,9 @@
         <item name="TextSizeHeadline">20sp</item>
     </style>
 
+    <!-- grey medium font - black -->
+    <style name="ConversationsTheme.Grey.Black.Medium" parent="ConversationsTheme.Grey.Dark.Medium" />
+
     <!-- grey large font -->
     <style name="ConversationsTheme.Grey.Large" parent="ConversationsTheme.Grey">
         <item name="TextSizeCaption">16sp</item>
@@ -910,79 +967,10 @@
         <item name="TextSizeHeadline">22sp</item>
     </style>
 
-    <!-- 5. black -->
-    <!-- black theme -->
-    <style name="ConversationsTheme.Black.Dark" parent="ConversationsTheme.Dark">
-        <item name="colorPrimary">@color/primary_black</item>
-        <item name="colorPrimaryDark">@color/primary_dark_black</item>
-        <item name="colorAccent">@color/accent_black</item>
-        <item name="colorAccentLight">@color/accent_light_black</item>
-        <item name="color_background_primary">@color/primary_black</item>
-        <item name="color_background_secondary">@color/primary_black</item>
-        <item name="color_background_tertiary">@color/primary_black</item>
-        <item name="colorControlNormal">@color/accent_black</item>
-        <item name="colorControlActivated">@color/accent_black</item>
+    <!-- grey large font - black -->
+    <style name="ConversationsTheme.Grey.Black.Large" parent="ConversationsTheme.Grey.Dark.Large" />
 
-        <item name="color_bubble_light">@color/middleblack</item>
-        <item name="color_bubble_dark">@color/darkblack</item>
-        <item name="color_bubble_date">@color/lightgreen</item>
-        <item name="color_bubble_warning">@color/lightred</item>
-
-        <item name="windowActionModeOverlay">true</item>
-        <item name="android:actionModeBackground">@color/accent_black</item>
-    </style>
-
-    <!-- black dialog -->
-    <style name="ConversationsTheme.Black.Dark.Dialog" parent="ConversationsTheme.Dark.Dialog">
-        <item name="colorPrimary">@color/primary_black</item>
-        <item name="colorPrimaryDark">@color/primary_dark_black</item>
-        <item name="colorAccent">@color/accent_black</item>
-        <item name="colorAccentLight">@color/accent_light_black</item>
-    </style>
-
-    <!-- black dialog medium font -->
-    <style name="ConversationsTheme.Black.Dark.Dialog.Medium" parent="ConversationsTheme.Black.Dark.Dialog">
-        <item name="TextSizeBody2">16sp</item>
-        <item name="TextSizeDisplay2">51sp</item>
-    </style>
-
-    <!-- black dialog large font -->
-    <style name="ConversationsTheme.Black.Dark.Dialog.Large" parent="ConversationsTheme.Black.Dark.Dialog">
-        <item name="TextSizeBody2">18sp</item>
-        <item name="TextSizeTitle">56sp</item>
-    </style>
-
-    <!-- black medium font -->
-    <style name="ConversationsTheme.Black.Dark.Medium" parent="ConversationsTheme.Black.Dark">
-        <item name="TextSizeCaption">14sp</item>
-        <item name="TextSizeBody1">16sp</item>
-        <item name="TextSizeBody2">16sp</item>
-        <item name="TextSizeSubhead">18sp</item>
-        <item name="TextSizeTitle">22sp</item>
-        <item name="TextSizeInput">18sp</item>
-        <item name="TextSeparation">6sp</item>
-        <item name="IconSize">20sp</item>
-        <item name="TextSizeInfo">14sp</item>
-        <item name="TextSizeBody">16sp</item>
-        <item name="TextSizeHeadline">20sp</item>
-    </style>
-
-    <!-- black large font -->
-    <style name="ConversationsTheme.Black.Dark.Large" parent="ConversationsTheme.Black.Dark">
-        <item name="TextSizeCaption">16sp</item>
-        <item name="TextSizeBody1">18sp</item>
-        <item name="TextSizeBody2">18sp</item>
-        <item name="TextSizeSubhead">20sp</item>
-        <item name="TextSizeTitle">24sp</item>
-        <item name="TextSizeInput">20sp</item>
-        <item name="TextSeparation">7sp</item>
-        <item name="IconSize">22sp</item>
-        <item name="TextSizeInfo">16sp</item>
-        <item name="TextSizeBody">18sp</item>
-        <item name="TextSizeHeadline">22sp</item>
-    </style>
-
-    <!-- 6. pink -->
+    <!-- 5. pink -->
     <!-- pink theme -->
     <style name="ConversationsTheme.Pink" parent="ConversationsTheme">
         <item name="colorPrimary">@color/primary_pink</item>
@@ -991,15 +979,9 @@
         <item name="colorAccentLight">@color/accent_light_pink</item>
         <item name="colorControlNormal">@color/accent_pink</item>
         <item name="colorControlActivated">@color/accent_pink</item>
-
         <item name="color_bubble_light">@color/lightpink</item>
         <item name="color_bubble_dark">@color/lightpink2</item>
-        <item name="color_bubble_date">@color/lightgreen</item>
-        <item name="color_bubble_warning">@color/lightred</item>
-
         <item name="chat_bg">@drawable/bg_light_pink</item>
-
-        <item name="windowActionModeOverlay">true</item>
         <item name="android:actionModeBackground">@color/accent_pink</item>
     </style>
 
@@ -1011,15 +993,18 @@
         <item name="colorAccentLight">@color/accent_light_pink</item>
         <item name="colorControlNormal">@color/accent_pink</item>
         <item name="colorControlActivated">@color/accent_pink</item>
-
         <item name="color_bubble_light">@color/middlepink</item>
         <item name="color_bubble_dark">@color/darkpink</item>
-        <item name="color_bubble_date">@color/darkgreen</item>
-        <item name="color_bubble_warning">@color/darkred</item>
-
         <item name="chat_bg">@drawable/bg_dark_pink</item>
+        <item name="android:actionModeBackground">@color/accent_pink</item>
+    </style>
 
-        <item name="windowActionModeOverlay">true</item>
+    <!-- pink theme - black -->
+    <style name="ConversationsTheme.Pink.Black" parent="ConversationsTheme.Black">
+        <item name="colorAccent">@color/accent_pink</item>
+        <item name="colorAccentLight">@color/accent_light_pink</item>
+        <item name="colorControlNormal">@color/accent_pink</item>
+        <item name="colorControlActivated">@color/accent_pink</item>
         <item name="android:actionModeBackground">@color/accent_pink</item>
     </style>
 
@@ -1039,6 +1024,12 @@
         <item name="colorAccentLight">@color/accent_light_pink</item>
     </style>
 
+    <!-- pink dialog - black -->
+    <style name="ConversationsTheme.Pink.Black.Dialog" parent="ConversationsTheme.Black.Dialog">
+        <item name="colorAccent">@color/accent_pink</item>
+        <item name="colorAccentLight">@color/accent_light_pink</item>
+    </style>
+
     <!-- pink dialog medium font -->
     <style name="ConversationsTheme.Pink.Dialog.Medium" parent="ConversationsTheme.Pink.Dialog">
         <item name="TextSizeBody2">16sp</item>
@@ -1051,6 +1042,9 @@
         <item name="TextSizeDisplay2">51sp</item>
     </style>
 
+    <!-- pink dialog medium font - black -->
+    <style name="ConversationsTheme.Pink.Black.Dialog.Medium" parent="ConversationsTheme.Pink.Dark.Dialog.Medium" />
+
     <!-- pink dialog large font -->
     <style name="ConversationsTheme.Pink.Dialog.Large" parent="ConversationsTheme.Pink.Dialog">
         <item name="TextSizeBody2">18sp</item>
@@ -1062,6 +1056,9 @@
         <item name="TextSizeBody2">18sp</item>
         <item name="TextSizeTitle">56sp</item>
     </style>
+
+    <!-- pink dialog large font - black -->
+    <style name="ConversationsTheme.Pink.Black.Dialog.Large" parent="ConversationsTheme.Pink.Dark.Dialog.Large" />
 
     <!-- pink medium font -->
     <style name="ConversationsTheme.Pink.Medium" parent="ConversationsTheme.Pink">
@@ -1093,6 +1090,9 @@
         <item name="TextSizeHeadline">20sp</item>
     </style>
 
+    <!-- pink medium font - black -->
+    <style name="ConversationsTheme.Pink.Black.Medium" parent="ConversationsTheme.Pink.Dark.Medium" />
+
     <!-- pink large font -->
     <style name="ConversationsTheme.Pink.Large" parent="ConversationsTheme.Pink">
         <item name="TextSizeCaption">16sp</item>
@@ -1122,5 +1122,8 @@
         <item name="TextSizeBody">18sp</item>
         <item name="TextSizeHeadline">22sp</item>
     </style>
+
+    <!-- pink large font - black -->
+    <style name="ConversationsTheme.Pink.Black.Large" parent="ConversationsTheme.Pink.Dark.Large" />
 
 </resources>

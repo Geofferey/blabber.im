@@ -440,7 +440,7 @@ public abstract class XmppActivity extends ActionBarActivity {
     }
 
     public boolean unicoloredBG() {
-        return getBooleanPreference("unicolored_chatbg", R.bool.use_unicolored_chatbg) || getThemeColor().equalsIgnoreCase("black");
+        return getBooleanPreference("unicolored_chatbg", R.bool.use_unicolored_chatbg) || getPreferences().getString(SettingsActivity.THEME, getString(R.string.theme)).equals("black");
     }
 
     public void setBubbleColor(final View v, final int backgroundColor, final int borderColor) {

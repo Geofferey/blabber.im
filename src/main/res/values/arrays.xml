@@ -4,18 +4,19 @@
         <item>@string/pref_theme_light</item>
         <item>@string/pref_theme_dark</item>
         <item>@string/pref_theme_auto</item>
+        <item>@string/pref_theme_black</item>
     </string-array>
     <string-array name="themes_values">
         <item>light</item>
         <item>dark</item>
         <item>auto</item>
+        <item>black</item>
     </string-array>
     <string-array name="themecolors">
         <item>@string/pref_theme_blabber</item>
         <item>@string/pref_theme_blue</item>
         <item>@string/pref_theme_orange</item>
         <item>@string/pref_theme_grey</item>
-        <item>@string/pref_theme_black</item>
         <item>@string/pref_theme_pink</item>
     </string-array>
     <string-array name="themecolor_values">
@@ -23,7 +24,6 @@
         <item>blue</item>
         <item>orange</item>
         <item>grey</item>
-        <item>black</item>
         <item>pink</item>
     </string-array>
 
