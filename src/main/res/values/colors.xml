@@ -35,12 +35,12 @@
     <color name="accent_light_black">#1aff9843</color>
 
     <!-- pink theme -->
-    <color name="primary_pink">#ffff93e4</color>
-    <color name="primary_dark_pink">#ffe584cd</color>
-    <color name="primary_pink_dark">#ffb2669f</color>
+    <color name="primary_pink">#ffff80bc</color>
+    <color name="primary_dark_pink">#ffe573a9</color>
+    <color name="primary_pink_dark">#ffcc6696</color>
     <color name="primary_dark_pink_dark">#ff7f4972</color>
-    <color name="accent_pink">#ffff93e4</color>
-    <color name="accent_light_pink">#1aff7ade</color>
+    <color name="accent_pink">#ffff80bc</color>
+    <color name="accent_light_pink">#1aff80bc</color>
 
     <!-- bubbles -->
     <!-- date -->
@@ -80,8 +80,8 @@
     <color name="darkblack">#ff252525</color> <!-- dark theme me -->
 
     <!-- pink theme -->
-    <color name="lightpink">#fffff4fc</color> <!-- light theme other -->
-    <color name="lightpink2">#ffffd3f4</color> <!-- light theme me -->
+    <color name="lightpink">#fffff2f8</color> <!-- light theme other -->
+    <color name="lightpink2">#ffffd8ea</color> <!-- light theme me -->
     <color name="middlepink">#ff7f4972</color> <!-- dark theme other -->
     <color name="darkpink">#ff4c2c44</color> <!-- dark theme me -->
 
