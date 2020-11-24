@@ -204,18 +204,6 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         return this.getItemViewType(getItem(position));
     }
 
-    private int getMessageTextColorPrivate() {
-        return StyledAttributes.getColor(activity, R.attr.colorAccent);
-    }
-
-    private int getWarningTextColor(boolean onDark) {
-        if (onDark) {
-            return ContextCompat.getColor(activity, R.color.white70);
-        } else {
-            return ContextCompat.getColor(activity, R.color.black26);
-        }
-    }
-
     private void displayStatus(ViewHolder viewHolder, final Message message, int type, boolean darkBackground) {
         String filesize = null;
         String info = null;
@@ -634,7 +622,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                     } else {
                         body.insert(privateMarkerIndex, " ");
                     }
-                    body.setSpan(new ForegroundColorSpan(getMessageTextColorPrivate()), 0, privateMarkerIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    body.setSpan(new ForegroundColorSpan(ThemeHelper.getMessageTextColorPrivate(activity)), 0, privateMarkerIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     body.setSpan(new StyleSpan(Typeface.BOLD), 0, privateMarkerIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     if (hasMeCommand) {
                         body.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), privateMarkerIndex + 1, privateMarkerIndex + 1 + nick.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -798,7 +786,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         final boolean dataSaverDisabled = activity.xmppConnectionService.isDataSaverDisabled();
         viewHolder.richlinkview.setVisibility(mShowLinksInside ? View.VISIBLE : View.GONE);
         if (mShowLinksInside) {
-            final int color = ThemeHelper.getMessageTextColor(activity, darkBackground, false);
+            final int color = ThemeHelper.messageTextColor(activity);
             final double target = metrics.density * 200;
             final int scaledH;
             if (Math.max(100, 100) * metrics.density <= target) {
@@ -1014,7 +1002,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                 body.append("\n");
                 body.append(messageBody);
             }
-            body.setSpan(new ForegroundColorSpan(getMessageTextColorPrivate()), 0, privateMarker.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            body.setSpan(new ForegroundColorSpan(ThemeHelper.getMessageTextColorPrivate(activity)), 0, privateMarker.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             body.setSpan(new StyleSpan(Typeface.BOLD), 0, privateMarker.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             MyLinkify.addLinks(body, false);
             viewHolder.messageBody.setAutoLinkMask(0);
@@ -1327,7 +1315,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
             } else {
                 setBubbleBackgroundColor(viewHolder.message_box, type, message.isPrivateMessage(), isInValidSession);
                 viewHolder.encryption.setVisibility(View.VISIBLE);
-                viewHolder.encryption.setTextColor(this.getWarningTextColor(darkBackground));
+                viewHolder.encryption.setTextColor(ThemeHelper.getWarningTextColor(activity, darkBackground));
                 if (omemoEncryption && !message.isTrusted()) {
                     viewHolder.encryption.setText(R.string.not_trusted);
                 } else {

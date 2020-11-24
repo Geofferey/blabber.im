@@ -46,6 +46,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.ui.SettingsActivity;
+import eu.siacs.conversations.ui.util.StyledAttributes;
 
 public class ThemeHelper {
 
@@ -509,6 +510,18 @@ public class ThemeHelper {
                 return dark ? getMessageTextColor(context, dark, false) : ContextCompat.getColor(context, R.color.darkpink);
             default:
                 return dark ? getMessageTextColor(context, dark, false) : ContextCompat.getColor(context, R.color.darkblabber);
+        }
+    }
+
+    public static int getMessageTextColorPrivate(Context context) {
+        return StyledAttributes.getColor(context, R.attr.colorAccent);
+    }
+
+    public static int getWarningTextColor(Context context, boolean onDark) {
+        if (onDark) {
+            return ContextCompat.getColor(context, R.color.white70);
+        } else {
+            return ContextCompat.getColor(context, R.color.black26);
         }
     }
 
