@@ -86,7 +86,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             viewHolder.binding.frame.setBackgroundColor(StyledAttributes.getColor(activity, R.attr.color_background_secondary));
         }
 
-        Message message = conversation.getLatestMessage();
+        final Message message = conversation.getLatestMessage();
         final int failedCount = conversation.failedCount();
         final int unreadCount = conversation.unreadCount();
         final boolean isRead = conversation.isRead();
@@ -243,7 +243,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         if (draft != null) {
             timestamp = draft.getTimestamp();
         } else {
-            timestamp = conversation.getLatestMessage().getTimeSent();
+            timestamp = message.getTimeSent();
         }
         final boolean isPinned = conversation.getBooleanAttribute(Conversation.ATTRIBUTE_PINNED_ON_TOP,false);
         if (isPinned) {

@@ -572,7 +572,7 @@ public class Conversation extends AbstractEntity implements Blockable, Comparabl
 
     private long getSortableTime() {
         Draft draft = getDraft();
-        long messageTime = getLatestMessage().getTimeSent();
+        final long messageTime = getLatestMessage().getTimeSent();
         if (draft == null) {
             return messageTime;
         } else {
@@ -775,7 +775,7 @@ public class Conversation extends AbstractEntity implements Blockable, Comparabl
 
     public @Nullable
     Draft getDraft() {
-        long timestamp = getLongAttribute(ATTRIBUTE_NEXT_MESSAGE_TIMESTAMP, 0);
+        final long timestamp = getLongAttribute(ATTRIBUTE_NEXT_MESSAGE_TIMESTAMP, 0);
         if (timestamp > getLatestMessage().getTimeSent()) {
             String message = getAttribute(ATTRIBUTE_NEXT_MESSAGE);
             if (!TextUtils.isEmpty(message) && timestamp != 0) {

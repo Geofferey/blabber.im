@@ -659,7 +659,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             binding.scrollToBottomButton.setEnabled(true);
             binding.scrollToBottomButton.show();
             if (lastMessageUuid == null) {
-                new Thread(lastMessageUuid = conversation.getLatestMessage().getUuid()).start();
+                lastMessageUuid = conversation.getLatestMessage().getUuid();
             }
             if (conversation.getReceivedMessagesCountSinceUuid(lastMessageUuid) > 0) {
                 binding.unreadCountCustomView.setVisibility(View.VISIBLE);

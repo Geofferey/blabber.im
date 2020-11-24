@@ -748,9 +748,10 @@ public class XmppConnectionService extends Service {
                             if (c != null) {
                                 boolean pn = false;
                                 if (c.getMode() == Conversational.MODE_MULTI) {
-                                    if (c.getLatestMessage().isPrivateMessage()) {
+                                    final Message latestMessage = c.getLatestMessage();
+                                    if (latestMessage.isPrivateMessage()) {
                                         pn = true;
-                                        c.setNextCounterpart(c.getLatestMessage().getCounterpart());
+                                        c.setNextCounterpart(latestMessage.getCounterpart());
                                     }
                                 }
                                 directReply(c, body.toString(), dismissNotification, pn);
@@ -4749,7 +4750,7 @@ public class XmppConnectionService extends Service {
             final long clearDate;
             final String reference;
             if (conversation.countMessages() > 0) {
-                Message latestMessage = conversation.getLatestMessage();
+                final Message latestMessage = conversation.getLatestMessage();
                 clearDate = latestMessage.getTimeSent() + 1000;
                 reference = latestMessage.getServerMsgId();
             } else {
