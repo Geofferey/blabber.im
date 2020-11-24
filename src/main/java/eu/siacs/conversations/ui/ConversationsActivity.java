@@ -838,7 +838,7 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setDisplayShowCustomEnabled(false);
             actionBar.setTitle(null);
-            actionBar.setIcon(R.drawable.logo_800);
+            actionBar.setIcon(R.drawable.logo_actionbar);
             actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.header_background)));
             actionBar.setSubtitle(null);
             actionBar.setDisplayHomeAsUpEnabled(false);
