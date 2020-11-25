@@ -62,7 +62,7 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
             if (AudioPlayer.player != null) {
                 AudioPlayer.player.setOnCompletionListener(this);
                 if (AudioPlayer.player.isPlaying() && sensorManager != null) {
-                    sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
+                    sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_FASTEST);
                 }
             }
         }
@@ -195,7 +195,7 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
             acquireProximityWakeLock();
             viewHolder.progress.setEnabled(true);
             viewHolder.playPause.setImageResource(viewHolder.darkBackground ? R.drawable.ic_pause_white_36dp : R.drawable.ic_pause_black_36dp);
-            sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_FASTEST);
             return true;
         } catch (Exception e) {
             messageAdapter.flagScreenOff();
@@ -363,7 +363,7 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
             return;
         }
         final int streamType;
-        if (event.values[0] < 5f && event.values[0] != proximitySensor.getMaximumRange()) {
+        if (event.values[0] < proximitySensor.getMaximumRange()) {
             streamType = AudioManager.STREAM_VOICE_CALL;
         } else {
             streamType = AudioManager.STREAM_MUSIC;
