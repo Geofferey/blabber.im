@@ -34,7 +34,7 @@ public class UpdateHelper {
     private static boolean dataMoved = false;
 
     private static final File oldMainDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pix-Art Messenger/");
-    private static final File newMainDirectory = new File(Environment.getExternalStorageDirectory() + "/blabber-im/");
+    private static final File newMainDirectory = new File(Environment.getExternalStorageDirectory() + "/blabber.im/");
     private static final File oldPicturesDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pix-Art Messenger/Media/Pix-Art Messenger Images/");
     private static final File oldFilesDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pix-Art Messenger/Media/Pix-Art Messenger Files/");
     private static final File oldAudiosDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pix-Art Messenger/Media/Pix-Art Messenger Audios/");
