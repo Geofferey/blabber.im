@@ -1,5 +1,12 @@
 ### Changelog
 
+#### Version 3.0.2
+* play ogg files in audio player
+* small UI improvements
+* improve startup performance
+* rework black theme
+* bug fixes
+
 #### Version 3.0.1
 #### Version 3.0.0
 * Pix-Art Messenger is now blabber.im
