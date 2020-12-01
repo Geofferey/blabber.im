@@ -1077,5 +1077,13 @@
     <string name="move_data">Move  data</string>
     <string name="error_moving_data">An error occurred while moving your old data. Please move them manually.</string>
     <string name="data_successfully_moved">Your data has been moved successfully.</string>
+    <string name="invite_to_app">Invite to Conversations</string>
+    <string name="unable_to_parse_invite">Unable to parse invite</string>
+    <string name="server_does_not_support_easy_onboarding_invites">Server does not support generating invites</string>
     <string name="your_server">Your provider</string>
+    <string name="tap_share_button_send_invite">Tap the share button to send your contact an invitation to %1$s.</string>
+    <string name="invite">Invite</string>
+    <string name="if_contact_is_nearby_use_qr">If your contact is nearby, they can also scan the code below to accept your invitation.</string>
+    <string name="easy_invite_share_text">Join %1$s and chat with me: %2$s</string>
+    <string name="share_invite_with">Share invite with…</string>
 </resources>

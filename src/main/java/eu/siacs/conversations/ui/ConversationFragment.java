@@ -2355,6 +2355,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         this.binding.textinput.setKeyboardListener(this);
         messageListAdapter.updatePreferences();
         refresh(false);
+        activity.invalidateOptionsMenu();
         this.conversation.messagesLoaded.set(true);
         hasWriteAccessInMUC();
         Log.d(Config.LOGTAG, "scrolledToBottomAndNoPending=" + Boolean.toString(scrolledToBottomAndNoPending));
@@ -2693,7 +2694,6 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 }
                 updateSendButton();
                 updateEditablity();
-                activity.invalidateOptionsMenu();
             }
         }
     }

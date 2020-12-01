@@ -32,6 +32,7 @@ package eu.siacs.conversations.ui;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,13 +46,17 @@ import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import com.google.common.collect.Collections2;
+
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.databinding.FragmentConversationsOverviewBinding;
+import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.entities.Conversation;
 import eu.siacs.conversations.ui.adapter.ConversationAdapter;
 import eu.siacs.conversations.ui.interfaces.OnConversationSelected;
@@ -59,6 +64,7 @@ import eu.siacs.conversations.ui.util.PendingActionHelper;
 import eu.siacs.conversations.ui.util.PendingItem;
 import eu.siacs.conversations.ui.util.ScrollState;
 import eu.siacs.conversations.utils.MenuDoubleTabUtil;
+import eu.siacs.conversations.utils.EasyOnboardingInvite;
 
 public class ConversationsOverviewFragment extends XmppFragment {
 
@@ -179,6 +185,8 @@ public class ConversationsOverviewFragment extends XmppFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
         menuInflater.inflate(R.menu.fragment_conversations_overview, menu);
+		final MenuItem easyOnboardInvite = menu.findItem(R.id.action_easy_invite);
+		easyOnboardInvite.setVisible(EasyOnboardingInvite.anyHasSupport(activity == null ? null : activity.xmppConnectionService));
     }
 
     @Override
@@ -234,8 +242,31 @@ public class ConversationsOverviewFragment extends XmppFragment {
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 activity.overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
                 return true;
+			case R.id.action_easy_invite:
+				selectAccountToStartEasyInvite();
+				return true;
         }
         return super.onOptionsItemSelected(item);
+	}
+
+	private void selectAccountToStartEasyInvite() {
+		final List<Account> accounts = EasyOnboardingInvite.getSupportingAccounts(activity.xmppConnectionService);
+		if (accounts.size() == 1) {
+			openEasyInviteScreen(accounts.get(0));
+		} else {
+			final AtomicReference<Account> selectedAccount = new AtomicReference<>(accounts.get(0));
+			final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
+			alertDialogBuilder.setTitle(R.string.choose_account);
+			final String[] asStrings = Collections2.transform(accounts, a -> a.getJid().asBareJid().toEscapedString()).toArray(new String[0]);
+			alertDialogBuilder.setSingleChoiceItems(asStrings, 0, (dialog, which) -> selectedAccount.set(accounts.get(which)));
+			alertDialogBuilder.setNegativeButton(R.string.cancel, null);
+			alertDialogBuilder.setPositiveButton(R.string.ok, (dialog, which) -> openEasyInviteScreen(selectedAccount.get()));
+			alertDialogBuilder.create().show();
+		}
+	}
+
+	private void openEasyInviteScreen(final Account account) {
+		EasyOnboardingInviteActivity.launch(account, activity);
     }
 
     @Override
