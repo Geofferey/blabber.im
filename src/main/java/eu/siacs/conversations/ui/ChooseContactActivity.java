@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import com.google.common.base.Strings;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -347,7 +349,7 @@ public class ChooseContactActivity extends AbstractSearchableListItemActivity im
     private void handleActivityResult(ActivityResult activityResult) {
         if (activityResult.resultCode == RESULT_OK && activityResult.requestCode == ScanActivity.REQUEST_SCAN_QR_CODE) {
             String result = activityResult.data.getStringExtra(ScanActivity.INTENT_EXTRA_RESULT);
-            XmppUri uri = new XmppUri(result == null ? "" : result);
+            XmppUri uri = new XmppUri(Strings.nullToEmpty(result));
             if (uri.isValidJid()) {
                 showEnterJidDialog(uri);
             }
