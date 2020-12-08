@@ -30,9 +30,11 @@ import eu.siacs.conversations.xmpp.Jid;
 public class MagicCreateActivity extends XmppActivity implements TextWatcher, AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
 
     private boolean useOwnProvider = false;
+    private boolean registerFromUri = false;
     public static final String EXTRA_DOMAIN = "domain";
     public static final String EXTRA_PRE_AUTH = "pre_auth";
     public static final String EXTRA_USERNAME = "username";
+    public static final String EXTRA_REGISTER = "register";
 
     private ActivityMagicCreateBinding binding;
     private String domain;
@@ -61,9 +63,17 @@ public class MagicCreateActivity extends XmppActivity implements TextWatcher, Ad
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         final Intent data = getIntent();
-        this.domain = data == null ? null : data.getStringExtra(EXTRA_DOMAIN);
-        this.preAuth = data == null ? null : data.getStringExtra(EXTRA_PRE_AUTH);
-        this.username = data == null ? null : data.getStringExtra(EXTRA_USERNAME);
+        if (data != null) {
+            this.domain = data.getStringExtra(EXTRA_DOMAIN);
+            this.preAuth = data.getStringExtra(EXTRA_PRE_AUTH);
+            this.username = data.getStringExtra(EXTRA_USERNAME);
+            this.registerFromUri = data.getBooleanExtra(EXTRA_REGISTER, false);
+        } else {
+            this.domain = null;
+            this.preAuth = null;
+            this.username = null;
+            this.registerFromUri = false;
+        }
         if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
@@ -73,10 +83,17 @@ public class MagicCreateActivity extends XmppActivity implements TextWatcher, Ad
         Collections.sort(domains, String::compareToIgnoreCase);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_selectable_list_item, domains);
         int defaultServer = adapter.getPosition("blabber.im");
-        if (this.preAuth != null && domain != null) {
+        if (registerFromUri && !useOwnProvider && (this.preAuth != null || domain != null)) {
             binding.server.setEnabled(false);
+            binding.server.setVisibility(View.GONE);
             binding.useOwn.setEnabled(false);
             binding.useOwn.setChecked(true);
+            binding.useOwn.setVisibility(View.GONE);
+            binding.servertitle.setText(R.string.your_server);
+            binding.yourserver.setVisibility(View.VISIBLE);
+            binding.yourserver.setText(domain);
+        } else {
+            binding.yourserver.setVisibility(View.GONE);
         }
         binding.useOwn.setOnCheckedChangeListener(this);
         binding.server.setAdapter(adapter);
@@ -133,6 +150,7 @@ public class MagicCreateActivity extends XmppActivity implements TextWatcher, Ad
                     intent.putExtra("init", true);
                     intent.putExtra("existing", false);
                     intent.putExtra("useownprovider", useOwnProvider);
+                    intent.putExtra("register", registerFromUri);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setTitle(getString(R.string.create_account));
@@ -202,12 +220,10 @@ public class MagicCreateActivity extends XmppActivity implements TextWatcher, Ad
     }
 
     private void updateFullJidInformation(String username) {
-        if (this.preAuth == null) {
-            if (useOwnProvider) {
-                this.domain = updateDomain();
-            } else {
-                this.domain = binding.server.getSelectedItem().toString();
-            }
+        if (useOwnProvider && !registerFromUri) {
+            this.domain = updateDomain();
+        } else if (!registerFromUri){
+            this.domain = binding.server.getSelectedItem().toString();
         }
         if (username.trim().isEmpty()) {
             binding.fullJid.setVisibility(View.INVISIBLE);
@@ -240,11 +256,13 @@ public class MagicCreateActivity extends XmppActivity implements TextWatcher, Ad
             binding.server.setEnabled(false);
             binding.fullJid.setVisibility(View.GONE);
             useOwnProvider = true;
+
         } else {
             binding.server.setEnabled(true);
             binding.fullJid.setVisibility(View.VISIBLE);
             useOwnProvider = false;
         }
+        registerFromUri = false;
         updateFullJidInformation(binding.username.getText().toString());
     }
 }

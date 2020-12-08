@@ -116,7 +116,7 @@ public class UriHandlerActivity extends AppCompatActivity {
                     ToastCompat.makeText(this, R.string.account_already_exists, Toast.LENGTH_LONG).show();
                     return;
                 }
-                intent = SignupUtils.getTokenRegistrationIntent(this, jid, preAuth);
+                intent = SignupUtils.getTokenRegistrationIntent(this, jid, preAuth, true);
                 startActivity(intent);
                 return;
             }

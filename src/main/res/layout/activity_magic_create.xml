@@ -52,8 +52,9 @@
                         android:id="@+id/title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="@string/pick_your_username"
-                        android:textAppearance="@style/TextAppearance.Conversations.Title" />
+                        android:textAppearance="@style/TextAppearance.Conversations.Subhead" />
 
                     <EditText
                         android:id="@+id/username"
@@ -66,10 +67,12 @@
                         android:textColor="?attr/edit_text_color" />
 
                     <TextView
+                        android:id="@+id/servertitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="@string/choose_your_server"
-                        android:textAppearance="@style/TextAppearance.Conversations.Title" />
+                        android:textAppearance="@style/TextAppearance.Conversations.Subhead" />
 
                     <Spinner
                         android:id="@+id/server"
@@ -79,6 +82,18 @@
                         android:hint="@string/server_hint"
                         android:prompt="@string/server_hint"
                         android:spinnerMode="dialog" />
+
+                    <EditText
+                        android:id="@+id/yourserver"
+                        style="@style/Widget.Conversations.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/your_server"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="?attr/edit_text_color"
+                        android:enabled="false"
+                        android:visibility="gone"/>
 
                     <CheckBox
                         android:id="@+id/use_own"

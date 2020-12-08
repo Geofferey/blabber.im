@@ -1077,4 +1077,5 @@
     <string name="move_data">Move  data</string>
     <string name="error_moving_data">An error occurred while moving your old data. Please move them manually.</string>
     <string name="data_successfully_moved">Your data has been moved successfully.</string>
+    <string name="your_server">Your provider</string>
 </resources>

@@ -107,6 +107,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
     private boolean mUsernameMode = Config.DOMAIN_LOCK != null;
     private boolean mShowOptions = false;
     private boolean useOwnProvider = false;
+    private boolean register = false;
     private Account mAccount;
     private String messageFingerprint;
 
@@ -361,7 +362,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
             } else {
                 preset = jid.getDomain();
             }
-            final Intent intent = SignupUtils.getTokenRegistrationIntent(this, preset, mAccount.getKey(Account.PRE_AUTH_REGISTRATION_TOKEN));
+            final Intent intent = SignupUtils.getTokenRegistrationIntent(this, preset, mAccount.getKey(Account.PRE_AUTH_REGISTRATION_TOKEN), register);
             StartConversationActivity.addInviteUri(intent, getIntent());
             startActivity(intent);
             return;
@@ -780,6 +781,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
             boolean init = intent.getBooleanExtra("init", false);
             boolean existing = intent.getBooleanExtra("existing", false);
             useOwnProvider = intent.getBooleanExtra("useownprovider", false);
+            register = intent.getBooleanExtra("register", false);
             boolean openedFromNotification = intent.getBooleanExtra(EXTRA_OPENED_FROM_NOTIFICATION, false);
             Log.d(Config.LOGTAG, "extras " + intent.getExtras());
             this.mForceRegister = intent.hasExtra(EXTRA_FORCE_REGISTER) ? intent.getBooleanExtra(EXTRA_FORCE_REGISTER, false) : null;

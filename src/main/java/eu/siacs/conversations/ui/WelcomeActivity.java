@@ -67,7 +67,7 @@ public class WelcomeActivity extends XmppActivity implements XmppConnectionServi
         final Jid jid = xmppUri.getJid();
         final Intent intent;
         if (xmppUri.isAction(XmppUri.ACTION_REGISTER)) {
-            intent = SignupUtils.getTokenRegistrationIntent(this, jid, preAuth);
+            intent = SignupUtils.getTokenRegistrationIntent(this, jid, preAuth, true);
         } else if (xmppUri.isAction(XmppUri.ACTION_ROSTER) && "y".equals(xmppUri.getParameter(XmppUri.PARAMETER_IBR))) {
             intent = SignupUtils.getTokenRegistrationIntent(this, jid.getDomain(), preAuth);
             intent.putExtra(StartConversationActivity.EXTRA_INVITE_URI, xmppUri.toString());
