@@ -78,7 +78,6 @@ import eu.siacs.conversations.ui.util.MyLinkify;
 import eu.siacs.conversations.ui.util.StyledAttributes;
 import eu.siacs.conversations.ui.util.ViewUtil;
 import eu.siacs.conversations.ui.widget.ClickableMovementMethod;
-import eu.siacs.conversations.ui.widget.CopyTextView;
 import eu.siacs.conversations.ui.widget.RichLinkView;
 import eu.siacs.conversations.utils.CryptoHelper;
 import eu.siacs.conversations.utils.EmojiWrapper;
@@ -105,7 +104,7 @@ import static eu.siacs.conversations.ui.util.MyLinkify.removeTrackingParameter;
 import static eu.siacs.conversations.ui.util.MyLinkify.removeTrailingBracket;
 import static eu.siacs.conversations.ui.util.MyLinkify.replaceYoutube;
 
-public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextView.CopyHandler {
+public class MessageAdapter extends ArrayAdapter<Message> {
 
     public static final String DATE_SEPARATOR_BODY = "DATE_SEPARATOR";
     private static final int SENT = 0;
@@ -1113,9 +1112,6 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
                 default:
                     throw new AssertionError("Unknown view type");
             }
-            if (viewHolder.messageBody != null) {
-                viewHolder.messageBody.setCopyHandler(this);
-            }
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
@@ -1351,38 +1347,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
     private void promptOpenKeychainInstall(View view) {
         activity.showInstallPgpDialog();
     }
-
-    private String transformText(CharSequence text, int start, int end, boolean forCopy) {
-        SpannableStringBuilder builder = new SpannableStringBuilder(text);
-        Object copySpan = new Object();
-        builder.setSpan(copySpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        DividerSpan[] dividerSpans = builder.getSpans(0, builder.length(), DividerSpan.class);
-        for (DividerSpan dividerSpan : dividerSpans) {
-            builder.replace(builder.getSpanStart(dividerSpan), builder.getSpanEnd(dividerSpan),
-                    dividerSpan.isLarge() ? "\n\n" : "\n");
-        }
-        start = builder.getSpanStart(copySpan);
-        end = builder.getSpanEnd(copySpan);
-        if (start == -1 || end == -1) return "";
-        builder = new SpannableStringBuilder(builder, start, end);
-        if (forCopy) {
-            QuoteSpan[] quoteSpans = builder.getSpans(0, builder.length(), QuoteSpan.class);
-            for (QuoteSpan quoteSpan : quoteSpans) {
-                builder.insert(builder.getSpanStart(quoteSpan), "> ");
-            }
-        }
-        return builder.toString();
-    }
-
-    @Override
-    public String transformTextForCopy(CharSequence text, int start, int end) {
-        if (text instanceof Spanned) {
-            return transformText(text, start, end, true);
-        } else {
-            return text.toString().substring(start, end);
-        }
-    }
-
+    
     public FileBackend getFileBackend() {
         return activity.xmppConnectionService.getFileBackend();
     }
@@ -1459,64 +1424,13 @@ public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextVie
         protected ImageView indicator;
         protected ImageView indicatorReceived;
         protected TextView time;
-        protected CopyTextView messageBody;
+        protected TextView messageBody;
         protected TextView user;
         protected TextView username;
         protected ImageView contact_picture;
         protected TextView status_message;
         protected TextView encryption;
         protected ProgressBar progressBar;
-    }
-
-    private class MessageBodyActionModeCallback implements ActionMode.Callback {
-
-        private final TextView messageBody;
-        private final TextView messageUser;
-        private final boolean multiuser;
-
-        public MessageBodyActionModeCallback(TextView messgebody, TextView user, final boolean multi) {
-            this.messageBody = messgebody;
-            this.messageUser = user;
-            this.multiuser = multi;
-        }
-
-        @Override
-        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            if (onQuoteListener != null) {
-                int quoteResId = activity.getThemeResource(R.attr.icon_quote, R.drawable.ic_action_reply);
-                // 3rd item is placed after "copy" item
-                menu.add(0, android.R.id.button1, 3, R.string.quote).setIcon(quoteResId)
-                        .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-            }
-            return false;
-        }
-
-        @Override
-        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            return false;
-        }
-
-        @Override
-        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            if (item.getItemId() == android.R.id.button1) {
-                int start = messageBody.getSelectionStart();
-                int end = messageBody.getSelectionEnd();
-                if (end > start) {
-                    String text = transformText(messageBody.getText(), start, end, false);
-                    String user = multiuser ? messageUser.getText().toString() : null;
-                    if (onQuoteListener != null) {
-                        onQuoteListener.onQuote(text, user);
-                    }
-                    mode.finish();
-                }
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public void onDestroyActionMode(ActionMode mode) {
-        }
     }
 
     public void setBubbleBackgroundColor(final View viewHolder, final int type,
