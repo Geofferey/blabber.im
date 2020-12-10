@@ -22,7 +22,6 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -42,9 +41,9 @@ import eu.siacs.conversations.entities.MucOptions;
 import eu.siacs.conversations.entities.RawBlockable;
 import eu.siacs.conversations.entities.Room;
 import eu.siacs.conversations.utils.UIHelper;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.OnAdvancedStreamFeaturesLoaded;
 import eu.siacs.conversations.xmpp.XmppConnection;
-import eu.siacs.conversations.xmpp.Jid;
 
 import static eu.siacs.conversations.ui.SettingsActivity.PREFER_XMPP_AVATAR;
 
@@ -62,7 +61,7 @@ public class AvatarService implements OnAdvancedStreamFeaturesLoaded {
     private static final String PREFIX_GENERIC = "generic";
     private static final String CHANNEL_SYMBOL = "#";
 
-    final private ArrayList<Integer> sizes = new ArrayList<>();
+    final private Set<Integer> sizes = new HashSet<>();
     final private HashMap<String, Set<String>> conversationDependentKeys = new HashMap<>();
 
     protected XmppConnectionService mXmppConnectionService = null;
@@ -227,9 +226,8 @@ public class AvatarService implements OnAdvancedStreamFeaturesLoaded {
 
     public void clear(Contact contact) {
         synchronized (this.sizes) {
-            for (Integer size : sizes) {
-                this.mXmppConnectionService.getBitmapCache().remove(
-                        key(contact, size));
+            for (final Integer size : sizes) {
+                this.mXmppConnectionService.getBitmapCache().remove(key(contact, size));
             }
         }
         for (Conversation conversation : mXmppConnectionService.findAllConferencesWith(contact)) {
@@ -243,9 +241,7 @@ public class AvatarService implements OnAdvancedStreamFeaturesLoaded {
 
     private String key(Contact contact, int size) {
         synchronized (this.sizes) {
-            if (!this.sizes.contains(size)) {
-                this.sizes.add(size);
-            }
+            this.sizes.add(size);
         }
         return PREFIX_CONTACT +
                 '\0' +
@@ -258,9 +254,7 @@ public class AvatarService implements OnAdvancedStreamFeaturesLoaded {
 
     private String key(MucOptions.User user, int size) {
         synchronized (this.sizes) {
-            if (!this.sizes.contains(size)) {
-                this.sizes.add(size);
-            }
+            this.sizes.add(size);
         }
         return PREFIX_CONTACT +
                 '\0' +
@@ -419,12 +413,9 @@ public class AvatarService implements OnAdvancedStreamFeaturesLoaded {
 
     private String key(final MucOptions options, int size) {
         synchronized (this.sizes) {
-            if (!this.sizes.contains(size)) {
-                this.sizes.add(size);
-            }
+            this.sizes.add(size);
         }
-        return PREFIX_CONVERSATION + "_" + options.getConversation().getUuid()
-                + "_" + String.valueOf(size);
+        return PREFIX_CONVERSATION + "_" + options.getConversation().getUuid() + "_" + size;
     }
 
     private String key(List<MucOptions.User> users, int size) {
@@ -527,9 +518,7 @@ public class AvatarService implements OnAdvancedStreamFeaturesLoaded {
 
     private String key(Account account, int size) {
         synchronized (this.sizes) {
-            if (!this.sizes.contains(size)) {
-                this.sizes.add(size);
-            }
+            this.sizes.add(size);
         }
         return PREFIX_ACCOUNT + "_" + account.getUuid() + "_"
                 + String.valueOf(size);
@@ -564,11 +553,9 @@ public class AvatarService implements OnAdvancedStreamFeaturesLoaded {
 
     private String key(String name, int size) {
         synchronized (this.sizes) {
-            if (!this.sizes.contains(size)) {
-                this.sizes.add(size);
-            }
+            this.sizes.add(size);
         }
-        return PREFIX_GENERIC + "_" + name + "_" + String.valueOf(size);
+        return PREFIX_GENERIC + "_" + name + "_" + size;
     }
 
     private static boolean drawTile(Canvas canvas, String letter, int tileColor, int left, int top, int right, int bottom) {
@@ -689,6 +676,7 @@ public class AvatarService implements OnAdvancedStreamFeaturesLoaded {
     public interface Avatarable {
         @ColorInt
         int getAvatarBackgroundColor();
-		String getAvatarName();
+
+        String getAvatarName();
     }
 }

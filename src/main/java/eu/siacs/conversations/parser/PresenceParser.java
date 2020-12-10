@@ -21,10 +21,10 @@ import eu.siacs.conversations.utils.Namespace;
 import eu.siacs.conversations.utils.XmppUri;
 import eu.siacs.conversations.xml.Element;
 import eu.siacs.conversations.xmpp.InvalidJid;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.OnPresencePacketReceived;
 import eu.siacs.conversations.xmpp.pep.Avatar;
 import eu.siacs.conversations.xmpp.stanzas.PresencePacket;
-import eu.siacs.conversations.xmpp.Jid;
 
 public class PresenceParser extends AbstractParser implements
         OnPresencePacketReceived {
@@ -116,12 +116,11 @@ public class PresenceParser extends AbstractParser implements
                                     mXmppConnectionService.getAvatarService().clear(user);
                                 }
                                 if (user.getRealJid() != null) {
-                                    Contact c = conversation.getAccount().getRoster().getContact(user.getRealJid());
-                                    if (c.setAvatar(avatar)) {
-                                        mXmppConnectionService.syncRoster(conversation.getAccount());
-                                        mXmppConnectionService.getAvatarService().clear(c);
-                                        mXmppConnectionService.updateRosterUi();
-                                    }
+                                    final Contact c = conversation.getAccount().getRoster().getContact(user.getRealJid());
+                                    c.setAvatar(avatar);
+                                    mXmppConnectionService.syncRoster(conversation.getAccount());
+                                    mXmppConnectionService.getAvatarService().clear(c);
+                                    mXmppConnectionService.updateRosterUi();
                                 }
                             } else if (mXmppConnectionService.isDataSaverDisabled()) {
                                 mXmppConnectionService.fetchAvatar(mucOptions.getAccount(), avatar);
@@ -266,7 +265,8 @@ public class PresenceParser extends AbstractParser implements
                         mXmppConnectionService.getAvatarService().clear(account);
                         mXmppConnectionService.updateConversationUi();
                         mXmppConnectionService.updateAccountUi();
-                    } else if (contact.setAvatar(avatar)) {
+                    } else {
+                        contact.setAvatar(avatar);
                         mXmppConnectionService.syncRoster(account);
                         mXmppConnectionService.getAvatarService().clear(contact);
                         mXmppConnectionService.updateConversationUi();
@@ -334,7 +334,7 @@ public class PresenceParser extends AbstractParser implements
             mXmppConnectionService.onContactStatusChanged.onContactStatusChanged(contact, false);
         } else if (type.equals("subscribe")) {
             if (contact.setPresenceName(packet.findChildContent("nick", Namespace.NICK))) {
-				mXmppConnectionService.syncRoster(account);
+                mXmppConnectionService.syncRoster(account);
                 mXmppConnectionService.getAvatarService().clear(contact);
             }
             if (contact.getOption(Contact.Options.PREEMPTIVE_GRANT)) {

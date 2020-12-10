@@ -951,7 +951,7 @@ public class FileBackend {
             return null;
         }
         Avatar avatar = new Avatar();
-        File file = new File(getAvatarPath(hash));
+        final File file = getAvatarFile(hash);
         FileInputStream is = null;
         try {
             avatar.size = file.length();
@@ -986,14 +986,14 @@ public class FileBackend {
     }
 
     public boolean isAvatarCached(Avatar avatar) {
-        File file = new File(getAvatarPath(avatar.getFilename()));
+        final File file = getAvatarFile(avatar.getFilename());
         return file.exists();
     }
 
     public boolean save(final Avatar avatar) {
         File file;
         if (isAvatarCached(avatar)) {
-            file = new File(getAvatarPath(avatar.getFilename()));
+            file = getAvatarFile(avatar.getFilename());
             avatar.size = file.length();
         } else {
             file = new File(mXmppConnectionService.getCacheDir().getAbsolutePath() + File.separator + UUID.randomUUID().toString());
@@ -1015,12 +1015,12 @@ public class FileBackend {
                 mDigestOutputStream.close();
                 String sha1sum = CryptoHelper.bytesToHex(digest.digest());
                 if (sha1sum.equals(avatar.sha1sum)) {
-                    File outputFile = new File(getAvatarPath(avatar.getFilename()));
+                    final File outputFile = getAvatarFile(avatar.getFilename());
                     if (outputFile.getParentFile().mkdirs()) {
                         Log.d(Config.LOGTAG, "created avatar directory");
                     }
-                    String filename = getAvatarPath(avatar.getFilename());
-                    if (!file.renameTo(new File(filename))) {
+                    final File avatarFile = getAvatarFile(avatar.getFilename());
+                    if (!file.renameTo(avatarFile)) {
                         Log.d(Config.LOGTAG, "unable to rename " + file.getAbsolutePath() + " to " + outputFile);
                         return false;
                     }
@@ -1045,12 +1045,34 @@ public class FileBackend {
         return true;
     }
 
-    private String getAvatarPath(String avatar) {
-        return mXmppConnectionService.getFilesDir().getAbsolutePath() + "/avatars/" + avatar;
+    public void deleteHistoricAvatarPath() {
+        delete(getHistoricAvatarPath());
+    }
+
+    private void delete(final File file) {
+        if (file.isDirectory()) {
+            final File[] files = file.listFiles();
+            if (files != null) {
+                for (final File f : files) {
+                    delete(f);
+                }
+            }
+        }
+        if (file.delete()) {
+            Log.d(Config.LOGTAG,"deleted "+file.getAbsolutePath());
+        }
+    }
+
+    private File getHistoricAvatarPath() {
+        return new File(mXmppConnectionService.getFilesDir(), "/avatars/");
+    }
+
+    private File getAvatarFile(String avatar) {
+        return new File(mXmppConnectionService.getCacheDir(), "/avatars/" + avatar);
     }
 
     public Uri getAvatarUri(String avatar) {
-        return Uri.parse("file:" + getAvatarPath(avatar));
+        return Uri.fromFile(getAvatarFile(avatar));
     }
 
     public Bitmap cropCenterSquare(Uri image, int size) {

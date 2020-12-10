@@ -21,19 +21,20 @@ import java.util.Locale;
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.android.AbstractPhoneContact;
+import eu.siacs.conversations.android.JabberIdContact;
 import eu.siacs.conversations.services.QuickConversationsService;
 import eu.siacs.conversations.utils.JidHelper;
 import eu.siacs.conversations.utils.UIHelper;
 import eu.siacs.conversations.xml.Element;
-import eu.siacs.conversations.xmpp.pep.Avatar;
 import eu.siacs.conversations.xmpp.Jid;
+import eu.siacs.conversations.xmpp.pep.Avatar;
 
 public class Contact implements ListItem, Blockable {
     public static final String TABLENAME = "contacts";
 
     public static final String SYSTEMNAME = "systemname";
     public static final String SERVERNAME = "servername";
-	public static final String PRESENCE_NAME = "presence_name";
+    public static final String PRESENCE_NAME = "presence_name";
     public static final String JID = "jid";
     public static final String OPTIONS = "options";
     public static final String SYSTEMACCOUNT = "systemaccount";
@@ -63,14 +64,14 @@ public class Contact implements ListItem, Blockable {
     private long mLastseen = 0;
     private String mLastPresence = null;
 
-	public Contact(final String account, final String systemName, final String serverName, final String presenceName,
+    public Contact(final String account, final String systemName, final String serverName, final String presenceName,
                    final Jid jid, final int subscription, final String photoUri,
                    final Uri systemAccount, final String keys, final String avatar, final long lastseen,
                    final String presence, final String groups) {
         this.accountUuid = account;
         this.systemName = systemName;
         this.serverName = serverName;
-		this.presenceName = presenceName;
+        this.presenceName = presenceName;
         this.jid = jid;
         this.subscription = subscription;
         this.photoUri = photoUri;
@@ -118,7 +119,7 @@ public class Contact implements ListItem, Blockable {
         return new Contact(cursor.getString(cursor.getColumnIndex(ACCOUNT)),
                 cursor.getString(cursor.getColumnIndex(SYSTEMNAME)),
                 cursor.getString(cursor.getColumnIndex(SERVERNAME)),
-				cursor.getString(cursor.getColumnIndex(PRESENCE_NAME)),
+                cursor.getString(cursor.getColumnIndex(PRESENCE_NAME)),
                 jid,
                 cursor.getInt(cursor.getColumnIndex(OPTIONS)),
                 cursor.getString(cursor.getColumnIndex(PHOTOURI)),
@@ -145,21 +146,21 @@ public class Contact implements ListItem, Blockable {
             return jid.getDomain().toEscapedString();
         }
     }
-    
+
     @Override
     public int getOffline() {
         return 0;
     }
 
-	public String getPublicDisplayName() {
-		if (!TextUtils.isEmpty(this.presenceName)) {
-			return this.presenceName;
-		} else if (jid.getLocal() != null) {
-			return JidHelper.localPartOrFallback(jid);
-		} else {
-			return jid.getDomain().toEscapedString();
-		}
-	}
+    public String getPublicDisplayName() {
+        if (!TextUtils.isEmpty(this.presenceName)) {
+            return this.presenceName;
+        } else if (jid.getLocal() != null) {
+            return JidHelper.localPartOrFallback(jid);
+        } else {
+            return jid.getDomain().toEscapedString();
+        }
+    }
 
     public String getProfilePhoto() {
         return this.photoUri;
@@ -219,7 +220,7 @@ public class Contact implements ListItem, Blockable {
             values.put(ACCOUNT, accountUuid);
             values.put(SYSTEMNAME, systemName);
             values.put(SERVERNAME, serverName);
-			values.put(PRESENCE_NAME, presenceName);
+            values.put(PRESENCE_NAME, presenceName);
             values.put(JID, jid.toString());
             values.put(OPTIONS, subscription);
             values.put(SYSTEMACCOUNT, systemAccount != null ? systemAccount.toString() : null);
@@ -458,7 +459,7 @@ public class Contact implements ListItem, Blockable {
 
     public Element asElement() {
         final Element item = new Element("item");
-		item.setAttribute("jid", this.jid);
+        item.setAttribute("jid", this.jid);
         if (this.serverName != null) {
             item.setAttribute("name", this.serverName);
         }
@@ -478,20 +479,18 @@ public class Contact implements ListItem, Blockable {
         return getJid().getDomain().toEscapedString();
     }
 
-    public boolean setAvatar(Avatar avatar) {
-        return setAvatar(avatar, false);
+    public void setAvatar(Avatar avatar) {
+        setAvatar(avatar, false);
     }
 
-    public boolean setAvatar(Avatar avatar, boolean previouslyOmittedPepFetch) {
+    public void setAvatar(Avatar avatar, boolean previouslyOmittedPepFetch) {
         if (this.avatar != null && this.avatar.equals(avatar)) {
-            return false;
-        } else {
-            if (!previouslyOmittedPepFetch && this.avatar != null && this.avatar.origin == Avatar.Origin.PEP && avatar.origin == Avatar.Origin.VCARD) {
-                return false;
-            }
-            this.avatar = avatar;
-            return true;
+            return;
         }
+        if (!previouslyOmittedPepFetch && this.avatar != null && this.avatar.origin == Avatar.Origin.PEP && avatar.origin == Avatar.Origin.VCARD) {
+            return;
+        }
+        this.avatar = avatar;
     }
 
     public String getAvatarFilename() {
@@ -618,21 +617,25 @@ public class Contact implements ListItem, Blockable {
     }
 
     public static int getOption(Class<? extends AbstractPhoneContact> clazz) {
-        return Options.SYNCED_VIA_OTHER;
+        if (clazz == JabberIdContact.class) {
+            return Options.SYNCED_VIA_ADDRESSBOOK;
+        } else {
+            return Options.SYNCED_VIA_OTHER;
+        }
     }
 
     @Override
     public int getAvatarBackgroundColor() {
         return UIHelper.getColorForName(jid != null ? jid.asBareJid().toString() : getDisplayName());
-	}
+    }
 
-	@Override
-	public String getAvatarName() {
-		return getDisplayName();
-	}
+    @Override
+    public String getAvatarName() {
+        return getDisplayName();
+    }
 
-	public boolean hasAvatarOrPresenceName() {
-		return (avatar != null && avatar.getFilename() != null) || presenceName != null;
+    public boolean hasAvatarOrPresenceName() {
+        return (avatar != null && avatar.getFilename() != null) || presenceName != null;
     }
 
     public final class Options {
