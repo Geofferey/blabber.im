@@ -242,8 +242,7 @@ public class UpdateHelper {
     private static boolean PAMInstalled(Activity activity) {
         PackageManager pm = activity.getPackageManager();
         try {
-            pm.getPackageInfo("de.pixart.messenger", 0);
-            return true;
+            return pm.getApplicationLabel(pm.getApplicationInfo("de.pixart.messenger", 0)).equals("Pix-Art Messenger");
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
