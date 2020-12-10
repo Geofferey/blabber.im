@@ -42,6 +42,7 @@ import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.utils.WakeLockHelper;
 import me.drakeet.support.toast.ToastCompat;
 
+import static eu.siacs.conversations.Config.blabber;
 import static eu.siacs.conversations.http.HttpConnectionManager.getProxy;
 import static eu.siacs.conversations.services.XmppConnectionService.FDroid;
 import static eu.siacs.conversations.services.XmppConnectionService.PlayStore;
@@ -136,7 +137,7 @@ public class UpdaterActivity extends XmppActivity {
                         if (isStoragePermissionGranted() && isNetworkAvailable(getApplicationContext())) {
                             //start downloading the file using the download manager
                             if (store != null && store.equalsIgnoreCase(PlayStore)) {
-                                Uri uri = Uri.parse("market://details?id=de.pixart.messenger");
+                                Uri uri = Uri.parse("market://details?id=" + getString(R.string.applicationId));
                                 Intent marketIntent = new Intent(Intent.ACTION_VIEW, uri);
                                 PackageManager manager = getApplicationContext().getPackageManager();
                                 List<ResolveInfo> infos = manager.queryIntentActivities(marketIntent, 0);
@@ -144,13 +145,13 @@ public class UpdaterActivity extends XmppActivity {
                                     startActivity(marketIntent);
                                     overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
                                 } else {
-                                    uri = Uri.parse("https://blabber.im/");
+                                    uri = Uri.parse("https://" + blabber());
                                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
                                     startActivity(browserIntent);
                                     overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
                                 }
                             } else if (store != null && store.equalsIgnoreCase(FDroid)) {
-                                Uri uri = Uri.parse("https://f-droid.org/de/packages/de.pixart.messenger/");
+                                Uri uri = Uri.parse("https://f-droid.org/de/packages/" + getString(R.string.applicationId) + "/");
                                 Intent marketIntent = new Intent(Intent.ACTION_VIEW, uri);
                                 PackageManager manager = getApplicationContext().getPackageManager();
                                 List<ResolveInfo> infos = manager.queryIntentActivities(marketIntent, 0);
@@ -158,7 +159,7 @@ public class UpdaterActivity extends XmppActivity {
                                     startActivity(marketIntent);
                                     overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
                                 } else {
-                                    uri = Uri.parse("https://f-droid.org/de/packages/de.pixart.messenger/");
+                                    uri = Uri.parse("https://" + blabber());
                                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
                                     startActivity(browserIntent);
                                     overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
