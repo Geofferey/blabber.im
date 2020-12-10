@@ -113,6 +113,7 @@
                     android:layout_gravity="center_vertical"
                     android:alpha="?attr/icon_alpha"
                     android:gravity="center_vertical"
+                    android:padding="1dp"
                     android:src="@drawable/ic_check_black_18dp" />
             </LinearLayout>
         </LinearLayout>
