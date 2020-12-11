@@ -38,6 +38,7 @@ import eu.siacs.conversations.persistance.FileBackend;
 import eu.siacs.conversations.services.ExportBackupService;
 import eu.siacs.conversations.services.MemorizingTrustManager;
 import eu.siacs.conversations.ui.util.StyledAttributes;
+import eu.siacs.conversations.utils.ThemeHelper;
 import eu.siacs.conversations.utils.TimeFrameUtils;
 import eu.siacs.conversations.xmpp.Jid;
 import me.drakeet.support.toast.ToastCompat;
@@ -90,9 +91,7 @@ public class SettingsActivity extends XmppActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.mTheme = findTheme();
-        setTheme(this.mTheme);
-        updateTheme();
+        setTheme(ThemeHelper.find(this));
         setContentView(R.layout.activity_settings);
         FragmentManager fm = getFragmentManager();
         mSettingsFragment = (SettingsFragment) fm.findFragmentById(R.id.settings_content);
@@ -309,6 +308,7 @@ public class SettingsActivity extends XmppActivity implements
             deleteOmemoPreference.setOnPreferenceClickListener(preference -> deleteOmemoIdentities());
         }
 
+        PreferenceScreen ExpertPreferenceScreen = (PreferenceScreen) mSettingsFragment.findPreference("expert");
         final Preference useBundledEmojis = mSettingsFragment.findPreference("use_bundled_emoji");
         if (useBundledEmojis != null) {
             Log.d(Config.LOGTAG, "Bundled Emoji checkbox checked: " + isBundledEmojiChecked);
@@ -320,8 +320,8 @@ public class SettingsActivity extends XmppActivity implements
                 PreferenceCategory UICatergory = (PreferenceCategory) mSettingsFragment.findPreference("UI");
                 UICatergory.removePreference(useBundledEmojis);
                 if (UICatergory.getPreferenceCount() == 0) {
-                    if (mainPreferenceScreen != null) {
-                        mainPreferenceScreen.removePreference(UICatergory);
+                    if (ExpertPreferenceScreen != null) {
+                        ExpertPreferenceScreen.removePreference(UICatergory);
                     }
                 }
             }

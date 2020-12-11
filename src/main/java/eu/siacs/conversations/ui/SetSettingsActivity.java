@@ -18,6 +18,7 @@ import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.utils.AccountUtils;
 import eu.siacs.conversations.utils.FirstStartManager;
+import eu.siacs.conversations.utils.ThemeHelper;
 
 import static eu.siacs.conversations.ui.SettingsActivity.BROADCAST_LAST_ACTIVITY;
 import static eu.siacs.conversations.ui.SettingsActivity.CHAT_STATES;
@@ -57,6 +58,7 @@ public class SetSettingsActivity extends XmppActivity implements XmppConnectionS
         this.binding.next.setOnClickListener(this::next);
         createInfoMenu();
         getDefaults();
+        setTheme(ThemeHelper.find(this));
     }
 
     private void createInfoMenu() {

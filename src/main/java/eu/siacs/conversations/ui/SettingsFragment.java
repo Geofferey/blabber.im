@@ -20,7 +20,6 @@ public class SettingsFragment extends PreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
-
         // Remove from standard preferences if the flag ONLY_INTERNAL_STORAGE is false
         if (!Config.ONLY_INTERNAL_STORAGE) {
             PreferenceCategory mCategory = (PreferenceCategory) findPreference("security_options");

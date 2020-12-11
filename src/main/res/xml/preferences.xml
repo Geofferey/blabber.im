@@ -3,7 +3,6 @@
     android:key="main_screen">
     <!--UI-->
     <PreferenceScreen
-        android:icon="?attr/ic_settings_ui"
         android:key="userinterface"
         android:title="@string/pref_ui_options">
         <intent
@@ -115,7 +114,6 @@
     </PreferenceScreen>
     <!--Notifications-->
     <PreferenceScreen
-        android:icon="?attr/ic_settings_notifications"
         android:key="notifications"
         android:title="@string/pref_notification_settings">
         <intent
@@ -206,7 +204,6 @@
     </PreferenceScreen>
     <!--Attachments-->
     <PreferenceScreen
-        android:icon="?attr/ic_settings_attachments"
         android:key="attachments"
         android:title="@string/pref_attachments">
         <intent
@@ -260,7 +257,6 @@
     </PreferenceScreen>
     <!--status-->
     <PreferenceScreen
-        android:icon="?attr/ic_settings_status"
         android:key="presence"
         android:title="@string/pref_presence_settings">
         <intent
@@ -298,7 +294,6 @@
     </PreferenceScreen>
     <!--Security and Privacy-->
     <PreferenceScreen
-        android:icon="?attr/ic_settings_security"
         android:key="security"
         android:title="@string/pref_security_settings">
         <intent
@@ -403,7 +398,6 @@
     </PreferenceScreen>
     <!--Expert-->
     <PreferenceScreen
-        android:icon="?attr/ic_settings_expert"
         android:key="expert"
         android:title="@string/pref_expert_options">
         <intent
@@ -516,7 +510,6 @@
     </PreferenceScreen>
     <!--About-->
     <eu.siacs.conversations.ui.AboutPreference
-        android:icon="?attr/ic_settings_about"
         android:summary="@string/pref_about_conversations_summary"
         android:title="@string/title_activity_about" />
 
