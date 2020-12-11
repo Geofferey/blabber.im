@@ -178,7 +178,7 @@ public class UpdateService extends AsyncTask<String, Object, UpdateService.Wrapp
         String[] remoteV = null;
         String[] installedV = null;
         try {
-            installedV = installedVersion.split(" ");
+            installedV = installedVersion.split("[ |\\-]");
             Log.d(Config.LOGTAG, "AppUpdater: Version installed: " + installedV[0]);
             installed = installedV[0].split("\\.");
         } catch (Exception e) {
