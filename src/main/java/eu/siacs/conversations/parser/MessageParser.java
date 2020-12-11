@@ -977,7 +977,7 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
                 }
             } else if (isTypeGroupChat) {
                 final Conversation conversation = mXmppConnectionService.find(account, counterpart.asBareJid());
-                final Message message;
+                Message message;
                 if (conversation != null && id != null) {
                     if (sender != null) {
                         message = conversation.findMessageWithRemoteId(id, sender);
@@ -998,10 +998,19 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
                     } else if (!counterpart.isBareJid() && trueJid != null) {
                         final ReadByMarker readByMarker = ReadByMarker.from(counterpart, trueJid);
                         if (message.addReadByMarker(readByMarker)) {
+                            final Message displayedMessage = message;
                             if (message.getStatus() >= Message.STATUS_SEND_RECEIVED) {
                                 mXmppConnectionService.markMessage(message, Message.STATUS_SEND_DISPLAYED);
                             }
                             mXmppConnectionService.updateMessage(message, false);
+                            message = displayedMessage == null ? null : displayedMessage.prev();
+                            while (message != null
+                                    && message.getStatus() >= Message.STATUS_SEND_RECEIVED
+                                    && message.getTimeSent() < displayedMessage.getTimeSent()) {
+                                mXmppConnectionService.markMessage(message, Message.STATUS_SEND_DISPLAYED);
+                                mXmppConnectionService.updateMessage(message, false);
+                                message = message.prev();
+                            }
                         }
                     }
                 }
