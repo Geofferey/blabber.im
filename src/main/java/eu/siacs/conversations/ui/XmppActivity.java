@@ -401,6 +401,37 @@ public abstract class XmppActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void selectPresence(final Conversation conversation, final PresenceSelector.OnPresenceSelected listener) {
+        final Contact contact = conversation.getContact();
+        if (contact.showInRoster() || contact.isSelf()) {
+            final Presences presences = contact.getPresences();
+            if (presences.size() == 0) {
+                if (contact.isSelf()) {
+                    conversation.setNextCounterpart(null);
+                    listener.onPresenceSelected();
+                } else if (!contact.getOption(Contact.Options.TO)
+                        && !contact.getOption(Contact.Options.ASKING)
+                        && contact.getAccount().getStatus() == Account.State.ONLINE) {
+                    showAskForPresenceDialog(contact);
+                } else if (!contact.getOption(Contact.Options.TO)
+                        || !contact.getOption(Contact.Options.FROM)) {
+                    PresenceSelector.warnMutualPresenceSubscription(this, conversation, listener);
+                } else {
+                    conversation.setNextCounterpart(null);
+                    listener.onPresenceSelected();
+                }
+            } else if (presences.size() == 1) {
+                final String presence = presences.toResourceArray()[0];
+                conversation.setNextCounterpart(PresenceSelector.getNextCounterpart(contact, presence));
+                listener.onPresenceSelected();
+            } else {
+                PresenceSelector.showPresenceSelectionDialog(this, conversation, listener);
+            }
+        } else {
+            showAddToRosterDialog(conversation.getContact());
+        }
+    }
+
     @SuppressLint("UnsupportedChromeOsCameraSystemFeature")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -849,34 +880,6 @@ public abstract class XmppActivity extends ActionBarActivity {
             }
         } else {
             return true;
-        }
-    }
-
-    public void selectPresence(final Conversation conversation, final PresenceSelector.OnPresenceSelected listener) {
-        final Contact contact = conversation.getContact();
-        if (!contact.showInRoster()) {
-            showAddToRosterDialog(conversation.getContact());
-        } else {
-            final Presences presences = contact.getPresences();
-            if (presences.size() == 0) {
-                if (!contact.getOption(Contact.Options.TO)
-                        && !contact.getOption(Contact.Options.ASKING)
-                        && contact.getAccount().getStatus() == Account.State.ONLINE) {
-                    showAskForPresenceDialog(contact);
-                } else if (!contact.getOption(Contact.Options.TO)
-                        || !contact.getOption(Contact.Options.FROM)) {
-                    PresenceSelector.warnMutualPresenceSubscription(this, conversation, listener);
-                } else {
-                    conversation.setNextCounterpart(null);
-                    listener.onPresenceSelected();
-                }
-            } else if (presences.size() == 1) {
-                final String presence = presences.toResourceArray()[0];
-                conversation.setNextCounterpart(PresenceSelector.getNextCounterpart(contact, presence));
-                listener.onPresenceSelected();
-            } else {
-                PresenceSelector.showPresenceSelectionDialog(this, conversation, listener);
-            }
         }
     }
 
