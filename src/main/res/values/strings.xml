@@ -1086,4 +1086,5 @@
     <string name="if_contact_is_nearby_use_qr">If your contact is nearby, they can also scan the code below to accept your invitation.</string>
     <string name="easy_invite_share_text">Join %1$s and chat with me: %2$s</string>
     <string name="share_invite_with">Share invite with…</string>
+    <string name="no_active_accounts_support_this">No active accounts support this feature</string>
 </resources>
