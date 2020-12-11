@@ -540,7 +540,7 @@
     <string name="InviteText">Здравствуйте!\n\nПользователь %s приглашает Вас в blabber.im. Просто перейдите по ссылке…</string>
     <string name="pref_broadcast_last_activity">Отображение последней активности</string>
     <string name="pref_broadcast_last_activity_summary">Сообщать всем контактам, когда Вы используете blabber.im</string>
-    <string name="invite_user">Пригласить в blabber.im</string>
+    <string name="invite_to_app">Пригласить в blabber.im</string>
     <string name="request_permissions_message">blabber.im запросит у Вас несколько разрешений. Они необходимы, чтобы пользоваться всеми возможностями мессенджера. Если какое-либо разрешение не будет получено, приложение будет закрыто.</string>
     <string name="request_permissions_message_again">Вы отказались от некоторых разрешений, необходимых для blabber.im. Вы бы хотели перейти к настройкам и предоставить эти разрешения? Если какое-либо разрешение не будет получено, приложение будет закрыто.</string>
     <string name="unable_to_connect_to_keychain">Не удается подключиться к OpenKeychain</string>

@@ -168,6 +168,10 @@
             android:label="@string/create_account"
             android:launchMode="singleTask" />
         <activity
+            android:name=".ui.EasyOnboardingInviteActivity"
+            android:label="@string/invite_to_app"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".ui.ImportBackupActivity"
             android:label="@string/restore_backup"
             android:launchMode="singleTask">

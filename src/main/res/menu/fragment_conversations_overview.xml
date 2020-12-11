@@ -36,8 +36,4 @@
         android:title="@string/search_messages"
         android:icon="?attr/icon_search"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/action_easy_invite"
-        android:orderInCategory="89"    
-        android:title="@string/invite_to_app" />
 </menu>

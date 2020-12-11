@@ -531,7 +531,7 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="inviteUser_Subject">zaprosił/a Cie poprzez</string>
     <string name="pref_broadcast_last_activity">Dziel się ostatnią interakcją.</string>
     <string name="pref_broadcast_last_activity_summary">Powiadamiaj kontakty, że używasz blabber.im</string>
-    <string name="invite_user">Zaproś do blabber.im</string>
+    <string name="invite_to_app">Zaproś do blabber.im</string>
     <string name="unable_to_connect_to_keychain">Nie można połączyć się z OpenKeychain</string>
     <string name="this_device_is_no_longer_in_use">Urządzenie to nie jest już używane</string>
     <string name="please_wait">Proszę czekać…</string>

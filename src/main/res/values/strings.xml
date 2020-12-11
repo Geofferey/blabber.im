@@ -537,7 +537,6 @@
     <string name="InviteText">Hello,\n\nthe user %s has invited you to blabber.im. Just click the following link…</string>
     <string name="pref_broadcast_last_activity">Broadcast Last User Interaction</string>
     <string name="pref_broadcast_last_activity_summary">Let all your contacts know when use blabber.im</string>
-    <string name="invite_user">Invite to blabber.im</string>
     <string name="request_permissions_message">blabber.im will ask you to allow a few permissions. It is important that you allow all these permissions to use all features of this messenger. If you deny any of these permissions the app will close itself.</string>
     <string name="request_permissions_message_again">You have denied some or all permissions needed for blabber.im. Would you like to jump to the settings and allow these permissions? If you denie any of these permissions, the app will close itself.</string>
     <string name="unable_to_connect_to_keychain">Unable to connect to OpenKeychain</string>
@@ -1077,7 +1076,7 @@
     <string name="move_data">Move  data</string>
     <string name="error_moving_data">An error occurred while moving your old data. Please move them manually.</string>
     <string name="data_successfully_moved">Your data has been moved successfully.</string>
-    <string name="invite_to_app">Invite to Conversations</string>
+    <string name="invite_to_app">Invite to blabber.im</string>
     <string name="unable_to_parse_invite">Unable to parse invite</string>
     <string name="server_does_not_support_easy_onboarding_invites">Server does not support generating invites</string>
     <string name="your_server">Your provider</string>

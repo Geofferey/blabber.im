@@ -54,6 +54,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
+import com.google.common.collect.Collections2;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -61,6 +63,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.atomic.AtomicReference;
 
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
@@ -81,6 +84,7 @@ import eu.siacs.conversations.services.XmppConnectionService.XmppConnectionBinde
 import eu.siacs.conversations.ui.util.PresenceSelector;
 import eu.siacs.conversations.ui.util.SoftKeyboardUtils;
 import eu.siacs.conversations.utils.AccountUtils;
+import eu.siacs.conversations.utils.EasyOnboardingInvite;
 import eu.siacs.conversations.utils.ExceptionHelper;
 import eu.siacs.conversations.utils.MenuDoubleTabUtil;
 import eu.siacs.conversations.utils.ThemeHelper;
@@ -946,31 +950,36 @@ public abstract class XmppActivity extends ActionBarActivity {
             ToastCompat.makeText(this, R.string.no_accounts, Toast.LENGTH_SHORT).show();
             return;
         }
+
         if (!xmppConnectionService.multipleAccounts()) {
             Account mAccount = xmppConnectionService.getAccounts().get(0);
-            String user = Jid.ofEscaped(mAccount.getJid()).getLocal();
-            String domain = Jid.ofEscaped(mAccount.getJid()).getDomain().toEscapedString();
-            String inviteURL;
-            try {
-                inviteURL = new getAdHocInviteUri(mAccount.getXmppConnection(), mAccount).execute().get();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-                inviteURL = Config.inviteUserURL + user + "/" + domain;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                inviteURL = Config.inviteUserURL + user + "/" + domain;
+            if (EasyOnboardingInvite.hasAccountSupport(mAccount)) {
+                selectAccountToStartEasyInvite();
+            } else {
+                String user = Jid.ofEscaped(mAccount.getJid()).getLocal();
+                String domain = Jid.ofEscaped(mAccount.getJid()).getDomain().toEscapedString();
+                String inviteURL;
+                try {
+                    inviteURL = new getAdHocInviteUri(mAccount.getXmppConnection(), mAccount).execute().get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                    inviteURL = Config.inviteUserURL + user + "/" + domain;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    inviteURL = Config.inviteUserURL + user + "/" + domain;
+                }
+                if (inviteURL == null) {
+                    inviteURL = Config.inviteUserURL + user + "/" + domain;
+                }
+                Log.d(Config.LOGTAG, "Invite uri = " + inviteURL);
+                String inviteText = getString(R.string.InviteText, user);
+                Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_SUBJECT, user + " " + getString(R.string.inviteUser_Subject) + " " + getString(R.string.app_name));
+                intent.putExtra(Intent.EXTRA_TEXT, inviteText + "\n\n" + inviteURL);
+                startActivity(Intent.createChooser(intent, getString(R.string.invite_contact)));
+                overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
             }
-            if (inviteURL == null) {
-                inviteURL = Config.inviteUserURL + user + "/" + domain;
-            }
-            Log.d(Config.LOGTAG, "Invite uri = " + inviteURL);
-            String inviteText = getString(R.string.InviteText, user);
-            Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-            intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_SUBJECT, user + " " + getString(R.string.inviteUser_Subject) + " " + getString(R.string.app_name));
-            intent.putExtra(Intent.EXTRA_TEXT, inviteText + "\n\n" + inviteURL);
-            startActivity(Intent.createChooser(intent, getString(R.string.invite_contact)));
-            overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
         } else {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.chooce_account);
@@ -992,33 +1001,60 @@ public abstract class XmppActivity extends ActionBarActivity {
                     (dialog, id) -> {
                         String selection = spinner.getSelectedItem().toString();
                         Account mAccount = xmppConnectionService.findAccountByJid(Jid.of(selection).asBareJid());
-                        String user = Jid.of(mAccount.getJid()).getLocal();
-                        String domain = Jid.of(mAccount.getJid()).getDomain().toEscapedString();
-                        String inviteURL;
-                        try {
-                            inviteURL = new getAdHocInviteUri(mAccount.getXmppConnection(), mAccount).execute().get();
-                        } catch (ExecutionException e) {
-                            e.printStackTrace();
-                            inviteURL = Config.inviteUserURL + user + "/" + domain;
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                            inviteURL = Config.inviteUserURL + user + "/" + domain;
+                        if (EasyOnboardingInvite.hasAccountSupport(mAccount)) {
+                            selectAccountToStartEasyInvite();
+                        } else {
+                            String user = Jid.of(mAccount.getJid()).getLocal();
+                            String domain = Jid.of(mAccount.getJid()).getDomain().toEscapedString();
+                            String inviteURL;
+                            try {
+                                inviteURL = new getAdHocInviteUri(mAccount.getXmppConnection(), mAccount).execute().get();
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                                inviteURL = Config.inviteUserURL + user + "/" + domain;
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                                inviteURL = Config.inviteUserURL + user + "/" + domain;
+                            }
+                            if (inviteURL == null) {
+                                inviteURL = Config.inviteUserURL + user + "/" + domain;
+                            }
+                            Log.d(Config.LOGTAG, "Invite uri = " + inviteURL);
+                            String inviteText = getString(R.string.InviteText, user);
+                            Intent intent = new Intent(Intent.ACTION_SEND);
+                            intent.setType("text/plain");
+                            intent.putExtra(Intent.EXTRA_SUBJECT, user + " " + getString(R.string.inviteUser_Subject) + " " + getString(R.string.app_name));
+                            intent.putExtra(Intent.EXTRA_TEXT, inviteText + "\n\n" + inviteURL);
+                            startActivity(Intent.createChooser(intent, getString(R.string.invite_contact)));
+                            overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
                         }
-                        if (inviteURL == null) {
-                            inviteURL = Config.inviteUserURL + user + "/" + domain;
-                        }
-                        Log.d(Config.LOGTAG, "Invite uri = " + inviteURL);
-                        String inviteText = getString(R.string.InviteText, user);
-                        Intent intent = new Intent(Intent.ACTION_SEND);
-                        intent.setType("text/plain");
-                        intent.putExtra(Intent.EXTRA_SUBJECT, user + " " + getString(R.string.inviteUser_Subject) + " " + getString(R.string.app_name));
-                        intent.putExtra(Intent.EXTRA_TEXT, inviteText + "\n\n" + inviteURL);
-                        startActivity(Intent.createChooser(intent, getString(R.string.invite_contact)));
-                        overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
                     });
             builder.setNegativeButton(R.string.cancel, null);
             builder.create().show();
         }
+    }
+
+    private void selectAccountToStartEasyInvite() {
+        final List<Account> accounts = EasyOnboardingInvite.getSupportingAccounts(this.xmppConnectionService);
+        if (accounts.size() == 0) {
+            //This can technically happen if opening the menu item races with accounts reconnecting or something
+            Toast.makeText(this, R.string.no_active_accounts_support_this, Toast.LENGTH_LONG).show();
+        } else if (accounts.size() == 1) {
+            openEasyInviteScreen(accounts.get(0));
+        } else {
+            final AtomicReference<Account> selectedAccount = new AtomicReference<>(accounts.get(0));
+            final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle(R.string.choose_account);
+            final String[] asStrings = Collections2.transform(accounts, a -> a.getJid().asBareJid().toEscapedString()).toArray(new String[0]);
+            alertDialogBuilder.setSingleChoiceItems(asStrings, 0, (dialog, which) -> selectedAccount.set(accounts.get(which)));
+            alertDialogBuilder.setNegativeButton(R.string.cancel, null);
+            alertDialogBuilder.setPositiveButton(R.string.ok, (dialog, which) -> openEasyInviteScreen(selectedAccount.get()));
+            alertDialogBuilder.create().show();
+        }
+    }
+
+    private void openEasyInviteScreen(final Account account) {
+        EasyOnboardingInviteActivity.launch(account, this);
     }
 
     private class getAdHocInviteUri extends AsyncTask<XmppConnection, Account, String> {

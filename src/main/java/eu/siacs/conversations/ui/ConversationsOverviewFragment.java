@@ -186,8 +186,6 @@ public class ConversationsOverviewFragment extends XmppFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
         menuInflater.inflate(R.menu.fragment_conversations_overview, menu);
-		final MenuItem easyOnboardInvite = menu.findItem(R.id.action_easy_invite);
-		easyOnboardInvite.setVisible(EasyOnboardingInvite.anyHasSupport(activity == null ? null : activity.xmppConnectionService));
     }
 
     @Override
@@ -243,35 +241,9 @@ public class ConversationsOverviewFragment extends XmppFragment {
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 activity.overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
                 return true;
-			case R.id.action_easy_invite:
-				selectAccountToStartEasyInvite();
-				return true;
         }
         return super.onOptionsItemSelected(item);
 	}
-
-	private void selectAccountToStartEasyInvite() {
-		final List<Account> accounts = EasyOnboardingInvite.getSupportingAccounts(activity.xmppConnectionService);
-		if (accounts.size() == 0) {
-			//This can technically happen if opening the menu item races with accounts reconnecting or something
-			Toast.makeText(getActivity(),R.string.no_active_accounts_support_this, Toast.LENGTH_LONG).show();
-		} else if (accounts.size() == 1) {
-			openEasyInviteScreen(accounts.get(0));
-		} else {
-			final AtomicReference<Account> selectedAccount = new AtomicReference<>(accounts.get(0));
-			final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
-			alertDialogBuilder.setTitle(R.string.choose_account);
-			final String[] asStrings = Collections2.transform(accounts, a -> a.getJid().asBareJid().toEscapedString()).toArray(new String[0]);
-			alertDialogBuilder.setSingleChoiceItems(asStrings, 0, (dialog, which) -> selectedAccount.set(accounts.get(which)));
-			alertDialogBuilder.setNegativeButton(R.string.cancel, null);
-			alertDialogBuilder.setPositiveButton(R.string.ok, (dialog, which) -> openEasyInviteScreen(selectedAccount.get()));
-			alertDialogBuilder.create().show();
-		}
-	}
-
-	private void openEasyInviteScreen(final Account account) {
-		EasyOnboardingInviteActivity.launch(account, activity);
-    }
 
     @Override
     public Animator onCreateAnimator(int transit, boolean enter, int nextAnim) {

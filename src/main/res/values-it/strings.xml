@@ -536,7 +536,7 @@
     <string name="InviteText">Ciao,\n\nl\'utente %s ti ha invitato/a su blabber.im. Premi il seguente collegamento…</string>
     <string name="pref_broadcast_last_activity">Trasmetti ultima interazione utente</string>
     <string name="pref_broadcast_last_activity_summary">Fai sapere a tutti i tuoi contatti quando usi blabber.im</string>
-    <string name="invite_user">Invita su blabber.im</string>
+    <string name="invite_to_app">Invita su blabber.im</string>
     <string name="request_permissions_message">blabber.im ti chiederà di concedere solo poche autorizzazioni. È importante che tu permetta tutte queste richieste per utilizzare tutte le funzionalità di questa app. Se neghi alcune di queste l\'app si chiuderà da sola.</string>
     <string name="request_permissions_message_again">Hai negato alcune o tutte le autorizzazioni richieste da blabber.im. Vuoi andare nelle impostazioni e concedere questi permessi? Se neghi qualsiasi di queste autorizzazioni, l\'app si chiuderà da sola.</string>
     <string name="unable_to_connect_to_keychain">Impossibile connettersi a OpenKeychain</string>
