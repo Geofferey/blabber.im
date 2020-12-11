@@ -129,7 +129,7 @@
         <item name="icon_refresh" type="reference">@drawable/ic_refresh_grey600_24dp</item>
         <item name="icon_remove" type="reference">@drawable/ic_delete_grey600_24dp</item>
         <item name="icon_search" type="reference">@drawable/ic_search_white_24dp</item>
-        <item name="icon_help" type="reference">@drawable/ic_help_white_24dp</item>
+        <item name="icon_help" type="reference">@drawable/ic_help_black_24dp</item>
         <item name="icon_goto_chat" type="reference">@drawable/ic_question_answer_white_24dp</item>
         <item name="icon_secure" type="reference">@drawable/ic_lock_open_white_24dp</item>
         <item name="icon_settings" type="reference">@drawable/ic_settings_black_24dp</item>
@@ -415,7 +415,10 @@
     </style>
 
     <!-- blue dialog medium font - black -->
-    <style name="ConversationsTheme.Black.Dialog.Medium" parent="ConversationsTheme.Dark.Dialog.Medium" />
+    <style name="ConversationsTheme.Black.Dialog.Medium" parent="ConversationsTheme.Black.Dialog">
+        <item name="TextSizeBody2">16sp</item>
+        <item name="TextSizeDisplay2">51sp</item>
+    </style>
 
     <!-- blue dialog large font -->
     <style name="ConversationsTheme.Dialog.Large" parent="ConversationsTheme.Dialog">
@@ -430,7 +433,10 @@
     </style>
 
     <!-- blue dialog large font - black -->
-    <style name="ConversationsTheme.Black.Dialog.Large" parent="ConversationsTheme.Dark.Dialog.Large" />
+    <style name="ConversationsTheme.Black.Dialog.Large" parent="ConversationsTheme.Black.Dialog">
+        <item name="TextSizeBody2">18sp</item>
+        <item name="TextSizeTitle">56sp</item>
+    </style>
 
     <!-- blue medium font -->
     <style name="ConversationsTheme.Medium" parent="ConversationsTheme">
@@ -463,7 +469,19 @@
     </style>
 
     <!-- blue medium font - black -->
-    <style name="ConversationsTheme.Black.Medium" parent="ConversationsTheme.Dark.Medium" />
+    <style name="ConversationsTheme.Black.Medium" parent="ConversationsTheme.Black">
+        <item name="TextSizeCaption">14sp</item>
+        <item name="TextSizeBody1">16sp</item>
+        <item name="TextSizeBody2">16sp</item>
+        <item name="TextSizeSubhead">18sp</item>
+        <item name="TextSizeTitle">22sp</item>
+        <item name="TextSizeInput">18sp</item>
+        <item name="TextSeparation">6sp</item>
+        <item name="IconSize">20sp</item>
+        <item name="TextSizeInfo">14sp</item>
+        <item name="TextSizeBody">16sp</item>
+        <item name="TextSizeHeadline">20sp</item>
+    </style>
 
     <!-- blue large font -->
     <style name="ConversationsTheme.Large" parent="ConversationsTheme">
@@ -496,7 +514,19 @@
     </style>
 
     <!-- blue large font - black -->
-    <style name="ConversationsTheme.Black.Large" parent="ConversationsTheme.Dark.Large" />
+    <style name="ConversationsTheme.Black.Large" parent="ConversationsTheme.Black">
+        <item name="TextSizeCaption">16sp</item>
+        <item name="TextSizeBody1">18sp</item>
+        <item name="TextSizeBody2">18sp</item>
+        <item name="TextSizeSubhead">20sp</item>
+        <item name="TextSizeTitle">24sp</item>
+        <item name="TextSizeInput">20sp</item>
+        <item name="TextSeparation">7sp</item>
+        <item name="IconSize">22sp</item>
+        <item name="TextSizeInfo">16sp</item>
+        <item name="TextSizeBody">18sp</item>
+        <item name="TextSizeHeadline">22sp</item>
+    </style>
 
     <!-- 2. blabber -->
     <!-- blabber theme -->
@@ -573,7 +603,10 @@
     </style>
 
     <!-- blabber dialog medium font - black -->
-    <style name="ConversationsTheme.Blabber.Black.Dialog.Medium" parent="ConversationsTheme.Blabber.Dark.Dialog.Medium" />
+    <style name="ConversationsTheme.Blabber.Black.Dialog.Medium" parent="ConversationsTheme.Blabber.Black.Dialog">
+        <item name="TextSizeBody2">16sp</item>
+        <item name="TextSizeDisplay2">51sp</item>
+    </style>
 
     <!-- blabber dialog large font -->
     <style name="ConversationsTheme.Blabber.Dialog.Large" parent="ConversationsTheme.Blabber.Dialog">
@@ -588,7 +621,10 @@
     </style>
 
     <!-- blabber dialog large font - black -->
-    <style name="ConversationsTheme.Blabber.Black.Dialog.Large" parent="ConversationsTheme.Blabber.Dark.Dialog.Large" />
+    <style name="ConversationsTheme.Blabber.Black.Dialog.Large" parent="ConversationsTheme.Blabber.Black.Dialog">
+        <item name="TextSizeBody2">18sp</item>
+        <item name="TextSizeTitle">56sp</item>
+    </style>
 
     <!-- blabber medium font -->
     <style name="ConversationsTheme.Blabber.Medium" parent="ConversationsTheme.Blabber">
@@ -621,7 +657,19 @@
     </style>
 
     <!-- blabber medium font - black -->
-    <style name="ConversationsTheme.Blabber.Black.Medium" parent="ConversationsTheme.Blabber.Dark.Medium" />
+    <style name="ConversationsTheme.Blabber.Black.Medium" parent="ConversationsTheme.Blabber.Black">
+        <item name="TextSizeCaption">14sp</item>
+        <item name="TextSizeBody1">16sp</item>
+        <item name="TextSizeBody2">16sp</item>
+        <item name="TextSizeSubhead">18sp</item>
+        <item name="TextSizeTitle">22sp</item>
+        <item name="TextSizeInput">18sp</item>
+        <item name="TextSeparation">6sp</item>
+        <item name="IconSize">20sp</item>
+        <item name="TextSizeInfo">14sp</item>
+        <item name="TextSizeBody">16sp</item>
+        <item name="TextSizeHeadline">20sp</item>
+    </style>
 
     <!-- blabber large font -->
     <style name="ConversationsTheme.Blabber.Large" parent="ConversationsTheme.Blabber">
@@ -654,7 +702,19 @@
     </style>
 
     <!-- blabber large font - black -->
-    <style name="ConversationsTheme.Blabber.Black.Large" parent="ConversationsTheme.Blabber.Dark.Large" />
+    <style name="ConversationsTheme.Blabber.Black.Large" parent="ConversationsTheme.Blabber.Black">
+        <item name="TextSizeCaption">16sp</item>
+        <item name="TextSizeBody1">18sp</item>
+        <item name="TextSizeBody2">18sp</item>
+        <item name="TextSizeSubhead">20sp</item>
+        <item name="TextSizeTitle">24sp</item>
+        <item name="TextSizeInput">20sp</item>
+        <item name="TextSeparation">7sp</item>
+        <item name="IconSize">22sp</item>
+        <item name="TextSizeInfo">16sp</item>
+        <item name="TextSizeBody">18sp</item>
+        <item name="TextSizeHeadline">22sp</item>
+    </style>
 
     <!-- 3. orange -->
     <!-- orange theme -->
@@ -731,7 +791,10 @@
     </style>
 
     <!-- orange dialog medium font - black -->
-    <style name="ConversationsTheme.Orange.Black.Dialog.Medium" parent="ConversationsTheme.Orange.Dark.Dialog.Medium" />
+    <style name="ConversationsTheme.Orange.Black.Dialog.Medium" parent="ConversationsTheme.Orange.Black.Dialog">
+        <item name="TextSizeBody2">16sp</item>
+        <item name="TextSizeDisplay2">51sp</item>
+    </style>
 
     <!-- orange dialog large font -->
     <style name="ConversationsTheme.Orange.Dialog.Large" parent="ConversationsTheme.Orange.Dialog">
@@ -746,7 +809,10 @@
     </style>
 
     <!-- orange dialog large font - black -->
-    <style name="ConversationsTheme.Orange.Black.Dialog.Large" parent="ConversationsTheme.Orange.Dark.Dialog.Large" />
+    <style name="ConversationsTheme.Orange.Black.Dialog.Large" parent="ConversationsTheme.Orange.Black.Dialog">
+        <item name="TextSizeBody2">18sp</item>
+        <item name="TextSizeTitle">56sp</item>
+    </style>
 
     <!-- orange medium font -->
     <style name="ConversationsTheme.Orange.Medium" parent="ConversationsTheme.Orange">
@@ -779,7 +845,19 @@
     </style>
 
     <!-- orange medium font - black -->
-    <style name="ConversationsTheme.Orange.Black.Medium" parent="ConversationsTheme.Orange.Dark.Medium" />
+    <style name="ConversationsTheme.Orange.Black.Medium" parent="ConversationsTheme.Orange.Black">
+        <item name="TextSizeCaption">14sp</item>
+        <item name="TextSizeBody1">16sp</item>
+        <item name="TextSizeBody2">16sp</item>
+        <item name="TextSizeSubhead">18sp</item>
+        <item name="TextSizeTitle">22sp</item>
+        <item name="TextSizeInput">18sp</item>
+        <item name="TextSeparation">6sp</item>
+        <item name="IconSize">20sp</item>
+        <item name="TextSizeInfo">14sp</item>
+        <item name="TextSizeBody">16sp</item>
+        <item name="TextSizeHeadline">20sp</item>
+    </style>
 
     <!-- orange large font -->
     <style name="ConversationsTheme.Orange.Large" parent="ConversationsTheme.Orange">
@@ -812,7 +890,19 @@
     </style>
 
     <!-- orange large font - black -->
-    <style name="ConversationsTheme.Orange.Black.Large" parent="ConversationsTheme.Orange.Dark.Large" />
+    <style name="ConversationsTheme.Orange.Black.Large" parent="ConversationsTheme.Orange.Black">
+        <item name="TextSizeCaption">16sp</item>
+        <item name="TextSizeBody1">18sp</item>
+        <item name="TextSizeBody2">18sp</item>
+        <item name="TextSizeSubhead">20sp</item>
+        <item name="TextSizeTitle">24sp</item>
+        <item name="TextSizeInput">20sp</item>
+        <item name="TextSeparation">7sp</item>
+        <item name="IconSize">22sp</item>
+        <item name="TextSizeInfo">16sp</item>
+        <item name="TextSizeBody">18sp</item>
+        <item name="TextSizeHeadline">22sp</item>
+    </style>
 
     <!-- 4. grey -->
     <!-- grey theme -->
@@ -887,7 +977,10 @@
     </style>
 
     <!-- grey dialog medium font - black -->
-    <style name="ConversationsTheme.Grey.Black.Dialog.Medium" parent="ConversationsTheme.Grey.Dark.Dialog.Medium" />
+    <style name="ConversationsTheme.Grey.Black.Dialog.Medium" parent="ConversationsTheme.Grey.Black.Dialog">
+        <item name="TextSizeBody2">16sp</item>
+        <item name="TextSizeDisplay2">51sp</item>
+    </style>
 
     <!-- grey dialog large font -->
     <style name="ConversationsTheme.Grey.Dialog.Large" parent="ConversationsTheme.Grey.Dialog">
@@ -902,7 +995,10 @@
     </style>
 
     <!-- grey dialog large font - black -->
-    <style name="ConversationsTheme.Grey.Black.Dialog.Large" parent="ConversationsTheme.Grey.Dark.Dialog.Large" />
+    <style name="ConversationsTheme.Grey.Black.Dialog.Large" parent="ConversationsTheme.Grey.Black.Dialog">
+        <item name="TextSizeBody2">18sp</item>
+        <item name="TextSizeTitle">56sp</item>
+    </style>
 
     <!-- grey medium font -->
     <style name="ConversationsTheme.Grey.Medium" parent="ConversationsTheme.Grey">
@@ -935,7 +1031,19 @@
     </style>
 
     <!-- grey medium font - black -->
-    <style name="ConversationsTheme.Grey.Black.Medium" parent="ConversationsTheme.Grey.Dark.Medium" />
+    <style name="ConversationsTheme.Grey.Black.Medium" parent="ConversationsTheme.Grey.Black">
+        <item name="TextSizeCaption">14sp</item>
+        <item name="TextSizeBody1">16sp</item>
+        <item name="TextSizeBody2">16sp</item>
+        <item name="TextSizeSubhead">18sp</item>
+        <item name="TextSizeTitle">22sp</item>
+        <item name="TextSizeInput">18sp</item>
+        <item name="TextSeparation">6sp</item>
+        <item name="IconSize">20sp</item>
+        <item name="TextSizeInfo">14sp</item>
+        <item name="TextSizeBody">16sp</item>
+        <item name="TextSizeHeadline">20sp</item>
+    </style>
 
     <!-- grey large font -->
     <style name="ConversationsTheme.Grey.Large" parent="ConversationsTheme.Grey">
@@ -968,7 +1076,19 @@
     </style>
 
     <!-- grey large font - black -->
-    <style name="ConversationsTheme.Grey.Black.Large" parent="ConversationsTheme.Grey.Dark.Large" />
+    <style name="ConversationsTheme.Grey.Black.Large" parent="ConversationsTheme.Grey.Black">
+        <item name="TextSizeCaption">16sp</item>
+        <item name="TextSizeBody1">18sp</item>
+        <item name="TextSizeBody2">18sp</item>
+        <item name="TextSizeSubhead">20sp</item>
+        <item name="TextSizeTitle">24sp</item>
+        <item name="TextSizeInput">20sp</item>
+        <item name="TextSeparation">7sp</item>
+        <item name="IconSize">22sp</item>
+        <item name="TextSizeInfo">16sp</item>
+        <item name="TextSizeBody">18sp</item>
+        <item name="TextSizeHeadline">22sp</item>
+    </style>
 
     <!-- 5. pink -->
     <!-- pink theme -->
@@ -1043,7 +1163,10 @@
     </style>
 
     <!-- pink dialog medium font - black -->
-    <style name="ConversationsTheme.Pink.Black.Dialog.Medium" parent="ConversationsTheme.Pink.Dark.Dialog.Medium" />
+    <style name="ConversationsTheme.Pink.Black.Dialog.Medium" parent="ConversationsTheme.Pink.Black.Dialog">
+        <item name="TextSizeBody2">16sp</item>
+        <item name="TextSizeDisplay2">51sp</item>
+    </style>
 
     <!-- pink dialog large font -->
     <style name="ConversationsTheme.Pink.Dialog.Large" parent="ConversationsTheme.Pink.Dialog">
@@ -1058,7 +1181,10 @@
     </style>
 
     <!-- pink dialog large font - black -->
-    <style name="ConversationsTheme.Pink.Black.Dialog.Large" parent="ConversationsTheme.Pink.Dark.Dialog.Large" />
+    <style name="ConversationsTheme.Pink.Black.Dialog.Large" parent="ConversationsTheme.Pink.Black.Dialog">
+        <item name="TextSizeBody2">18sp</item>
+        <item name="TextSizeTitle">56sp</item>
+    </style>
 
     <!-- pink medium font -->
     <style name="ConversationsTheme.Pink.Medium" parent="ConversationsTheme.Pink">
@@ -1091,7 +1217,19 @@
     </style>
 
     <!-- pink medium font - black -->
-    <style name="ConversationsTheme.Pink.Black.Medium" parent="ConversationsTheme.Pink.Dark.Medium" />
+    <style name="ConversationsTheme.Pink.Black.Medium" parent="ConversationsTheme.Pink.Black">
+        <item name="TextSizeCaption">14sp</item>
+        <item name="TextSizeBody1">16sp</item>
+        <item name="TextSizeBody2">16sp</item>
+        <item name="TextSizeSubhead">18sp</item>
+        <item name="TextSizeTitle">22sp</item>
+        <item name="TextSizeInput">18sp</item>
+        <item name="TextSeparation">6sp</item>
+        <item name="IconSize">20sp</item>
+        <item name="TextSizeInfo">14sp</item>
+        <item name="TextSizeBody">16sp</item>
+        <item name="TextSizeHeadline">20sp</item>
+    </style>
 
     <!-- pink large font -->
     <style name="ConversationsTheme.Pink.Large" parent="ConversationsTheme.Pink">
@@ -1124,6 +1262,18 @@
     </style>
 
     <!-- pink large font - black -->
-    <style name="ConversationsTheme.Pink.Black.Large" parent="ConversationsTheme.Pink.Dark.Large" />
+    <style name="ConversationsTheme.Pink.Black.Large" parent="ConversationsTheme.Pink.Black">
+        <item name="TextSizeCaption">16sp</item>
+        <item name="TextSizeBody1">18sp</item>
+        <item name="TextSizeBody2">18sp</item>
+        <item name="TextSizeSubhead">20sp</item>
+        <item name="TextSizeTitle">24sp</item>
+        <item name="TextSizeInput">20sp</item>
+        <item name="TextSeparation">7sp</item>
+        <item name="IconSize">22sp</item>
+        <item name="TextSizeInfo">16sp</item>
+        <item name="TextSizeBody">18sp</item>
+        <item name="TextSizeHeadline">22sp</item>
+    </style>
 
 </resources>
