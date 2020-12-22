@@ -648,9 +648,13 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
             if (extras != null && extras.containsKey("MUC_UUID")) {
                 Log.d(Config.LOGTAG, "Get " + intent.getAction() + " intent for " + extras.getString("MUC_UUID"));
                 Conversation conversation = xmppConnectionService.findConversationByUuid(extras.getString("MUC_UUID"));
-                ConversationsActivity.this.xmppConnectionService.clearConversationHistory(conversation);
-                xmppConnectionService.destroyRoom(conversation, ConversationsActivity.this);
-                endConversation(conversation);
+                try {
+                    ConversationsActivity.this.xmppConnectionService.clearConversationHistory(conversation);
+                    xmppConnectionService.destroyRoom(conversation, ConversationsActivity.this);
+                    endConversation(conversation);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         setIntent(createLauncherIntent(this));
