@@ -68,6 +68,7 @@ import eu.siacs.conversations.ui.util.PendingItem;
 import eu.siacs.conversations.ui.util.SoftKeyboardUtils;
 import eu.siacs.conversations.utils.CharSequenceUtils;
 import eu.siacs.conversations.utils.CryptoHelper;
+import eu.siacs.conversations.utils.EasyOnboardingInvite;
 import eu.siacs.conversations.utils.MenuDoubleTabUtil;
 import eu.siacs.conversations.utils.Resolver;
 import eu.siacs.conversations.utils.SignupUtils;
@@ -1245,6 +1246,11 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                 this.binding.serverInfoExternalService.setText(R.string.server_info_unavailable);
             }
             if (features.adhocinvite) {
+                this.binding.serverInfoAdhocInvite.setText(R.string.server_info_available);
+            } else {
+                this.binding.serverInfoAdhocInvite.setText(R.string.server_info_unavailable);
+            }
+            if (EasyOnboardingInvite.hasAccountSupport(this.mAccount)) {
                 this.binding.serverInfoAdhocInvite.setText(R.string.server_info_available);
             } else {
                 this.binding.serverInfoAdhocInvite.setText(R.string.server_info_unavailable);
