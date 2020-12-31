@@ -12,7 +12,7 @@ import eu.siacs.conversations.utils.CryptoHelper;
 import eu.siacs.conversations.xml.TagWriter;
 
 public class DigestMd5 extends SaslMechanism {
-    public DigestMd5(final TagWriter tagWriter, final Account account, final SecureRandom rng) {
+    public static final String MECHANISM = "DIGEST-MD5";public DigestMd5(final TagWriter tagWriter, final Account account, final SecureRandom rng) {
         super(tagWriter, account, rng);
     }
 
@@ -23,7 +23,7 @@ public class DigestMd5 extends SaslMechanism {
 
     @Override
     public String getMechanism() {
-        return "DIGEST-MD5";
+        return MECHANISM;
     }
 
     private State state = State.INITIAL;

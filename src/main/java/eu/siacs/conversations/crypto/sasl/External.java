@@ -9,7 +9,7 @@ import eu.siacs.conversations.xml.TagWriter;
 
 public class External extends SaslMechanism {
 
-    public External(TagWriter tagWriter, Account account, SecureRandom rng) {
+    public static final String MECHANISM = "EXTERNAL";public External(TagWriter tagWriter, Account account, SecureRandom rng) {
         super(tagWriter, account, rng);
     }
 
@@ -20,11 +20,11 @@ public class External extends SaslMechanism {
 
     @Override
     public String getMechanism() {
-        return "EXTERNAL";
+        return MECHANISM;
     }
 
     @Override
     public String getClientFirstMessage() {
-		return Base64.encodeToString(account.getJid().asBareJid().toEscapedString().getBytes(),Base64.NO_WRAP);
+        return Base64.encodeToString(account.getJid().asBareJid().toEscapedString().getBytes(), Base64.NO_WRAP);
     }
 }

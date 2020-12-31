@@ -8,7 +8,7 @@ import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.xml.TagWriter;
 
 public class Plain extends SaslMechanism {
-    public Plain(final TagWriter tagWriter, final Account account) {
+    public static final String MECHANISM = "PLAIN";public Plain(final TagWriter tagWriter, final Account account) {
         super(tagWriter, account, null);
     }
 
@@ -19,7 +19,7 @@ public class Plain extends SaslMechanism {
 
     @Override
     public String getMechanism() {
-        return "PLAIN";
+        return MECHANISM;
     }
 
     @Override

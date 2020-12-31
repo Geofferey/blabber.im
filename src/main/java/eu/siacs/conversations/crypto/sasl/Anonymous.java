@@ -7,7 +7,7 @@ import eu.siacs.conversations.xml.TagWriter;
 
 public class Anonymous extends SaslMechanism {
 
-    public Anonymous(TagWriter tagWriter, Account account, SecureRandom rng) {
+    public static final String MECHANISM = "ANONYMOUS";public Anonymous(TagWriter tagWriter, Account account, SecureRandom rng) {
         super(tagWriter, account, rng);
     }
 
@@ -18,7 +18,7 @@ public class Anonymous extends SaslMechanism {
 
     @Override
     public String getMechanism() {
-        return "ANONYMOUS";
+        return MECHANISM;
     }
 
     @Override
