@@ -207,7 +207,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
 
     private boolean reInitRequiredOnStart = true;
     private MediaPreviewAdapter mediaPreviewAdapter;
-    private OnClickListener clickToMuc = new OnClickListener() {
+    private final OnClickListener clickToMuc = new OnClickListener() {
 
         @Override
         public void onClick(View v) {
@@ -218,16 +218,14 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             activity.overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
         }
     };
-
-    private OnClickListener leaveMuc = new OnClickListener() {
+    private final OnClickListener leaveMuc = new OnClickListener() {
 
         @Override
         public void onClick(View v) {
             activity.xmppConnectionService.archiveConversation(conversation);
         }
     };
-
-    private OnClickListener joinMuc = new OnClickListener() {
+    private final OnClickListener joinMuc = new OnClickListener() {
 
         @Override
         public void onClick(View v) {
@@ -235,7 +233,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         }
     };
 
-    private OnClickListener acceptJoin = new OnClickListener() {
+    private final OnClickListener acceptJoin = new OnClickListener() {
         @Override
         public void onClick(View v) {
             conversation.setAttribute("accept_non_anonymous", true);
@@ -244,7 +242,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         }
     };
 
-    private OnClickListener enterPassword = new OnClickListener() {
+    private final OnClickListener enterPassword = new OnClickListener() {
 
         @Override
         public void onClick(View v) {
@@ -259,8 +257,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             });
         }
     };
-
-    private OnScrollListener mOnScrollListener = new OnScrollListener() {
+    private final OnScrollListener mOnScrollListener = new OnScrollListener() {
 
         @Override
         public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -337,8 +334,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             }
         }
     };
-
-    private EditMessage.OnCommitContentListener mEditorContentListener = new EditMessage.OnCommitContentListener() {
+    private final EditMessage.OnCommitContentListener mEditorContentListener = new EditMessage.OnCommitContentListener() {
         @Override
         public boolean onCommitContent(InputContentInfoCompat inputContentInfo, int flags, Bundle opts, String[] contentMimeTypes) {
             // try to get permission to read the image, if applicable
@@ -361,7 +357,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         }
     };
     private Message selectedMessage;
-    private OnClickListener mEnableAccountListener = new OnClickListener() {
+    private final OnClickListener mEnableAccountListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
             final Account account = conversation == null ? null : conversation.getAccount();
@@ -371,7 +367,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             }
         }
     };
-    private OnClickListener mUnblockClickListener = new OnClickListener() {
+    private final OnClickListener mUnblockClickListener = new OnClickListener() {
         @Override
         public void onClick(final View v) {
             v.post(() -> v.setVisibility(View.INVISIBLE));
@@ -382,7 +378,8 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             }
         }
     };
-    private OnClickListener mBlockClickListener = this::showBlockSubmenu;
+    private final OnClickListener mBlockClickListener = this::showBlockSubmenu;
+    private final OnClickListener mAddBackClickListener = new OnClickListener() {
 
     private OnClickListener mAddBackClickListener = new OnClickListener() {
         @Override
@@ -394,12 +391,10 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             }
         }
     };
-    private View.OnLongClickListener mLongPressBlockListener = v -> {
-        showBlockSubmenu(v);
-        return true;
-    };
 
-    private OnClickListener mHideUnencryptionHint = v -> enableMessageEncryption();
+    private final View.OnLongClickListener mLongPressBlockListener = this::showBlockSubmenu;
+
+    private final OnClickListener mHideUnencryptionHint = v -> enableMessageEncryption();
 
     private void enableMessageEncryption() {
         if (Config.supportOmemo() && Conversation.suitableForOmemoByDefault(conversation) && conversation.isSingleOrPrivateAndNonAnonymous()) {
@@ -410,7 +405,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         hideSnackbar();
     }
 
-    private OnClickListener mAllowPresenceSubscription = new OnClickListener() {
+    private final OnClickListener mAllowPresenceSubscription = new OnClickListener() {
         @Override
         public void onClick(View v) {
             final Contact contact = conversation == null ? null : conversation.getContact();
@@ -444,8 +439,8 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             updateSnackBar(conversation);
         }
     };
-    private AtomicBoolean mSendingPgpMessage = new AtomicBoolean(false);
-    private OnEditorActionListener mEditorActionListener = (v, actionId, event) -> {
+    private final AtomicBoolean mSendingPgpMessage = new AtomicBoolean(false);
+    private final OnEditorActionListener mEditorActionListener = (v, actionId, event) -> {
         if (actionId == EditorInfo.IME_ACTION_SEND) {
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             if (imm != null && imm.isFullscreenMode()) {
@@ -457,8 +452,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             return false;
         }
     };
-
-    private OnClickListener mScrollButtonListener = new OnClickListener() {
+    private final OnClickListener mScrollButtonListener = new OnClickListener() {
 
         @Override
         public void onClick(View v) {
@@ -467,9 +461,9 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         }
     };
 
-    private OnClickListener mRecordVoiceButtonListener = v -> attachFile(ATTACHMENT_CHOICE_RECORD_VOICE);
+    private final OnClickListener mRecordVoiceButtonListener = v -> attachFile(ATTACHMENT_CHOICE_RECORD_VOICE);
 
-    private OnClickListener mSendButtonListener = new OnClickListener() {
+    private final OnClickListener mSendButtonListener = new OnClickListener() {
 
         @Override
         public void onClick(View v) {
@@ -579,7 +573,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
 
     private static Conversation getConversation(Activity activity, @IdRes int res) {
         final Fragment fragment = activity.getFragmentManager().findFragmentById(res);
-        if (fragment != null && fragment instanceof ConversationFragment) {
+        if (fragment instanceof ConversationFragment) {
             return ((ConversationFragment) fragment).getConversation();
         } else {
             return null;
@@ -589,11 +583,11 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
     public static ConversationFragment get(Activity activity) {
         FragmentManager fragmentManager = activity.getFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.main_fragment);
-        if (fragment != null && fragment instanceof ConversationFragment) {
+        if (fragment instanceof ConversationFragment) {
             return (ConversationFragment) fragment;
         } else {
             fragment = fragmentManager.findFragmentById(R.id.secondary_fragment);
-            return fragment != null && fragment instanceof ConversationFragment ? (ConversationFragment) fragment : null;
+            return fragment instanceof ConversationFragment ? (ConversationFragment) fragment : null;
         }
     }
 
@@ -1142,7 +1136,8 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 menuCall.setVisible(false);
                 menuOngoingCall.setVisible(false);
             } else {
-                final Optional<OngoingRtpSession> ongoingRtpSession = activity.xmppConnectionService.getJingleConnectionManager().getOngoingRtpConnection(conversation.getContact());
+                final XmppConnectionService service = activity.xmppConnectionService;
+                final Optional<OngoingRtpSession> ongoingRtpSession = service == null ? Optional.absent() : service.getJingleConnectionManager().getOngoingRtpConnection(conversation.getContact());
                 if (ongoingRtpSession.isPresent()) {
                     menuOngoingCall.setVisible(true);
                     menuCall.setVisible(false);

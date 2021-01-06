@@ -38,6 +38,7 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -130,23 +131,24 @@ public class SearchActivity extends XmppActivity implements TextWatcher, OnSearc
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        AdapterView.AdapterContextMenuInfo acmi = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        final Message message = this.messages.get(acmi.position);
-        this.selectedMessageReference = new WeakReference<>(message);
-        getMenuInflater().inflate(R.menu.search_result_context, menu);
-        MenuItem copy = menu.findItem(R.id.copy_message);
-        MenuItem quote = menu.findItem(R.id.quote_message);
-        MenuItem copyUrl = menu.findItem(R.id.copy_url);
-        if (message.isGeoUri()) {
-            copy.setVisible(false);
-            quote.setVisible(false);
-        } else {
-            copyUrl.setVisible(false);
-        }
-        super.onCreateContextMenu(menu, v, menuInfo);
-    }
+	@Override
+	public void onCreateContextMenu(final ContextMenu menu, final View v, ContextMenu.ContextMenuInfo menuInfo) {
+		v.dispatchTouchEvent(MotionEvent.obtain(0, 0, MotionEvent.ACTION_CANCEL, 0f, 0f, 0));
+		AdapterView.AdapterContextMenuInfo acmi = (AdapterView.AdapterContextMenuInfo) menuInfo;
+		final Message message = this.messages.get(acmi.position);
+		this.selectedMessageReference = new WeakReference<>(message);
+		getMenuInflater().inflate(R.menu.search_result_context, menu);
+		MenuItem copy = menu.findItem(R.id.copy_message);
+		MenuItem quote = menu.findItem(R.id.quote_message);
+		MenuItem copyUrl = menu.findItem(R.id.copy_url);
+		if (message.isGeoUri()) {
+			copy.setVisible(false);
+			quote.setVisible(false);
+		} else {
+			copyUrl.setVisible(false);
+		}
+		super.onCreateContextMenu(menu, v, menuInfo);
+	}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
