@@ -379,9 +379,9 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         }
     };
     private final OnClickListener mBlockClickListener = this::showBlockSubmenu;
+
     private final OnClickListener mAddBackClickListener = new OnClickListener() {
 
-    private OnClickListener mAddBackClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
             final Contact contact = conversation == null ? null : conversation.getContact();
