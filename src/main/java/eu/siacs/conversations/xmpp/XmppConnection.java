@@ -120,7 +120,7 @@ public class XmppConnection implements Runnable {
                     "Please use a longer password.");
             Element error = packet.findChild("error");
             Account.State state = Account.State.REGISTRATION_FAILED;
-            mXmppConnectionService.deleteAccount(account);
+            deleteAccount(account);
                 if (error != null) {
                     if (error.hasChild("text")) {
                         errorMessage = error.findChildContent("text");
@@ -140,6 +140,11 @@ public class XmppConnection implements Runnable {
             throw new StateChangingError(state);
         }
     };
+
+    private void deleteAccount(Account account) {
+        mXmppConnectionService.deleteAccount(account);
+    }
+
     protected final Account account;
     private final Features features = new Features(this);
     private final HashMap<Jid, ServiceDiscoveryResult> disco = new HashMap<>();
