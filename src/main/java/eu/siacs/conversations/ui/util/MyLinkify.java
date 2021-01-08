@@ -148,7 +148,10 @@ public class MyLinkify {
     }
 
     private static boolean isValid(String url) {
-        String urlstring = "https://" + url;
+        String urlstring = url;
+        if (!urlstring.toLowerCase(Locale.US).startsWith("http://") && !urlstring.toLowerCase(Locale.US).startsWith("https://")) {
+            urlstring = "https://" + url;
+        }
         try {
             return URLUtil.isValidUrl(urlstring) && Patterns.WEB_URL.matcher(urlstring).matches();
         } catch (Exception e) {
