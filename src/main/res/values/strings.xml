@@ -1087,4 +1087,6 @@
     <string name="share_invite_with">Share invite with…</string>
     <string name="no_active_accounts_support_this">No active accounts support this feature</string>
     <string name="server_info_easy_invite">XEP-0401: Easy User Onboarding</string>
+    <string name="pref_mappreview_host_summary">Use a custom map preview host</string>
+    <string name="pref_mappreview_host">Map preview host</string>
 </resources>

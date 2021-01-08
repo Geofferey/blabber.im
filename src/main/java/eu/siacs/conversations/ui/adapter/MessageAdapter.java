@@ -14,7 +14,6 @@ import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.format.DateUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
@@ -22,9 +21,6 @@ import android.text.style.StyleSpan;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -90,8 +86,8 @@ import eu.siacs.conversations.utils.ThemeHelper;
 import eu.siacs.conversations.utils.TimeFrameUtils;
 import eu.siacs.conversations.utils.UIHelper;
 import eu.siacs.conversations.xmpp.Jid;
-import me.drakeet.support.toast.ToastCompat;
 import eu.siacs.conversations.xmpp.mam.MamReference;
+import me.drakeet.support.toast.ToastCompat;
 import pl.droidsonroids.gif.GifImageView;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -821,10 +817,10 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         }
     }
 
-    private void displayLocationMessage(final ViewHolder viewHolder, final Message message, final boolean darkBackground) {
+    private void displayLocationMessage(final ViewHolder viewHolder, final Message message, final boolean darkBackground, Activity activity) {
         toggleWhisperInfo(viewHolder, message, false, darkBackground);
         viewHolder.audioPlayer.setVisibility(View.GONE);
-        final String url = GeoHelper.MapPreviewUri(message);
+        final String url = GeoHelper.MapPreviewUri(message, activity);
         viewHolder.gifImage.setVisibility(View.GONE);
         viewHolder.richlinkview.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
@@ -1246,7 +1242,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             displayInfoMessage(viewHolder, activity.getString(R.string.omemo_decryption_failed), darkBackground, message);
         } else {
             if (message.isGeoUri()) {
-                displayLocationMessage(viewHolder, message, darkBackground);
+                displayLocationMessage(viewHolder, message, darkBackground, activity);
             } else if (message.bodyIsOnlyEmojis() && message.getType() != Message.TYPE_PRIVATE) {
                 displayEmojiMessage(viewHolder, message.getBody().trim(), darkBackground);
             } else if (message.isXmppUri()) {

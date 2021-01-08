@@ -1,14 +1,20 @@
 package eu.siacs.conversations.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
+import android.util.Log;
+import android.webkit.URLUtil;
 
 import org.osmdroid.util.GeoPoint;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,13 +23,14 @@ import eu.siacs.conversations.R;
 import eu.siacs.conversations.entities.Contact;
 import eu.siacs.conversations.entities.Conversational;
 import eu.siacs.conversations.entities.Message;
+import eu.siacs.conversations.ui.SettingsActivity;
 import eu.siacs.conversations.ui.ShowLocationActivity;
 
 public class GeoHelper {
 
     public static Pattern GEO_URI = Pattern.compile("geo:(-?\\d+(?:\\.\\d+)?),(-?\\d+(?:\\.\\d+)?)(?:,-?\\d+(?:\\.\\d+)?)?(?:;crs=[\\w-]+)?(?:;u=\\d+(?:\\.\\d+)?)?(?:;[\\w-]+=(?:[\\w-_.!~*'()]|%[\\da-f][\\da-f])+)*(\\?z=\\d+)?", Pattern.CASE_INSENSITIVE);
 
-    public static String MapPreviewUri(Message message) {
+    public static String MapPreviewUri(Message message, Activity activity) {
         Matcher matcher = GEO_URI.matcher(message.getBody());
         if (!matcher.matches()) {
             return null;
@@ -42,7 +49,32 @@ public class GeoHelper {
         } catch (NumberFormatException nfe) {
             return null;
         }
-        return "https://blabber.im/staticmap/staticmap.php?center=" + latitude + "," + longitude + "&size=500x500&markers=" + latitude + "," + longitude + "&zoom=" + Config.DEFAULT_ZOOM;
+        return getMappreviewHost(activity) + "?center=" + latitude + "," + longitude + "&size=500x500&markers=" + latitude + "," + longitude + "&zoom=" + Config.DEFAULT_ZOOM;
+    }
+
+    private static String getMappreviewHost(Activity activity) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
+        String mapprevieHost = sharedPreferences.getString(SettingsActivity.MAPPREVIEW_HOST, activity.getResources().getString(R.string.mappreview_url));
+        if (mapprevieHost.length() == 0) {
+            return activity.getResources().getString(R.string.mappreview_url);
+        } else if ((mapprevieHost.length() > 0) && isValid(mapprevieHost)) {
+            return mapprevieHost;
+        } else {
+            return activity.getResources().getString(R.string.mappreview_url);
+        }
+    }
+
+    private static boolean isValid(String url) {
+        String urlstring = url;
+        if (!urlstring.toLowerCase(Locale.US).startsWith("http://") && !urlstring.toLowerCase(Locale.US).startsWith("https://")) {
+            urlstring = "https://" + url;
+        }
+        try {
+            return URLUtil.isValidUrl(urlstring) && Patterns.WEB_URL.matcher(urlstring).matches();
+        } catch (Exception e) {
+            Log.d(Config.LOGTAG, "Could not use custom mappreview host and using blabber.im for mappreview " + e);
+        }
+        return false;
     }
 
     private static GeoPoint parseGeoPoint(String body) throws IllegalArgumentException {

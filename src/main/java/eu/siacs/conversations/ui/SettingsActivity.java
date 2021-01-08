@@ -76,6 +76,7 @@ public class SettingsActivity extends XmppActivity implements
     public static final String INDICATE_RECEIVED = "indicate_received";
     public static final String USE_INVIDIOUS = "use_invidious";
     public static final String INVIDIOUS_HOST = "invidious_host";
+    public static final String MAPPREVIEW_HOST = "mappreview_host";
     public static final String ALLOW_MESSAGE_CORRECTION = "allow_message_correction";
     public static final String USE_UNICOLORED_CHATBG = "unicolored_chatbg";
 

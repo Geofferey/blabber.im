@@ -352,8 +352,15 @@
         <CheckBoxPreference
             android:defaultValue="@bool/show_maps_inside"
             android:key="show_maps_inside"
+            android:disableDependentsState="false"
             android:summary="@string/pref_show_mappreview_inside_summary"
             android:title="@string/pref_show_mappreview_inside" />
+        <EditTextPreference
+            android:dependency="show_maps_inside"
+            android:defaultValue="@string/mappreview_url"
+            android:key="mappreview_host"
+            android:summary="@string/pref_mappreview_host_summary"
+            android:title="@string/pref_mappreview_host" />
         <CheckBoxPreference
             android:defaultValue="@bool/warn_unencrypted_chat"
             android:key="warn_unencrypted_chat"
