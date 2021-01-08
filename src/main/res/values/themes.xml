@@ -34,6 +34,7 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
         <item name="colorAccentLight">@color/accent_light</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_disabled</item>
         <item name="popupOverlayStyle">@style/ThemeOverlay.MaterialComponents.Light</item>
         <item name="colorControlNormal">@color/accent</item>
         <item name="colorControlActivated">@color/accent</item>
@@ -196,6 +197,7 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
         <item name="colorAccentLight">@color/accent_light</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_disabled</item>
         <item name="popupOverlayStyle">@style/ThemeOverlay.MaterialComponents.Dark</item>
         <item name="colorControlNormal">@color/accent</item>
         <item name="colorControlActivated">@color/accent</item>
@@ -374,6 +376,7 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
         <item name="colorAccentLight">@color/accent_light</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_disabled</item>
         <item name="color_background_primary">@color/grey50</item>
         <item name="divider">@color/black12</item>
         <item name="TextSizeTitle">18sp</item>
@@ -388,6 +391,7 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
         <item name="colorAccentLight">@color/accent_light</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_disabled</item>
         <item name="color_background_primary">@color/grey800</item>
         <item name="divider">@color/white12</item>
         <item name="TextSizeBody2">14sp</item>
@@ -535,6 +539,7 @@
         <item name="colorPrimaryDark">@color/primary_dark_blabber</item>
         <item name="colorAccent">@color/accent_blabber</item>
         <item name="colorAccentLight">@color/accent_light_blabber</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_disabled_blabber</item>
         <item name="colorControlNormal">@color/accent_blabber</item>
         <item name="colorControlActivated">@color/accent_blabber</item>
         <item name="color_bubble_light">@color/lightblabber</item>
@@ -551,6 +556,7 @@
         <item name="colorPrimaryDark">@color/primary_dark_blabber</item>
         <item name="colorAccent">@color/accent_blabber</item>
         <item name="colorAccentLight">@color/accent_light_blabber</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_disabled_blabber</item>
         <item name="colorControlNormal">@color/accent_blabber</item>
         <item name="colorControlActivated">@color/accent_blabber</item>
         <item name="color_bubble_light">@color/middleblabber</item>
@@ -563,6 +569,7 @@
     <style name="ConversationsTheme.Blabber.Black" parent="ConversationsTheme.Black">
         <item name="colorAccent">@color/accent_blabber</item>
         <item name="colorAccentLight">@color/accent_light_blabber</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_disabled_blabber</item>
         <item name="colorControlNormal">@color/accent_blabber</item>
         <item name="colorControlActivated">@color/accent_blabber</item>
         <item name="android:actionModeBackground">@color/accent_blabber</item>
@@ -574,6 +581,7 @@
         <item name="colorPrimaryDark">@color/primary_dark_blabber</item>
         <item name="colorAccent">@color/accent_blabber</item>
         <item name="colorAccentLight">@color/accent_light_blabber</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_disabled_blabber</item>
     </style>
 
     <!-- blabber dialog - dark -->
@@ -582,12 +590,14 @@
         <item name="colorPrimaryDark">@color/primary_dark_blabber</item>
         <item name="colorAccent">@color/accent_blabber</item>
         <item name="colorAccentLight">@color/accent_light_blabber</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_disabled_blabber</item>
     </style>
 
     <!-- blabber dialog - black -->
     <style name="ConversationsTheme.Blabber.Black.Dialog" parent="ConversationsTheme.Black.Dialog">
         <item name="colorAccent">@color/accent_blabber</item>
         <item name="colorAccentLight">@color/accent_light_blabber</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_disabled_blabber</item>
     </style>
 
     <!-- blabber dialog medium font -->
@@ -723,6 +733,7 @@
         <item name="colorPrimaryDark">@color/primary_dark_orange</item>
         <item name="colorAccent">@color/accent_orange</item>
         <item name="colorAccentLight">@color/accent_light_orange</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_orange_disabled</item>
         <item name="colorControlNormal">@color/accent_orange</item>
         <item name="colorControlActivated">@color/accent_orange</item>
         <item name="color_bubble_light">@color/lightorange</item>
@@ -739,6 +750,7 @@
         <item name="colorPrimaryDark">@color/primary_dark_orange_dark</item>
         <item name="colorAccent">@color/accent_orange</item>
         <item name="colorAccentLight">@color/accent_light_orange</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_orange_disabled</item>
         <item name="colorControlNormal">@color/accent_orange</item>
         <item name="colorControlActivated">@color/accent_orange</item>
         <item name="color_bubble_light">@color/middleorange</item>
@@ -751,6 +763,7 @@
     <style name="ConversationsTheme.Orange.Black" parent="ConversationsTheme.Black">
         <item name="colorAccent">@color/accent_orange</item>
         <item name="colorAccentLight">@color/accent_light_orange</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_orange_disabled</item>
         <item name="colorControlNormal">@color/accent_orange</item>
         <item name="colorControlActivated">@color/accent_orange</item>
         <item name="android:actionModeBackground">@color/accent_orange</item>
@@ -762,6 +775,7 @@
         <item name="colorPrimaryDark">@color/primary_dark_orange</item>
         <item name="colorAccent">@color/accent_orange</item>
         <item name="colorAccentLight">@color/accent_light_orange</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_orange_disabled</item>
     </style>
 
     <!-- orange dialog - dark -->
@@ -770,12 +784,14 @@
         <item name="colorPrimaryDark">@color/primary_dark_orange_dark</item>
         <item name="colorAccent">@color/accent_orange</item>
         <item name="colorAccentLight">@color/accent_light_orange</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_orange_disabled</item>
     </style>
 
     <!-- orange dialog - black -->
     <style name="ConversationsTheme.Orange.Black.Dialog" parent="ConversationsTheme.Black.Dialog">
         <item name="colorAccent">@color/accent_orange</item>
         <item name="colorAccentLight">@color/accent_light_orange</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_orange_disabled</item>
     </style>
 
     <!-- orange dialog medium font -->
@@ -911,6 +927,7 @@
         <item name="colorPrimaryDark">@color/primary_dark_grey</item>
         <item name="colorAccent">@color/accent_grey</item>
         <item name="colorAccentLight">@color/accent_light_grey</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_grey_disabled</item>
         <item name="colorControlNormal">@color/accent_grey</item>
         <item name="colorControlActivated">@color/accent_grey</item>
         <item name="color_bubble_light">@color/lightgrey</item>
@@ -925,6 +942,7 @@
         <item name="colorPrimaryDark">@color/primary_dark_grey_dark</item>
         <item name="colorAccent">@color/accent_grey</item>
         <item name="colorAccentLight">@color/accent_light_grey</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_grey_disabled</item>
         <item name="colorControlNormal">@color/accent_grey</item>
         <item name="colorControlActivated">@color/accent_grey</item>
         <item name="color_bubble_light">@color/middlegrey</item>
@@ -937,6 +955,7 @@
     <style name="ConversationsTheme.Grey.Black" parent="ConversationsTheme.Black">
         <item name="colorAccent">@color/accent_grey</item>
         <item name="colorAccentLight">@color/accent_light_grey</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_grey_disabled</item>
         <item name="colorControlNormal">@color/accent_grey</item>
         <item name="colorControlActivated">@color/accent_grey</item>
         <item name="android:actionModeBackground">@color/accent_grey</item>
@@ -948,6 +967,7 @@
         <item name="colorPrimaryDark">@color/primary_dark_grey</item>
         <item name="colorAccent">@color/accent_grey</item>
         <item name="colorAccentLight">@color/accent_light_grey</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_grey_disabled</item>
     </style>
 
     <!-- grey dialog - dark -->
@@ -956,12 +976,14 @@
         <item name="colorPrimaryDark">@color/primary_dark_grey_dark</item>
         <item name="colorAccent">@color/accent_grey</item>
         <item name="colorAccentLight">@color/accent_light_grey</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_grey_disabled</item>
     </style>
 
     <!-- grey dialog - black -->
     <style name="ConversationsTheme.Grey.Black.Dialog" parent="ConversationsTheme.Black.Dialog">
         <item name="colorAccent">@color/accent_grey</item>
         <item name="colorAccentLight">@color/accent_light_grey</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_grey_disabled</item>
     </style>
 
     <!-- grey dialog medium font -->
@@ -1097,6 +1119,7 @@
         <item name="colorPrimaryDark">@color/primary_dark_pink</item>
         <item name="colorAccent">@color/accent_pink</item>
         <item name="colorAccentLight">@color/accent_light_pink</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_pink_disabled</item>
         <item name="colorControlNormal">@color/accent_pink</item>
         <item name="colorControlActivated">@color/accent_pink</item>
         <item name="color_bubble_light">@color/lightpink</item>
@@ -1111,6 +1134,7 @@
         <item name="colorPrimaryDark">@color/primary_dark_pink_dark</item>
         <item name="colorAccent">@color/accent_pink</item>
         <item name="colorAccentLight">@color/accent_light_pink</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_pink_disabled</item>
         <item name="colorControlNormal">@color/accent_pink</item>
         <item name="colorControlActivated">@color/accent_pink</item>
         <item name="color_bubble_light">@color/middlepink</item>
@@ -1123,6 +1147,7 @@
     <style name="ConversationsTheme.Pink.Black" parent="ConversationsTheme.Black">
         <item name="colorAccent">@color/accent_pink</item>
         <item name="colorAccentLight">@color/accent_light_pink</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_pink_disabled</item>
         <item name="colorControlNormal">@color/accent_pink</item>
         <item name="colorControlActivated">@color/accent_pink</item>
         <item name="android:actionModeBackground">@color/accent_pink</item>
@@ -1134,6 +1159,7 @@
         <item name="colorPrimaryDark">@color/primary_dark_pink</item>
         <item name="colorAccent">@color/accent_pink</item>
         <item name="colorAccentLight">@color/accent_light_pink</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_pink_disabled</item>
     </style>
 
     <!-- pink dialog - dark -->
@@ -1142,12 +1168,14 @@
         <item name="colorPrimaryDark">@color/primary_dark_pink_dark</item>
         <item name="colorAccent">@color/accent_pink</item>
         <item name="colorAccentLight">@color/accent_light_pink</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_pink_disabled</item>
     </style>
 
     <!-- pink dialog - black -->
     <style name="ConversationsTheme.Pink.Black.Dialog" parent="ConversationsTheme.Black.Dialog">
         <item name="colorAccent">@color/accent_pink</item>
         <item name="colorAccentLight">@color/accent_light_pink</item>
+        <item name="colorAccentLightDisabled">@color/accent_light_pink_disabled</item>
     </style>
 
     <!-- pink dialog medium font -->

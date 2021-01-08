@@ -33,9 +33,9 @@ import eu.siacs.conversations.ui.util.StyledAttributes;
 import eu.siacs.conversations.utils.EmojiWrapper;
 import eu.siacs.conversations.utils.IrregularUnicodeDetector;
 import eu.siacs.conversations.utils.UIHelper;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.chatstate.ChatState;
 import eu.siacs.conversations.xmpp.jingle.OngoingRtpSession;
-import eu.siacs.conversations.xmpp.Jid;
 
 import static eu.siacs.conversations.entities.Message.DELETED_MESSAGE_BODY;
 import static eu.siacs.conversations.entities.Message.DELETED_MESSAGE_BODY_OLD;
@@ -43,6 +43,8 @@ import static eu.siacs.conversations.ui.util.MyLinkify.replaceYoutube;
 
 public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.ConversationViewHolder> {
 
+    private static final float INACTIVE_ALPHA = 0.4684f;
+    private static final float ACTIVE_ALPHA = 1.0f;
     private XmppActivity activity;
     private List<Conversation> conversations;
     private OnConversationClickListener listener;
@@ -245,11 +247,22 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         } else {
             timestamp = message.getTimeSent();
         }
+        final boolean isAccountDisabled = !conversation.getAccount().isEnabled();
         final boolean isPinned = conversation.getBooleanAttribute(Conversation.ATTRIBUTE_PINNED_ON_TOP,false);
         if (isPinned) {
             viewHolder.binding.chat.setBackgroundColor(StyledAttributes.getColor(this.activity, R.attr.colorAccentLight));
+            viewHolder.binding.chat.setAlpha(ACTIVE_ALPHA);
+            if (isAccountDisabled) {
+                viewHolder.binding.chat.setBackgroundColor(StyledAttributes.getColor(this.activity, R.attr.colorAccentLightDisabled));
+                viewHolder.binding.chat.setAlpha(INACTIVE_ALPHA);
+            }
         } else {
             viewHolder.binding.chat.setBackgroundColor(0);
+            viewHolder.binding.chat.setAlpha(ACTIVE_ALPHA);
+            if (isAccountDisabled) {
+                viewHolder.binding.chat.setBackgroundColor(StyledAttributes.getColor(this.activity, R.attr.colorAccentLightDisabled));
+                viewHolder.binding.chat.setAlpha(INACTIVE_ALPHA);
+            }
         }
         viewHolder.binding.pinnedOnTop.setVisibility(isPinned ? View.VISIBLE : View.GONE);
         viewHolder.binding.conversationLastupdate.setText(UIHelper.readableTimeDifference(activity, timestamp));

@@ -6,10 +6,9 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Lists;
-
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -566,6 +565,7 @@ public class Conversation extends AbstractEntity implements Blockable, Comparabl
     public int compareTo(@NonNull Conversation another) {
         return ComparisonChain.start()
                 .compareFalseFirst(another.getBooleanAttribute(ATTRIBUTE_PINNED_ON_TOP, false), getBooleanAttribute(ATTRIBUTE_PINNED_ON_TOP,false))
+                .compareFalseFirst(another.getAccount().isEnabled(), getAccount().isEnabled())
                 .compare(another.getSortableTime(), getSortableTime())
                 .result();
     }
