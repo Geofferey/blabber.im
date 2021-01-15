@@ -18,13 +18,12 @@ import eu.siacs.conversations.R;
 import eu.siacs.conversations.services.AvatarService;
 import eu.siacs.conversations.services.MessageArchiveService;
 import eu.siacs.conversations.utils.JidHelper;
-import eu.siacs.conversations.utils.Namespace;
 import eu.siacs.conversations.utils.UIHelper;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.chatstate.ChatState;
 import eu.siacs.conversations.xmpp.forms.Data;
 import eu.siacs.conversations.xmpp.forms.Field;
 import eu.siacs.conversations.xmpp.pep.Avatar;
-import eu.siacs.conversations.xmpp.Jid;
 
 @SuppressLint("DefaultLocale")
 public class MucOptions {
@@ -41,7 +40,7 @@ public class MucOptions {
     private final Conversation conversation;
     public OnRenameListener onRenameListener = null;
     private boolean mAutoPushConfiguration = true;
-    private Account account;
+    private final Account account;
     private ServiceDiscoveryResult serviceDiscoveryResult;
     private boolean isOnline = false;
     private Error error = Error.NONE;
