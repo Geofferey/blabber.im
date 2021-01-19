@@ -39,6 +39,7 @@ import eu.siacs.conversations.R;
 import eu.siacs.conversations.http.NoSSLv3SocketFactory;
 import eu.siacs.conversations.persistance.FileBackend;
 import eu.siacs.conversations.services.XmppConnectionService;
+import eu.siacs.conversations.ui.util.CustomTab;
 import eu.siacs.conversations.utils.WakeLockHelper;
 import me.drakeet.support.toast.ToastCompat;
 
@@ -145,10 +146,12 @@ public class UpdaterActivity extends XmppActivity {
                                     startActivity(marketIntent);
                                     overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
                                 } else {
-                                    uri = Uri.parse("https://" + blabber());
-                                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-                                    startActivity(browserIntent);
-                                    overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
+                                    try {
+                                        uri = Uri.parse("https://" + blabber());
+                                        CustomTab.openTab(this, uri, isDarkTheme());
+                                    } catch (Exception e) {
+                                        ToastCompat.makeText(this, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             } else if (store != null && store.equalsIgnoreCase(FDroid)) {
                                 Uri uri = Uri.parse("https://f-droid.org/de/packages/" + getString(R.string.applicationId) + "/");
@@ -160,9 +163,11 @@ public class UpdaterActivity extends XmppActivity {
                                     overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
                                 } else {
                                     uri = Uri.parse("https://" + blabber());
-                                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-                                    startActivity(browserIntent);
-                                    overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
+                                    try {
+                                        CustomTab.openTab(this, uri, isDarkTheme());
+                                    } catch (Exception e) {
+                                        ToastCompat.makeText(this, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             } else {
                                 ToastCompat.makeText(getApplicationContext(), getText(R.string.download_started), Toast.LENGTH_LONG).show();
@@ -176,12 +181,9 @@ public class UpdaterActivity extends XmppActivity {
                     .setNeutralButton(R.string.changelog, (dialog, id) -> {
                         Uri uri = Uri.parse(Config.CHANGELOG_URL); // missing 'http://' will cause crash
                         try {
-                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
+                            CustomTab.openTab(this, uri, isDarkTheme());
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            ToastCompat.makeText(this, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
                         } finally {
                             //restart updater to show dialog again after coming back after opening changelog
                             recreate();

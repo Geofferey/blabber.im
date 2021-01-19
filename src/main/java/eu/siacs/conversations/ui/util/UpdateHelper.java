@@ -2,7 +2,6 @@ package eu.siacs.conversations.ui.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -24,6 +23,7 @@ import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.ui.ConversationsActivity;
 import eu.siacs.conversations.ui.WelcomeActivity;
+import eu.siacs.conversations.utils.ThemeHelper;
 import me.drakeet.support.toast.ToastCompat;
 
 public class UpdateHelper {
@@ -78,8 +78,10 @@ public class UpdateHelper {
                         SaveMessageShown(activity, blabber_message);
                         try {
                             final Uri uri = Uri.parse(Config.migrationURL);
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-                            activity.startActivity(browserIntent);
+                            try {CustomTab.openTab(activity, uri, ThemeHelper.isDark(ThemeHelper.find(activity)));
+                            } catch (Exception e) {
+                                ToastCompat.makeText(activity, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+                            }
                             showNewInstalledDialog(activity);
                         } catch (Exception e) {
                             ToastCompat.makeText(activity, R.string.no_application_found_to_open_link, Toast.LENGTH_LONG).show();

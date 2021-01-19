@@ -81,6 +81,7 @@ import eu.siacs.conversations.services.QuickConversationsService;
 import eu.siacs.conversations.services.UpdateService;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.services.XmppConnectionService.XmppConnectionBinder;
+import eu.siacs.conversations.ui.util.CustomTab;
 import eu.siacs.conversations.ui.util.PresenceSelector;
 import eu.siacs.conversations.ui.util.SoftKeyboardUtils;
 import eu.siacs.conversations.utils.AccountUtils;
@@ -301,9 +302,11 @@ public abstract class XmppActivity extends ActionBarActivity {
                         startActivity(marketIntent);
                     } else {
                         uri = Uri.parse("http://www.openkeychain.org/");
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivity(browserIntent);
-                        overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
+                        try {
+                            CustomTab.openTab(this, uri, isDarkTheme());
+                        } catch (Exception e) {
+                            ToastCompat.makeText(this, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+                        }
                     }
                     finish();
                 });

@@ -1,8 +1,6 @@
 package eu.siacs.conversations.ui.widget;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -19,8 +17,10 @@ import com.squareup.picasso.Picasso;
 
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.services.XmppConnectionService;
+import eu.siacs.conversations.ui.util.CustomTab;
 import eu.siacs.conversations.utils.MetaData;
 import eu.siacs.conversations.utils.RichPreview;
+import eu.siacs.conversations.utils.ThemeHelper;
 import me.drakeet.support.toast.ToastCompat;
 
 
@@ -138,11 +138,10 @@ public class RichLinkView extends RelativeLayout {
     }
 
     private void richLinkClicked() {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(main_url));
         try {
-            context.startActivity(intent);
-        } catch (ActivityNotFoundException e) {
-            ToastCompat.makeText(context, R.string.no_application_found_to_open_link, Toast.LENGTH_LONG).show();
+            CustomTab.openTab(this.context, Uri.parse(main_url), ThemeHelper.isDark(ThemeHelper.find(this.context)));
+        } catch (Exception e) {
+            ToastCompat.makeText(this.context, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
         }
     }
 
