@@ -77,9 +77,9 @@ import eu.siacs.conversations.ui.util.SoftKeyboardUtils;
 import eu.siacs.conversations.utils.AccountUtils;
 import eu.siacs.conversations.utils.MenuDoubleTabUtil;
 import eu.siacs.conversations.utils.XmppUri;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.OnUpdateBlocklist;
 import eu.siacs.conversations.xmpp.XmppConnection;
-import eu.siacs.conversations.xmpp.Jid;
 import me.drakeet.support.toast.ToastCompat;
 
 public class StartConversationActivity extends XmppActivity implements XmppConnectionService.OnConversationUpdate, OnRosterUpdate, OnUpdateBlocklist, CreatePrivateGroupChatDialog.CreateConferenceDialogListener, JoinConferenceDialog.JoinConferenceDialogListener, CreatePublicChannelDialog.CreatePublicChannelDialogListener {
@@ -94,16 +94,17 @@ public class StartConversationActivity extends XmppActivity implements XmppConne
     public int conference_context_id;
     public int contact_context_id;
     private ListPagerAdapter mListPagerAdapter;
-    private List<ListItem> contacts = new ArrayList<>();
+	private final List<ListItem> contacts = new ArrayList<>();
     private ListItemAdapter mContactsAdapter;
-    private List<ListItem> conferences = new ArrayList<>();
+	private final List<ListItem> conferences = new ArrayList<>();
     private ListItemAdapter mConferenceAdapter;
-    private List<String> mActivatedAccounts = new ArrayList<>();
+	private final List<String> mActivatedAccounts = new ArrayList<>();
     private EditText mSearchEditText;
-    private AtomicBoolean mRequestedContactsPermission = new AtomicBoolean(false);
+	private final AtomicBoolean mRequestedContactsPermission = new AtomicBoolean(false);
+	private final AtomicBoolean mOpenedFab = new AtomicBoolean(false);
     private boolean mHideOfflineContacts = false;
     private boolean createdByViewIntent = false;
-    private MenuItem.OnActionExpandListener mOnActionExpandListener = new MenuItem.OnActionExpandListener() {
+	private final MenuItem.OnActionExpandListener mOnActionExpandListener = new MenuItem.OnActionExpandListener() {
 
         @Override
         public boolean onMenuItemActionExpand(MenuItem item) {
@@ -132,7 +133,7 @@ public class StartConversationActivity extends XmppActivity implements XmppConne
             return true;
         }
     };
-    private TextWatcher mSearchTextWatcher = new TextWatcher() {
+	private final TextWatcher mSearchTextWatcher = new TextWatcher() {
 
         @Override
         public void afterTextChanged(Editable editable) {
@@ -148,7 +149,7 @@ public class StartConversationActivity extends XmppActivity implements XmppConne
         }
     };
     private MenuItem mMenuSearchView;
-    private ListItemAdapter.OnTagClickedListener mOnTagClickedListener = new ListItemAdapter.OnTagClickedListener() {
+	private final ListItemAdapter.OnTagClickedListener mOnTagClickedListener = new ListItemAdapter.OnTagClickedListener() {
         @Override
         public void onTagClicked(String tag) {
             if (mMenuSearchView != null) {
@@ -161,7 +162,7 @@ public class StartConversationActivity extends XmppActivity implements XmppConne
     };
     private Pair<Integer, Intent> mPostponedActivityResult;
     private Toast mToast;
-    private UiCallback<Conversation> mAdhocConferenceCallback = new UiCallback<Conversation>() {
+	private final UiCallback<Conversation> mAdhocConferenceCallback = new UiCallback<Conversation>() {
         @Override
         public void success(final Conversation conversation) {
             runOnUiThread(() -> {
@@ -181,7 +182,7 @@ public class StartConversationActivity extends XmppActivity implements XmppConne
     };
 
     private ActivityStartConversationBinding binding;
-    private TextView.OnEditorActionListener mSearchDone = new TextView.OnEditorActionListener() {
+	private final TextView.OnEditorActionListener mSearchDone = new TextView.OnEditorActionListener() {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             int pos = binding.startConversationViewPager.getCurrentItem();
