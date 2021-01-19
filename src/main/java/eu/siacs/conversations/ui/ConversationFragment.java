@@ -23,7 +23,6 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -33,7 +32,6 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -101,7 +99,6 @@ import eu.siacs.conversations.entities.TransferablePlaceholder;
 import eu.siacs.conversations.http.HttpDownloadConnection;
 import eu.siacs.conversations.persistance.FileBackend;
 import eu.siacs.conversations.services.MessageArchiveService;
-import eu.siacs.conversations.services.NotificationService;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.ui.adapter.MediaPreviewAdapter;
 import eu.siacs.conversations.ui.adapter.MessageAdapter;
@@ -127,7 +124,6 @@ import eu.siacs.conversations.utils.Compatibility;
 import eu.siacs.conversations.utils.GeoHelper;
 import eu.siacs.conversations.utils.MenuDoubleTabUtil;
 import eu.siacs.conversations.utils.MessageUtils;
-import eu.siacs.conversations.utils.Namespace;
 import eu.siacs.conversations.utils.NickValidityChecker;
 import eu.siacs.conversations.utils.Patterns;
 import eu.siacs.conversations.utils.QuickLoader;
@@ -136,10 +132,7 @@ import eu.siacs.conversations.utils.UIHelper;
 import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.XmppConnection;
 import eu.siacs.conversations.xmpp.chatstate.ChatState;
-import eu.siacs.conversations.xmpp.jingle.AbstractJingleConnection;
-import eu.siacs.conversations.xmpp.jingle.JingleConnectionManager;
 import eu.siacs.conversations.xmpp.jingle.JingleFileTransferConnection;
-import eu.siacs.conversations.xmpp.jingle.Media;
 import eu.siacs.conversations.xmpp.jingle.OngoingRtpSession;
 import eu.siacs.conversations.xmpp.jingle.RtpCapability;
 import me.drakeet.support.toast.ToastCompat;
@@ -1854,15 +1847,21 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
 
     protected void invokeAttachFileIntent(final int attachmentChoice) {
         Intent intent = new Intent();
+        Intent pickIntent = new Intent();
         boolean chooser = false;
+        boolean gallery = false;
         switch (attachmentChoice) {
             case ATTACHMENT_CHOICE_CHOOSE_IMAGE:
+                chooser = true;
+                gallery = true;
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
                     intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 }
                 intent.setType("image/*");
-                chooser = true;
+                pickIntent.setAction(Intent.ACTION_PICK);
+                pickIntent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                pickIntent.setType("image/*");
                 break;
             case ATTACHMENT_CHOICE_CHOOSE_VIDEO:
                 chooser = true;
@@ -1904,10 +1903,16 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             Log.d(Config.LOGTAG, "Attachment: " + attachmentChoice);
             if (chooser) {
-                startActivityForResult(
-                        Intent.createChooser(intent, getString(R.string.perform_action_with)),
-                        attachmentChoice);
-                activity.overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
+                if (gallery) {
+                    Intent chooserIntent = Intent.createChooser(intent, getString(R.string.perform_action_with));
+                    chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+                    startActivityForResult(chooserIntent, attachmentChoice);
+                } else {
+                    startActivityForResult(
+                            Intent.createChooser(intent, getString(R.string.perform_action_with)),
+                            attachmentChoice);
+                    activity.overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
+                }
             } else {
                 startActivityForResult(intent, attachmentChoice);
                 activity.overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
