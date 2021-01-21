@@ -547,16 +547,10 @@ public class UIHelper {
             } else {
                 final Account account = conversation.getAccount();
                 final Jid jid = account.getJid();
-                final String displayName = account.getDisplayName();
-                if (displayName != null) {
-                    return displayName;
-                } else {
-                    if (jid.getLocal() != null) {
-                        return jid.getLocal();
-                    } else {
-                        return jid.getDomain().toString();
-                    }
+                if (account.getDisplayName() != null) {
+                    return account.getDisplayName();
                 }
+                return jid.getLocal() != null ? jid.getLocal() : jid.getDomain().toString();
             }
         }
     }
