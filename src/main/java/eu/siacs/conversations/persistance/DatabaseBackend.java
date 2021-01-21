@@ -55,18 +55,18 @@ import eu.siacs.conversations.utils.CursorUtils;
 import eu.siacs.conversations.utils.FtsUtils;
 import eu.siacs.conversations.utils.Resolver;
 import eu.siacs.conversations.xmpp.InvalidJid;
-import eu.siacs.conversations.xmpp.mam.MamReference;
 import eu.siacs.conversations.xmpp.Jid;
+import eu.siacs.conversations.xmpp.mam.MamReference;
 
 import static eu.siacs.conversations.ui.util.UpdateHelper.moveData;
 
 public class DatabaseBackend extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "history";
-    public static final int DATABASE_VERSION = 53; // = Conversations DATABASE_VERSION + 6
+    public static final int DATABASE_VERSION = 54; // = Conversations DATABASE_VERSION + 6
     private static DatabaseBackend instance = null;
 
-    private static String CREATE_CONTATCS_STATEMENT = "create table "
+    private static final String CREATE_CONTATCS_STATEMENT = "create table "
             + Contact.TABLENAME + "(" + Contact.ACCOUNT + " TEXT, "
             + Contact.SERVERNAME + " TEXT, " + Contact.SYSTEMNAME + " TEXT,"
             + Contact.PRESENCE_NAME + " TEXT,"
@@ -74,12 +74,13 @@ public class DatabaseBackend extends SQLiteOpenHelper {
             + Contact.PHOTOURI + " TEXT," + Contact.OPTIONS + " NUMBER,"
             + Contact.SYSTEMACCOUNT + " NUMBER, " + Contact.AVATAR + " TEXT, "
             + Contact.LAST_PRESENCE + " TEXT, " + Contact.LAST_TIME + " NUMBER, "
+            + Contact.RTP_CAPABILITY + " TEXT,"
             + Contact.GROUPS + " TEXT, FOREIGN KEY(" + Contact.ACCOUNT + ") REFERENCES "
             + Account.TABLENAME + "(" + Account.UUID
             + ") ON DELETE CASCADE, UNIQUE(" + Contact.ACCOUNT + ", "
             + Contact.JID + ") ON CONFLICT REPLACE);";
 
-    private static String CREATE_DISCOVERY_RESULTS_STATEMENT = "create table "
+    private static final String CREATE_DISCOVERY_RESULTS_STATEMENT = "create table "
             + ServiceDiscoveryResult.TABLENAME + "("
             + ServiceDiscoveryResult.HASH + " TEXT, "
             + ServiceDiscoveryResult.VER + " TEXT, "
@@ -87,7 +88,7 @@ public class DatabaseBackend extends SQLiteOpenHelper {
             + "UNIQUE(" + ServiceDiscoveryResult.HASH + ", "
             + ServiceDiscoveryResult.VER + ") ON CONFLICT REPLACE);";
 
-    private static String CREATE_PRESENCE_TEMPLATES_STATEMENT = "CREATE TABLE "
+    private static final String CREATE_PRESENCE_TEMPLATES_STATEMENT = "CREATE TABLE "
             + PresenceTemplate.TABELNAME + "("
             + PresenceTemplate.UUID + " TEXT, "
             + PresenceTemplate.LAST_USED + " NUMBER,"
@@ -95,7 +96,7 @@ public class DatabaseBackend extends SQLiteOpenHelper {
             + PresenceTemplate.STATUS + " TEXT,"
             + "UNIQUE(" + PresenceTemplate.MESSAGE + "," + PresenceTemplate.STATUS + ") ON CONFLICT REPLACE);";
 
-    private static String CREATE_PREKEYS_STATEMENT = "CREATE TABLE "
+    private static final String CREATE_PREKEYS_STATEMENT = "CREATE TABLE "
             + SQLiteAxolotlStore.PREKEY_TABLENAME + "("
             + SQLiteAxolotlStore.ACCOUNT + " TEXT,  "
             + SQLiteAxolotlStore.ID + " INTEGER, "
@@ -581,13 +582,17 @@ public class DatabaseBackend extends SQLiteOpenHelper {
           db.execSQL("DROP TABLE IF EXISTS " + RESOLVER_RESULTS_TABLENAME);
           db.execSQL(CREATE_RESOLVER_RESULTS_TABLE);
         }
-        
+
         if (oldVersion < 52 && newVersion >= 52) {
             db.execSQL("ALTER TABLE " + Contact.TABLENAME + " ADD COLUMN " + Contact.PRESENCE_NAME + " TEXT");
         }
 
         if (oldVersion < 53 && newVersion >= 53) {
             moveData();
+        }
+
+        if (oldVersion < 54 && newVersion >= 54) {
+            db.execSQL("ALTER TABLE " + Contact.TABLENAME + " ADD COLUMN " + Contact.RTP_CAPABILITY + " TEXT");
         }
     }
 

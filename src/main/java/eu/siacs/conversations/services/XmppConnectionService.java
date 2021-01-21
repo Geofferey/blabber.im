@@ -374,10 +374,10 @@ public class XmppConnectionService extends Service {
     };
     private boolean destroyed = false;
     private int unreadCount = -1;
-    private AtomicLong mLastExpiryRun = new AtomicLong(0);
+    private final AtomicLong mLastExpiryRun = new AtomicLong(0);
     private SecureRandom mRandom;
-    private LruCache<Pair<String, String>, ServiceDiscoveryResult> discoCache = new LruCache<>(20);
-    private OnStatusChanged statusListener = new OnStatusChanged() {
+    private final LruCache<Pair<String, String>, ServiceDiscoveryResult> discoCache = new LruCache<>(20);
+    private final OnStatusChanged statusListener = new OnStatusChanged() {
 
         @Override
         public void onStatusChanged(final Account account) {
@@ -4910,6 +4910,10 @@ public class XmppConnectionService extends Service {
         final ServiceDiscoveryResult disco = getCachedServiceDiscoveryResult(key);
         if (disco != null) {
             presence.setServiceDiscoveryResult(disco);
+            final Contact contact = account.getRoster().getContact(jid);
+            if (contact.refreshRtpCapability()) {
+                syncRoster(account);
+            }
         } else {
             if (account.inProgressDiscoFetches.contains(key)) {
                 Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": skipping duplicate disco request for " + key.second + " to " + jid);
@@ -4943,12 +4947,21 @@ public class XmppConnectionService extends Service {
     }
 
     private void injectServiceDiscoveryResult(Roster roster, String hash, String ver, ServiceDiscoveryResult disco) {
+        boolean rosterNeedsSync = false;
         for (final Contact contact : roster.getContacts()) {
+            boolean serviceDiscoverySet = false;
             for (final Presence presence : contact.getPresences().getPresences()) {
                 if (hash.equals(presence.getHash()) && ver.equals(presence.getVer())) {
                     presence.setServiceDiscoveryResult(disco);
+                    serviceDiscoverySet = true;
                 }
             }
+            if (serviceDiscoverySet) {
+                rosterNeedsSync |= contact.refreshRtpCapability();
+            }
+        }
+        if (rosterNeedsSync) {
+            syncRoster(roster.getAccount());
         }
     }
 
