@@ -64,9 +64,9 @@ import eu.siacs.conversations.services.XmppConnectionService.OnCaptchaRequested;
 import eu.siacs.conversations.ui.adapter.KnownHostsAdapter;
 import eu.siacs.conversations.ui.adapter.PresenceTemplateAdapter;
 import eu.siacs.conversations.ui.util.AvatarWorkerTask;
+import eu.siacs.conversations.ui.util.CustomTab;
 import eu.siacs.conversations.ui.util.PendingItem;
 import eu.siacs.conversations.ui.util.SoftKeyboardUtils;
-import eu.siacs.conversations.utils.CharSequenceUtils;
 import eu.siacs.conversations.utils.CryptoHelper;
 import eu.siacs.conversations.utils.EasyOnboardingInvite;
 import eu.siacs.conversations.utils.MenuDoubleTabUtil;
@@ -169,8 +169,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
             URL url = connection != null && redirectionWorthyStatus ? connection.getRedirectionUrl() : null;
             if (url != null && !wasDisabled) {
                 try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url.toString())));
-                    overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
+                    CustomTab.openTab(EditAccountActivity.this, Uri.parse(url.toString()), isDarkTheme());
                     return;
                 } catch (ActivityNotFoundException e) {
                     ToastCompat.makeText(EditAccountActivity.this, R.string.application_found_to_open_website, Toast.LENGTH_SHORT).show();
@@ -667,13 +666,11 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
         }
         this.binding.showPrivacyPolicy.setOnClickListener(view -> {
             final Uri uri = Uri.parse("https://jabber.pix-art.de/privacy/");
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-            startActivity(browserIntent);
+            CustomTab.openTab(EditAccountActivity.this, uri, isDarkTheme());
         });
         this.binding.showTermsOfUse.setOnClickListener(view -> {
             final Uri uri = Uri.parse("https://jabber.pix-art.de/termsofuse/");
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-            startActivity(browserIntent);
+            CustomTab.openTab(EditAccountActivity.this, uri, isDarkTheme());
         });
     }
 
@@ -960,8 +957,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                 builder.setPositiveButton(R.string.confirm, (dialog, which) -> {
                     try {
                         Uri uri = Uri.parse(getSupportSite(mAccount.getJid().getDomain().toEscapedString()));
-                        final Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivity(intent);
+                        CustomTab.openTab(EditAccountActivity.this, uri, isDarkTheme());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
