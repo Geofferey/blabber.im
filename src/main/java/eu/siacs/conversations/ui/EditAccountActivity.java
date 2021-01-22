@@ -1247,9 +1247,9 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                 this.binding.serverInfoAdhocInvite.setText(R.string.server_info_unavailable);
             }
             if (EasyOnboardingInvite.hasAccountSupport(this.mAccount)) {
-                this.binding.serverInfoAdhocInvite.setText(R.string.server_info_available);
+                this.binding.serverInfoEasyInvite.setText(R.string.server_info_available);
             } else {
-                this.binding.serverInfoAdhocInvite.setText(R.string.server_info_unavailable);
+                this.binding.serverInfoEasyInvite.setText(R.string.server_info_unavailable);
             }
             if (features.pep()) {
                 AxolotlService axolotlService = this.mAccount.getAxolotlService();
