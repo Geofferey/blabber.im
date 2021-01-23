@@ -53,15 +53,15 @@ import eu.siacs.conversations.services.AppRTCAudioManager;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.ui.util.AvatarWorkerTask;
 import eu.siacs.conversations.ui.util.MainThreadExecutor;
+import eu.siacs.conversations.utils.Namespace;
 import eu.siacs.conversations.utils.PermissionUtils;
 import eu.siacs.conversations.utils.TimeFrameUtils;
-import eu.siacs.conversations.utils.Namespace;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.jingle.AbstractJingleConnection;
 import eu.siacs.conversations.xmpp.jingle.JingleConnectionManager;
 import eu.siacs.conversations.xmpp.jingle.JingleRtpConnection;
 import eu.siacs.conversations.xmpp.jingle.Media;
 import eu.siacs.conversations.xmpp.jingle.RtpEndUserState;
-import eu.siacs.conversations.xmpp.Jid;
 
 import static eu.siacs.conversations.utils.PermissionUtils.getFirstDenied;
 import static java.util.Arrays.asList;
@@ -468,25 +468,43 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
 
     @Override
     public void onBackPressed() {
-        if (shouldAllowBack) {
-            super.onBackPressed();
+        if (isConnected()) {
+            if (switchToPictureInPicture()) {
+                return;
+            }
+        } else {
+            if (shouldAllowBack) {
+                super.onBackPressed();
+            }
         }
     }
 
     @Override
     public void onUserLeaveHint() {
         super.onUserLeaveHint();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && deviceSupportsPictureInPicture()) {
-            if (shouldBePictureInPicture()) {
-                startPictureInPicture();
-                return;
-            }
+        if (switchToPictureInPicture()) {
+            return;
         }
         //TODO apparently this method is not getting called on Android 10 when using the task switcher
         final boolean emptyReference = rtpConnectionReference == null || rtpConnectionReference.get() == null;
         if (emptyReference && xmppConnectionService != null) {
             retractSessionProposal();
         }
+    }
+
+    private boolean isConnected() {
+        final JingleRtpConnection connection = this.rtpConnectionReference != null ? this.rtpConnectionReference.get() : null;
+        return connection != null && connection.getEndUserState() == RtpEndUserState.CONNECTED;
+    }
+
+    private boolean switchToPictureInPicture() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && deviceSupportsPictureInPicture()) {
+            if (shouldBePictureInPicture()) {
+                startPictureInPicture();
+                return true;
+            }
+        }
+        return false;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
