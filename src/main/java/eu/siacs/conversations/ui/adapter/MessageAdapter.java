@@ -1138,7 +1138,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                 if (duration > 0) {
                     viewHolder.status_message.setText(activity.getString(R.string.incoming_call_duration, formattedTime, TimeFrameUtils.resolve(activity, duration)));
                 } else {
-                    viewHolder.status_message.setText(activity.getString(R.string.incoming_call_time, formattedTime));
+                    viewHolder.status_message.setText(activity.getString(R.string.missed_call_timestamp, formattedTime));
                 }
             } else {
                 if (duration > 0) {
