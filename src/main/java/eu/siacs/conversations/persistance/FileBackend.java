@@ -525,8 +525,11 @@ public class FileBackend {
         return pos > 0 ? filename.substring(pos + 1) : null;
     }
 
-    private void copyImageToPrivateStorage(File file, Uri image, int sampleSize) throws FileCopyException, NotAnImageFileException {
-        file.getParentFile().mkdirs();
+    private void copyImageToPrivateStorage(File file, Uri image, int sampleSize) throws FileCopyException, ImageCompressionException {
+        final File parent = file.getParentFile();
+        if (parent.mkdirs()) {
+            Log.d(Config.LOGTAG,"created parent directory");
+        }
         InputStream is = null;
         OutputStream os = null;
         try {
@@ -545,7 +548,11 @@ public class FileBackend {
             originalBitmap = BitmapFactory.decodeStream(is, null, options);
             is.close();
             if (originalBitmap == null) {
-                throw new NotAnImageFileException();
+                throw new ImageCompressionException("Source file was not an image");
+            }
+            if (hasAlpha(originalBitmap)) {
+                originalBitmap.recycle();
+                throw new ImageCompressionException("Source file had alpha channel");
             }
             int size;
             if (mXmppConnectionService.getCompressImageResolutionPreference() == 0) {
@@ -591,12 +598,12 @@ public class FileBackend {
         }
     }
 
-    public void copyImageToPrivateStorage(File file, Uri image) throws FileCopyException, NotAnImageFileException {
+    public void copyImageToPrivateStorage(File file, Uri image) throws FileCopyException, ImageCompressionException {
         Log.d(Config.LOGTAG, "copy image (" + image.toString() + ") to private storage " + file.getAbsolutePath());
         copyImageToPrivateStorage(file, image, 0);
     }
 
-    public void copyImageToPrivateStorage(Message message, Uri image) throws FileCopyException, NotAnImageFileException {
+    public void copyImageToPrivateStorage(Message message, Uri image) throws FileCopyException, ImageCompressionException {
         String filename = "Sent/" + fileDateFormat.format(new Date(message.getTimeSent())) + "_" + message.getUuid().substring(0, 4);
         switch (Config.IMAGE_FORMAT) {
             case JPEG:
@@ -664,11 +671,11 @@ public class FileBackend {
                 } else if (mime.startsWith("video/")) {
                     thumbnail = getVideoPreview(file, size);
                 } else if (mime.startsWith("image/")) {
-                    Bitmap fullsize = getFullsizeImagePreview(file, size);
-                    if (fullsize == null) {
+                    final Bitmap fullSize = getFullsizeImagePreview(file, size);
+                    if (fullSize == null) {
                         throw new FileNotFoundException();
                     }
-                    thumbnail = resize(fullsize, size);
+                    thumbnail = resize(fullSize, size);
                     thumbnail = rotate(thumbnail, getRotation(file));
                     if (mime.equals("image/gif")) {
                         Bitmap withGifOverlay = thumbnail.copy(Bitmap.Config.ARGB_8888, true);
@@ -1534,9 +1541,13 @@ public class FileBackend {
         }
     }
 
-    public static class NotAnImageFileException extends Exception {
+    public static class ImageCompressionException extends Exception {
 
+        ImageCompressionException(String message) {
+            super(message);
+        }
     }
+
 
     public static class FileCopyException extends Exception {
         private int resId;
