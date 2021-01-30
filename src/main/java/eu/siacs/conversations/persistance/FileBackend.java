@@ -866,10 +866,13 @@ public class FileBackend {
         return getUriForFile(mXmppConnectionService, file);
     }
 
-
     private static boolean hasAlpha(final Bitmap bitmap) {
-        for (int x = 0; x < bitmap.getWidth(); ++x) {
-            for (int y = 0; y < bitmap.getWidth(); ++y) {
+        final int w = bitmap.getWidth();
+        final int h = bitmap.getHeight();
+        final int yStep = Math.max(1, w / 100);
+        final int xStep = Math.max(1, h / 100);
+        for (int x = 0; x < w; x += xStep) {
+            for (int y = 0; y < h; y += yStep) {
                 if (Color.alpha(bitmap.getPixel(x, y)) < 255) {
                     return true;
                 }
