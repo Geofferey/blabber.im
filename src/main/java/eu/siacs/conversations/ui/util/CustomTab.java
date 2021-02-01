@@ -3,7 +3,6 @@ package eu.siacs.conversations.ui.util;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.provider.Browser;
 
@@ -22,7 +21,6 @@ public class CustomTab {
         tabBuilder.setDefaultColorSchemeParams(new CustomTabColorSchemeParams.Builder()
                 .setToolbarColor(StyledAttributes.getColor(context, R.attr.colorPrimary))
                 .setSecondaryToolbarColor(StyledAttributes.getColor(context, R.attr.colorPrimaryDark))
-                .setNavigationBarColor(Color.BLUE)
                 .build());
         tabBuilder.setColorScheme(dark ? CustomTabsIntent.COLOR_SCHEME_DARK : CustomTabsIntent.COLOR_SCHEME_LIGHT);
         tabBuilder.setShareState(CustomTabsIntent.SHARE_STATE_ON);
