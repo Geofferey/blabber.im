@@ -131,7 +131,7 @@
     </style>
 
     <style name="TextAppearance.Conversations.Caption.Highlight" parent="TextAppearance.Conversations.Caption">
-        <item name="android:textColor">?colorAccent</item>
+        <item name="android:textColor">?attr/colorAccent</item>
     </style>
 
     <style name="TextAppearance.Conversations.Caption.Disabled" parent="TextAppearance.Conversations.Caption">

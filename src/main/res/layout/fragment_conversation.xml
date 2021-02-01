@@ -36,6 +36,7 @@
             android:visibility="gone"
             app:backgroundTint="?attr/color_background_primary"
             app:fabSize="mini"
+            app:tint="?attr/icon_tint"
             app:useCompatPadding="true" />
 
         <eu.siacs.conversations.ui.widget.UnreadCountCustomView

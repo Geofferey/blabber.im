@@ -57,7 +57,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:text="@string/next"
-                    android:textColor="?colorAccent" />
+                    android:textColor="?attr/colorAccent" />
             </RelativeLayout>
         </ScrollView>
     </LinearLayout>

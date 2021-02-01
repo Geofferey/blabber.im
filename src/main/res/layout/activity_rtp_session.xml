@@ -56,8 +56,8 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="32dp"
-                android:textSize="50sp"
                 android:textColor="@color/white"
+                android:textSize="50sp"
                 tools:text="Juliet Capulet" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -90,9 +90,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:gravity="bottom"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="8dp"
+                android:gravity="bottom"
                 android:text="@string/using_account"
                 android:textAppearance="@style/TextAppearance.Conversations.Caption" />
 
@@ -132,8 +132,8 @@
             android:layout_margin="8dp"
             android:alpha="0.7"
             android:src="@drawable/ic_mic_off_black_24dp"
-            android:tint="@color/white"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:tint="?attr/icon_tint" />
 
         <RelativeLayout
             android:id="@+id/button_row"
@@ -161,6 +161,7 @@
                     app:elevation="4dp"
                     app:fabCustomSize="72dp"
                     app:maxImageSize="36dp"
+                    app:tint="?attr/icon_tint"
                     tools:visibility="visible" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -177,6 +178,7 @@
                     app:elevation="4dp"
                     app:fabCustomSize="72dp"
                     app:maxImageSize="36dp"
+                    app:tint="?attr/icon_tint"
                     tools:visibility="visible" />
 
             </RelativeLayout>
@@ -206,7 +208,8 @@
                 app:backgroundTint="@color/red700"
                 app:elevation="4dp"
                 app:fabCustomSize="72dp"
-                app:maxImageSize="36dp" />
+                app:maxImageSize="36dp"
+                app:tint="?attr/icon_tint" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/in_call_action_right"
