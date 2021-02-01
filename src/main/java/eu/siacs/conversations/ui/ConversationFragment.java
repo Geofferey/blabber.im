@@ -2685,9 +2685,9 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 conversation.populateWithMessages(ConversationFragment.this.messageList);
                 updateSnackBar(conversation);
                 updateStatusMessages();
-                if (conversation.getReceivedMessagesCountSinceUuid(lastMessageUuid) != 0) {
+                if (conversation.unreadCount() > 0) {
                     binding.unreadCountCustomView.setVisibility(View.VISIBLE);
-                    binding.unreadCountCustomView.setUnreadCount(conversation.getReceivedMessagesCountSinceUuid(lastMessageUuid));
+                    binding.unreadCountCustomView.setUnreadCount(conversation.unreadCount());
                 }
                 this.messageListAdapter.notifyDataSetChanged();
                 updateChatMsgHint();
