@@ -1038,7 +1038,7 @@
     <string name="incoming_call_duration">%s · Incoming call · %s</string>
     <string name="incoming_call_time">%s · Incoming call</string>
     <string name="incoming_call">Incoming call</string>
-    <string name="missed_call_timestamp">Missed call · %s</string>
+    <string name="missed_call_timestamp">%s · Missed call</string>
     <string name="outgoing_call_duration">%s · Outgoing call · %s</string>
     <string name="outgoing_call_time">%s · Outgoing call</string>
     <string name="outgoing_call">Outgoing call</string>
