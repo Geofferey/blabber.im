@@ -821,7 +821,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         viewHolder.progressBar.setVisibility(View.GONE);
         if (mShowMapsInside) {
             viewHolder.image.setVisibility(View.VISIBLE);
-            final double target = metrics.density * 200;
+            final double target = activity.getResources().getDimension(R.dimen.image_preview_width);
             final int scaledW;
             final int scaledH;
             if (Math.max(500, 500) * metrics.density <= target) {
@@ -914,7 +914,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             viewHolder.image.setVisibility(View.GONE);
             viewHolder.gifImage.setVisibility(View.VISIBLE);
             final FileParams params = message.getFileParams();
-        final float target = activity.getResources().getDimension(R.dimen.image_preview_width);
+            final float target = activity.getResources().getDimension(R.dimen.image_preview_width);
             final int scaledW;
             final int scaledH;
             if (Math.max(params.height, params.width) * metrics.density <= target) {
@@ -930,7 +930,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                 scaledW = (int) target;
                 scaledH = (int) (params.height / ((double) params.width / target));
             }
-        final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(scaledW, scaledH);
+            final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(scaledW, scaledH);
             layoutParams.setMargins(0, (int) (metrics.density * 4), 0, (int) (metrics.density * 4));
             viewHolder.gifImage.setLayoutParams(layoutParams);
             activity.loadGif(file, viewHolder.gifImage);
@@ -939,12 +939,12 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             viewHolder.image.setVisibility(View.VISIBLE);
             viewHolder.gifImage.setVisibility(View.GONE);
             FileParams params = message.getFileParams();
-            double target = metrics.density * 200;
-            int scaledW;
-            int scaledH;
+            final float target = activity.getResources().getDimension(R.dimen.image_preview_width);
+            final int scaledW;
+            final int scaledH;
             if (Math.max(params.height, params.width) * metrics.density <= target) {
-                scaledW = (int) (params.width * metrics.density);
-                scaledH = (int) (params.height * metrics.density);
+                scaledW = (int) (params.width * metrics.density / 2);
+                scaledH = (int) (params.height * metrics.density / 2);
             } else if (Math.max(params.height, params.width) <= target) {
                 scaledW = params.width;
                 scaledH = params.height;
