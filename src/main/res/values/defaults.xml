@@ -87,6 +87,7 @@
     <integer name="low_video_res">360</integer>
     <integer name="mid_video_res">720</integer>
     <integer name="high_video_res">1080</integer>
+    <bool name="easy_downloader">true</bool>
 
     <string-array name="domains">
         <item>pix-art.de</item>

@@ -1095,4 +1095,6 @@
     <string name="pref_mappreview_host_summary">Use a custom map preview host</string>
     <string name="pref_mappreview_host">Map preview host</string>
     <string name="webview_not_available">Webview is not available on your device.</string>
+    <string name="pref_easy_downloader_summary">Automatically download all attachments in public channels and from strangers instead of showing a button for a manual download.</string>
+    <string name="pref_easy_downloader">Automatically download all attachments</string>
 </resources>

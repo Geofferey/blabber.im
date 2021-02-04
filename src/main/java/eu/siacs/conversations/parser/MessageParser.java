@@ -757,7 +757,7 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
 
             mXmppConnectionService.databaseBackend.createMessage(message);
             final HttpConnectionManager manager = this.mXmppConnectionService.getHttpConnectionManager();
-            if (message.trusted() && message.treatAsDownloadable() && manager.getAutoAcceptFileSize() > 0) {
+            if ((mXmppConnectionService.easyDownloader() || message.trusted()) && message.treatAsDownloadable() && manager.getAutoAcceptFileSize() > 0) {
                 manager.createNewDownloadConnection(message);
             } else if (notify) {
                 if (query != null && query.isCatchup()) {

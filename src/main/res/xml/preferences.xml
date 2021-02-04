@@ -335,6 +335,11 @@
             android:summary="@string/pref_broadcast_last_activity_summary"
             android:title="@string/pref_broadcast_last_activity" />
         <CheckBoxPreference
+            android:defaultValue="@bool/easy_downloader"
+            android:key="easy_downloader"
+            android:summary="@string/pref_easy_downloader_summary"
+            android:title="@string/pref_easy_downloader" />
+        <CheckBoxPreference
             android:defaultValue="@bool/notifications_from_strangers"
             android:key="notifications_from_strangers"
             android:summary="@string/pref_notifications_from_strangers_summary"

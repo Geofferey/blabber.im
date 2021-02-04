@@ -1043,6 +1043,10 @@ public class XmppConnectionService extends Service {
         }
     }
 
+    public boolean easyDownloader() {
+        return getBooleanPreference(SettingsActivity.EASY_DOWNLOADER, R.bool.easy_downloader);
+    }
+
     private boolean dndOnSilentMode() {
         return getBooleanPreference(SettingsActivity.DND_ON_SILENT_MODE, R.bool.dnd_on_silent_mode);
     }
