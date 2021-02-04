@@ -299,8 +299,8 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                     viewHolder.username.setVisibility(View.VISIBLE);
                     viewHolder.username.setText(UIHelper.getColoredUsername(activity.xmppConnectionService, message));
                     if (activity.xmppConnectionService.colored_muc_names()) {
-                        viewHolder.username.setShadowLayer(shadowSize, 0, 0, ContextCompat.getColor(activity, R.color.realwhite));
-                        viewHolder.username.setPadding(shadowSize / 2, shadowSize / 2, shadowSize / 2, shadowSize / 2);
+                        viewHolder.username.setPadding(4, 2, 4, 2);
+                        viewHolder.username.setBackground(ContextCompat.getDrawable(activity, R.drawable.duration_background));
                     }
                 }
                 if (singleReceived) {
