@@ -80,7 +80,11 @@ public class NotificationService {
     public static final String MESSAGES_CHANNEL_ID = "messages";
     public static final String SILENT_MESSAGES_CHANNEL_ID = "silent_messages";
     public static final String INCOMING_CALLS_CHANNEL_ID = "incoming_calls";
+    public static final String ONGOING_CALLS_CHANNEL_ID = "ongoing_calls";
+    public static final String MISSED_CALLS_CHANNEL_ID = "missed_calls";
     public static final String FOREGROUND_CHANNEL_ID = "foreground";
+    public static final String QUIET_HOURS_CHANNEL_ID = "quiet_hours";
+    public static final String DELIVERY_FAILED_CHANNEL_ID = "delivery_failed";
     public static final String BACKUP_CHANNEL_ID = "backup";
     public static final String UPDATE_CHANNEL_ID = "appupdate";
     public static final String VIDEOCOMPRESSION_CHANNEL_ID = "compression";
@@ -185,9 +189,9 @@ public class NotificationService {
             notificationManager.createNotificationChannel(AppUpdateChannel);
         }
 
-        NotificationChannel ongoingCallsChannel = notificationManager.getNotificationChannel("ongoing_calls");
+        NotificationChannel ongoingCallsChannel = notificationManager.getNotificationChannel(ONGOING_CALLS_CHANNEL_ID);
         if (ongoingCallsChannel == null) {
-            ongoingCallsChannel = new NotificationChannel("ongoing_calls",
+            ongoingCallsChannel = new NotificationChannel(ONGOING_CALLS_CHANNEL_ID,
                     c.getString(R.string.ongoing_calls_channel_name),
                     NotificationManager.IMPORTANCE_LOW);
             ongoingCallsChannel.setShowBadge(false);
@@ -195,9 +199,9 @@ public class NotificationService {
             notificationManager.createNotificationChannel(ongoingCallsChannel);
         }
 
-        NotificationChannel missedCallsChannel = notificationManager.getNotificationChannel("missed_calls");
+        NotificationChannel missedCallsChannel = notificationManager.getNotificationChannel(MISSED_CALLS_CHANNEL_ID);
         if (missedCallsChannel == null) {
-            missedCallsChannel = new NotificationChannel("missed_calls",
+            missedCallsChannel = new NotificationChannel(MISSED_CALLS_CHANNEL_ID,
                     c.getString(R.string.missed_calls_channel_name),
                     NotificationManager.IMPORTANCE_HIGH);
             missedCallsChannel.setShowBadge(true);
@@ -221,9 +225,9 @@ public class NotificationService {
             notificationManager.createNotificationChannel(silentMessagesChannel);
         }
 
-        NotificationChannel quietHoursChannel = notificationManager.getNotificationChannel("quiet_hours");
+        NotificationChannel quietHoursChannel = notificationManager.getNotificationChannel(QUIET_HOURS_CHANNEL_ID);
         if (quietHoursChannel == null) {
-            quietHoursChannel = new NotificationChannel("quiet_hours",
+            quietHoursChannel = new NotificationChannel(QUIET_HOURS_CHANNEL_ID,
                     c.getString(R.string.title_pref_quiet_hours),
                     NotificationManager.IMPORTANCE_LOW);
             quietHoursChannel.setShowBadge(true);
@@ -235,9 +239,9 @@ public class NotificationService {
             notificationManager.createNotificationChannel(quietHoursChannel);
         }
 
-        NotificationChannel deliveryFailedChannel = notificationManager.getNotificationChannel("delivery_failed");
+        NotificationChannel deliveryFailedChannel = notificationManager.getNotificationChannel(DELIVERY_FAILED_CHANNEL_ID);
         if (deliveryFailedChannel == null) {
-            deliveryFailedChannel = new NotificationChannel("delivery_failed",
+            deliveryFailedChannel = new NotificationChannel(DELIVERY_FAILED_CHANNEL_ID,
                     c.getString(R.string.delivery_failed_channel_name),
                     NotificationManager.IMPORTANCE_DEFAULT);
             deliveryFailedChannel.setShowBadge(false);
@@ -526,7 +530,7 @@ public class NotificationService {
         final int notificationId = generateRequestCode(conversation, 0) + DELIVERY_FAILED_NOTIFICATION_ID;
         final int failedDeliveries = conversation.countFailedDeliveries();
         final Notification notification =
-                new Builder(mXmppConnectionService, "delivery_failed")
+                new Builder(mXmppConnectionService, DELIVERY_FAILED_CHANNEL_ID)
                         .setContentTitle(conversation.getName())
                         .setAutoCancel(true)
                         .setSmallIcon(R.drawable.ic_error_white_24dp)
@@ -534,7 +538,7 @@ public class NotificationService {
                         .setGroup("delivery_failed")
                         .setContentIntent(pendingIntent).build();
         final Notification summaryNotification =
-                new Builder(mXmppConnectionService, "delivery_failed")
+                new Builder(mXmppConnectionService, DELIVERY_FAILED_CHANNEL_ID)
                         .setContentTitle(mXmppConnectionService.getString(R.string.failed_deliveries))
                         .setContentText(mXmppConnectionService.getResources().getQuantityText(R.plurals.some_messages_could_not_be_delivered, 1024))
                         .setSmallIcon(R.drawable.ic_error_white_24dp)
@@ -611,7 +615,7 @@ public class NotificationService {
     }
 
     public Notification getOngoingCallNotification(final AbstractJingleConnection.Id id, final Set<Media> media) {
-        final NotificationCompat.Builder builder = new NotificationCompat.Builder(mXmppConnectionService, "ongoing_calls");
+        final NotificationCompat.Builder builder = new NotificationCompat.Builder(mXmppConnectionService, ONGOING_CALLS_CHANNEL_ID);
         if (media.contains(Media.VIDEO)) {
             builder.setSmallIcon(R.drawable.ic_videocam_white_24dp);
             builder.setContentTitle(mXmppConnectionService.getString(R.string.ongoing_video_call));
@@ -912,7 +916,7 @@ public class NotificationService {
     }
 
     private Builder buildMissedCallsSummary(boolean publicVersion) {
-        final Builder builder = new NotificationCompat.Builder(mXmppConnectionService, "missed_calls");
+        final Builder builder = new NotificationCompat.Builder(mXmppConnectionService, MISSED_CALLS_CHANNEL_ID);
         int totalCalls = 0;
         final StringBuilder names = new StringBuilder();
         long lastTime = 0;
@@ -958,7 +962,7 @@ public class NotificationService {
     }
 
     private Builder buildMissedCall(final Conversational conversation, final MissedCallsInfo info, boolean publicVersion) {
-        final Builder builder = new NotificationCompat.Builder(mXmppConnectionService, "missed_calls");
+        final Builder builder = new NotificationCompat.Builder(mXmppConnectionService, MISSED_CALLS_CHANNEL_ID);
         final String title = (info.getNumberOfCalls() == 1) ? mXmppConnectionService.getString(R.string.missed_call) :
                 mXmppConnectionService.getString(R.string.n_missed_calls, info.getNumberOfCalls());
         builder.setContentTitle(title);
@@ -1008,7 +1012,7 @@ public class NotificationService {
         for (final ArrayList<Message> messages : notifications.values()) {
             if (messages.size() > 0) {
                 conversation = (Conversation) messages.get(0).getConversation();
-                mBuilder = new NotificationCompat.Builder(mXmppConnectionService, quietHours ? "quiet_hours" : (notify ? (INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + '_' + conversation.getUuid()) : SILENT_MESSAGES_CHANNEL_ID));
+                mBuilder = new NotificationCompat.Builder(mXmppConnectionService, quietHours ? QUIET_HOURS_CHANNEL_ID : (notify ? (INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + '_' + conversation.getUuid()) : SILENT_MESSAGES_CHANNEL_ID));
                 final String name = conversation.getName().toString();
                 SpannableString styledString;
                 if (Config.HIDE_MESSAGE_TEXT_IN_NOTIFICATION) {
@@ -1047,7 +1051,7 @@ public class NotificationService {
         Builder mBuilder = null;
         if (messages.size() >= 1) {
             final Conversation conversation = (Conversation) messages.get(0).getConversation();
-            mBuilder = new NotificationCompat.Builder(mXmppConnectionService, quietHours ? "quiet_hours" : (notify ? (INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + '_' + conversation.getUuid()) : SILENT_MESSAGES_CHANNEL_ID));
+            mBuilder = new NotificationCompat.Builder(mXmppConnectionService, quietHours ? QUIET_HOURS_CHANNEL_ID : (notify ? (INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + '_' + conversation.getUuid()) : SILENT_MESSAGES_CHANNEL_ID));
             mBuilder.setLargeIcon(mXmppConnectionService.getAvatarService().get(conversation, AvatarService.getSystemUiAvatarSize(mXmppConnectionService)));
             mBuilder.setContentTitle(conversation.getName());
             if (Config.HIDE_MESSAGE_TEXT_IN_NOTIFICATION) {
