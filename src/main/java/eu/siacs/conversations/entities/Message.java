@@ -906,6 +906,8 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
                     }
                     break;
                 case 5:
+                    fileParams.width = parseInt(parts[2]);
+                    fileParams.height = parseInt(parts[3]);
                     fileParams.runtime = parseInt(parts[4]);
                 case 4:
                     fileParams.width = parseInt(parts[2]);

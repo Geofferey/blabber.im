@@ -90,7 +90,7 @@ public class AvatarWorkerTask extends AsyncTask<AvatarService.Avatarable, Void, 
             if (bm != null) {
                 cancelPotentialWork(avatarable, imageView);
                 if (overlay) {
-                    activity.xmppConnectionService.fileBackend.drawOverlay(bm, R.drawable.pencil_overlay, 0.35f, true, 0);
+                    activity.xmppConnectionService.fileBackend.drawOverlay(bm, R.drawable.pencil_overlay, 0.35f, true);
                     imageView.setImageBitmap(bm);
                 } else {
                     imageView.setImageBitmap(bm);

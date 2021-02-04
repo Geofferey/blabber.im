@@ -1,6 +1,7 @@
 package eu.siacs.conversations.ui.adapter;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -93,6 +94,8 @@ import pl.droidsonroids.gif.GifImageView;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static eu.siacs.conversations.entities.Message.DELETED_MESSAGE_BODY;
 import static eu.siacs.conversations.entities.Message.DELETED_MESSAGE_BODY_OLD;
+import static eu.siacs.conversations.persistance.FileBackend.formatTime;
+import static eu.siacs.conversations.persistance.FileBackend.safeLongToInt;
 import static eu.siacs.conversations.ui.SettingsActivity.PLAY_GIF_INSIDE;
 import static eu.siacs.conversations.ui.SettingsActivity.SHOW_LINKS_INSIDE;
 import static eu.siacs.conversations.ui.SettingsActivity.SHOW_MAPS_INSIDE;
@@ -397,8 +400,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
     private void displayInfoMessage(ViewHolder viewHolder, CharSequence text, boolean darkBackground, Message message) {
         viewHolder.download_button.setVisibility(View.GONE);
         viewHolder.audioPlayer.setVisibility(View.GONE);
-        viewHolder.image.setVisibility(View.GONE);
-        viewHolder.gifImage.setVisibility(View.GONE);
+        showImages(false, viewHolder);
         viewHolder.richlinkview.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
         viewHolder.messageBody.setVisibility(View.VISIBLE);
@@ -428,8 +430,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
     private void displayEmojiMessage(final ViewHolder viewHolder, final String body, final boolean darkBackground) {
         viewHolder.download_button.setVisibility(View.GONE);
         viewHolder.audioPlayer.setVisibility(View.GONE);
-        viewHolder.image.setVisibility(View.GONE);
-        viewHolder.gifImage.setVisibility(View.GONE);
+        showImages(false, viewHolder);
         viewHolder.richlinkview.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
         viewHolder.messageBody.setVisibility(View.VISIBLE);
@@ -480,8 +481,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             }
 
         });
-        viewHolder.image.setVisibility(View.GONE);
-        viewHolder.gifImage.setVisibility(View.GONE);
+        showImages(false, viewHolder);
         viewHolder.richlinkview.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
         viewHolder.messageBody.setVisibility(View.GONE);
@@ -556,8 +556,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 
     private void displayTextMessage(final ViewHolder viewHolder, final Message message, boolean darkBackground, int type) {
         viewHolder.download_button.setVisibility(View.GONE);
-        viewHolder.image.setVisibility(View.GONE);
-        viewHolder.gifImage.setVisibility(View.GONE);
+        showImages(false, viewHolder);
         viewHolder.richlinkview.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
         viewHolder.audioPlayer.setVisibility(View.GONE);
@@ -655,8 +654,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
     private void displayDownloadableMessage(ViewHolder viewHolder, final Message message, String text, final boolean darkBackground) {
         toggleWhisperInfo(viewHolder, message, false, darkBackground);
         viewHolder.audioPlayer.setVisibility(View.GONE);
-        viewHolder.image.setVisibility(View.GONE);
-        viewHolder.gifImage.setVisibility(View.GONE);
+        showImages(false, viewHolder);
         viewHolder.richlinkview.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
         viewHolder.download_button.setVisibility(View.VISIBLE);
@@ -672,8 +670,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         toggleWhisperInfo(viewHolder, message, false, darkBackground);
         viewHolder.download_button.setVisibility(View.VISIBLE);
         viewHolder.audioPlayer.setVisibility(View.GONE);
-        viewHolder.image.setVisibility(View.GONE);
-        viewHolder.gifImage.setVisibility(View.GONE);
+        showImages(false, viewHolder);
         viewHolder.richlinkview.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
         final String mimeType = message.getMimeType();
@@ -762,8 +759,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
     private void displayRichLinkMessage(final ViewHolder viewHolder, final Message message, boolean darkBackground) {
         toggleWhisperInfo(viewHolder, message, true, darkBackground);
         viewHolder.audioPlayer.setVisibility(View.GONE);
-        viewHolder.image.setVisibility(View.GONE);
-        viewHolder.gifImage.setVisibility(View.GONE);
+        showImages(false, viewHolder);
         viewHolder.download_button.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
         String url;
@@ -777,7 +773,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         viewHolder.richlinkview.setVisibility(mShowLinksInside ? View.VISIBLE : View.GONE);
         if (mShowLinksInside) {
             final int color = ThemeHelper.messageTextColor(activity);
-            final double target = metrics.density * 200;
+            final float target = activity.getResources().getDimension(R.dimen.image_preview_width);
             final int scaledH;
             if (Math.max(100, 100) * metrics.density <= target) {
                 scaledH = (int) (100 * metrics.density);
@@ -816,11 +812,11 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         toggleWhisperInfo(viewHolder, message, false, darkBackground);
         viewHolder.audioPlayer.setVisibility(View.GONE);
         final String url = GeoHelper.MapPreviewUri(message, activity);
-        viewHolder.gifImage.setVisibility(View.GONE);
+        showImages(false, viewHolder);
         viewHolder.richlinkview.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
         if (mShowMapsInside) {
-            viewHolder.image.setVisibility(View.VISIBLE);
+            showImages(mShowMapsInside, 0, false, viewHolder);
             final double target = activity.getResources().getDimension(R.dimen.image_preview_width);
             final int scaledW;
             final int scaledH;
@@ -836,10 +832,9 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             }
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(scaledW, scaledH);
             layoutParams.setMargins(0, (int) (metrics.density * 4), 0, (int) (metrics.density * 4));
-            viewHolder.image.setLayoutParams(layoutParams);
+            viewHolder.images.setLayoutParams(layoutParams);
             viewHolder.image.setOnClickListener(v -> showLocation(message));
-            Picasso
-                    .get()
+            Picasso .get()
                     .load(Uri.parse(url))
                     .placeholder(R.drawable.ic_map_marker_grey600_48dp)
                     .error(R.drawable.ic_map_marker_grey600_48dp)
@@ -848,7 +843,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             viewHolder.image.setAdjustViewBounds(true);
             viewHolder.download_button.setVisibility(View.GONE);
         } else {
-            viewHolder.image.setVisibility(View.GONE);
+            showImages(false, viewHolder);
             viewHolder.download_button.setVisibility(View.VISIBLE);
             viewHolder.download_button.setText(R.string.show_location);
             final Drawable icon = activity.getResources().getDrawable(R.drawable.ic_map_marker_grey600_48dp);
@@ -861,8 +856,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 
     private void displayAudioMessage(ViewHolder viewHolder, Message message, boolean darkBackground) {
         toggleWhisperInfo(viewHolder, message, showTitle(message), darkBackground);
-        viewHolder.image.setVisibility(View.GONE);
-        viewHolder.gifImage.setVisibility(View.GONE);
+        showImages(false, viewHolder);
         viewHolder.richlinkview.setVisibility(View.GONE);
         viewHolder.progressBar.setVisibility(View.GONE);
         viewHolder.download_button.setVisibility(View.GONE);
@@ -909,10 +903,11 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             return;
         }
         final String mime = file.getMimeType();
-        if (mime != null && mime.equals("image/gif") && mPlayGifInside) {
+        final boolean isGif = mime != null && mime.equals("image/gif");
+        final int mediaRuntime = message.getFileParams().runtime;
+        if (isGif && mPlayGifInside) {
+            showImages(true, mediaRuntime, true, viewHolder);
             Log.d(Config.LOGTAG, "Gif Image file");
-            viewHolder.image.setVisibility(View.GONE);
-            viewHolder.gifImage.setVisibility(View.VISIBLE);
             final FileParams params = message.getFileParams();
             final float target = activity.getResources().getDimension(R.dimen.image_preview_width);
             final int scaledW;
@@ -932,19 +927,18 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             }
             final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(scaledW, scaledH);
             layoutParams.setMargins(0, (int) (metrics.density * 4), 0, (int) (metrics.density * 4));
-            viewHolder.gifImage.setLayoutParams(layoutParams);
+            viewHolder.images.setLayoutParams(layoutParams);
             activity.loadGif(file, viewHolder.gifImage);
             viewHolder.gifImage.setOnClickListener(v -> openDownloadable(message));
         } else {
-            viewHolder.image.setVisibility(View.VISIBLE);
-            viewHolder.gifImage.setVisibility(View.GONE);
+            showImages(true, mediaRuntime, false, viewHolder);
             FileParams params = message.getFileParams();
             final float target = activity.getResources().getDimension(R.dimen.image_preview_width);
             final int scaledW;
             final int scaledH;
             if (Math.max(params.height, params.width) * metrics.density <= target) {
-                scaledW = (int) (params.width * metrics.density / 2);
-                scaledH = (int) (params.height * metrics.density / 2);
+                scaledW = (int) (params.width * metrics.density);
+                scaledH = (int) (params.height * metrics.density);
             } else if (Math.max(params.height, params.width) <= target) {
                 scaledW = params.width;
                 scaledH = params.height;
@@ -957,9 +951,38 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             }
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(scaledW, scaledH);
             layoutParams.setMargins(0, (int) (metrics.density * 4), 0, (int) (metrics.density * 4));
-            viewHolder.image.setLayoutParams(layoutParams);
+            viewHolder.images.setLayoutParams(layoutParams);
             activity.loadBitmap(message, viewHolder.image);
             viewHolder.image.setOnClickListener(v -> openDownloadable(message));
+        }
+    }
+
+    private void showImages(final boolean show, final ViewHolder viewHolder) {
+        showImages(show, 0, false, viewHolder);
+    }
+
+    private void showImages(final boolean show, final int duration, final boolean isGif, final ViewHolder viewHolder) {
+        boolean hasDuration = duration > 0;
+        if (show) {
+            viewHolder.images.setVisibility(View.VISIBLE);
+            if (hasDuration) {
+                viewHolder.mediaduration.setVisibility(View.VISIBLE);
+                viewHolder.mediaduration.setText(formatTime(safeLongToInt(duration)));
+            } else {
+                viewHolder.mediaduration.setVisibility(View.GONE);
+            }
+            if (isGif) {
+                viewHolder.image.setVisibility(View.GONE);
+                viewHolder.gifImage.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.image.setVisibility(View.VISIBLE);
+                viewHolder.gifImage.setVisibility(View.GONE);
+            }
+        } else {
+            viewHolder.images.setVisibility(View.GONE);
+            viewHolder.image.setVisibility(View.GONE);
+            viewHolder.gifImage.setVisibility(View.GONE);
+            viewHolder.mediaduration.setVisibility(View.GONE);
         }
     }
 
@@ -1032,6 +1055,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         }
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         final Message message = getItem(position);
@@ -1065,6 +1089,8 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                     viewHolder.resend_button = view.findViewById(R.id.resend_button);
                     viewHolder.indicator = view.findViewById(R.id.security_indicator);
                     viewHolder.edit_indicator = view.findViewById(R.id.edit_indicator);
+                    viewHolder.images = view.findViewById(R.id.images);
+                    viewHolder.mediaduration = view.findViewById(R.id.media_duration);
                     viewHolder.image = view.findViewById(R.id.message_image);
                     viewHolder.gifImage = view.findViewById(R.id.message_image_gif);
                     viewHolder.richlinkview = view.findViewById(R.id.richLinkView);
@@ -1084,6 +1110,8 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                     viewHolder.answer_button = view.findViewById(R.id.answer);
                     viewHolder.indicator = view.findViewById(R.id.security_indicator);
                     viewHolder.edit_indicator = view.findViewById(R.id.edit_indicator);
+                    viewHolder.images = view.findViewById(R.id.images);
+                    viewHolder.mediaduration = view.findViewById(R.id.media_duration);
                     viewHolder.image = view.findViewById(R.id.message_image);
                     viewHolder.gifImage = view.findViewById(R.id.message_image_gif);
                     viewHolder.richlinkview = view.findViewById(R.id.richLinkView);
@@ -1212,7 +1240,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         } else if (message.isFileOrImage() && message.getEncryption() != Message.ENCRYPTION_PGP && message.getEncryption() != Message.ENCRYPTION_DECRYPTION_FAILED) {
             if (message.getFileParams().width > 0 && message.getFileParams().height > 0) {
                 displayMediaPreviewMessage(viewHolder, message, darkBackground);
-            } else if (message.getFileParams().runtime > 0) {
+            } else if (message.getFileParams().runtime > 0 && (message.getFileParams().width == 0 && message.getFileParams().height == 0)) {
                 displayAudioMessage(viewHolder, message, darkBackground);
             } else {
                 displayOpenableMessage(viewHolder, message, darkBackground);
@@ -1405,12 +1433,14 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         public Button load_more_messages;
         public ImageView edit_indicator;
         public RelativeLayout audioPlayer;
+        public RelativeLayout images;
         protected LinearLayout message_box;
         protected Button download_button;
         protected Button resend_button;
         protected ImageButton answer_button;
         protected ImageView image;
         protected GifImageView gifImage;
+        protected TextView mediaduration;
         protected RichLinkView richlinkview;
         protected ImageView indicator;
         protected ImageView indicatorReceived;

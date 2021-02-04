@@ -13,7 +13,6 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Movie;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.pdf.PdfRenderer;
@@ -687,7 +686,7 @@ public class FileBackend {
                     thumbnail = rotate(thumbnail, getRotation(file));
                     if (mime.equals("image/gif")) {
                         Bitmap withGifOverlay = thumbnail.copy(Bitmap.Config.ARGB_8888, true);
-                        drawOverlay(withGifOverlay, R.drawable.play_gif, 1.0f, getMediaRuntime(file, true));
+                        drawOverlay(withGifOverlay, R.drawable.play_gif, 1.0f);
                         thumbnail.recycle();
                         thumbnail = withGifOverlay;
                     }
@@ -711,7 +710,7 @@ public class FileBackend {
             final Bitmap bitmap = Bitmap.createBitmap(dimensions.width, dimensions.height, Bitmap.Config.ARGB_8888);
             bitmap.eraseColor(Color.WHITE);
             page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
-            drawOverlay(bitmap, R.drawable.show_pdf, 0.75f, 0);
+            drawOverlay(bitmap, R.drawable.show_pdf, 0.75f);
             page.close();
             renderer.close();
             return bitmap;
@@ -719,7 +718,7 @@ public class FileBackend {
             e.printStackTrace();
             final Bitmap placeholder = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
             placeholder.eraseColor(Color.WHITE);
-            drawOverlay(placeholder, R.drawable.show_pdf, 0.75f, 0);
+            drawOverlay(placeholder, R.drawable.show_pdf, 0.75f);
             return placeholder;
         }
     }
@@ -738,11 +737,6 @@ public class FileBackend {
         return new Dimensions(h, w);
     }
 
-    private int getDisplayDensity() {
-        final DisplayMetrics displayMetrics = mXmppConnectionService.getResources().getDisplayMetrics();
-        return (int) displayMetrics.density;
-    }
-
     private Bitmap getFullsizeImagePreview(File file, int size) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = calcSampleSize(file, size);
@@ -754,34 +748,11 @@ public class FileBackend {
         }
     }
 
-    public void drawOverlay(final Bitmap bitmap, final int resource, final float factor, final long duration) {
-        drawOverlay(bitmap, resource, factor, false, duration);
+    public void drawOverlay(final Bitmap bitmap, final int resource, final float factor) {
+        drawOverlay(bitmap, resource, factor, false);
     }
 
-    public void drawOverlay(final Bitmap bitmap, final int resource, final float factor, final boolean corner, final long duration) {
-        if (duration > 0) {
-            final String time = formatTime(safeLongToInt(duration));
-            Canvas c = new Canvas(bitmap);
-            c.drawBitmap(bitmap, 0,0,null);
-            Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            paint.setColor(mXmppConnectionService.getResources().getColor(R.color.white));
-            paint.setTextSize((int) (15 * getDisplayDensity()));
-            Rect bounds = new Rect();
-            paint.getTextBounds(time, 0, time.length(), bounds);
-            int xy = 10;
-            int x = xy + xy;
-            int y = xy + xy + bounds.height();
-            Canvas bg = new Canvas(bitmap);
-            bg.drawBitmap(bitmap, 0,0,null);
-            Paint bgpaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            bgpaint.setColor(mXmppConnectionService.getResources().getColor(R.color.grey700));
-            if (Compatibility.runsTwentyOne()) {
-                bg.drawRoundRect(xy, xy, bounds.width() + (3 * xy), bounds.height() + (3 * xy), 10, 10, bgpaint);
-            } else {
-                bg.drawRect(xy, xy, bounds.width() + (3 * xy), bounds.height() + (3 * xy), bgpaint);
-            }
-            c.drawText(time, x, y, paint);
-        }
+    public void drawOverlay(final Bitmap bitmap, final int resource, final float factor, final boolean corner) {
         Bitmap overlay = BitmapFactory.decodeResource(mXmppConnectionService.getResources(), resource);
         Canvas canvas = new Canvas(bitmap);
         float targetSize = Math.min(canvas.getWidth(), canvas.getHeight()) * factor;
@@ -850,11 +821,9 @@ public class FileBackend {
     private Bitmap getVideoPreview(final File file, final int size) {
         final MediaMetadataRetriever metadataRetriever = new MediaMetadataRetriever();
         Bitmap frame;
-        long duration = 0;
         try {
             metadataRetriever.setDataSource(file.getAbsolutePath());
             frame = metadataRetriever.getFrameAtTime(0);
-            duration = Long.parseLong(metadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
             metadataRetriever.release();
             frame = resize(frame, size);
         } catch (IOException e) {
@@ -864,7 +833,7 @@ public class FileBackend {
             frame = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
             frame.eraseColor(0xff000000);
         }
-        drawOverlay(frame, R.drawable.play_video, 0.75f, duration);
+        drawOverlay(frame, R.drawable.play_video, 0.75f);
         return frame;
     }
 
@@ -876,7 +845,7 @@ public class FileBackend {
         return (int) l;
     }
 
-    private static String formatTime(int ms) {
+    public static String formatTime(int ms) {
         return String.format(Locale.ENGLISH, "%d:%02d", ms / 60000, Math.min(Math.round((ms % 60000) / 1000f), 59));
     }
 
@@ -1271,11 +1240,17 @@ public class FileBackend {
         final String mime = file.getMimeType();
         final boolean privateMessage = message.isPrivateMessage();
         final boolean image = message.getType() == Message.TYPE_IMAGE || (mime != null && mime.startsWith("image/"));
+        final boolean isGif = image & (mime != null && mime.equalsIgnoreCase("image/gif"));
         final boolean video = mime != null && mime.startsWith("video/");
         final boolean audio = mime != null && mime.startsWith("audio/");
         final boolean vcard = mime != null && mime.contains("vcard");
         final boolean apk = mime != null && mime.equals("application/vnd.android.package-archive");
         final boolean pdf = "application/pdf".equals(mime);
+        /* file params:
+         1  |    2     |   3   |    4    |    5    |   6
+                       | image/video/pdf | a/v/gif | vcard/apk
+        url | filesize | width | height  | runtime | name
+        */
         final StringBuilder body = new StringBuilder();
         if (url != null) {
             body.append(url.toString());
@@ -1293,6 +1268,9 @@ public class FileBackend {
                 }
                 if (dimensions.valid()) {
                     body.append('|').append(dimensions.width).append('|').append(dimensions.height);
+                    if (isGif || video) {
+                        body.append("|").append(getMediaRuntime(file, isGif));
+                    }
                 }
             } catch (NotAVideoFile notAVideoFile) {
                 Log.d(Config.LOGTAG, "file with mime type " + file.getMimeType() + " was not a video file");
@@ -1341,18 +1319,18 @@ public class FileBackend {
         message.setBody(body.toString());
     }
 
-    private int getMediaRuntime(File file, boolean isGif) {
+    public int getMediaRuntime(File file, boolean isGif) {
         if (isGif) {
-            try {
-                final InputStream inputStream = mXmppConnectionService.getContentResolver().openInputStream(getUriForFile(mXmppConnectionService, file));
-                Movie movie = Movie.decodeStream(inputStream);
-                int duration = movie.duration();
-                close(inputStream);
-                return duration;
-            } catch (FileNotFoundException e) {
-                Log.d(Config.LOGTAG, "unable to get image dimensions", e);
-                return 0;
-            }
+             try {
+                    final InputStream inputStream = mXmppConnectionService.getContentResolver().openInputStream(getUriForFile(mXmppConnectionService, file));
+                    Movie movie = Movie.decodeStream(inputStream);
+                    int duration = movie.duration();
+                    close(inputStream);
+                    return duration;
+                } catch (FileNotFoundException e) {
+                    Log.d(Config.LOGTAG, "unable to get image dimensions", e);
+                    return 0;
+                }
         } else {
             try {
                 MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
@@ -1492,12 +1470,12 @@ public class FileBackend {
             bitmap = cropCenterSquare(getPDFPreview(file, size), size);
         } else if (attachment.getMime() != null && attachment.getMime().startsWith("video/")) {
             bitmap = cropCenterSquareVideo(attachment.getUri(), size);
-            drawOverlay(bitmap, R.drawable.play_video, 0.75f, 0);
+            drawOverlay(bitmap, R.drawable.play_video, 0.75f);
         } else {
             bitmap = cropCenterSquare(attachment.getUri(), size);
             if (bitmap != null && "image/gif".equals(attachment.getMime())) {
                 Bitmap withGifOverlay = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-                drawOverlay(withGifOverlay, R.drawable.play_gif, 1.0f, getMediaRuntime(file, true));
+                drawOverlay(withGifOverlay, R.drawable.play_gif, 1.0f);
                 bitmap.recycle();
                 bitmap = withGifOverlay;
             }
