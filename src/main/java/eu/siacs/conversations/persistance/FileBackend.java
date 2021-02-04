@@ -1273,8 +1273,13 @@ public class FileBackend {
                     }
                 }
             } catch (NotAVideoFile notAVideoFile) {
-                Log.d(Config.LOGTAG, "file with mime type " + file.getMimeType() + " was not a video file");
-                //fall threw
+                Log.d(Config.LOGTAG, "file with mime type " + file.getMimeType() + " was not a video file, trying to handle it as audio file");
+                try {
+                    body.append("|0|0|").append(getMediaRuntime(file, false)).append('|').append(getAudioTitleArtist(file));
+                } catch (Exception e) {
+                    Log.d(Config.LOGTAG, "file with mime type " + file.getMimeType() + " was neither a video file nor an audio file");
+                    //fall threw
+                }
             }
         } else if (audio) {
             body.append("|0|0|").append(getMediaRuntime(file, false)).append('|').append(getAudioTitleArtist(file));
