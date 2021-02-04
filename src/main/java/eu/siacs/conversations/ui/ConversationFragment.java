@@ -1893,7 +1893,11 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 intent.putExtra("ALTERNATIVE_CODEC", activity.xmppConnectionService.alternativeVoiceSettings());
                 break;
             case ATTACHMENT_CHOICE_LOCATION:
-                intent = new Intent(getActivity(), ShareLocationActivity.class);
+                if (activity.xmppConnectionService.webViewAvailable()) {
+                    intent = new Intent(getActivity(), ShareLocationActivity.class);
+                } else {
+                    ToastCompat.makeText(activity, R.string.webview_not_available, Toast.LENGTH_LONG).show();
+                }
                 break;
         }
         final Context context = getActivity();
@@ -2939,7 +2943,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         } else {
             if (conversation.getMucOptions().pgpKeysInUse()) {
                 if (!conversation.getMucOptions().everybodyHasKeys()) {
-                    Toast warning = Toast
+                    Toast warning = ToastCompat
                             .makeText(getActivity(),
                                     R.string.missing_public_keys,
                                     Toast.LENGTH_LONG);
@@ -3039,7 +3043,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             correctMessage(lastEditableMessage);
             return true;
         } else {
-            Toast.makeText(getActivity(), R.string.could_not_correct_message, Toast.LENGTH_LONG).show();
+            ToastCompat.makeText(getActivity(), R.string.could_not_correct_message, Toast.LENGTH_LONG).show();
             return false;
         }
     }

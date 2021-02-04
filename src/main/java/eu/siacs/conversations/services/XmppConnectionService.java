@@ -4878,6 +4878,10 @@ public class XmppConnectionService extends Service {
         }
     }
 
+    public boolean webViewAvailable() {
+        return this.getPackageManager().hasSystemFeature("android.software.webview");
+    }
+
     public void publishDisplayName(Account account) {
         String displayName = account.getDisplayName();
         final IqPacket request;

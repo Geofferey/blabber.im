@@ -1094,4 +1094,5 @@
     <string name="server_info_easy_invite">XEP-0401: Easy User Onboarding</string>
     <string name="pref_mappreview_host_summary">Use a custom map preview host</string>
     <string name="pref_mappreview_host">Map preview host</string>
+    <string name="webview_not_available">Webview is not available on your device.</string>
 </resources>

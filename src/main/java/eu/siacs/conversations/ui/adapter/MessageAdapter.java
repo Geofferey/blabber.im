@@ -1394,14 +1394,17 @@ public class MessageAdapter extends ArrayAdapter<Message> {
     }
 
     private void showLocation(Message message) {
-        for (Intent intent : GeoHelper.createGeoIntentsFromMessage(this.getContext(), message)) {
-            if (intent.resolveActivity(getContext().getPackageManager()) != null) {
-                getContext().startActivity(intent);
-                activity.overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
-                return;
+        if (activity.xmppConnectionService.webViewAvailable()) {
+            for (Intent intent : GeoHelper.createGeoIntentsFromMessage(this.getContext(), message)) {
+                if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+                    getContext().startActivity(intent);
+                    activity.overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
+                    return;
+                }
             }
+        } else {
+            ToastCompat.makeText(activity, R.string.webview_not_available, Toast.LENGTH_LONG).show();
         }
-        ToastCompat.makeText(activity, R.string.no_application_found_to_display_location, Toast.LENGTH_SHORT).show();
     }
 
     public void updatePreferences() {

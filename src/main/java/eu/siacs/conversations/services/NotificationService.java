@@ -65,7 +65,6 @@ import eu.siacs.conversations.utils.AccountUtils;
 import eu.siacs.conversations.utils.Compatibility;
 import eu.siacs.conversations.utils.EmojiWrapper;
 import eu.siacs.conversations.utils.GeoHelper;
-import eu.siacs.conversations.utils.RichPreview;
 import eu.siacs.conversations.utils.ThemeHelper;
 import eu.siacs.conversations.utils.TorServiceUtils;
 import eu.siacs.conversations.utils.UIHelper;
@@ -1099,7 +1098,7 @@ public class NotificationService {
                     mBuilder.addAction(snoozeAction);
                     ++addedActionsCount;
                 }
-                if (addedActionsCount < 3) {
+                if (addedActionsCount < 3 && mXmppConnectionService.webViewAvailable()) {
                     final Message firstLocationMessage = getFirstLocationMessage(messages);
                     if (firstLocationMessage != null) {
                         final PendingIntent pendingShowLocationIntent = createShowLocationIntent(firstLocationMessage);
