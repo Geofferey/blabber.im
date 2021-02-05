@@ -25,7 +25,6 @@
     <string name="just_now">ಇದೀಗ</string>
     <string name="minute_ago">1 ನಿಮಿಷ ಹಿಂದೆ</string>
     <string name="minutes_ago">%d ನಿಮಿಷ ಮುಂಚೆ</string>
-    <string name="x_unread_conversations">%d ಓದಿರದ ಸಂಭಾಷಣೆಗಳು</string>
     <string name="sending">ಕಳಿಸುತ್ತಿದೆ…</string>
     <string name="message_decrypting">ಸಂಧೇಶ ನಿರ್ಗೂಢಿಸಲಾಗುತ್ತಿದೆ. ದಯವಿಟ್ಟು ತಾಳಿ…</string>
     <string name="pgp_message">OpenPGP ಬದ್ಧ ಸಂದೇಶ</string>
@@ -81,7 +80,6 @@
     <string name="your_nick_has_been_changed">ನಿಮ್ಮ ಉಪನಾಮ ಬದಲಾಯಿಸಲಾಗಿದೆ</string>
     <string name="send_unencrypted">ನಿರ್ಬದ್ಧ ಕಳುಹಿಸು</string>
     <string name="decryption_failed">ಡೀಕ್ರಿಪ್ಶನ್ ವಿಫಲವಾಗಿದೆ. ನೀವು ಸರಿಯಾದ ಖಾಸಗಿ ಕೀಲಿಯನ್ನು ಹೊಂದಿಲ್ಲದಿರಬಹುದು.</string>
-    <string name="openkeychain_required">OpenKeychain</string>
     <string name="restart">ಪುನರಾರಂಭ</string>
     <string name="install">ಸ್ಥಾಪಿಸು</string>
     <string name="offering">ನೀಡುತ್ತದೆ…</string>
@@ -138,9 +136,6 @@
     <string name="account_status_incompatible_server">ಹೊಂದಾಣಿಕೆ ಆಗದ ಸರ್ವರ್</string>
     <string name="account_status_stream_error">ಸ್ಟ್ರೀಮ್ ದೋಷ</string>
     <string name="encryption_choice_unencrypted">ನಿರ್ಬದ್ಧ</string>
-    <string name="encryption_choice_otr">OTR</string>
-    <string name="encryption_choice_pgp">OpenPGP</string>
-    <string name="encryption_choice_omemo">OMEMO</string>
     <string name="action_account">ಖಾತೆ ತಿದ್ದು</string>
     <string name="mgmt_account_delete">ಖಾತೆ ಅಳಿಸು</string>
     <string name="mgmt_account_publish_avatar">ಅವತಾರ ಪ್ರಕಟಿಸು</string>

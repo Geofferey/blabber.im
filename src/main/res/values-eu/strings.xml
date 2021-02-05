@@ -71,7 +71,6 @@
     <string name="your_nick_has_been_changed">Zure ezizena aldatu da</string>
     <string name="send_unencrypted">Enkriptatu gabe bidali</string>
     <string name="decryption_failed">Desenkriptazioak huts egin du. Agian ez duzu gako pribatu egokia.</string>
-    <string name="openkeychain_required">OpenKeychain</string>
     <string name="restart">Berrabiarazi</string>
     <string name="install">Instalatu</string>
     <string name="offering">eskeintzen…</string>
@@ -121,9 +120,6 @@
     <string name="account_status_incompatible_server">Zerbitzari ez bateragarria</string>
     <string name="account_status_stream_error">Akatsa korrontean</string>
     <string name="encryption_choice_unencrypted">Enkriptatu gabe</string>
-    <string name="encryption_choice_otr">OTR</string>
-    <string name="encryption_choice_pgp">OpenPGP</string>
-    <string name="encryption_choice_omemo">OMEMO</string>
     <string name="mgmt_account_delete">Kontua ezabatu</string>
     <string name="mgmt_account_publish_avatar">Profileko argazkia argitaratu</string>
     <string name="mgmt_account_publish_pgp">OpenPGP gako publikoa argitaratu</string>
@@ -138,15 +134,6 @@
     <string name="error_out_of_memory">Memoriarik gabe. Irudia handiegia da</string>
     <string name="add_phone_book_text">%s zure helbideen liburura gehitu nahi duzu?</string>
     <string name="server_info_show_more">Zerbitzariaren informazioa</string>
-    <string name="server_info_mam">XEP-0313: MAM</string>
-    <string name="server_info_carbon_messages">XEP-0280: Message Carbons</string>
-    <string name="server_info_csi">XEP-0352: Client State Indication</string>
-    <string name="server_info_blocking">XEP-0191: Blocking Command</string>
-    <string name="server_info_roster_version">XEP-0237: Roster Versioning</string>
-    <string name="server_info_stream_management">XEP-0198: Stream Management</string>
-    <string name="server_info_pep">XEP-0163: PEP (Avatars / OMEMO)</string>
-    <string name="server_info_http_upload">XEP-0363: HTTP File Upload</string>
-    <string name="server_info_push">XEP-0357: Push</string>
     <string name="missing_public_keys">Gako publikoen iragarpenak faltan</string>
     <string name="last_seen_now">azkenengoz ikusia orain</string>
     <string name="last_seen_min">azkenengoz ikusia minutu 1 lehenago</string>

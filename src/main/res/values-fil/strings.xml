@@ -22,7 +22,6 @@
     <string name="message_decrypting">Nag gawa ng mga mensahi. Pakiusap maghintay…</string>
     <string name="pgp_message">OpenPGP encrypted na mensahe</string>
     <string name="nick_in_use">Palayaw ay nagamit na</string>
-    <string name="admin">Admin</string>
     <string name="owner">May-ari</string>
     <string name="moderator">Tagapayo</string>
     <string name="participant">Nakilahok</string>
@@ -45,7 +44,6 @@
     <string name="add">Idagdag</string>
     <string name="edit">I-edit</string>
     <string name="delete">Alisin</string>
-    <string name="block">Block</string>
     <string name="unblock">I-unblock</string>
     <string name="save">I-save</string>
     <string name="ok">Sige</string>
@@ -87,16 +85,13 @@
     <string name="pref_accept_files_summary_mobileroaming">Kapag nakakonektado sa mobile data na roaming ito ay automatikong tumanggap ng mga dokumentong maliliit…</string>
     <string name="pref_attachments">Mga payl</string>
     <string name="pref_notification_settings">Ang notipikasyon</string>
-    <string name="pref_vibrate">Vibrate</string>
     <string name="pref_vibrate_summary">Pakivibrate kapay maroong bagong mensahe na dumating</string>
     <string name="pref_led">Notipikasyon gamit ang LED</string>
     <string name="pref_led_summary">Paki kumisap ang ilaw kapag may bagong mensahe na dumating</string>
-    <string name="pref_sound">Ringtone</string>
     <string name="pref_sound_summary">I-play ang tunog kapay mayroong bagong mensahe</string>
     <string name="pref_send_crash">Magpadala ng mga bagsak na ulat</string>
     <string name="pref_confirm_messages">I-kumpirma ang mensahe</string>
     <string name="pref_confirm_messages_summary">Paki alam sa mga kontak ko na natanggap at nabasa ko ang kanilang mga mensahe</string>
-    <string name="pref_ui_options">UI</string>
     <string name="openpgp_error">OpenKeychain ay nagulat ng pagkakamali</string>
     <string name="accept">Taggapin</string>
     <string name="error">Isang mali ang naganap</string>
@@ -113,9 +108,7 @@
     <string name="error_security_exception_during_image_copy">Ang ginamit mo na app para pumili nitong imahe ay hindi nag bigay ng sapat na pahintulot para bumasa sa file. <small>Gumamit ng ibang file manager para pumili ng imahe</small></string>
     <string name="account_status_unknown">Hindi alam</string>
     <string name="account_status_disabled">Pansamantalang hindi gumana</string>
-    <string name="account_status_online">Online</string>
     <string name="account_status_connecting">Komukonekta\u2026</string>
-    <string name="account_status_offline">Offline</string>
     <string name="account_status_unauthorized">Hindi awtorisado</string>
     <string name="account_status_not_found">Hindi mahanap na server</string>
     <string name="account_status_no_internet">Walang pagkakakonekta</string>
@@ -127,10 +120,6 @@
     <string name="account_status_policy_violation">Paglabag sa patakaran</string>
     <string name="account_status_incompatible_server">Hindi tugma na server</string>
     <string name="account_status_stream_error">May mali sa stream</string>
-    <string name="encryption_choice_unencrypted">Unencrypted</string>
-    <string name="encryption_choice_otr">OTR</string>
-    <string name="encryption_choice_pgp">OpenPGP</string>
-    <string name="encryption_choice_omemo">OMEMO</string>
     <string name="mgmt_account_delete">Tanggalin ang account</string>
     <string name="mgmt_account_publish_avatar">Magpublish ng kahit anong larawan</string>
     <string name="mgmt_account_publish_pgp">Magpublish ng OpenPGP public key</string>
@@ -139,23 +128,14 @@
     <string name="openpgp_has_been_published">Napublish na ang OpenPGP public key.</string>
     <string name="mgmt_account_are_you_sure">Sigurado ka ba?</string>
     <string name="attach_record_voice">I-rekord ang boses</string>
-    <string name="account_settings_jabber_id">Jabber-ID</string>
     <string name="password">Ang password</string>
     <string name="invalid_jid">Hindi ito balido na Jabber-ID</string>
     <string name="error_out_of_memory">Wala ng memorya. Ang imahe ay napakalaki</string>
     <string name="add_phone_book_text">Gusto mo bang magdagdag %s sa iyong address book?</string>
     <string name="server_info_show_more">Impormasyon sa server</string>
-    <string name="server_info_mam">XEP-0313: MAM</string>
     <string name="server_info_carbon_messages">XEP-0280: Mensagheng karbon</string>
-    <string name="server_info_csi">XEP-0352: Client State Indication</string>
     <string name="server_info_blocking">XEP-0191: I-block na utos</string>
-    <string name="server_info_roster_version">XEP-0237: Roster Versioning</string>
-    <string name="server_info_stream_management">XEP-0198: Stream Management</string>
-    <string name="server_info_pep">XEP-0163: PEP (Avatars / OMEMO)</string>
-    <string name="server_info_http_upload">XEP-0363: HTTP File Upload</string>
-    <string name="server_info_push">XEP-0357: Push</string>
     <string name="missing_public_keys">Nawalang public key na mga anunsyo</string>
-    <string name="last_seen_now">online</string>
     <string name="last_seen_min">1 minutong nakalipas</string>
     <string name="last_seen_mins">%d minutong nakalipas</string>
     <string name="last_seen_hour">1 oras na ang nakalipas</string>
@@ -165,7 +145,6 @@
     <string name="install_openkeychain">Encrypted na mensahe. Paki install ng OpenKeychain sa decrypt.</string>
     <string name="openpgp_messages_found">OpenPGP encrypted na mga mensahe ay hindi na kita</string>
     <string name="your_fingerprint">Iyong fingerprint</string>
-    <string name="openpgp_key_id">OpenPGP Key ID</string>
     <string name="omemo_fingerprint">Bakas ng daliri para sa OMEMO</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO bakas ng daliri</string>
     <string name="omemo_fingerprint_selected_message">OMEMO bakas ng daliri ng mensahe</string>
@@ -175,7 +154,6 @@
     <string name="fetching_keys">Pagkuha ng keys…</string>
     <string name="done">Natapos</string>
     <string name="verify">I-verify</string>
-    <string name="decrypt">Decrypt</string>
     <string name="search">Magsaliksik</string>
     <string name="enter_contact">Ipasok na kontak</string>
     <string name="delete_contact">Burahin ang kontak</string>
@@ -194,14 +172,12 @@
     <string name="add_back">Idagdag ulit</string>
     <string name="publish">I-publish</string>
     <string name="touch_to_choose_picture">Hawakan ang avatar para pumili ng imahe galing sa gallery</string>
-    <string name="publishing">Publishing…</string>
     <string name="error_publish_avatar_server_reject">Ang server ay tinanggihan ang iyong publikasyon</string>
     <string name="error_publish_avatar_converting">May naganap na mali ng i-conver na ang iyong imahe</string>
     <string name="error_saving_avatar">Hindi ma i-save ang avatar sa disk</string>
     <string name="or_long_press_for_default">(o matagal na pindut upang bumalik sa default)</string>
     <string name="error_publish_avatar_no_server_support">Ang iyong server ay hindi sumuporta sa publikasyon ng mga avatar</string>
     <string name="private_message">bumulong</string>
-    <string name="private_message_to">to %s</string>
     <string name="send_private_message_to">Magpadala ng pribadong mensahe kay %s</string>
     <string name="connect">Kumunekta</string>
     <string name="account_already_exists">Ang account na ito ay umiiral na</string>
@@ -321,7 +297,6 @@
     <string name="could_not_modify_conference_options">Hindi mabago ang mga pagpipilian sa grupo ng chat</string>
     <string name="never">Tunay na hindi</string>
     <string name="until_further_notice">Hanggang mayroong abiso</string>
-    <string name="pref_input_options">Input</string>
     <string name="pref_enter_is_send">Ipasok ay ipapadala</string>
     <string name="pref_display_enter_key">Ibahagi ang papasok na susi</string>
     <string name="pref_display_enter_key_summary">Baguhin ang mga susi ng imotikon para ipasok ang papasok na susi</string>
@@ -329,7 +304,6 @@
     <string name="video">bediyo</string>
     <string name="image">imahe</string>
     <string name="pdf_document">Kodumentong PDF</string>
-    <string name="apk">Android App</string>
     <string name="vcard">Pakikipag-ugnayan</string>
     <string name="avatar_has_been_published">Avatar ay nailathala!</string>
     <string name="sending_x_file">Nagpapadala %s</string>
@@ -375,7 +349,6 @@
     <string name="no_update_available">Walang available na update</string>
     <string name="download_started">Nagsimula ang pag-download</string>
     <string name="account_status_tor_unavailable">Hindi magagamit ang network ng Tor</string>
-    <string name="account_status_bind_failure">Bind failure</string>
     <string name="account_status_host_unknown">Hindi mananagot ang server para sa domain</string>
     <string name="server_info_broken">Nasira</string>
     <string name="pref_away_when_screen_off">Lumayo kapag naka-off ang screen</string>
@@ -400,8 +373,6 @@
     <string name="verified_omemo_key_with_certificate">Na-verify na key ng OMEMO na may sertipiko!</string>
     <string name="device_does_not_support_certificates">Ang iyong aparato ay hindi sumusuporta sa pagpili ng mga sertipiko ng kliyente!</string>
     <string name="changelog">Mga pagbabago</string>
-    <string name="account_settings_hostname">Hostname</string>
-    <string name="account_settings_port">Port</string>
     <string name="not_a_valid_port">Hindi ito isang wastong numero ng port</string>
     <string name="not_valid_hostname">Hindi ito wastong hostname</string>
     <string name="connected_accounts">%1$d ng %2$d mga account na konektado</string>
@@ -439,7 +410,6 @@
     <string name="pick_your_username">Piliin ang iyong username</string>
     <string name="status_message">Katayuan ng mensahe</string>
     <string name="presence_chat">Libre para sa Chat</string>
-    <string name="presence_online">Online</string>
     <string name="presence_away">Malayo</string>
     <string name="presence_xa">Hindi magagamit</string>
     <string name="presence_dnd">Abala</string>
@@ -459,7 +429,6 @@
     <string name="import_database">Mag-import ng backup</string>
     <string name="invite_again">Mag-imbita muli</string>
     <string name="inviteUser_Subject">ay inanyayahan ka sa pamamagitan ng</string>
-    <string name="pref_broadcast_last_activity">Broadcast Last User Interaction</string>
     <string name="unable_to_connect_to_keychain">Hindi makakonekta sa OpenKeychain</string>
     <string name="this_device_is_no_longer_in_use">Hindi na ginagamit ang aparatong ito</string>
     <string name="please_wait">Mangyaring maghintay…</string>
@@ -518,7 +487,6 @@
     <string name="contacts_are_typing">%s ay nagta-type…</string>
     <string name="contact_is_typing">%s ay nagta-type…</string>
     <string name="more_participants">%d mga kalahok</string>
-    <string name="presence_offline">Offline</string>
     <string name="block_stranger">I-block ang estranghero</string>
     <string name="block_entire_domain">I-block ang buong domain</string>
     <string name="pref_use_auto_rotate_summary">I-rotate ang mga imahe at video sa fullscreen upang magkasya sa screen</string>
@@ -534,7 +502,6 @@
     <string name="send_failed_resend">nabigo ang paghahatid, hinahatid uli…</string>
     <string name="pref_show_connection_options_summary">Ipakita ang mga setting ng hostname at port kapag nag-set up ng isang account</string>
     <string name="pref_show_connection_options">Pinalawak na mga setting ng koneksyon</string>
-    <string name="retry_decryption">Retry decryption</string>
     <string name="session_failure">Pagkabigo ng sesyon</string>
     <string name="sasl_downgrade">I-downgrade ang mekanismo ng SASL</string>
     <string name="action_take_photo">kunan ng litrato</string>

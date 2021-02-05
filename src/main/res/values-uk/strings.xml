@@ -25,7 +25,6 @@
     <string name="just_now">щойно</string>
     <string name="minute_ago">1 хвилину тому</string>
     <string name="minutes_ago">%d хв. тому</string>
-    <string name="x_unread_conversations">%d непрочитаних розмов</string>
     <string name="sending">надсилаю…</string>
     <string name="message_decrypting">Розшифровую повідомлення. Зачекайте, будь ласка…</string>
     <string name="pgp_message">Повідомлення зашифроване OpenPGP</string>
@@ -81,7 +80,6 @@
     <string name="your_nick_has_been_changed">Ваше прізвисько змінено</string>
     <string name="send_unencrypted">Надіслати без шифрування</string>
     <string name="decryption_failed">Не вдалося розшифрувати. Можливо, у вас відсутній потрібний приватний ключ.</string>
-    <string name="openkeychain_required">OpenKeychain</string>
     <string name="restart">Перезапустити</string>
     <string name="install">Встановити</string>
     <string name="offering">пропоную…</string>
@@ -138,9 +136,6 @@
     <string name="account_status_incompatible_server">Несумісний сервер</string>
     <string name="account_status_stream_error">Помилка потоку</string>
     <string name="encryption_choice_unencrypted">Без шифрування</string>
-    <string name="encryption_choice_otr">OTR</string>
-    <string name="encryption_choice_pgp">OpenPGP</string>
-    <string name="encryption_choice_omemo">OMEMO</string>
     <string name="action_account">Мій обліковий запис</string>
     <string name="mgmt_account_delete">Вилучити обліковий запис</string>
     <string name="mgmt_account_publish_avatar">Опублікувати піктограму користувача</string>
@@ -201,8 +196,6 @@
     <string name="select">Вибрати</string>
     <string name="contact_already_exists">Контакт уже існує</string>
     <string name="join">Приєднатися</string>
-    <string name="channel_full_jid_example">channel@conference.example.com/nick</string>
-    <string name="channel_bare_jid_example">channel@conference.example.com</string>
     <string name="save_as_bookmark">Зберегти до закладок</string>
     <string name="delete_bookmark">Вилучити закладку</string>
     <string name="topic">Тема</string>
@@ -729,7 +722,6 @@
     <string name="create_shortcut">Створити ярлик</string>
     <string name="not_encrypted_for_this_device">Повідомлення не було зашифровано для цього пристрою</string>
     <string name="search_messages">Шукати в повідомленнях</string>
-    <string name="gif">GIF</string>
     <string name="view_conversation">Переглянути розмову</string>
     <string name="web_address">вебадреса</string>
     <string name="jabber_id_copied_to_clipboard">Адресу XMPP скопійовано</string>
@@ -947,7 +939,6 @@
     <string name="no_results">Нічого не знайдено</string>
     <string name="file_transmission_cancelled">скасовано передачу файлу</string>
     <string name="sharing_application_not_grant_permission">Застосунок для спільного доступу не надав дозволу на доступ до цього файлу.</string>
-    <string name="jabber_network">jabber.network</string>
     <string name="local_server">Локальний сервер</string>
     <string name="pref_channel_discovery_summary">Більшість користувачів вибирають \'jabber.network\' як одну з кращих пропозицій зі всіх публічних середовищ XMPP.</string>
     <string name="pref_channel_discovery">Спосіб пошуку каналів</string>

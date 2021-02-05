@@ -45,7 +45,6 @@
     <string name="block">Zablokovat</string>
     <string name="unblock">Odblokovat</string>
     <string name="save">Uložit</string>
-    <string name="ok">OK</string>
     <string name="send_now">Odeslat teď</string>
     <string name="send_never">Již se neptat</string>
     <string name="problem_connecting_to_account">Připojení k účtu se nezdařilo</string>
@@ -68,7 +67,6 @@
     <string name="your_nick_has_been_changed">Přezdívka byla změněna</string>
     <string name="send_unencrypted">Poslat nešifrované</string>
     <string name="decryption_failed">Zašifrování se nezdařilo. Možná nemáte správný privátní klíč.</string>
-    <string name="openkeychain_required">OpenKeychain</string>
     <string name="restart">Restartovat</string>
     <string name="install">Instalovat</string>
     <string name="offering">nabízí…</string>
@@ -85,7 +83,6 @@
     <string name="pref_sound">Tón upozornění</string>
     <string name="pref_sound_summary">Přehrát zvuk při přijetí nové zprávy</string>
     <string name="pref_confirm_messages">Potvrzovat zprávy</string>
-    <string name="pref_ui_options">UI</string>
     <string name="openpgp_error">OpenKeychain nahlásil chybu</string>
     <string name="accept">Přijmout</string>
     <string name="error">Došlo k chybě</string>
@@ -102,9 +99,7 @@
     <string name="error_security_exception_during_image_copy">Aplikace, která byla vybrána pro výběr obrázku, nepovolila přečtení souboru.\n\n<small>Zkuste použít jiného správce souborů pro výběr obrázku</small></string>
     <string name="account_status_unknown">Neznámý</string>
     <string name="account_status_disabled">Dočasně vypnuto</string>
-    <string name="account_status_online">Online</string>
     <string name="account_status_connecting">Připojuji\u2026</string>
-    <string name="account_status_offline">Offline</string>
     <string name="account_status_unauthorized">Nepřihlášen</string>
     <string name="account_status_not_found">Server nenalezen</string>
     <string name="account_status_no_internet">Žádné připojení</string>
@@ -116,9 +111,6 @@
     <string name="account_status_incompatible_server">Nekompatibilní server</string>
     <string name="account_status_stream_error">Chyba přenosu</string>
     <string name="encryption_choice_unencrypted">Nešifrováno</string>
-    <string name="encryption_choice_otr">OTR</string>
-    <string name="encryption_choice_pgp">OpenPGP</string>
-    <string name="encryption_choice_omemo">OMEMO</string>
     <string name="mgmt_account_delete">Smazat účet</string>
     <string name="mgmt_account_publish_avatar">Zveřejnit avatar</string>
     <string name="mgmt_account_publish_pgp">Zveřejnit OpenPGP klíč</string>
@@ -131,15 +123,11 @@
     <string name="error_out_of_memory">Nedostatek paměti. Obrázek je příliš velký</string>
     <string name="add_phone_book_text">Chcete přidat %s do svého adresáře?</string>
     <string name="server_info_show_more">Údaje serveru</string>
-    <string name="server_info_mam">XEP-0313: MAM</string>
     <string name="server_info_carbon_messages">XEP-0280: Kopie zpráv</string>
     <string name="server_info_csi">XEP-0352: Zobrazování stavu klienta</string>
     <string name="server_info_blocking">XEP-0191: Příkaz blokování</string>
     <string name="server_info_roster_version">XEP-0237: Verzování seznamu</string>
     <string name="server_info_stream_management">XEP-0198: Nastavení proudu</string>
-    <string name="server_info_pep">XEP-0163: PEP (Avatars / OMEMO)</string>
-    <string name="server_info_http_upload">XEP-0363: HTTP File Upload</string>
-    <string name="server_info_push">XEP-0357: Push</string>
     <string name="missing_public_keys">Chybí oznámení o veřejném klíči</string>
     <string name="last_seen_now">právě spatřen</string>
     <string name="last_seen_min">naposledy spatřen před 1 minutou</string>
@@ -278,7 +266,6 @@
     <string name="password_should_not_be_empty">Heslo nemá být prázdné</string>
     <string name="perform_action_with">Provést akci s</string>
     <string name="no_affiliation">Nepřidružený</string>
-    <string name="no_role">Offline</string>
     <string name="outcast">Vyloučený</string>
     <string name="member">Člen</string>
     <string name="advanced_mode">Pokročilý mód</string>
@@ -293,8 +280,6 @@
     <string name="pref_enter_is_send">Enter odesílá</string>
     <string name="pref_display_enter_key">Zobrazit klávesu enter</string>
     <string name="pref_display_enter_key_summary">Změnit klávesu emotikon na klávesu enter</string>
-    <string name="audio">audio</string>
-    <string name="video">video</string>
     <string name="image">obrázek</string>
     <string name="pdf_document">dokument PDF</string>
     <string name="apk">Aplikace pro Android</string>
@@ -351,8 +336,6 @@
     <string name="error_fetching_omemo_key">Chyba získání OMEMO klíče!</string>
     <string name="verified_omemo_key_with_certificate">OMEMO klíč ověřen certifikátem!</string>
     <string name="device_does_not_support_certificates">Tento přístroj nepodporuje výběr klientského certifikátu!</string>
-    <string name="account_settings_hostname">Hostname</string>
-    <string name="account_settings_port">Port</string>
     <string name="not_a_valid_port">Toto není platné číslo portu</string>
     <string name="not_valid_hostname">Toto není platné hostname</string>
     <string name="connected_accounts">%1$d z %2$d účtů připojeno</string>
@@ -376,7 +359,6 @@
     <string name="pick_your_username">Zadejte své uživatelské jméno</string>
     <string name="status_message">Stavová zpráva</string>
     <string name="presence_chat">Volný pro chat</string>
-    <string name="presence_online">Online</string>
     <string name="presence_away">Pryč</string>
     <string name="presence_xa">Nedostupný</string>
     <string name="presence_dnd">Zaneprázdněný</string>

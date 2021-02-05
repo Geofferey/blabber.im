@@ -21,9 +21,7 @@
     <string name="message_decrypting">Avkrypterar meddelande. Vänta…</string>
     <string name="pgp_message">OpenPGP-krypterat meddelande</string>
     <string name="nick_in_use">Nick används redan</string>
-    <string name="admin">Admin</string>
     <string name="owner">Ägare</string>
-    <string name="moderator">Moderator</string>
     <string name="participant">Deltagare</string>
     <string name="visitor">Besökare</string>
     <string name="remove_contact_text">Vill du ta bort %s från din kontaktlista? Konversationer associerade med denna kontakt kommer inte tas bort.</string>
@@ -68,7 +66,6 @@
     <string name="your_nick_has_been_changed">Ditt nick har ändrats</string>
     <string name="send_unencrypted">Skicka okrypterat</string>
     <string name="decryption_failed">Avkryptering misslyckades. Du har kanske kanske inte rätt privat nyckel.</string>
-    <string name="openkeychain_required">OpenKeychain</string>
     <string name="restart">Starta om</string>
     <string name="install">Installera</string>
     <string name="offering">erbjuder…</string>
@@ -103,9 +100,7 @@
     <string name="error_security_exception_during_image_copy">Applikationen du använde för att välja bilden gav inte tillräckliga rättigheter för att läsa filen.\n\n<small>Använd en annan filhanterare för att välja bild</small></string>
     <string name="account_status_unknown">Okänd</string>
     <string name="account_status_disabled">Tillfälligt inaktiverad</string>
-    <string name="account_status_online">Online</string>
     <string name="account_status_connecting">Ansluter\u2026</string>
-    <string name="account_status_offline">Offline</string>
     <string name="account_status_unauthorized">Otillåten</string>
     <string name="account_status_not_found">Server ej funnen</string>
     <string name="account_status_no_internet">Ingen anslutning</string>
@@ -117,9 +112,6 @@
     <string name="account_status_incompatible_server">Inkompatibel server</string>
     <string name="account_status_stream_error">Strömningsfel</string>
     <string name="encryption_choice_unencrypted">Okrypterat</string>
-    <string name="encryption_choice_otr">OTR</string>
-    <string name="encryption_choice_pgp">OpenPGP</string>
-    <string name="encryption_choice_omemo">OMEMO</string>
     <string name="mgmt_account_delete">Ta bort konto</string>
     <string name="mgmt_account_publish_avatar">Publicera avatarbild</string>
     <string name="mgmt_account_publish_pgp">Publicera OpenPGP publik nyckel</string>
@@ -128,21 +120,14 @@
     <string name="openpgp_has_been_published">OpenPGP-nyckel har publicerats.</string>
     <string name="mgmt_account_are_you_sure">Är du säker?</string>
     <string name="attach_record_voice">Spela in röst</string>
-    <string name="account_settings_jabber_id">Jabber-ID</string>
     <string name="password">Lösenord</string>
     <string name="invalid_jid">Detta är inte ett korrekt Jabber-ID</string>
     <string name="error_out_of_memory">Slut på minne. Bilden är för stor</string>
     <string name="add_phone_book_text">Vill du lägga till %s i din enhets kontakter?</string>
     <string name="server_info_show_more">Server-info</string>
     <string name="server_info_mam">XEP-0313: Message Archive</string>
-    <string name="server_info_carbon_messages">XEP-0280: Message Carbons</string>
-    <string name="server_info_csi">XEP-0352: Client State Indication</string>
-    <string name="server_info_blocking">XEP-0191: Blocking Command</string>
-    <string name="server_info_roster_version">XEP-0237: Roster Versioning</string>
-    <string name="server_info_stream_management">XEP-0198: Stream Management</string>
     <string name="server_info_pep">XEP-0163: PEP (Avatarbilder / OMEMO)</string>
     <string name="server_info_http_upload">XEP-0363: Ladda upp via HTTP</string>
-    <string name="server_info_push">XEP-0357: Push</string>
     <string name="missing_public_keys">Annonsering om publik nyckel saknas</string>
     <string name="last_seen_now">senast sedd just nu</string>
     <string name="last_seen_min">senast sedd 1 minut sedan</string>
@@ -283,7 +268,6 @@
     <string name="password_should_not_be_empty">Lösenordet ska inte vara tomt</string>
     <string name="perform_action_with">Utför åtgärden med</string>
     <string name="no_affiliation">Ingen anknytning</string>
-    <string name="no_role">Offline</string>
     <string name="outcast">Utstött</string>
     <string name="member">Medlem</string>
     <string name="advanced_mode">Avancerat läge</string>
@@ -294,12 +278,10 @@
     <string name="you_are_not_participating">Du deltar ej</string>
     <string name="never">Aldrig</string>
     <string name="until_further_notice">Tills vidare</string>
-    <string name="pref_input_options">Input</string>
     <string name="pref_enter_is_send">Skicka med enter</string>
     <string name="pref_display_enter_key">Visa enter-knappen</string>
     <string name="pref_display_enter_key_summary">Byt ut emoticons-tangenten mot en enter-tangent</string>
     <string name="audio">ljud</string>
-    <string name="video">video</string>
     <string name="image">bild</string>
     <string name="pdf_document">PDF-dokument</string>
     <string name="apk">Android-app</string>
@@ -362,7 +344,6 @@
     <string name="verified_omemo_key_with_certificate">Verifierade OMEMO-nyckel med certifikat!</string>
     <string name="device_does_not_support_certificates">Din enhet stödjer inte val av klientcertifikat!</string>
     <string name="account_settings_hostname">Servernamn</string>
-    <string name="account_settings_port">Port</string>
     <string name="not_a_valid_port">Inte ett giltigt portnummer</string>
     <string name="not_valid_hostname">Inte ett giltigt servernamn</string>
     <string name="connected_accounts">%1$d av %2$d konton anslutna</string>
@@ -390,7 +371,6 @@
     <string name="pick_your_username">Välj användarnamn</string>
     <string name="status_message">Statusmeddelande</string>
     <string name="presence_chat">Tillgänglig</string>
-    <string name="presence_online">Online</string>
     <string name="presence_away">Borta</string>
     <string name="presence_xa">Ej tillgänglig</string>
     <string name="presence_dnd">Upptagen</string>
@@ -454,8 +434,6 @@
     <string name="retry_decryption">Försök dekryptera igen</string>
     <string name="session_failure">Sessionsfel</string>
     <string name="contact_has_read_up_to_this_point">%s har läst hit</string>
-    <string name="pref_theme_blabber">blabber.im</string>
     <string name="pref_theme_grey">Grau</string>
-    <string name="pref_theme_pink">Pink</string>
     <string name="pref_theme_black">Schwarz (AMOLED)</string>
 </resources>

@@ -22,9 +22,7 @@
     <string name="message_decrypting">Pagdeklarar sa mensahe. Palihog paabot…</string>
     <string name="pgp_message">AbliPGP naka-encrypt nga mensahe</string>
     <string name="nick_in_use">Angga kay nagamit na</string>
-    <string name="admin">Admin</string>
     <string name="owner">Tag-iya</string>
-    <string name="moderator">Moderator</string>
     <string name="participant">Partisipante</string>
     <string name="visitor">Bisita</string>
     <string name="remove_contact_text">Ganahan ka tangtangun %s gekan sa imung roster? Ang panang-estorya kay naglagkit sa kini nga kontak kay dili ma tangtang.</string>
@@ -48,7 +46,6 @@
     <string name="block">I-block</string>
     <string name="unblock">Ayaw i-block</string>
     <string name="save">Luwasa</string>
-    <string name="ok">OK</string>
     <string name="send_now">Ipadala karun</string>
     <string name="send_never">Ayaw nag pangutana balik</string>
     <string name="problem_connecting_to_account">Dili ka konek sa account</string>
@@ -71,14 +68,12 @@
     <string name="your_nick_has_been_changed">Ang imung angga kay nailisan na</string>
     <string name="send_unencrypted">Ipadala nga wala\'y lihok</string>
     <string name="decryption_failed">Npakyas ang decryption. Basin tungod kay wala kay husto nga pribadong yawe.</string>
-    <string name="openkeychain_required">OpenKeychain</string>
     <string name="restart">I-restart</string>
     <string name="install">I-install</string>
     <string name="offering">paghalad…</string>
     <string name="waiting">napa-abot…</string>
     <string name="no_pgp_key">Walay OpenPGP nga yawe nga nakita</string>
     <string name="no_pgp_keys">Walay OpenPGP nga mga Yawe ang nakita</string>
-    <string name="pref_general">General</string>
     <string name="pref_accept_files_wifi">Dawat nga mga file sa WiFi nga mga koneksiyon</string>
     <string name="pref_accept_files_summary_wifi">Kung naka konek sa WiFi automatic ma accept ang mga file nga mas gamay pa sa…</string>
     <string name="pref_accept_files_mobile">Dawat sa mga file sa mobile nga mga koneksiyon</string>
@@ -91,12 +86,10 @@
     <string name="pref_vibrate_summary">Mukurog kung naay bag-o nga mensahe ang maabot</string>
     <string name="pref_led">LED nga pagpahibalo</string>
     <string name="pref_led_summary">Mu-blink ang signal sa pagpahibalo kung naay bag-o nga mensahe ang maabot</string>
-    <string name="pref_sound">Ringtone</string>
     <string name="pref_sound_summary">Mutingog kung naay bag-o nga mensahe ang maabot</string>
     <string name="pref_send_crash">Pagpadala kung naay nabangga nga mga report</string>
     <string name="pref_confirm_messages">Pagmatuod sa mga mensahe</string>
     <string name="pref_confirm_messages_summary">Himua nga ang imung mga kontak makabalo nga naka dawat naka sa ilang mga mensahe</string>
-    <string name="pref_ui_options">UI</string>
     <string name="openpgp_error">OpenKeychain mitaho nga dunay sayop</string>
     <string name="accept">Dawata</string>
     <string name="error">Naay di-mao nga nigawas</string>
@@ -113,7 +106,6 @@
     <string name="error_security_exception_during_image_copy">Ang app nga gigamit nimu pag pili sa kini nga litrato kay wala nakahatag ug saktong mga permiso para basahun ang file.\n\n<small>Gamit ug lahi nga file manager pra sa pagpili ug litrato</small></string>
     <string name="account_status_unknown">Wa mailhi</string>
     <string name="account_status_disabled">Sa pagkakarun kay baldado</string>
-    <string name="account_status_online">Online</string>
     <string name="account_status_connecting">Nag-sumpay\u2026</string>
     <string name="account_status_offline">Dili-online</string>
     <string name="account_status_unauthorized">Dili awtorisado</string>
@@ -128,9 +120,7 @@
     <string name="account_status_incompatible_server">Dili uyon ang serber</string>
     <string name="account_status_stream_error">Napakyas ang stream</string>
     <string name="encryption_choice_unencrypted">Dili sinuwat</string>
-    <string name="encryption_choice_otr">OTR</string>
     <string name="encryption_choice_pgp">AbliPGP</string>
-    <string name="encryption_choice_omemo">OMEMO</string>
     <string name="mgmt_account_delete">Tangtanga ang account</string>
     <string name="mgmt_account_publish_avatar">I-publikar ang avatar</string>
     <string name="mgmt_account_publish_pgp">I-publikar sa OpenPGP ang publikong yawe</string>
@@ -139,13 +129,10 @@
     <string name="openpgp_has_been_published">Gilunsad ang publikong yawe sa OpenPGP.</string>
     <string name="mgmt_account_are_you_sure">Sure jud ka?</string>
     <string name="attach_record_voice">Irekord ang tingog</string>
-    <string name="account_settings_jabber_id">Jabber-ID</string>
-    <string name="password">Password</string>
     <string name="invalid_jid">Dili kini balido nga Jabber-ID</string>
     <string name="error_out_of_memory">Wala nay memorya. Ang hulagway dako kaayo</string>
     <string name="add_phone_book_text">Gusto nimu i-dagdag %s sa imung address nga libro?</string>
     <string name="server_info_show_more">Serber nga impormasyon</string>
-    <string name="server_info_mam">XEP-0313: MAM</string>
     <string name="server_info_carbon_messages">XEP-0280: Mensahe sa mga Carbons</string>
     <string name="server_info_csi">XEP-0352: Kliyente nga Stasyon nga Indikasyon</string>
     <string name="server_info_blocking">XEP-0191: Pagdili sa Sugo</string>
@@ -155,7 +142,6 @@
     <string name="server_info_http_upload">XEP-0363: HTTP nga File na-upload</string>
     <string name="server_info_push">XEP-0357: Itukmod</string>
     <string name="missing_public_keys">Nawala ang yawe sa publikong mga pahibalo</string>
-    <string name="last_seen_now">online</string>
     <string name="last_seen_min">1 minutos ang milabay</string>
     <string name="last_seen_mins">%d ang mga minuto nga milabay</string>
     <string name="last_seen_hour">1 ka oras ang nilabay</string>
@@ -166,8 +152,6 @@
     <string name="openpgp_messages_found">OpenPGP naka-encrypt nga mga mensahe ang nakita</string>
     <string name="your_fingerprint">Imuhang fingerprint</string>
     <string name="openpgp_key_id">OpenPGP Yawe nga ID</string>
-    <string name="omemo_fingerprint">OMEMO fingerprint</string>
-    <string name="omemo_fingerprint_x509">v\\OMEMO fingerprint</string>
     <string name="omemo_fingerprint_selected_message">OMEMO fingerprint sa mensahe</string>
     <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO fingerprint sa mensahe</string>
     <string name="other_devices">Lahi nga mga devices</string>
@@ -249,7 +233,6 @@
     <string name="message_options">Mensahe nga mga opsiyon</string>
     <string name="copy_original_url">Kopya sa orhinal nga URL</string>
     <string name="send_again">Padpadala ug balik</string>
-    <string name="file_url">File URL</string>
     <string name="url_copied_to_clipboard">URL gekopya ngadto sa clipboard</string>
     <string name="show_block_list">Ipakita ang na block nga listahan</string>
     <string name="account_details">Mga detalyi sa account</string>
@@ -268,7 +251,6 @@
     <string name="choose_file">Pili ug file</string>
     <string name="download_x_file">Pag-download %s</string>
     <string name="delete_x_file">Tangtanga %s</string>
-    <string name="file">file</string>
     <string name="open_x_file">Abli %s</string>
     <string name="preparing_file">Pagpreparar sa file para transmission</string>
     <string name="x_file_offered_for_download">%s ang gitanyag alang sa pag-download</string>
@@ -292,11 +274,9 @@
     <string name="error_no_keys_to_trust_server_error">Wala ju\'y magamit nga mga yawe nga anaa para sa kini nga kontak.\nPamasol ug bag-o nga mga yawe gekan sa serber kay wala nagmalampuson. Tingali naay bati nga nahitabo sa imung mga kontak nga serber.</string>
     <string name="pref_display_enter_key">Ipakita ang pisletunon nga yawe</string>
     <string name="pref_display_enter_key_summary">Ilisi ang mga emotikon nga yawe para pislet sa yawe</string>
-    <string name="audio">audio</string>
     <string name="video">bidyo</string>
     <string name="image">litrato</string>
     <string name="pdf_document">PDF nga dokumento</string>
-    <string name="apk">Android App</string>
     <string name="vcard">Kontak</string>
     <string name="avatar_has_been_published">Ang avatar kay gelahad!</string>
     <string name="sending_x_file">Pagpadala %s</string>
@@ -369,8 +349,6 @@
     <string name="verified_omemo_key_with_certificate">Tino-a ang OMEMO nga yawe uban sa sertipiko!</string>
     <string name="device_does_not_support_certificates">Ang imong device wala mosuporta sa pagpili sa mga sertipiko sa kliyente!</string>
     <string name="changelog">Mga kausaban</string>
-    <string name="account_settings_hostname">Hostname</string>
-    <string name="account_settings_port">Port</string>
     <string name="not_a_valid_port">Dili kini balido nga port nga numero</string>
     <string name="not_valid_hostname">Dili kini usa ka balido nga hostname</string>
     <string name="connected_accounts">%1$d gekan sa %2$d mga account konektado</string>
@@ -412,7 +390,6 @@
     <string name="pick_your_username">Pili ug imung username</string>
     <string name="status_message">Status ang mensahe</string>
     <string name="presence_chat">Libre alang sa Chat</string>
-    <string name="presence_online">Online</string>
     <string name="presence_away">Layo</string>
     <string name="presence_xa">Walay anaa</string>
     <string name="presence_dnd">Daghan gibuhat</string>
@@ -456,7 +433,6 @@
     <string name="copy_to_clipboard">Kopyaha ngato sa clipboard</string>
     <string name="message_copied_to_clipboard">Mensahe ge-kopya ngadto sa clipboard</string>
     <string name="message">Mensahe</string>
-    <string name="quote">Quote</string>
     <string name="show_error_message">Ipakita ang error nga mensahe</string>
     <string name="data_saver_enabled">Tigluwas sa Data gipagana</string>
     <string name="add_to_contact_list">Ipuno sa lista sa mga kontak</string>
@@ -533,6 +509,5 @@
     <string name="invalid_muc_nick">Dili balido nga angga nga pangan</string>
     <string name="title_activity_share_via_account">Pakigbahin pinaagi sa account</string>
     <string name="conference_unknown_error">Wala nakay labot diri nga grupo sa chat</string>
-    <string name="snooze">Snooze</string>
     <string name="huawei_protected_apps">Protektado nga mga App</string>
 </resources>

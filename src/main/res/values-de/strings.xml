@@ -25,7 +25,10 @@
     <string name="just_now">gerade</string>
     <string name="minute_ago">vor einer Minute</string>
     <string name="minutes_ago">vor %d Minuten</string>
-    <string name="x_unread_conversations">%d ungelesene Unterhaltungen</string>
+    <plurals name="x_unread_conversations">
+        <item quantity="one">%d ungelesene Unterhaltung</item>
+        <item quantity="other">%d ungelesene Unterhaltungen</item>
+    </plurals>
     <string name="sending">wird gesendet…</string>
     <string name="message_decrypting">Nachricht wird entschlüsselt. Bitte warten …</string>
     <string name="pgp_message">OpenPGP-verschlüsselte Nachricht</string>
@@ -536,7 +539,6 @@
     <string name="InviteText">Hallo,\n\n%s hat dich zu einem Chat mit blabber.im eingeladen. Klicke einfach auf folgenden Link…</string>
     <string name="pref_broadcast_last_activity">Zuletzt gesehen senden</string>
     <string name="pref_broadcast_last_activity_summary">Lasse deine Kontakte wissen, wann du blabber.im nutzt</string>
-    <string name="invite_to_app">Zu blabber.im einladen</string>
     <string name="request_permissions_message">blabber.im wird dich nach ein paar Berechtigungen fragen. Es ist wichtig, dass du alle Berechtigungen erlaubst, um alle Funktionen nutzen zu können. Falls du eine dieser Berechtigungen ablehnst wird sich die App schließen.</string>
     <string name="request_permissions_message_again">Du hast eine oder alle Berechtigungen, welche für blabber.im benötigt werden abgelehnt. Willst du zu den Einstellungen springen, um diese Berechtigungen zu erlauben? Falls du eine dieser Berechtigungen ablehnst wird sich die App schließen.</string>
     <string name="unable_to_connect_to_keychain">Keine Verbindung zu OpenKeychain</string>
@@ -721,7 +723,7 @@
     <string name="pref_omemo_setting_summary_default_on">OMEMO Verschlüsselung wird standardmäßig für alle neuen Chats verwendet.</string>
     <string name="pref_omemo_setting_summary_default_off">OMEMO Verschlüsselung muss manuell für neue Chats aktiviert werden.</string>
     <string name="pref_omemo_setting_summary_always_off">OMEMO Verschlüsselung wird nie verwendet.</string>
-    <string name="default_on">Standarmäßig aktiviert</string>
+    <string name="default_on">Standardmäßig aktiviert</string>
     <string name="default_off">Standardmäßig deaktiviert</string>
     <string name="pref_theme_light">Hell</string>
     <string name="pref_theme_dark">Dunkel</string>
@@ -744,8 +746,8 @@
     <string name="jabber_id_copied_to_clipboard">JID in die Zwischenablage kopiert</string>
     <string name="copy_jabber_id">JID kopieren</string>
     <string name="copy_link">Webadresse kopieren</string>
-    <string name="server_hint">Wähle Anbieter</string>
-    <string name="choose_your_server">Wähle deinen Jabber Anbieter</string>
+    <string name="server_hint">Wähle Provider</string>
+    <string name="choose_your_server">Wähle deinen Jabber Provider</string>
     <string name="show_privacy">Datenschutzerklärung</string>
     <string name="show_termsofuse">Nutzungsbedingungen</string>
     <string name="p1_s3_filetransfer">HTTP Dateitransfer für S3</string>
@@ -765,7 +767,7 @@
     <string name="delete_message">Nachricht löschen</string>
     <string name="conference_destroyed">Dieser Gruppenchat wurde aufgelöst</string>
     <string name="no_application_found_to_view_contact">Keine Anwendung zum Anzeigen von Kontakten gefunden</string>
-    <string name="welcome_server_info">Wir empfehlen dir blabber.im als Anbieter.</string>
+    <string name="welcome_server_info">Wir empfehlen dir blabber.im als Provider.</string>
     <string name="no_location_permission">blabber.im benötigt Zugriff auf die Standortdienste</string>
     <string name="pref_show_record_voice_btn_summary">Zeige Sprachaufnahme-Taste als Schnell-Taste in den Chats</string>
     <string name="pref_show_record_voice_btn">Zeige Sprachaufnahme-Taste</string>
@@ -1034,6 +1036,7 @@
     <string name="incoming_call_duration">%s · Eingehender Anruf · %s</string>
     <string name="incoming_call_time">%s · Eingehender Anruf</string>
     <string name="incoming_call">Eingehender Anruf</string>
+    <string name="missed_call_timestamp">%s · Verpasster Anruf</string>
     <string name="outgoing_call_duration">%s · Ausgehender Anruf · %s</string>
     <string name="outgoing_call_time">%s · Ausgehender Anruf</string>
     <string name="outgoing_call">Ausgehender Anruf</string>
@@ -1076,4 +1079,21 @@
     <string name="move_data">Daten verschieben</string>
     <string name="error_moving_data">Beim Verschieben deiner alten Daten ist ein Fehler aufgetreten. Bitte verschiebe sie manuell.</string>
     <string name="data_successfully_moved">Daten wurden erfolgreich verschoben.</string>
+    <string name="invite_to_app">Zu blabber.im einladen</string>
+    <string name="unable_to_parse_invite">Einladung kann nicht gelesen werden</string>
+    <string name="server_does_not_support_easy_onboarding_invites">Server unterstützt keine Generierung von Einladungen</string>
+    <string name="your_server">Dein Provider</string>
+    <string name="tap_share_button_send_invite">Tippe auf die Schaltfläche \"Teilen\", um deinem Kontakt %1$s eine Einladung zu senden.</string>
+    <string name="invite">Einladen</string>
+    <string name="if_contact_is_nearby_use_qr">Wenn dein Kontakt in der Nähe ist, kann auch der unten stehende Code gescannt werden, um deine Einladung anzunehmen.</string>
+    <string name="easy_invite_share_text">Trete %1$s bei und chatte mit mir: %2$s</string>
+    <string name="share_invite_with">Teile Einladung mit…</string>
+    <string name="no_active_accounts_support_this">Keine aktiven Profile unterstützen diese Funktion</string>
+    <string name="server_info_easy_invite">XEP-0401: Easy User Onboarding</string>
+    <string name="pref_mappreview_host_summary">Nutze benutzerdefinierten Kartenvorschau Server</string>
+    <string name="pref_mappreview_host">Kartenvorschau Server</string>
+    <string name="webview_not_available">WebView ist auf dem Gerät nicht verfügbar.</string>
+    <string name="pref_easy_downloader_summary">Lade alle Anhänge in öffentlichen Channels und von Unbekannten automatisch herunter, anstatt eine Schaltfläche für einen manuellen Download anzuzeigen.</string>
+    <string name="pref_easy_downloader">Lade alle Anhänge automatisch herunter</string>
+    <string name="got_invitation_from">Du wurdest von %s in den Chatraum %s eingeladen.</string>
 </resources>

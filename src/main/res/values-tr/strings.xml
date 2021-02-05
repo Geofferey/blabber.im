@@ -6,18 +6,27 @@
     <string name="action_end_conversation">Bu konuşmayı bitir</string>
     <string name="action_contact_details">İletişim detayları</string>
     <string name="action_secure">Güvenli görüşme</string>
+    <string name="action_add_new_account">Hesap ekle</string>
     <string name="action_add_phone_book">Adres defterine ekle</string>
     <string name="action_delete_contact">Listeden sil</string>
     <string name="action_block_contact">Kişiyi engelle</string>
     <string name="action_unblock_contact">Kişinin engelini kaldır</string>
     <string name="action_block_domain">Domaini engelle</string>
     <string name="action_unblock_domain">Domainin engelini kaldır</string>
+    <string name="title_activity_manage_accounts">Hesapları yönet</string>
     <string name="title_activity_settings">Ayarlar</string>
+    <string name="conference_details">Grup sohbeti detayları</string>
+    <string name="contact_details">Kişi bilgileri</string>
+    <string name="title_activity_start_conversation">Sohbet başlat</string>
     <string name="title_activity_choose_contact">Kişi seç</string>
     <string name="title_activity_block_list">Engelli liste</string>
     <string name="just_now">şimdi</string>
     <string name="minute_ago">1 dakika önce</string>
     <string name="minutes_ago">%d dakika önce</string>
+    <plurals name="x_unread_conversations">
+        <item quantity="one">%d okunmamış mesaj</item>
+        <item quantity="other">%d okunmamış mesajlar</item>
+    </plurals>
     <string name="sending">gönderiliyor…</string>
     <string name="message_decrypting">Mesaj çözülüyor. Lütfen bekleyin…</string>
     <string name="pgp_message">OpenPGP şifrelenmiş mesaj</string>
@@ -33,6 +42,7 @@
     <string name="block_domain_text">Adresindeki tüm kişileri engelle%s?</string>
     <string name="unblock_domain_text">%s\'deki tüm kişilerin engeli kaldırılsın mı?</string>
     <string name="contact_blocked">Kişi engellendi</string>
+    <string name="blocked">Engellendi</string>
     <string name="remove_bookmark_text">%s kendi listenizden kaldırmak ister misiniz? Bu kişi ile ilgili görüşmeler kaldırılamaz.</string>
     <string name="register_account">Sunucuya yeni hesap kaydet</string>
     <string name="change_password_on_server">Sunucudaki şifreyi değiştir</string>
@@ -49,6 +59,8 @@
     <string name="unblock">Engeli kaldır</string>
     <string name="save">Kaydet</string>
     <string name="ok">Tamam</string>
+    <string name="crash_report_title">blabber.im hata verdi</string>
+    <string name="crash_report_message">Hata raporlarını göndererek blabber.im\'in devam eden geliştirmesine yardımcı oluyorsunuz.\n<b>Uyarı:</b> Geliştiriciye hata raporlarını göndermek için XMPP hesabınız kullanılacak.</string>
     <string name="send_now">Şimdi Gönder</string>
     <string name="send_never">Bir daha sorma</string>
     <string name="problem_connecting_to_account">Sunucuya bağlanılamıyor</string>
@@ -61,6 +73,7 @@
     <string name="preparing_image">Aktarım için resim hazırlanıyor</string>
     <string name="action_clear_history">Geçmişi sil</string>
     <string name="clear_conversation_history">Konuşma Geçmişini Sil</string>
+    <string name="clear_histor_msg">Bu konuşmadaki bütün iletileri silmek istediğinize emin misiniz?\n\n<b>Uyarı:</b> Bu, diğer cihazlarda veya sunucularda saklanan iletileri silmeyecektir.</string>
     <string name="also_end_conversation">Bu sohbeti daha sonra sonlandır</string>
     <string name="choose_presence">Cihazı seçin</string>
     <string name="send_unencrypted_message">Şifresiz mesaj gönder</string>
@@ -72,11 +85,13 @@
     <string name="send_unencrypted">Şifrelenmemiş olarak gönder</string>
     <string name="decryption_failed">Şifre çözme işlemi başarısız. Belki de uygun özel anahtara sahip değilsiniz.</string>
     <string name="openkeychain_required">OpenKeychain</string>
+    <string name="openkeychain_required_long">blabber.im, mesajlarınızı şifrelemek, şifresini çözmek ve açık anahtarlarınızı yönetmek için <b>OpenKeychain</b> adlı üçüncü parti bir uygulama kullanır.\n\nOpenKeychain, GPLv3 lisanslıdır ve F-Droid, Google Play\'de mevcuttur.\n\n<small>(Lütfen blabber.im\'i daha sonrasında yeniden başlatın.)</small>\n</string>
     <string name="restart">Yeniden başlat</string>
     <string name="install">Yükle</string>
     <string name="offering">teklif yapılıyor…</string>
     <string name="waiting">Bekleniyor…</string>
     <string name="no_pgp_key">Hiç OpenPGP anahtarı bulunamadı</string>
+    <string name="contact_has_no_pgp_key">blabber.im mesajlarınızı şifreleyemiyor çünkü kişi sizin veya kendisinin açık anahtarını paylaşmıyor.\n\n<small>Lütfen kişiden OpenPGP\'yi kurmasını isteyin.</small></string>
     <string name="no_pgp_keys">OpenPGP anahtarları bulunamadı</string>
     <string name="pref_general">Genel</string>
     <string name="pref_accept_files_wifi">WiFi bağlantılarındaki dosyaları kabul et</string>
@@ -94,9 +109,10 @@
     <string name="pref_sound">Zil sesi</string>
     <string name="pref_sound_summary">Yeni bir mesaj geldiği zaman ses çıkar</string>
     <string name="pref_send_crash">Kilitlenme raporlarını gönderin</string>
+    <string name="pref_send_crash_summary">Hata raporları göndererek blabber.im\'in devam etmekte olan gelişimine yardım ediyorsunuz</string>
     <string name="pref_confirm_messages">Mesajları Onayla</string>
     <string name="pref_confirm_messages_summary">Kişilerinize mesajlarınızı ne zaman aldığınızı ve okuduğunuzu bilmelerini sağlayın</string>
-    <string name="pref_ui_options">UI</string>
+    <string name="pref_ui_options">Arayüz</string>
     <string name="openpgp_error">OpenKeychain bir hata raporladı</string>
     <string name="accept">Kabul et</string>
     <string name="error">Bir hata oluştu</string>
@@ -131,6 +147,7 @@
     <string name="encryption_choice_otr">OTR</string>
     <string name="encryption_choice_pgp">OpenPGP</string>
     <string name="encryption_choice_omemo">OMEMO</string>
+    <string name="action_account">Hesabı düzenle</string>
     <string name="mgmt_account_delete">Hesabı silin</string>
     <string name="mgmt_account_publish_avatar">Avatarı paylaş</string>
     <string name="mgmt_account_publish_pgp">OpenPGP genel anahtarı paylaş</string>
@@ -138,8 +155,10 @@
     <string name="unpublish_pgp_message">OpenPGP genel anahtarınızı varlığınızın duyurusundan kaldırmak istediğinize emin misiniz? \ N Kişileriniz artık size OpenPGP şifrelenmiş mesajlar gönderemeyecek.</string>
     <string name="openpgp_has_been_published">OpenPGP genel anahtarı paylaşıldı.</string>
     <string name="mgmt_account_are_you_sure">Emin misiniz?</string>
+    <string name="mgmt_account_delete_confirm_message">Eğer hesabınızı silerseniz bütün lokal sohbet geçmişiniz kaybolacak.\n\nEğer hesabınızı bu sunucudan silerseniz, tüm hesabımınız sunucudan da kaldırılacaktır ve Yeni bir hesap açana kadar oturum açamayacaksınız.</string>
     <string name="attach_record_voice">Kayıt sesi</string>
-    <string name="account_settings_jabber_id">Jabber-ID</string>
+    <string name="account_settings_jabber_id">Jabber Kimliği</string>
+    <string name="account_settings_example_jabber_id">kullanıcıadı@blabber.im</string>
     <string name="password">Parola</string>
     <string name="invalid_jid">Bu geçerli bir Jabber-ID değil</string>
     <string name="error_out_of_memory">Bellek yetersiz. Görüntü çok büyük</string>
@@ -154,6 +173,8 @@
     <string name="server_info_pep">XEP-0163: PEP (Kişi Simgeleri / OMEMO)</string>
     <string name="server_info_http_upload">XEP-0363: HTTP Dosya Yükleme</string>
     <string name="server_info_push">XEP-0357: Zorla</string>
+    <string name="server_info_available">evet</string>
+    <string name="server_info_unavailable">hayır</string>
     <string name="missing_public_keys">Eksik genel anahtar bildirimleri</string>
     <string name="last_seen_now">çevrimiçi</string>
     <string name="last_seen_min">1 dakika önce</string>
@@ -176,6 +197,7 @@
     <string name="done">Bitti</string>
     <string name="verify">Doğrula</string>
     <string name="decrypt">Şifreyi çöz</string>
+    <string name="bookmarks">Gruplar</string>
     <string name="search">Ara</string>
     <string name="enter_contact">İletişim Kur</string>
     <string name="delete_contact">Kişiyi sil</string>
@@ -186,8 +208,11 @@
     <string name="select">Seç</string>
     <string name="contact_already_exists">Kişi zaten mevcut</string>
     <string name="join">Katıl</string>
+    <string name="channel_full_jid_example">kanal@conference.example.com/isim</string>
+    <string name="channel_bare_jid_example">kanal@conference.example.com</string>
     <string name="save_as_bookmark">Yer imi olarak kaydet</string>
     <string name="delete_bookmark">Yer imini sil</string>
+    <string name="topic">Konu</string>
     <string name="joining_conference">Sohbet Grubuna bağlanılıyor…</string>
     <string name="leave">Ayrıl</string>
     <string name="contact_added_you">Kişi sizi listesine ekledi</string>
@@ -236,6 +261,8 @@
     <string name="pref_use_send_button_to_indicate_status_summary">Kişi durumunu belirtmek için gönder butonunu renklendirin</string>
     <string name="pref_use_colored_names_to_indicate_status_summary">Kişi durumunu belirtmek için kişilerin adlarını renklendirin</string>
     <string name="pref_expert_options_other">Diğer</string>
+    <string name="pref_autojoin">Yer imlerini senkronize et</string>
+    <string name="pref_autojoin_summary">Yer imlerinizdeki otomatik katılma işaretine göre grup sohbetlerine katılın ve ayrılın.</string>
     <string name="toast_message_omemo_fingerprint">OMEMO parmak izi Panoya kopyalandı!</string>
     <string name="conference_banned">Bu sohbet grubundan banlandınız</string>
     <string name="conference_members_only">Bu grup sohbeti yalnızca üyeler arasında</string>
@@ -251,6 +278,8 @@
     <string name="send_again">Tekrar Gönder</string>
     <string name="file_url">Dosya URL\'si</string>
     <string name="url_copied_to_clipboard">URL panoya kopyalandı</string>
+    <string name="scan_qr_code">Karakodu tara</string>
+    <string name="show_qr_code">Karekodu göster</string>
     <string name="show_block_list">Engelli listesini göster</string>
     <string name="account_details">Hesap Detayları</string>
     <string name="remote_fingerprint">Uzaktan Parmak İzi</string>
@@ -265,6 +294,8 @@
     <string name="finish">Bitti</string>
     <string name="verified">Doğrulandı!</string>
     <string name="smp_requested">İstenilen SMP doğrulamayla bağlantıyı kurun</string>
+    <string name="pref_create_backup">Yedek oluştur</string>
+    <string name="pref_create_backup_summary">Yedek dosyaları %s buraya yaz</string>
     <string name="choose_file">Dosya seç</string>
     <string name="download_x_file">%s indir</string>
     <string name="delete_x_file">%s sil</string>
@@ -290,6 +321,7 @@
     <string name="distrust_omemo_key">Şüpheli cihaz</string>
     <string name="distrust_omemo_key_text">Bu cihaz için doğrulamayı kaldırmak istediğinizden emin misiniz?\nBu cihaz ve bu cihazdan gelen mesajlar güvenilmez olarak işaretlenecek.</string>
     <string name="error_no_keys_to_trust_server_error">Bu bağlantıda kullanılabilen kullanılabilir bir anahtar yok.\nSunucudan yeni anahtarlar getirme başarısız oldu. Belki rehber sunucunuzda bir sorun var.</string>
+    <string name="error_trustkeys_title">Bir şeyler ters gitti</string>
     <string name="fetching_history_from_server">Geçmişi sunucudan geri getir</string>
     <string name="no_more_history_on_server">Sunucuda daha fazla geçmiş yok</string>
     <string name="updating">Güncelleniyor…</string>
@@ -313,9 +345,12 @@
     <string name="advanced_mode">Gelişmiş mod</string>
     <string name="grant_admin_privileges">Yönetici ayrıcalıkları ver</string>
     <string name="remove_admin_privileges">Yönetici ayrıcalıklarını iptal et</string>
+    <string name="kick_from_room">Gruptan at</string>
     <string name="could_not_change_affiliation">%s kullanıcısının üyeliği değiştirilemedi</string>
     <string name="ban_from_conference">Grup sohbetini engelle</string>
+    <string name="kick_from_conference">Gruptan at</string>
     <string name="ban_now">Şimdi engelle</string>
+    <string name="kick_now">Şimdi at</string>
     <string name="you_are_not_participating">Katılım sağlamıyorsun</string>
     <string name="modified_conference_options">Grup sohbeti seçeneklerini düzenle!</string>
     <string name="could_not_modify_conference_options">Grup sohbeti seçenekleri değiştirilemedi</string>
@@ -384,6 +419,7 @@
     <string name="pref_dnd_on_silent_mode_summary">Cihaz sessiz moddayken kaynağınızı \"Rahatsız etmeyin\" olarak işaretler</string>
     <string name="pref_treat_vibrate_as_silent">Titreşimsiz mod olarak işlem yap</string>
     <string name="pref_treat_vibrate_as_dnd_summary">Cihaz titrediğinde kaynağı \"Rahatsız etmeyin\" olarak işaretler</string>
+    <string name="hostname_example">blabber.im</string>
     <string name="action_add_account_with_certificate">Sertifika ile hesap ekle</string>
     <string name="unable_to_parse_certificate">Sertifika çözümlenemedi</string>
     <string name="authenticate_with_certificate">Sertifikanın kimliğini doğrulamak için boş bırakın</string>
@@ -415,8 +451,20 @@
     <string name="notify_only_when_highlighted">Yalnızca bahsedildiğinde bildir</string>
     <string name="notify_never">Bildirimler devre dışı</string>
     <string name="notify_paused">Bildirimler duraklatıldı</string>
+    <string name="pref_picture_quality">Fotoğraf kalitesi</string>
+    <string name="pref_picture_quality_summary">Resimleri yeniden boyutlandır ve sıkıştır</string>
+    <string name="pref_video_quality">Video kalitesi</string>
+    <string name="pref_video_quality_summary">Videoları yeniden boyutlandır ve sıkıştır</string>
+    <string name="video_very_low">Çok düşük (144p)</string>
+    <string name="video_low">Düşük (360p)</string>
+    <string name="video_mid">Orta (720p)</string>
+    <string name="video_high">Yüksek (1080p)</string>
+    <string name="video_original">Orijinal (sıkıştırılmadan)</string>
     <string name="always">Her zaman</string>
+    <string name="always_off">Her zaman kapalı</string>
     <string name="battery_optimizations_enabled">Pil optimizasyonları etkin</string>
+    <string name="battery_optimizations_enabled_explained">Cihazınız blabber\'da bildirimleri gecikmeli bildirime hatta mesaj kaybına yol açabilecek bazı ağır pil optimizasyonları yapıyor. \nBunları devre dışı bırakmanız önerilir.</string>
+    <string name="battery_optimizations_enabled_dialog">Cihazınız blabber\'da bildirimleri gecikmeli bildirime hatta mesaj kaybına yol açabilecek bazı ağır pil optimizasyonları yapıyor.\n\nŞimdi bunları kapatmanız istenecek.</string>
     <string name="install_from_unknown_sources_disabled">Bilinmeyen açık kaynaklardan yüklemeleri devre dışı bırak</string>
     <string name="install_from_unknown_sources_disabled_dialog">Cihazınız, Google PlayStore dışında bilinmeyen kaynaklardan uygulama yüklemelerine izin vermeyecek şekilde yapılandırıldı. Bu, uygulama güncelleyicisinde sorunlara neden olur. \n\n Bundan sonra bilinmeyen kaynaklardan uygulama yüklemelerine izin vermeniz istenecektir.</string>
     <string name="disable">Devre dışı</string>
@@ -436,6 +484,7 @@
     <string name="magic_create_text">Bir sonraki sayfada kendi şifrenizi değiştirebileceğiniz veya kullanabileceğiniz rastgele bir şifreyle bir hesap oluşturma sürecinde size yol göstereceğiz.\n Bu kişilere ve diğer sağlayıcıların kullanıcılarına tam Jabber Kimliği vererek iletişime geçebileceksiniz.</string>
     <string name="your_full_jid_will_be">Jabber-ID\'niz şu şekilde olacaktır: %s</string>
     <string name="create_account">Yeni hesap oluştur</string>
+    <string name="welcome_existing_account">Bir hesabım var</string>
     <string name="pick_your_username">Kullanıcı adınızı seçin</string>
     <string name="status_message">Durum mesajı</string>
     <string name="presence_chat">Sohbet için Ücretsiz</string>
@@ -507,6 +556,30 @@
     <string name="reply">Yanıtla</string>
     <string name="transcoding_video">Video sıkıştırılıyor</string>
     <string name="not_fetching_history_retention_period">Yerel koruma süresi nedeniyle ileti getirilemiyor.</string>
+    <plurals name="seconds">
+        <item quantity="one">%d saniye</item>
+        <item quantity="other">%d saniye</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="one">%d dakika</item>
+        <item quantity="other">%d dakika</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="one">%d saat</item>
+        <item quantity="other">%d saat</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="one">%d gün</item>
+        <item quantity="other">%d gün</item>
+    </plurals>
+    <plurals name="weeks">
+        <item quantity="one">%d hafta</item>
+        <item quantity="other">%d hafta</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="one">%d ay</item>
+        <item quantity="other">%d ay</item>
+    </plurals>
     <string name="today">Bugün</string>
     <string name="pref_use_max_brightness_summary">Videoları veya resimleri tam ekran izlerken maksimum parlaklığa geçin.</string>
     <string name="pref_use_max_brightness">En yüksek parlaklık</string>
@@ -517,6 +590,7 @@
     <string name="received_message_from_stranger">Yabancıdan gelen ileti</string>
     <string name="contacts_are_typing">%s yazıyor…</string>
     <string name="contact_is_typing">%s yazıyor…</string>
+    <string name="one_participant">Bir katılımcı</string>
     <string name="more_participants">%d katılımcılar</string>
     <string name="presence_offline">Çevrimdışı</string>
     <string name="block_stranger">Yabancıyı engelle</string>
@@ -529,6 +603,7 @@
     <string name="image_low">düşük (720p)</string>
     <string name="image_mid">orta (1920p)</string>
     <string name="image_high">yüksek (3840p)</string>
+    <string name="image_original">Orijinal (sıkıştırılmadan)</string>
     <string name="last_seen_just_away">yeni</string>
     <string name="send_message">Mesaj gönder</string>
     <string name="send_failed_resend">gönderim başarısız oldu, yeniden gönderiliyor…</string>
@@ -569,4 +644,39 @@
     <string name="conference_unknown_error">Artık bu grupta değilsiniz</string>
     <string name="snooze">Ertele</string>
     <string name="huawei_protected_apps">Korunan uygulamalar</string>
+    <string name="mtm_connect_anyway">Yine de bağlanmak istiyor musunuz?</string>
+    <string name="mtm_cert_details">Sertifika detayları:</string>
+    <string name="once">Bir kez</string>
+    <string name="pref_scroll_to_bottom">En alta kaydır</string>
+    <string name="pref_automatically_delete_messages">Otomatik ileti silme</string>
+    <string name="disable_encryption">Şifrelemeyi devre dışı bırak</string>
+    <string name="disable_now">Şimdi kapat</string>
+    <string name="draft">Taslak:</string>
+    <string name="small">Küçük</string>
+    <string name="medium">Orta</string>
+    <string name="large">Büyük</string>
+    <string name="gif">GIF</string>
+    <string name="view_conversation">Sohbeti görüntüle</string>
+    <string name="show_privacy">Gizlilik Politikası</string>
+    <string name="show_termsofuse">Kullanım Şartları</string>
+    <string name="group_chat_name">İsim</string>
+    <string name="create_dialog_group_chat_name">Grup sohbet adı</string>
+    <string name="everyone_has_read_up_to_this_point">Herkes bu noktaya kadar okudu</string>
+    <string name="delete_message">Mesajı sil</string>
+    <string name="notification_group_messages">Mesajlar</string>
+    <string name="messages_channel_name">Mesajlar</string>
+    <string name="silent_messages_channel_name">Sessiz mesajlar</string>
+    <string name="pref_more_notification_settings">Bildirim ayarları</string>
+    <string name="video_compression_channel_name">Video sıkıştırma</string>
+    <string name="action_group_details">Grup detayları</string>
+    <string name="delete_file_dialog">Dosyayı sil</string>
+    <string name="delete_file_dialog_msg">Bu dosyayı silmek istediğinize emin misiniz?\n\n<b>Uyarı:</b> Bu, diğer cihazlarda veya sunucularda saklanan iletileri silmeyecektir.</string>
+    <string name="cancelled">iptal edildi</string>
+    <string name="your_name">İsminiz</string>
+    <string name="enter_your_name">İsminizi girin</string>
+    <string name="pref_play_gif_inside">GIF dosyalarını sohbette oynat</string>
+    <string name="group_chat_members">Katılımcılar</string>
+    <string name="message_deleted">Mesaj silindi</string>
+    <string name="channel_details">Kanal detayları</string>
+    <string name="xmpp_address">XMPP adresi</string>
 </resources>

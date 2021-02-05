@@ -25,7 +25,6 @@
     <string name="just_now">الآن</string>
     <string name="minute_ago">منذ دقيقة</string>
     <string name="minutes_ago">منذ %d دقيقة</string>
-    <string name="x_unread_conversations">%1$s غيرمقرؤه محادثه</string>
     <string name="sending">الإرسال جارٍ…</string>
     <string name="message_decrypting">جارٍ فك تشفير الرسالة. الرجاء الإنتظار…</string>
     <string name="pgp_message">OpenPGP رسالة مشفرة</string>
@@ -81,7 +80,6 @@
     <string name="your_nick_has_been_changed">لقد تم تغيير اسمك المستعار</string>
     <string name="send_unencrypted">أرسل من دون تشفير</string>
     <string name="decryption_failed">فشل فك التشفير. ربما ليس لديك المفتاح الخاص المناسب.</string>
-    <string name="openkeychain_required">OpenKeychain</string>
     <string name="restart">إعادة التشغيل</string>
     <string name="install">تثبيت</string>
     <string name="offering">عرض…</string>
@@ -136,9 +134,6 @@
     <string name="account_status_incompatible_server">خادم غير متوافق</string>
     <string name="account_status_stream_error">خطأ في البث</string>
     <string name="encryption_choice_unencrypted">بدون تشفير</string>
-    <string name="encryption_choice_otr">OTR</string>
-    <string name="encryption_choice_pgp">OpenPGP</string>
-    <string name="encryption_choice_omemo">OMEMO</string>
     <string name="action_account">تعديل الحساب</string>
     <string name="mgmt_account_delete">حذف الحساب</string>
     <string name="mgmt_account_publish_avatar">انشر الصورة الرمزية</string>
@@ -155,15 +150,6 @@
     <string name="error_out_of_memory">خارج الذاكرة. الصورة كبيرة جدًا</string>
     <string name="add_phone_book_text">هل تريد إضافة %s إلى دفتر العناوين الخاص بك؟</string>
     <string name="server_info_show_more">معلومات الخادم</string>
-    <string name="server_info_mam">XEP-0313: MAM</string>
-    <string name="server_info_carbon_messages">XEP-0280: Message Carbons</string>
-    <string name="server_info_csi">XEP-0352: Client State Indication</string>
-    <string name="server_info_blocking">XEP-0191: Blocking Command</string>
-    <string name="server_info_roster_version">XEP-0237: Roster Versioning</string>
-    <string name="server_info_stream_management">XEP-0198: Stream Management</string>
-    <string name="server_info_pep">XEP-0163: PEP (Avatars / OMEMO)</string>
-    <string name="server_info_http_upload">XEP-0363: HTTP File Upload</string>
-    <string name="server_info_push">XEP-0357: Push</string>
     <string name="server_info_available">نعم</string>
     <string name="server_info_unavailable">لا</string>
     <string name="missing_public_keys">إعلانات مفتاح عمومي مفقودة</string>
@@ -198,8 +184,6 @@
     <string name="select">اختيار</string>
     <string name="contact_already_exists">جهة الاتصال موجودة مسبقاً</string>
     <string name="join">الانضمام</string>
-    <string name="channel_full_jid_example">channel@conference.example.com/nick</string>
-    <string name="channel_bare_jid_example">channel@conference.example.com</string>
     <string name="save_as_bookmark">أضفه كفاصلة مرجعية</string>
     <string name="delete_bookmark">حذف الفاصلة المرجعية</string>
     <string name="topic">الموضوع</string>

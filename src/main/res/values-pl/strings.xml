@@ -25,14 +25,11 @@
     <string name="just_now">przed chwilą</string>
     <string name="minute_ago">minutę temu</string>
     <string name="minutes_ago">%d minut temu</string>
-    <string name="x_unread_conversations">%d nieprzeczytanych wiadomości</string>
     <string name="sending">wysyłanie...</string>
     <string name="message_decrypting">Odszyfrowywanie wiadomości. To zajmie tylko chwilę...</string>
     <string name="pgp_message">Wiadomość zaszyfrowana OpenPGP</string>
     <string name="nick_in_use">Pseudonim jest już w użyciu</string>
-    <string name="admin">Admin</string>
     <string name="owner">Właściciel</string>
-    <string name="moderator">Moderator</string>
     <string name="participant">Uczestnik</string>
     <string name="visitor">Gość</string>
     <string name="remove_contact_text">Czy na pewno chcesz usunąć %s ze swojego rostera? Konwersacja powiązana z tym kontaktem nie zostanie usunięta.</string>
@@ -83,7 +80,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="your_nick_has_been_changed">Twój pseudonim został zmieniony</string>
     <string name="send_unencrypted">Wyślij bez szyfrowania</string>
     <string name="decryption_failed">Nie można odszyfrować. Sprawdź poprawność klucza prywatnego.</string>
-    <string name="openkeychain_required">OpenKeychain</string>
     <string name="restart">Zrestartuj</string>
     <string name="install">Zainstaluj</string>
     <string name="offering">oferowanie...</string>
@@ -108,7 +104,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="pref_send_crash">Wyślij raporty o awariach</string>
     <string name="pref_confirm_messages">Potwierdzenia wiadomości</string>
     <string name="pref_confirm_messages_summary">Zezwól na wysyłanie do osób z twojej listy kontaktów informacji o tym, kiedy otrzymałeś i przeczytałeś wiadomość od nich</string>
-    <string name="pref_ui_options">UI</string>
     <string name="openpgp_error">Wystąpił błąd OpenKeychain</string>
     <string name="accept">Akceptuj</string>
     <string name="error">Wystąpił błąd</string>
@@ -140,9 +135,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="account_status_incompatible_server">Serwer niekompatybilny</string>
     <string name="account_status_stream_error">Błąd strumienia</string>
     <string name="encryption_choice_unencrypted">Bez szyfrowania</string>
-    <string name="encryption_choice_otr">OTR</string>
-    <string name="encryption_choice_pgp">OpenPGP</string>
-    <string name="encryption_choice_omemo">OMEMO</string>
     <string name="action_account">Edytuj konto</string>
     <string name="mgmt_account_delete">Usuń konto</string>
     <string name="mgmt_account_publish_avatar">Publikuj awatar</string>
@@ -160,15 +152,9 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="error_out_of_memory">Brak pamięci, obraz jest za duży</string>
     <string name="add_phone_book_text">Czy chcesz dodać %s do listy kontaktów?</string>
     <string name="server_info_show_more">Informacje o serwerze</string>
-    <string name="server_info_mam">XEP-0313: MAM</string>
     <string name="server_info_carbon_messages">XEP-0280: Kopie wiadomości</string>
-    <string name="server_info_csi">XEP-0352: Client State Indication</string>
-    <string name="server_info_blocking">XEP-0191: Blocking Command</string>
-    <string name="server_info_roster_version">XEP-0237: Roster Versioning</string>
-    <string name="server_info_stream_management">XEP-0198: Stream Management</string>
     <string name="server_info_pep">XEP-0163: PEP (Awatary / OMEMO)</string>
     <string name="server_info_http_upload">XEP-0363: Przesyłanie plików przez HTTP</string>
-    <string name="server_info_push">XEP-0357: Push</string>
     <string name="server_info_available">tak</string>
     <string name="server_info_unavailable">nie</string>
     <string name="missing_public_keys">Brak informacji o kluczu publicznym</string>
@@ -204,8 +190,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="select">Wybierz</string>
     <string name="contact_already_exists">Kontakt już istnieje</string>
     <string name="join">Dołącz</string>
-    <string name="channel_full_jid_example">channel@conference.example.com/nick</string>
-    <string name="channel_bare_jid_example">channel@conference.example.com</string>
     <string name="save_as_bookmark">Dodaj jako zakładkę</string>
     <string name="delete_bookmark">Usuń zakładkę</string>
     <string name="topic">Temat</string>
@@ -340,7 +324,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="password_should_not_be_empty">Hasło nie może być puste</string>
     <string name="perform_action_with">Użyj</string>
     <string name="no_affiliation">Brak stanowiska</string>
-    <string name="no_role">Offline</string>
     <string name="outcast">Wykluczony</string>
     <string name="member">Członek</string>
     <string name="advanced_mode">Tryb zaawansowany</string>
@@ -436,7 +419,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="pref_dnd_on_silent_mode_summary">Oznacza Twój zasób jako \"Nie przeszkadzać\", gdy urządzenie jest w trybie cichym</string>
     <string name="pref_treat_vibrate_as_silent">Traktuj tryb wibracji jak tryb cichy</string>
     <string name="pref_treat_vibrate_as_dnd_summary">Oznacza Twój zasób jako \"Nie przeszkadzać\", gdy urządzenie jest w trybie wibracji</string>
-    <string name="hostname_example">blabber.im</string>
     <string name="action_add_account_with_certificate">Dodaj konto za pomocą certyfikatu</string>
     <string name="unable_to_parse_certificate">Nie mogę odczytać certyfikatu</string>
     <string name="authenticate_with_certificate">Pozostaw puste by autoryzować za pomocą certyfikatu</string>
@@ -454,7 +436,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="device_does_not_support_certificates">Twoje urządzenie nie wspiera wyboru certyfikatów klienckich</string>
     <string name="changelog">Zmiany</string>
     <string name="account_settings_hostname">Nazwa hosta</string>
-    <string name="account_settings_port">Port</string>
     <string name="hostname_or_onion">Adres hosta lub adres .onion</string>
     <string name="not_a_valid_port">To nie jest prawidłowy numer portu</string>
     <string name="not_valid_hostname">To nie jest prawidłowa nazwa hosta</string>
@@ -531,7 +512,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="inviteUser_Subject">zaprosił/a Cie poprzez</string>
     <string name="pref_broadcast_last_activity">Dziel się ostatnią interakcją.</string>
     <string name="pref_broadcast_last_activity_summary">Powiadamiaj kontakty, że używasz blabber.im</string>
-    <string name="invite_to_app">Zaproś do blabber.im</string>
     <string name="unable_to_connect_to_keychain">Nie można połączyć się z OpenKeychain</string>
     <string name="this_device_is_no_longer_in_use">Urządzenie to nie jest już używane</string>
     <string name="please_wait">Proszę czekać…</string>
@@ -739,7 +719,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="create_shortcut">Utwórz skrót</string>
     <string name="not_encrypted_for_this_device">Wiadomość nie została zaszyfrowana dla tego urządzenia.</string>
     <string name="search_messages">Znajdź Wiadomość</string>
-    <string name="gif">GIF</string>
     <string name="view_conversation">Wyświetl komunikację</string>
     <string name="web_address">adres internetowy</string>
     <string name="jabber_id_copied_to_clipboard">Skopiowano JID do schowka</string>
@@ -810,7 +789,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="start_orbot">Uruchom Orbot</string>
     <string name="no_market_app_installed">Brak aplikacji sklepu na urządzeniu.</string>
     <string name="group_chat_will_make_your_jabber_id_public">Ten kanał upubliczni Twój Jabber ID</string>
-    <string name="ebook">e-book</string>
     <string name="your_name">Twoje miano</string>
     <string name="enter_your_name">Wprowadź swoje imię</string>
     <string name="enter_your_name_instructions">Wprowadź swój pseudonim, który będzie widoczny dla Twoich kontaktów.</string>
@@ -960,7 +938,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="no_results">Brak rezultatów</string>
     <string name="file_transmission_cancelled">transfer plików anulowany</string>
     <string name="sharing_application_not_grant_permission">Aplikacja do udostępniania nie upoważniła blabber.im do dostępu do tego pliku.</string>
-    <string name="jabber_network">jabber.network</string>
     <string name="local_server">Serwer lokalny</string>
     <string name="pref_channel_discovery_summary">Większość użytkowników powinna wybrać \'jabber.network\' dla lepszych sugestii spośród wszystkich publicznych kanałów XMPP.</string>
     <string name="pref_channel_discovery">Metoda wyszukiwania kanałów</string>
@@ -973,7 +950,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="ask_for_writeaccess">Poproś o możliwość wysyłania wiadomości</string>
     <string name="pref_theme_blue">Niebieski</string>
     <string name="pref_theme_orange">Pomarańczowy</string>
-    <string name="pref_theme_blabber">blabber.im</string>
     <string name="pref_theme_grey">Szary</string>
     <string name="pref_theme_pink">Różowy</string>
     <string name="pref_theme_black">Czarny (AMOLED)</string>
@@ -994,7 +970,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="action_delete">Usuń</string>
     <string name="attach_choose_video">Wybierz film</string>
     <string name="please_enable_an_account">Włącz jakiekolwiek konto</string>
-    <string name="server_info_external_service_discovery">XEP-0215: External Service Discovery</string>
     <string name="return_to_ongoing_call">Wróć do trwającego połączenia</string>
     <string name="make_call">Zadzwoń</string>
     <string name="audio_call">Połączenie głosowe</string>
@@ -1049,6 +1024,5 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="encrypted_with_openpgp">Zaszyfrowane za pomocą OpenPGP</string>
     <string name="not_encrypted">Nieszyfrowane</string>
     <string name="missed_calls_channel_name">Nieodebrane połączenia</string>
-    <string name="link">Link</string>
     <string name="no_application_found">Nie znaleziono żadnych aplikacji</string>
 </resources>

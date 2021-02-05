@@ -12,9 +12,7 @@
     <string name="action_unblock_contact">Walang harang na kontak</string>
     <string name="action_block_domain">May harang na domain</string>
     <string name="action_unblock_domain">Walang harang na domain</string>
-    <string name="title_activity_settings">Settings</string>
     <string name="title_activity_choose_contact">Pumili ng kontak</string>
-    <string name="title_activity_block_list">Block list</string>
     <string name="just_now">ngayon lang</string>
     <string name="minute_ago">1 min nakalipas</string>
     <string name="minutes_ago">%d minuto nakalipas</string>
@@ -22,7 +20,6 @@
     <string name="message_decrypting">Decrypting message. Mangyaring maghintay…</string>
     <string name="pgp_message">Ang naka-encrypt na mensahe ng OpenPGP</string>
     <string name="nick_in_use">Nagamit na ang palayaw</string>
-    <string name="admin">Admin</string>
     <string name="owner">May-ari</string>
     <string name="moderator">Tagapamagitan</string>
     <string name="participant">Kalahok</string>
@@ -48,7 +45,6 @@
     <string name="block">I-block</string>
     <string name="unblock">I-unblock</string>
     <string name="save">I-save</string>
-    <string name="ok">OK</string>
     <string name="send_now">Ipadala ngayon</string>
     <string name="send_never">Wag kang magtanong ulit</string>
     <string name="problem_connecting_to_account">Hindi makakonekta sa iyong account</string>
@@ -71,7 +67,6 @@
     <string name="your_nick_has_been_changed">Ang itong palayaw ay nabago</string>
     <string name="send_unencrypted">Magpadala ng hindi naka-encrypt</string>
     <string name="decryption_failed">Nabigo ang decryption. Dahil Maaring hindi mo hawag ang tamang key.</string>
-    <string name="openkeychain_required">OpenKeychain</string>
     <string name="restart">I-restart</string>
     <string name="install">I-instal</string>
     <string name="offering">Hain…</string>
@@ -86,5 +81,4 @@
     <string name="pref_vibrate_summary">Manginig pag may bagong mensaheng dumamating</string>
     <string name="pref_led">Nitipikasyon ng LED</string>
     <string name="pref_led_summary">Kumukurap ang ilaw ng notipikasyon kapag may bagong mensaheng dumating</string>
-    <string name="pref_sound">Ringtone</string>
 </resources>

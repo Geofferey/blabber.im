@@ -25,15 +25,12 @@
     <string name="just_now">în acest moment</string>
     <string name="minute_ago">acum un minut</string>
     <string name="minutes_ago">acum %d minute</string>
-    <string name="x_unread_conversations">%d conversații necitite</string>
     <string name="sending">trimitere...</string>
     <string name="message_decrypting">Decriptez mesaj. Te rog așteaptă...</string>
     <string name="pgp_message">Mesaj criptat cu OpenPGP</string>
     <string name="nick_in_use">Numele de utilizator este deja alocat</string>
     <string name="admin">Administrator</string>
     <string name="owner">Proprietar</string>
-    <string name="moderator">Moderator</string>
-    <string name="participant">Participant</string>
     <string name="visitor">Vizitator</string>
     <string name="remove_contact_text">Ați dori să ștergeți pe %s din listă? Conversația asociată cu acest contact nu va fi ștearsă.</string>
     <string name="block_contact_text">Ați dori să blocați pe %s ca să nu vă mai trimită mesaje?</string>
@@ -81,14 +78,12 @@
     <string name="your_nick_has_been_changed">Numele dumneavoastră a fost schimbat</string>
     <string name="send_unencrypted">Trimite necriptat</string>
     <string name="decryption_failed">Decriptarea a eșuat. Poate nu aveți cheia privată corectă.</string>
-    <string name="openkeychain_required">OpenKeychain</string>
     <string name="restart">Repornește</string>
     <string name="install">Instalare</string>
     <string name="offering">transmit...</string>
     <string name="waiting">în așteptare...</string>
     <string name="no_pgp_key">Nu am găsit cheia OpenPGP</string>
     <string name="no_pgp_keys">Nu am găsit chei OpenPGP</string>
-    <string name="pref_general">General</string>
     <string name="pref_attachments">Atașamente</string>
     <string name="pref_notification_settings">Notificare</string>
     <string name="pref_vibrate">Vibrează</string>
@@ -132,9 +127,7 @@
     <string name="account_status_incompatible_server">Server incompatibil</string>
     <string name="account_status_stream_error">Eroare de date</string>
     <string name="encryption_choice_unencrypted">Necriptat</string>
-    <string name="encryption_choice_otr">OTR</string>
     <string name="encryption_choice_pgp">OpenGPG</string>
-    <string name="encryption_choice_omemo">OMEMO</string>
     <string name="action_account">Editare cont</string>
     <string name="mgmt_account_delete">Șterge cont</string>
     <string name="mgmt_account_publish_avatar">Publică avatar</string>
@@ -150,7 +143,6 @@
     <string name="error_out_of_memory">Memorie epuizată. Imaginea este prea mare.</string>
     <string name="add_phone_book_text">Vreți să adăugați pe %s în lista de contacte?</string>
     <string name="server_info_show_more">Informații server</string>
-    <string name="server_info_mam">XEP-0313: MAM</string>
     <string name="server_info_carbon_messages">XEP-0280: Copii indigo mesaje</string>
     <string name="server_info_csi">XEP-0352: Indicator stare client</string>
     <string name="server_info_blocking">XEP-0191: Comandă blocare</string>
@@ -158,7 +150,6 @@
     <string name="server_info_stream_management">XEP-0198: Management flux</string>
     <string name="server_info_pep">XEP-0163: PEP (Avatare / OMEMO)</string>
     <string name="server_info_http_upload">XEP-0363: Încărcare fișiere prin HTTP</string>
-    <string name="server_info_push">XEP-0357: Push</string>
     <string name="server_info_available">da</string>
     <string name="server_info_unavailable">nu</string>
     <string name="missing_public_keys">Cheile publice ce nu au fost anunțate</string>
@@ -352,12 +343,9 @@
     <string name="pref_enter_is_send">ENTER trimite</string>
     <string name="pref_display_enter_key">Arată tasta ENTER</string>
     <string name="pref_display_enter_key_summary">Preschimbă tasta emoticon în ENTER</string>
-    <string name="audio">audio</string>
-    <string name="video">video</string>
     <string name="image">imagine</string>
     <string name="pdf_document">document PDF</string>
     <string name="apk">Aplicație Android</string>
-    <string name="vcard">Contact</string>
     <string name="avatar_has_been_published">Avatarul a fost publicat!</string>
     <string name="sending_x_file">Trimit %s</string>
     <string name="offering_x_file">Ofer %s</string>
@@ -431,7 +419,6 @@
     <string name="device_does_not_support_certificates">Dispozitivul nu permite selectia unui certificat pentru client!</string>
     <string name="changelog">Istoric schimbări</string>
     <string name="account_settings_hostname">Nume gazdă</string>
-    <string name="account_settings_port">Port</string>
     <string name="not_a_valid_port">Acesta nu este un numar de port valabil</string>
     <string name="not_valid_hostname">Acesta nu este un nume de gazdă valabil</string>
     <string name="connected_accounts">%1$d din %2$d conturi conectate</string>
@@ -667,7 +654,6 @@
     <string name="create_shortcut">Creează scurtătură</string>
     <string name="not_encrypted_for_this_device">Mesajul nu a fost criptat pentru acest dispozitiv.</string>
     <string name="search_messages">Caută mesaje</string>
-    <string name="gif">GIF</string>
     <string name="view_conversation">Arată conversația</string>
     <string name="web_address">adresă web</string>
     <string name="jabber_id_copied_to_clipboard">Adresă XMPP copiată în memorie</string>
@@ -817,7 +803,6 @@
     <string name="no_results">Nici un rezultat</string>
     <string name="file_transmission_cancelled">transmisia fișierului a fost anulată</string>
     <string name="sharing_application_not_grant_permission">Aplicația care a partajat nu a permis accesul la acest fișier.</string>
-    <string name="jabber_network">jabber.network</string>
     <string name="local_server">Server local</string>
     <string name="pref_channel_discovery_summary">Cei mai mulți utilizatori ar trebui să aleagă \'jabber.network\' pentru a primi sugestii mai bune din întregul ecosistem XMPP.</string>
     <string name="pref_channel_discovery">Metoda de descoperire a canalelor</string>

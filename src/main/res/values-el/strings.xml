@@ -59,7 +59,6 @@
     <string name="your_nick_has_been_changed">Το ψευδώνυμό σας έχει αλλάξει</string>
     <string name="send_unencrypted">Αποστολή χωρίς κρυπτογράφηση</string>
     <string name="decryption_failed">Η αποκρυπτογράφηση απέτυχε. Ίσως δεν κατέχετε το σωστό ιδιωτικό κλειδί.</string>
-    <string name="openkeychain_required">OpenKeychain</string>
     <string name="restart">Επανεκκίνηση</string>
     <string name="install">Εγκατάσταση</string>
     <string name="offering">προσφορά...</string>
@@ -96,8 +95,6 @@
     <string name="account_status_regis_success">Ολοκλήρωση εγγραφής</string>
     <string name="account_status_regis_not_sup">Ο διακομιστής δεν υποστηρίζει εγγραφή</string>
     <string name="account_status_incompatible_server">Μη συμβατός διακομιστής</string>
-    <string name="encryption_choice_otr">OTR</string>
-    <string name="encryption_choice_pgp">OpenPGP</string>
     <string name="mgmt_account_delete">Διαγραφή λογαριασμού</string>
     <string name="mgmt_account_publish_avatar">Δημοσίευση εικόνας προφίλ</string>
     <string name="mgmt_account_publish_pgp">Δημοσίευση του δημόσιου κλειδιού OpenPGP</string>
