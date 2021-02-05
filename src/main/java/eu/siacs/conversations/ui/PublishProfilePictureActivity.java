@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -156,16 +155,11 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
 
     public static void chooseAvatar(final Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            final Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
-            getIntent.setType("image/*");
-
-            final Intent pickIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-            final Intent chooserIntent = Intent.createChooser(getIntent, activity.getString(R.string.attach_choose_picture));
-            chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
-
+            final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
             activity.startActivityForResult(
-                    chooserIntent, REQUEST_CHOOSE_PICTURE
+                    Intent.createChooser(intent, activity.getString(R.string.attach_choose_picture)),
+                    REQUEST_CHOOSE_PICTURE
             );
         } else {
             CropImage.activity()

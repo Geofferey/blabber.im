@@ -1847,21 +1847,15 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
 
     protected void invokeAttachFileIntent(final int attachmentChoice) {
         Intent intent = new Intent();
-        Intent pickIntent = new Intent();
         boolean chooser = false;
-        boolean gallery = false;
         switch (attachmentChoice) {
             case ATTACHMENT_CHOICE_CHOOSE_IMAGE:
-                chooser = true;
-                gallery = true;
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
                     intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 }
                 intent.setType("image/*");
-                pickIntent.setAction(Intent.ACTION_PICK);
-                pickIntent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                pickIntent.setType("image/*");
+                chooser = true;
                 break;
             case ATTACHMENT_CHOICE_CHOOSE_VIDEO:
                 chooser = true;
@@ -1907,16 +1901,10 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             Log.d(Config.LOGTAG, "Attachment: " + attachmentChoice);
             if (chooser) {
-                if (gallery) {
-                    Intent chooserIntent = Intent.createChooser(intent, getString(R.string.perform_action_with));
-                    chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
-                    startActivityForResult(chooserIntent, attachmentChoice);
-                } else {
-                    startActivityForResult(
-                            Intent.createChooser(intent, getString(R.string.perform_action_with)),
-                            attachmentChoice);
-                    activity.overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
-                }
+                startActivityForResult(
+                        Intent.createChooser(intent, getString(R.string.perform_action_with)),
+                        attachmentChoice);
+                activity.overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
             } else {
                 startActivityForResult(intent, attachmentChoice);
                 activity.overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
