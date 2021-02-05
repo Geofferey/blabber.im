@@ -5146,6 +5146,33 @@ public class XmppConnectionService extends Service {
         }
     }
 
+    public void showInvitationNotification(final Conversation conversation, final Contact contact) {
+        final String messageId = "MUC_INVITATION_" + System.currentTimeMillis();
+        final Message message = new Message(
+                conversation,
+                Message.STATUS_RECEIVED,
+                Message.TYPE_PRIVATE,
+                messageId
+        );
+        final String from = contact.getJid().asBareJid().toEscapedString();
+        String to = conversation.getJid().toString();
+        final String toDisplayName = conversation.getName().toString();
+        if (toDisplayName != null && toDisplayName.length() > 0) {
+            to = toDisplayName + " (" + to + ")";
+        }
+        message.setBody(String.format(getString(R.string.got_invitation_from),from, to));
+        message.setServerMsgId(messageId);
+        message.setTime(System.currentTimeMillis());
+        if (conversation instanceof Conversation) {
+            ((Conversation) conversation).add(message);
+            createMessageAsync(message);
+            message.markUnread();
+            updateConversationUi();
+        } else {
+            throw new IllegalStateException("Somehow the conversation in a message was a stub");
+        }
+    }
+
     public interface OnMamPreferencesFetched {
         void onPreferencesFetched(Element prefs);
 

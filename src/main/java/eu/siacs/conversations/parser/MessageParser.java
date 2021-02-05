@@ -1130,8 +1130,10 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
                     conversation.getMucOptions().setPassword(password);
                     mXmppConnectionService.databaseBackend.updateConversation(conversation);
                     final Contact contact = inviter != null ? account.getRoster().getContactFromContactList(inviter) : null;
+                    Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": received invite to " + jid + " (" + conversation.getName() + ") from " + contact.getJid().asBareJid());
                     mXmppConnectionService.joinMuc(conversation, contact != null && contact.mutualPresenceSubscription());
                     mXmppConnectionService.updateConversationUi();
+                    mXmppConnectionService.showInvitationNotification(conversation, contact);
                 }
                 return true;
             }
