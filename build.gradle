@@ -104,9 +104,9 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
 
-        //versionNameSuffix " beta_(2020-11-20)" // " beta_(XXXX-XX-XX)" // activate for beta versions
-        versionCode 316
-        versionName "3.0.2"
+        //versionNameSuffix " beta_(2021-02-04)" // " beta_(XXXX-XX-XX)" // activate for beta versions
+        versionCode 318
+        versionName "3.0.3"
         //resConfigs "en"
 
         archivesBaseName += "-$versionName"
@@ -215,6 +215,7 @@ android {
 
         }
     }
+    buildToolsVersion '29.0.2'
 
     packagingOptions {
         exclude 'META-INF/BCKEY.DSA'

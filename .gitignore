@@ -47,3 +47,4 @@ src/standardPush/res/values/gcm.xml
 /libs/libwebrtc*
 /.github/ISSUE_TEMPLATE.md
 crowdin.properties
+/languages.sh

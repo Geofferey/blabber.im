@@ -1,5 +1,20 @@
 ### Changelog
 
+#### Version 3.0.3
+
+* add custom tabs (blabber.im)
+* show video/gif duration in preview (blabber.im)
+* auto download all attachments (blabber.im)
+* show notification on muc invites as private messages (blabber.im)
+* offer Easy Invite generation on supporting servers
+* display GIFs send from Movim
+* store avatars in cache
+* fixed connectivity issues when different accounts used different SCRAM mechanisms
+* add support for SCRAM-SHA-512
+* allow P2P (Jingle) file transfer with self contact
+* show call button for offline contacts if they previously announced support
+* bug fixes
+
 #### Version 3.0.2
 * play ogg files in audio player
 * small UI improvements
