@@ -18,6 +18,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ConnectException;
+import java.net.IDN;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
@@ -856,7 +857,7 @@ public class XmppConnection implements Runnable {
         final InetAddress address = socket.getInetAddress();
         final SSLSocket sslSocket = (SSLSocket) tlsFactoryVerifier.factory.createSocket(socket, address.getHostAddress(), socket.getPort(), true);
         SSLSocketHelper.setSecurity(sslSocket);
-        SSLSocketHelper.setHostname(sslSocket, account.getServer());
+        SSLSocketHelper.setHostname(sslSocket, IDN.toASCII(account.getServer()));
         SSLSocketHelper.setApplicationProtocol(sslSocket, "xmpp-client");
         if (!tlsFactoryVerifier.verifier.verify(account.getServer(), this.verifiedHostname, sslSocket.getSession())) {
             Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": TLS certificate verification failed");
