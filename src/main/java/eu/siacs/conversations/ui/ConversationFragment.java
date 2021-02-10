@@ -144,6 +144,7 @@ import static eu.siacs.conversations.ui.XmppActivity.EXTRA_ACCOUNT;
 import static eu.siacs.conversations.ui.XmppActivity.REQUEST_INVITE_TO_CONVERSATION;
 import static eu.siacs.conversations.ui.util.SoftKeyboardUtils.hideSoftKeyboard;
 import static eu.siacs.conversations.utils.Compatibility.runsTwentyOne;
+import static eu.siacs.conversations.utils.MessageUtils.fileWithKnownSize;
 import static eu.siacs.conversations.utils.PermissionUtils.allGranted;
 import static eu.siacs.conversations.utils.PermissionUtils.getFirstDenied;
 import static eu.siacs.conversations.utils.PermissionUtils.readGranted;
@@ -1357,6 +1358,9 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             final boolean cancelable = (t != null && !deleted) || waitingOfferedSending && m.needsUploading();
             if (cancelable) {
                 cancelTransmission.setVisible(true);
+            }
+            if (fileWithKnownSize(m)) {
+                cancelTransmission.setVisible(false);
             }
             if (m.isFileOrImage() && !deleted && !cancelable) {
                 String path = m.getRelativeFilePath();
