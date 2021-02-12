@@ -362,7 +362,7 @@ public class XmppConnectionService extends Service {
             synchronized (account.inProgressConferencePings) {
                 account.inProgressConferencePings.clear();
             }
-            mJingleConnectionManager.notifyRebound();
+            mJingleConnectionManager.notifyRebound(account);
             mQuickConversationsService.considerSyncBackground(false);
             fetchRosterFromServer(account);
             final XmppConnection connection = account.getXmppConnection();
@@ -386,6 +386,7 @@ public class XmppConnectionService extends Service {
             }
             connectMultiModeConversations(account);
             syncDirtyContacts(account);
+
         }
     };
     private boolean destroyed = false;
