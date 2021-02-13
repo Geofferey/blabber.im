@@ -1098,4 +1098,5 @@
     <string name="pref_easy_downloader_summary">Automatically download all attachments in public channels and from strangers instead of showing a button for a manual download.</string>
     <string name="pref_easy_downloader">Automatically download all attachments</string>
     <string name="got_invitation_from">You have been invited by %s to the chat room %s.</string>
+    <string name="a_user">a user</string>
 </resources>

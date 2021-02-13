@@ -476,8 +476,8 @@ public class XmppConnectionService extends Service {
     private WakeLock wakeLock;
     private PowerManager pm;
     private LruCache<String, Bitmap> mBitmapCache;
-    private BroadcastReceiver mInternalEventReceiver = new InternalEventReceiver();
-    private BroadcastReceiver mInternalScreenEventReceiver = new InternalEventReceiver();
+    private final BroadcastReceiver mInternalEventReceiver = new InternalEventReceiver();
+    private final BroadcastReceiver mInternalScreenEventReceiver = new InternalEventReceiver();
 
     private static String generateFetchKey(Account account, final Avatar avatar) {
         return account.getJid().asBareJid() + "_" + avatar.owner + "_" + avatar.sha1sum;
@@ -852,7 +852,7 @@ public class XmppConnectionService extends Service {
                     }
                     final boolean lowTimeout = isInLowPingTimeoutMode(account);
                     account.getXmppConnection().sendPing();
-                    Log.d(Config.LOGTAG, account.getJid().asBareJid() + " send ping (action=" + action + ",lowTimeout=" + Boolean.toString(lowTimeout) + ")");
+                    Log.d(Config.LOGTAG, account.getJid().asBareJid() + " send ping (action=" + action + ",lowTimeout=" + lowTimeout + ")");
                     scheduleWakeUpCall(lowTimeout ? Config.LOW_PING_TIMEOUT : Config.PING_TIMEOUT, account.getUuid().hashCode());
                 }
             }
@@ -2090,7 +2090,7 @@ public class XmppConnectionService extends Service {
                     }
                 });
             } else {
-                Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": error publishing bookmarks (retry=" + Boolean.toString(retry) + ") " + response);
+                Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": error publishing bookmarks (retry=" + retry + ") " + response);
             }
         });
     }
@@ -5123,11 +5123,7 @@ public class XmppConnectionService extends Service {
         final String packageID = BuildConfig.APPLICATION_ID;
         final String installedFrom = packageManager.getInstallerPackageName(packageID);
         Log.d(Config.LOGTAG, "Messenger installed from " + installedFrom);
-        if (installedFrom != null) {
-            return installedFrom;
-        } else {
-            return null;
-        }
+        return installedFrom;
     }
 
     public ShortcutService getShortcutService() {
@@ -5154,13 +5150,18 @@ public class XmppConnectionService extends Service {
                 Message.TYPE_PRIVATE,
                 messageId
         );
-        final String from = contact.getJid().asBareJid().toEscapedString();
+        String from;
+        if (contact == null) {
+            from = getString(R.string.a_user);
+        } else {
+            from = contact.getJid().asBareJid().toEscapedString();
+        }
         String to = conversation.getJid().toString();
         final String toDisplayName = conversation.getName().toString();
         if (toDisplayName != null && toDisplayName.length() > 0) {
             to = toDisplayName + " (" + to + ")";
         }
-        message.setBody(String.format(getString(R.string.got_invitation_from),from, to));
+        message.setBody(String.format(getString(R.string.got_invitation_from), from, to));
         message.setServerMsgId(messageId);
         message.setTime(System.currentTimeMillis());
         if (conversation instanceof Conversation) {
