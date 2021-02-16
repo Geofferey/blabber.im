@@ -221,6 +221,7 @@ public class HttpDownloadConnection implements Transferable {
     }
 
     private void showToastForException(Exception e) {
+        e.printStackTrace();
         if (e instanceof java.net.UnknownHostException) {
             mXmppConnectionService.showErrorToastInUi(R.string.download_failed_server_not_found);
         } else if (e instanceof java.net.ConnectException) {
@@ -291,6 +292,7 @@ public class HttpDownloadConnection implements Transferable {
                             check();
                             return;
                         } catch (MalformedURLException e) {
+                            Log.d(Config.LOGTAG, "Exception " + e + " while retrieving url");
                             //fallthrough
                         }
                     }
