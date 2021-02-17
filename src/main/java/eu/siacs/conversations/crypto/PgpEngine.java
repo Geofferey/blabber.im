@@ -6,6 +6,10 @@ import android.util.Log;
 
 import androidx.annotation.StringRes;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
+
 import org.openintents.openpgp.OpenPgpError;
 import org.openintents.openpgp.OpenPgpSignatureResult;
 import org.openintents.openpgp.util.OpenPgpApi;
@@ -18,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
@@ -29,6 +34,7 @@ import eu.siacs.conversations.entities.Message;
 import eu.siacs.conversations.persistance.FileBackend;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.ui.UiCallback;
+import eu.siacs.conversations.utils.AsciiArmor;
 
 public class PgpEngine {
     private OpenPgpApi api;
@@ -77,14 +83,14 @@ public class PgpEngine {
                     case OpenPgpApi.RESULT_CODE_SUCCESS:
                         try {
                             os.flush();
-                            StringBuilder encryptedMessageBody = new StringBuilder();
-                            String[] lines = os.toString().split("\n");
+                            final ArrayList<String> encryptedMessageBody = new ArrayList<>();
+                            final String[] lines = os.toString().split("\n");
                             for (int i = 2; i < lines.length - 1; ++i) {
                                 if (!lines[i].contains("Version")) {
-                                    encryptedMessageBody.append(lines[i].trim());
+                                    encryptedMessageBody.add(lines[i].trim());
                                 }
                             }
-                            message.setEncryptedBody(encryptedMessageBody.toString());
+                            message.setEncryptedBody(Joiner.on('\n').join(encryptedMessageBody));
                             message.setEncryption(Message.ENCRYPTION_DECRYPTED);
                             mXmppConnectionService.sendMessage(message);
                             callback.success(message);
@@ -146,36 +152,26 @@ public class PgpEngine {
         }
     }
 
-    public long fetchKeyId(Account account, String status, String signature) {
-        if ((signature == null) || (api == null)) {
+    public long fetchKeyId(final Account account, final String status, final String signature) {
+        if (signature == null || api == null) {
             return 0;
         }
-        if (status == null) {
-            status = "";
-        }
-        final StringBuilder pgpSig = new StringBuilder();
-        pgpSig.append("-----BEGIN PGP SIGNED MESSAGE-----");
-        pgpSig.append('\n');
-        pgpSig.append('\n');
-        pgpSig.append(status);
-        pgpSig.append('\n');
-        pgpSig.append("-----BEGIN PGP SIGNATURE-----");
-        pgpSig.append('\n');
-        pgpSig.append('\n');
-        pgpSig.append(signature.replace("\n", "").trim());
-        pgpSig.append('\n');
-        pgpSig.append("-----END PGP SIGNATURE-----");
-        Intent params = new Intent();
+        final Intent params = new Intent();
         params.setAction(OpenPgpApi.ACTION_DECRYPT_VERIFY);
-        params.putExtra(OpenPgpApi.EXTRA_REQUEST_ASCII_ARMOR, true);
-        InputStream is = new ByteArrayInputStream(pgpSig.toString().getBytes());
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        Intent result = api.executeApi(params, is, os);
+        try {
+            params.putExtra(OpenPgpApi.RESULT_DETACHED_SIGNATURE, AsciiArmor.decode(signature));
+        } catch (final IllegalArgumentException e) {
+            Log.d(Config.LOGTAG, "unable to parse signature", e);
+            return 0;
+        }
+        final InputStream is = new ByteArrayInputStream(Strings.nullToEmpty(status).getBytes());
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        final Intent result = api.executeApi(params, is, os);
         switch (result.getIntExtra(OpenPgpApi.RESULT_CODE,
                 OpenPgpApi.RESULT_CODE_ERROR)) {
             case OpenPgpApi.RESULT_CODE_SUCCESS:
-                OpenPgpSignatureResult sigResult = result
-                        .getParcelableExtra(OpenPgpApi.RESULT_SIGNATURE);
+                final OpenPgpSignatureResult sigResult = result.getParcelableExtra(OpenPgpApi.RESULT_SIGNATURE);
+                //TODO unsure that sigResult.getResult() is either 1, 2 or 3
                 if (sigResult != null) {
                     return sigResult.getKeyId();
                 } else {
@@ -222,18 +218,17 @@ public class PgpEngine {
         api.executeApiAsync(params, is, os, result -> {
             switch (result.getIntExtra(OpenPgpApi.RESULT_CODE, 0)) {
                 case OpenPgpApi.RESULT_CODE_SUCCESS:
-                    StringBuilder signatureBuilder = new StringBuilder();
+                    final ArrayList<String> signature = new ArrayList<>();
                     try {
                         os.flush();
-                        String[] lines = os.toString().split("\n");
                         boolean sig = false;
-                        for (String line : lines) {
+                        for (final String line : Splitter.on('\n').split(os.toString())) {
                             if (sig) {
                                 if (line.contains("END PGP SIGNATURE")) {
                                     sig = false;
                                 } else {
                                     if (!line.contains("Version")) {
-                                        signatureBuilder.append(line.trim());
+                                        signature.add(line.trim());
                                     }
                                 }
                             }
@@ -245,7 +240,7 @@ public class PgpEngine {
                         callback.error(R.string.openpgp_error, null);
                         return;
                     }
-                    callback.success(signatureBuilder.toString());
+                    callback.success(Joiner.on('\n').join(signature));
                     return;
                 case OpenPgpApi.RESULT_CODE_USER_INTERACTION_REQUIRED:
                     callback.userInputRequired(result.getParcelableExtra(OpenPgpApi.RESULT_INTENT), status);
