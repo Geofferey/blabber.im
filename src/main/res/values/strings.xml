@@ -435,8 +435,8 @@
     <string name="account_status_host_unknown">Server not responsible for domain</string>
     <string name="server_info_broken">Broken</string>
     <string name="pref_presence_settings">Availability</string>
-    <string name="pref_away_when_screen_off">Away when screen is off</string>
-    <string name="pref_away_when_screen_off_summary">Marks your resource as away when the screen is turned off</string>
+    <string name="pref_away_when_screen_off">Away when device is locked</string>
+    <string name="pref_away_when_screen_off_summary">Marks your resource as away when the device is locked</string>
     <string name="pref_dnd_on_silent_mode">\"Do not disturb\" in silent mode</string>
     <string name="update_info">blabber.im is downloading and installing the new version automatically.\n\nPlease wait…</string>
     <string name="pref_dnd_on_silent_mode_summary">Marks your resource as \"Do not disturb\" when device is in silent mode</string>
