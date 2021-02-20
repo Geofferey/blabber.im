@@ -653,9 +653,9 @@ public class FileBackend {
             if (is == null) {
                 throw new FileCopyException(R.string.error_not_an_image_file);
             }
-            Bitmap originalBitmap;
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            int inSampleSize = (int) Math.pow(2, sampleSize);
+            final Bitmap originalBitmap;
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            final int inSampleSize = (int) Math.pow(2, sampleSize);
             Log.d(Config.LOGTAG, "reading bitmap with sample size " + inSampleSize);
             options.inSampleSize = inSampleSize;
             originalBitmap = BitmapFactory.decodeStream(is, null, options);
@@ -663,7 +663,7 @@ public class FileBackend {
             if (originalBitmap == null) {
                 throw new ImageCompressionException("Source file was not an image");
             }
-            if (hasAlpha(originalBitmap)) {
+            if (!"image/jpeg".equals(options.outMimeType) && hasAlpha(originalBitmap)) {
                 originalBitmap.recycle();
                 throw new ImageCompressionException("Source file had alpha channel");
             }
@@ -676,7 +676,7 @@ public class FileBackend {
                 size = mXmppConnectionService.getCompressImageResolutionPreference();
             }
             Bitmap scaledBitmap = resize(originalBitmap, size);
-            int rotation = getRotation(image);
+            final int rotation = getRotation(image);
             scaledBitmap = rotate(scaledBitmap, rotation);
             boolean targetSizeReached = false;
             int quality = Config.IMAGE_QUALITY;
@@ -691,7 +691,7 @@ public class FileBackend {
                 quality -= 5;
             }
             scaledBitmap.recycle();
-        } catch (FileNotFoundException e) {
+        } catch (final FileNotFoundException e) {
             throw new FileCopyException(R.string.error_file_not_found);
         } catch (IOException e) {
             e.printStackTrace();
