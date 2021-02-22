@@ -27,6 +27,8 @@ import eu.siacs.conversations.utils.Checksum;
 import eu.siacs.conversations.utils.CryptoHelper;
 import eu.siacs.conversations.utils.WakeLockHelper;
 
+import static eu.siacs.conversations.http.HttpConnectionManager.EXECUTOR;
+
 public class HttpUploadConnection implements Transferable {
 
     static final List<String> WHITE_LISTED_HEADERS = Arrays.asList(
@@ -137,7 +139,7 @@ public class HttpUploadConnection implements Transferable {
             public void success(SlotRequester.Slot slot) {
                 if (!cancelled) {
                     changeStatus(STATUS_WAITING);
-                    mXmppConnectionService.mUploadExecutor.execute(() -> {
+                    EXECUTOR.execute(() -> {
                         changeStatus(STATUS_UPLOADING);
                         HttpUploadConnection.this.slot = slot;
                         HttpUploadConnection.this.upload();
@@ -158,7 +160,7 @@ public class HttpUploadConnection implements Transferable {
         OutputStream os = null;
         InputStream fileInputStream = null;
         HttpURLConnection connection = null;
-        PowerManager.WakeLock wakeLock = mHttpConnectionManager.createWakeLock("http_upload_" + message.getUuid());
+		final PowerManager.WakeLock wakeLock = mHttpConnectionManager.createWakeLock(Thread.currentThread());
         try {
             fileInputStream = new FileInputStream(file);
             final String slotHostname = slot.getPutUrl().getHost();
