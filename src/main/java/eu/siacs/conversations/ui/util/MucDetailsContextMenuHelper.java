@@ -1,7 +1,6 @@
 package eu.siacs.conversations.ui.util;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.text.SpannableString;
@@ -15,7 +14,6 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -177,16 +175,7 @@ public final class MucDetailsContextMenuHelper {
         final Contact contact = jid == null ? null : account.getRoster().getContact(jid);
         switch (item.getItemId()) {
             case R.id.action_show_avatar:
-                final ImageView view = new ImageView(activity);
-                view.setAdjustViewBounds(true);
-                view.setMaxHeight(R.dimen.avatar_big);
-                view.setMaxWidth(R.dimen.avatar_big);
-                view.setBackgroundColor(Color.WHITE);
-                view.setScaleType(ImageView.ScaleType.FIT_XY);
-                AvatarWorkerTask.loadAvatar(user, view, R.dimen.avatar_big);
-                final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                builder.setView(view);
-                builder.create().show();
+                activity.ShowAvatarPopup(activity, user);
                 return true;
             case R.id.action_contact_details:
                 if (contact != null) {

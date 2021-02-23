@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
@@ -28,7 +27,6 @@ import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,7 +55,6 @@ import eu.siacs.conversations.databinding.ActivityContactDetailsBinding;
 import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.entities.Contact;
 import eu.siacs.conversations.entities.Conversation;
-import eu.siacs.conversations.entities.Conversational;
 import eu.siacs.conversations.entities.ListItem;
 import eu.siacs.conversations.services.NotificationService;
 import eu.siacs.conversations.services.XmppConnectionService.OnAccountUpdate;
@@ -629,16 +626,7 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
         AvatarWorkerTask.loadAvatar(contact, binding.detailsContactBadge, R.dimen.avatar_on_details_screen_size);
         binding.detailsContactBadge.setOnClickListener(this::onBadgeClick);
         binding.detailsContactBadge.setOnLongClickListener(v -> {
-            final ImageView view = new ImageView(ContactDetailsActivity.this);
-            view.setAdjustViewBounds(true);
-            view.setMaxHeight(R.dimen.avatar_big);
-            view.setMaxWidth(R.dimen.avatar_big);
-            view.setBackgroundColor(Color.WHITE);
-            view.setScaleType(ImageView.ScaleType.FIT_XY);
-            AvatarWorkerTask.loadAvatar(mConversation, view, R.dimen.avatar_big);
-            final AlertDialog.Builder builder = new AlertDialog.Builder(ContactDetailsActivity.this);
-            builder.setView(view);
-            builder.create().show();
+            ShowAvatarPopup(ContactDetailsActivity.this, contact);
             return true;
         });
         if (xmppConnectionService.multipleAccounts()) {

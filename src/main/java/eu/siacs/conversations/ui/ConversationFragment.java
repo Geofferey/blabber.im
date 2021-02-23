@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
@@ -47,7 +46,6 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
@@ -104,7 +102,6 @@ import eu.siacs.conversations.ui.adapter.MediaPreviewAdapter;
 import eu.siacs.conversations.ui.adapter.MessageAdapter;
 import eu.siacs.conversations.ui.util.ActivityResult;
 import eu.siacs.conversations.ui.util.Attachment;
-import eu.siacs.conversations.ui.util.AvatarWorkerTask;
 import eu.siacs.conversations.ui.util.CallManager;
 import eu.siacs.conversations.ui.util.ConversationMenuConfigurator;
 import eu.siacs.conversations.ui.util.DateSeparator;
@@ -3233,16 +3230,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 popupMenu.setOnMenuItemClickListener(item -> {
                     switch (item.getItemId()) {
                         case R.id.action_show_avatar:
-                            final ImageView view = new ImageView(activity);
-                            view.setAdjustViewBounds(true);
-                            view.setMaxHeight(R.dimen.avatar_big);
-                            view.setMaxWidth(R.dimen.avatar_big);
-                            view.setBackgroundColor(Color.WHITE);
-                            view.setScaleType(ImageView.ScaleType.FIT_XY);
-                            AvatarWorkerTask.loadAvatar(contact, view, R.dimen.avatar_big);
-                            final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                            builder.setView(view);
-                            builder.create().show();
+                            activity.ShowAvatarPopup(activity, contact);
                             break;
                         case R.id.action_contact_details:
                             activity.switchToContactDetails(message.getContact(), fingerprint);

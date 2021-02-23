@@ -3,7 +3,6 @@ package eu.siacs.conversations.ui;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -56,8 +54,8 @@ import eu.siacs.conversations.utils.StringUtils;
 import eu.siacs.conversations.utils.StylingHelper;
 import eu.siacs.conversations.utils.TimeFrameUtils;
 import eu.siacs.conversations.utils.XmppUri;
-import me.drakeet.support.toast.ToastCompat;
 import eu.siacs.conversations.xmpp.Jid;
+import me.drakeet.support.toast.ToastCompat;
 
 import static eu.siacs.conversations.entities.Bookmark.printableValue;
 import static eu.siacs.conversations.ui.util.IntroHelper.showIntro;
@@ -255,16 +253,7 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
             }
         });
         this.binding.detailsMucAvatar.setOnLongClickListener(v -> {
-            final ImageView view = new ImageView(ConferenceDetailsActivity.this);
-            view.setAdjustViewBounds(true);
-            view.setMaxHeight(R.dimen.avatar_big);
-            view.setMaxWidth(R.dimen.avatar_big);
-            view.setBackgroundColor(Color.WHITE);
-            view.setScaleType(ImageView.ScaleType.FIT_XY);
-            AvatarWorkerTask.loadAvatar(mConversation, view, R.dimen.avatar_big);
-            final AlertDialog.Builder builder = new AlertDialog.Builder(ConferenceDetailsActivity.this);
-            builder.setView(view);
-            builder.create().show();
+            ShowAvatarPopup(ConferenceDetailsActivity.this, mConversation);
             return true;
         });
         this.mAdvancedMode = getPreferences().getBoolean("advanced_muc_mode", false);

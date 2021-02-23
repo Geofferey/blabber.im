@@ -3,6 +3,7 @@ package eu.siacs.conversations.ui;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
@@ -39,9 +40,11 @@ import android.provider.Settings;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -81,6 +84,7 @@ import eu.siacs.conversations.services.QuickConversationsService;
 import eu.siacs.conversations.services.UpdateService;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.services.XmppConnectionService.XmppConnectionBinder;
+import eu.siacs.conversations.ui.util.AvatarWorkerTask;
 import eu.siacs.conversations.ui.util.CustomTab;
 import eu.siacs.conversations.ui.util.PresenceSelector;
 import eu.siacs.conversations.ui.util.SoftKeyboardUtils;
@@ -112,6 +116,8 @@ public abstract class XmppActivity extends ActionBarActivity {
     public XmppConnectionService xmppConnectionService;
     public MediaBrowserActivity mediaBrowserActivity;
     public boolean xmppConnectionServiceBound = false;
+
+    public AlertDialog AvatarPopup;
 
     protected int mColorWarningButton;
     protected int mColorWarningText;
@@ -1152,6 +1158,7 @@ public abstract class XmppActivity extends ActionBarActivity {
     @Override
     public void onPause() {
         super.onPause();
+        hideAvatarPopup();
     }
 
     @Override
@@ -1409,6 +1416,31 @@ public abstract class XmppActivity extends ActionBarActivity {
             UpdateService task = new UpdateService(this, xmppConnectionService.installedFrom(), xmppConnectionService);
             task.executeOnExecutor(UpdateService.THREAD_POOL_EXECUTOR, ShowToast);
             Log.d(Config.LOGTAG, "AppUpdater started");
+        }
+    }
+
+    public void ShowAvatarPopup(final Activity activity, final AvatarService.Avatarable user) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        AvatarPopup = builder.create();
+        final LayoutInflater inflater = getLayoutInflater();
+        final View dialogLayout = inflater.inflate(R.layout.avatar_dialog, null);
+        AvatarPopup.setView(dialogLayout);
+        AvatarPopup.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        final ImageView image = (ImageView) dialogLayout.findViewById(R.id.avatar);
+        AvatarWorkerTask.loadAvatar(user, image, R.dimen.avatar_big);
+        AvatarPopup.setOnShowListener((DialogInterface.OnShowListener) d -> {
+            int imageWidthInPX = 0;
+            if (image != null) {
+                imageWidthInPX = Math.round(image.getWidth());
+                AvatarPopup.getWindow().setLayout(imageWidthInPX, imageWidthInPX);
+            }
+        });
+        AvatarPopup.show();
+    }
+
+    private void hideAvatarPopup() {
+        if (AvatarPopup != null && AvatarPopup.isShowing()) {
+            AvatarPopup.cancel();
         }
     }
 }
