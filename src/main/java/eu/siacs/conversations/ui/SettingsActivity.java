@@ -565,17 +565,24 @@ public class SettingsActivity extends XmppActivity implements
     private void showIntroAgain() {
         SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(this.getBaseContext());
         Map<String, ?> allEntries = getPrefs.getAll();
+        int success = -1;
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
             if (entry.getKey().contains("intro_shown_on_activity")) {
                 SharedPreferences.Editor e = getPrefs.edit();
                 e.putBoolean(entry.getKey(), true);
                 if (e.commit()) {
-                    ToastCompat.makeText(this, R.string.show_intro_again, ToastCompat.LENGTH_SHORT).show();
+                    if (success != 0) {
+                        success = 1;
+                    }
                 } else {
-                    ToastCompat.makeText(this, R.string.show_intro_again_failed, ToastCompat.LENGTH_SHORT).show();
+                    success = 0;
                 }
-
             }
+        }
+        if (success == 1) {
+            ToastCompat.makeText(this, R.string.show_intro_again, ToastCompat.LENGTH_SHORT).show();
+        } else {
+            ToastCompat.makeText(this, R.string.show_intro_again_failed, ToastCompat.LENGTH_SHORT).show();
         }
     }
 }

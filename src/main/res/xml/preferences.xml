@@ -174,11 +174,6 @@
             android:key="led"
             android:summary="@string/pref_led_summary"
             android:title="@string/pref_led" />
-        <CheckBoxPreference
-            android:defaultValue="@bool/notifications_from_strangers"
-            android:key="notifications_from_strangers"
-            android:summary="@string/pref_notifications_from_strangers_summary"
-            android:title="@string/pref_notifications_from_strangers" />
         <PreferenceScreen
             android:key="message_notification_settings"
             android:summary="@string/pref_more_notification_settings_summary"
