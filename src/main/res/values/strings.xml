@@ -1119,4 +1119,6 @@
     <string name="memory_warning">Your messenger is using %1$s (%2$s) of internal memory.\n\nYou can enable automatic message deletion in relation with automatic attachment deletion or delete stored media manually.</string>
     <string name="memory_warning_force">Your messenger is using %1$s (%2$s) of internal memory.\n\nYou should enable automatic message deletion in relation with automatic attachment deletion or delete stored media manually. Your device will become out of memory!</string>
     <string name="open_settings">Open settings</string>
-    </resources>
+    <string name="oldAndroidVersion">Old Android version</string>
+    <string name="oldAndroidVersionMessage">You are using an old Android version that will no longer be supported in future updates. From blabber.im version 3.1.0 only devices with Android 5 or higher are supported. Please update your device firmware.</string>
+</resources>

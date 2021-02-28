@@ -82,6 +82,7 @@ public class SettingsActivity extends XmppActivity implements
     public static final String ALLOW_MESSAGE_CORRECTION = "allow_message_correction";
     public static final String USE_UNICOLORED_CHATBG = "unicolored_chatbg";
     public static final String EASY_DOWNLOADER = "easy_downloader";
+    public static final String MIN_ANDROID_SDK21_SHOWN = "min_android_sdk21_shown";
 
     public static final int REQUEST_CREATE_BACKUP = 0xbf8701;
     Preference multiAccountPreference;

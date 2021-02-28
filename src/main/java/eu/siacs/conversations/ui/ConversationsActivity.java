@@ -91,6 +91,7 @@ import eu.siacs.conversations.ui.util.IntroHelper;
 import eu.siacs.conversations.ui.util.PendingItem;
 import eu.siacs.conversations.ui.util.StyledAttributes;
 import eu.siacs.conversations.ui.util.UpdateHelper;
+import eu.siacs.conversations.utils.Compatibility;
 import eu.siacs.conversations.utils.EmojiWrapper;
 import eu.siacs.conversations.utils.ExceptionHelper;
 import eu.siacs.conversations.utils.MenuDoubleTabUtil;
@@ -105,6 +106,7 @@ import me.drakeet.support.toast.ToastCompat;
 
 import static eu.siacs.conversations.ui.ConversationFragment.REQUEST_DECRYPT_PGP;
 import static eu.siacs.conversations.ui.SettingsActivity.HIDE_MEMORY_WARNING;
+import static eu.siacs.conversations.ui.SettingsActivity.MIN_ANDROID_SDK21_SHOWN;
 
 public class ConversationsActivity extends XmppActivity implements OnConversationSelected, OnConversationArchived, OnConversationsListItemUpdated, OnConversationRead, XmppConnectionService.OnAccountUpdate, XmppConnectionService.OnConversationUpdate, XmppConnectionService.OnRosterUpdate, OnUpdateBlocklist, XmppConnectionService.OnShowErrorToast, XmppConnectionService.OnAffiliationChanged, XmppConnectionService.OnRoomDestroy {
 
@@ -277,11 +279,30 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
             }
             openBatteryOptimizationDialogIfNeeded();
             new showMemoryWarning().execute();
+            showOutdatedVersionWarning();
         }
     }
 
+    private void showOutdatedVersionWarning() {
+        if (Compatibility.runsTwentyOne() || getPreferences().getBoolean(MIN_ANDROID_SDK21_SHOWN, false)) {
+            Log.d(Config.LOGTAG, "Device is running Android >= SDK 21");
+            return;
+        }
+        Log.d(Config.LOGTAG, "Device is running Android < SDK 21");
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.oldAndroidVersion);
+        builder.setMessage(R.string.oldAndroidVersionMessage);
+        builder.setPositiveButton(R.string.ok, (dialog, which) -> {
+            getPreferences().edit().putBoolean(MIN_ANDROID_SDK21_SHOWN, true).apply();
+        });
+        final AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
     private String getBatteryOptimizationPreferenceKey() {
-        @SuppressLint("HardwareIds") String device = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+        @SuppressLint("HardwareIds")
+        String device = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         return "show_battery_optimization" + (device == null ? "" : device);
     }
 
