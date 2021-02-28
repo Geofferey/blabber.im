@@ -33,12 +33,12 @@ public class UpdateHelper {
     private static boolean moveData = true;
     private static boolean dataMoved = false;
 
-    private static final File oldMainDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pix-Art Messenger/");
-    private static final File newMainDirectory = new File(Environment.getExternalStorageDirectory() + "/blabber.im/");
-    private static final File oldPicturesDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pix-Art Messenger/Media/Pix-Art Messenger Images/");
-    private static final File oldFilesDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pix-Art Messenger/Media/Pix-Art Messenger Files/");
-    private static final File oldAudiosDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pix-Art Messenger/Media/Pix-Art Messenger Audios/");
-    private static final File oldVideosDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pix-Art Messenger/Media/Pix-Art Messenger Videos/");
+    private static final File PAM_MainDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pix-Art Messenger/");
+    private static final File Blabber_MainDirectory = new File(Environment.getExternalStorageDirectory() + "/blabber.im/");
+    private static final File PAM_PicturesDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pix-Art Messenger/Media/Pix-Art Messenger Images/");
+    private static final File PAM_FilesDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pix-Art Messenger/Media/Pix-Art Messenger Files/");
+    private static final File PAM_AudiosDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pix-Art Messenger/Media/Pix-Art Messenger Audios/");
+    private static final File PAM_VideosDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pix-Art Messenger/Media/Pix-Art Messenger Videos/");
 
     public static void showPopup(Activity activity) {
         Thread t = new Thread(() -> {
@@ -95,7 +95,7 @@ public class UpdateHelper {
                             if (!moveData) {
                                 ToastCompat.makeText(activity, R.string.error_moving_data, Toast.LENGTH_LONG).show();
                             } else {
-                                moveData();
+                                moveData_PAM_blabber();
                             }
                             showNewInstalledDialog(activity);
                         } catch (Exception e) {
@@ -113,8 +113,8 @@ public class UpdateHelper {
     }
 
     private static void checkOldData() {
-        if (oldMainDirectory.exists() && oldMainDirectory.isDirectory()) {
-            if (newMainDirectory.exists() && newMainDirectory.isDirectory()) {
+        if (PAM_MainDirectory.exists() && PAM_MainDirectory.isDirectory()) {
+            if (Blabber_MainDirectory.exists() && Blabber_MainDirectory.isDirectory()) {
                 moveData = false;
             } else {
                 moveData = true;
@@ -125,70 +125,70 @@ public class UpdateHelper {
         Log.d(Config.LOGTAG, "UpdateHelper: old data available: " + moveData);
     }
 
-    public static void moveData() {
-        if (oldPicturesDirectory.exists() && oldPicturesDirectory.isDirectory()) {
+    public static void moveData_PAM_blabber() {
+        if (PAM_PicturesDirectory.exists() && PAM_PicturesDirectory.isDirectory()) {
             final File newPicturesDirectory = new File(Environment.getExternalStorageDirectory() + "/Pix-Art Messenger/Media/blabber.im Images/");
             newPicturesDirectory.getParentFile().mkdirs();
-            final File[] files = oldPicturesDirectory.listFiles();
+            final File[] files = PAM_PicturesDirectory.listFiles();
             if (files == null) {
                 return;
             }
-            if (oldPicturesDirectory.renameTo(newPicturesDirectory)) {
-                Log.d(Config.LOGTAG, "moved " + oldPicturesDirectory.getAbsolutePath() + " to " + newPicturesDirectory.getAbsolutePath());
+            if (PAM_PicturesDirectory.renameTo(newPicturesDirectory)) {
+                Log.d(Config.LOGTAG, "moved " + PAM_PicturesDirectory.getAbsolutePath() + " to " + newPicturesDirectory.getAbsolutePath());
             } else {
-                Log.d(Config.LOGTAG, "could not move " + oldPicturesDirectory.getAbsolutePath() + " to " + newPicturesDirectory.getAbsolutePath());
+                Log.d(Config.LOGTAG, "could not move " + PAM_PicturesDirectory.getAbsolutePath() + " to " + newPicturesDirectory.getAbsolutePath());
             }
         }
-        if (oldFilesDirectory.exists() && oldFilesDirectory.isDirectory()) {
+        if (PAM_FilesDirectory.exists() && PAM_FilesDirectory.isDirectory()) {
             final File newFilesDirectory = new File(Environment.getExternalStorageDirectory() + "/Pix-Art Messenger/Media/blabber.im Files/");
             newFilesDirectory.mkdirs();
-            final File[] files = oldFilesDirectory.listFiles();
+            final File[] files = PAM_FilesDirectory.listFiles();
             if (files == null) {
                 return;
             }
-            if (oldFilesDirectory.renameTo(newFilesDirectory)) {
-                Log.d(Config.LOGTAG, "moved " + oldFilesDirectory.getAbsolutePath() + " to " + newFilesDirectory.getAbsolutePath());
+            if (PAM_FilesDirectory.renameTo(newFilesDirectory)) {
+                Log.d(Config.LOGTAG, "moved " + PAM_FilesDirectory.getAbsolutePath() + " to " + newFilesDirectory.getAbsolutePath());
             } else {
-                Log.d(Config.LOGTAG, "could not move " + oldFilesDirectory.getAbsolutePath() + " to " + newFilesDirectory.getAbsolutePath());
+                Log.d(Config.LOGTAG, "could not move " + PAM_FilesDirectory.getAbsolutePath() + " to " + newFilesDirectory.getAbsolutePath());
             }
         }
-        if (oldAudiosDirectory.exists() && oldAudiosDirectory.isDirectory()) {
+        if (PAM_AudiosDirectory.exists() && PAM_AudiosDirectory.isDirectory()) {
             final File newAudiosDirectory = new File(Environment.getExternalStorageDirectory() + "/Pix-Art Messenger/Media/blabber.im Audios/");
             newAudiosDirectory.mkdirs();
-            final File[] files = oldAudiosDirectory.listFiles();
+            final File[] files = PAM_AudiosDirectory.listFiles();
             if (files == null) {
                 return;
             }
-            if (oldAudiosDirectory.renameTo(newAudiosDirectory)) {
-                Log.d(Config.LOGTAG, "moved " + oldAudiosDirectory.getAbsolutePath() + " to " + newAudiosDirectory.getAbsolutePath());
+            if (PAM_AudiosDirectory.renameTo(newAudiosDirectory)) {
+                Log.d(Config.LOGTAG, "moved " + PAM_AudiosDirectory.getAbsolutePath() + " to " + newAudiosDirectory.getAbsolutePath());
             } else {
-                Log.d(Config.LOGTAG, "could not move " + oldAudiosDirectory.getAbsolutePath() + " to " + newAudiosDirectory.getAbsolutePath());
+                Log.d(Config.LOGTAG, "could not move " + PAM_AudiosDirectory.getAbsolutePath() + " to " + newAudiosDirectory.getAbsolutePath());
             }
         }
-        if (oldVideosDirectory.exists() && oldVideosDirectory.isDirectory()) {
+        if (PAM_VideosDirectory.exists() && PAM_VideosDirectory.isDirectory()) {
             final File newVideosDirectory = new File(Environment.getExternalStorageDirectory() + "/Pix-Art Messenger/Media/blabber.im Videos/");
             newVideosDirectory.mkdirs();
-            final File[] files = oldVideosDirectory.listFiles();
+            final File[] files = PAM_VideosDirectory.listFiles();
             if (files == null) {
                 return;
             }
-            if (oldVideosDirectory.renameTo(newVideosDirectory)) {
-                Log.d(Config.LOGTAG, "moved " + oldVideosDirectory.getAbsolutePath() + " to " + newVideosDirectory.getAbsolutePath());
+            if (PAM_VideosDirectory.renameTo(newVideosDirectory)) {
+                Log.d(Config.LOGTAG, "moved " + PAM_VideosDirectory.getAbsolutePath() + " to " + newVideosDirectory.getAbsolutePath());
             } else {
-                Log.d(Config.LOGTAG, "could not move " + oldVideosDirectory.getAbsolutePath() + " to " + newVideosDirectory.getAbsolutePath());
+                Log.d(Config.LOGTAG, "could not move " + PAM_VideosDirectory.getAbsolutePath() + " to " + newVideosDirectory.getAbsolutePath());
             }
         }
-        if (oldMainDirectory.exists() && oldMainDirectory.isDirectory()) {
-            newMainDirectory.mkdirs();
-            final File[] files = oldMainDirectory.listFiles();
+        if (PAM_MainDirectory.exists() && PAM_MainDirectory.isDirectory()) {
+            Blabber_MainDirectory.mkdirs();
+            final File[] files = PAM_MainDirectory.listFiles();
             if (files == null) {
                 return;
             }
-            if (oldMainDirectory.renameTo(newMainDirectory)) {
+            if (PAM_MainDirectory.renameTo(Blabber_MainDirectory)) {
                 dataMoved = true;
-                Log.d(Config.LOGTAG, "moved " + oldMainDirectory.getAbsolutePath() + " to " + newMainDirectory.getAbsolutePath());
+                Log.d(Config.LOGTAG, "moved " + PAM_MainDirectory.getAbsolutePath() + " to " + Blabber_MainDirectory.getAbsolutePath());
             } else {
-                Log.d(Config.LOGTAG, "could not move " + oldMainDirectory.getAbsolutePath() + " to " + newMainDirectory.getAbsolutePath());
+                Log.d(Config.LOGTAG, "could not move " + PAM_MainDirectory.getAbsolutePath() + " to " + Blabber_MainDirectory.getAbsolutePath());
             }
         }
     }

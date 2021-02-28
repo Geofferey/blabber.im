@@ -623,7 +623,14 @@ public class UIHelper {
     }
 
     public static String filesizeToString(long size) {
-        if (size > (1 * 1024 * 1024)) {
+        if (size > (1f * 1024 * 1024 * 1024)) {
+            try {
+                return String.format("%.2f", size * 1f / (1024 * 1024 * 1024)) + " GiB";
+            } catch (Exception e) {
+                e.printStackTrace();
+                return String.format(Locale.ENGLISH, "%.2f", size * 1f / (1024 * 1024 * 1024)) + " GiB";
+            }
+        } else if (size > (1f * 1024 * 1024)) {
             return Math.round(size * 1f / (1024 * 1024)) + " MiB";
         } else if (size >= 1024) {
             return Math.round(size * 1f / 1024) + " KiB";

@@ -249,6 +249,9 @@
             android:key="alternative_voice_settings"
             android:summary="@string/pref_alternative_voice_settings_summary"
             android:title="@string/pref_alternative_voice_settings" />
+        <eu.siacs.conversations.ui.MemoryManagementPref
+            android:summary="@string/pref_memory_management_summary"
+            android:title="@string/title_memory_management" />
     </PreferenceScreen>
     <!--status-->
     <PreferenceScreen
@@ -339,6 +342,16 @@
             android:key="notifications_from_strangers"
             android:summary="@string/pref_notifications_from_strangers_summary"
             android:title="@string/pref_notifications_from_strangers" />
+        <ListPreference
+            android:defaultValue="@integer/automatic_message_deletion"
+            android:key="automatic_message_deletion"
+            android:summary="@string/pref_automatically_delete_messages_description"
+            android:title="@string/pref_automatically_delete_messages" />
+        <CheckBoxPreference
+            android:defaultValue="@bool/automatic_file_deletion"
+            android:key="automatic_file_deletion"
+            android:summary="@string/pref_automatically_delete_files_description"
+            android:title="@string/pref_automatically_delete_files" />
         <CheckBoxPreference
             android:defaultValue="@bool/use_internal_updater"
             android:key="use_internal_updater"
@@ -457,11 +470,6 @@
                 android:key="btbv"
                 android:summary="@string/pref_blind_trust_before_verification_summary"
                 android:title="@string/pref_blind_trust_before_verification" />
-            <ListPreference
-                android:defaultValue="@integer/automatic_message_deletion"
-                android:key="automatic_message_deletion"
-                android:summary="@string/pref_automatically_delete_messages_description"
-                android:title="@string/pref_automatically_delete_messages" />
             <Preference
                 android:key="delete_omemo_identities"
                 android:summary="@string/pref_delete_omemo_identities_summary"
@@ -519,5 +527,4 @@
     <eu.siacs.conversations.ui.AboutPreference
         android:summary="@string/pref_about_conversations_summary"
         android:title="@string/title_activity_about" />
-
 </PreferenceScreen>

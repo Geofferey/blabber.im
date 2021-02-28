@@ -171,6 +171,8 @@ import eu.siacs.conversations.xmpp.stanzas.PresencePacket;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
 import static eu.siacs.conversations.ui.SettingsActivity.ALLOW_MESSAGE_CORRECTION;
+import static eu.siacs.conversations.ui.SettingsActivity.AUTOMATIC_FILE_DELETION;
+import static eu.siacs.conversations.ui.SettingsActivity.AUTOMATIC_MESSAGE_DELETION;
 import static eu.siacs.conversations.ui.SettingsActivity.CHAT_STATES;
 import static eu.siacs.conversations.ui.SettingsActivity.CONFIRM_MESSAGES;
 import static eu.siacs.conversations.ui.SettingsActivity.ENABLE_MULTI_ACCOUNTS;
@@ -4350,6 +4352,10 @@ public class XmppConnectionService extends Service {
         return getBooleanPreference(SettingsActivity.HIDE_YOU_ARE_NOT_PARTICIPATING, R.bool.hide_you_are_not_participating);
     }
 
+    public boolean hideMemoryWarning() {
+        return getBooleanPreference(SettingsActivity.HIDE_MEMORY_WARNING, R.bool.hide_memory_warning);
+    }
+
     public boolean broadcastLastActivity() {
         return getBooleanPreference(SettingsActivity.BROADCAST_LAST_ACTIVITY, R.bool.last_activity);
     }
@@ -5313,5 +5319,12 @@ public class XmppConnectionService extends Service {
         } else {
             databaseBackend.expireOldMessages(timestamp);
         }
+        if (isMessageAndFileExpiryEnabled()) {
+            getFileBackend().expireOldFiles(new File(FileBackend.getAppMediaDirectory()), timestamp);
+        }
+    }
+
+    public boolean isMessageAndFileExpiryEnabled() {
+        return getBooleanPreference(AUTOMATIC_FILE_DELETION, R.bool.automatic_file_deletion) && getLongPreference(AUTOMATIC_MESSAGE_DELETION, R.integer.automatic_message_deletion) > 0;
     }
 }

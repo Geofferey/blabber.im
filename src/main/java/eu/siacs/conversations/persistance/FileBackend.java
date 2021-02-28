@@ -22,6 +22,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
+import android.os.StatFs;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.system.Os;
@@ -56,8 +58,10 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Stack;
 import java.util.UUID;
 
 import eu.siacs.conversations.Config;
@@ -85,6 +89,14 @@ public class FileBackend {
 
     private static final String FILE_PROVIDER = ".files";
     private static final String APP_DIRECTORY = "blabber.im";
+    public static final String FILES = "Files";
+    public static final String SENT_FILES = "Files/Sent";
+    public static final String AUDIOS = "Audios";
+    public static final String SENT_AUDIOS = "Audios/Sent";
+    public static final String IMAGES = "Images";
+    public static final String SENT_IMAGES = "Images/Sent";
+    public static final String VIDEOS = "Videos";
+    public static final String SENT_VIDEOS = "Videos/Sent";
 
     private final XmppConnectionService mXmppConnectionService;
 
@@ -93,12 +105,12 @@ public class FileBackend {
     }
 
     private void createNoMedia() {
-        final File nomedia_files = new File(getConversationsDirectory("Files") + ".nomedia");
-        final File nomedia_audios = new File(getConversationsDirectory("Audios") + ".nomedia");
-        final File nomedia_videos_sent = new File(getConversationsDirectory("Videos/Sent") + ".nomedia");
-        final File nomedia_files_sent = new File(getConversationsDirectory("Files/Sent") + ".nomedia");
-        final File nomedia_audios_sent = new File(getConversationsDirectory("Audios/Sent") + ".nomedia");
-        final File nomedia_images_sent = new File(getConversationsDirectory("Images/Sent") + ".nomedia");
+        final File nomedia_files = new File(getConversationsDirectory(FILES) + ".nomedia");
+        final File nomedia_audios = new File(getConversationsDirectory(AUDIOS) + ".nomedia");
+        final File nomedia_videos_sent = new File(getConversationsDirectory(SENT_VIDEOS) + ".nomedia");
+        final File nomedia_files_sent = new File(getConversationsDirectory(SENT_FILES) + ".nomedia");
+        final File nomedia_audios_sent = new File(getConversationsDirectory(SENT_AUDIOS) + ".nomedia");
+        final File nomedia_images_sent = new File(getConversationsDirectory(SENT_IMAGES) + ".nomedia");
         if (!nomedia_files.exists()) {
             try {
                 nomedia_files.createNewFile();
@@ -169,8 +181,8 @@ public class FileBackend {
     }
 
     public void updateMediaScanner(File file, final Runnable callback) {
-        if (file.getAbsolutePath().startsWith(getConversationsDirectory("Images"))
-                || file.getAbsolutePath().startsWith(getConversationsDirectory("Videos"))) {
+        if (file.getAbsolutePath().startsWith(getConversationsDirectory(IMAGES))
+                || file.getAbsolutePath().startsWith(getConversationsDirectory(VIDEOS))) {
             MediaScannerConnection.scanFile(mXmppConnectionService, new String[]{file.getAbsolutePath()}, null, new MediaScannerConnection.MediaScannerConnectionClient() {
                 @Override
                 public void onMediaScannerConnected() {
@@ -215,6 +227,72 @@ public class FileBackend {
         return deleteFile(file);
     }
 
+    public boolean expireOldFile(File file, long timestamp) {
+        if (file.exists()) {
+            long lastModified = file.lastModified();
+            if (lastModified < timestamp) {
+                return deleteFile(file);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public void expireOldFiles(File dir, long timestamp) {
+        long start = SystemClock.elapsedRealtime();
+        int num = 0;
+        if (dir == null) {
+            return;
+        }
+        Stack<File> dirlist = new Stack<File>();
+        dirlist.clear();
+        dirlist.push(dir);
+        while (!dirlist.isEmpty()) {
+            File dirCurrent = dirlist.pop();
+            File[] fileList = dirCurrent.listFiles();
+            for (File file : fileList) {
+                if (file.isDirectory()) {
+                    dirlist.push(file);
+                } else {
+                    if (file.exists() && !file.getName().equalsIgnoreCase(".nomedia")) {
+                        long lastModified = file.lastModified();
+                        if (lastModified < timestamp) {
+                            num++;
+                            deleteFile(file);
+                        }
+                    }
+                }
+            }
+        }
+        Log.d(Config.LOGTAG, "deleted " + num + " expired files in " + (SystemClock.elapsedRealtime() - start) + "ms");
+    }
+
+    public void deleteFilesInDir(File dir) {
+        long start = SystemClock.elapsedRealtime();
+        int num = 0;
+        if (dir == null) {
+            return;
+        }
+        Stack<File> dirlist = new Stack<File>();
+        dirlist.clear();
+        dirlist.push(dir);
+        while (!dirlist.isEmpty()) {
+            File dirCurrent = dirlist.pop();
+            File[] fileList = dirCurrent.listFiles();
+            for (File file : fileList) {
+                if (file.isDirectory()) {
+                    dirlist.push(file);
+                } else {
+                    if (file.exists() && !file.getName().equalsIgnoreCase(".nomedia")) {
+                        num++;
+                        deleteFile(file);
+                    }
+                }
+            }
+        }
+        Log.d(Config.LOGTAG, "deleted " + num + " files in " + dir + " in " + (SystemClock.elapsedRealtime() - start) + "ms");
+    }
+
     public DownloadableFile getFile(Message message) {
         return getFile(message, true);
     }
@@ -229,13 +307,13 @@ public class FileBackend {
             file = new DownloadableFile(path);
         } else {
             if (mime != null && mime.startsWith("image")) {
-                file = new DownloadableFile(getConversationsDirectory("Images") + path);
+                file = new DownloadableFile(getConversationsDirectory(IMAGES) + path);
             } else if (mime != null && mime.startsWith("video")) {
-                file = new DownloadableFile(getConversationsDirectory("Videos") + path);
+                file = new DownloadableFile(getConversationsDirectory(VIDEOS) + path);
             } else if (mime != null && mime.startsWith("audio")) {
-                file = new DownloadableFile(getConversationsDirectory("Audios") + path);
+                file = new DownloadableFile(getConversationsDirectory(AUDIOS) + path);
             } else {
-                file = new DownloadableFile(getConversationsDirectory("Files") + path);
+                file = new DownloadableFile(getConversationsDirectory(FILES) + path);
             }
         }
         return file;
@@ -256,7 +334,7 @@ public class FileBackend {
         }
         final DownloadableFile file = getFileForPath(path, message.getMimeType());
         if (encrypted) {
-            return new DownloadableFile(getConversationsDirectory("Files") + file.getName() + ".pgp");
+            return new DownloadableFile(getConversationsDirectory(FILES) + file.getName() + ".pgp");
         } else {
             return file;
         }
@@ -275,6 +353,33 @@ public class FileBackend {
         } catch (Exception e) {
             return -1;
         }
+    }
+
+    public static long getDirectorySize(final File file) {
+        if (file == null || !file.exists() || !file.isDirectory())
+            return 0;
+        final List<File> dirs = new LinkedList<>();
+        dirs.add(file);
+        long result = 0;
+        while (!dirs.isEmpty()) {
+            final File dir = dirs.remove(0);
+            if (!dir.exists())
+                continue;
+            final File[] listFiles = dir.listFiles();
+            if (listFiles == null || listFiles.length == 0)
+                continue;
+            for (final File child : listFiles) {
+                result += child.length();
+                if (child.isDirectory())
+                    dirs.add(child);
+            }
+        }
+        return result;
+    }
+
+    public static long getDiskSize() {
+        StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+        return (long) stat.getBlockSize() * (long) stat.getBlockCount();
     }
 
     public static boolean allFilesUnderSize(Context context, List<Attachment> attachments, long max) {

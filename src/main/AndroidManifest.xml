@@ -343,6 +343,19 @@
                 android:value=".ui.SettingsActivity" />
         </activity>
         <activity
+            android:name=".ui.MemoryManagementActivity"
+            android:label="@string/title_memory_management"
+            android:launchMode="singleTask"
+            android:parentActivityName=".ui.SettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.PREFERENCE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.SettingsActivity" />
+        </activity>
+        <activity
             android:name=".ui.UpdaterActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_updater"

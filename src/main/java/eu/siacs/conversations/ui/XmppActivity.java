@@ -50,6 +50,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.BoolRes;
+import androidx.annotation.IntegerRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
@@ -548,6 +549,15 @@ public abstract class XmppActivity extends ActionBarActivity {
 
     protected String getStringPreference(String name, int res) {
         return getPreferences().getString(name, getResources().getString(res));
+    }
+
+    public long getLongPreference(String name, @IntegerRes int res) {
+        long defaultValue = getResources().getInteger(res);
+        try {
+            return Long.parseLong(getPreferences().getString(name, String.valueOf(defaultValue)));
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
     }
 
     public void switchToConversation(Conversation conversation) {

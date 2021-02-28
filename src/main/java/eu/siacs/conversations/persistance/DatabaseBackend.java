@@ -58,7 +58,7 @@ import eu.siacs.conversations.xmpp.InvalidJid;
 import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.mam.MamReference;
 
-import static eu.siacs.conversations.ui.util.UpdateHelper.moveData;
+import static eu.siacs.conversations.ui.util.UpdateHelper.moveData_PAM_blabber;
 
 public class DatabaseBackend extends SQLiteOpenHelper {
 
@@ -588,7 +588,7 @@ public class DatabaseBackend extends SQLiteOpenHelper {
         }
 
         if (oldVersion < 53 && newVersion >= 53) {
-            moveData();
+            moveData_PAM_blabber();
         }
 
         if (oldVersion < 54 && newVersion >= 54) {

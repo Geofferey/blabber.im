@@ -64,6 +64,7 @@
     <integer name="auto_accept_filesize_mobile">524288</integer>
     <integer name="auto_accept_filesize_roaming">0</integer>
     <integer name="automatic_message_deletion">0</integer>
+    <bool name="automatic_file_deletion">false</bool>
     <integer name="grace_period">144</integer>
     <string name="default_resource" translatable="false">Phone</string>
     <string name="notification_ringtone">content://settings/system/notification_sound</string>
@@ -88,6 +89,7 @@
     <integer name="mid_video_res">720</integer>
     <integer name="high_video_res">1080</integer>
     <bool name="easy_downloader">true</bool>
+    <bool name="hide_memory_warning">false</bool>
 
     <string-array name="domains">
         <item>pix-art.de</item>

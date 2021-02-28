@@ -42,6 +42,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -63,8 +64,10 @@ import androidx.databinding.DataBindingUtil;
 
 import org.openintents.openpgp.util.OpenPgpApi;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import eu.siacs.conversations.Config;
@@ -75,6 +78,7 @@ import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.entities.Conversation;
 import eu.siacs.conversations.entities.Conversational;
 import eu.siacs.conversations.entities.MucOptions;
+import eu.siacs.conversations.persistance.FileBackend;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.ui.interfaces.OnBackendConnected;
 import eu.siacs.conversations.ui.interfaces.OnConversationArchived;
@@ -100,6 +104,7 @@ import eu.siacs.conversations.xmpp.chatstate.ChatState;
 import me.drakeet.support.toast.ToastCompat;
 
 import static eu.siacs.conversations.ui.ConversationFragment.REQUEST_DECRYPT_PGP;
+import static eu.siacs.conversations.ui.SettingsActivity.HIDE_MEMORY_WARNING;
 
 public class ConversationsActivity extends XmppActivity implements OnConversationSelected, OnConversationArchived, OnConversationsListItemUpdated, OnConversationRead, XmppConnectionService.OnAccountUpdate, XmppConnectionService.OnConversationUpdate, XmppConnectionService.OnRosterUpdate, OnUpdateBlocklist, XmppConnectionService.OnShowErrorToast, XmppConnectionService.OnAffiliationChanged, XmppConnectionService.OnRoomDestroy {
 
@@ -123,6 +128,8 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
     );
 
     private boolean showLastSeen;
+
+    AlertDialog memoryWarningDialog;
 
     long FirstStartTime = -1;
     String PREF_FIRST_START = "FirstStart";
@@ -269,6 +276,7 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
                 return;
             }
             openBatteryOptimizationDialogIfNeeded();
+            new showMemoryWarning().execute();
         }
     }
 
@@ -305,6 +313,89 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
             final AlertDialog dialog = builder.create();
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
+        }
+    }
+
+    public class showMemoryWarning extends AsyncTask<Void, Void, Void> {
+
+        long totalMemory = 0;
+        long mediaUsage = 0;
+        double relativeUsage = 0;
+        String percentUsage = "0%";
+        boolean force = false;
+        // normal warning: more or equals 20 % or 10 GiB and automatic file deletion is disabled
+        double normalWarningRelative = 0.2f; // 20%
+        double normalWarningAbsolute = 10f * 1024 * 1024 * 1024; // 10 GiB
+        // force warning: usage is more than 50%
+        double forceWarningRelative = 0.5f; // 50%
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            totalMemory = FileBackend.getDiskSize();
+            mediaUsage = FileBackend.getDirectorySize(new File(FileBackend.getAppMediaDirectory()));
+            try {
+                relativeUsage = ((double) mediaUsage / (double) totalMemory);
+                try {
+                    percentUsage = String.format("%.2f", relativeUsage * 100) + " %";
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    percentUsage = String.format(Locale.ENGLISH,"%.2f", relativeUsage * 100) + " %";
+                }
+                force = relativeUsage > forceWarningRelative;
+            }   catch (Exception e) {
+                e.printStackTrace();
+                relativeUsage = 0;
+            }
+            return null;
+        }
+
+        private boolean showWarning(boolean force) {
+            if (force) {
+                SharedPreferences preferences = getPreferences();
+                preferences.edit().putBoolean(HIDE_MEMORY_WARNING, false).apply();
+                return true;
+            }
+            return !xmppConnectionService.hideMemoryWarning() && (relativeUsage > normalWarningRelative || mediaUsage >= normalWarningAbsolute) & !xmppConnectionService.isMessageAndFileExpiryEnabled();
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            Log.d(Config.LOGTAG, "Memory management: using " + UIHelper.filesizeToString(mediaUsage) + " from " + UIHelper.filesizeToString(totalMemory) + " (" + percentUsage + ")");
+            if (showWarning(force)) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(ConversationsActivity.this);
+                builder.setPositiveButton(R.string.open_settings, (dialog, which) -> {
+                    try {
+                        final Intent intent = new Intent(ConversationsActivity.this, SettingsActivity.class);
+                        intent.setAction(Intent.ACTION_VIEW);
+                        intent.addCategory("android.intent.category.PREFERENCE");
+                        intent.putExtra("page", "security");
+                        startActivity(intent);
+                    } catch (ActivityNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                });
+                if (!force) {
+                    builder.setNeutralButton(R.string.hide_warning, (dialog, which) -> {
+                        SharedPreferences preferences = getPreferences();
+                        preferences.edit().putBoolean(HIDE_MEMORY_WARNING, true).apply();
+                    });
+                }
+                memoryWarningDialog = builder.create();
+                memoryWarningDialog.setTitle(R.string.title_memory_management);
+                if (force) {
+                    memoryWarningDialog.setMessage(getResources().getString(R.string.memory_warning_force, UIHelper.filesizeToString(mediaUsage), percentUsage));
+                } else {
+                    memoryWarningDialog.setMessage(getResources().getString(R.string.memory_warning, UIHelper.filesizeToString(mediaUsage), percentUsage));
+                }
+                memoryWarningDialog.setCanceledOnTouchOutside(false);
+                memoryWarningDialog.show();
+            }
         }
     }
 
@@ -670,6 +761,13 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
     public void onPause() {
         this.mActivityPaused = true;
         super.onPause();
+        hideMemoryWarningDialog();
+    }
+
+    private void hideMemoryWarningDialog() {
+        if (memoryWarningDialog != null && memoryWarningDialog.isShowing()) {
+            memoryWarningDialog.cancel();
+        }
     }
 
     @Override

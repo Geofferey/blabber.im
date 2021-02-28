@@ -712,6 +712,8 @@
     <string name="edit_status_message_title">Edit Status Message</string>
     <string name="pref_automatically_delete_messages_description">Automatically delete messages from this device that are older than the configured time frame.</string>
     <string name="pref_automatically_delete_messages">Automatic message deletion</string>
+    <string name="pref_automatically_delete_files_description">Automatically delete attachments from this device that are older than the configured time frame for automatic message deletion.</string>
+    <string name="pref_automatically_delete_files">Automatic attachment deletion</string>
     <string name="disable_encryption">Disable encryption</string>
     <string name="error_trustkey_general">blabber.im is unable to send encrypted messages to %1$s. This may be due to your contact using an outdated server or client that can not handle OMEMO.</string>
     <string name="error_trustkey_device_list">Unable to fetch device list</string>
@@ -1099,4 +1101,22 @@
     <string name="pref_easy_downloader">Automatically download all attachments</string>
     <string name="got_invitation_from">You have been invited by %s to the chat room %s.</string>
     <string name="a_user">a user</string>
-</resources>
+    <string name="pref_memory_management_summary">Show memory usage of media directrory</string>
+    <string name="title_memory_management">Memory management</string>
+    <string name="disk_storage">Total file storage</string>
+    <string name="media_usage">Memory usage of media</string>
+    <string name="pictures_usage">Memory usage of pictures</string>
+    <string name="videos_usage">Memory usage of videos</string>
+    <string name="files_usage">Memory usage of files</string>
+    <string name="audios_usage">Memory usage of audios</string>
+    <string name="delete_files_dialog">Delete attachments</string>
+    <string name="delete_files_dialog_msg">Do you really want to delete all %s?</string>
+    <string name="audios">audios</string>
+    <string name="images">images</string>
+    <string name="videos">videos</string>
+    <string name="files">files</string>
+    <string name="all_media_files">media files</string>
+    <string name="memory_warning">Your messenger is using %1$s (%2$s) of internal memory.\n\nYou can enable automatic message deletion in relation with automatic attachment deletion or delete stored media manually.</string>
+    <string name="memory_warning_force">Your messenger is using %1$s (%2$s) of internal memory.\n\nYou should enable automatic message deletion in relation with automatic attachment deletion or delete stored media manually. Your device will become out of memory!</string>
+    <string name="open_settings">Open settings</string>
+    </resources>
