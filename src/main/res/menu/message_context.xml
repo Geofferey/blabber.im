@@ -54,6 +54,10 @@
         android:title="@string/cancel_transmission"
         android:visible="false" />
     <item
+        android:id="@+id/save_file"
+        android:title="@string/save_x_file"
+        android:visible="false" />
+    <item
         android:id="@+id/delete_file"
         android:title="@string/delete_x_file"
         android:visible="false" />

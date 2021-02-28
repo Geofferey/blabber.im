@@ -1,6 +1,7 @@
 package eu.siacs.conversations.persistance;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -33,6 +34,7 @@ import android.util.Base64OutputStream;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.LruCache;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -52,6 +54,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
+import java.nio.channels.FileChannel;
 import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -80,6 +83,7 @@ import eu.siacs.conversations.utils.MimeUtils;
 import eu.siacs.conversations.xmpp.pep.Avatar;
 import ezvcard.Ezvcard;
 import ezvcard.VCard;
+import me.drakeet.support.toast.ToastCompat;
 
 public class FileBackend {
 
@@ -727,6 +731,33 @@ public class FileBackend {
         }
         copyImageToPrivateStorage(getFile(message), image);
         updateFileParams(message);
+    }
+
+    public void copyFile(File sourceFile, File destFile) throws IOException {
+        if (!destFile.getParentFile().exists()) {
+            destFile.getParentFile().mkdirs();
+        }
+        if (!destFile.exists()) {
+            destFile.createNewFile();
+        }
+        Log.d(Config.LOGTAG, "Copy " + sourceFile.getAbsolutePath() + " to " + destFile.getAbsolutePath());
+        FileChannel source = null;
+        FileChannel destination = null;
+        try {
+            source = new FileInputStream(sourceFile).getChannel();
+            destination = new FileOutputStream(destFile).getChannel();
+            destination.transferFrom(source, 0, source.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (source != null) {
+                source.close();
+            }
+            if (destination != null) {
+                destination.close();
+            }
+            updateMediaScanner(destFile);
+        }
     }
 
     public boolean unusualBounds(final Uri image) {
@@ -1845,6 +1876,61 @@ public class FileBackend {
         } catch (OutOfMemoryError e) {
             e.printStackTrace();
             return bitmap;
+        }
+    }
+
+
+    public static String getGlobalPicturesPath() {
+        return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/blabber.im/";
+    }
+
+    public static String getGlobalVideosPath() {
+        return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES) + "/blabber.im/";
+    }
+
+    public static String getGlobalDocumentsPath() {
+        if (Compatibility.runsNineTeen()) {
+            return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/blabber.im/";
+        } else {
+            return Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Documents";
+        }
+    }
+
+    public static String getGlobalAudiosPath() {
+        return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC) + "/blabber.im/";
+    }
+
+    public void saveFile(final Message message, final Activity activity) {
+        final DownloadableFile source = getFile(message);
+        final File destination = new File(getDestinationToSaveFile(message));
+        try {
+            copyFile(source, destination);
+            ToastCompat.makeText(activity, activity.getString(R.string.file_copied_to, destination), Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getDestinationToSaveFile(Message message) {
+        final DownloadableFile file = getFile(message);
+        final String mime = file.getMimeType();
+        String extension = MimeUtils.guessExtensionFromMimeType(mime);
+        if (extension == null) {
+            Log.d(Config.LOGTAG, "extension from mime type was null");
+            extension = "null";
+        }
+        if ("ogg".equals(extension) && mime.startsWith("audio/")) {
+            extension = "oga";
+        }
+        String filename = fileDateFormat.format(new Date(message.getTimeSent())) + "_" + message.getUuid().substring(0, 4) + "." + extension;
+        if (mime != null && mime.startsWith("image")) {
+            return getGlobalPicturesPath() + File.separator + filename;
+        } else if (mime != null && mime.startsWith("video")) {
+            return getGlobalVideosPath() + File.separator + filename;
+        } else if (mime != null && mime.startsWith("audio")) {
+            return getGlobalAudiosPath() + File.separator + filename;
+        } else {
+            return getGlobalDocumentsPath() + File.separator + filename;
         }
     }
 }

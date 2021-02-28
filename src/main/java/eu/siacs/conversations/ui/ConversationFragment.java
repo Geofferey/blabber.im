@@ -1306,6 +1306,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             MenuItem downloadFile = menu.findItem(R.id.download_file);
             MenuItem deleteFile = menu.findItem(R.id.delete_file);
             MenuItem showErrorMessage = menu.findItem(R.id.show_error_message);
+            MenuItem saveFile = menu.findItem(R.id.save_file);
             final boolean unInitiatedButKnownSize = MessageUtils.unInitiatedButKnownSize(m);
             final boolean showError = m.getStatus() == Message.STATUS_SEND_FAILED && m.getErrorMessage() != null && !Message.ERROR_MESSAGE_CANCELLED.equals(m.getErrorMessage());
             deleteMessage.setVisible(true);
@@ -1366,6 +1367,8 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                     deleteFile.setVisible(true);
                     deleteFile.setTitle(activity.getString(R.string.delete_x_file, UIHelper.getFileDescriptionString(activity, m)));
                 }
+                saveFile.setVisible(true);
+                saveFile.setTitle(activity.getString(R.string.save_x_file, UIHelper.getFileDescriptionString(activity, m)));
             }
             showErrorMessage.setVisible(showError);
             final String mime = m.isFileOrImage() ? m.getMimeType() : null;
@@ -1441,6 +1444,9 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 return true;
             case R.id.open_with:
                 openWith(selectedMessage);
+                return true;
+            case R.id.save_file:
+                activity.xmppConnectionService.getFileBackend().saveFile(selectedMessage, activity);
                 return true;
             default:
                 return super.onContextItemSelected(item);

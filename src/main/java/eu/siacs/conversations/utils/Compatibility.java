@@ -50,6 +50,10 @@ public class Compatibility {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 
+    public static boolean runsNineTeen() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+    }
+
     public static boolean runsTwentySix() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
     }
