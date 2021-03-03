@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-import eu.siacs.conversations.xmpp.chatstate.ChatState;
 import eu.siacs.conversations.xmpp.Jid;
+import eu.siacs.conversations.xmpp.chatstate.ChatState;
 
 public final class Config {
 
@@ -126,6 +126,7 @@ public final class Config {
     public static final boolean REMOVE_BROKEN_DEVICES = false;
     public static final boolean OMEMO_PADDING = false;
     public static final boolean PUT_AUTH_TAG_INTO_KEY = true;
+    public static final boolean AUTOMATICALLY_COMPLETE_SESSIONS = true;
     public static final boolean TWELVE_BYTE_IV = true;
 
     public static final int MAX_DISPLAY_MESSAGE_CHARS = 2 * 4096; //why only 4096? --> increased
