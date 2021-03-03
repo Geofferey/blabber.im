@@ -394,6 +394,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
                 Log.d(Config.LOGTAG, "restored last state from intent extra");
                 RtpEndUserState state = RtpEndUserState.valueOf(extraLastState);
                 updateButtonConfiguration(state);
+                updateVerifiedShield(false);
                 updateStateDisplay(state);
                 updateProfilePicture(state);
                 invalidateOptionsMenu();
@@ -556,6 +557,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
         }
         this.rtpConnectionReference = reference;
         final RtpEndUserState currentState = requireRtpConnection().getEndUserState();
+        final boolean verified = requireRtpConnection().isVerified();
         if (currentState == RtpEndUserState.ENDED) {
             reference.get().throwStateTransitionException();
             finish();
@@ -571,6 +573,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
         binding.with.setText(getWith().getDisplayName());
         updateVideoViews(currentState);
         updateStateDisplay(currentState, media);
+        updateVerifiedShield(verified && STATES_SHOWING_SWITCH_TO_CHAT.contains(currentState));
         updateButtonConfiguration(currentState, media);
         updateProfilePicture(currentState);
         invalidateOptionsMenu();
@@ -589,6 +592,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
         updateStateDisplay(state);
         updateProfilePicture(state);
         updateCallDuration();
+        updateVerifiedShield(false);
         invalidateOptionsMenu();
         binding.with.setText(account.getRoster().getContact(with).getDisplayName());
     }
@@ -680,6 +684,14 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
             default:
                 throw new IllegalStateException(String.format("State %s has not been handled in UI", state));
         }
+    }
+
+    private void updateVerifiedShield(final boolean verified) {
+        if (isPictureInPicture()) {
+            this.binding.verified.setVisibility(View.GONE);
+            return;
+        }
+        this.binding.verified.setVisibility(verified ? View.VISIBLE : View.GONE);
     }
 
     private void updateProfilePicture(final RtpEndUserState state) {
@@ -1078,6 +1090,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
             return;
         }
         final AbstractJingleConnection.Id id = requireRtpConnection().getId();
+        final boolean verified = requireRtpConnection().isVerified();
         final Set<Media> media = getMedia();
         final Contact contact = getWith();
         if (account == id.account && id.with.equals(with) && id.sessionId.equals(sessionId)) {
@@ -1087,6 +1100,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
             }
             runOnUiThread(() -> {
                 updateStateDisplay(state, media);
+                updateVerifiedShield(verified && STATES_SHOWING_SWITCH_TO_CHAT.contains(state));
                 updateButtonConfiguration(state, media);
                 updateVideoViews(state);
                 updateProfilePicture(state, contact);
@@ -1136,6 +1150,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
         }
         if (Jid.ofEscaped(withExtra).asBareJid().equals(with)) {
             runOnUiThread(() -> {
+                updateVerifiedShield(false);
                 updateStateDisplay(state);
                 updateButtonConfiguration(state);
                 updateProfilePicture(state);
