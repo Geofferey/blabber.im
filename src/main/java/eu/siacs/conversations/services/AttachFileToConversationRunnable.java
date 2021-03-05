@@ -97,7 +97,7 @@ public class AttachFileToConversationRunnable implements Runnable, MediaTranscod
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-    private void processAsVideo() throws FileNotFoundException {
+    private void processAsVideo() throws Exception {
         Log.d(Config.LOGTAG, "processing file as video");
         mXmppConnectionService.startForcingForegroundNotification();
         SimpleDateFormat fileDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US);
@@ -125,9 +125,14 @@ public class AttachFileToConversationRunnable implements Runnable, MediaTranscod
         }
     }
 
-    private Future<Void> getVideoCompressor(final FileDescriptor fileDescriptor, final File file, final long maxUploadSize) {
+    private Future<Void> getVideoCompressor(final FileDescriptor fileDescriptor, final File file, final long maxUploadSize) throws Exception {
         MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
-        mediaMetadataRetriever.setDataSource(fileDescriptor);
+        try {
+            mediaMetadataRetriever.setDataSource(fileDescriptor);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception(e);
+        }
         long videoDuration;
         long estimatedFileSize = maxUploadSize / 2;  // keep estimated filesize half as big as maxUploadSize
         try {
@@ -215,7 +220,7 @@ public class AttachFileToConversationRunnable implements Runnable, MediaTranscod
         if (this.isVideoMessage()) {
             try {
                 processAsVideo();
-            } catch (FileNotFoundException e) {
+            } catch (Exception e) {
                 processAsFile();
                 e.printStackTrace();
             }
