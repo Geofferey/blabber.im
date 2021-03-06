@@ -487,8 +487,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
             return;
         }
         //TODO apparently this method is not getting called on Android 10 when using the task switcher
-        final boolean emptyReference = rtpConnectionReference == null || rtpConnectionReference.get() == null;
-        if (emptyReference && xmppConnectionService != null) {
+        if (emptyReference(rtpConnectionReference) && xmppConnectionService != null) {
             retractSessionProposal();
         }
     }
@@ -1080,7 +1079,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
             updateRtpSessionProposalState(account, with, state);
             return;
         }
-        if (this.rtpConnectionReference == null) {
+        if (emptyReference(this.rtpConnectionReference)) {
             if (END_CARD.contains(state)) {
                 Log.d(Config.LOGTAG, "not reinitializing session");
                 return;
@@ -1177,5 +1176,9 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
         intent.putExtra(EXTRA_LAST_REPORTED_STATE, state.toString());
         intent.putExtra(EXTRA_LAST_ACTION, media.contains(Media.VIDEO) ? ACTION_MAKE_VIDEO_CALL : ACTION_MAKE_VOICE_CALL);
         setIntent(intent);
+    }
+
+    private static boolean emptyReference(final WeakReference<?> weakReference) {
+        return weakReference == null || weakReference.get() == null;
     }
 }
