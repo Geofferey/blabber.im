@@ -97,23 +97,23 @@
     <string name="no_pgp_keys">Claus OpenPGP no trobades</string>
     <string name="pref_general">General</string>
     <string name="pref_accept_files_wifi">Acceptar arxius en connexions WiFi</string>
-    <string name="pref_accept_files_summary_wifi">Quant és connecta a  la wifi accepta automàticament descarregar arxius més petits que…</string>
+    <string name="pref_accept_files_summary_wifi">Quan és connecta a la wifi accepta automàticament descarregar arxius més petits que…</string>
     <string name="pref_accept_files_mobile">Acceptar arxius en connexions de la xarxa mòbil</string>
-    <string name="pref_accept_files_summary_mobile">Quant es connecta a la xarxa mòbil accepta automàticament descarregar arxius més petits de…</string>
+    <string name="pref_accept_files_summary_mobile">Quan es connecta a la xarxa mòbil accepta automàticament descarregar arxius més petits de…</string>
     <string name="pref_accept_files_mobileroaming">Acceptar arxius en connexions roaming</string>
-    <string name="pref_accept_files_summary_mobileroaming">Quant es connecta a la xarxa mòbil per roaming accepta automàticament descarregar arxius més petits de…</string>
+    <string name="pref_accept_files_summary_mobileroaming">Quan es connecta a la xarxa mòbil per roaming accepta automàticament descarregar arxius més petits de…</string>
     <string name="pref_attachments">Adjunts</string>
     <string name="pref_notification_settings">Notificació</string>
     <string name="pref_vibrate">Vibrar</string>
-    <string name="pref_vibrate_summary">Vibrar quant arribi un nou missatge</string>
+    <string name="pref_vibrate_summary">Vibrar quan arribi un nou missatge</string>
     <string name="pref_led">Notificació LED</string>
-    <string name="pref_led_summary">La llum parpalleja quant arriba un nou missatge</string>
+    <string name="pref_led_summary">La llum parpalleja quan arriba un nou missatge</string>
     <string name="pref_sound">To</string>
-    <string name="pref_sound_summary">Reprodueix el sol quant arribi un missatge nou</string>
+    <string name="pref_sound_summary">Reprodueix el sol quan arribi un missatge nou</string>
     <string name="pref_send_crash">Enviar informes d\'errors</string>
     <string name="pref_send_crash_summary">Enviant els stack tracis estàs ajudant al desenvolupament continu de blabber.im</string>
     <string name="pref_confirm_messages">Confirmar missatges</string>
-    <string name="pref_confirm_messages_summary">Permetre als teus contactes saber quant has rebut i llegit els seus missatges</string>
+    <string name="pref_confirm_messages_summary">Permetre als teus contactes saber quan has rebut i llegit els seus missatges</string>
     <string name="pref_ui_options">Ui</string>
     <string name="openpgp_error">OpenKeychain va reportar un error</string>
     <string name="accept">Acceptar</string>
@@ -259,7 +259,7 @@
     <string name="pref_use_send_button_to_indicate_status">Botó enviar indica estat</string>
     <string name="pref_use_colored_names_to_indicate_status">Els noms pintats indiquen l\'estat</string>
     <string name="pref_use_indicate_received">Sol·licitar entrega del missatge</string>
-    <string name="pref_use_indicate_received_summary">Quant el contacte reb el missatge serà indicat amb una marca verda. Ves en compte, aixó podría no funcionar en tots els casos.</string>
+    <string name="pref_use_indicate_received_summary">Quan el contacte reb el missatge serà indicat amb una marca verda. Ves en compte, aixó podría no funcionar en tots els casos</string>
     <string name="pref_use_send_button_to_indicate_status_summary">El color del botó enviar indica l\'estat del contacte</string>
     <string name="pref_use_colored_names_to_indicate_status_summary">Pintar el nom del contacte per a mostrar el seu estat en línea</string>
     <string name="pref_expert_options_other">Altres</string>
@@ -324,7 +324,7 @@
     <string name="copy_omemo_clipboard_description">Copiar empremta digital OMEMO al portapapers</string>
     <string name="regenerate_omemo_key">Regenerar clau OMEMO</string>
     <string name="clear_other_devices"> Netejar dispositius</string>
-    <string name="clear_other_devices_desc">Estàs segur de que vols netejar todos els altres dispositius del anunci OMEMO? La pròxima vegada que els teus dispositius connectin, tindràn que tornar a anunciar-se, però aquests podràn no rebre els missatges enviats durant el procés.</string>
+    <string name="clear_other_devices_desc">Estàs segur de que vols netejar todos els altres dispositius del anunci OMEMO? La pròxima vegada que els teus dispositius connectin, hauran de tornar a anunciar-se, però aquests podràn no rebre els missatges enviats durant el procés.</string>
     <string name="distrust_omemo_key">Desconfiar d\'aquest dispositiu</string>
     <string name="distrust_omemo_key_text">Estàs segur que vols eliminar la verificació d\'aquest dispositiu?\n Aquest dispositiu i els missatges que llegim des d\'allí seràn marcats com no confiables.</string>
     <string name="error_no_keys_to_trust_server_error">No hi ha claus disponibles per a aquest contacte. La cerca de noves claus al servidor ha fallat. Pot existir un problema amb al servidor del teu contacte.</string>
@@ -388,7 +388,7 @@
     <string name="hide_offline">Amaga el fora de línia</string>
     <string name="is_typing">Està escrivint...</string>
     <string name="pref_chat_states">Notificació d\'escriptura</string>
-    <string name="pref_chat_states_summary">Permetre als teus contactes saber quant estàs escrivint un missatge</string>
+    <string name="pref_chat_states_summary">Permetre als teus contactes saber quan estàs escrivint un missatge</string>
     <string name="send_location">Enviar ubicació</string>
     <string name="show_location">Mostrar ubicació</string>
     <string name="no_application_found_to_display_location">No s\'han trobat ninguna aplicació per a mostrar l\'ubicació</string>
@@ -434,12 +434,12 @@
     <string name="server_info_broken">Error</string>
     <string name="pref_presence_settings">Disponibilitat</string>
     <string name="pref_away_when_screen_off">Absent amb pantalla apagada</string>
-    <string name="pref_away_when_screen_off_summary">Canviar el teu estat a absent quant la pantalla està apagada</string>
+    <string name="pref_away_when_screen_off_summary">Canviar el teu estat a absent quan la pantalla està apagada</string>
     <string name="pref_dnd_on_silent_mode">\"No molestar\" en mode silenci</string>
     <string name="update_info">blabber.im està descarregant i instal·lant la nova versió automàticament.\n\nSi us plau, esperi…</string>
-    <string name="pref_dnd_on_silent_mode_summary">Canvia el teu estat a \"no molestar\"  quant el dispositiu està en mode silenci</string>
+    <string name="pref_dnd_on_silent_mode_summary">Canvia el teu estat a \"no molestar\" quan el dispositiu està en mode silenci</string>
     <string name="pref_treat_vibrate_as_silent">Mode vibració como a mode silenci</string>
-    <string name="pref_treat_vibrate_as_dnd_summary">Canvia el teu estat a \"no molestar\" quant el dispositiu està en mode vibració</string>
+    <string name="pref_treat_vibrate_as_dnd_summary">Canvia el teu estat a \"no molestar\" quan el dispositiu està en mode vibració</string>
     <string name="hostname_example">blabber.im</string>
     <string name="action_add_account_with_certificate">Afegir compte amb certificat</string>
     <string name="unable_to_parse_certificate">No s\'ha pogut llegir el certificat</string>
@@ -472,7 +472,7 @@
     <string name="sync_with_contacts">Sincronitzar contactes</string>
     <string name="sync_with_contacts_long">blabber.im vol fer coincidir la teva llista de XMPP amb els teus contactes per a mostrar els seus noms complets i avatars.\n\nblabber.im només llegirà els teus contactes i els aparellarà localment sense pujar-los al teu servidor.\n\nAra es demanarà permís per a accedir als teus contactes.</string>
     <string name="notify_on_all_messages">Notificar per a tots els missatges</string>
-    <string name="notify_only_when_highlighted">Notificar només quants ets anomenat</string>
+    <string name="notify_only_when_highlighted">Notificar només quan ets anomenat</string>
     <string name="notify_never">Notificacions deshabil·litades</string>
     <string name="notify_paused">Notificacions pausades</string>
     <string name="pref_picture_quality">Qualitat d\'imatge</string>
@@ -512,7 +512,7 @@
     <string name="welcome_existing_account">Tinc un compte</string>
     <string name="pick_your_username">Selecciona el teu nom d\'usuari</string>
     <string name="pref_manually_change_presence">Canviar disponibilitat manualment</string>
-    <string name="pref_manually_change_presence_summary">Estableix la teva disponibilitat quant editis el seu missatge d\'estat</string>
+    <string name="pref_manually_change_presence_summary">Estableix la teva disponibilitat quan editis el seu missatge d\'estat.</string>
     <string name="status_message">Missatge d\'estat</string>
     <string name="presence_chat">Lliure per a parlar</string>
     <string name="presence_online">Disponible</string>
@@ -558,7 +558,7 @@
     <string name="report_jid_as_spammer">Reportar a aquest Id Jabber per enviar missatges no desitjats</string>
     <string name="create_issue">Notificar una incidència</string>
     <string name="pref_delete_omemo_identities">Eliminar identitats OMEMO</string>
-    <string name="pref_delete_omemo_identities_summary">Regenerar les teves claus OMEMO. Tots  els seus contactes tindràn que verificar-t\'he de nou. Utilitza aquesta opció	com últim recurs.</string>
+    <string name="pref_delete_omemo_identities_summary">Regenerar les teves claus OMEMO. Tots els seus contactes hauran de verificar-t\'he de nou. Utilitza aquesta opció com últim recurs.</string>
     <string name="delete_selected_keys">Eliminar claus seleccionats</string>
     <string name="error_publish_avatar_offline">Has d\'estar connectat per a publicar l\'imatge de perfil</string>
     <string name="copy_to_clipboard">Copiar el portapapers</string>
@@ -623,7 +623,7 @@
         <item quantity="other">%d mesos</item>
     </plurals>
     <string name="today">Avui</string>
-    <string name="pref_use_max_brightness_summary">Canviar la brillantor al màxim quant estigui veient vídeos o imatges en pantalla completa.</string>
+    <string name="pref_use_max_brightness_summary">Canviar la brillantor al màxim quan estigui veient vídeos o imatges en pantalla completa.</string>
     <string name="pref_use_max_brightness">Brillantor al màxim</string>
     <string name="block_jabber_id">Bloquejar l\'ID de Jabber</string>
     <string name="corresponding_conversations_closed">Conversa corresponent tancada.</string>
@@ -650,7 +650,7 @@
     <string name="last_seen_just_away">recentment</string>
     <string name="send_message">Enviar missatge</string>
     <string name="send_failed_resend">entrega fallida, reenvío…</string>
-    <string name="pref_show_connection_options_summary">Mostrar el hostname i el port quant s\'està creant un compte</string>
+    <string name="pref_show_connection_options_summary">Mostrar el hostname i el port quan s\'està creant un compte</string>
     <string name="pref_show_connection_options">Opcions de connexió</string>
     <string name="retry_decryption">Reintentar desxifrat</string>
     <string name="session_failure">Error de sessió</string>
@@ -669,7 +669,7 @@
     <string name="error_no_keys_to_trust_presence">No hi ha claus disponibles per a aquest contacte.\n Assegura\'t que teniu subscripció de presència mútua.</string>
     <string name="mark_as_read">Marcar como a llegit</string>
     <string name="server_info_partial">Parcial</string>
-    <string name="pref_show_foreground_service_summary">Alguns dispositius Android tancaràn algunes aplicacions després d\'un temps i no podràs rebre nous missatges. Si tens aquests problemes, intenta activar el servei de primer pla. Però tingues en compte que tindrà una notificació permanent amb aquesta opció marcada.</string>
+    <string name="pref_show_foreground_service_summary">Alguns dispositius Android tancaràn algunes aplicacions després d\'un temps i no podrà rebre nous missatges. Si te aquests problemes, intente activar el servei de primer pla. Però tingui en compte que tindrà una notificació permanent amb aquesta opció marcada.</string>
     <string name="pref_show_foreground_service">Utilitzar servei en primer pla</string>
     <string name="update_service">Servei d\'actualització de blabber.im</string>
     <string name="install_update">Instal·lar actualizació?</string>
@@ -721,7 +721,7 @@
     <string name="pref_omemo_setting">Xifrat OMEMO</string>
     <string name="pref_omemo_setting_summary_always">OMEMO s\'utilitzarà sempre en converses d\'un a un i en grups privats.</string>
     <string name="pref_omemo_setting_summary_default_on">OMEMO s\'utilitzarà per defecte en noves converses.</string>
-    <string name="pref_omemo_setting_summary_default_off">OMEMO tindrà que ser activat explícítament en noves converses.</string>
+    <string name="pref_omemo_setting_summary_default_off">OMEMO haurà de ser activat explícítament en noves converses.</string>
     <string name="pref_omemo_setting_summary_always_off">Mai s\'utilitzarà OMEMO.</string>
     <string name="default_on">Activar per defecte</string>
     <string name="default_off">Desactivar per defect</string>
@@ -782,7 +782,7 @@
     <string name="notification_group_messages">Missatges</string>
     <string name="messages_channel_name">Missatges</string>
     <string name="silent_messages_channel_name">Missatges silenciosos</string>
-    <string name="silent_messages_channel_description">Aquesta categoría s\'utilitza	per a mostrar notificacions que no haurien d\'activar ningun so. Per exemple, quant està actiu en  un altra dispositiu (Període de gracia).</string>
+    <string name="silent_messages_channel_description">Aquesta categoría s\'utilitza	per a mostrar notificacions que no haurien d\'activar ningun so. Per exemple, quan està actiu en un altra dispositiu (Període de gracia).</string>
     <string name="pref_more_notification_settings">Configuració	de notificacions</string>
     <string name="delivery_failed_channel_name">Lliuraments fallits</string>
     <string name="pref_more_notification_settings_summary">Importància, So, Vibració</string>
@@ -1095,4 +1095,5 @@
     <string name="webview_not_available">La vista web no està disponible en el seu dispositiu.</string>
     <string name="pref_easy_downloader_summary">Descarregui automàticament tots els arxius adjunts en els canals públics i de desconeguts en lloc de mostrar un botó per a una descàrrega manual.</string>
     <string name="pref_easy_downloader">Descàrrega automàtica de tots els arxius adjunts</string>
+    <string name="got_invitation_from">Ha estat convidat per %s a la sala de xat %s.</string>
 </resources>

@@ -712,6 +712,8 @@
     <string name="edit_status_message_title">Status Mesajını redaktə edin</string>
     <string name="pref_automatically_delete_messages_description">Konfiqurasiya müddətindən daha köhnə olan bu cihazdakı mesajları avtomatik olaraq silmək.</string>
     <string name="pref_automatically_delete_messages">Avtomatik mesaj silinməsi</string>
+    <string name="pref_automatically_delete_files_description">Bu cihazdan avtomatik mesaj silinməsi üçün konfiqurasiya edilmiş vaxt çərçivəsindən daha köhnə fayllar avtomatik olaraq silinməsi.</string>
+    <string name="pref_automatically_delete_files">Faylların avtomatik silinməsi</string>
     <string name="disable_encryption">Şifrələməni deaktiv edin</string>
     <string name="error_trustkey_general">blabber.im şifrelenmiş mesaj göndərə bilməz %1$s. Bu kontakt ya bir köhnəlmiş server istifadə edir və ya OMEMO dəstəkləməyən bir proqram istifadə edir.</string>
     <string name="error_trustkey_device_list">Cihaz siyahısını əldə etmək olmur</string>
@@ -1097,4 +1099,28 @@
     <string name="webview_not_available">Cihazınızda Webview mövcud deyil.</string>
     <string name="pref_easy_downloader_summary">Əl ilə yükləmək üçün düyməni göstərmək əvəzinə, bütün faylları ictimai kanallarda və kənarlarda avtomatik olaraq yükləyin.</string>
     <string name="pref_easy_downloader">Bütün əlavələrin avtomatik yüklənməsi</string>
+    <string name="got_invitation_from">Sizi %s %s çata dəvət etdi.</string>
+    <string name="a_user">istifadəçi</string>
+    <string name="pref_memory_management_summary">Media yerləşmə yerinin yaddaş istifadəsini göstərin</string>
+    <string name="title_memory_management">Yaddaş idarəetməsi</string>
+    <string name="disk_storage">Ümümi yaddaş</string>
+    <string name="media_usage">Medianın yaddaşdan istifadəsi</string>
+    <string name="pictures_usage">Şəkillərdən yaddaş istifadəsi</string>
+    <string name="videos_usage">Videodən yaddaş istifadəsi</string>
+    <string name="files_usage">Fayllardan yaddaş istifadəsi</string>
+    <string name="audios_usage">Audiodan yaddaş istifadəsi</string>
+    <string name="delete_files_dialog">Bərkidilən faylların silinməsi</string>
+    <string name="delete_files_dialog_msg">Həqiqətən bütün %s silmək istəyirsən?</string>
+    <string name="audios">səslər</string>
+    <string name="images">şəkillər</string>
+    <string name="videos">videolar</string>
+    <string name="files">fayllar</string>
+    <string name="all_media_files">media fayllar</string>
+    <string name="memory_warning">Mesenceriniz %1$s (%2$s) daxili yaddaşdan istifadə edir.\n\nSiz avtomatik qoşmanın silinməsi ilə əlaqədar avtomatik mesaj silinməsini aktivləşdirə və ya saxlanan medianı əl ilə silə bilərsiniz.</string>
+    <string name="memory_warning_force">Mesenceriniz %1$s (%2$s) daxili yaddaşdan istifadə edir.\n\nSiz avtomatik qoşmanın silinməsi ilə əlaqədar avtomatik mesaj silinməsini təmin etməli və ya saxlanan medianı əl ilə silməlisiniz. Cihazınız yaddaşdan çıxacaq!</string>
+    <string name="open_settings">Ayarları açın</string>
+    <string name="oldAndroidVersion">Köhnə Android versiyası</string>
+    <string name="oldAndroidVersionMessage">Gələcək yeniləmələrdə artıq dəstəklənməyəcək köhnə bir Android versiyasından istifadə edirsiniz. Blabber.im versiyası 3.1.0-dan yalnız Android 5 və ya daha yüksək olan cihazlara dəstək verilir. Zəhmət olmasa cihazınızın proqram təminatını yeniləyin.</string>
+    <string name="save_x_file">Saxla %s</string>
+    <string name="file_copied_to">Faylı %s saxla</string>
 </resources>

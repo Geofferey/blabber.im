@@ -728,6 +728,8 @@
     <string name="edit_status_message_title">Редактировать статус</string>
     <string name="pref_automatically_delete_messages_description">Автоматически удалять с этого устройства сообщения старше заданного времени.</string>
     <string name="pref_automatically_delete_messages">Автоматическое удаление сообщений</string>
+    <string name="pref_automatically_delete_files_description">Автоматически удалять с этого устройства вложения, которые старше указанного периода времени.</string>
+    <string name="pref_automatically_delete_files">Автоматическое удаление вложений</string>
     <string name="disable_encryption">Отключить шифрование</string>
     <string name="error_trustkey_general">blabber.im не может отправить зашифрованные сообщения %1$s. Возможно, Ваш контакт использует устаревший сервер или клиент, не поддерживающий OMEMO.</string>
     <string name="error_trustkey_device_list">Не удалось получить список устройств</string>
@@ -1118,4 +1120,27 @@
     <string name="pref_easy_downloader_summary">Автоматически загружать все вложения в публичных каналах и от незнакомцев вместо того, чтобы показывать кнопку ручной загрузки.</string>
     <string name="pref_easy_downloader">Автоматическая загрузка всех вложений</string>
     <string name="got_invitation_from">Вы были приглашены\nигроком %s\nв фракцию\n%s.</string>
+    <string name="a_user">пользователь</string>
+    <string name="pref_memory_management_summary">Показать размер каталога мультимедиа</string>
+    <string name="title_memory_management">Управление памятью</string>
+    <string name="disk_storage">Общий размер хранилища</string>
+    <string name="media_usage">Использование памяти медиа-файлами</string>
+    <string name="pictures_usage">Использование памяти изображениями</string>
+    <string name="videos_usage">Использование памяти видео</string>
+    <string name="files_usage">Использование памяти файлами</string>
+    <string name="audios_usage">Использование памяти аудио-файлами</string>
+    <string name="delete_files_dialog">Удалить вложения</string>
+    <string name="delete_files_dialog_msg">Вы действительно хотите удалить все %s?</string>
+    <string name="audios">аудио</string>
+    <string name="images">изображения</string>
+    <string name="videos">видео</string>
+    <string name="files">файлы</string>
+    <string name="all_media_files">медиа-файлы</string>
+    <string name="memory_warning">Ваш мессенджер использует %1$s (%2$s) внутренней памяти.\n\nВы можете включить автоматическое удаление вложений или удалить медиа-файлы вручную.</string>
+    <string name="memory_warning_force">Ваш мессенджер использует %1$s (%2$s) внутренней памяти.\n\nВы должны включить автоматическое удаление вложений или удалить медиа-файлы вручную. В Вашем устройстве закончится память!</string>
+    <string name="open_settings">Открыть настройки</string>
+    <string name="oldAndroidVersion">Старая версия Android</string>
+    <string name="oldAndroidVersionMessage">Вы используете старую версию Android, которая больше не будет поддерживаться в будущих обновлениях. Начиная с blabber.im версии 3.1.0 поддерживаются только устройства с Android 5 и выше. Пожалуйста, обновите прошивку Вашего устройства.</string>
+    <string name="save_x_file">Сохранить %s</string>
+    <string name="file_copied_to">Файл скопирован в %s</string>
 </resources>

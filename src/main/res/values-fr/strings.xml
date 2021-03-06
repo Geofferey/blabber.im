@@ -706,6 +706,8 @@
     <string name="edit_status_message_title">Modifier votre message de statut</string>
     <string name="pref_automatically_delete_messages_description">Définit la durée de conservation des messages au-delà de laquelle ils seront automatiquement supprimés.</string>
     <string name="pref_automatically_delete_messages">Suppression automatique des messages</string>
+    <string name="pref_automatically_delete_files_description">Supprimer automatiquement de cet appareil les pièces jointes qui sont plus anciennes que le délai configuré pour la suppression automatique des messages.</string>
+    <string name="pref_automatically_delete_files">Suppression automatique des pièces jointes</string>
     <string name="disable_encryption">Désactiver le chiffrement</string>
     <string name="error_trustkey_general">blabber.im ne peut envoyer de messages chiffrés à %1$s. Il se peut que votre contact utilise soit un serveur ou un client ancien ne prenant pas en charge le chiffrement avec OMEMO.</string>
     <string name="error_trustkey_device_list">Impossible d’obtenir la liste des appareils</string>
@@ -847,7 +849,7 @@
     <string name="please_enter_name">Merci de fournir un nom pour ce canal</string>
     <string name="please_enter_xmpp_address">Veuillez fournir une adresse XMPP</string>
     <string name="this_is_an_xmpp_address">Ceci est une adresse XMPP. Veuillez fournir un nom.</string>
-    <string name="creating_channel">Canal public en cours de création …</string>
+    <string name="creating_channel">Canal public en cours de création…</string>
     <string name="channel_already_exists">Ce canal existe déjà</string>
     <string name="joined_an_existing_channel">Vous venez de rejoindre un canal existant</string>
     <string name="unable_to_set_channel_configuration">Impossible de spécifier une configuration au canal</string>
@@ -1032,6 +1034,7 @@
     <string name="incoming_call_duration">%s · Appel entrant · %s</string>
     <string name="incoming_call_time">%s · Appel entrant</string>
     <string name="incoming_call">Appel entrant</string>
+    <string name="missed_call_timestamp">%s · Appel manqué</string>
     <string name="outgoing_call_duration">%s · Appel sortant · %s</string>
     <string name="outgoing_call_time">%s · Appel sortant</string>
     <string name="outgoing_call">Appel sortant</string>
@@ -1044,6 +1047,7 @@
     <string name="readmore">Plus d\'informations</string>
     <string name="add_to_favorites">Ajouter aux favoris</string>
     <string name="remove_from_favorites">Enlever des favoris</string>
+    <string name="improperly_formatted_provisioning">Code de provisionnement mal formaté</string>
     <string name="gpx_track">Trace GPX</string>
     <string name="could_not_correct_message">Impossible de corriger le message</string>
     <string name="search_all_conversations">Toutes les conversations</string>
@@ -1053,6 +1057,7 @@
     <string name="encrypted_with_omemo">Chiffré avec OMEMO</string>
     <string name="encrypted_with_openpgp">Chiffré avec OpenPGP</string>
     <string name="not_encrypted">Pas chiffré</string>
+    <string name="add_contact_or_create_or_join_group_chat">Ajouter un contact, créer ou rejoindre un groupe de discussion, ou découvrir des canaux</string>
     <plurals name="some_messages_could_not_be_delivered">
         <item quantity="one">Un message n\'a pas pu être délivré</item>
         <item quantity="other">Des messages n\'ont pas pu être délivrés</item>
@@ -1081,4 +1086,33 @@
     <string name="if_contact_is_nearby_use_qr">Si votre contact est à proximité, il peut également scanner le code ci-dessous pour accepter votre invitation.</string>
     <string name="easy_invite_share_text">Rejoindre %1$s et chat avec moi : %2$s</string>
     <string name="share_invite_with">Partager une invitation avec…</string>
+    <string name="no_active_accounts_support_this">Aucun compte actif ne supporte cette fonction</string>
+    <string name="server_info_easy_invite">XEP-0401: Easy User Onboarding</string>
+    <string name="pref_mappreview_host_summary">Utiliser un hôte pour visualiser la carte personnalisée</string>
+    <string name="pref_mappreview_host">Hôte pour aperçu de la carte</string>
+    <string name="webview_not_available">Aperçu web non disponible sur votre appareil.</string>
+    <string name="pref_easy_downloader_summary">Télécharger automatiquement les pièces jointes des canaux publics et des inconnus au lieu d\'un téléchargement manuel.</string>
+    <string name="pref_easy_downloader">Auto-téléchargement des pièces jointes</string>
+    <string name="got_invitation_from">Vous avez été invité par %s à rejoindre le canal %s.</string>
+    <string name="a_user">un utilisateur</string>
+    <string name="pref_memory_management_summary">Afficher la taille mémoire du répertoire des médias</string>
+    <string name="title_memory_management">Gestion de la mémoire</string>
+    <string name="disk_storage">Stockage total des fichiers</string>
+    <string name="media_usage">Utilisation mémoire des médias</string>
+    <string name="pictures_usage">Utilisation mémoire des images</string>
+    <string name="videos_usage">Utilisation mémoire des vidéos</string>
+    <string name="files_usage">Utilisation mémoire des fichiers</string>
+    <string name="audios_usage">Utilisation mémoire des audios</string>
+    <string name="delete_files_dialog">Supprimer les pièces jointes</string>
+    <string name="delete_files_dialog_msg">Voulez-vous vraiment supprimer les %s ?</string>
+    <string name="audios">audios</string>
+    <string name="images">images</string>
+    <string name="videos">vidéos</string>
+    <string name="files">fichiers</string>
+    <string name="all_media_files">fichiers médias</string>
+    <string name="memory_warning">Votre application utilise %1$s (%2$s) de mémoire interne.\n\nVous pouvez activer la suppression automatique des pièces jointes ou supprimer manuellement les supports stockés.</string>
+    <string name="memory_warning_force">Votre application utilise %1$s (%2$s) de mémoire interne. Vous devez activer la suppression automatique des pièces jointes ou supprimer manuellement les médias enregistrés. Votre appareil va être à court de mémoire !</string>
+    <string name="open_settings">Ouvrir les paramètres</string>
+    <string name="oldAndroidVersion">Ancienne version d\'Android</string>
+    <string name="oldAndroidVersionMessage">Vous utilisez une ancienne version d\'Android qui ne sera plus prise en charge dans les futures mises à jour. À partir de la version 3.1.0 de blabber.im, seuls les appareils avec Android 5 ou supérieur sont pris en charge. Veuillez mettre à jour l\'OS de votre appareil.</string>
 </resources>

@@ -1095,4 +1095,5 @@
     <string name="webview_not_available">A vista web non está dispoñible no seu dispositivo.</string>
     <string name="pref_easy_downloader_summary">Descargue automaticamente todos os arquivos adxuntos nas canles públicas e de descoñecidos en lugar de mostrar un botón para unha descarga manual.</string>
     <string name="pref_easy_downloader">Descarga automática de todos os arquivos adxuntos</string>
+    <string name="got_invitation_from">Foi convidado por %s á sala de chat %s.</string>
 </resources>

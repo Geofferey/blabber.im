@@ -710,6 +710,8 @@
     <string name="edit_status_message_title">Modifica Messaggio di Stato</string>
     <string name="pref_automatically_delete_messages_description">Elimina automaticamente da questo dispositivo i messaggi più vecchi del lasso di tempo configurato.</string>
     <string name="pref_automatically_delete_messages">Eliminazione automatica dei messaggi</string>
+    <string name="pref_automatically_delete_files_description">Elimina automaticamente gli allegati da questo dispositivo che sono più vecchi del periodo di tempo configurato per l\'eliminazione automatica dei messaggi.</string>
+    <string name="pref_automatically_delete_files">Eliminazione automatica degli allegati</string>
     <string name="disable_encryption">Disabilita crittografia</string>
     <string name="error_trustkey_general">blabber.im non è in grado di inviare messaggi criptati a %1$s. Questo può essere causato dal tuo contatto che utilizza un server non aggiornato o da un client che non gestisce OMEMO.</string>
     <string name="error_trustkey_device_list">Impossibile ottenere l\'elenco dei dispositivi</string>
@@ -1036,6 +1038,7 @@
     <string name="incoming_call_duration">%s · Chiamata in arrivo · %s</string>
     <string name="incoming_call_time">%s · Chiamata in arrivo</string>
     <string name="incoming_call">Chiamata in arrivo</string>
+    <string name="missed_call_timestamp">%s · Chiamata persa</string>
     <string name="outgoing_call_duration">%s · Chiamata in uscita · %s</string>
     <string name="outgoing_call_time">%s · Chiamata in uscita</string>
     <string name="outgoing_call">Chiamata in uscita</string>
@@ -1043,7 +1046,7 @@
     <string name="help">Aiuto</string>
     <string name="switch_to_conversation">Vai alla conversazione</string>
     <string name="only_one_call_at_a_time">È possibile effettuare una sola chiamata alla volta.</string>
-    <string name="missed_call">Chiamata senza risposta</string>
+    <string name="missed_call">Chiamata persa</string>
     <string name="could_not_switch_camera">Non è stato possibile cambiare la fotocamera</string>
     <string name="readmore">Leggi altro</string>
     <string name="add_to_favorites">Aggiungi ai preferiti</string>
@@ -1064,11 +1067,11 @@
         <item quantity="other">Non è stato possibile inviare alcuni messaggi</item>
     </plurals>
     <string name="failed_deliveries">Consegne non riuscite</string>
-    <string name="missed_calls_channel_name">Chiamate senza risposta</string>
-    <string name="missed_call_from_x">Chiamata senza risposta da %s</string>
-    <string name="n_missed_calls_from_x">%1$d chiamate senza risposta da %2$s</string>
-    <string name="n_missed_calls">%d chiamate senza risposta</string>
-    <string name="n_missed_calls_from_m_contacts">%1$d chiamate senza risposta da %2$d contatti</string>
+    <string name="missed_calls_channel_name">Chiamate perse</string>
+    <string name="missed_call_from_x">Chiamata persa da %s</string>
+    <string name="n_missed_calls_from_x">%1$d chiamate perse da %2$s</string>
+    <string name="n_missed_calls">%d chiamate perse</string>
+    <string name="n_missed_calls_from_m_contacts">%1$d chiamate perse da %2$d contatti</string>
     <string name="pref_invidious_host_summary">Utilizza un server personalizzato di invidious</string>
     <string name="pref_invidious_host">Server invidious</string>
     <string name="updated_to_blabber">Siamo riusciti ad aggiornarti con successo da Pix-Art Messenger a blabber.im\n\nLa cooperazione tra i due progetti blabber.im e Pix-Art Messenger si è ampliata nel Novembre 2020. In futuro, l\'applicazione Android Pix-Art Messenger continuerà sotto il nome di blabber.im.\n\nCosa ti dovrai aspettare:\n- Stesse funzionalità\n- Stanze di supporto saranno unite\n- Colori e logo adattati a blabber.im\n- Applicazione sempre disponibile gratuitamente nel Google Play Store e in F-Droid \n\nIl tuo Team blabber.im</string>
@@ -1091,4 +1094,31 @@
     <string name="server_info_easy_invite">XEP-0401: Easy User Onboarding</string>
     <string name="pref_mappreview_host_summary">Usa un fornitore di anteprime mappa personalizzato</string>
     <string name="pref_mappreview_host">Fornitore di anteprime mappa</string>
+    <string name="webview_not_available">Webview non è disponibile sul tuo dispositivo.</string>
+    <string name="pref_easy_downloader_summary">Scarica automaticamente tutti gli allegati nei canali pubblici e da sconosciuti invece di mostrare un pulsante per lo scaricamento manuale.</string>
+    <string name="pref_easy_downloader">Scarica automaticamente tutti gli allegati</string>
+    <string name="got_invitation_from">Sei stato invitato da %s nella conversazione di gruppo %s.</string>
+    <string name="a_user">un utente</string>
+    <string name="pref_memory_management_summary">Mostra spazio utilizzato della cartella dei media</string>
+    <string name="title_memory_management">Gestione della memoria</string>
+    <string name="disk_storage">Spazio di archiviazione totale</string>
+    <string name="media_usage">Utilizzo memoria dei media</string>
+    <string name="pictures_usage">Utilizzo memoria delle immagini</string>
+    <string name="videos_usage">Utilizzo memoria dei video</string>
+    <string name="files_usage">Utilizzo memoria dei file</string>
+    <string name="audios_usage">Utilizzo memoria degli audio</string>
+    <string name="delete_files_dialog">Elimina allegati</string>
+    <string name="delete_files_dialog_msg">Vuoi veramente eliminare tutti %s?</string>
+    <string name="audios">audio</string>
+    <string name="images">immagini</string>
+    <string name="videos">video</string>
+    <string name="files">file</string>
+    <string name="all_media_files">file multimediali</string>
+    <string name="memory_warning">L\'applicazione sta utilizzando %1$s (%2$s) di memoria interna.\n\nPuoi abilitare l\'eliminazione automatica dei messaggi in unione con l\'eliminazione automatica degli allegati o eliminare i file multimediali manualmente.</string>
+    <string name="memory_warning_force">L\'applicazione sta utilizzando %1$s (%2$s) di memoria interna.\n\nDovresti abilitare l\'eliminazione automatica dei messaggi in unione con l\'eliminazione automatica degli allegati o eliminare i file multimediali manualmente. Diversamente il tuo dispositivo finirà la memoria a disposizione!</string>
+    <string name="open_settings">Apri impostazioni</string>
+    <string name="oldAndroidVersion">Vecchia versione di Android</string>
+    <string name="oldAndroidVersionMessage">Stai utilizzando una vecchia versione di Android che non sarà più supportata dagli aggiornamenti futuri. Da blabber.im versione 3.1.0 solo i dispositivi con Android 5 o superiore saranno supportati. Per favore aggiorna il firmware del tuo dispositivo.</string>
+    <string name="save_x_file">Salva %s</string>
+    <string name="file_copied_to">File copiato in %s</string>
 </resources>

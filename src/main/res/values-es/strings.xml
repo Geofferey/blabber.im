@@ -25,6 +25,10 @@
     <string name="just_now">ahora mismo</string>
     <string name="minute_ago">hace 1 min</string>
     <string name="minutes_ago">hace %d min</string>
+    <plurals name="x_unread_conversations">
+        <item quantity="one">%d conversación no leída</item>
+        <item quantity="other">%d conversaciones no leídas</item>
+    </plurals>
     <string name="sending">enviando…</string>
     <string name="message_decrypting">Descifrando mensaje. Por favor, espera...</string>
     <string name="pgp_message">Mensaje cifrado con OpenPGP</string>
@@ -706,6 +710,8 @@
     <string name="edit_status_message_title">Editar el mensaje de estado</string>
     <string name="pref_automatically_delete_messages_description">Eliminar automáticamente los mensajes del dispositivo que sean anteriores al tiempo seleccionado.</string>
     <string name="pref_automatically_delete_messages">Borrado automático de mensajes</string>
+    <string name="pref_automatically_delete_files_description">Borrar automáticamente todos los adjuntos de este dispositivo que son mas antiguos que el periodo de tiempo configurado para el borrado automático de mensajes.</string>
+    <string name="pref_automatically_delete_files">Borrado automático de adjunto</string>
     <string name="disable_encryption">Desactivar cifrado</string>
     <string name="error_trustkey_general">blabber.im no puede enviar mensajes cifrados a %1$s. Esto puede ser debido a que tu contacto está usando un servidor o un cliente desactualizado que no puede manejar las claves OMEMO.</string>
     <string name="error_trustkey_device_list">No se pudo obtener la lista de dispositivos</string>
@@ -1092,4 +1098,33 @@
     <string name="pref_easy_downloader_summary">Descargar automáticamente todos los adjuntos de los canales públicos y de extraños en lugar de mostrar un botón para descarga manual.</string>
     <string name="pref_easy_downloader">Descargar automáticamente todos los adjuntos</string>
     <string name="got_invitation_from">%s te ha invitado a la sala de chat %s.</string>
+    <string name="a_user">un usuario</string>
+    <string name="pref_memory_management_summary">Mostrar el uso de memoria del directorio de medios</string>
+    <string name="title_memory_management">Gestión de memoria</string>
+    <string name="disk_storage">Almacenamiento total de ficheros</string>
+    <string name="media_usage">Uso de memoria de medios</string>
+    <string name="pictures_usage">Uso de memoria de imágenes</string>
+    <string name="videos_usage">Uso de memoria de vídeos</string>
+    <string name="files_usage">Uso de memoria de ficheros</string>
+    <string name="audios_usage">Uso de memoria de audios</string>
+    <string name="delete_files_dialog">Borrar adjuntos</string>
+    <string name="delete_files_dialog_msg">¿Realmente quieres borrar todos los %s?</string>
+    <string name="audios">audios</string>
+    <string name="images">imágenes</string>
+    <string name="videos">vídeos</string>
+    <string name="files">ficheros</string>
+    <string name="all_media_files">ficheros multimedia</string>
+    <string name="memory_warning">Tu aplicación está usando %1$s (%2$s) de memoria interna.\n\nPuedes habilitar el borrado automático de mensajes en relación con el borrado automático de adjuntos o borrar manualmente los medios almacenados.</string>
+    <string name="memory_warning_force">Tu aplicación está usando %1$s (%2$s) de memoria interna.\n\nDeberías habilitar el borrado automático de mensajes en relación con el borrado automático de adjuntos o borrar manualmente los medios almacenados. ¡Tu dispositivo se quedará sin memoria!</string>
+    <string name="open_settings">Abrir configuraciones</string>
+    <string name="oldAndroidVersion">Versión antigua de Android</string>
+    <string name="oldAndroidVersionMessage">Estás usando una versión de Android antigua que no será soportada en futuras actualizaciones. A partir de la versión 3.1.0 de blabber.im solo tendrán soporte los dispositivos con Android 5 o superior. Por favor actualiza el firmware de tu dispositivo.</string>
+    <string name="save_x_file">Guardar %s</string>
+    <string name="file_copied_to">Fichero copiado a %s</string>
+    <string name="use_individual_notifications">Usar notificaciones individuales</string>
+    <string name="pref_remove_all_individual_summary">Borrar todas las notificaciones individuales para tus contactos y grupos.</string>
+    <string name="pref_remove_all_individual_notifications_title">Borrar todas las notificaciones individuales</string>
+    <string name="remove_individual_notifications">Borrar notificaciones individuales</string>
+    <string name="remove_individual_notifications_message">¿Realmente quieres borrar este conjunto de notificaciones individuales para %s?</string>
+    <string name="remove_all_individual_notifications_message">¿Realmente quieres borrar todas las notificaciones individuales para tus contactos y grupos?</string>
 </resources>
