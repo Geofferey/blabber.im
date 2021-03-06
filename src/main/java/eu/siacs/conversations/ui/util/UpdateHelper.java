@@ -78,7 +78,8 @@ public class UpdateHelper {
                         SaveMessageShown(activity, blabber_message);
                         try {
                             final Uri uri = Uri.parse(Config.migrationURL);
-                            try {CustomTab.openTab(activity, uri, ThemeHelper.isDark(ThemeHelper.find(activity)));
+                            try {
+                                CustomTab.openTab(activity, uri, ThemeHelper.isDark(ThemeHelper.find(activity)));
                             } catch (Exception e) {
                                 ToastCompat.makeText(activity, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
                             }
@@ -215,7 +216,20 @@ public class UpdateHelper {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return updateDate != null && lastUpdateDate != null && !firstInstalled.equals(lastUpdate) && lastUpdateDate.getTime() >= updateDate.getTime();
+        if (updateDate != null) {
+            if (lastUpdateDate != null) {
+                if (firstInstalled.equals(lastUpdate)) {
+                    SaveMessageShown(activity, blabber_message);
+                    return false;
+                } else {
+                    return lastUpdateDate.getTime() > updateDate.getTime();
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     private static boolean newInstalled(Activity activity) {
