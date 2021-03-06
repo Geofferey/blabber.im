@@ -104,13 +104,13 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
 
-        //versionNameSuffix " beta_(2021-02-04)" // " beta_(XXXX-XX-XX)" // activate for beta versions
-        versionCode 318
-        versionName "3.0.3"
+        versionNameSuffix " beta_(2021-03-06)" // " beta_(XXXX-XX-XX)" // activate for beta versions
+        versionCode 320
+        versionName "3.0.4"
         //resConfigs "en"
 
         archivesBaseName += "-$versionName"
-        //archivesBaseName += "$versionNameSuffix"  // activate for beta versions
+        archivesBaseName += "$versionNameSuffix"  // activate for beta versions
         applicationId "de.pixart.messenger"
         multiDexEnabled true
 

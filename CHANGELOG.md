@@ -1,5 +1,15 @@
 ### Changelog
 
+#### Version 3.0.4
+* fix OpenPGP key id discovery for OpenKeychain 5.6+
+* properly verify punycode TLS certificates
+* improve stability of RTP session establishment (calling)
+* verify A/V calls with preexisting OMEMO sessions
+* add memory management in attachment settings (blabber.im)
+* add setting to delete files older than x days (blabber.im)
+* show message on devices with Android 4 that they are outdated (blabber.im)
+* bug fixes
+
 #### Version 3.0.3
 
 * add custom tabs (blabber.im)
