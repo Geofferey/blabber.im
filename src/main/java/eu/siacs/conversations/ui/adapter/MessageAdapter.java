@@ -298,7 +298,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                     final int shadowSize = 10;
                     viewHolder.username.setVisibility(View.VISIBLE);
                     viewHolder.username.setText(UIHelper.getColoredUsername(activity.xmppConnectionService, message));
-                    if (activity.xmppConnectionService.colored_muc_names()) {
+                    if (activity.xmppConnectionService.colored_muc_names() && ThemeHelper.showColoredUsernameBackGround(activity, darkBackground)) {
                         viewHolder.username.setPadding(4, 2, 4, 2);
                         viewHolder.username.setBackground(ContextCompat.getDrawable(activity, R.drawable.duration_background));
                     }

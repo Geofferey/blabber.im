@@ -540,4 +540,24 @@ public class ThemeHelper {
             }
         }
     }
+
+    public static boolean showColoredUsernameBackGround(Context context, boolean dark) {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        final Resources resources = context.getResources();
+        final String themeColor = sharedPreferences.getString("theme_color", resources.getString(R.string.theme_color));
+        switch (themeColor) {
+            case "blue":
+                return dark ? false : false;
+            case "blabber":
+                return dark ? true : false;
+            case "orange":
+                return dark ? true : false;
+            case "grey":
+                return dark ? false : false;
+            case "pink":
+                return dark ? true : false;
+            default:
+                return dark ? true : false;
+        }
+    }
 }
