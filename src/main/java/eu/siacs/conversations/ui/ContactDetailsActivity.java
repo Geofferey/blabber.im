@@ -95,6 +95,7 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
     ActivityContactDetailsBinding binding;
     private MediaAdapter mMediaAdapter;
     private boolean mAdvancedMode = false;
+    private boolean mIndividualNotifications = false;
     private DialogInterface.OnClickListener removeFromRoster = new DialogInterface.OnClickListener() {
 
         @Override
@@ -121,8 +122,7 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
     private OnCheckedChangeListener mOnReceiveCheckedChange = new OnCheckedChangeListener() {
 
         @Override
-        public void onCheckedChanged(CompoundButton buttonView,
-                                     boolean isChecked) {
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked) {
                 xmppConnectionService.sendPresencePacket(contact.getAccount(),
                         xmppConnectionService.getPresenceGenerator()
@@ -367,21 +367,52 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
                 invalidateOptionsMenu();
                 refreshUi();
                 break;
+            case R.id.action_activate_individual_notifications:
+                if (!menuItem.isChecked()) {
+                    this.mIndividualNotifications = true;
+                } else {
+                    if (Compatibility.runsTwentySix()) {
+                        final AlertDialog.Builder removeIndividualNotificationDialog = new AlertDialog.Builder(ContactDetailsActivity.this);
+                        removeIndividualNotificationDialog.setTitle(getString(R.string.remove_individual_notifications));
+                        removeIndividualNotificationDialog.setMessage(JidDialog.style(this, R.string.remove_individual_notifications_message, contact.getJid().toEscapedString()));
+                        removeIndividualNotificationDialog.setPositiveButton(R.string.yes, (dialog, which) -> {
+                            this.mIndividualNotifications = false;
+                            xmppConnectionService.getNotificationService().cleanNotificationChannels(this, mConversation.getUuid());
+                            menuItem.setChecked(this.mIndividualNotifications);
+                            xmppConnectionService.setIndividualNotificationPreference(mConversation, !mIndividualNotifications);
+                            xmppConnectionService.updateNotificationChannels();
+                            invalidateOptionsMenu();
+                            refreshUi();
+                        });
+                        removeIndividualNotificationDialog.setNegativeButton(R.string.no, (dialog, which) -> {
+                            this.mIndividualNotifications = true;
+                        });
+                        removeIndividualNotificationDialog.create().show();
+                    }
+                }
+                menuItem.setChecked(this.mIndividualNotifications);
+                xmppConnectionService.setIndividualNotificationPreference(mConversation, !mIndividualNotifications);
+                xmppConnectionService.updateNotificationChannels();
+                invalidateOptionsMenu();
+                refreshUi();
+                break;
             case R.id.action_message_notifications:
                 Intent messageNotificationIntent = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    final String time = String.valueOf(xmppConnectionService.getIndividualNotificationPreference(mConversation));
                     messageNotificationIntent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
                             .putExtra(Settings.EXTRA_APP_PACKAGE, this.getPackageName())
-                            .putExtra(Settings.EXTRA_CHANNEL_ID, NotificationService.INDIVIDUAL_NOTIFICATION_PREFIX + NotificationService.MESSAGES_CHANNEL_ID + '_' + mConversation.getUuid());
+                            .putExtra(Settings.EXTRA_CHANNEL_ID, NotificationService.INDIVIDUAL_NOTIFICATION_PREFIX + NotificationService.MESSAGES_CHANNEL_ID + "_" + mConversation.getUuid() + "_" + time);
                 }
                 startActivity(messageNotificationIntent);
                 break;
             case R.id.action_call_notifications:
                 Intent callNotificationIntent = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    final String time = String.valueOf(xmppConnectionService.getIndividualNotificationPreference(mConversation));
                     callNotificationIntent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
                             .putExtra(Settings.EXTRA_APP_PACKAGE, this.getPackageName())
-                            .putExtra(Settings.EXTRA_CHANNEL_ID, NotificationService.INDIVIDUAL_NOTIFICATION_PREFIX + NotificationService.INCOMING_CALLS_CHANNEL_ID + '_' + mConversation.getUuid());
+                            .putExtra(Settings.EXTRA_CHANNEL_ID, NotificationService.INDIVIDUAL_NOTIFICATION_PREFIX + NotificationService.INCOMING_CALLS_CHANNEL_ID + "_" + mConversation.getUuid() + "_" + time);
                 }
                 startActivity(callNotificationIntent);
                 break;
@@ -415,6 +446,9 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem menuItemAdvancedMode = menu.findItem(R.id.action_advanced_mode);
         menuItemAdvancedMode.setChecked(mAdvancedMode);
+        MenuItem menuItemIndividualNotifications = menu.findItem(R.id.action_activate_individual_notifications);
+        menuItemIndividualNotifications.setChecked(mIndividualNotifications);
+        menuItemIndividualNotifications.setVisible(Compatibility.runsTwentySix());
         if (mConversation == null) {
             return true;
         }
@@ -450,9 +484,9 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
                     menuVideoCall.setVisible(rtpCapability == RtpCapability.Capability.VIDEO);
                 }
             }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                menuCallNotification.setVisible(true);
-                menuMessageNotification.setVisible(true);
+            if (Compatibility.runsTwentySix()) {
+                menuCallNotification.setVisible(xmppConnectionService.hasIndividualNotification(mConversation));
+                menuMessageNotification.setVisible(xmppConnectionService.hasIndividualNotification(mConversation));
             } else {
                 menuCallNotification.setVisible(false);
                 menuMessageNotification.setVisible(false);
@@ -744,6 +778,7 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
                 xmppConnectionService.getAttachments(account, contact.getJid().asBareJid(), limit, this);
                 this.binding.showMedia.setOnClickListener((v) -> MediaBrowserActivity.launch(this, contact));
             }
+            this.mIndividualNotifications = xmppConnectionService.hasIndividualNotification(mConversation);
             populateView();
         }
     }

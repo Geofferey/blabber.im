@@ -39,7 +39,8 @@ public class Compatibility {
 
     private static final List<String> UNUSED_SETTINGS_PRE_TWENTYSIX = Arrays.asList(
             "message_notification_settings",
-            "call_notification_settings"
+            "call_notification_settings",
+            "remove_all_individual_notifications"
     );
 
     public static boolean hasStoragePermission(Context context) {

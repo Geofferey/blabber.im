@@ -1141,6 +1141,24 @@ public class XmppConnectionService extends Service {
         return getBooleanPreference(SettingsActivity.QUICK_SHARE_ATTACHMENT_CHOICE, R.bool.quick_share_attachment_choice);
     }
 
+    public long getIndividualNotificationPreference(final Conversation conversation) {
+        final String uuid = conversation.getUuid();
+        return getPreferences().getLong(SettingsActivity.INDIVIDUAL_NOTIFICATION_PREFIX + uuid, 0L);
+    }
+
+    public void setIndividualNotificationPreference(final Conversation conversation, final boolean reset) {
+        final String uuid = conversation.getUuid();
+        long value = System.currentTimeMillis();
+        if (reset) {
+            value = 0;
+        }
+        getPreferences().edit().putLong(SettingsActivity.INDIVIDUAL_NOTIFICATION_PREFIX + uuid, value).apply();
+    }
+
+    public boolean hasIndividualNotification(Conversation conversation) {
+        return getIndividualNotificationPreference(conversation) > 0L;
+    }
+
     private Presence.Status getTargetPresence() {
         if (dndOnSilentMode() && isPhoneSilenced()) {
             return Presence.Status.DND;
@@ -1406,7 +1424,8 @@ public class XmppConnectionService extends Service {
 
     public void updateNotificationChannels() {
         if (Compatibility.runsTwentySix()) {
-            mNotificationService.updateChannels();
+            new Thread(mNotificationService::updateChannels).start();
+            new Thread(() -> mNotificationService.cleanAllOldNotificationChannels(this)).start();
         }
     }
 
@@ -4306,7 +4325,8 @@ public class XmppConnectionService extends Service {
         long defaultValue = getResources().getInteger(res);
         try {
             return Long.parseLong(getPreferences().getString(name, String.valueOf(defaultValue)));
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
             return defaultValue;
         }
     }

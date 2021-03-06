@@ -38,6 +38,7 @@ import eu.siacs.conversations.persistance.FileBackend;
 import eu.siacs.conversations.services.ExportBackupService;
 import eu.siacs.conversations.services.MemorizingTrustManager;
 import eu.siacs.conversations.ui.util.StyledAttributes;
+import eu.siacs.conversations.utils.Compatibility;
 import eu.siacs.conversations.utils.ThemeHelper;
 import eu.siacs.conversations.utils.TimeFrameUtils;
 import eu.siacs.conversations.xmpp.Jid;
@@ -83,6 +84,7 @@ public class SettingsActivity extends XmppActivity implements
     public static final String USE_UNICOLORED_CHATBG = "unicolored_chatbg";
     public static final String EASY_DOWNLOADER = "easy_downloader";
     public static final String MIN_ANDROID_SDK21_SHOWN = "min_android_sdk21_shown";
+    public static final String INDIVIDUAL_NOTIFICATION_PREFIX = "individual_notification_set_";
 
     public static final int REQUEST_CREATE_BACKUP = 0xbf8701;
     Preference multiAccountPreference;
@@ -371,6 +373,27 @@ public class SettingsActivity extends XmppActivity implements
                     return true;
                 });
             }
+        }
+
+        final Preference removeAllIndividualNotifications = mSettingsFragment.findPreference("remove_all_individual_notifications");
+        if (removeAllIndividualNotifications != null) {
+            removeAllIndividualNotifications.setOnPreferenceClickListener(preference -> {
+                final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(SettingsActivity.this);
+                dialogBuilder.setTitle(getResources().getString(R.string.remove_individual_notifications));
+                dialogBuilder.setMessage(R.string.remove_all_individual_notifications_message);
+                dialogBuilder.setPositiveButton(
+                        getResources().getString(R.string.yes), (dialog, which) -> {
+                            if (Compatibility.runsTwentySix()) {
+                                xmppConnectionService.getNotificationService().cleanAllNotificationChannels(SettingsActivity.this);
+                                xmppConnectionService.updateNotificationChannels();
+                            }
+                        });
+                dialogBuilder.setNegativeButton(getResources().getString(R.string.no), null);
+                AlertDialog alertDialog = dialogBuilder.create();
+                alertDialog.show();
+                return true;
+            });
+            updateTheme();
         }
     }
 

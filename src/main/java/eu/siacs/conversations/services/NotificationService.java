@@ -89,7 +89,9 @@ public class NotificationService {
     public static final String UPDATE_CHANNEL_ID = "appupdate";
     public static final String VIDEOCOMPRESSION_CHANNEL_ID = "compression";
     public static final String ERROR_CHANNEL_ID = "error";
-    public static final String INDIVIDUAL_NOTIFICATION_PREFIX = "xxXx_"; // x, Xx, xXx,
+    public static final String INDIVIDUAL_NOTIFICATION_PREFIX = "XxXx_";
+    public static final String OLD_INDIVIDUAL_NOTIFICATION_PREFIX = "xxXx_"; // x, Xx, xXx,
+    private static final String DEFAULT = "default_ID";
     private static final int CALL_DAT = 120;
     private static final long[] CALL_PATTERN = {0, 3 * CALL_DAT, CALL_DAT, CALL_DAT, 3 * CALL_DAT, CALL_DAT, CALL_DAT};
 
@@ -252,26 +254,35 @@ public class NotificationService {
             deliveryFailedChannel.setGroup("chats");
             notificationManager.createNotificationChannel(deliveryFailedChannel);
         }
+
+        createDefaultMessageNotificationChannel(notificationManager);
+        createDefaultCallNotificationChannel(notificationManager);
+
         createIndividualNotificationChannels(notificationManager);
     }
 
+    // create individual notification channels for selected chats
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createIndividualNotificationChannels(NotificationManager notificationManager) {
         int chats = mXmppConnectionService.getConversations().size();
         for (int i = 0; i < chats; i++) {
-            if (mXmppConnectionService.getConversations().get(i).getMode() == Conversation.MODE_SINGLE) {
-                createCallNotificationChannels(notificationManager, i);
+            if (mXmppConnectionService.hasIndividualNotification(mXmppConnectionService.getConversations().get(i))) {
+                if (mXmppConnectionService.getConversations().get(i).getMode() == Conversation.MODE_SINGLE) {
+                    createCallNotificationChannels(notificationManager, i);
+                }
+                createMessageNotificationChannels(notificationManager, i);
             }
-            createMessageNotificationChannels(notificationManager, i);
         }
     }
 
+    // create individual call notification channel for selected chats
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createCallNotificationChannels(NotificationManager notificationManager, int i) {
         final String uuid = mXmppConnectionService.getConversations().get(i).getUuid();
         final String jid = mXmppConnectionService.getConversations().get(i).getAccount().getJid().asBareJid().toString();
         final String name = mXmppConnectionService.getConversations().get(i).getName().toString().toLowerCase();
-        final String channelID = INDIVIDUAL_NOTIFICATION_PREFIX + INCOMING_CALLS_CHANNEL_ID + "_" + uuid;
+        final String time = String.valueOf(mXmppConnectionService.getIndividualNotificationPreference(mXmppConnectionService.getConversations().get(i)));
+        final String channelID = INDIVIDUAL_NOTIFICATION_PREFIX + INCOMING_CALLS_CHANNEL_ID + "_" + uuid + "_" + time;
         try {
             final NotificationChannel incomingCallsChannel = new NotificationChannel(channelID,
                     mXmppConnectionService.getString(R.string.notification_group_calls),
@@ -294,12 +305,14 @@ public class NotificationService {
         }
     }
 
+    // create individual message notification channels for selected chat
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createMessageNotificationChannels(NotificationManager notificationManager, int i) {
         final String uuid = mXmppConnectionService.getConversations().get(i).getUuid();
         final String jid = mXmppConnectionService.getConversations().get(i).getAccount().getJid().asBareJid().toString();
         final String name = mXmppConnectionService.getConversations().get(i).getName().toString().toLowerCase();
-        final String channelID = INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + "_" + uuid;
+        final String time = String.valueOf(mXmppConnectionService.getIndividualNotificationPreference(mXmppConnectionService.getConversations().get(i)));
+        final String channelID = INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + "_" + uuid + "_" + time;
         try {
             final NotificationChannel messagesChannel = new NotificationChannel(channelID,
                     mXmppConnectionService.getString(R.string.notification_group_messages),
@@ -323,6 +336,58 @@ public class NotificationService {
         }
     }
 
+    // default message notification channel
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void createDefaultMessageNotificationChannel(NotificationManager notificationManager) {
+        final String channelID = MESSAGES_CHANNEL_ID + "_" + DEFAULT;
+        try {
+            final NotificationChannel messagesChannel = new NotificationChannel(channelID,
+                    mXmppConnectionService.getString(R.string.notification_group_messages),
+                    NotificationManager.IMPORTANCE_HIGH);
+            messagesChannel.setShowBadge(true);
+            messagesChannel.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION), new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION_COMMUNICATION_INSTANT)
+                    .build());
+            messagesChannel.setLightColor(LED_COLOR);
+            final int dat = 70;
+            final long[] pattern = {0, 3 * dat, dat, dat};
+            messagesChannel.setVibrationPattern(pattern);
+            messagesChannel.enableVibration(true);
+            messagesChannel.enableLights(true);
+            messagesChannel.setGroup("chats");
+            notificationManager.createNotificationChannel(messagesChannel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // default call notification channel
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void createDefaultCallNotificationChannel(NotificationManager notificationManager) {
+        final String channelID = INCOMING_CALLS_CHANNEL_ID + "_" + DEFAULT;
+        try {
+            final NotificationChannel incomingCallsChannel = new NotificationChannel(channelID,
+                    mXmppConnectionService.getString(R.string.notification_group_calls),
+                    NotificationManager.IMPORTANCE_HIGH);
+            incomingCallsChannel.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE), new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
+                    .build());
+            incomingCallsChannel.setShowBadge(false);
+            incomingCallsChannel.setLightColor(LED_COLOR);
+            incomingCallsChannel.enableLights(true);
+            incomingCallsChannel.setGroup("calls");
+            incomingCallsChannel.setBypassDnd(true);
+            incomingCallsChannel.enableVibration(true);
+            incomingCallsChannel.setVibrationPattern(CALL_PATTERN);
+            notificationManager.createNotificationChannel(incomingCallsChannel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // clean individual notification channels and groups for selected user
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void cleanNotificationChannels(Context context, String uuid) {
         final NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
@@ -331,6 +396,7 @@ public class NotificationService {
         cleanNotificationGroup(notificationManager, uuid);
     }
 
+    // clean individual notification group for user
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void cleanNotificationGroup(NotificationManager notificationManager, String uuid) {
         try {
@@ -350,9 +416,11 @@ public class NotificationService {
         }
     }
 
+    // clean individual call notification channels for user
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void cleanCallNotificationChannels(NotificationManager notificationManager, String uuid) {
-        final String channelID = INDIVIDUAL_NOTIFICATION_PREFIX + INCOMING_CALLS_CHANNEL_ID + "_" + uuid;
+        final String time = String.valueOf(mXmppConnectionService.getIndividualNotificationPreference(mXmppConnectionService.findConversationByUuid(uuid)));
+        final String channelID = INDIVIDUAL_NOTIFICATION_PREFIX + INCOMING_CALLS_CHANNEL_ID + "_" + uuid + "_" + time;
         try {
             final List<NotificationChannel> list = notificationManager.getNotificationChannels();
             final int count = list.size();
@@ -368,9 +436,11 @@ public class NotificationService {
         }
     }
 
+    // clean individual message notification channels and group for user
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void cleanMessageNotificationChannels(NotificationManager notificationManager, String uuid) {
-        final String channelID = INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + "_" + uuid;
+        final String time = String.valueOf(mXmppConnectionService.getIndividualNotificationPreference(mXmppConnectionService.findConversationByUuid(uuid)));
+        final String channelID = INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + "_" + uuid + "_" + time;
         try {
             final List<NotificationChannel> list = notificationManager.getNotificationChannels();
             final int count = list.size();
@@ -383,6 +453,42 @@ public class NotificationService {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    // clean all individual notification settings
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void cleanAllNotificationChannels(Context context) {
+        final NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+        int chats = mXmppConnectionService.getConversations().size();
+        for (int i = 0; i < chats; i++) {
+            if (mXmppConnectionService.hasIndividualNotification(mXmppConnectionService.getConversations().get(i))) {
+                final String uuid = mXmppConnectionService.getConversations().get(i).getUuid();
+                mXmppConnectionService.setIndividualNotificationPreference(mXmppConnectionService.getConversations().get(i), true);
+                cleanCallNotificationChannels(notificationManager, uuid);
+                cleanMessageNotificationChannels(notificationManager, uuid);
+                cleanNotificationGroup(notificationManager, uuid);
+            }
+        }
+    }
+
+    // clean all old individual notifications
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void cleanAllOldNotificationChannels(Context context) {
+        final NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+        int channels = notificationManager.getNotificationChannels().size();
+        for (int i1 = 0; i1 < channels; i1++) {
+            String channelID = notificationManager.getNotificationChannels().get(i1).getId();
+            if (channelID.startsWith(OLD_INDIVIDUAL_NOTIFICATION_PREFIX)) {
+                notificationManager.deleteNotificationChannel(channelID);
+            }
+        }
+        int groups = notificationManager.getNotificationChannelGroups().size();
+        for (int i2 = 0; i2 < groups; i2++) {
+            String groupID = notificationManager.getNotificationChannelGroups().get(i2).getId();
+            if (groupID.startsWith(OLD_INDIVIDUAL_NOTIFICATION_PREFIX)) {
+                notificationManager.deleteNotificationChannel(groupID);
+            }
         }
     }
 
@@ -561,7 +667,13 @@ public class NotificationService {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             cleanNotificationChannels(mXmppConnectionService, olduuid);
         }
-        final Builder builder = new Builder(mXmppConnectionService, INDIVIDUAL_NOTIFICATION_PREFIX + INCOMING_CALLS_CHANNEL_ID + '_' + uuid);
+        Builder builder = null;
+        if (mXmppConnectionService.hasIndividualNotification(mXmppConnectionService.findConversationByUuid(uuid))) {
+            final String time = String.valueOf(mXmppConnectionService.getIndividualNotificationPreference(mXmppConnectionService.findConversationByUuid(uuid)));
+            builder =  new Builder(mXmppConnectionService, INDIVIDUAL_NOTIFICATION_PREFIX + INCOMING_CALLS_CHANNEL_ID + "_" + uuid + "_" + time);
+        } else {
+            builder =  new Builder(mXmppConnectionService, INCOMING_CALLS_CHANNEL_ID + "_" + DEFAULT);
+        }
         if (media.contains(Media.VIDEO)) {
             builder.setSmallIcon(R.drawable.ic_videocam_white_24dp);
             builder.setContentTitle(mXmppConnectionService.getString(R.string.rtp_state_incoming_video_call));
@@ -1012,7 +1124,18 @@ public class NotificationService {
         for (final ArrayList<Message> messages : notifications.values()) {
             if (messages.size() > 0) {
                 conversation = (Conversation) messages.get(0).getConversation();
-                mBuilder = new NotificationCompat.Builder(mXmppConnectionService, quietHours ? QUIET_HOURS_CHANNEL_ID : (notify ? (INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + '_' + conversation.getUuid()) : SILENT_MESSAGES_CHANNEL_ID));
+                if (quietHours) {
+                    mBuilder = new Builder(mXmppConnectionService, QUIET_HOURS_CHANNEL_ID);
+                } else if (notify) {
+                    if (mXmppConnectionService.hasIndividualNotification(conversation)) {
+                        final String time = String.valueOf(mXmppConnectionService.getIndividualNotificationPreference(conversation));
+                        mBuilder = new Builder(mXmppConnectionService, INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + "_" + conversation.getUuid() + "_" + time);
+                    } else {
+                        mBuilder = new Builder(mXmppConnectionService, MESSAGES_CHANNEL_ID + "_" + DEFAULT);
+                    }
+                } else {
+                    mBuilder = new Builder(mXmppConnectionService, SILENT_MESSAGES_CHANNEL_ID);
+                }
                 final String name = conversation.getName().toString();
                 SpannableString styledString;
                 if (Config.HIDE_MESSAGE_TEXT_IN_NOTIFICATION) {
@@ -1051,7 +1174,20 @@ public class NotificationService {
         Builder mBuilder = null;
         if (messages.size() >= 1) {
             final Conversation conversation = (Conversation) messages.get(0).getConversation();
-            mBuilder = new NotificationCompat.Builder(mXmppConnectionService, quietHours ? QUIET_HOURS_CHANNEL_ID : (notify ? (INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + '_' + conversation.getUuid()) : SILENT_MESSAGES_CHANNEL_ID));
+            if (quietHours) {
+                mBuilder = new Builder(mXmppConnectionService, QUIET_HOURS_CHANNEL_ID);
+            } else {
+                if (notify) {
+                    if (mXmppConnectionService.hasIndividualNotification(conversation)) {
+                        final String time = String.valueOf(mXmppConnectionService.getIndividualNotificationPreference(conversation));
+                        mBuilder = new Builder(mXmppConnectionService, INDIVIDUAL_NOTIFICATION_PREFIX + MESSAGES_CHANNEL_ID + "_" + conversation.getUuid() + "_" + time);
+                    } else {
+                        mBuilder = new Builder(mXmppConnectionService, MESSAGES_CHANNEL_ID + "_" + DEFAULT);
+                    }
+                } else {
+                    mBuilder = new Builder(mXmppConnectionService, SILENT_MESSAGES_CHANNEL_ID);
+                }
+            }
             mBuilder.setLargeIcon(mXmppConnectionService.getAvatarService().get(conversation, AvatarService.getSystemUiAvatarSize(mXmppConnectionService)));
             mBuilder.setContentTitle(conversation.getName());
             if (Config.HIDE_MESSAGE_TEXT_IN_NOTIFICATION) {

@@ -65,6 +65,13 @@
         android:title="@string/advanced_mode"
         app:showAsAction="never" />
     <item
+        android:id="@+id/action_activate_individual_notifications"
+        android:checkable="true"
+        android:checked="false"
+        android:orderInCategory="109"
+        android:title="@string/use_individual_notifications"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_message_notifications"
         android:orderInCategory="110"
         android:title="@string/pref_message_notification_settings"

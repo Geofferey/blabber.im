@@ -184,6 +184,10 @@
                     android:value="@string/applicationId" />
             </intent>
         </PreferenceScreen>
+        <Preference
+            android:key="remove_all_individual_notifications"
+            android:summary="@string/pref_remove_all_individual_summary"
+            android:title="@string/pref_remove_all_individual_notifications_title" />
         <RingtonePreference
             android:defaultValue="@string/notification_ringtone"
             android:key="notification_ringtone"

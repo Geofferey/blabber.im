@@ -4,7 +4,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Editable;
@@ -43,6 +42,7 @@ import eu.siacs.conversations.ui.interfaces.OnMediaLoaded;
 import eu.siacs.conversations.ui.util.Attachment;
 import eu.siacs.conversations.ui.util.AvatarWorkerTask;
 import eu.siacs.conversations.ui.util.GridManager;
+import eu.siacs.conversations.ui.util.JidDialog;
 import eu.siacs.conversations.ui.util.MucConfiguration;
 import eu.siacs.conversations.ui.util.MucDetailsContextMenuHelper;
 import eu.siacs.conversations.ui.util.MyLinkify;
@@ -91,6 +91,7 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
     private String uuid = null;
 
     private boolean mAdvancedMode = false;
+    private boolean mIndividualNotifications = false;
 
     private UiCallback<Conversation> renameCallback = new UiCallback<Conversation>() {
         @Override
@@ -334,12 +335,42 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
                 invalidateOptionsMenu();
                 updateView();
                 break;
+            case R.id.action_activate_individual_notifications:
+                if (!menuItem.isChecked()) {
+                    this.mIndividualNotifications = true;
+                } else {
+                    if (Compatibility.runsTwentySix()) {
+                        final AlertDialog.Builder removeIndividualNotificationDialog = new AlertDialog.Builder(ConferenceDetailsActivity.this);
+                        removeIndividualNotificationDialog.setTitle(getString(R.string.remove_individual_notifications));
+                        removeIndividualNotificationDialog.setMessage(JidDialog.style(this, R.string.remove_individual_notifications_message, mConversation.getJid().asBareJid().toString()));
+                        removeIndividualNotificationDialog.setPositiveButton(R.string.yes, (dialog, which) -> {
+                            this.mIndividualNotifications = false;
+                            xmppConnectionService.getNotificationService().cleanNotificationChannels(this, mConversation.getUuid());
+                            menuItem.setChecked(this.mIndividualNotifications);
+                            xmppConnectionService.setIndividualNotificationPreference(mConversation, !mIndividualNotifications);
+                            xmppConnectionService.updateNotificationChannels();
+                            invalidateOptionsMenu();
+                            refreshUi();
+                        });
+                        removeIndividualNotificationDialog.setNegativeButton(R.string.no, (dialog, which) -> {
+                            this.mIndividualNotifications = true;
+                        });
+                        removeIndividualNotificationDialog.create().show();
+                    }
+                }
+                menuItem.setChecked(this.mIndividualNotifications);
+                xmppConnectionService.setIndividualNotificationPreference(mConversation, !mIndividualNotifications);
+                xmppConnectionService.updateNotificationChannels();
+                invalidateOptionsMenu();
+                refreshUi();
+                break;
             case R.id.action_message_notifications:
                 Intent messageNotificationIntent = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                if (Compatibility.runsTwentySix()) {
+                    final String time = String.valueOf(xmppConnectionService.getIndividualNotificationPreference(mConversation));
                     messageNotificationIntent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
                             .putExtra(Settings.EXTRA_APP_PACKAGE, this.getPackageName())
-                            .putExtra(Settings.EXTRA_CHANNEL_ID, NotificationService.INDIVIDUAL_NOTIFICATION_PREFIX + NotificationService.MESSAGES_CHANNEL_ID + '_' + mConversation.getUuid());
+                            .putExtra(Settings.EXTRA_CHANNEL_ID, NotificationService.INDIVIDUAL_NOTIFICATION_PREFIX + NotificationService.MESSAGES_CHANNEL_ID + "_" + mConversation.getUuid() + "_" + time);
                 }
                 startActivity(messageNotificationIntent);
                 break;
@@ -432,6 +463,9 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem menuItemAdvancedMode = menu.findItem(R.id.action_advanced_mode);
         menuItemAdvancedMode.setChecked(mAdvancedMode);
+        MenuItem menuItemIndividualNotifications = menu.findItem(R.id.action_activate_individual_notifications);
+        menuItemIndividualNotifications.setChecked(mIndividualNotifications);
+        menuItemIndividualNotifications.setVisible(Compatibility.runsTwentySix());
         if (mConversation == null) {
             return true;
         }
@@ -445,8 +479,10 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
         final MenuItem share = menu.findItem(R.id.action_share);
         share.setVisible(!groupChat);
         final MenuItem menuMessageNotification = menu.findItem(R.id.action_message_notifications);
-        if (this.mConversation != null) {
-            menuMessageNotification.setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O);
+        if (Compatibility.runsTwentySix()) {
+            menuMessageNotification.setVisible(xmppConnectionService.hasIndividualNotification(mConversation));
+        } else {
+            menuMessageNotification.setVisible(false);
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -499,6 +535,7 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
                     this.binding.leaveMuc.setText(groupChat ? R.string.action_end_conversation_muc : R.string.action_end_conversation_channel);
                     this.binding.autojoinCheckbox.setText(groupChat ? R.string.autojoin_group_chat : R.string.autojoin_channel);
                 }
+                this.mIndividualNotifications = xmppConnectionService.hasIndividualNotification(mConversation);
                 updateView();
             }
         }
