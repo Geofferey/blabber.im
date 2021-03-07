@@ -42,6 +42,7 @@ public class UpdateHelper {
 
     public static void showPopup(Activity activity) {
         Thread t = new Thread(() -> {
+            updateInstalled(activity);
             final SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(activity.getBaseContext());
             final String Message = "message_shown_" + blabber_message;
             final boolean SHOW_MESSAGE = getPrefs.getBoolean(Message, true);
@@ -222,12 +223,19 @@ public class UpdateHelper {
                     SaveMessageShown(activity, blabber_message);
                     return false;
                 } else {
-                    return lastUpdateDate.getTime() > updateDate.getTime();
+                    if (lastUpdateDate.getTime() <= updateDate.getTime()) {
+                        return true;
+                    } else {
+                        SaveMessageShown(activity, blabber_message);
+                        return false;
+                    }
                 }
             } else {
+                SaveMessageShown(activity, blabber_message);
                 return false;
             }
         } else {
+            SaveMessageShown(activity, blabber_message);
             return false;
         }
     }
