@@ -377,7 +377,11 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
                         removeIndividualNotificationDialog.setMessage(JidDialog.style(this, R.string.remove_individual_notifications_message, contact.getJid().toEscapedString()));
                         removeIndividualNotificationDialog.setPositiveButton(R.string.yes, (dialog, which) -> {
                             this.mIndividualNotifications = false;
-                            xmppConnectionService.getNotificationService().cleanNotificationChannels(this, mConversation.getUuid());
+                            try {
+                                xmppConnectionService.getNotificationService().cleanNotificationChannels(this, mConversation.getUuid());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             menuItem.setChecked(this.mIndividualNotifications);
                             xmppConnectionService.setIndividualNotificationPreference(mConversation, !mIndividualNotifications);
                             xmppConnectionService.updateNotificationChannels();

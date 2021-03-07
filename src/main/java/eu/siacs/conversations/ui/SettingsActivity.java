@@ -384,7 +384,11 @@ public class SettingsActivity extends XmppActivity implements
                 dialogBuilder.setPositiveButton(
                         getResources().getString(R.string.yes), (dialog, which) -> {
                             if (Compatibility.runsTwentySix()) {
-                                xmppConnectionService.getNotificationService().cleanAllNotificationChannels(SettingsActivity.this);
+                                try {
+                                    xmppConnectionService.getNotificationService().cleanAllNotificationChannels(SettingsActivity.this);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                                 xmppConnectionService.updateNotificationChannels();
                             }
                         });

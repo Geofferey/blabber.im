@@ -345,7 +345,11 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
                         removeIndividualNotificationDialog.setMessage(JidDialog.style(this, R.string.remove_individual_notifications_message, mConversation.getJid().asBareJid().toString()));
                         removeIndividualNotificationDialog.setPositiveButton(R.string.yes, (dialog, which) -> {
                             this.mIndividualNotifications = false;
-                            xmppConnectionService.getNotificationService().cleanNotificationChannels(this, mConversation.getUuid());
+                            try {
+                                xmppConnectionService.getNotificationService().cleanNotificationChannels(this, mConversation.getUuid());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             menuItem.setChecked(this.mIndividualNotifications);
                             xmppConnectionService.setIndividualNotificationPreference(mConversation, !mIndividualNotifications);
                             xmppConnectionService.updateNotificationChannels();
