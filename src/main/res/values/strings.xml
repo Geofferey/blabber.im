@@ -624,6 +624,10 @@
         <item quantity="one">%d month</item>
         <item quantity="other">%d months</item>
     </plurals>
+    <plurals name="years">
+        <item quantity="one">%d year</item>
+        <item quantity="other">%d years</item>
+    </plurals>
     <string name="today">Today</string>
     <string name="pref_use_max_brightness_summary">Switch to maximum brightness while watching videos or images in fullscreen.</string>
     <string name="pref_use_max_brightness">Maximum brightness</string>
@@ -1116,8 +1120,8 @@
     <string name="videos">videos</string>
     <string name="files">files</string>
     <string name="all_media_files">media files</string>
-    <string name="memory_warning">Your messenger is using %1$s (%2$s) of internal memory.\n\nYou can enable automatic message deletion in relation with automatic attachment deletion or delete stored media manually.</string>
-    <string name="memory_warning_force">Your messenger is using %1$s (%2$s) of internal memory.\n\nYou should enable automatic message deletion in relation with automatic attachment deletion or delete stored media manually. Your device will become out of memory!</string>
+    <string name="memory_warning">Your messenger is using %1$s (%2$s) of internal memory.\n\nYou can enable automatic attachment deletion or delete stored media manually.</string>
+    <string name="memory_warning_force">Your messenger is using %1$s (%2$s) of internal memory.\n\nYou should enable automatic attachment deletion or delete stored media manually. Your device will become out of memory!</string>
     <string name="open_settings">Open settings</string>
     <string name="oldAndroidVersion">Old Android version</string>
     <string name="oldAndroidVersionMessage">You are using an old Android version that will no longer be supported in future updates. From blabber.im version 3.1.0 only devices with Android 5 or higher are supported. Please update your device firmware.</string>

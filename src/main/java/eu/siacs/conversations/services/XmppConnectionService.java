@@ -173,8 +173,7 @@ import eu.siacs.conversations.xmpp.stanzas.PresencePacket;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
 import static eu.siacs.conversations.ui.SettingsActivity.ALLOW_MESSAGE_CORRECTION;
-import static eu.siacs.conversations.ui.SettingsActivity.AUTOMATIC_FILE_DELETION;
-import static eu.siacs.conversations.ui.SettingsActivity.AUTOMATIC_MESSAGE_DELETION;
+import static eu.siacs.conversations.ui.SettingsActivity.AUTOMATIC_ATTACHMENT_DELETION;
 import static eu.siacs.conversations.ui.SettingsActivity.CHAT_STATES;
 import static eu.siacs.conversations.ui.SettingsActivity.CONFIRM_MESSAGES;
 import static eu.siacs.conversations.ui.SettingsActivity.ENABLE_MULTI_ACCOUNTS;
@@ -877,6 +876,7 @@ public class XmppConnectionService extends Service {
         }
         if (SystemClock.elapsedRealtime() - mLastExpiryRun.get() >= Config.EXPIRY_INTERVAL) {
             expireOldMessages();
+            expireOldFiles();
             deleteWebpreviewCache();
         }
         return START_STICKY;
@@ -4343,6 +4343,11 @@ public class XmppConnectionService extends Service {
         return timeout == 0 ? timeout : (System.currentTimeMillis() - (timeout * 1000));
     }
 
+    public long getAutomaticAttachmentDeletionDate() {
+        final long timeout = getLongPreference(AUTOMATIC_ATTACHMENT_DELETION, R.integer.automatic_attachment_deletion);
+        return timeout == 0 ? timeout : (System.currentTimeMillis() - (timeout * 1000));
+    }
+
     public long getLongPreference(String name, @IntegerRes int res) {
         long defaultValue = getResources().getInteger(res);
         try {
@@ -5355,12 +5360,16 @@ public class XmppConnectionService extends Service {
         } else {
             databaseBackend.expireOldMessages(timestamp);
         }
-        if (isMessageAndFileExpiryEnabled()) {
-            getFileBackend().expireOldFiles(new File(FileBackend.getAppMediaDirectory()), timestamp);
-        }
     }
 
-    public boolean isMessageAndFileExpiryEnabled() {
-        return getBooleanPreference(AUTOMATIC_FILE_DELETION, R.bool.automatic_file_deletion) && getLongPreference(AUTOMATIC_MESSAGE_DELETION, R.integer.automatic_message_deletion) > 0;
+    public void expireOldFiles() {
+        mLastExpiryRun.set(SystemClock.elapsedRealtime());
+        new Thread(() -> {
+            long timestamp = getAutomaticAttachmentDeletionDate();
+            if (timestamp > 0) {
+                getFileBackend().expireOldFiles(new File(FileBackend.getAppMediaDirectory()), timestamp);
+                updateConversationUi();
+            }
+        }).start();
     }
 }

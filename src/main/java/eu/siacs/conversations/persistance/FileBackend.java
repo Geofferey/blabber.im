@@ -231,17 +231,6 @@ public class FileBackend {
         return deleteFile(file);
     }
 
-    public boolean expireOldFile(File file, long timestamp) {
-        if (file.exists()) {
-            long lastModified = file.lastModified();
-            if (lastModified < timestamp) {
-                return deleteFile(file);
-            }
-            return true;
-        }
-        return false;
-    }
-
     public void expireOldFiles(File dir, long timestamp) {
         long start = SystemClock.elapsedRealtime();
         int num = 0;

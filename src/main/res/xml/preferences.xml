@@ -351,10 +351,10 @@
             android:key="automatic_message_deletion"
             android:summary="@string/pref_automatically_delete_messages_description"
             android:title="@string/pref_automatically_delete_messages" />
-        <CheckBoxPreference
-            android:defaultValue="@bool/automatic_file_deletion"
-            android:key="automatic_file_deletion"
-            android:summary="@string/pref_automatically_delete_files_description"
+        <ListPreference
+            android:defaultValue="@integer/automatic_attachment_deletion"
+            android:key="automatic_attachment_deletion"
+            android:summary="@string/pref_automatically_delete_attachments_description"
             android:title="@string/pref_automatically_delete_files" />
         <CheckBoxPreference
             android:defaultValue="@bool/use_internal_updater"

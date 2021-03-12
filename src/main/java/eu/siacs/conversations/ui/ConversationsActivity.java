@@ -381,7 +381,7 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
                 preferences.edit().putBoolean(HIDE_MEMORY_WARNING, false).apply();
                 return true;
             }
-            return !xmppConnectionService.hideMemoryWarning() && (relativeUsage > normalWarningRelative || mediaUsage >= normalWarningAbsolute) & !xmppConnectionService.isMessageAndFileExpiryEnabled();
+            return !xmppConnectionService.hideMemoryWarning() && (relativeUsage > normalWarningRelative || mediaUsage >= normalWarningAbsolute) & xmppConnectionService.getAutomaticAttachmentDeletionDate() == 0;
         }
 
         @Override

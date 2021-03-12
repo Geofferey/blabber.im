@@ -53,7 +53,7 @@ public class SettingsActivity extends XmppActivity implements
     public static final String MANUALLY_CHANGE_PRESENCE = "manually_change_presence";
     public static final String BLIND_TRUST_BEFORE_VERIFICATION = "btbv";
     public static final String AUTOMATIC_MESSAGE_DELETION = "automatic_message_deletion";
-    public static final String AUTOMATIC_FILE_DELETION = "automatic_file_deletion";
+    public static final String AUTOMATIC_ATTACHMENT_DELETION = "automatic_attachment_deletion";
     public static final String BROADCAST_LAST_ACTIVITY = "last_activity";
     public static final String WARN_UNENCRYPTED_CHAT = "warn_unencrypted_chat";
     public static final String HIDE_YOU_ARE_NOT_PARTICIPATING = "hide_you_are_not_participating";
@@ -129,18 +129,6 @@ public class SettingsActivity extends XmppActivity implements
             //handleMultiAccountChanges();
         }
 
-        autoMessageExpiryPreference = mSettingsFragment.findPreference(AUTOMATIC_MESSAGE_DELETION);
-        autoFileExpiryPreference = mSettingsFragment.findPreference(AUTOMATIC_FILE_DELETION);
-        if (autoFileExpiryPreference != null && autoMessageExpiryPreference != null && autoMessageExpiryPreference instanceof ListPreference) {
-            ListPreference listPref = (ListPreference) autoMessageExpiryPreference;
-            long expiry = Long.parseLong(listPref.getValue());
-            autoFileExpiryPreference.setEnabled(expiry > 0);
-            autoMessageExpiryPreference.setOnPreferenceChangeListener((preference, newValue) -> {
-                refreshUiReal();
-                return true;
-            });
-        }
-
         BundledEmojiPreference = mSettingsFragment.findPreference("use_bundled_emoji");
         if (BundledEmojiPreference != null) {
             isBundledEmojiChecked = ((CheckBoxPreference) BundledEmojiPreference).isChecked();
@@ -199,6 +187,23 @@ public class SettingsActivity extends XmppActivity implements
             }
             automaticMessageDeletionList.setEntries(entries);
             automaticMessageDeletionList.setEntryValues(entryValues);
+        }
+
+        ListPreference automaticAttachmentDeletionList = (ListPreference) mSettingsFragment.findPreference(AUTOMATIC_ATTACHMENT_DELETION);
+        if (automaticAttachmentDeletionList != null) {
+            final int[] choices = getResources().getIntArray(R.array.automatic_message_deletion_values);
+            CharSequence[] entries = new CharSequence[choices.length];
+            CharSequence[] entryValues = new CharSequence[choices.length];
+            for (int i = 0; i < choices.length; ++i) {
+                entryValues[i] = String.valueOf(choices[i]);
+                if (choices[i] == 0) {
+                    entries[i] = getString(R.string.never);
+                } else {
+                    entries[i] = TimeFrameUtils.resolve(this, 1000L * choices[i]);
+                }
+            }
+            automaticAttachmentDeletionList.setEntries(entries);
+            automaticAttachmentDeletionList.setEntryValues(entryValues);
         }
 
         boolean removeVoice = !getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_MICROPHONE);

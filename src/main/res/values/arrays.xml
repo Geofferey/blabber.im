@@ -115,10 +115,15 @@
     <integer-array name="automatic_message_deletion_values">
         <item>0</item>
         <item>86400</item>
+        <item>259200</item>
         <item>604800</item>
+        <item>1209600</item>
         <item>2592000</item>
+        <item>7776000</item>
         <item>15811200</item>
         <item>31622400</item>
+        <item>63244800</item>
+        <item>94867200</item>
     </integer-array>
 
     <string-array name="omemo_setting_entry_values">
