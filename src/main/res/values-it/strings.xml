@@ -1121,4 +1121,10 @@
     <string name="oldAndroidVersionMessage">Stai utilizzando una vecchia versione di Android che non sarà più supportata dagli aggiornamenti futuri. Da blabber.im versione 3.1.0 solo i dispositivi con Android 5 o superiore saranno supportati. Per favore aggiorna il firmware del tuo dispositivo.</string>
     <string name="save_x_file">Salva %s</string>
     <string name="file_copied_to">File copiato in %s</string>
+    <string name="use_individual_notifications">Utilizza notifiche individuali</string>
+    <string name="pref_remove_all_individual_summary">Rimuovi tutte le notifiche individuali per i tuoi contatti e gruppi.</string>
+    <string name="pref_remove_all_individual_notifications_title">Rimuovi tutte le notifiche individuali</string>
+    <string name="remove_individual_notifications">Rimuovi notifiche individuali</string>
+    <string name="remove_individual_notifications_message">Vuoi veramente rimuovere queste notifiche individuali impostate per %s?</string>
+    <string name="remove_all_individual_notifications_message">Vuoi veramente rimuovere tutte le notifiche individuali impostate per i tuoi contatti e gruppi?</string>
 </resources>

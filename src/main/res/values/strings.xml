@@ -712,7 +712,7 @@
     <string name="edit_status_message_title">Edit Status Message</string>
     <string name="pref_automatically_delete_messages_description">Automatically delete messages from this device that are older than the configured time frame.</string>
     <string name="pref_automatically_delete_messages">Automatic message deletion</string>
-    <string name="pref_automatically_delete_files_description">Automatically delete attachments from this device that are older than the configured time frame for automatic message deletion.</string>
+    <string name="pref_automatically_delete_attachments_description">Automatically delete attachments from this device that are older than the configured time frame.</string>
     <string name="pref_automatically_delete_files">Automatic attachment deletion</string>
     <string name="disable_encryption">Disable encryption</string>
     <string name="error_trustkey_general">blabber.im is unable to send encrypted messages to %1$s. This may be due to your contact using an outdated server or client that can not handle OMEMO.</string>

@@ -1123,4 +1123,10 @@
     <string name="oldAndroidVersionMessage">Gələcək yeniləmələrdə artıq dəstəklənməyəcək köhnə bir Android versiyasından istifadə edirsiniz. Blabber.im versiyası 3.1.0-dan yalnız Android 5 və ya daha yüksək olan cihazlara dəstək verilir. Zəhmət olmasa cihazınızın proqram təminatını yeniləyin.</string>
     <string name="save_x_file">Saxla %s</string>
     <string name="file_copied_to">Faylı %s saxla</string>
+    <string name="use_individual_notifications">Fərdi bildirişlərdən istifadə edin</string>
+    <string name="pref_remove_all_individual_summary">Kontaktlarınız və qruplarınız üçün bütün fərdi bildirişləri silin.</string>
+    <string name="pref_remove_all_individual_notifications_title">Bütün fərdi bildirişləri silin</string>
+    <string name="remove_individual_notifications">Fərdi bildirişləri silin</string>
+    <string name="remove_individual_notifications_message">%s üçün fərdi bildirişləri silmək istəyirsiniz?</string>
+    <string name="remove_all_individual_notifications_message">Kontaktlarınız və qruplarınız üçün qurulmuş bütün fərdi bildirişləri silmək istəyirsiniz?</string>
 </resources>
