@@ -1141,18 +1141,25 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                 menuInviteContact.setVisible(false);
                 menuArchiveChat.setTitle(R.string.action_end_conversation);
             }
-            Fragment secondaryFragment = activity.getFragmentManager().findFragmentById(R.id.secondary_fragment);
-            if (secondaryFragment instanceof ConversationFragment) {
-                if (conversation.getMode() == Conversation.MODE_MULTI) {
-                    menuGroupDetails.setTitle(conversation.getMucOptions().isPrivateAndNonAnonymous() ? R.string.action_group_details : R.string.channel_details);
-                    menuGroupDetails.setVisible(true);
-                    menuContactDetails.setVisible(false);
+            try {
+                Fragment secondaryFragment = activity.getFragmentManager().findFragmentById(R.id.secondary_fragment);
+                if (secondaryFragment instanceof ConversationFragment) {
+                    if (conversation.getMode() == Conversation.MODE_MULTI) {
+                        menuGroupDetails.setTitle(conversation.getMucOptions().isPrivateAndNonAnonymous() ? R.string.action_group_details : R.string.channel_details);
+                        menuGroupDetails.setVisible(true);
+                        menuContactDetails.setVisible(false);
+                    } else {
+                        menuGroupDetails.setVisible(false);
+                        menuContactDetails.setVisible(!this.conversation.withSelf());
+                    }
+                    menuSearchUpdates.setVisible(true);
                 } else {
                     menuGroupDetails.setVisible(false);
-                    menuContactDetails.setVisible(!this.conversation.withSelf());
+                    menuContactDetails.setVisible(false);
+                    menuSearchUpdates.setVisible(false);
                 }
-                menuSearchUpdates.setVisible(true);
-            } else {
+            } catch (Exception e) {
+                e.printStackTrace();
                 menuGroupDetails.setVisible(false);
                 menuContactDetails.setVisible(false);
                 menuSearchUpdates.setVisible(false);
