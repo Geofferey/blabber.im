@@ -102,8 +102,8 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
     private ActivityRtpSessionBinding binding;
     private PowerManager.WakeLock mProximityWakeLock;
 
-    private Handler mHandler = new Handler();
-    private Runnable mTickExecutor = new Runnable() {
+    private final Handler mHandler = new Handler();
+    private final Runnable mTickExecutor = new Runnable() {
         @Override
         public void run() {
             updateCallDuration();
@@ -203,11 +203,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
             retractSessionProposal();
             finish();
         } else {
-            try {
-                requireRtpConnection().endCall();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            requireRtpConnection().endCall();
         }
     }
 
@@ -390,9 +386,9 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
             binding.with.setText(account.getRoster().getContact(with).getDisplayName());
         } else if (Intent.ACTION_VIEW.equals(action)) {
             final String extraLastState = intent.getStringExtra(EXTRA_LAST_REPORTED_STATE);
-            if (extraLastState != null) {
+            final RtpEndUserState state = extraLastState == null ? null : RtpEndUserState.valueOf(extraLastState);
+            if (state != null) {
                 Log.d(Config.LOGTAG, "restored last state from intent extra");
-                RtpEndUserState state = RtpEndUserState.valueOf(extraLastState);
                 updateButtonConfiguration(state);
                 updateVerifiedShield(false);
                 updateStateDisplay(state);
@@ -400,6 +396,14 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
                 invalidateOptionsMenu();
             }
             binding.with.setText(account.getRoster().getContact(with).getDisplayName());
+            if (xmppConnectionService.getJingleConnectionManager().fireJingleRtpConnectionStateUpdates()) {
+                return;
+            }
+            if (END_CARD.contains(state) || xmppConnectionService.getJingleConnectionManager().hasMatchingProposal(account, with)) {
+                return;
+            }
+            Log.d(Config.LOGTAG, "restored state (" + state + ") was not an end card. finishing");
+            finish();
         }
     }
 
@@ -432,7 +436,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
             } else {
                 throw new IllegalStateException("Invalid permission result request");
             }
-            Toast.makeText(this, res, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(res, getString(R.string.app_name)), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -730,18 +734,22 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
             this.binding.endCall.setVisibility(View.INVISIBLE);
             this.binding.acceptCall.setVisibility(View.INVISIBLE);
         } else if (state == RtpEndUserState.INCOMING_CALL) {
+            this.binding.rejectCall.setContentDescription(getString(R.string.dismiss_call));
             this.binding.rejectCall.setOnClickListener(this::rejectCall);
             this.binding.rejectCall.setImageResource(R.drawable.ic_call_end_white_48dp);
             this.binding.rejectCall.setVisibility(View.VISIBLE);
             this.binding.endCall.setVisibility(View.INVISIBLE);
+            this.binding.acceptCall.setContentDescription(getString(R.string.answer_call));
             this.binding.acceptCall.setOnClickListener(this::acceptCall);
             this.binding.acceptCall.setImageResource(R.drawable.ic_call_white_48dp);
             this.binding.acceptCall.setVisibility(View.VISIBLE);
         } else if (state == RtpEndUserState.DECLINED_OR_BUSY) {
+            this.binding.rejectCall.setContentDescription(getString(R.string.exit));
             this.binding.rejectCall.setOnClickListener(this::exit);
             this.binding.rejectCall.setImageResource(R.drawable.ic_clear_white_48dp);
             this.binding.rejectCall.setVisibility(View.VISIBLE);
             this.binding.endCall.setVisibility(View.INVISIBLE);
+            this.binding.acceptCall.setContentDescription(getString(R.string.record_voice_mail));
             this.binding.acceptCall.setOnClickListener(this::recordVoiceMail);
             this.binding.acceptCall.setImageResource(R.drawable.ic_voicemail_white_24dp);
             this.binding.acceptCall.setVisibility(View.VISIBLE);
@@ -751,15 +759,18 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
                 RtpEndUserState.APPLICATION_ERROR,
                 RtpEndUserState.RETRACTED
         ).contains(state)) {
+            this.binding.rejectCall.setContentDescription(getString(R.string.exit));
             this.binding.rejectCall.setOnClickListener(this::exit);
             this.binding.rejectCall.setImageResource(R.drawable.ic_clear_white_48dp);
             this.binding.rejectCall.setVisibility(View.VISIBLE);
             this.binding.endCall.setVisibility(View.INVISIBLE);
+            this.binding.acceptCall.setContentDescription(getString(R.string.try_again));
             this.binding.acceptCall.setOnClickListener(this::retry);
             this.binding.acceptCall.setImageResource(R.drawable.ic_replay_white_48dp);
             this.binding.acceptCall.setVisibility(View.VISIBLE);
         } else {
             this.binding.rejectCall.setVisibility(View.INVISIBLE);
+            this.binding.endCall.setContentDescription(getString(R.string.hang_up));
             this.binding.endCall.setOnClickListener(this::endCall);
             this.binding.endCall.setImageResource(R.drawable.ic_call_end_white_48dp);
             this.binding.endCall.setVisibility(View.VISIBLE);

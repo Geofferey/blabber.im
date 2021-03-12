@@ -246,10 +246,7 @@ public class XmppConnectionService extends Service {
     private final IqParser mIqParser = new IqParser(this);
     private final MessageGenerator mMessageGenerator = new MessageGenerator(this);
     public OnContactStatusChanged onContactStatusChanged = (contact, online) -> {
-        if (!online) {
-            getJingleConnectionManager().failProposedSessions(contact.getAccount(), contact.getJid().asBareJid());
-        }
-        final Conversation conversation = find(getConversations(), contact);
+        Conversation conversation = find(getConversations(), contact);
         if (conversation != null) {
             if (online) {
                 if (contact.getPresences().size() == 1) {

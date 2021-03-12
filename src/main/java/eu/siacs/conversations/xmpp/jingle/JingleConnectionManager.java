@@ -61,7 +61,7 @@ public class JingleConnectionManager extends AbstractConnectionManager {
             .expireAfterWrite(24, TimeUnit.HOURS)
             .build();
 
-    private HashMap<Jid, JingleCandidate> primaryCandidates = new HashMap<>();
+    private final HashMap<Jid, JingleCandidate> primaryCandidates = new HashMap<>();
 
     public JingleConnectionManager(XmppConnectionService service) {
         super(service);
@@ -477,6 +477,21 @@ public class JingleConnectionManager extends AbstractConnectionManager {
         }
     }
 
+    public boolean fireJingleRtpConnectionStateUpdates() {
+        boolean firedUpdates = false;
+        for (final AbstractJingleConnection connection : this.connections.values()) {
+            if (connection instanceof JingleRtpConnection) {
+                final JingleRtpConnection jingleRtpConnection = (JingleRtpConnection) connection;
+                if (jingleRtpConnection.isTerminated()) {
+                    continue;
+                }
+                jingleRtpConnection.fireStateUpdate();
+                firedUpdates = true;
+            }
+        }
+        return firedUpdates;
+    }
+
     void getPrimaryCandidate(final Account account, final boolean initiator, final OnPrimaryCandidateFound listener) {
         if (Config.DISABLE_PROXY_LOOKUP) {
             listener.onPrimaryCandidateFound(false, null);
@@ -596,6 +611,18 @@ public class JingleConnectionManager extends AbstractConnectionManager {
         }
     }
 
+    public boolean hasMatchingProposal(final Account account, final Jid with) {
+        synchronized (this.rtpSessionProposals) {
+            for (Map.Entry<RtpSessionProposal, DeviceDiscoveryState> entry : this.rtpSessionProposals.entrySet()) {
+                final RtpSessionProposal proposal = entry.getKey();
+                if (proposal.account == account && with.asBareJid().equals(proposal.with)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public void deliverIbbPacket(Account account, IqPacket packet) {
         final String sid;
         final Element payload;
@@ -675,30 +702,11 @@ public class JingleConnectionManager extends AbstractConnectionManager {
                 Log.d(Config.LOGTAG, "session proposal already at discovered. not going to fall back");
                 return;
             }
-            updateProposedSessionDiscovered(sessionProposal, target);
-        }
-    }
-
-    public void updateProposedSessionDiscovered(RtpSessionProposal sessionProposal, final DeviceDiscoveryState target) {
-        this.rtpSessionProposals.put(sessionProposal, target);
-        final RtpEndUserState endUserState = target.toEndUserState();
-        toneManager.transition(endUserState, sessionProposal.media);
-        mXmppConnectionService.notifyJingleRtpConnectionUpdate(sessionProposal.account, sessionProposal.with, sessionProposal.sessionId, endUserState);
-        Log.d(Config.LOGTAG, sessionProposal.account.getJid().asBareJid() + ": flagging session " + sessionProposal.sessionId + " as " + target);
-    }
-
-    public void failProposedSessions(final Account account, Jid from) {
-        synchronized (this.rtpSessionProposals) {
-            for (Map.Entry<RtpSessionProposal, DeviceDiscoveryState> entry : rtpSessionProposals.entrySet()) {
-                final RtpSessionProposal rtpSessionProposal = entry.getKey();
-                final DeviceDiscoveryState state = entry.getValue();
-                if (state != DeviceDiscoveryState.DISCOVERED) {
-                    continue;
-                }
-                if (rtpSessionProposal.with.equals(from) && rtpSessionProposal.account.getJid().equals(account.getJid())) {
-                    updateProposedSessionDiscovered(rtpSessionProposal, JingleConnectionManager.DeviceDiscoveryState.FAILED);
-                }
-            }
+            this.rtpSessionProposals.put(sessionProposal, target);
+            final RtpEndUserState endUserState = target.toEndUserState();
+            toneManager.transition(endUserState, sessionProposal.media);
+            mXmppConnectionService.notifyJingleRtpConnectionUpdate(account, sessionProposal.with, sessionProposal.sessionId, endUserState);
+            Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": flagging session " + sessionId + " as " + target);
         }
     }
 

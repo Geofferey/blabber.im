@@ -1133,4 +1133,6 @@
     <string name="remove_individual_notifications">Remove individual notifications</string>
     <string name="remove_individual_notifications_message">Do you really want to remove this individual notifications set for %s?</string>
     <string name="remove_all_individual_notifications_message">Do you really want to remove all individual notifications set for your contacts and groups?</string>
+    <string name="exit">Exit</string>
+    <string name="record_voice_mail">Record voice message</string>
 </resources>

@@ -671,14 +671,6 @@ public class NotificationService {
         fullScreenIntent.putExtra(RtpSessionActivity.EXTRA_SESSION_ID, id.sessionId);
         fullScreenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         fullScreenIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        String olduuid = mXmppConnectionService.findConversation(id.account, id.with, false).toString();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            try {
-                cleanNotificationChannels(mXmppConnectionService, olduuid);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
         Builder builder = null;
         if (mXmppConnectionService.hasIndividualNotification(mXmppConnectionService.findConversationByUuid(uuid))) {
             final String time = String.valueOf(mXmppConnectionService.getIndividualNotificationPreference(mXmppConnectionService.findConversationByUuid(uuid)));
