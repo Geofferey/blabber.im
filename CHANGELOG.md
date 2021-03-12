@@ -1,5 +1,11 @@
 ### Changelog
 
+#### Version 3.0.5
+* improve compatibility with non libwebrtc WebRTC implementations
+* improve memory management (blabber.im)
+* ui improvements (blabber.im)
+* bug fixes
+
 #### Version 3.0.4
 * fix OpenPGP key id discovery for OpenKeychain 5.6+
 * properly verify punycode TLS certificates
