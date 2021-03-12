@@ -41,7 +41,7 @@
         <item name="text_Color_Main">@color/realblack</item>
         <item name="button_text_color_disabled">@color/grey500</item>
         <item name="chat_bg">@drawable/bg_light_blue</item>
-        <item name="icon_tint">@color/realwhite</item>
+        <item name="icon_tint">@color/black54</item>
         <item name="color_background_primary">@color/grey50</item>
         <item name="color_background_secondary">@color/grey200</item>
         <item name="color_background_tertiary">@color/grey300</item>
@@ -130,7 +130,8 @@
         <item name="icon_refresh" type="reference">@drawable/ic_refresh_grey600_24dp</item>
         <item name="icon_remove" type="reference">@drawable/ic_delete_grey600_24dp</item>
         <item name="icon_search" type="reference">@drawable/ic_search_white_24dp</item>
-        <item name="icon_help" type="reference">@drawable/ic_help_black_24dp</item>
+        <item name="icon_help" type="reference">@drawable/ic_help_white_24dp</item>
+        <item name="icon_help_black" type="reference">@drawable/ic_help_black_24dp</item>
         <item name="icon_goto_chat" type="reference">@drawable/ic_question_answer_white_24dp</item>
         <item name="icon_secure" type="reference">@drawable/ic_lock_open_white_24dp</item>
         <item name="icon_settings" type="reference">@drawable/ic_settings_black_24dp</item>
@@ -320,6 +321,7 @@
         <item name="icon_remove" type="reference">@drawable/ic_delete_white_24dp</item>
         <item name="icon_search" type="reference">@drawable/ic_search_white_24dp</item>
         <item name="icon_help" type="reference">@drawable/ic_help_white_24dp</item>
+        <item name="icon_help_black" type="reference">@drawable/ic_help_white_24dp</item>
         <item name="icon_goto_chat" type="reference">@drawable/ic_question_answer_white_24dp</item>
         <item name="icon_secure" type="reference">@drawable/ic_lock_open_white_24dp</item>
         <item name="icon_settings" type="reference">@drawable/ic_settings_white_24dp</item>
@@ -363,7 +365,7 @@
     <style name="ConversationsTheme.Black" parent="ConversationsTheme.Dark">
         <item name="colorPrimary">@color/primary_black</item>
         <item name="colorPrimaryDark">@color/primary_dark_black</item>
-        <item name="color_background_primary">@color/primary_black</item>
+        <item name="color_background_primary">@color/darkblack</item>
         <item name="color_background_secondary">@color/primary_black</item>
         <item name="color_background_tertiary">@color/primary_black</item>
         <item name="color_bubble_light">@color/middleblack</item>
@@ -403,7 +405,7 @@
     <style name="ConversationsTheme.Black.Dialog" parent="ConversationsTheme.Dark.Dialog">
         <item name="colorPrimary">@color/primary_black</item>
         <item name="colorPrimaryDark">@color/primary_black</item>
-        <item name="color_background_primary">@color/primary_black</item>
+        <item name="color_background_primary">@color/darkblack</item>
     </style>
 
     <!-- blue dialog medium font -->

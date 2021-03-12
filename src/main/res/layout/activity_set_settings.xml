@@ -59,7 +59,7 @@
                                 android:background="?attr/selectableItemBackgroundBorderless"
                                 android:gravity="center_vertical"
                                 android:padding="@dimen/image_button_padding"
-                                android:src="?attr/icon_help" />
+                                android:src="?attr/icon_help_black" />
 
                             <androidx.appcompat.widget.AppCompatCheckBox
                                 android:id="@+id/forbid_screenshots"
@@ -90,7 +90,7 @@
                                 android:background="?attr/selectableItemBackgroundBorderless"
                                 android:gravity="center_vertical"
                                 android:padding="@dimen/image_button_padding"
-                                android:src="?attr/icon_help" />
+                                android:src="?attr/icon_help_black" />
 
                             <androidx.appcompat.widget.AppCompatCheckBox
                                 android:id="@+id/show_links"
@@ -120,7 +120,7 @@
                                 android:background="?attr/selectableItemBackgroundBorderless"
                                 android:gravity="center_vertical"
                                 android:padding="@dimen/image_button_padding"
-                                android:src="?attr/icon_help" />
+                                android:src="?attr/icon_help_black" />
 
                             <androidx.appcompat.widget.AppCompatCheckBox
                                 android:id="@+id/show_mappreview"
@@ -150,7 +150,7 @@
                                 android:background="?attr/selectableItemBackgroundBorderless"
                                 android:gravity="center_vertical"
                                 android:padding="@dimen/image_button_padding"
-                                android:src="?attr/icon_help" />
+                                android:src="?attr/icon_help_black" />
 
                             <androidx.appcompat.widget.AppCompatCheckBox
                                 android:id="@+id/chat_states"
@@ -180,7 +180,7 @@
                                 android:background="?attr/selectableItemBackgroundBorderless"
                                 android:gravity="center_vertical"
                                 android:padding="@dimen/image_button_padding"
-                                android:src="?attr/icon_help" />
+                                android:src="?attr/icon_help_black" />
 
                             <androidx.appcompat.widget.AppCompatCheckBox
                                 android:id="@+id/confirm_messages"
@@ -210,7 +210,7 @@
                                 android:background="?attr/selectableItemBackgroundBorderless"
                                 android:gravity="center_vertical"
                                 android:padding="@dimen/image_button_padding"
-                                android:src="?attr/icon_help" />
+                                android:src="?attr/icon_help_black" />
 
                             <androidx.appcompat.widget.AppCompatCheckBox
                                 android:id="@+id/last_seen"
@@ -240,7 +240,7 @@
                                 android:background="?attr/selectableItemBackgroundBorderless"
                                 android:gravity="center_vertical"
                                 android:padding="@dimen/image_button_padding"
-                                android:src="?attr/icon_help" />
+                                android:src="?attr/icon_help_black" />
 
                             <androidx.appcompat.widget.AppCompatCheckBox
                                 android:id="@+id/invidious"

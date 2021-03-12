@@ -143,7 +143,7 @@
             android:alpha="0.7"
             android:src="@drawable/ic_mic_off_black_24dp"
             android:visibility="gone"
-            app:tint="?attr/icon_tint" />
+            app:tint="@color/white"  />
 
         <RelativeLayout
             android:id="@+id/button_row"
@@ -171,7 +171,6 @@
                     app:elevation="4dp"
                     app:fabCustomSize="72dp"
                     app:maxImageSize="36dp"
-                    app:tint="?attr/icon_tint"
                     tools:visibility="visible" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -188,7 +187,6 @@
                     app:elevation="4dp"
                     app:fabCustomSize="72dp"
                     app:maxImageSize="36dp"
-                    app:tint="?attr/icon_tint"
                     tools:visibility="visible" />
 
             </RelativeLayout>
@@ -218,8 +216,7 @@
                 app:backgroundTint="@color/red700"
                 app:elevation="4dp"
                 app:fabCustomSize="72dp"
-                app:maxImageSize="36dp"
-                app:tint="?attr/icon_tint" />
+                app:maxImageSize="36dp" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/in_call_action_right"

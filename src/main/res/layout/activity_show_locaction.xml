@@ -31,7 +31,6 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:src="@drawable/ic_navigation_white_24dp"
-        app:backgroundTint="?attr/colorAccent"
-        app:tint="?attr/icon_tint" />
+        app:backgroundTint="?attr/colorAccent" />
 
 </RelativeLayout>

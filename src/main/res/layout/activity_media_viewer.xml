@@ -48,7 +48,6 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             app:backgroundTint="?attr/colorAccent"
-            app:tint="?attr/icon_tint"
             app:sdMainFabClosedBackgroundColor="?attr/colorAccent"
             app:sdMainFabClosedSrc="@drawable/ic_menu_white_24dp"
             app:sdMainFabOpenedBackgroundColor="?attr/colorAccent"

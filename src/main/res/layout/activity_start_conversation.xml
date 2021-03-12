@@ -36,8 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/tab_layout"
-            android:background="?attr/color_background_overlay"
-            app:tint="?attr/icon_tint" />
+            android:background="?attr/color_background_overlay" />
 
         <com.leinardi.android.speeddial.SpeedDialView
             android:id="@+id/speed_dial"
@@ -48,13 +47,10 @@
             android:layout_alignParentBottom="true"
             android:contentDescription="@string/add_contact_or_create_or_join_group_chat"
             app:sdMainFabClosedBackgroundColor="?attr/colorAccent"
-            app:sdMainFabClosedIconColor="?attr/icon_tint"
             app:sdMainFabClosedSrc="@drawable/ic_add_white_24dp"
             app:sdMainFabOpenedBackgroundColor="?attr/colorAccent"
-            app:sdMainFabOpenedIconColor="?attr/icon_tint"
             app:sdOverlayLayout="@id/overlay"
-            app:sdUseReverseAnimationOnClose="true"
-            app:tint="?attr/icon_tint" />
+            app:sdUseReverseAnimationOnClose="true" />
 
     </RelativeLayout>
 </layout>
