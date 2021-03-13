@@ -3259,6 +3259,11 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             popupMenu.inflate(R.menu.account_context);
             final Menu menu = popupMenu.getMenu();
             popupMenu.setOnMenuItemClickListener(item -> {
+                final XmppActivity activity = this.activity;
+                if (activity == null) {
+                    Log.e(Config.LOGTAG,"Unable to perform action. no context provided");
+                    return true;
+                }
                 switch (item.getItemId()) {
 
 

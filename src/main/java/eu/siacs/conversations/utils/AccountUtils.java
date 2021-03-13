@@ -11,11 +11,12 @@ import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.services.XmppConnectionService;
+import eu.siacs.conversations.ui.XmppActivity;
 import me.drakeet.support.toast.ToastCompat;
 
 public class AccountUtils {
 
-    public static final Class MANAGE_ACCOUNT_ACTIVITY;
+    public static final Class<?> MANAGE_ACCOUNT_ACTIVITY;
 
     static {
         MANAGE_ACCOUNT_ACTIVITY = getManageAccountActivityClass();
@@ -65,7 +66,7 @@ public class AccountUtils {
         return pending;
     }
 
-    public static void launchManageAccounts(Activity activity) {
+    public static void launchManageAccounts(final Activity activity) {
         if (MANAGE_ACCOUNT_ACTIVITY != null) {
             activity.startActivity(new Intent(activity, MANAGE_ACCOUNT_ACTIVITY));
         } else {
@@ -73,10 +74,15 @@ public class AccountUtils {
         }
     }
 
-    private static Class getManageAccountActivityClass() {
+    public static void launchManageAccount(final XmppActivity xmppActivity) {
+        final Account account = getFirst(xmppActivity.xmppConnectionService);
+        xmppActivity.switchToAccount(account);
+    }
+
+    private static Class<?> getManageAccountActivityClass() {
         try {
             return Class.forName("eu.siacs.conversations.ui.ManageAccountActivity");
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
             return null;
         }
     }
