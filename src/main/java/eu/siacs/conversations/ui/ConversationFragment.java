@@ -727,7 +727,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         if (conversation == null) {
             return;
         }
-        final Toast prepareFileToast = ToastCompat.makeText(getActivity(), getText(R.string.preparing_file), Toast.LENGTH_LONG);
+        final Toast prepareFileToast = ToastCompat.makeText(getActivity(), getText(R.string.preparing_file), Toast.LENGTH_SHORT);
         prepareFileToast.show();
         activity.delegateUriPermissionsToService(uri);
         activity.xmppConnectionService.attachFileToConversation(conversation, uri, type, new UiInformableCallback<Message>() {

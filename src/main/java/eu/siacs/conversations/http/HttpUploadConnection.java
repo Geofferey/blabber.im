@@ -27,7 +27,7 @@ import eu.siacs.conversations.utils.Checksum;
 import eu.siacs.conversations.utils.CryptoHelper;
 import eu.siacs.conversations.utils.WakeLockHelper;
 
-import static eu.siacs.conversations.http.HttpConnectionManager.EXECUTOR;
+import static eu.siacs.conversations.http.HttpConnectionManager.FileTransferExecutor;
 
 public class HttpUploadConnection implements Transferable {
 
@@ -139,7 +139,7 @@ public class HttpUploadConnection implements Transferable {
             public void success(SlotRequester.Slot slot) {
                 if (!cancelled) {
                     changeStatus(STATUS_WAITING);
-                    EXECUTOR.execute(() -> {
+                    FileTransferExecutor.execute(() -> {
                         changeStatus(STATUS_UPLOADING);
                         HttpUploadConnection.this.slot = slot;
                         HttpUploadConnection.this.upload();

@@ -416,7 +416,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 
     private void showProgress(final ViewHolder viewHolder, final Transferable transferable) {
         if (transferable != null) {
-            if (transferable.getStatus() == Transferable.STATUS_DOWNLOADING || transferable.getStatus() == Transferable.STATUS_UPLOADING) {
+            if (transferable.getStatus() == Transferable.STATUS_DOWNLOADING || transferable.getStatus() == Transferable.STATUS_UPLOADING || transferable.getStatus() == Transferable.STATUS_WAITING) {
                 viewHolder.progressBar.setVisibility(View.VISIBLE);
                 viewHolder.progressBar.setProgress(transferable.getProgress());
             } else {

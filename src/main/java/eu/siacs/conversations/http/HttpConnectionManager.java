@@ -33,7 +33,7 @@ public class HttpConnectionManager extends AbstractConnectionManager {
     private final List<HttpDownloadConnection> downloadConnections = new ArrayList<>();
     private final List<HttpUploadConnection> uploadConnections = new ArrayList<>();
 
-    public static final Executor EXECUTOR = Executors.newFixedThreadPool(4);
+    public static final Executor FileTransferExecutor = Executors.newFixedThreadPool(4);
 
     public HttpConnectionManager(XmppConnectionService service) {
         super(service);

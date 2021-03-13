@@ -39,7 +39,7 @@ import eu.siacs.conversations.utils.MimeUtils;
 import eu.siacs.conversations.utils.WakeLockHelper;
 import eu.siacs.conversations.xmpp.stanzas.IqPacket;
 
-import static eu.siacs.conversations.http.HttpConnectionManager.EXECUTOR;
+import static eu.siacs.conversations.http.HttpConnectionManager.FileTransferExecutor;
 
 public class HttpDownloadConnection implements Transferable {
 
@@ -149,11 +149,11 @@ public class HttpDownloadConnection implements Transferable {
     }
 
     private void download(final boolean interactive) {
-        EXECUTOR.execute(new FileDownloader(interactive));
+        FileTransferExecutor.execute(new FileDownloader(interactive));
     }
 
     private void checkFileSize(final boolean interactive) {
-        EXECUTOR.execute(new FileSizeChecker(interactive));
+        FileTransferExecutor.execute(new FileSizeChecker(interactive));
     }
 
     @Override
@@ -421,25 +421,23 @@ public class HttpDownloadConnection implements Transferable {
         @Override
         public void run() {
             changeStatus(STATUS_WAITING);
-            EXECUTOR.execute(() -> {
-                try {
-                    changeStatus(STATUS_DOWNLOADING);
-                    download();
-                    decryptIfNeeded();
-                    updateImageBounds();
-                    finish();
-                } catch (SSLHandshakeException e) {
-                    changeStatus(STATUS_OFFER);
-                } catch (Exception e) {
-                    if (interactive) {
-                        showToastForException(e);
-                    } else {
-                        HttpDownloadConnection.this.acceptedAutomatically = false;
-                        HttpDownloadConnection.this.mXmppConnectionService.getNotificationService().push(message);
-                    }
-                    cancel();
+            try {
+                changeStatus(STATUS_DOWNLOADING);
+                download();
+                decryptIfNeeded();
+                updateImageBounds();
+                finish();
+            } catch (SSLHandshakeException e) {
+                changeStatus(STATUS_OFFER);
+            } catch (Exception e) {
+                if (interactive) {
+                    showToastForException(e);
+                } else {
+                    HttpDownloadConnection.this.acceptedAutomatically = false;
+                    HttpDownloadConnection.this.mXmppConnectionService.getNotificationService().push(message);
                 }
-            });
+                cancel();
+            }
         }
 
         private void download() throws Exception {
