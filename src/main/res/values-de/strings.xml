@@ -87,7 +87,7 @@
     <string name="send_unencrypted">Normal verschicken</string>
     <string name="decryption_failed">Entschlüsselung fehlgeschlagen. Vielleicht hast du nicht den richtigen privaten Schlüssel.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">blabber.im benutzt eine Drittanwendung namens <b>OpenKeychain</b>, um Nachrichten zu ver- und entschlüsseln und um deine Schlüssel zu verwalten.\n\nOpenKeychain ist GPLv3-lizenziert und kann über F-Droid oder Google Play bezogen werden.\n\n<small>(Bitte starte blabber.im danach neu.)</small></string>
+    <string name="openkeychain_required_long">%s benutzt eine Drittanwendung namens <b>OpenKeychain</b>, um Nachrichten zu ver- und entschlüsseln und um deine Schlüssel zu verwalten.\n\nOpenKeychain ist GPLv3-lizenziert und kann über F-Droid oder Google Play bezogen werden.\n\n<small>(Bitte starte %s danach neu.)</small></string>
     <string name="restart">Neu starten</string>
     <string name="install">Installieren</string>
     <string name="offering">angeboten…</string>
@@ -191,8 +191,8 @@
     <string name="openpgp_key_id">OpenPGP Schlüssel ID</string>
     <string name="omemo_fingerprint">OMEMO-Fingerabdruck</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO-Fingerabdruck </string>
-    <string name="omemo_fingerprint_selected_message">OMEMO-Fingerabdruck der Nachricht</string>
-    <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO-Fingerabdruck der Nachricht</string>
+    <string name="omemo_fingerprint_selected_message">OMEMO-Fingerabdruck (Nachrichtenquelle)</string>
+    <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO-Fingerabdruck (Nachrichtenquelle)</string>
     <string name="other_devices">Andere Geräte</string>
     <string name="trust_omemo_fingerprints">OMEMO-Fingerabdruck vertrauen</string>
     <string name="fetching_keys">Fingerabdrücke werden abgerufen …</string>
@@ -433,8 +433,8 @@
     <string name="account_status_host_unknown">Host unbekannt</string>
     <string name="server_info_broken">Fehlerhaft</string>
     <string name="pref_presence_settings">Verfügbarkeit</string>
-    <string name="pref_away_when_screen_off">Abwesend bei abgeschaltetem Bildschirm</string>
-    <string name="pref_away_when_screen_off_summary">Setze deinen Status auf \"abwesend\", solange dein Bildschirm abgeschaltet ist</string>
+    <string name="pref_away_when_screen_off">Abwesend bei gesperrtem Gerät</string>
+    <string name="pref_away_when_screen_off_summary">Setze deinen Status auf \"abwesend\", wenn dein Gerät gesperrt ist</string>
     <string name="pref_dnd_on_silent_mode">Bitte nicht stören bei Stummschaltung</string>
     <string name="update_info">blabber.im lädt und installiert die neue Version automatisch.\n\nBitte warten…</string>
     <string name="pref_dnd_on_silent_mode_summary">Setze deinen Status auf \"Bitte nicht stören\", solange dein Gerät stummgeschaltet ist</string>
@@ -622,6 +622,10 @@
         <item quantity="one">%d Monat</item>
         <item quantity="other">%d Monate</item>
     </plurals>
+    <plurals name="years">
+        <item quantity="one">%d Jahr</item>
+        <item quantity="other">%d Jahre</item>
+    </plurals>
     <string name="today">Heute</string>
     <string name="pref_use_max_brightness_summary">Maximale Helligkeit aktivieren, wenn Videos oder Bilder im Vollbild betracht werden.</string>
     <string name="pref_use_max_brightness">Maximale Helligkeit</string>
@@ -710,7 +714,7 @@
     <string name="edit_status_message_title">Statusnachricht bearbeiten</string>
     <string name="pref_automatically_delete_messages_description">Nachrichten von diesem Gerät nach dem eingestellten Zeitfenster automatisch löschen.</string>
     <string name="pref_automatically_delete_messages">Nachrichten automatisch löschen</string>
-    <string name="pref_automatically_delete_files_description">Anhänge von diesem Gerät automatisch löschen, die älter sind als das eingestellte Zeitfenster für das automatische Löschen von Nachrichten.</string>
+    <string name="pref_automatically_delete_attachments_description">Anhänge von diesem Gerät nach dem eingestellten Zeitfenster automatisch löschen.</string>
     <string name="pref_automatically_delete_files">Anhänge automatisch löschen</string>
     <string name="disable_encryption">Verschlüsselung deaktivieren</string>
     <string name="error_trustkey_general">blabber.im ist nicht in der Lage verschlüsselte Nachrichten an  %1$s zu senden. Dies kann daran liegen, dass dein Kontakt einen veralteten Server oder Client verwendet, der die OMEMO -Verschlüsselung nicht unterstützt.</string>
@@ -1127,4 +1131,6 @@
     <string name="remove_individual_notifications">Entferne individuelle Benachrichtigen</string>
     <string name="remove_individual_notifications_message">Möchtest du wirklich die eingestellten individuellen Benachrichtigungen für %s entfernen?</string>
     <string name="remove_all_individual_notifications_message">Möchtest du wirklich alle eingestellten individuellen Benachrichtigungen für Kontakte und Gruppen entfernen?</string>
+    <string name="exit">Beenden</string>
+    <string name="record_voice_mail">Sprachnachricht aufnehmen</string>
 </resources>

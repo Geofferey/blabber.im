@@ -87,7 +87,7 @@
     <string name="send_unencrypted">Enviar sin cifrar</string>
     <string name="decryption_failed">Falló el descifrado. Tal vez no tengas la clave privada apropiada.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">blabber.im utiliza una aplicación de terceros llamada <b>OpenKeychain</b> para cifrar y descifrar mensajes y gestionar tus claves públicas.\n\nOpenKeychain está publicado bajo licencia GPLv3 y disponible on F-Droid y Google Play.\n\n<small>(Por favor, reinicia blabber.im después.)</small></string>
+    <string name="openkeychain_required_long">%s usa una aplicación de terceros llamada <b>OpenKeyChain</b> para cifrar y descifrar mensajes y para gestionar tus claves públicas.\n\nOpenKeyChain tiene licencia GPLv3 y está disponible en F-Droid y Google Play.\n\n<small>(Por favor reiniciar %s después.)</small></string>
     <string name="restart">Reiniciar</string>
     <string name="install">Instalar</string>
     <string name="offering">ofreciendo…</string>
@@ -191,8 +191,8 @@
     <string name="openpgp_key_id">ID de clave de OpenPGP</string>
     <string name="omemo_fingerprint">Huella digital OMEMO</string>
     <string name="omemo_fingerprint_x509">Huella digital v\\OMEMO</string>
-    <string name="omemo_fingerprint_selected_message">Huella digital OMEMO del mensaje</string>
-    <string name="omemo_fingerprint_x509_selected_message">huella digital v\\OMEMO del mensaje</string>
+    <string name="omemo_fingerprint_selected_message">Huella OMEMO (origen del mensaje)</string>
+    <string name="omemo_fingerprint_x509_selected_message">v\\Huella OMEMO (mensaje original)</string>
     <string name="other_devices">Otros dispositivos</string>
     <string name="trust_omemo_fingerprints">Huellas digitales OMEMO de confianza</string>
     <string name="fetching_keys">Buscando claves...</string>
@@ -433,8 +433,8 @@
     <string name="account_status_host_unknown">El servidor no es responsable del dominio</string>
     <string name="server_info_broken">Error</string>
     <string name="pref_presence_settings">Disponibilidad</string>
-    <string name="pref_away_when_screen_off">Ausente con pantalla apagada</string>
-    <string name="pref_away_when_screen_off_summary">Cambia tu estado a ausente cuando la pantalla está apagada</string>
+    <string name="pref_away_when_screen_off">Ausente cuando el dispositivo está bloqueado</string>
+    <string name="pref_away_when_screen_off_summary">Marca tu recurso como ausente cuando el dispositivo está bloqueado</string>
     <string name="pref_dnd_on_silent_mode">\"No molestar\" en modo silencio</string>
     <string name="update_info">blabber.im está descargando e instalando la nueva versión automáticamente.\n\nPor favor, espere…</string>
     <string name="pref_dnd_on_silent_mode_summary">Cambia tu estado a \"no molestar\" cuando el dispositivo está en modo silencio</string>
@@ -710,7 +710,7 @@
     <string name="edit_status_message_title">Editar el mensaje de estado</string>
     <string name="pref_automatically_delete_messages_description">Eliminar automáticamente los mensajes del dispositivo que sean anteriores al tiempo seleccionado.</string>
     <string name="pref_automatically_delete_messages">Borrado automático de mensajes</string>
-    <string name="pref_automatically_delete_files_description">Borrar automáticamente todos los adjuntos de este dispositivo que son mas antiguos que el periodo de tiempo configurado para el borrado automático de mensajes.</string>
+    <string name="pref_automatically_delete_attachments_description">Borrar automáticamente los mensajes del dispositivo que sean anteriores al tiempo seleccionado.</string>
     <string name="pref_automatically_delete_files">Borrado automático de adjunto</string>
     <string name="disable_encryption">Desactivar cifrado</string>
     <string name="error_trustkey_general">blabber.im no puede enviar mensajes cifrados a %1$s. Esto puede ser debido a que tu contacto está usando un servidor o un cliente desactualizado que no puede manejar las claves OMEMO.</string>
@@ -1127,4 +1127,6 @@
     <string name="remove_individual_notifications">Borrar notificaciones individuales</string>
     <string name="remove_individual_notifications_message">¿Realmente quieres borrar este conjunto de notificaciones individuales para %s?</string>
     <string name="remove_all_individual_notifications_message">¿Realmente quieres borrar todas las notificaciones individuales para tus contactos y grupos?</string>
+    <string name="exit">Salir</string>
+    <string name="record_voice_mail">Graba mensaje de voz</string>
 </resources>

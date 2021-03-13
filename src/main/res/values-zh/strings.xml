@@ -177,8 +177,6 @@
     <string name="openpgp_key_id">OpenPGP密钥ID</string>
     <string name="omemo_fingerprint">OMEMO指纹</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO指纹</string>
-    <string name="omemo_fingerprint_selected_message">OMEMO消息指纹</string>
-    <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO消息指纹</string>
     <string name="other_devices">其它设备</string>
     <string name="trust_omemo_fingerprints">信任的OMEMO指纹</string>
     <string name="fetching_keys">获取密钥…</string>
@@ -417,8 +415,6 @@
     <string name="account_status_host_unknown">服务器不负责域名</string>
     <string name="server_info_broken">失败</string>
     <string name="pref_presence_settings">可用性</string>
-    <string name="pref_away_when_screen_off">屏幕关闭时修改状态为离开</string>
-    <string name="pref_away_when_screen_off_summary">屏幕关闭时将您标记为离开</string>
     <string name="pref_dnd_on_silent_mode">在“请勿打扰”模式下静音</string>
     <string name="pref_dnd_on_silent_mode_summary">当设备静音时，将您标记为“请勿打扰”状态</string>
     <string name="pref_treat_vibrate_as_silent">将振动看作静音</string>

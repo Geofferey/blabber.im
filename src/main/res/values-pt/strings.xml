@@ -136,8 +136,6 @@
     <string name="your_fingerprint">A sua impressão digital</string>
     <string name="omemo_fingerprint">Impressão digital OMEMO</string>
     <string name="omemo_fingerprint_x509">Impressão digital v\\OMEMO</string>
-    <string name="omemo_fingerprint_selected_message">Impressão digital OMEMO da mensagem</string>
-    <string name="omemo_fingerprint_x509_selected_message">Impressão digital v\\OMEMO da mensagem</string>
     <string name="other_devices">Outros dispositivos</string>
     <string name="trust_omemo_fingerprints">Confiar nas impressões digitais OMEMO</string>
     <string name="fetching_keys">Obtendo as chaves...</string>
@@ -315,8 +313,6 @@
     <string name="download_failed_could_not_connect">Transferência falhou: Não foi possível conectar ao host</string>
     <string name="account_status_tor_unavailable">Rede Tor indisponível</string>
     <string name="server_info_broken">Existe um problema</string>
-    <string name="pref_away_when_screen_off">Ausente quando o ecrã está desligado</string>
-    <string name="pref_away_when_screen_off_summary">Define o seu recurso como ausente quando o ecrã está desligado</string>
     <string name="pref_treat_vibrate_as_silent">Tratar vibrar como modo silencioso</string>
     <string name="action_add_account_with_certificate">Adicionar conta com certificado</string>
     <string name="unable_to_parse_certificate">Não foi possível processar o certificado</string>

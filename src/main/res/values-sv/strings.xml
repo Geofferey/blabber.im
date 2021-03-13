@@ -142,8 +142,6 @@
     <string name="openpgp_key_id">OpenPGP-nyckel-ID</string>
     <string name="omemo_fingerprint">OMEMO-fingeravtryck</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO-fingeravtryck</string>
-    <string name="omemo_fingerprint_selected_message">Meddelandets OMEMO-fingeravtryck</string>
-    <string name="omemo_fingerprint_x509_selected_message">Meddelandets v\\OMEMO-fingeravtryck</string>
     <string name="other_devices">Andra enheter</string>
     <string name="trust_omemo_fingerprints">Lita på OMEMO-fingeravtryck</string>
     <string name="fetching_keys">Hämtar nycklar...</string>
@@ -325,8 +323,6 @@
     <string name="account_status_bind_failure">Bind-fel</string>
     <string name="account_status_host_unknown">Servern är inte ansvarig för domänen</string>
     <string name="server_info_broken">Sönder</string>
-    <string name="pref_away_when_screen_off">Status borta när skärmen är av</string>
-    <string name="pref_away_when_screen_off_summary">Sätter din tillgänglighet till borta när skrämen är av</string>
     <string name="pref_treat_vibrate_as_silent">Hantera vibrationsläge som tyst läge</string>
     <string name="action_add_account_with_certificate">Lägg till konto med certifikat</string>
     <string name="unable_to_parse_certificate">Kan inte läsa certifikat</string>

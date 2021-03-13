@@ -87,7 +87,6 @@
     <string name="send_unencrypted">Invia non cifrato</string>
     <string name="decryption_failed">Decifrazione fallita. Forse non disponi della chiave privata corretta.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">blabber.im usa una app di terze parti chiamata <b>OpenKeychain</b> per cifrare e decifrare i messaggi per gestire le tue chiavi pubbliche.\n\nOpenKeychain è rilasciato secondo i termini della GPLv3 ed è disponibile sia su F-Droid, che su Google Play.\n\n<small>(Riavvia blabber.im in seguito.)</small></string>
     <string name="restart">Riavvia</string>
     <string name="install">Installa</string>
     <string name="offering">offrendo…</string>
@@ -191,8 +190,6 @@
     <string name="openpgp_key_id">ID chiave OpenPGP</string>
     <string name="omemo_fingerprint">Impronta OMEMO</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO impronta</string>
-    <string name="omemo_fingerprint_selected_message">Impronta OMEMO del messaggio</string>
-    <string name="omemo_fingerprint_x509_selected_message">Impronta v\\OMEMO del messaggio</string>
     <string name="other_devices">Altri dispositivi</string>
     <string name="trust_omemo_fingerprints">Fidati delle impronte OMEMO</string>
     <string name="fetching_keys">Ricezione chiavi...</string>
@@ -433,8 +430,6 @@
     <string name="account_status_host_unknown">Server non responsabile per il dominio</string>
     <string name="server_info_broken">Rotto</string>
     <string name="pref_presence_settings">Disponibilità</string>
-    <string name="pref_away_when_screen_off">\"Non disponibile\" a schermo spento</string>
-    <string name="pref_away_when_screen_off_summary">Imposta la tua risorsa come non disponibile quando lo schermo è spento</string>
     <string name="pref_dnd_on_silent_mode">\"Non disturbare\" in modalità silenziosa</string>
     <string name="update_info">blabber.im sta scaricando e installando la nuova versione automaticamente.\n\nAttendere prego…</string>
     <string name="pref_dnd_on_silent_mode_summary">Segna la tua risorsa come \"Non disturbare\" quando il dispositivo è in modalità silenziosa</string>
@@ -710,7 +705,6 @@
     <string name="edit_status_message_title">Modifica Messaggio di Stato</string>
     <string name="pref_automatically_delete_messages_description">Elimina automaticamente da questo dispositivo i messaggi più vecchi del lasso di tempo configurato.</string>
     <string name="pref_automatically_delete_messages">Eliminazione automatica dei messaggi</string>
-    <string name="pref_automatically_delete_files_description">Elimina automaticamente gli allegati da questo dispositivo che sono più vecchi del periodo di tempo configurato per l\'eliminazione automatica dei messaggi.</string>
     <string name="pref_automatically_delete_files">Eliminazione automatica degli allegati</string>
     <string name="disable_encryption">Disabilita crittografia</string>
     <string name="error_trustkey_general">blabber.im non è in grado di inviare messaggi criptati a %1$s. Questo può essere causato dal tuo contatto che utilizza un server non aggiornato o da un client che non gestisce OMEMO.</string>

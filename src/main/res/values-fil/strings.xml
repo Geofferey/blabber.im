@@ -147,8 +147,6 @@
     <string name="your_fingerprint">Iyong fingerprint</string>
     <string name="omemo_fingerprint">Bakas ng daliri para sa OMEMO</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO bakas ng daliri</string>
-    <string name="omemo_fingerprint_selected_message">OMEMO bakas ng daliri ng mensahe</string>
-    <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO bakas ng daliri ng mensahe</string>
     <string name="other_devices">Ibang aparato</string>
     <string name="trust_omemo_fingerprints">Magtiwala sa OMEMO bakas ng daliri</string>
     <string name="fetching_keys">Pagkuha ng keys…</string>
@@ -351,8 +349,6 @@
     <string name="account_status_tor_unavailable">Hindi magagamit ang network ng Tor</string>
     <string name="account_status_host_unknown">Hindi mananagot ang server para sa domain</string>
     <string name="server_info_broken">Nasira</string>
-    <string name="pref_away_when_screen_off">Lumayo kapag naka-off ang screen</string>
-    <string name="pref_away_when_screen_off_summary">Tinitiyak ang iyong mapagkukunan bilang malayo kapag naka-off ang screen</string>
     <string name="pref_dnd_on_silent_mode">\"Huwag abalahin\" sa tahimik na mode</string>
     <string name="pref_dnd_on_silent_mode_summary">Markahan ang iyong mapagkukunan bilang \"Huwag abalahin\" kapag ang aparato ay nasa tahimik na mode</string>
     <string name="pref_treat_vibrate_as_silent">Tratuhin ang vibrate bilang silent mode</string>

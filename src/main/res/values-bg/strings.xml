@@ -174,8 +174,6 @@
     <string name="openpgp_key_id">Идентификационен Kлюч на OpenPGP</string>
     <string name="omemo_fingerprint">OMEMO пръстови отпечатъци</string>
     <string name="omemo_fingerprint_x509">v\\Отпечатък на OMEMO</string>
-    <string name="omemo_fingerprint_selected_message">OMEMO отпечатък на съобщение</string>
-    <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO отпечатък на съобщение</string>
     <string name="other_devices">Други устройства</string>
     <string name="trust_omemo_fingerprints">Доверете се на Пръстовите Отпечатъци на OMEMO</string>
     <string name="fetching_keys">Извличане на ключове…</string>
@@ -409,8 +407,6 @@
     <string name="account_status_host_unknown">Сървърът не отговаря за домейна</string>
     <string name="server_info_broken">Счупен</string>
     <string name="pref_presence_settings">Наличност</string>
-    <string name="pref_away_when_screen_off">Kогато си отсъстващ изключи екрана</string>
-    <string name="pref_away_when_screen_off_summary">Маркира вашия ресурс когато сте отсъстващ когато екранът е изключен</string>
     <string name="pref_dnd_on_silent_mode">\"Не безпокойте\" в безшумен режим</string>
     <string name="pref_dnd_on_silent_mode_summary">Маркира вашия ресурс като \"Не безпокойте\", когато устройството е в безшумен режим</string>
     <string name="pref_treat_vibrate_as_silent">Третирайте вибрацията като безшумен режим</string>

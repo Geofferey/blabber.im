@@ -87,7 +87,6 @@
     <string name="send_unencrypted">Enviar sense xifrar</string>
     <string name="decryption_failed">Error en el desxifrar. Pot ser no tinguis la clau privada apropiada.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">blabber.im utiliza una aplicación de terceros llamada <b>OpenKeychain</b> per a xifrar i desxifrar missatges i gestionar les seves claus públiques.\n\nOpenKeychain té llicència GPLv3 i està disponible en F-Droid i Google Play.\n\n<small>(Si us plau, reiniciï blabber.im després.)</small></string>
     <string name="restart">Reiniciar</string>
     <string name="install">Instal·lar</string>
     <string name="offering">Oferint…</string>
@@ -191,8 +190,6 @@
     <string name="openpgp_key_id">ID de clau de OpenPGP</string>
     <string name="omemo_fingerprint">Empremta digital OMEMO</string>
     <string name="omemo_fingerprint_x509">Empremta digital v\\OMEMO</string>
-    <string name="omemo_fingerprint_selected_message">Empremta digital OMEMO del missatge</string>
-    <string name="omemo_fingerprint_x509_selected_message">Empremta digital v\\OMEMO del missatge</string>
     <string name="other_devices"> Altres dispositius</string>
     <string name="trust_omemo_fingerprints">Empremtes digitals OMEMO de confiança</string>
     <string name="fetching_keys">Buscant claus...</string>
@@ -433,8 +430,6 @@
     <string name="account_status_host_unknown">El servidor no és responsable del domini</string>
     <string name="server_info_broken">Error</string>
     <string name="pref_presence_settings">Disponibilitat</string>
-    <string name="pref_away_when_screen_off">Absent amb pantalla apagada</string>
-    <string name="pref_away_when_screen_off_summary">Canviar el teu estat a absent quan la pantalla està apagada</string>
     <string name="pref_dnd_on_silent_mode">\"No molestar\" en mode silenci</string>
     <string name="update_info">blabber.im està descarregant i instal·lant la nova versió automàticament.\n\nSi us plau, esperi…</string>
     <string name="pref_dnd_on_silent_mode_summary">Canvia el teu estat a \"no molestar\" quan el dispositiu està en mode silenci</string>
@@ -710,7 +705,6 @@
     <string name="edit_status_message_title">Editar el missatge d\'estat</string>
     <string name="pref_automatically_delete_messages_description">Eliminar automàticament els missatges del dispositius que siguin anteriors al temps seleccionant.</string>
     <string name="pref_automatically_delete_messages">Borrat automàtico de missatges</string>
-    <string name="pref_automatically_delete_files_description">Eliminar automàticament els arxius adjunts d\'aquest dispositiu que siguin més antics que el termini configurat per a l\'eliminació automàtica de missatges.</string>
     <string name="pref_automatically_delete_files">Eliminació automàtica d\'arxius adjunts</string>
     <string name="disable_encryption">Desactivar xifrat</string>
     <string name="error_trustkey_general">blabber.im no pot enviar missatges encriptats a %1$s. Això pot haver-se d\'al fet que el seu contacte utilitza un servidor o client obsolet que no pot manejar OMEMO.</string>

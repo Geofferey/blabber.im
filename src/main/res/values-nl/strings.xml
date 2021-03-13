@@ -154,8 +154,6 @@
     <string name="openpgp_key_id">OpenPGP-sleutel-ID</string>
     <string name="omemo_fingerprint">OMEMO-vingerafdruk</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO-vingerafdruk</string>
-    <string name="omemo_fingerprint_selected_message">OMEMO-vingerafdruk van bericht</string>
-    <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO-vingerafdruk van bericht</string>
     <string name="other_devices">Andere apparaten</string>
     <string name="trust_omemo_fingerprints">Vertrouw OMEMO-vingerafdrukken</string>
     <string name="fetching_keys">Sleutels ophalen…</string>
@@ -366,8 +364,6 @@
     <string name="account_status_host_unknown">Server niet verantwoordelijk voor domein</string>
     <string name="server_info_broken">Gebroken</string>
     <string name="pref_presence_settings">Beschikbaarheid</string>
-    <string name="pref_away_when_screen_off">Even weg wanneer scherm uit staat</string>
-    <string name="pref_away_when_screen_off_summary">Stelt je bron in als even weg wanneer het scherm uitgeschakeld is</string>
     <string name="pref_dnd_on_silent_mode">“Niet storen” in stille modus</string>
     <string name="pref_dnd_on_silent_mode_summary">Stelt je bron in als “Niet storen” wanneer je apparaat in stille modus staat</string>
     <string name="pref_treat_vibrate_as_silent">Trillen behandelen als stille modus</string>

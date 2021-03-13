@@ -87,7 +87,7 @@
     <string name="send_unencrypted">Şifrəsiz göndər</string>
     <string name="decryption_failed">Şifrəni açma uğursuz oldu. Bəlkə də, müvafiq özəl açarınız yoxdur.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">blabber.im, mesajları şifrələmək və şifrəni açmaq və açıq açarlarınızı idarə etmək üçün <b>OpenKeychain</b>; adlı üçüncü bir tətbiqdən istifadə edir.\n\nOpenKeychain GPLv3-lə lisenziyalıdır və F-Droid və Google Play-də mövcuddur.\n\n<small>(blabber.im-i yenidən başladın)</small></string>
+    <string name="openkeychain_required_long">&amp;s mesajları şifrələmək və şifrəni açmaq və açıq açarlarınızı idarə etmək üçün <b>OpenKeychain</b>; adlı üçüncü bir tətbiqdən istifadə edir.\n\nOpenKeychain GPLv3-lə lisenziyalıdır və F-Droid və Google Play-də mövcuddur.\n\n<small>(Zəhmət olmasa %s sonra yenidən başladın.)</small></string>
     <string name="restart">Yenidən başlat</string>
     <string name="install">Quraşdır</string>
     <string name="offering">təklif edilir…</string>
@@ -193,8 +193,8 @@
     <string name="openpgp_key_id">OpenPGP Açar Kimliyi</string>
     <string name="omemo_fingerprint">OMEMO barmaq izi</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO barmaq izi</string>
-    <string name="omemo_fingerprint_selected_message">OMEMO mesajın barmaq izi</string>
-    <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO mesajın barmaq izi</string>
+    <string name="omemo_fingerprint_selected_message">OMEMO izi (orijinal mesaj)</string>
+    <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO izi (orijinal mesaj)</string>
     <string name="other_devices">Digər cihazlar</string>
     <string name="trust_omemo_fingerprints">OMEMO Barmaq izlərinə güvən</string>
     <string name="fetching_keys">Açarlar alınır…</string>
@@ -435,8 +435,8 @@
     <string name="account_status_host_unknown">Server domena cavabdeh deyil</string>
     <string name="server_info_broken">Zədəli</string>
     <string name="pref_presence_settings">Mövcudluq</string>
-    <string name="pref_away_when_screen_off">Ekran qapalı olduğu zaman blok edin</string>
-    <string name="pref_away_when_screen_off_summary">Ekran söndürüldükdə resursunuzu olmayan kimi qeyd edir</string>
+    <string name="pref_away_when_screen_off">Cihaz kilidlənmiş olduqda</string>
+    <string name="pref_away_when_screen_off_summary">Cihaz kilidli olduqda resursunuzu olmayan kimi qeyd edir</string>
     <string name="pref_dnd_on_silent_mode">\"Narahat etməyin\" səssiz rejimdə</string>
     <string name="update_info">blabber.im yeni versiyasını avtomatik yükləyir və quraşdırır.\n\nGözləyin…</string>
     <string name="pref_dnd_on_silent_mode_summary">Cihaz səssiz rejimdə olduqda mənbəyinizi \"Narahat etməyin\" kimi qeyd edir</string>
@@ -712,7 +712,7 @@
     <string name="edit_status_message_title">Status Mesajını redaktə edin</string>
     <string name="pref_automatically_delete_messages_description">Konfiqurasiya müddətindən daha köhnə olan bu cihazdakı mesajları avtomatik olaraq silmək.</string>
     <string name="pref_automatically_delete_messages">Avtomatik mesaj silinməsi</string>
-    <string name="pref_automatically_delete_files_description">Bu cihazdan avtomatik mesaj silinməsi üçün konfiqurasiya edilmiş vaxt çərçivəsindən daha köhnə fayllar avtomatik olaraq silinməsi.</string>
+    <string name="pref_automatically_delete_attachments_description">Konfiqurasiya müddətindən daha köhnə olan bu cihazdakı mesajları avtomatik olaraq silmək.</string>
     <string name="pref_automatically_delete_files">Faylların avtomatik silinməsi</string>
     <string name="disable_encryption">Şifrələməni deaktiv edin</string>
     <string name="error_trustkey_general">blabber.im şifrelenmiş mesaj göndərə bilməz %1$s. Bu kontakt ya bir köhnəlmiş server istifadə edir və ya OMEMO dəstəkləməyən bir proqram istifadə edir.</string>
@@ -1129,4 +1129,6 @@
     <string name="remove_individual_notifications">Fərdi bildirişləri silin</string>
     <string name="remove_individual_notifications_message">%s üçün fərdi bildirişləri silmək istəyirsiniz?</string>
     <string name="remove_all_individual_notifications_message">Kontaktlarınız və qruplarınız üçün qurulmuş bütün fərdi bildirişləri silmək istəyirsiniz?</string>
+    <string name="exit">Çıxış</string>
+    <string name="record_voice_mail">Səsli mesajı yazın</string>
 </resources>

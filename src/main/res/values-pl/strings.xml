@@ -182,8 +182,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="openpgp_key_id">ID klucza OpenPGP</string>
     <string name="omemo_fingerprint">Odcisk OMEMO</string>
     <string name="omemo_fingerprint_x509">Odcisk v\\OMEMO</string>
-    <string name="omemo_fingerprint_selected_message">Odcisk OMEMO wiadomości</string>
-    <string name="omemo_fingerprint_x509_selected_message">Odcisk v\\OMEMO wiadomości</string>
     <string name="other_devices">Pozostałe urządzenia</string>
     <string name="trust_omemo_fingerprints">Zaufane odciski OMEMO</string>
     <string name="fetching_keys">Pobieranie kluczy...</string>
@@ -426,8 +424,6 @@ Nie spowoduje to usunięcia kopii wiadomości przechowywanych na innych urządze
     <string name="account_status_host_unknown">Serwer nie odpowiada domenie</string>
     <string name="server_info_broken">Zepsute</string>
     <string name="pref_presence_settings">Dostępność</string>
-    <string name="pref_away_when_screen_off">Status \"Oddalony\" gdy wyświetlacz jest wyłączony</string>
-    <string name="pref_away_when_screen_off_summary">Oznacza Twój zasób jako \"Oddalony\", gdy wyświetlacz jest wyłączony</string>
     <string name="pref_dnd_on_silent_mode">\"Nie przeszkadzać\" w trybie cichym</string>
     <string name="update_info">blabber.im automatycznie pobiera i instaluje nową wersję. \n\nPotrwa to chwilkę…</string>
     <string name="pref_dnd_on_silent_mode_summary">Oznacza Twój zasób jako \"Nie przeszkadzać\", gdy urządzenie jest w trybie cichym</string>

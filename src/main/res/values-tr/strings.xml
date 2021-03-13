@@ -85,7 +85,6 @@
     <string name="send_unencrypted">Şifrelenmemiş olarak gönder</string>
     <string name="decryption_failed">Şifre çözme işlemi başarısız. Belki de uygun özel anahtara sahip değilsiniz.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">blabber.im, mesajlarınızı şifrelemek, şifresini çözmek ve açık anahtarlarınızı yönetmek için <b>OpenKeychain</b> adlı üçüncü parti bir uygulama kullanır.\n\nOpenKeychain, GPLv3 lisanslıdır ve F-Droid, Google Play\'de mevcuttur.\n\n<small>(Lütfen blabber.im\'i daha sonrasında yeniden başlatın.)</small>\n</string>
     <string name="restart">Yeniden başlat</string>
     <string name="install">Yükle</string>
     <string name="offering">teklif yapılıyor…</string>
@@ -189,8 +188,6 @@
     <string name="openpgp_key_id">OpenPGP Anahtar Kimliği</string>
     <string name="omemo_fingerprint">OMEMO parmak izi</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO parmak izi</string>
-    <string name="omemo_fingerprint_selected_message">OMEMO mesajın parmak izi</string>
-    <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO mesajın parmak izi</string>
     <string name="other_devices">Diğer cihazlar</string>
     <string name="trust_omemo_fingerprints">OMEMO parmak izlerine güven</string>
     <string name="fetching_keys">Anahtarlar alınıyor…</string>
@@ -413,8 +410,6 @@
     <string name="account_status_bind_failure">Bağlanma hatası</string>
     <string name="account_status_host_unknown">Sunucu, alan adı için sorumlu değil</string>
     <string name="server_info_broken">Bozuk</string>
-    <string name="pref_away_when_screen_off">Uzakta ekran kapalıyken</string>
-    <string name="pref_away_when_screen_off_summary">Ekran kapalıyken kaynağını uzakta olarak işaretler</string>
     <string name="pref_dnd_on_silent_mode">Sessiz modda \'\'Rahatsız etme\'\'</string>
     <string name="pref_dnd_on_silent_mode_summary">Cihaz sessiz moddayken kaynağınızı \"Rahatsız etmeyin\" olarak işaretler</string>
     <string name="pref_treat_vibrate_as_silent">Titreşimsiz mod olarak işlem yap</string>

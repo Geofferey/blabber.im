@@ -148,8 +148,6 @@
     <string name="openpgp_key_id">OpenPGP gakoaren nortasuna</string>
     <string name="omemo_fingerprint">OMEMO hatz-marka</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO hatz-marka</string>
-    <string name="omemo_fingerprint_selected_message">Mezuaren OMEMO hatz-marka</string>
-    <string name="omemo_fingerprint_x509_selected_message">Mezuaren v\\OMEMO hatz-marka</string>
     <string name="other_devices">Beste gailuak</string>
     <string name="trust_omemo_fingerprints">OMEMO hatz-marketaz fidatu</string>
     <string name="fetching_keys">Gakoak eskuratzen...</string>
@@ -347,8 +345,6 @@
     <string name="account_status_bind_failure">Estekatzeak hust egin du</string>
     <string name="account_status_host_unknown">Zerbitzaria ez da domeinuaren erantzule</string>
     <string name="server_info_broken">Hondatuta</string>
-    <string name="pref_away_when_screen_off">Urrun pantaila itzalita dagoenean</string>
-    <string name="pref_away_when_screen_off_summary">Zure baliabidea urrun bezala markatzen du pantaila itzalita dagoenean</string>
     <string name="pref_dnd_on_silent_mode">\"Ez gogaitu\" modu isilean</string>
     <string name="pref_dnd_on_silent_mode_summary">Zure baliabidea \"Ez gogaitu\" bezala markatzen du gailua modu isilean dagoenean</string>
     <string name="pref_treat_vibrate_as_silent">Dardara modu isila bezala tratatu</string>

@@ -177,8 +177,6 @@
     <string name="openpgp_key_id">OpenPGP ಕೀಲಿ ಗುರುತು</string>
     <string name="omemo_fingerprint">OMEMO ಕೀಲಿಬೆರಳಚ್ಚು</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO ಕೀಲಿಬೆರಳಚ್ಚು</string>
-    <string name="omemo_fingerprint_selected_message">ಈ ಸಂದೇಶದ OMEMO ಕೀಲಿಬೆರಳಚ್ಚು</string>
-    <string name="omemo_fingerprint_x509_selected_message">v\\ಈ ಸಂದೇಶದ OMEMO ಕೀಲಿಬೆರಳಚ್ಚು</string>
     <string name="other_devices">ಇತರೆ ಸಾಧನಗಳು</string>
     <string name="trust_omemo_fingerprints">OMEMO ಕೀಲಿಬೆರಳಚ್ಚುಗಳನ್ನು ನಂಬಿರಿ</string>
     <string name="fetching_keys">ಕೀಲಿಗಳನ್ನು ಪಡೆಯಲಾಗುತ್ತಿದೆ…</string>

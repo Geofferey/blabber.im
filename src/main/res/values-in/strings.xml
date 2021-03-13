@@ -160,8 +160,6 @@
     <string name="openpgp_key_id">OpenPGP Kunci data diri</string>
     <string name="omemo_fingerprint">OMEMO sidik jari</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO sidik jari</string>
-    <string name="omemo_fingerprint_selected_message">OMEMO sidik jari pesan</string>
-    <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO sidik jari pesan</string>
     <string name="other_devices">Perangkat lainnya</string>
     <string name="trust_omemo_fingerprints">Percaya sidik jari OMEMO</string>
     <string name="fetching_keys">Mengambil kunci…</string>
@@ -367,8 +365,6 @@
     <string name="account_status_tor_unavailable">Jaringan Tor tidak tersedia</string>
     <string name="account_status_host_unknown">Server tidak bertanggung jawab atas domain</string>
     <string name="server_info_broken">Rusak</string>
-    <string name="pref_away_when_screen_off">Jauh saat layar mati</string>
-    <string name="pref_away_when_screen_off_summary">Tandai sumber daya Anda saat tidak aktif saat layar dimatikan</string>
     <string name="pref_dnd_on_silent_mode">\"Jangan diganggu\" dalam mode diam</string>
     <string name="pref_dnd_on_silent_mode_summary">Tandai sumber Anda sebagai \"Jangan diganggu\" saat perangkat dalam mode senyap</string>
     <string name="pref_treat_vibrate_as_silent">Perlakukan getar sebagai mode senyap</string>
@@ -420,7 +416,7 @@
     <string name="no_application_to_share_uri">Tidak ada aplikasi yang ditemukan untuk berbagi URI</string>
     <string name="share_uri_with">Bagikan URI dengan…</string>
     <string name="mgmt_account_reconnect">Sambung kembali</string>
-    <string name="welcome_text">… adalah klien XMPP/Jabber yang bebas dan aman.</string>
+    <string name="welcome_text">... adalah klien XMPP/Jabber yang bebas dan aman.</string>
     <string name="magic_create_text">Kami akan memandu anda dalam proses pembuatan akun dengan kata kunci acak, yang dapat anda gunakan atau ubah ke kata sandi anda sendiri di halaman berikutnya.\nAnda akan dapat berkomunikasi dengan pengguna dan penyedia layanan lainnya dengan memberi mereka Jabber-ID anda.</string>
     <string name="your_full_jid_will_be">Jabber-ID anda adalah: %s</string>
     <string name="create_account">Buat akun baru</string>

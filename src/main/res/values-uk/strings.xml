@@ -177,8 +177,6 @@
     <string name="openpgp_key_id">Ідентифікатор ключа OpenPGP</string>
     <string name="omemo_fingerprint">Цифровий підпис OMEMO</string>
     <string name="omemo_fingerprint_x509">Цифровий підпис v\\OMEMO</string>
-    <string name="omemo_fingerprint_selected_message">Цифровий підпис повідомлення OMEMO</string>
-    <string name="omemo_fingerprint_x509_selected_message">Цифровий підпис повідомлення v\\OMEMO</string>
     <string name="other_devices">Інші пристрої</string>
     <string name="trust_omemo_fingerprints">Довіряти цифровим підписам OMEMO</string>
     <string name="fetching_keys">Отримую ключі…</string>
@@ -419,8 +417,6 @@
     <string name="account_status_host_unknown">Сервер не відповідає за домен</string>
     <string name="server_info_broken">Поламано</string>
     <string name="pref_presence_settings">Присутність</string>
-    <string name="pref_away_when_screen_off">Відійшов, якщо екран вимкнуто</string>
-    <string name="pref_away_when_screen_off_summary">Показувати стан як відійшов, якщо екран вимкнуто</string>
     <string name="pref_dnd_on_silent_mode">\"Не турбувати\" в режимі тиші</string>
     <string name="pref_dnd_on_silent_mode_summary">Додавати \"Не турбувати\" до імені вашого пристрою, коли пристрій в режимі тиші</string>
     <string name="pref_treat_vibrate_as_silent">Вважати вібро за безшумний режим</string>

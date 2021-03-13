@@ -89,7 +89,7 @@
     <string name="send_unencrypted">Отправить незашифрованным</string>
     <string name="decryption_failed">Расшифровка не удалась. Возможно, у вас нет правильного приватного ключа.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">blabber.im использует приложение <b>OpenKeychain</b> для шифрования/расшифровки сообщений и управления Вашими открытыми ключами.\n\nOpenKeychain лицензирован под GPLv3 и доступен в F-Droid и Google Play.\n\n<small>(После этого перезапустите blabber.im.)</small></string>
+    <string name="openkeychain_required_long">использует приложение <b>OpenKeychain</b> для шифрования/расшифровки сообщений и управления Вашими открытыми ключами.\n\nOpenKeychain лицензирован под GPLv3 и доступен в F-Droid и Google Play.\n\n<small>(После этого перезапустите.)</small></string>
     <string name="restart">Перезапуск</string>
     <string name="install">Установка</string>
     <string name="offering">предложение…</string>
@@ -193,8 +193,8 @@
     <string name="openpgp_key_id">Идентификатор ключа OpenPGP</string>
     <string name="omemo_fingerprint">OMEMO отпечаток</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO отпечаток</string>
-    <string name="omemo_fingerprint_selected_message">OMEMO отпечаток сообщения</string>
-    <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO отпечаток сообщения</string>
+    <string name="omemo_fingerprint_selected_message">OMEMO fingerprint (оригинальное сообщение)</string>
+    <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO fingerprint (оригинальное сообщение)</string>
     <string name="other_devices">Другие устройства</string>
     <string name="trust_omemo_fingerprints">Доверенные OMEMO Отпечатки</string>
     <string name="fetching_keys">Получение ключей…</string>
@@ -437,8 +437,8 @@
     <string name="account_status_host_unknown">Сервер не отвечает за домен</string>
     <string name="server_info_broken">Поломано</string>
     <string name="pref_presence_settings">Доступность</string>
-    <string name="pref_away_when_screen_off">Статус \"Отошел\", когда экран выключен</string>
-    <string name="pref_away_when_screen_off_summary">Устанавливать статус \"Отошел\" при выключенном экране</string>
+    <string name="pref_away_when_screen_off">Немедленно, если устройство заблокировано</string>
+    <string name="pref_away_when_screen_off_summary">Устанавливать статус \"Отошел\" если устройство заблокировано</string>
     <string name="pref_dnd_on_silent_mode">Статус \"Не беспокоить\" в беззвучном режиме</string>
     <string name="update_info">blabber.im скачивает и устанавливает новую версию автоматически.\n\nПожалуйста, подождите…</string>
     <string name="pref_dnd_on_silent_mode_summary">Устанавливать статус \"Не беспокоить\", когда устройство находится в беззвучном режиме</string>
@@ -728,7 +728,7 @@
     <string name="edit_status_message_title">Редактировать статус</string>
     <string name="pref_automatically_delete_messages_description">Автоматически удалять с этого устройства сообщения старше заданного времени.</string>
     <string name="pref_automatically_delete_messages">Автоматическое удаление сообщений</string>
-    <string name="pref_automatically_delete_files_description">Автоматически удалять с этого устройства вложения, которые старше указанного периода времени.</string>
+    <string name="pref_automatically_delete_attachments_description">Автоматически удалять с этого устройства сообщения старше заданного времени.</string>
     <string name="pref_automatically_delete_files">Автоматическое удаление вложений</string>
     <string name="disable_encryption">Отключить шифрование</string>
     <string name="error_trustkey_general">blabber.im не может отправить зашифрованные сообщения %1$s. Возможно, Ваш контакт использует устаревший сервер или клиент, не поддерживающий OMEMO.</string>
@@ -1149,4 +1149,6 @@
     <string name="remove_individual_notifications">Удаление отдельных уведомлений</string>
     <string name="remove_individual_notifications_message">Вы действительно хотите удалить этот индивидуальный набор уведомлений для %s?</string>
     <string name="remove_all_individual_notifications_message">Вы действительно хотите удалить все индивидуальные уведомления, установленные для ваших контактов и групп?</string>
+    <string name="exit">Выход</string>
+    <string name="record_voice_mail">Запись голосового сообщения</string>
 </resources>

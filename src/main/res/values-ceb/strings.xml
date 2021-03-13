@@ -152,8 +152,6 @@
     <string name="openpgp_messages_found">OpenPGP naka-encrypt nga mga mensahe ang nakita</string>
     <string name="your_fingerprint">Imuhang fingerprint</string>
     <string name="openpgp_key_id">OpenPGP Yawe nga ID</string>
-    <string name="omemo_fingerprint_selected_message">OMEMO fingerprint sa mensahe</string>
-    <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO fingerprint sa mensahe</string>
     <string name="other_devices">Lahi nga mga devices</string>
     <string name="trust_omemo_fingerprints">Salig sa OMEMO ng Fingerprint</string>
     <string name="fetching_keys">Namasol ug mga yawe…</string>
@@ -327,8 +325,6 @@
     <string name="account_status_bind_failure">Pugong kapakyasan</string>
     <string name="account_status_host_unknown">Serber dili responsabli sa domain</string>
     <string name="server_info_broken">Guba</string>
-    <string name="pref_away_when_screen_off">Layo kung ang screen kay gepalong</string>
-    <string name="pref_away_when_screen_off_summary">Markahe ang imung gepanguhaan ingon nga layo kong ang screen gipalong</string>
     <string name="pref_dnd_on_silent_mode">\"Ayaw ug samoka\" sa hilom nga mode</string>
     <string name="pref_dnd_on_silent_mode_summary">Markahi imung gepanguhaan sa \"Ayaw ug Samoka\" kung ang device kay naa sa hilum nga mode</string>
     <string name="pref_treat_vibrate_as_silent">Tratuha ang pag-vibrate ingun nga hilum nga mode</string>

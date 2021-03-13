@@ -142,8 +142,6 @@
     <string name="openpgp_key_id">OpenPGP ID klíče</string>
     <string name="omemo_fingerprint">OMEMO otisk</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO otisk</string>
-    <string name="omemo_fingerprint_selected_message">OMEMO otisk zprávy</string>
-    <string name="omemo_fingerprint_x509_selected_message">v\\OMEMO otisk zprávy</string>
     <string name="other_devices">Ostatní přístroje</string>
     <string name="trust_omemo_fingerprints">Věřit OMEMO otiskům</string>
     <string name="fetching_keys">Získávání klíčů...</string>
@@ -318,8 +316,6 @@
     <string name="account_status_bind_failure">Bind chyba</string>
     <string name="account_status_host_unknown">Server není zodpovědný za doménu</string>
     <string name="server_info_broken">Rozbité</string>
-    <string name="pref_away_when_screen_off">Pryč při vypnuté obrazovce</string>
-    <string name="pref_away_when_screen_off_summary">Při vypnuté obrazovce označí váš stav jako pryč</string>
     <string name="pref_treat_vibrate_as_silent">Vibrační mód brát stejně jako tichý</string>
     <string name="action_add_account_with_certificate">Přidat účet s certifikátem</string>
     <string name="unable_to_parse_certificate">Nelze načíst certifikát</string>

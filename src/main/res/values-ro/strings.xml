@@ -166,8 +166,6 @@
     <string name="openpgp_key_id">ID cheie OpenPGP</string>
     <string name="omemo_fingerprint">Amprenta OMEMO</string>
     <string name="omemo_fingerprint_x509">Amprenta v\\OMEMO</string>
-    <string name="omemo_fingerprint_selected_message">Amprenta OMEMO a mesajului</string>
-    <string name="omemo_fingerprint_x509_selected_message">Amprenta v\\OMEMO a mesajului</string>
     <string name="other_devices">Alte dispozitive</string>
     <string name="trust_omemo_fingerprints">Amprente OMEMO de încredere</string>
     <string name="fetching_keys">Se preiau cheile...</string>
@@ -396,8 +394,6 @@
     <string name="account_status_host_unknown">Gazdă fără domeniu</string>
     <string name="server_info_broken">Deteriorat</string>
     <string name="pref_presence_settings">Disponibilitate</string>
-    <string name="pref_away_when_screen_off">Plecat când ecranul este oprit</string>
-    <string name="pref_away_when_screen_off_summary">Prezintă clientul drept \"Plecat\" atunci când ecranul este oprit</string>
     <string name="pref_dnd_on_silent_mode">\"Nu deranja\" în modul silențios</string>
     <string name="pref_dnd_on_silent_mode_summary">Prezintă clientul drept \"Nu deranja\" atunci când dispozitivul este în mod silențios</string>
     <string name="pref_treat_vibrate_as_silent">Tratează modul vibrație ca silențios</string>
