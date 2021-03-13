@@ -266,19 +266,21 @@ public class FileBackend {
         if (dir == null) {
             return;
         }
-        Stack<File> dirlist = new Stack<File>();
+        Stack<File> dirlist = new Stack<>();
         dirlist.clear();
         dirlist.push(dir);
         while (!dirlist.isEmpty()) {
             File dirCurrent = dirlist.pop();
             File[] fileList = dirCurrent.listFiles();
-            for (File file : fileList) {
-                if (file.isDirectory()) {
-                    dirlist.push(file);
-                } else {
-                    if (file.exists() && !file.getName().equalsIgnoreCase(".nomedia")) {
-                        num++;
-                        deleteFile(file);
+            if (fileList.length > 0) {
+                for (File file : fileList) {
+                    if (file.isDirectory()) {
+                        dirlist.push(file);
+                    } else {
+                        if (file.exists() && !file.getName().equalsIgnoreCase(".nomedia")) {
+                            num++;
+                            deleteFile(file);
+                        }
                     }
                 }
             }
