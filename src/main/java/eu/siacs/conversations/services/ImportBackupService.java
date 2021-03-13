@@ -61,7 +61,7 @@ import eu.siacs.conversations.xmpp.Jid;
 public class ImportBackupService extends Service {
 
     private static final int NOTIFICATION_ID = 21;
-    private static AtomicBoolean running = new AtomicBoolean(false);
+    private static final AtomicBoolean running = new AtomicBoolean(false);
     private final ImportBackupServiceBinder binder = new ImportBackupServiceBinder();
     private final SerialSingleThreadExecutor executor = new SerialSingleThreadExecutor(getClass().getSimpleName());
     private final Set<OnBackupProcessed> mOnBackupProcessedListeners = Collections.newSetFromMap(new WeakHashMap<>());

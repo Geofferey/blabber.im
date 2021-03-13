@@ -18,6 +18,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+
 import com.google.common.base.Strings;
 
 import java.io.BufferedWriter;
@@ -386,6 +387,8 @@ public class ExportBackupService extends Service {
             Log.d(Config.LOGTAG, "written backup to " + file.getAbsoluteFile());
             count++;
         }
+        stopForeground(true);
+        notificationManager.cancel(NOTIFICATION_ID);
         return files;
     }
 
