@@ -18,11 +18,11 @@ import eu.siacs.conversations.entities.Conversational;
 import eu.siacs.conversations.entities.ReceiptRequest;
 import eu.siacs.conversations.generator.AbstractGenerator;
 import eu.siacs.conversations.xml.Element;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.OnAdvancedStreamFeaturesLoaded;
 import eu.siacs.conversations.xmpp.mam.MamReference;
 import eu.siacs.conversations.xmpp.stanzas.IqPacket;
 import eu.siacs.conversations.xmpp.stanzas.MessagePacket;
-import eu.siacs.conversations.xmpp.Jid;
 
 public class MessageArchiveService implements OnAdvancedStreamFeaturesLoaded {
 
@@ -211,7 +211,7 @@ public class MessageArchiveService implements OnAdvancedStreamFeaturesLoaded {
     }
 
     void executePendingQueries(final Account account) {
-        List<Query> pending = new ArrayList<>();
+        final List<Query> pending = new ArrayList<>();
         synchronized (this.pendingQueries) {
             for (Iterator<Query> iterator = this.pendingQueries.iterator(); iterator.hasNext(); ) {
                 Query query = iterator.next();
@@ -391,8 +391,17 @@ public class MessageArchiveService implements OnAdvancedStreamFeaturesLoaded {
         }
     }
 
-    void kill(Conversation conversation) {
+    void kill(final Conversation conversation) {
         final ArrayList<Query> toBeKilled = new ArrayList<>();
+        synchronized (this.pendingQueries) {
+            for (final Iterator<Query> iterator = this.pendingQueries.iterator(); iterator.hasNext(); ) {
+                final Query query = iterator.next();
+                if (query.getConversation() == conversation) {
+                    iterator.remove();
+                    Log.d(Config.LOGTAG, conversation.getAccount().getJid().asBareJid() + ": killed pending MAM query for archived conversation");
+                }
+            }
+        }
         synchronized (this.queries) {
 			for (final Query q : queries) {
                 if (q.conversation == conversation) {
@@ -400,7 +409,7 @@ public class MessageArchiveService implements OnAdvancedStreamFeaturesLoaded {
                 }
             }
         }
-        for (Query q : toBeKilled) {
+        for (final Query q : toBeKilled) {
             kill(q);
         }
     }
