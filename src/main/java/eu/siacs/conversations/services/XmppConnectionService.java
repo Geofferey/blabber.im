@@ -2051,10 +2051,10 @@ public class XmppConnectionService extends Service {
     public void createBookmark(final Account account, final Bookmark bookmark) {
         account.putBookmark(bookmark);
         final XmppConnection connection = account.getXmppConnection();
-        if (connection.getFeatures().bookmarks2()) {
+        if (connection != null && connection.getFeatures().bookmarks2()) {
             final Element item = mIqGenerator.publishBookmarkItem(bookmark);
             pushNodeAndEnforcePublishOptions(account, Namespace.BOOKMARKS2, item, bookmark.getJid().asBareJid().toEscapedString(), PublishOptions.persistentWhitelistAccessMaxItems());
-        } else if (connection.getFeatures().bookmarksConversion()) {
+        } else if (connection != null && connection.getFeatures().bookmarksConversion()) {
             pushBookmarksPep(account);
         } else {
             pushBookmarksPrivateXml(account);
@@ -2064,14 +2064,14 @@ public class XmppConnectionService extends Service {
     public void deleteBookmark(final Account account, final Bookmark bookmark) {
         account.removeBookmark(bookmark);
         final XmppConnection connection = account.getXmppConnection();
-        if (connection.getFeatures().bookmarks2()) {
+        if (connection != null && connection.getFeatures().bookmarks2()) {
             IqPacket request = mIqGenerator.deleteItem(Namespace.BOOKMARKS2, bookmark.getJid().asBareJid().toEscapedString());
             sendIqPacket(account, request, (a, response) -> {
                 if (response.getType() == IqPacket.TYPE.ERROR) {
                     Log.d(Config.LOGTAG, a.getJid().asBareJid() + ": unable to delete bookmark " + response.getError());
                 }
             });
-        } else if (connection.getFeatures().bookmarksConversion()) {
+        } else if (connection != null && connection.getFeatures().bookmarksConversion()) {
             pushBookmarksPep(account);
         } else {
             pushBookmarksPrivateXml(account);
