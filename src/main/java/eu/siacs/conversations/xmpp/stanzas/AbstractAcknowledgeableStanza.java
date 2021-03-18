@@ -18,29 +18,23 @@ abstract public class AbstractAcknowledgeableStanza extends AbstractStanza {
         setAttribute("id", id);
     }
 
-    public Element getError() {
-        Element error = findChild("error");
-        if (error != null) {
-            for (Element element : error.getChildren()) {
+    private Element getErrorConditionElement() {
+        final Element error = findChild("error");
+        if (error == null) {
+            return null;
+        }
+        for (final Element element : error.getChildren()) {
                 if (!element.getName().equals("text")) {
                     return element;
                 }
             }
-        }
         return null;
     }
 
-	public String getErrorCondition() {
-		Element error = findChild("error");
-		if (error != null) {
-			for(Element element : error.getChildren()) {
-				if (!element.getName().equals("text")) {
-					return element.getName();
-				}
-			}
-		}
-		return null;
-	}
+    public String getErrorCondition() {
+        final Element condition = getErrorConditionElement();
+        return condition == null ? null : condition.getName();
+    }
 
     public boolean valid() {
         return InvalidJid.isValid(getFrom()) && InvalidJid.isValid(getTo());
