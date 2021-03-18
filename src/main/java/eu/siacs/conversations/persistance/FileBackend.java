@@ -351,30 +351,43 @@ public class FileBackend {
     }
 
     public static long getDirectorySize(final File file) {
-        if (file == null || !file.exists() || !file.isDirectory())
-            return 0;
-        final List<File> dirs = new LinkedList<>();
-        dirs.add(file);
-        long result = 0;
-        while (!dirs.isEmpty()) {
-            final File dir = dirs.remove(0);
-            if (!dir.exists())
-                continue;
-            final File[] listFiles = dir.listFiles();
-            if (listFiles == null || listFiles.length == 0)
-                continue;
-            for (final File child : listFiles) {
-                result += child.length();
-                if (child.isDirectory())
-                    dirs.add(child);
+        try {
+            if (file == null || !file.exists() || !file.isDirectory())
+                return 0;
+            final List<File> dirs = new LinkedList<>();
+            dirs.add(file);
+            long result = 0;
+            while (!dirs.isEmpty()) {
+                final File dir = dirs.remove(0);
+                if (!dir.exists()) {
+                    continue;
+                }
+                final File[] listFiles = dir.listFiles();
+                if (listFiles == null || listFiles.length == 0) {
+                    continue;
+                }
+                for (final File child : listFiles) {
+                    result += child.length();
+                    if (child.isDirectory()) {
+                        dirs.add(child);
+                    }
+                }
             }
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
         }
-        return result;
     }
 
     public static long getDiskSize() {
-        StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
-        return (long) stat.getBlockSize() * (long) stat.getBlockCount();
+        try {
+            StatFs external = new StatFs(Environment.getExternalStorageDirectory().getAbsolutePath());
+            return external.getBlockCount() * external.getBlockSize();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     public static boolean allFilesUnderSize(Context context, List<Attachment> attachments, long max) {
