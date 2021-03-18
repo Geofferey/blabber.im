@@ -545,7 +545,7 @@ public class HttpDownloadConnection implements Transferable {
             } else {
                 url = mUrl;
             }
-            mXmppConnectionService.getFileBackend().updateFileParams(message, url);
+            mXmppConnectionService.getFileBackend().updateFileParams(message, url.toString());
             mXmppConnectionService.updateMessage(message);
         }
 

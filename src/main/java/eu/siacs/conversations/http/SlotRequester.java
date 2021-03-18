@@ -31,9 +31,7 @@ package eu.siacs.conversations.http;
 
 import android.util.Log;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
+import com.google.common.collect.ImmutableMap;
 
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.entities.Account;
@@ -42,8 +40,10 @@ import eu.siacs.conversations.parser.IqParser;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.utils.Namespace;
 import eu.siacs.conversations.xml.Element;
-import eu.siacs.conversations.xmpp.stanzas.IqPacket;
 import eu.siacs.conversations.xmpp.Jid;
+import eu.siacs.conversations.xmpp.stanzas.IqPacket;
+import okhttp3.Headers;
+import okhttp3.HttpUrl;
 
 public class SlotRequester {
 
@@ -75,14 +75,13 @@ public class SlotRequester {
                         final String putUrl = slotElement.findChildContent("put");
                         final String getUrl = slotElement.findChildContent("get");
                         if (getUrl != null && putUrl != null) {
-                            Slot slot = new Slot(new URL(putUrl));
-                            slot.getUrl = new URL(getUrl);
-                            slot.headers = new HashMap<>();
-                            slot.headers.put("Content-Type", mime == null ? "application/octet-stream" : mime);
+							Slot slot = new Slot(HttpUrl.get(putUrl));
+							slot.getUrl = HttpUrl.get(getUrl);
+							slot.headers = Headers.of("Content-Type", mime == null ? "application/octet-stream" : mime);
                             callback.success(slot);
                             return;
                         }
-                    } catch (MalformedURLException e) {
+					} catch (IllegalArgumentException e) {
                         //fall through
                     }
                 }
@@ -104,23 +103,24 @@ public class SlotRequester {
                         final String putUrl = put == null ? null : put.getAttribute("url");
                         final String getUrl = get == null ? null : get.getAttribute("url");
                         if (getUrl != null && putUrl != null) {
-                            Slot slot = new Slot(new URL(putUrl));
-                            slot.getUrl = new URL(getUrl);
-                            slot.headers = new HashMap<>();
+							Slot slot = new Slot(HttpUrl.get(putUrl));
+							slot.getUrl = HttpUrl.get(getUrl);
+							final ImmutableMap.Builder<String,String> headers = new ImmutableMap.Builder<>();
                             for (Element child : put.getChildren()) {
                                 if ("header".equals(child.getName())) {
                                     final String name = child.getAttribute("name");
                                     final String value = child.getContent();
                                     if (HttpUploadConnection.WHITE_LISTED_HEADERS.contains(name) && value != null && !value.trim().contains("\n")) {
-                                        slot.headers.put(name, value.trim());
+										headers.put(name, value.trim());
                                     }
                                 }
                             }
-                            slot.headers.put("Content-Type", mime == null ? "application/octet-stream" : mime);
+							headers.put("Content-Type", mime == null ? "application/octet-stream" : mime);
+							slot.headers = Headers.of(headers.build());
                             callback.success(slot);
                             return;
                         }
-                    } catch (MalformedURLException e) {
+					} catch (IllegalArgumentException e) {
                         //fall through
                     }
                 }
@@ -132,28 +132,7 @@ public class SlotRequester {
     }
 
     private void requestP1S3(final Account account, Jid host, String filename, String md5, OnSlotRequested callback) {
-        IqPacket request = service.getIqGenerator().requestP1S3Slot(host, md5);
-        service.sendIqPacket(account, request, (a, packet) -> {
-            if (packet.getType() == IqPacket.TYPE.RESULT) {
-                String putUrl = packet.query(Namespace.P1_S3_FILE_TRANSFER).getAttribute("upload");
-                String id = packet.query().getAttribute("fileid");
-                try {
-                    if (putUrl != null && id != null) {
-                        Slot slot = new Slot(new URL(putUrl));
-                        slot.getUrl = P1S3UrlStreamHandler.of(id, filename);
-                        slot.headers = new HashMap<>();
-                        slot.headers.put("Content-MD5", md5);
-                        slot.headers.put("Content-Type", " "); //required to force it to empty. otherwise library will set something
-                        callback.success(slot);
-                        return;
-                    }
-                } catch (MalformedURLException e) {
-                    //fall through;
-                }
-            }
             callback.failure("unable to request slot");
-        });
-        Log.d(Config.LOGTAG, "requesting slot with p1. md5=" + md5);
     }
 
 
@@ -166,23 +145,23 @@ public class SlotRequester {
     }
 
     public static class Slot {
-        private final URL putUrl;
-        private URL getUrl;
-        private HashMap<String, String> headers;
+		private final HttpUrl putUrl;
+		private HttpUrl getUrl;
+		private Headers headers;
 
-        private Slot(URL putUrl) {
+		private Slot(HttpUrl putUrl) {
             this.putUrl = putUrl;
         }
 
-        public URL getPutUrl() {
+		public HttpUrl getPutUrl() {
             return putUrl;
         }
 
-        public URL getGetUrl() {
+		public HttpUrl getGetUrl() {
             return getUrl;
         }
 
-        public HashMap<String, String> getHeaders() {
+		public Headers getHeaders() {
             return headers;
         }
     }

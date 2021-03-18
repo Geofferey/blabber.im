@@ -32,6 +32,7 @@ import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.entities.Message;
 import eu.siacs.conversations.http.AesGcmURLStreamHandler;
 import eu.siacs.conversations.xmpp.Jid;
+import okhttp3.HttpUrl;
 
 public final class CryptoHelper {
 
@@ -286,6 +287,14 @@ public final class CryptoHelper {
             return new URL(AesGcmURLStreamHandler.PROTOCOL_NAME + url.toString().substring(url.getProtocol().length()));
         } catch (MalformedURLException e) {
             return url;
+        }
+    }
+
+    public static String toAesGcmUrl(HttpUrl url) {
+        if (url.isHttps()) {
+            return AesGcmURLStreamHandler.PROTOCOL_NAME + url.toString().substring(5);
+        } else {
+            return url.toString();
         }
     }
 

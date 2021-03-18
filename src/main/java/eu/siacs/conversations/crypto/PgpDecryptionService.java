@@ -210,7 +210,7 @@ public class PgpDecryptionService {
                                 }
                             }
                             URL url = message.getFileParams().url;
-                            mXmppConnectionService.getFileBackend().updateFileParams(message, url);
+							mXmppConnectionService.getFileBackend().updateFileParams(message, url.toString());
                             message.setEncryption(Message.ENCRYPTION_DECRYPTED);
                             mXmppConnectionService.updateMessage(message);
                             if (!inputFile.delete()) {

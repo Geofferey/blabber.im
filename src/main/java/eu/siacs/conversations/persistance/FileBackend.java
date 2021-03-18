@@ -1375,7 +1375,7 @@ public class FileBackend {
         updateFileParams(message, null);
     }
 
-    public void updateFileParams(Message message, URL url) {
+    public void updateFileParams(Message message, String url) {
         DownloadableFile file = getFile(message);
         final String mime = file.getMimeType();
         final boolean privateMessage = message.isPrivateMessage();
@@ -1393,7 +1393,7 @@ public class FileBackend {
         */
         final StringBuilder body = new StringBuilder();
         if (url != null) {
-            body.append(url.toString());
+            body.append(url);
         }
         body.append('|').append(file.getSize());
         if (image || video || (pdf && Compatibility.runsTwentyOne())) {
