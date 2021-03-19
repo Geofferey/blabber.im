@@ -14,7 +14,6 @@ import android.media.AudioManager;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -262,6 +261,7 @@ public class MediaViewerActivity extends XmppActivity implements AudioManager.On
 
     private void DisplayImage(final File file, final Uri uri) {
         final boolean gif = "image/gif".equalsIgnoreCase(getMimeType(file.toString()));
+        final boolean bmp = "image/bmp".equalsIgnoreCase(getMimeType(file.toString())) || "image/x-ms-bmp".equalsIgnoreCase(getMimeType(file.toString()));
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(new File(file.getPath()).getAbsolutePath(), options);
@@ -279,7 +279,7 @@ public class MediaViewerActivity extends XmppActivity implements AudioManager.On
                 binding.messageGifView.setOnTouchListener((view, motionEvent) -> gestureDetector.onTouchEvent(motionEvent));
             } else {
                 binding.messageImageView.setVisibility(View.VISIBLE);
-                binding.messageImageView.setImage(ImageSource.uri(uri));
+                binding.messageImageView.setImage(ImageSource.uri(uri).tiling(!bmp));
                 binding.messageImageView.setOrientation(SubsamplingScaleImageView.ORIENTATION_USE_EXIF);
                 binding.messageImageView.setOnTouchListener((view, motionEvent) -> gestureDetector.onTouchEvent(motionEvent));
             }
