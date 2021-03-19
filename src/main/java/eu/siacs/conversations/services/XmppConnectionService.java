@@ -56,7 +56,6 @@ import org.openintents.openpgp.util.OpenPgpApi;
 import org.openintents.openpgp.util.OpenPgpServiceConnection;
 
 import java.io.File;
-import java.net.URL;
 import java.security.SecureRandom;
 import java.security.Security;
 import java.security.cert.CertificateException;
@@ -112,7 +111,6 @@ import eu.siacs.conversations.generator.AbstractGenerator;
 import eu.siacs.conversations.generator.IqGenerator;
 import eu.siacs.conversations.generator.MessageGenerator;
 import eu.siacs.conversations.generator.PresenceGenerator;
-import eu.siacs.conversations.http.CustomURLStreamHandlerFactory;
 import eu.siacs.conversations.http.HttpConnectionManager;
 import eu.siacs.conversations.parser.AbstractParser;
 import eu.siacs.conversations.parser.IqParser;
@@ -201,10 +199,6 @@ public class XmppConnectionService extends Service {
     public static final String FDroid = "org.fdroid.fdroid";
     public static final String PlayStore = "com.android.vending";
     private static final String SETTING_LAST_ACTIVITY_TS = "last_activity_timestamp";
-
-    static {
-        URL.setURLStreamHandlerFactory(new CustomURLStreamHandlerFactory());
-    }
 
     public final CountDownLatch restoredFromDatabaseLatch = new CountDownLatch(1);
     private final SerialSingleThreadExecutor mFileAddingExecutor = new SerialSingleThreadExecutor("FileAdding");

@@ -821,7 +821,7 @@ public class Conversation extends AbstractEntity implements Blockable, Comparabl
                 if (message.getStatus() == Message.STATUS_UNSEND || message.getStatus() == Message.STATUS_SEND) {
                     String otherBody;
                     if (message.hasFileOnRemoteHost()) {
-                        otherBody = message.getFileParams().url.toString();
+                        otherBody = message.getFileParams().url;
                     } else {
                         otherBody = message.body;
                     }

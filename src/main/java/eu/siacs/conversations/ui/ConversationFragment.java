@@ -1806,7 +1806,7 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
     }
 
     private void createNewConnection(final Message message) {
-        if (!activity.xmppConnectionService.getHttpConnectionManager().checkConnection(message)) {
+        if (!activity.xmppConnectionService.hasInternetConnection()) {
             ToastCompat.makeText(getActivity(), R.string.not_connected_try_again, Toast.LENGTH_SHORT).show();
             return;
         }

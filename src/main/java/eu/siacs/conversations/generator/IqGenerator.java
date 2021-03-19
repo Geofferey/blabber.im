@@ -31,10 +31,10 @@ import eu.siacs.conversations.services.MessageArchiveService;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.utils.Namespace;
 import eu.siacs.conversations.xml.Element;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.forms.Data;
 import eu.siacs.conversations.xmpp.pep.Avatar;
 import eu.siacs.conversations.xmpp.stanzas.IqPacket;
-import eu.siacs.conversations.xmpp.Jid;
 
 public class IqGenerator extends AbstractGenerator {
 
@@ -416,20 +416,6 @@ public class IqGenerator extends AbstractGenerator {
         request.addChild("filename").setContent(convertFilename(file.getName()));
         request.addChild("size").setContent(String.valueOf(file.getExpectedSize()));
         request.addChild("content-type").setContent(mime);
-        return packet;
-    }
-
-    public IqPacket requestP1S3Slot(Jid host, String md5) {
-        IqPacket packet = new IqPacket(IqPacket.TYPE.SET);
-        packet.setTo(host);
-        packet.query(Namespace.P1_S3_FILE_TRANSFER).setAttribute("md5", md5);
-        return packet;
-    }
-
-    public IqPacket requestP1S3Url(Jid host, String fileId) {
-        IqPacket packet = new IqPacket(IqPacket.TYPE.GET);
-        packet.setTo(host);
-        packet.query(Namespace.P1_S3_FILE_TRANSFER).setAttribute("fileid", fileId);
         return packet;
     }
 

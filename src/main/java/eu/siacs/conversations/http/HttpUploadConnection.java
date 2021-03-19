@@ -2,7 +2,9 @@ package eu.siacs.conversations.http;
 
 import android.util.Log;
 
-import java.io.FileInputStream;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,16 +15,15 @@ import eu.siacs.conversations.entities.Message;
 import eu.siacs.conversations.entities.Transferable;
 import eu.siacs.conversations.services.AbstractConnectionManager;
 import eu.siacs.conversations.services.XmppConnectionService;
-import eu.siacs.conversations.utils.Checksum;
 import eu.siacs.conversations.utils.CryptoHelper;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static eu.siacs.conversations.http.HttpConnectionManager.FileTransferExecutor;
-
-public class HttpUploadConnection implements Transferable {
+public class HttpUploadConnection implements Transferable, AbstractConnectionManager.ProgressListener {
 
     static final List<String> WHITE_LISTED_HEADERS = Arrays.asList(
             "Authorization",
@@ -35,7 +36,6 @@ public class HttpUploadConnection implements Transferable {
     private final SlotRequester mSlotRequester;
     private final Method method;
     private final boolean mUseTor;
-    private boolean cancelled = false;
     private boolean delayed = false;
     private DownloadableFile file;
     private final Message message;
@@ -45,6 +45,7 @@ public class HttpUploadConnection implements Transferable {
     private int mStatus = Transferable.STATUS_UNKNOWN;
 
     private long transmitted = 0;
+    private Call mostRecentCall;
 
     public HttpUploadConnection(Message message, Method method, HttpConnectionManager httpConnectionManager) {
         this.message = message;
@@ -80,11 +81,16 @@ public class HttpUploadConnection implements Transferable {
 
     @Override
     public void cancel() {
-        this.cancelled = true;
+        final Call call = this.mostRecentCall;
+        if (call != null && !call.isCanceled()) {
+            call.cancel();
+        }
     }
 
     private void fail(String errorMessage) {
         finish();
+        final Call call = this.mostRecentCall;
+        final boolean cancelled = call != null && call.isCanceled();
         mXmppConnectionService.markMessage(message, Message.STATUS_SEND_FAILED, cancelled ? Message.ERROR_MESSAGE_CANCELLED : errorMessage);
     }
 
@@ -110,34 +116,14 @@ public class HttpUploadConnection implements Transferable {
             mXmppConnectionService.getRNG().nextBytes(this.key);
             this.file.setKeyAndIv(this.key);
         }
-
-        final String md5;
-
-        if (method == Method.P1_S3) {
-            try {
-                md5 = Checksum.md5(AbstractConnectionManager.upgrade(file, new FileInputStream(file)));
-            } catch (Exception e) {
-                Log.d(Config.LOGTAG, account.getJid().asBareJid() + ": unable to calculate md5()", e);
-                fail(e.getMessage());
-                return;
-            }
-        } else {
-            md5 = null;
-        }
-
         this.file.setExpectedSize(originalFileSize + (file.getKey() != null ? 16 : 0));
         message.resetFileParams();
-        this.mSlotRequester.request(method, account, file, mime, md5, new SlotRequester.OnSlotRequested() {
+        this.mSlotRequester.request(method, account, file, mime, new SlotRequester.OnSlotRequested() {
             @Override
-            public void success(SlotRequester.Slot slot) {
-                if (!cancelled) {
-                    changeStatus(STATUS_WAITING);
-                    FileTransferExecutor.execute(() -> {
-                        changeStatus(STATUS_UPLOADING);
+            public void success(final SlotRequester.Slot slot) {
+                //TODO needs to mark the message as cancelled afterwards (ie call fail())
                         HttpUploadConnection.this.slot = slot;
-                        HttpUploadConnection.this.upload();
-                    });
-                }
+                HttpUploadConnection.this.upload();
             }
 
             @Override
@@ -150,31 +136,36 @@ public class HttpUploadConnection implements Transferable {
     }
 
     private void upload() {
-        final String slotHostname = slot.getPutUrl().host();
-        final boolean onionSlot = slotHostname.endsWith(".onion");
-        try {
-            final OkHttpClient client;
-            if (mUseTor || message.getConversation().getAccount().isOnion() || onionSlot) {
-                client = new OkHttpClient.Builder().proxy(HttpConnectionManager.getProxy()).build();
-            } else {
-                client = new OkHttpClient();
+        final OkHttpClient client = mHttpConnectionManager.buildHttpClient(
+                slot.put,
+                message.getConversation().getAccount(),
+                true
+        );
+        final RequestBody requestBody = AbstractConnectionManager.requestBody(file, this);
+        final Request request = new Request.Builder()
+                .url(slot.put)
+                .put(requestBody)
+                .headers(slot.headers)
+                .build();
+        Log.d(Config.LOGTAG, "uploading file to " + slot.put);
+        this.mostRecentCall = client.newCall(request);
+        this.mostRecentCall.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, IOException e) {
+                Log.d(Config.LOGTAG, "http upload failed", e);
+                fail(e.getMessage());
             }
-            final RequestBody requestBody = AbstractConnectionManager.requestBody(file);
-            final Request request = new Request.Builder()
-                    .url(slot.getPutUrl())
-                    .put(requestBody)
-                    .headers(slot.getHeaders())
-                    .build();
-            Log.d(Config.LOGTAG, "uploading file to " + slot.getPutUrl());
-            final Response response = client.newCall(request).execute();
-            final int code = response.code();
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                final int code = response.code();
             if (code == 200 || code == 201) {
                 Log.d(Config.LOGTAG, "finished uploading file");
                 final String get;
                 if (key != null) {
-                    get = CryptoHelper.toAesGcmUrl(slot.getGetUrl().newBuilder().fragment(CryptoHelper.bytesToHex(key)).build());
+                        get = AesGcmURL.toAesGcmUrl(slot.get.newBuilder().fragment(CryptoHelper.bytesToHex(key)).build());
                     } else {
-                    get = slot.getGetUrl().toString();
+                        get = slot.get.toString();
                 }
                 mXmppConnectionService.getFileBackend().updateFileParams(message, get);
                 mXmppConnectionService.getFileBackend().updateMediaScanner(file);
@@ -187,18 +178,17 @@ public class HttpUploadConnection implements Transferable {
                 Log.d(Config.LOGTAG, "http upload failed because response code was " + code);
                 fail("http upload failed because response code was " + code);
             }
-        } catch (final Exception e) {
-            Log.d(Config.LOGTAG, "http upload failed", e);
-            fail(e.getMessage());
         }
-    }
-
-    private void changeStatus(int status) {
-        this.mStatus = status;
-        mHttpConnectionManager.updateConversationUi(true);
+        });
     }
 
     public Message getMessage() {
         return message;
+    }
+
+    @Override
+    public void onProgress(final long progress) {
+        this.transmitted = progress;
+        mHttpConnectionManager.updateConversationUi(false);
     }
 }

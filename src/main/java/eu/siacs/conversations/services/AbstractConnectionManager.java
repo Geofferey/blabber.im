@@ -58,7 +58,7 @@ public class AbstractConnectionManager {
     //For progress tracking see:
     //https://github.com/square/okhttp/blob/master/samples/guide/src/main/java/okhttp3/recipes/Progress.java
 
-    public static RequestBody requestBody(final DownloadableFile file) {
+    public static RequestBody requestBody(final DownloadableFile file, final ProgressListener progressListener) {
         return new RequestBody() {
 
             @Override
@@ -74,11 +74,21 @@ public class AbstractConnectionManager {
 
             @Override
             public void writeTo(final BufferedSink sink) throws IOException {
-                try (Source source = Okio.source(upgrade(file, new FileInputStream(file)))) {
-                    sink.writeAll(source);
+                long transmitted = 0;
+                try (final Source source = Okio.source(upgrade(file, new FileInputStream(file)))) {
+                    long read;
+                    while ((read = source.read(sink.buffer(), 8196)) != -1) {
+                        transmitted += read;
+                        sink.flush();
+                        progressListener.onProgress(transmitted);
+                    }
                 }
             }
         };
+    }
+
+    public interface ProgressListener {
+        void onProgress(long progress);
     }
 
     public static OutputStream createOutputStream(DownloadableFile file, boolean append, boolean decrypt) {
@@ -169,6 +179,7 @@ public class AbstractConnectionManager {
         }
 
         public static Extension of(String path) {
+            //TODO accept List<String> pathSegments
             final int pos = path.lastIndexOf('/');
             final String filename = path.substring(pos + 1).toLowerCase();
             final String[] parts = filename.split("\\.");

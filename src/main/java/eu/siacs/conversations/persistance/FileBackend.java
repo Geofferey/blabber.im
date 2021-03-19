@@ -180,6 +180,25 @@ public class FileBackend {
         }
     }
 
+    public static void updateFileParams(Message message, String url, long size) {
+        final StringBuilder body = new StringBuilder();
+        body.append(url).append('|').append(size);
+        message.setBody(body.toString());
+    }
+
+    private void createNoMedia(File diretory) {
+        final File noMedia = new File(diretory, ".nomedia");
+        if (!noMedia.exists()) {
+            try {
+                if (!noMedia.createNewFile()) {
+                    Log.d(Config.LOGTAG, "created nomedia file " + noMedia.getAbsolutePath());
+                }
+            } catch (Exception e) {
+                Log.d(Config.LOGTAG, "could not create nomedia file");
+            }
+        }
+    }
+
     public void updateMediaScanner(File file) {
         updateMediaScanner(file, null);
     }

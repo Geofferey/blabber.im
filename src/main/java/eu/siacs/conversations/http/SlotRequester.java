@@ -33,6 +33,8 @@ import android.util.Log;
 
 import com.google.common.collect.ImmutableMap;
 
+import java.util.Map;
+
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.entities.DownloadableFile;
@@ -53,15 +55,13 @@ public class SlotRequester {
         this.service = service;
     }
 
-    public void request(Method method, Account account, DownloadableFile file, String mime, String md5, OnSlotRequested callback) {
-        if (method == Method.HTTP_UPLOAD) {
-            Jid host = account.getXmppConnection().findDiscoItemByFeature(Namespace.HTTP_UPLOAD);
-            requestHttpUpload(account, host, file, mime, callback);
-        } else if (method == Method.HTTP_UPLOAD_LEGACY) {
-            Jid host = account.getXmppConnection().findDiscoItemByFeature(Namespace.HTTP_UPLOAD_LEGACY);
+    public void request(Method method, Account account, DownloadableFile file, String mime, OnSlotRequested callback) {
+        if (method == Method.HTTP_UPLOAD_LEGACY) {
+            final Jid host = account.getXmppConnection().findDiscoItemByFeature(Namespace.HTTP_UPLOAD_LEGACY);
             requestHttpUploadLegacy(account, host, file, mime, callback);
         } else {
-            requestP1S3(account, account.getDomain(), file.getName(), md5, callback);
+            final Jid host = account.getXmppConnection().findDiscoItemByFeature(Namespace.HTTP_UPLOAD);
+            requestHttpUpload(account, host, file, mime, callback);
         }
     }
 
@@ -75,9 +75,11 @@ public class SlotRequester {
                         final String putUrl = slotElement.findChildContent("put");
                         final String getUrl = slotElement.findChildContent("get");
                         if (getUrl != null && putUrl != null) {
-							Slot slot = new Slot(HttpUrl.get(putUrl));
-							slot.getUrl = HttpUrl.get(getUrl);
-							slot.headers = Headers.of("Content-Type", mime == null ? "application/octet-stream" : mime);
+                            final Slot slot = new Slot(
+                                    HttpUrl.get(putUrl),
+                                    HttpUrl.get(getUrl),
+                                    Headers.of("Content-Type", mime == null ? "application/octet-stream" : mime)
+                            );
                             callback.success(slot);
                             return;
                         }
@@ -95,7 +97,7 @@ public class SlotRequester {
         IqPacket request = service.getIqGenerator().requestHttpUploadSlot(host, file, mime);
         service.sendIqPacket(account, request, (a, packet) -> {
             if (packet.getType() == IqPacket.TYPE.RESULT) {
-                Element slotElement = packet.findChild("slot", Namespace.HTTP_UPLOAD);
+                final Element slotElement = packet.findChild("slot", Namespace.HTTP_UPLOAD);
                 if (slotElement != null) {
                     try {
                         final Element put = slotElement.findChild("put");
@@ -103,9 +105,7 @@ public class SlotRequester {
                         final String putUrl = put == null ? null : put.getAttribute("url");
                         final String getUrl = get == null ? null : get.getAttribute("url");
                         if (getUrl != null && putUrl != null) {
-							Slot slot = new Slot(HttpUrl.get(putUrl));
-							slot.getUrl = HttpUrl.get(getUrl);
-							final ImmutableMap.Builder<String,String> headers = new ImmutableMap.Builder<>();
+                            final ImmutableMap.Builder<String, String> headers = new ImmutableMap.Builder<>();
                             for (Element child : put.getChildren()) {
                                 if ("header".equals(child.getName())) {
                                     final String name = child.getAttribute("name");
@@ -115,8 +115,8 @@ public class SlotRequester {
                                     }
                                 }
                             }
-							headers.put("Content-Type", mime == null ? "application/octet-stream" : mime);
-							slot.headers = Headers.of(headers.build());
+                            headers.put("Content-Type", mime == null ? "application/octet-stream" : mime);
+                            final Slot slot = new Slot(HttpUrl.get(putUrl), HttpUrl.get(getUrl), headers.build());
                             callback.success(slot);
                             return;
                         }
@@ -131,38 +131,26 @@ public class SlotRequester {
 
     }
 
-    private void requestP1S3(final Account account, Jid host, String filename, String md5, OnSlotRequested callback) {
-            callback.failure("unable to request slot");
-    }
-
-
     public interface OnSlotRequested {
-
         void success(Slot slot);
-
         void failure(String message);
-
     }
 
     public static class Slot {
-		private final HttpUrl putUrl;
-		private HttpUrl getUrl;
-		private Headers headers;
+        public final HttpUrl put;
+        public final HttpUrl get;
+        public final Headers headers;
 
-		private Slot(HttpUrl putUrl) {
-            this.putUrl = putUrl;
+        private Slot(HttpUrl put, HttpUrl get, Headers headers) {
+            this.put = put;
+            this.get = get;
+            this.headers = headers;
         }
 
-		public HttpUrl getPutUrl() {
-            return putUrl;
-        }
-
-		public HttpUrl getGetUrl() {
-            return getUrl;
-        }
-
-		public Headers getHeaders() {
-            return headers;
+        private Slot(HttpUrl put, HttpUrl getUrl, Map<String, String> headers) {
+            this.put = put;
+            this.get = getUrl;
+            this.headers = Headers.of(headers);
         }
     }
 }

@@ -23,6 +23,7 @@ import eu.siacs.conversations.entities.Room;
 import eu.siacs.conversations.http.HttpConnectionManager;
 import eu.siacs.conversations.http.services.MuclumbusService;
 import eu.siacs.conversations.parser.IqParser;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.OnIqPacketReceived;
 import eu.siacs.conversations.xmpp.XmppConnection;
 import eu.siacs.conversations.xmpp.stanzas.IqPacket;
@@ -33,7 +34,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import eu.siacs.conversations.xmpp.Jid;
 
 public class ChannelDiscoveryService {
 
@@ -51,13 +51,8 @@ public class ChannelDiscoveryService {
 
     void initializeMuclumbusService() {
         final OkHttpClient.Builder builder = new OkHttpClient.Builder();
-
         if (service.useTorToConnect()) {
-            try {
-                builder.proxy(HttpConnectionManager.getProxy());
-            } catch (IOException e) {
-                throw new RuntimeException("Unable to use Tor proxy", e);
-            }
+            builder.proxy(HttpConnectionManager.getProxy());
         }
         Retrofit retrofit = new Retrofit.Builder()
                 .client(builder.build())

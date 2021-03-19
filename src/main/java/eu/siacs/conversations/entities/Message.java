@@ -12,8 +12,6 @@ import com.google.common.collect.ImmutableSet;
 import org.json.JSONException;
 
 import java.lang.ref.WeakReference;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +22,7 @@ import java.util.regex.Pattern;
 
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.crypto.axolotl.FingerprintStatus;
+import eu.siacs.conversations.http.URL;
 import eu.siacs.conversations.services.AvatarService;
 import eu.siacs.conversations.ui.util.PresenceSelector;
 import eu.siacs.conversations.utils.CryptoHelper;
@@ -573,7 +572,7 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
         } else {
             String body, otherBody;
             if (this.hasFileOnRemoteHost()) {
-                body = getFileParams().url.toString();
+                body = getFileParams().url;
                 otherBody = message.body == null ? null : message.body.trim();
             } else {
                 body = this.body;
@@ -715,10 +714,10 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
         }
     }
 
-	@Override
-	public String getAvatarName() {
-		return UIHelper.getMessageDisplayName(this);
-	}
+    @Override
+    public String getAvatarName() {
+        return UIHelper.getMessageDisplayName(this);
+    }
 
     public boolean isOOb() {
         return oob;
@@ -824,15 +823,16 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
         if (relativeFilePath != null) {
             extension = MimeUtils.extractRelevantExtension(relativeFilePath);
         } else {
-            try {
-                final URL url = new URL(body.split("\n")[0]);
-                extension = MimeUtils.extractRelevantExtension(url);
-            } catch (MalformedURLException e) {
-                return null;
-            } catch (Exception e) {
-                return null;
-            }
-        }
+			try {
+				final String url = URL.tryParse(body.split("\n")[0]);
+				if (url == null) {
+					return null;
+				}
+				extension = MimeUtils.extractRelevantExtension(url);
+			} catch (Exception e) {
+				return null;
+			}
+		}
         return MimeUtils.guessMimeTypeFromExtension(extension);
     }
 
@@ -901,8 +901,8 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
                 case 1:
                     try {
                         fileParams.size = Long.parseLong(parts[0]);
-                    } catch (NumberFormatException e) {
-                        fileParams.url = parseUrl(parts[0]);
+                    } catch (final NumberFormatException e) {
+                        fileParams.url = URL.tryParse(parts[0]);
                     }
                     break;
                 case 5:
@@ -913,7 +913,7 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
                     fileParams.width = parseInt(parts[2]);
                     fileParams.height = parseInt(parts[3]);
                 case 2:
-                    fileParams.url = parseUrl(parts[0]);
+                    fileParams.url = URL.tryParse(parts[0]);
                     fileParams.size = parseLong(parts[1]);
                     break;
                 case 3:
@@ -922,7 +922,7 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
                     fileParams.height = parseInt(parts[2]);
                     break;
                 case 6:
-                    fileParams.url = parseUrl(parts[0]);
+                    fileParams.url = URL.tryParse(parts[0]);
                     fileParams.size = parseLong(parts[1]);
                     fileParams.runtime = parseInt(parts[4]);
                     fileParams.subject = parseString(parts[5]);
@@ -947,14 +947,6 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
             return 0;
-        }
-    }
-
-    private static URL parseUrl(String value) {
-        try {
-            return new URL(value);
-        } catch (MalformedURLException e) {
-            return null;
         }
     }
 
@@ -984,11 +976,13 @@ public class Message extends AbstractEntity implements AvatarService.Avatarable 
     }
 
     public boolean needsUploading() {
-        return isFileOrImage() && getFileParams().url == null;
+        final boolean needsUploading = isFileOrImage() && getFileParams().url == null;
+        Log.d(Config.LOGTAG, "needs uploading " + needsUploading + " url=" + getFileParams().url);
+        return needsUploading;
     }
 
-	public static class FileParams {
-        public URL url;
+    public static class FileParams {
+        public String url;
         public long size = 0;
         public int width = 0;
         public int height = 0;
