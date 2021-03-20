@@ -15,7 +15,6 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.concurrent.CancellationException;
 
 import javax.net.ssl.SSLHandshakeException;
 
@@ -223,15 +222,20 @@ public class HttpDownloadConnection implements Transferable {
         mHttpConnectionManager.updateConversationUi(true);
     }
 
-    private void showToastForException(Exception e) {
+    private void showToastForException(final Exception e) {
         e.printStackTrace();
+        final Call call = mostRecentCall;
+        final boolean cancelled = call != null && call.isCanceled();
+        if (e == null || cancelled) {
+            return;
+        }
         if (e instanceof java.net.UnknownHostException) {
             mXmppConnectionService.showErrorToastInUi(R.string.download_failed_server_not_found);
         } else if (e instanceof java.net.ConnectException) {
             mXmppConnectionService.showErrorToastInUi(R.string.download_failed_could_not_connect);
         } else if (e instanceof FileWriterException) {
             mXmppConnectionService.showErrorToastInUi(R.string.download_failed_could_not_write_file);
-        } else if (!(e instanceof CancellationException)) {
+        } else {
             mXmppConnectionService.showErrorToastInUi(R.string.download_failed_file_not_found);
         }
     }
@@ -281,9 +285,7 @@ public class HttpDownloadConnection implements Transferable {
         private void retrieveFailed(@Nullable Exception e) {
             changeStatus(STATUS_OFFER_CHECK_FILESIZE);
             if (interactive) {
-                if (e != null) {
-                    showToastForException(e);
-                }
+                showToastForException(e);
             } else {
                 HttpDownloadConnection.this.acceptedAutomatically = false;
                 HttpDownloadConnection.this.mXmppConnectionService.getNotificationService().push(message);
@@ -376,8 +378,7 @@ public class HttpDownloadConnection implements Transferable {
             } catch (final SSLHandshakeException e) {
                 changeStatus(STATUS_OFFER);
             } catch (final Exception e) {
-                Log.d(Config.LOGTAG,"problem downloading",e);
-                //TODO do not show toast for cancelled stuff
+                Log.d(Config.LOGTAG, message.getConversation().getAccount().getJid().asBareJid() + ": unable to download file", e);
                 if (interactive) {
                     showToastForException(e);
                 } else {
@@ -435,7 +436,7 @@ public class HttpDownloadConnection implements Transferable {
                     outputStream = AbstractConnectionManager.createOutputStream(file, false, false);
                 }
                 int count;
-                byte[] buffer = new byte[4096];
+                final byte[] buffer = new byte[4096];
                 while ((count = inputStream.read(buffer)) != -1) {
                     transmitted += count;
                     try {
@@ -444,9 +445,6 @@ public class HttpDownloadConnection implements Transferable {
                         throw new FileWriterException();
                     }
                     updateProgress(Math.round(((double) transmitted / expected) * 100));
-                    if (canceled) {
-                        throw new CancellationException();
-                    }
                 }
                 outputStream.flush();
             } else {
