@@ -137,6 +137,8 @@ public final class Config {
     public static final int ExportLogs_Minute = 0; //Time - minutes: valid values from 0 to 59
 
     public static final boolean USE_BOOKMARKS2 = false;
+
+    public static final boolean PROCESS_EXTMAP_ALLOW_MIXED = false;
     public static final boolean DISABLE_PROXY_LOOKUP = false; //useful to debug ibb
     public static final boolean USE_DIRECT_JINGLE_CANDIDATES = true;
     public static final boolean DISABLE_HTTP_UPLOAD = false;
