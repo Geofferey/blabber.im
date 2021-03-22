@@ -586,6 +586,10 @@ public class SettingsActivity extends XmppActivity implements
         final Intent intent = new Intent(this, ExportBackupService.class);
         intent.putExtra("NOTIFY_ON_BACKUP_COMPLETE", notify);
         ContextCompat.startForegroundService(this, intent);
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(R.string.backup_started_message);
+		builder.setPositiveButton(R.string.ok, null);
+		builder.create().show();
     }
 
     private void displayToast(final String msg) {

@@ -1135,4 +1135,5 @@
     <string name="remove_all_individual_notifications_message">Do you really want to remove all individual notifications set for your contacts and groups?</string>
     <string name="exit">Exit</string>
     <string name="record_voice_mail">Record voice message</string>
+    <string name="backup_started_message">The backup has been started. You’ll get a notification once it has been completed.</string>
 </resources>
