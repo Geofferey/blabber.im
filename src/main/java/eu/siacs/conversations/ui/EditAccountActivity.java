@@ -40,7 +40,6 @@ import com.google.common.base.CharMatcher;
 
 import org.openintents.openpgp.util.OpenPgpUtils;
 
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -84,6 +83,7 @@ import eu.siacs.conversations.xmpp.XmppConnection.Features;
 import eu.siacs.conversations.xmpp.forms.Data;
 import eu.siacs.conversations.xmpp.pep.Avatar;
 import me.drakeet.support.toast.ToastCompat;
+import okhttp3.HttpUrl;
 
 import static eu.siacs.conversations.utils.PermissionUtils.allGranted;
 import static eu.siacs.conversations.utils.PermissionUtils.readGranted;
@@ -166,7 +166,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
             final boolean openRegistrationUrl = registerNewAccount && !accountInfoEdited && mAccount != null && mAccount.getStatus() == Account.State.REGISTRATION_WEB;
             final boolean openPaymentUrl = mAccount != null && mAccount.getStatus() == Account.State.PAYMENT_REQUIRED;
             final boolean redirectionWorthyStatus = openPaymentUrl || openRegistrationUrl;
-            URL url = connection != null && redirectionWorthyStatus ? connection.getRedirectionUrl() : null;
+            final HttpUrl url = connection != null && redirectionWorthyStatus ? connection.getRedirectionUrl() : null;
             if (url != null && !wasDisabled) {
                 try {
                     CustomTab.openTab(EditAccountActivity.this, Uri.parse(url.toString()), isDarkTheme());
@@ -571,7 +571,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                     this.binding.showPrivacyPolicy.setVisibility(View.GONE);
                     this.binding.showTermsOfUse.setVisibility(View.GONE);
                     XmppConnection connection = mAccount == null ? null : mAccount.getXmppConnection();
-                    URL url = connection != null && mAccount.getStatus() == Account.State.PAYMENT_REQUIRED ? connection.getRedirectionUrl() : null;
+                    HttpUrl url = connection != null && mAccount.getStatus() == Account.State.PAYMENT_REQUIRED ? connection.getRedirectionUrl() : null;
                     if (url != null) {
                         this.binding.saveButton.setText(R.string.open_website);
                     } else if (inNeedOfSaslAccept()) {
@@ -582,7 +582,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                 }
             } else {
                 XmppConnection connection = mAccount == null ? null : mAccount.getXmppConnection();
-                URL url = connection != null && mAccount.getStatus() == Account.State.REGISTRATION_WEB ? connection.getRedirectionUrl() : null;
+                HttpUrl url = connection != null && mAccount.getStatus() == Account.State.REGISTRATION_WEB ? connection.getRedirectionUrl() : null;
                 if (url != null && this.binding.accountRegisterNew.isChecked() && !accountInfoEdited) {
                     this.binding.saveButton.setText(R.string.open_website);
                 } else {
@@ -818,7 +818,8 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
     }
 
     @Override
-    public void onNewIntent(Intent intent) {
+    public void onNewIntent(final Intent intent) {
+        super.onNewIntent(intent);
         if (intent != null && intent.getData() != null) {
             final XmppUri uri = new XmppUri(intent.getData());
             if (xmppConnectionServiceBound) {
