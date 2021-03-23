@@ -24,10 +24,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import de.measite.minidns.AbstractDNSClient;
+import de.measite.minidns.DNSCache;
 import de.measite.minidns.DNSClient;
 import de.measite.minidns.DNSName;
 import de.measite.minidns.Question;
 import de.measite.minidns.Record;
+import de.measite.minidns.cache.LRUCache;
 import de.measite.minidns.dnssec.DNSSECResultNotAuthenticException;
 import de.measite.minidns.dnsserverlookup.AndroidUsingExec;
 import de.measite.minidns.hla.DnssecResolverApi;
@@ -77,9 +79,7 @@ public class Resolver {
             final Field useHardcodedDnsServers = DNSClient.class.getDeclaredField("useHardcodedDnsServers");
             useHardcodedDnsServers.setAccessible(true);
             useHardcodedDnsServers.setBoolean(dnsClient, false);
-        } catch (NoSuchFieldException e) {
-            Log.e(Config.LOGTAG, "Unable to disable hardcoded DNS servers", e);
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             Log.e(Config.LOGTAG, "Unable to disable hardcoded DNS servers", e);
         }
     }
@@ -102,6 +102,15 @@ public class Resolver {
         }
     }
 
+    public static void clearCache() {
+        final AbstractDNSClient client = ResolverApi.INSTANCE.getClient();
+        final DNSCache dnsCache = client.getCache();
+        if (dnsCache instanceof LRUCache) {
+            Log.d(Config.LOGTAG,"clearing DNS cache");
+            ((LRUCache) dnsCache).clear();
+        }
+    }
+
 
     public static boolean useDirectTls(final int port) {
         return port == 443 || port == 5223;
@@ -115,7 +124,7 @@ public class Resolver {
         }
         final List<Result> results = new ArrayList<>();
         final List<Result> fallbackResults = new ArrayList<>();
-        Thread[] threads = new Thread[3];
+        final Thread[] threads = new Thread[3];
         threads[0] = new Thread(() -> {
             try {
                 final List<Result> list = resolveSrv(domain, true);
@@ -146,7 +155,7 @@ public class Resolver {
                 Log.d(Config.LOGTAG, Resolver.class.getSimpleName() + ": resolving no SRV record (STARTTLS)", throwable);
             }
         });
-        for (Thread thread : threads) {
+        for (final Thread thread : threads) {
             thread.start();
         }
         try {
