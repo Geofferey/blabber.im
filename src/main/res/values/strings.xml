@@ -1136,4 +1136,5 @@
     <string name="exit">Exit</string>
     <string name="record_voice_mail">Record voice message</string>
     <string name="backup_started_message">The backup has been started. You’ll get a notification once it has been completed.</string>
+    <string name="error_security_exception">The app you used to share this file did not provide enough permissions.</string>
 </resources>
