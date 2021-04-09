@@ -383,7 +383,7 @@ public class FileBackend {
     public static long getDiskSize() {
         try {
             StatFs external = new StatFs(Environment.getExternalStorageDirectory().getAbsolutePath());
-            return external.getBlockCount() * external.getBlockSize();
+            return (long) external.getBlockCount() * (long) external.getBlockSize();
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
