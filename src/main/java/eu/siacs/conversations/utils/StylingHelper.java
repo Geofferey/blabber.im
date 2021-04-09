@@ -59,7 +59,7 @@ import eu.siacs.conversations.ui.text.QuoteSpan;
 
 public class StylingHelper {
 
-    private static List<? extends Class<? extends ParcelableSpan>> SPAN_CLASSES = Arrays.asList(
+    private static final List<? extends Class<? extends ParcelableSpan>> SPAN_CLASSES = Arrays.asList(
             StyleSpan.class,
             StrikethroughSpan.class,
             TypefaceSpan.class,

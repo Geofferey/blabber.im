@@ -36,12 +36,14 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.webkit.URLUtil;
 
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,30 +60,35 @@ public class MyLinkify {
 
     private static final Pattern youtubePattern = Pattern.compile("(www\\.|m\\.)?(youtube\\.com|youtu\\.be|youtube-nocookie\\.com)\\/(((?!(\"|'|<)).)*)");
 
-    public static SpannableString replaceYoutube(Context context, String url) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean invidious = sharedPreferences.getBoolean(SettingsActivity.USE_INVIDIOUS, context.getResources().getBoolean(R.bool.use_invidious));
-        String invidioushost = sharedPreferences.getString(SettingsActivity.INVIDIOUS_HOST, context.getResources().getString(R.string.invidious_host));
-        if (invidioushost.length() == 0) {
-            invidioushost = context.getResources().getString(R.string.invidious_host);
-        }
-        if (invidious) {
-            Matcher matcher = youtubePattern.matcher(url);
+    public static String replaceYoutube(Context context, String content) {
+        return replaceYoutube(context, new SpannableStringBuilder(content)).toString();
+    }
+
+    public static SpannableStringBuilder replaceYoutube(Context context, SpannableStringBuilder content) {
+        Matcher matcher = youtubePattern.matcher(content);
+        if (useInvidious(context)) {
             while (matcher.find()) {
                 final String youtubeId = matcher.group(3);
-                String invidiousHost = invidioushost.toLowerCase();
-                if (isValid(invidiousHost)) {
-                    if (matcher.group(2) != null && matcher.group(2).equalsIgnoreCase("youtu.be")) {
-                        return new SpannableString(url.replaceAll("https://" + Pattern.quote(matcher.group()), Matcher.quoteReplacement("https://" + invidiousHost + "/watch?v=" + youtubeId + "&local=true")));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    if (matcher.group(2) != null && Objects.equals(matcher.group(2), "youtu.be")) {
+                        content = new SpannableStringBuilder(content.toString().replaceAll("(?i)https://" + Pattern.quote(matcher.group()), Matcher.quoteReplacement("https://" + invidiousHost(context) + "/watch?v=" + youtubeId + "&local=true")));
+                        content = new SpannableStringBuilder(content.toString().replaceAll(">" + Pattern.quote(matcher.group()), Matcher.quoteReplacement(">" + invidiousHost(context) + "/watch?v=" + youtubeId + "&local=true")));
                     } else {
-                        return new SpannableString(url.replaceAll("https://" + Pattern.quote(matcher.group()), Matcher.quoteReplacement("https://" + invidiousHost + "/" + youtubeId + "&local=true")));
+                        content = new SpannableStringBuilder(content.toString().replaceAll("(?i)https://" + Pattern.quote(matcher.group()), Matcher.quoteReplacement("https://" + invidiousHost(context) + "/" + youtubeId + "&local=true")));
+                        content = new SpannableStringBuilder(content.toString().replaceAll(">" + Pattern.quote(matcher.group()), Matcher.quoteReplacement(">" + invidiousHost(context) + "/" + youtubeId + "&local=true")));
                     }
                 } else {
-                    return new SpannableString(url.replaceAll("https://" + Pattern.quote(matcher.group()), Matcher.quoteReplacement("https://www.youtube-nocookie.com/embed/" + youtubeId + "&local=true")));
+                    if (matcher.group(2) != null && matcher.group(2) == "youtu.be") {
+                        content = new SpannableStringBuilder(content.toString().replaceAll("(?i)https://" + Pattern.quote(matcher.group()), Matcher.quoteReplacement("https://" + invidiousHost(context) + "/watch?v=" + youtubeId + "&local=true")));
+                        content = new SpannableStringBuilder(content.toString().replaceAll(">" + Pattern.quote(matcher.group()), Matcher.quoteReplacement(">" + invidiousHost(context) + "/watch?v=" + youtubeId + "&local=true")));
+                    } else {
+                        content = new SpannableStringBuilder(content.toString().replaceAll("(?i)https://" + Pattern.quote(matcher.group()), Matcher.quoteReplacement("https://" + invidiousHost(context) + "/" + youtubeId + "&local=true")));
+                        content = new SpannableStringBuilder(content.toString().replaceAll(">" + Pattern.quote(matcher.group()), Matcher.quoteReplacement(">" + invidiousHost(context) + "/" + youtubeId + "&local=true")));
+                    }
                 }
             }
         }
-        return new SpannableString(url);
+        return content;
     }
 
     // https://github.com/M66B/FairEmail/blob/master/app/src/main/java/eu/faircode/email/AdapterMessage.java
@@ -228,6 +235,21 @@ public class MyLinkify {
             default:
                 return false;
         }
+    }
+
+    private static String invidiousHost(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String invidioushost = sharedPreferences.getString(SettingsActivity.INVIDIOUS_HOST, context.getResources().getString(R.string.invidious_host));
+        if (invidioushost.length() == 0) {
+            invidioushost = context.getResources().getString(R.string.invidious_host);
+        }
+        return invidioushost;
+    }
+
+    private static boolean useInvidious(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean invidious = sharedPreferences.getBoolean(SettingsActivity.USE_INVIDIOUS, context.getResources().getBoolean(R.bool.use_invidious));
+        return invidious;
     }
 
     public static void addLinks(Editable body, boolean includeGeo) {

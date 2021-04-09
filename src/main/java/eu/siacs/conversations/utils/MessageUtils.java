@@ -47,22 +47,22 @@ public class MessageUtils {
 
     public static String prepareQuote(Message message) {
         final StringBuilder builder = new StringBuilder();
-		final String body;
-		if (message.hasMeCommand()) {
-			final String nick;
-			if (message.getStatus() == Message.STATUS_RECEIVED) {
-				if (message.getConversation().getMode() == Conversational.MODE_MULTI) {
-					nick = Strings.nullToEmpty(message.getCounterpart().getResource());
-				} else {
-					nick = message.getContact().getPublicDisplayName();
-				}
-			} else {
-				nick =  UIHelper.getMessageDisplayName(message);
-			}
-			body = nick + " " + message.getBody().substring(Message.ME_COMMAND.length());
-		} else {
-			body = message.getMergedBody().toString();;
-		}
+        final String body;
+        if (message.hasMeCommand()) {
+            final String nick;
+            if (message.getStatus() == Message.STATUS_RECEIVED) {
+                if (message.getConversation().getMode() == Conversational.MODE_MULTI) {
+                    nick = Strings.nullToEmpty(message.getCounterpart().getResource());
+                } else {
+                    nick = message.getContact().getPublicDisplayName();
+                }
+            } else {
+                nick = UIHelper.getMessageDisplayName(message);
+            }
+            body = nick + " " + message.getBody().substring(Message.ME_COMMAND.length());
+        } else {
+            body = message.getMergedBody().toString();
+        }
         for (String line : body.split("\n")) {
             if (line.length() <= 0) {
                 continue;
