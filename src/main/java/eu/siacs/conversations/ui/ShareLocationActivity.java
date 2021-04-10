@@ -29,6 +29,7 @@ import java.util.Locale;
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.utils.LocationHelper;
 import eu.siacs.conversations.utils.ThemeHelper;
+import me.drakeet.support.toast.ToastCompat;
 
 public class ShareLocationActivity extends LocationActivity implements LocationListener {
 
@@ -211,20 +212,25 @@ public class ShareLocationActivity extends LocationActivity implements LocationL
     }
 
     private void showLocation(@Nullable Location location, String address) {
-        if (location == null && TextUtils.isEmpty(address)) { // no location and no address available
-            final WebView webView = findViewById(R.id.webView);
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.loadUrl("file:///android_asset/map.html");
-        } else if (location != null && TextUtils.isEmpty(address)) { // location but no address available
-            String LocationName = "<b>" + mLocationName + "</b>";
-            final WebView webView = findViewById(R.id.webView);
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.loadUrl("javascript:toCoordinates(" + mLastLocation.getLatitude() + "," + mLastLocation.getLongitude() + "," + "'" + LocationName + "'" +");");
-        } else if (location != null && !TextUtils.isEmpty(address)) { // location and address available
-            String LocationName = "<b>" + mLocationName + "</b><br>" + address;
-            final WebView webView = findViewById(R.id.webView);
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.loadUrl("javascript:toCoordinates(" + mLastLocation.getLatitude() + "," + mLastLocation.getLongitude() + "," + "'" + LocationName + "'" +");");
+        try {
+            if (location == null && TextUtils.isEmpty(address)) { // no location and no address available
+                final WebView webView = findViewById(R.id.webView);
+                webView.getSettings().setJavaScriptEnabled(true);
+                webView.loadUrl("file:///android_asset/map.html");
+            } else if (location != null && TextUtils.isEmpty(address)) { // location but no address available
+                String LocationName = "<b>" + mLocationName + "</b>";
+                final WebView webView = findViewById(R.id.webView);
+                webView.getSettings().setJavaScriptEnabled(true);
+                webView.loadUrl("javascript:toCoordinates(" + mLastLocation.getLatitude() + "," + mLastLocation.getLongitude() + "," + "'" + LocationName + "'" + ");");
+            } else if (location != null && !TextUtils.isEmpty(address)) { // location and address available
+                String LocationName = "<b>" + mLocationName + "</b><br>" + address;
+                final WebView webView = findViewById(R.id.webView);
+                webView.getSettings().setJavaScriptEnabled(true);
+                webView.loadUrl("javascript:toCoordinates(" + mLastLocation.getLatitude() + "," + mLastLocation.getLongitude() + "," + "'" + LocationName + "'" + ");");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastCompat.makeText(this, R.string.error, ToastCompat.LENGTH_LONG);
         }
     }
 

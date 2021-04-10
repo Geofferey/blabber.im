@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.WebView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -137,16 +136,21 @@ public class ShowLocationActivity extends XmppActivity {
     }
 
     private void showLocation(Location location, String address) {
-        if (location != null && TextUtils.isEmpty(address)) { // location but no address available
-            String LocationName = "<b>" + mLocationName + "</b>";
-            final WebView webView = findViewById(R.id.webView);
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.loadUrl("file:///android_asset/map.html?lat=" + location.getLatitude() + "&lon=" + location.getLongitude() + "&name=" + LocationName);
-        } else if (location != null && !TextUtils.isEmpty(address)) { // location and address available
-            String LocationName = "<b>" + mLocationName + "</b><br>" + address;
-            final WebView webView = findViewById(R.id.webView);
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.loadUrl("javascript:toCoordinates(" + location.getLatitude() + "," + location.getLongitude() + "," + "'" + LocationName + "'" +");");
+        try {
+            if (location != null && TextUtils.isEmpty(address)) { // location but no address available
+                String LocationName = "<b>" + mLocationName + "</b>";
+                final WebView webView = findViewById(R.id.webView);
+                webView.getSettings().setJavaScriptEnabled(true);
+                webView.loadUrl("file:///android_asset/map.html?lat=" + location.getLatitude() + "&lon=" + location.getLongitude() + "&name=" + LocationName);
+            } else if (location != null && !TextUtils.isEmpty(address)) { // location and address available
+                String LocationName = "<b>" + mLocationName + "</b><br>" + address;
+                final WebView webView = findViewById(R.id.webView);
+                webView.getSettings().setJavaScriptEnabled(true);
+                webView.loadUrl("javascript:toCoordinates(" + location.getLatitude() + "," + location.getLongitude() + "," + "'" + LocationName + "'" + ");");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastCompat.makeText(this, R.string.error, ToastCompat.LENGTH_LONG);
         }
     }
 
@@ -162,7 +166,7 @@ public class ShowLocationActivity extends XmppActivity {
             startActivity(intent);
             overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
         } catch (ActivityNotFoundException e) {
-            ToastCompat.makeText(this, R.string.no_application_found_to_display_location, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, R.string.no_application_found_to_display_location, ToastCompat.LENGTH_SHORT).show();
         }
     }
 
