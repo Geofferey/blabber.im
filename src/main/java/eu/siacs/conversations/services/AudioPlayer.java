@@ -36,7 +36,7 @@ import eu.siacs.conversations.ui.util.PendingItem;
 import eu.siacs.conversations.utils.ThemeHelper;
 import eu.siacs.conversations.utils.WeakReferenceSet;
 
-public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener, Runnable, SensorEventListener {
+public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener, Runnable, SensorEventListener, AudioManager.OnAudioFocusChangeListener {
 
     private static final int REFRESH_INTERVAL = 250;
     private static final Object LOCK = new Object();
@@ -162,11 +162,13 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
         if (player.isPlaying()) {
             viewHolder.progress.setEnabled(false);
             player.pause();
+            releaseAudiFocus();
             messageAdapter.flagScreenOff();
             releaseProximityWakeLock();
             viewHolder.playPause.setImageResource(viewHolder.darkBackground ? R.drawable.ic_play_arrow_white_36dp : R.drawable.ic_play_arrow_black_36dp);
         } else {
             viewHolder.progress.setEnabled(true);
+            requestAudioFocus();
             player.start();
             messageAdapter.flagScreenOn();
             acquireProximityWakeLock();
@@ -190,6 +192,7 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
             AudioPlayer.player.setDataSource(messageAdapter.getFileBackend().getFile(message).getAbsolutePath());
             AudioPlayer.player.setOnCompletionListener(this);
             AudioPlayer.player.prepare();
+            requestAudioFocus();
             AudioPlayer.player.start();
             messageAdapter.flagScreenOn();
             acquireProximityWakeLock();
@@ -230,6 +233,7 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
         if (AudioPlayer.player.isPlaying()) {
             AudioPlayer.player.stop();
         }
+        releaseAudiFocus();
         AudioPlayer.player.release();
         messageAdapter.flagScreenOff();
         releaseProximityWakeLock();
@@ -375,6 +379,7 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
         if (AudioPlayer.player.getAudioStreamType() != streamType) {
             synchronized (AudioPlayer.LOCK) {
                 AudioPlayer.player.stop();
+                releaseAudiFocus();
                 AudioPlayer.player.release();
                 AudioPlayer.player = null;
                 try {
@@ -421,6 +426,14 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
         return null;
     }
 
+    @Override
+    public void onAudioFocusChange(int focusChange) {
+        if (focusChange == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+            Log.i(Config.LOGTAG, "Audio focus granted.");
+        } else if (focusChange == AudioManager.AUDIOFOCUS_REQUEST_FAILED) {
+            Log.i(Config.LOGTAG, "Audio focus failed.");
+        }
+    }
     public static class ViewHolder {
         private TextView runtime;
         private SeekBar progress;
@@ -441,6 +454,22 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
 
         public void setTheme(boolean darkBackground) {
             this.darkBackground = darkBackground;
+        }
+    }
+
+    private void releaseAudiFocus() {
+        AudioManager am = (AudioManager) messageAdapter.getActivity().getSystemService(Context.AUDIO_SERVICE);
+        if (am != null) {
+            am.abandonAudioFocus(this);
+        }
+    }
+
+    private void requestAudioFocus() {
+        AudioManager am = (AudioManager) messageAdapter.getActivity().getSystemService(Context.AUDIO_SERVICE);
+        if (am != null) {
+            am.requestAudioFocus(this,
+                    AudioManager.STREAM_MUSIC,
+                    AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
         }
     }
 }
