@@ -3,8 +3,10 @@ package eu.siacs.conversations.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.media.MediaRecorder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.FileObserver;
 import android.os.Handler;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -38,8 +41,10 @@ public class RecordingActivity extends AppCompatActivity implements View.OnClick
     private ActivityRecordingBinding binding;
 
     private MediaRecorder mRecorder;
+    private Integer oldOrientation;
     private long mStartTime = 0;
     private boolean alternativeCodec = false;
+    private boolean recording = false;
 
     private CountDownLatch outputFileWrittenLatch = new CountDownLatch(1);
 
@@ -61,6 +66,7 @@ public class RecordingActivity extends AppCompatActivity implements View.OnClick
         setTheme(ThemeHelper.findDialog(this));
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        oldOrientation = getRequestedOrientation();
         this.binding = DataBindingUtil.setContentView(this, R.layout.activity_recording);
         this.setTitle(R.string.attach_record_voice);
         this.binding.cancelButton.setOnClickListener(this);
@@ -72,6 +78,9 @@ public class RecordingActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onStart() {
         super.onStart();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+        }
         Intent intent = getIntent();
         alternativeCodec = intent != null && intent.getBooleanExtra("ALTERNATIVE_CODEC", getResources().getBoolean(R.bool.alternative_voice_settings));
         if (!startRecording()) {
@@ -91,6 +100,7 @@ public class RecordingActivity extends AppCompatActivity implements View.OnClick
         if (mFileObserver != null) {
             mFileObserver.stopWatching();
         }
+        setRequestedOrientation(oldOrientation);
     }
 
     private boolean startRecording() {
@@ -111,6 +121,7 @@ public class RecordingActivity extends AppCompatActivity implements View.OnClick
         try {
             mRecorder.prepare();
             mRecorder.start();
+            recording = true;
             mStartTime = SystemClock.elapsedRealtime();
             mHandler.postDelayed(mTickExecutor, 100);
             Log.d("Voice Recorder", "started recording to " + mOutputFile.getAbsolutePath());
@@ -121,10 +132,21 @@ public class RecordingActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    protected void stopRecording(final boolean saveFile) {
+    protected void stopRecording() {
         try {
             mRecorder.stop();
             mRecorder.release();
+            recording = false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void stopRecording(final boolean saveFile) {
+        try {
+            if (recording) {
+                stopRecording();
+            }
         } catch (Exception e) {
             if (saveFile) {
                 ToastCompat.makeText(this, R.string.unable_to_save_recording, ToastCompat.LENGTH_SHORT).show();
@@ -202,10 +224,7 @@ public class RecordingActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cancel_button:
-                mHandler.removeCallbacks(mTickExecutor);
-                stopRecording(false);
-                setResult(RESULT_CANCELED);
-                finish();
+                showCancelDialog();
                 break;
             case R.id.share_button:
                 this.binding.shareButton.setEnabled(false);
@@ -215,4 +234,22 @@ public class RecordingActivity extends AppCompatActivity implements View.OnClick
                 break;
         }
     }
-}
+
+    private void showCancelDialog() {
+        stopRecording();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(RecordingActivity.this);
+        builder.setTitle(getString(R.string.cancel));
+        builder.setMessage(R.string.delete_recording_dialog_message);
+        builder.setPositiveButton(R.string.attach, (dialog, which) -> {
+            mHandler.removeCallbacks(mTickExecutor);
+            mHandler.postDelayed(() -> stopRecording(true), 500);
+        });
+        builder.setNegativeButton(R.string.delete, (dialog, which) -> {
+            mHandler.removeCallbacks(mTickExecutor);
+            stopRecording(false);
+            setResult(RESULT_CANCELED);
+            finish();
+        });
+        builder.create().show();
+    }
+ }

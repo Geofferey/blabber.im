@@ -1138,4 +1138,5 @@
     <string name="backup_started_message">The backup has been started. You’ll get a notification once it has been completed.</string>
     <string name="error_security_exception">The app you used to share this file did not provide enough permissions.</string>
     <string name="unable_to_enable_video">Unable to enable video.</string>
+    <string name="delete_recording_dialog_message">Do you really want to cancel and delete your recording?</string>
 </resources>
