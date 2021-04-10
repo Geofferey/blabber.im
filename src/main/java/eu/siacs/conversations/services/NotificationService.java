@@ -476,16 +476,16 @@ public class NotificationService {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void cleanAllOldNotificationChannels(final Context context) {
         final NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-        final int channels = notificationManager.getNotificationChannels().size();
-        for (int i1 = 0; i1 < channels; i1++) {
-            try {
+        try {
+            final int channels = notificationManager.getNotificationChannels().size();
+            for (int i1 = 0; i1 < channels; i1++) {
                 final String channelID = notificationManager.getNotificationChannels().get(i1).getId();
                 if (channelID.startsWith(OLD_INDIVIDUAL_NOTIFICATION_PREFIX)) {
                     notificationManager.deleteNotificationChannel(channelID);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         try {
             final int groups = notificationManager.getNotificationChannelGroups().size();
