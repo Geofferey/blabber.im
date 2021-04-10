@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -69,7 +68,7 @@ public class UpdateHelper {
         checkOldData();
         activity.runOnUiThread(() -> {
             if (dataMoved) {
-                ToastCompat.makeText(activity, R.string.data_successfully_moved, Toast.LENGTH_LONG).show();
+                ToastCompat.makeText(activity, R.string.data_successfully_moved, ToastCompat.LENGTH_LONG).show();
             }
             final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             builder.setTitle(activity.getString(R.string.title_activity_updater));
@@ -82,11 +81,11 @@ public class UpdateHelper {
                             try {
                                 CustomTab.openTab(activity, uri, ThemeHelper.isDark(ThemeHelper.find(activity)));
                             } catch (Exception e) {
-                                ToastCompat.makeText(activity, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+                                ToastCompat.makeText(activity, R.string.no_application_found_to_open_link, ToastCompat.LENGTH_SHORT).show();
                             }
                             showNewInstalledDialog(activity);
                         } catch (Exception e) {
-                            ToastCompat.makeText(activity, R.string.no_application_found_to_open_link, Toast.LENGTH_LONG).show();
+                            ToastCompat.makeText(activity, R.string.no_application_found_to_open_link, ToastCompat.LENGTH_LONG).show();
                             showNewInstalledDialog(activity);
                         }
                     }
@@ -95,13 +94,13 @@ public class UpdateHelper {
                         SaveMessageShown(activity, blabber_message);
                         try {
                             if (!moveData) {
-                                ToastCompat.makeText(activity, R.string.error_moving_data, Toast.LENGTH_LONG).show();
+                                ToastCompat.makeText(activity, R.string.error_moving_data, ToastCompat.LENGTH_LONG).show();
                             } else {
                                 moveData_PAM_blabber();
                             }
                             showNewInstalledDialog(activity);
                         } catch (Exception e) {
-                            ToastCompat.makeText(activity, R.string.error_moving_data, Toast.LENGTH_LONG).show();
+                            ToastCompat.makeText(activity, R.string.error_moving_data, ToastCompat.LENGTH_LONG).show();
                             showNewInstalledDialog(activity);
                         }
                     }

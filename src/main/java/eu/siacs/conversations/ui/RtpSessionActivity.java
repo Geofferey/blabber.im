@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -62,6 +61,7 @@ import eu.siacs.conversations.xmpp.jingle.JingleConnectionManager;
 import eu.siacs.conversations.xmpp.jingle.JingleRtpConnection;
 import eu.siacs.conversations.xmpp.jingle.Media;
 import eu.siacs.conversations.xmpp.jingle.RtpEndUserState;
+import me.drakeet.support.toast.ToastCompat;
 
 import static eu.siacs.conversations.utils.PermissionUtils.getFirstDenied;
 import static java.util.Arrays.asList;
@@ -190,7 +190,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
         try {
             startActivity(intent);
         } catch (final ActivityNotFoundException e) {
-            Toast.makeText(this, R.string.no_application_found_to_open_link, Toast.LENGTH_LONG).show();
+            ToastCompat.makeText(this, R.string.no_application_found_to_open_link, ToastCompat.LENGTH_LONG).show();
         }
     }
 
@@ -246,7 +246,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
         try {
             requireRtpConnection().acceptCall();
         } catch (final IllegalStateException e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, e.getMessage(), ToastCompat.LENGTH_SHORT).show();
         }
     }
 
@@ -259,7 +259,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
             if (isMicrophoneAvailable) {
                 return;
             }
-            runOnUiThread(() -> Toast.makeText(this, R.string.microphone_unavailable, Toast.LENGTH_LONG).show());
+            runOnUiThread(() -> ToastCompat.makeText(this, R.string.microphone_unavailable, ToastCompat.LENGTH_LONG).show());
         }
         ).start();
     }
@@ -436,7 +436,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
             } else {
                 throw new IllegalStateException("Invalid permission result request");
             }
-            Toast.makeText(this, getString(res, getString(R.string.app_name)), Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, getString(res, getString(R.string.app_name)), ToastCompat.LENGTH_SHORT).show();
         }
     }
 
@@ -882,7 +882,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
             @Override
             public void onFailure(@NonNull final Throwable throwable) {
                 Log.d(Config.LOGTAG, "could not switch camera", Throwables.getRootCause(throwable));
-                Toast.makeText(RtpSessionActivity.this, R.string.could_not_switch_camera, Toast.LENGTH_LONG).show();
+                ToastCompat.makeText(RtpSessionActivity.this, R.string.could_not_switch_camera, ToastCompat.LENGTH_LONG).show();
             }
         }, MainThreadExecutor.getInstance());
     }
@@ -891,7 +891,7 @@ public class RtpSessionActivity extends XmppActivity implements XmppConnectionSe
         try {
             requireRtpConnection().setVideoEnabled(true);
         } catch (final IllegalStateException e) {
-            Toast.makeText(this, R.string.unable_to_enable_video, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, R.string.unable_to_enable_video, ToastCompat.LENGTH_SHORT).show();
             return;
         }
         updateInCallButtonConfigurationVideo(true, requireRtpConnection().isCameraSwitchable());

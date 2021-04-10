@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
@@ -102,13 +101,13 @@ public class UpdaterActivity extends XmppActivity {
             try {
                 appURI = getIntent().getStringExtra("url");
             } catch (Exception e) {
-                ToastCompat.makeText(getApplicationContext(), getText(R.string.failed), Toast.LENGTH_LONG).show();
+                ToastCompat.makeText(getApplicationContext(), getText(R.string.failed), ToastCompat.LENGTH_LONG).show();
                 UpdaterActivity.this.finish();
             }
             try {
                 changelog = getIntent().getStringExtra("changelog");
             } catch (Exception e) {
-                ToastCompat.makeText(getApplicationContext(), getText(R.string.failed), Toast.LENGTH_LONG).show();
+                ToastCompat.makeText(getApplicationContext(), getText(R.string.failed), ToastCompat.LENGTH_LONG).show();
                 UpdaterActivity.this.finish();
             }
             try {
@@ -150,7 +149,7 @@ public class UpdaterActivity extends XmppActivity {
                                         uri = Uri.parse("https://" + blabber());
                                         CustomTab.openTab(this, uri, isDarkTheme());
                                     } catch (Exception e) {
-                                        ToastCompat.makeText(this, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+                                        ToastCompat.makeText(this, R.string.no_application_found_to_open_link, ToastCompat.LENGTH_SHORT).show();
                                     }
                                 }
                             } else if (store != null && store.equalsIgnoreCase(FDroid)) {
@@ -166,11 +165,11 @@ public class UpdaterActivity extends XmppActivity {
                                     try {
                                         CustomTab.openTab(this, uri, isDarkTheme());
                                     } catch (Exception e) {
-                                        ToastCompat.makeText(this, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+                                        ToastCompat.makeText(this, R.string.no_application_found_to_open_link, ToastCompat.LENGTH_SHORT).show();
                                     }
                                 }
                             } else {
-                                ToastCompat.makeText(getApplicationContext(), getText(R.string.download_started), Toast.LENGTH_LONG).show();
+                                ToastCompat.makeText(getApplicationContext(), getText(R.string.download_started), ToastCompat.LENGTH_LONG).show();
                                 downloadTask = new DownloadTask(UpdaterActivity.this);
                                 downloadTask.execute(appURI);
                             }
@@ -183,7 +182,7 @@ public class UpdaterActivity extends XmppActivity {
                         try {
                             CustomTab.openTab(this, uri, isDarkTheme());
                         } catch (Exception e) {
-                            ToastCompat.makeText(this, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+                            ToastCompat.makeText(this, R.string.no_application_found_to_open_link, ToastCompat.LENGTH_SHORT).show();
                         } finally {
                             //restart updater to show dialog again after coming back after opening changelog
                             recreate();
@@ -196,7 +195,7 @@ public class UpdaterActivity extends XmppActivity {
             //show the alert message
             builder.create().show();
         } else {
-            ToastCompat.makeText(getApplicationContext(), getText(R.string.failed), Toast.LENGTH_LONG).show();
+            ToastCompat.makeText(getApplicationContext(), getText(R.string.failed), ToastCompat.LENGTH_LONG).show();
             UpdaterActivity.this.finish();
         }
     }
@@ -366,7 +365,7 @@ public class UpdaterActivity extends XmppActivity {
                 // expect HTTP 200 OK, so we don't mistakenly save error report
                 // instead of the file
                 if (connection.getResponseCode() != HttpsURLConnection.HTTP_OK) {
-                    ToastCompat.makeText(getApplicationContext(), getText(R.string.failed), Toast.LENGTH_LONG).show();
+                    ToastCompat.makeText(getApplicationContext(), getText(R.string.failed), ToastCompat.LENGTH_LONG).show();
                     return connection.getResponseCode() + ": " + connection.getResponseMessage();
                 }
 
@@ -422,7 +421,7 @@ public class UpdaterActivity extends XmppActivity {
             WakeLockHelper.release(mWakeLock);
             mProgressDialog.dismiss();
             if (result != null) {
-                ToastCompat.makeText(getApplicationContext(), getString(R.string.failed), Toast.LENGTH_LONG).show();
+                ToastCompat.makeText(getApplicationContext(), getString(R.string.failed), ToastCompat.LENGTH_LONG).show();
                 Log.d(Config.LOGTAG, "AppUpdater: failed with " + result);
                 UpdaterActivity.this.finish();
             } else {

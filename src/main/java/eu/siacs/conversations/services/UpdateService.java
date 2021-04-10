@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -148,7 +147,7 @@ public class UpdateService extends AsyncTask<String, Object, UpdateService.Wrapp
             } else {
                 ToastMessage = context.getString(R.string.no_update_available);
             }
-            ToastCompat.makeText(context, ToastMessage, Toast.LENGTH_LONG).show();
+            ToastCompat.makeText(context, ToastMessage, ToastCompat.LENGTH_LONG).show();
         });
     }
 

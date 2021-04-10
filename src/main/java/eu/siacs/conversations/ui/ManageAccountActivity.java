@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -32,8 +31,8 @@ import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.services.XmppConnectionService.OnAccountUpdate;
 import eu.siacs.conversations.ui.adapter.AccountAdapter;
 import eu.siacs.conversations.utils.MenuDoubleTabUtil;
-import eu.siacs.conversations.xmpp.XmppConnection;
 import eu.siacs.conversations.xmpp.Jid;
+import eu.siacs.conversations.xmpp.XmppConnection;
 import me.drakeet.support.toast.ToastCompat;
 
 import static eu.siacs.conversations.utils.PermissionUtils.allGranted;
@@ -221,7 +220,7 @@ public class ManageAccountActivity extends XmppActivity implements OnAccountUpda
                         break;
                 }
             } else {
-                ToastCompat.makeText(this, R.string.no_storage_permission, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(this, R.string.no_storage_permission, ToastCompat.LENGTH_SHORT).show();
             }
         }
         if (readGranted(grantResults, permissions)) {
@@ -265,7 +264,7 @@ public class ManageAccountActivity extends XmppActivity implements OnAccountUpda
         try {
             KeyChain.choosePrivateKeyAlias(this, this, null, null, null, -1, null);
         } catch (ActivityNotFoundException e) {
-            ToastCompat.makeText(this, R.string.device_does_not_support_certificates, Toast.LENGTH_LONG).show();
+            ToastCompat.makeText(this, R.string.device_does_not_support_certificates, ToastCompat.LENGTH_LONG).show();
         }
     }
 
@@ -330,7 +329,7 @@ public class ManageAccountActivity extends XmppActivity implements OnAccountUpda
     private void disableAccount(Account account) {
         account.setOption(Account.OPTION_DISABLED, true);
         if (!xmppConnectionService.updateAccount(account)) {
-            ToastCompat.makeText(this, R.string.unable_to_update_account, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, R.string.unable_to_update_account, ToastCompat.LENGTH_SHORT).show();
         }
     }
 
@@ -341,7 +340,7 @@ public class ManageAccountActivity extends XmppActivity implements OnAccountUpda
             connection.resetEverything();
         }
         if (!xmppConnectionService.updateAccount(account)) {
-            ToastCompat.makeText(this, R.string.unable_to_update_account, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, R.string.unable_to_update_account, ToastCompat.LENGTH_SHORT).show();
         }
     }
 
@@ -424,6 +423,6 @@ public class ManageAccountActivity extends XmppActivity implements OnAccountUpda
 
     @Override
     public void informUser(final int r) {
-        runOnUiThread(() -> ToastCompat.makeText(ManageAccountActivity.this, r, Toast.LENGTH_LONG).show());
+        runOnUiThread(() -> ToastCompat.makeText(ManageAccountActivity.this, r, ToastCompat.LENGTH_LONG).show());
     }
 }

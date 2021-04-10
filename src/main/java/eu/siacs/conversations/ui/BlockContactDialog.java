@@ -1,7 +1,6 @@
 package eu.siacs.conversations.ui;
 
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
@@ -13,7 +12,6 @@ import eu.siacs.conversations.entities.Blockable;
 import eu.siacs.conversations.entities.Conversation;
 import eu.siacs.conversations.ui.util.JidDialog;
 import me.drakeet.support.toast.ToastCompat;
-import eu.siacs.conversations.xmpp.Jid;
 
 public final class BlockContactDialog {
     public static void show(final XmppActivity xmppActivity, final Blockable blockable) {
@@ -48,12 +46,12 @@ public final class BlockContactDialog {
             } else {
                 boolean toastShown = false;
                 if (xmppActivity.xmppConnectionService.sendBlockRequest(blockable, binding.reportSpam.isChecked())) {
-                    ToastCompat.makeText(xmppActivity, R.string.corresponding_conversations_closed, Toast.LENGTH_SHORT).show();
+                    ToastCompat.makeText(xmppActivity, R.string.corresponding_conversations_closed, ToastCompat.LENGTH_SHORT).show();
                     toastShown = true;
                 }
                 if (xmppActivity instanceof ContactDetailsActivity) {
                     if (!toastShown) {
-                        ToastCompat.makeText(xmppActivity, R.string.contact_blocked_past_tense, Toast.LENGTH_SHORT).show();
+                        ToastCompat.makeText(xmppActivity, R.string.contact_blocked_past_tense, ToastCompat.LENGTH_SHORT).show();
                     }
                     xmppActivity.finish();
                 }

@@ -136,7 +136,7 @@ public abstract class XmppActivity extends ActionBarActivity {
     public boolean mUseTor = false;
 
     protected Toast mToast;
-    protected Runnable onOpenPGPKeyPublished = () -> ToastCompat.makeText(XmppActivity.this, R.string.openpgp_has_been_published, Toast.LENGTH_SHORT).show();
+    protected Runnable onOpenPGPKeyPublished = () -> ToastCompat.makeText(XmppActivity.this, R.string.openpgp_has_been_published, ToastCompat.LENGTH_SHORT).show();
     protected ConferenceInvite mPendingConferenceInvite = null;
     protected ServiceConnection mConnection = new ServiceConnection() {
 
@@ -221,7 +221,7 @@ public abstract class XmppActivity extends ActionBarActivity {
 
     protected void replaceToast(String msg, boolean showlong) {
         hideToast();
-        mToast = ToastCompat.makeText(this, msg, showlong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
+        mToast = ToastCompat.makeText(this, msg, showlong ? ToastCompat.LENGTH_LONG : ToastCompat.LENGTH_SHORT);
         mToast.show();
     }
 
@@ -314,7 +314,7 @@ public abstract class XmppActivity extends ActionBarActivity {
                         try {
                             CustomTab.openTab(this, uri, isDarkTheme());
                         } catch (Exception e) {
-                            ToastCompat.makeText(this, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+                            ToastCompat.makeText(this, R.string.no_application_found_to_open_link, ToastCompat.LENGTH_SHORT).show();
                         }
                     }
                     finish();
@@ -908,7 +908,7 @@ public abstract class XmppActivity extends ActionBarActivity {
             mPendingConferenceInvite = ConferenceInvite.parse(data);
             if (xmppConnectionServiceBound && mPendingConferenceInvite != null) {
                 if (mPendingConferenceInvite.execute(this)) {
-                    mToast = ToastCompat.makeText(this, R.string.creating_conference, Toast.LENGTH_LONG);
+                    mToast = ToastCompat.makeText(this, R.string.creating_conference, ToastCompat.LENGTH_LONG);
                     mToast.show();
                 }
                 mPendingConferenceInvite = null;
@@ -958,11 +958,11 @@ public abstract class XmppActivity extends ActionBarActivity {
 
     public void inviteUser() {
         if (!xmppConnectionServiceBound) {
-            ToastCompat.makeText(this, R.string.not_connected_try_again, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, R.string.not_connected_try_again, ToastCompat.LENGTH_SHORT).show();
             return;
         }
         if (xmppConnectionService.getAccounts() == null) {
-            ToastCompat.makeText(this, R.string.no_accounts, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, R.string.no_accounts, ToastCompat.LENGTH_SHORT).show();
             return;
         }
 
@@ -1053,7 +1053,7 @@ public abstract class XmppActivity extends ActionBarActivity {
         final List<Account> accounts = EasyOnboardingInvite.getSupportingAccounts(this.xmppConnectionService);
         if (accounts.size() == 0) {
             //This can technically happen if opening the menu item races with accounts reconnecting or something
-            Toast.makeText(this, R.string.no_active_accounts_support_this, Toast.LENGTH_LONG).show();
+            ToastCompat.makeText(this, R.string.no_active_accounts_support_this, ToastCompat.LENGTH_LONG).show();
         } else if (accounts.size() == 1) {
             openEasyInviteScreen(accounts.get(0));
         } else {
@@ -1136,7 +1136,7 @@ public abstract class XmppActivity extends ActionBarActivity {
             startActivity(Intent.createChooser(intent, getText(R.string.share_uri_with)));
             overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
         } catch (ActivityNotFoundException e) {
-            ToastCompat.makeText(this, R.string.no_application_to_share_uri, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, R.string.no_application_to_share_uri, ToastCompat.LENGTH_SHORT).show();
         }
     }
 
@@ -1147,7 +1147,7 @@ public abstract class XmppActivity extends ActionBarActivity {
                     pgp.getIntentForKey(keyId).getIntentSender(), 0, null, 0,
                     0, 0);
         } catch (Throwable e) {
-            ToastCompat.makeText(XmppActivity.this, R.string.openpgp_error, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(XmppActivity.this, R.string.openpgp_error, ToastCompat.LENGTH_SHORT).show();
         }
     }
 
@@ -1410,7 +1410,7 @@ public abstract class XmppActivity extends ActionBarActivity {
                 try {
                     startActivityForResult(intent, REQUEST_UNKNOWN_SOURCE_OP);
                 } catch (ActivityNotFoundException e) {
-                    ToastCompat.makeText(XmppActivity.this, R.string.device_does_not_support_unknown_source_op, Toast.LENGTH_SHORT).show();
+                    ToastCompat.makeText(XmppActivity.this, R.string.device_does_not_support_unknown_source_op, ToastCompat.LENGTH_SHORT).show();
                 } finally {
                     UpdateService task = new UpdateService(this, xmppConnectionService.installedFrom(), xmppConnectionService);
                     task.executeOnExecutor(UpdateService.THREAD_POOL_EXECUTOR, ShowToast);

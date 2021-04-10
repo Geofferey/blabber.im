@@ -35,7 +35,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
@@ -127,7 +126,7 @@ public class PublishGroupChatProfilePictureActivity extends XmppActivity impleme
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
                 if (error != null) {
-                    ToastCompat.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    ToastCompat.makeText(this, error.getMessage(), ToastCompat.LENGTH_SHORT).show();
                 }
             }
         } else if (requestCode == REQUEST_CHOOSE_PICTURE) {
@@ -140,7 +139,7 @@ public class PublishGroupChatProfilePictureActivity extends XmppActivity impleme
     @Override
     public void onAvatarPublicationSucceeded() {
         runOnUiThread(() -> {
-            ToastCompat.makeText(this, R.string.avatar_has_been_published, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, R.string.avatar_has_been_published, ToastCompat.LENGTH_SHORT).show();
             finish();
         });
     }
@@ -148,7 +147,7 @@ public class PublishGroupChatProfilePictureActivity extends XmppActivity impleme
     @Override
     public void onAvatarPublicationFailed(@StringRes int res) {
         runOnUiThread(() -> {
-            ToastCompat.makeText(this, res, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, res, ToastCompat.LENGTH_SHORT).show();
             this.binding.publishButton.setText(R.string.publish);
             this.binding.publishButton.setEnabled(true);
         });

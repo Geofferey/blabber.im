@@ -28,7 +28,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -173,7 +172,7 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
             try {
                 startActivityForResult(intent, 0);
             } catch (ActivityNotFoundException e) {
-                ToastCompat.makeText(ContactDetailsActivity.this, R.string.no_application_found_to_view_contact, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(ContactDetailsActivity.this, R.string.no_application_found_to_view_contact, ToastCompat.LENGTH_SHORT).show();
             }
         });
         builder.create().show();
@@ -441,7 +440,7 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
                 startActivity(intent);
                 overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
             } catch (ActivityNotFoundException e) {
-                ToastCompat.makeText(ContactDetailsActivity.this, R.string.no_application_found_to_view_contact, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(ContactDetailsActivity.this, R.string.no_application_found_to_view_contact, ToastCompat.LENGTH_SHORT).show();
             }
         }
     }
@@ -760,7 +759,7 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
             try {
                 startActivity(intent);
             } catch (final ActivityNotFoundException e) {
-                Toast.makeText(this, R.string.no_application_found_to_view_contact, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(this, R.string.no_application_found_to_view_contact, ToastCompat.LENGTH_SHORT).show();
             }
         }
     }
@@ -796,10 +795,10 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
     protected void processFingerprintVerification(XmppUri uri) {
         if (contact != null && contact.getJid().asBareJid().equals(uri.getJid()) && uri.hasFingerprints()) {
             if (xmppConnectionService.verifyFingerprints(contact, uri.getFingerprints())) {
-                ToastCompat.makeText(this, R.string.verified_fingerprints, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(this, R.string.verified_fingerprints, ToastCompat.LENGTH_SHORT).show();
             }
         } else {
-            ToastCompat.makeText(this, R.string.invalid_barcode, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, R.string.invalid_barcode, ToastCompat.LENGTH_SHORT).show();
         }
     }
 

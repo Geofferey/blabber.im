@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -70,7 +69,7 @@ public class UriHandlerActivity extends AppCompatActivity {
                     scan(activity);
                 }
             } else {
-                ToastCompat.makeText(activity, R.string.qr_code_scanner_needs_access_to_camera, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(activity, R.string.qr_code_scanner_needs_access_to_camera, ToastCompat.LENGTH_SHORT).show();
             }
         }
     }
@@ -113,7 +112,7 @@ public class UriHandlerActivity extends AppCompatActivity {
             final Jid jid = xmppUri.getJid();
             if (xmppUri.isAction(XmppUri.ACTION_REGISTER)) {
                 if (jid.getEscapedLocal() != null && accounts.contains(jid.asBareJid())) {
-                    ToastCompat.makeText(this, R.string.account_already_exists, Toast.LENGTH_LONG).show();
+                    ToastCompat.makeText(this, R.string.account_already_exists, ToastCompat.LENGTH_LONG).show();
                     return;
                 }
                 intent = SignupUtils.getTokenRegistrationIntent(this, jid, preAuth, true);
@@ -133,7 +132,7 @@ public class UriHandlerActivity extends AppCompatActivity {
                 intent.putExtra(StartConversationActivity.EXTRA_INVITE_URI, xmppUri.toString());
                 startActivity(intent);
             } else {
-                ToastCompat.makeText(this, R.string.invalid_jid, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(this, R.string.invalid_jid, ToastCompat.LENGTH_SHORT).show();
             }
             return;
         }
@@ -176,7 +175,7 @@ public class UriHandlerActivity extends AppCompatActivity {
             intent.putExtra("scanned", scanned);
             intent.setData(uri);
         } else {
-            ToastCompat.makeText(this, R.string.invalid_jid, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, R.string.invalid_jid, ToastCompat.LENGTH_SHORT).show();
             return;
         }
         startActivity(intent);

@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -128,7 +127,7 @@ public class RecordingActivity extends AppCompatActivity implements View.OnClick
             mRecorder.release();
         } catch (Exception e) {
             if (saveFile) {
-                ToastCompat.makeText(this, R.string.unable_to_save_recording, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(this, R.string.unable_to_save_recording, ToastCompat.LENGTH_SHORT).show();
                 return;
             }
         } finally {

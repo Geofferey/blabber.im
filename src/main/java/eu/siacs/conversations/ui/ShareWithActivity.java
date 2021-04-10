@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -76,7 +75,7 @@ public class ShareWithActivity extends XmppActivity implements XmppConnectionSer
                     }
                 }
             } else {
-                ToastCompat.makeText(this, R.string.no_storage_permission, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(this, R.string.no_storage_permission, ToastCompat.LENGTH_SHORT).show();
             }
     }
 
@@ -196,7 +195,7 @@ public class ShareWithActivity extends XmppActivity implements XmppConnectionSer
         try {
             startActivity(intent);
         } catch (SecurityException e) {
-            ToastCompat.makeText(this, R.string.sharing_application_not_grant_permission, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, R.string.sharing_application_not_grant_permission, ToastCompat.LENGTH_SHORT).show();
             return;
         }
         finish();

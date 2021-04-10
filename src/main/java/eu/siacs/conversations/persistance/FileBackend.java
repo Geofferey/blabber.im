@@ -34,7 +34,6 @@ import android.util.Base64OutputStream;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.LruCache;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -1930,7 +1929,7 @@ public class FileBackend {
         final File destination = new File(getDestinationToSaveFile(message));
         try {
             copyFile(source, destination);
-            ToastCompat.makeText(activity, activity.getString(R.string.file_copied_to, destination), Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(activity, activity.getString(R.string.file_copied_to, destination), ToastCompat.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
         }

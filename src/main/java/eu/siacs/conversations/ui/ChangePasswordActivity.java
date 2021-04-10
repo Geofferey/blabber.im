@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -92,7 +91,7 @@ public class ChangePasswordActivity extends XmppActivity implements XmppConnecti
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ToastCompat.makeText(ChangePasswordActivity.this, R.string.password_changed, Toast.LENGTH_LONG).show();
+                ToastCompat.makeText(ChangePasswordActivity.this, R.string.password_changed, ToastCompat.LENGTH_LONG).show();
                 finish();
             }
         });

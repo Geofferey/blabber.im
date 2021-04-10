@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -141,7 +140,7 @@ public class RichLinkView extends RelativeLayout {
         try {
             CustomTab.openTab(this.context, Uri.parse(main_url), ThemeHelper.isDark(ThemeHelper.find(this.context)));
         } catch (Exception e) {
-            ToastCompat.makeText(this.context, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this.context, R.string.no_application_found_to_open_link, ToastCompat.LENGTH_SHORT).show();
         }
     }
 

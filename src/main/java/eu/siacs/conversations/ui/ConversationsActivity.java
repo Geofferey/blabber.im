@@ -53,7 +53,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
@@ -325,7 +324,7 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
                 try {
                     startActivityForResult(intent, REQUEST_BATTERY_OP);
                 } catch (ActivityNotFoundException e) {
-                    ToastCompat.makeText(this, R.string.device_does_not_support_battery_op, Toast.LENGTH_SHORT).show();
+                    ToastCompat.makeText(this, R.string.device_does_not_support_battery_op, ToastCompat.LENGTH_SHORT).show();
                 }
             });
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
@@ -605,7 +604,7 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
     }
 
     private void displayToast(final String msg) {
-        runOnUiThread(() -> ToastCompat.makeText(ConversationsActivity.this, msg, Toast.LENGTH_SHORT).show());
+        runOnUiThread(() -> ToastCompat.makeText(ConversationsActivity.this, msg, ToastCompat.LENGTH_SHORT).show());
     }
 
     @Override
@@ -703,7 +702,7 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
                 if (xmppConnectionService.hasInternetConnection()) {
                     openInstallFromUnknownSourcesDialogIfNeeded(true);
                 } else {
-                    ToastCompat.makeText(this, R.string.account_status_no_internet, Toast.LENGTH_LONG).show();
+                    ToastCompat.makeText(this, R.string.account_status_no_internet, ToastCompat.LENGTH_LONG).show();
                 }
                 break;
             case R.id.action_invite_user:
@@ -1044,7 +1043,7 @@ public class ConversationsActivity extends XmppActivity implements OnConversatio
 
     @Override
     public void onShowErrorToast(int resId) {
-        runOnUiThread(() -> ToastCompat.makeText(this, resId, Toast.LENGTH_SHORT).show());
+        runOnUiThread(() -> ToastCompat.makeText(this, resId, ToastCompat.LENGTH_SHORT).show());
     }
 
     protected void AppUpdate(String Store) {

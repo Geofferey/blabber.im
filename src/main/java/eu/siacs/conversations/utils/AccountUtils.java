@@ -2,7 +2,6 @@ package eu.siacs.conversations.utils;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +69,7 @@ public class AccountUtils {
         if (MANAGE_ACCOUNT_ACTIVITY != null) {
             activity.startActivity(new Intent(activity, MANAGE_ACCOUNT_ACTIVITY));
         } else {
-            ToastCompat.makeText(activity, R.string.feature_not_implemented, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(activity, R.string.feature_not_implemented, ToastCompat.LENGTH_SHORT).show();
         }
     }
 

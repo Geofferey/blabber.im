@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -46,7 +45,7 @@ public class AboutActivity extends XmppActivity {
                 final Uri uri = Uri.parse(Config.privacyURL);
                 CustomTab.openTab(this, uri, isDarkTheme());
             } catch (Exception e) {
-                ToastCompat.makeText(this, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(this, R.string.no_application_found_to_open_link, ToastCompat.LENGTH_SHORT).show();
             }
         });
         Button termsOfUseButton = findViewById(R.id.show_terms_of_use);
@@ -55,7 +54,7 @@ public class AboutActivity extends XmppActivity {
                 final Uri uri = Uri.parse(Config.termsOfUseURL);
                 CustomTab.openTab(this, uri, isDarkTheme());
             } catch (Exception e) {
-                ToastCompat.makeText(this, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(this, R.string.no_application_found_to_open_link, ToastCompat.LENGTH_SHORT).show();
             }
         });
     }

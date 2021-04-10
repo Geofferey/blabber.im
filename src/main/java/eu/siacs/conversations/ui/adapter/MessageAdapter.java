@@ -33,7 +33,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -476,7 +475,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
             } catch (Exception e) {
-                ToastCompat.makeText(activity, R.string.no_application_found_to_view_contact, Toast.LENGTH_LONG).show();
+                ToastCompat.makeText(activity, R.string.no_application_found_to_view_contact, ToastCompat.LENGTH_LONG).show();
             }
 
         });
@@ -898,7 +897,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         viewHolder.progressBar.setVisibility(View.GONE);
         final DownloadableFile file = activity.xmppConnectionService.getFileBackend().getFile(message);
         if (!file.exists()) {
-            ToastCompat.makeText(activity, R.string.file_deleted, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(activity, R.string.file_deleted, ToastCompat.LENGTH_SHORT).show();
             return;
         }
         final String mime = file.getMimeType();
@@ -1048,9 +1047,9 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         conversation.messagesLoaded.set(true);
         MessageArchiveService.Query query = activity.xmppConnectionService.getMessageArchiveService().query(conversation, new MamReference(0), timestamp, false);
         if (query != null) {
-            ToastCompat.makeText(activity, R.string.fetching_history_from_server, Toast.LENGTH_LONG).show();
+            ToastCompat.makeText(activity, R.string.fetching_history_from_server, ToastCompat.LENGTH_LONG).show();
         } else {
-            ToastCompat.makeText(activity, R.string.not_fetching_history_retention_period, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(activity, R.string.not_fetching_history_retention_period, ToastCompat.LENGTH_SHORT).show();
         }
     }
 
@@ -1394,7 +1393,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                 }
             }
         } else {
-            ToastCompat.makeText(activity, R.string.webview_not_available, Toast.LENGTH_LONG).show();
+            ToastCompat.makeText(activity, R.string.webview_not_available, ToastCompat.LENGTH_LONG).show();
         }
     }
 

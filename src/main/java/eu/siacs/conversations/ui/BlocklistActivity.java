@@ -2,7 +2,6 @@ package eu.siacs.conversations.ui;
 
 import android.os.Bundle;
 import android.text.Editable;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,9 +14,9 @@ import eu.siacs.conversations.entities.Blockable;
 import eu.siacs.conversations.entities.ListItem;
 import eu.siacs.conversations.entities.RawBlockable;
 import eu.siacs.conversations.ui.interfaces.OnBackendConnected;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.OnUpdateBlocklist;
 import me.drakeet.support.toast.ToastCompat;
-import eu.siacs.conversations.xmpp.Jid;
 
 public class BlocklistActivity extends AbstractSearchableListItemActivity implements OnUpdateBlocklist {
     private Account account = null;
@@ -89,7 +88,7 @@ public class BlocklistActivity extends AbstractSearchableListItemActivity implem
         dialog.setOnEnterJidDialogPositiveListener((accountJid, contactJid) -> {
             Blockable blockable = new RawBlockable(account, contactJid);
             if (xmppConnectionService.sendBlockRequest(blockable, false)) {
-                ToastCompat.makeText(BlocklistActivity.this, R.string.corresponding_conversations_closed, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(BlocklistActivity.this, R.string.corresponding_conversations_closed, ToastCompat.LENGTH_SHORT).show();
             }
             return true;
         });

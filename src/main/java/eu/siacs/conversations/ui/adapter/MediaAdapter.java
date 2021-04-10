@@ -12,12 +12,10 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.DimenRes;
@@ -205,7 +203,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
             this.activity.startActivity(Intent.createChooser(share, this.activity.getText(R.string.share_with)));
         } catch (ActivityNotFoundException e) {
             //This should happen only on faulty androids because normally chooser is always available
-            ToastCompat.makeText(this.activity, R.string.no_application_found_to_open_file, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this.activity, R.string.no_application_found_to_open_file, ToastCompat.LENGTH_SHORT).show();
         }
     }
 
@@ -238,7 +236,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
             uri = FileBackend.getUriForFile(this.activity, file);
         } catch (SecurityException e) {
             Log.d(Config.LOGTAG, "No permission to access " + file.getAbsolutePath(), e);
-            ToastCompat.makeText(this.activity, this.activity.getString(R.string.no_permission_to_access_x, file.getAbsolutePath()), Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this.activity, this.activity.getString(R.string.no_permission_to_access_x, file.getAbsolutePath()), ToastCompat.LENGTH_SHORT).show();
             return;
         }
         String mime = MimeUtils.guessMimeTypeFromUri(this.activity, uri);
@@ -253,7 +251,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
         try {
             this.activity.startActivity(openIntent);
         } catch (ActivityNotFoundException e) {
-            ToastCompat.makeText(this.activity, R.string.no_application_found_to_open_file, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this.activity, R.string.no_application_found_to_open_file, ToastCompat.LENGTH_SHORT).show();
         }
     }
 

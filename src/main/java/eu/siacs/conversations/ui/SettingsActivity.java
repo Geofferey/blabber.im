@@ -16,7 +16,6 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -577,7 +576,7 @@ public class SettingsActivity extends XmppActivity implements
                     createBackup(true);
                 }
             } else {
-                ToastCompat.makeText(this, R.string.no_storage_permission, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(this, R.string.no_storage_permission, ToastCompat.LENGTH_SHORT).show();
             }
         }
     }
@@ -593,7 +592,7 @@ public class SettingsActivity extends XmppActivity implements
     }
 
     private void displayToast(final String msg) {
-        runOnUiThread(() -> ToastCompat.makeText(SettingsActivity.this, msg, Toast.LENGTH_LONG).show());
+        runOnUiThread(() -> ToastCompat.makeText(SettingsActivity.this, msg, ToastCompat.LENGTH_LONG).show());
     }
 
     private void reconnectAccounts() {

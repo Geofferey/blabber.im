@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
@@ -96,7 +95,7 @@ public abstract class OmemoActivity extends XmppActivity {
             ToastCompat.makeText(
                     this,
                     R.string.toast_message_omemo_fingerprint,
-                    Toast.LENGTH_SHORT).show();
+                    ToastCompat.LENGTH_SHORT).show();
         }
     }
 

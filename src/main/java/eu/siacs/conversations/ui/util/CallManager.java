@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.widget.Toast;
 
 import com.google.common.base.Optional;
 
@@ -25,6 +24,7 @@ import eu.siacs.conversations.xmpp.jingle.JingleConnectionManager;
 import eu.siacs.conversations.xmpp.jingle.Media;
 import eu.siacs.conversations.xmpp.jingle.OngoingRtpSession;
 import eu.siacs.conversations.xmpp.jingle.RtpCapability;
+import me.drakeet.support.toast.ToastCompat;
 
 import static eu.siacs.conversations.ui.ConversationFragment.REQUEST_START_AUDIO_CALL;
 import static eu.siacs.conversations.ui.ConversationFragment.REQUEST_START_VIDEO_CALL;
@@ -33,7 +33,7 @@ public class CallManager {
 
     public static void checkPermissionAndTriggerAudioCall(XmppActivity activity, Conversation conversation) {
         if (activity.mUseTor || conversation.getAccount().isOnion()) {
-            Toast.makeText(activity, R.string.disable_tor_to_make_call, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(activity, R.string.disable_tor_to_make_call, ToastCompat.LENGTH_SHORT).show();
             return;
         }
         if (hasPermissions(REQUEST_START_AUDIO_CALL, activity, Manifest.permission.RECORD_AUDIO)) {
@@ -43,7 +43,7 @@ public class CallManager {
 
     public static void checkPermissionAndTriggerVideoCall(XmppActivity activity, Conversation conversation) {
         if (activity.mUseTor || conversation.getAccount().isOnion()) {
-            Toast.makeText(activity, R.string.disable_tor_to_make_call, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(activity, R.string.disable_tor_to_make_call, ToastCompat.LENGTH_SHORT).show();
             return;
         }
         if (hasPermissions(REQUEST_START_VIDEO_CALL, activity, Manifest.permission.CAMERA)) {
@@ -53,7 +53,7 @@ public class CallManager {
 
     public static void triggerRtpSession(final String action, XmppActivity activity, Conversation conversation) {
         if (activity.xmppConnectionService.getJingleConnectionManager().isBusy()) {
-            Toast.makeText(activity, R.string.only_one_call_at_a_time, Toast.LENGTH_LONG).show();
+            ToastCompat.makeText(activity, R.string.only_one_call_at_a_time, ToastCompat.LENGTH_LONG).show();
             return;
         }
 

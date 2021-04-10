@@ -37,7 +37,6 @@ import android.text.Editable;
 import android.text.Spanned;
 import android.text.style.URLSpan;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.Arrays;
 
@@ -79,7 +78,7 @@ public class FixedURLSpan extends URLSpan {
             CustomTab.openTab(context, uri, ThemeHelper.isDark(ThemeHelper.find(context)));
             widget.playSoundEffect(0);
         } catch (ActivityNotFoundException e) {
-            ToastCompat.makeText(context, R.string.no_application_found_to_open_link, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(context, R.string.no_application_found_to_open_link, ToastCompat.LENGTH_SHORT).show();
         }
     }
 }

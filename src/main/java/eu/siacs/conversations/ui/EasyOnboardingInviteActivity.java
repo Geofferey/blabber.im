@@ -2,9 +2,6 @@ package eu.siacs.conversations.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-
-import androidx.appcompat.widget.Toolbar;
-import androidx.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -12,7 +9,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
 
 import com.google.common.base.Strings;
 
@@ -23,6 +22,7 @@ import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.services.BarcodeProvider;
 import eu.siacs.conversations.utils.EasyOnboardingInvite;
 import eu.siacs.conversations.xmpp.Jid;
+import me.drakeet.support.toast.ToastCompat;
 
 public class EasyOnboardingInviteActivity extends XmppActivity implements EasyOnboardingInvite.OnInviteRequested {
 
@@ -144,7 +144,7 @@ public class EasyOnboardingInviteActivity extends XmppActivity implements EasyOn
     public void inviteRequestFailed(final String message) {
         runOnUiThread(() -> {
             if (!Strings.isNullOrEmpty(message)) {
-                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+                ToastCompat.makeText(this, message, ToastCompat.LENGTH_LONG).show();
             }
             finish();
         });

@@ -1,11 +1,9 @@
 package eu.siacs.conversations.ui;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.security.KeyChain;
@@ -14,7 +12,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -28,8 +25,8 @@ import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.databinding.WelcomeBinding;
 import eu.siacs.conversations.entities.Account;
-import eu.siacs.conversations.ui.util.IntroHelper;
 import eu.siacs.conversations.services.XmppConnectionService;
+import eu.siacs.conversations.ui.util.IntroHelper;
 import eu.siacs.conversations.ui.util.UpdateHelper;
 import eu.siacs.conversations.utils.Compatibility;
 import eu.siacs.conversations.utils.InstallReferrerUtils;
@@ -204,7 +201,7 @@ public class WelcomeActivity extends XmppActivity implements XmppConnectionServi
         try {
             KeyChain.choosePrivateKeyAlias(this, this, null, null, null, -1, null);
         } catch (ActivityNotFoundException e) {
-            Toast.makeText(this, R.string.device_does_not_support_certificates, Toast.LENGTH_LONG).show();
+            ToastCompat.makeText(this, R.string.device_does_not_support_certificates, ToastCompat.LENGTH_LONG).show();
         }
     }
 
@@ -226,7 +223,7 @@ public class WelcomeActivity extends XmppActivity implements XmppConnectionServi
 
     @Override
     public void informUser(final int r) {
-        runOnUiThread(() -> Toast.makeText(this, r, Toast.LENGTH_LONG).show());
+        runOnUiThread(() -> ToastCompat.makeText(this, r, ToastCompat.LENGTH_LONG).show());
     }
 
     @Override
@@ -240,7 +237,7 @@ public class WelcomeActivity extends XmppActivity implements XmppConnectionServi
                         break;
                 }
             } else if (Arrays.asList(permissions).contains(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                ToastCompat.makeText(this, R.string.no_storage_permission, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(this, R.string.no_storage_permission, ToastCompat.LENGTH_SHORT).show();
             }
         }
         if (readGranted(grantResults, permissions)) {

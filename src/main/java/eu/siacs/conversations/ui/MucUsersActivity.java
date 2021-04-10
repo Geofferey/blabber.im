@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
@@ -105,7 +104,7 @@ public class MucUsersActivity extends XmppActivity implements XmppConnectionServ
     }
 
     private void displayToast(final String msg) {
-        runOnUiThread(() -> ToastCompat.makeText(this, msg, Toast.LENGTH_SHORT).show());
+        runOnUiThread(() -> ToastCompat.makeText(this, msg, ToastCompat.LENGTH_SHORT).show());
     }
 
     @Override

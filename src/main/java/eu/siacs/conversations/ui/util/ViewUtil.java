@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
 import java.util.List;
@@ -29,7 +28,7 @@ public class ViewUtil {
 
     public static void view(Context context, DownloadableFile file) {
         if (!file.exists()) {
-            ToastCompat.makeText(context, R.string.file_deleted, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(context, R.string.file_deleted, ToastCompat.LENGTH_SHORT).show();
             return;
         }
         String mime = file.getMimeType();
@@ -45,7 +44,7 @@ public class ViewUtil {
             uri = FileBackend.getUriForFile(context, file);
         } catch (SecurityException e) {
             Log.d(Config.LOGTAG, "No permission to access " + file.getAbsolutePath(), e);
-            ToastCompat.makeText(context, context.getString(R.string.no_permission_to_access_x, file.getAbsolutePath()), Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(context, context.getString(R.string.no_permission_to_access_x, file.getAbsolutePath()), ToastCompat.LENGTH_SHORT).show();
             return;
         }
         // use internal viewer for images and videos
@@ -79,7 +78,7 @@ public class ViewUtil {
             try {
                 context.startActivity(openIntent);
             } catch (ActivityNotFoundException e) {
-                ToastCompat.makeText(context, R.string.no_application_found_to_open_file, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(context, R.string.no_application_found_to_open_file, ToastCompat.LENGTH_SHORT).show();
             }
         }
     }

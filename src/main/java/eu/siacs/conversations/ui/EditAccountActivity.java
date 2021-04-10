@@ -129,7 +129,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
             if (mAccount != null && mAccount.getStatus() == Account.State.DISABLED && !accountInfoEdited) {
                 mAccount.setOption(Account.OPTION_DISABLED, false);
                 if (!xmppConnectionService.updateAccount(mAccount)) {
-                    ToastCompat.makeText(EditAccountActivity.this, R.string.unable_to_update_account, Toast.LENGTH_SHORT).show();
+                    ToastCompat.makeText(EditAccountActivity.this, R.string.unable_to_update_account, ToastCompat.LENGTH_SHORT).show();
                 }
                 return;
             }
@@ -159,7 +159,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
             if (inNeedOfSaslAccept()) {
                 mAccount.setKey(Account.PINNED_MECHANISM_KEY, String.valueOf(-1));
                 if (!xmppConnectionService.updateAccount(mAccount)) {
-                    ToastCompat.makeText(EditAccountActivity.this, R.string.unable_to_update_account, Toast.LENGTH_SHORT).show();
+                    ToastCompat.makeText(EditAccountActivity.this, R.string.unable_to_update_account, ToastCompat.LENGTH_SHORT).show();
                 }
                 return;
             }
@@ -172,7 +172,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                     CustomTab.openTab(EditAccountActivity.this, Uri.parse(url.toString()), isDarkTheme());
                     return;
                 } catch (ActivityNotFoundException e) {
-                    ToastCompat.makeText(EditAccountActivity.this, R.string.application_found_to_open_website, Toast.LENGTH_SHORT).show();
+                    ToastCompat.makeText(EditAccountActivity.this, R.string.application_found_to_open_website, ToastCompat.LENGTH_SHORT).show();
                     return;
                 }
             }
@@ -246,7 +246,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
             }
             if (registerNewAccount) {
                 if (XmppConnection.errorMessage != null) {
-                    ToastCompat.makeText(EditAccountActivity.this, XmppConnection.errorMessage, Toast.LENGTH_LONG).show();
+                    ToastCompat.makeText(EditAccountActivity.this, XmppConnection.errorMessage, ToastCompat.LENGTH_LONG).show();
                 }
             }
             if (mAccount != null) {
@@ -264,7 +264,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                 mAccount.setPassword(password);
                 mAccount.setOption(Account.OPTION_REGISTER, registerNewAccount);
                 if (!xmppConnectionService.updateAccount(mAccount)) {
-                    ToastCompat.makeText(EditAccountActivity.this, R.string.unable_to_update_account, Toast.LENGTH_SHORT).show();
+                    ToastCompat.makeText(EditAccountActivity.this, R.string.unable_to_update_account, ToastCompat.LENGTH_SHORT).show();
                     return;
                 }
             } else {
@@ -500,11 +500,11 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
     protected void processFingerprintVerification(XmppUri uri, boolean showWarningToast) {
         if (mAccount != null && mAccount.getJid().asBareJid().equals(uri.getJid()) && uri.hasFingerprints()) {
             if (xmppConnectionService.verifyFingerprints(mAccount, uri.getFingerprints())) {
-                ToastCompat.makeText(this, R.string.verified_fingerprints, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(this, R.string.verified_fingerprints, ToastCompat.LENGTH_SHORT).show();
                 updateAccountInformation(false);
             }
         } else if (showWarningToast) {
-            ToastCompat.makeText(this, R.string.invalid_barcode, Toast.LENGTH_SHORT).show();
+            ToastCompat.makeText(this, R.string.invalid_barcode, ToastCompat.LENGTH_SHORT).show();
         }
     }
 
@@ -1424,7 +1424,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                 try {
                     startActivityForResult(intent, REQUEST_DATA_SAVER);
                 } catch (ActivityNotFoundException e) {
-                    ToastCompat.makeText(EditAccountActivity.this, R.string.device_does_not_support_data_saver, Toast.LENGTH_SHORT).show();
+                    ToastCompat.makeText(EditAccountActivity.this, R.string.device_does_not_support_data_saver, ToastCompat.LENGTH_SHORT).show();
                 }
             });
         } else if (showBatteryWarning && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -1438,7 +1438,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                 try {
                     startActivityForResult(intent, REQUEST_BATTERY_OP);
                 } catch (ActivityNotFoundException e) {
-                    ToastCompat.makeText(EditAccountActivity.this, R.string.device_does_not_support_battery_op, Toast.LENGTH_SHORT).show();
+                    ToastCompat.makeText(EditAccountActivity.this, R.string.device_does_not_support_battery_op, ToastCompat.LENGTH_SHORT).show();
                 }
             });
         }
@@ -1456,7 +1456,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
     }
 
     private void editMamPrefs() {
-        this.mFetchingMamPrefsToast = ToastCompat.makeText(this, R.string.fetching_mam_prefs, Toast.LENGTH_LONG);
+        this.mFetchingMamPrefsToast = ToastCompat.makeText(this, R.string.fetching_mam_prefs, ToastCompat.LENGTH_LONG);
         this.mFetchingMamPrefsToast.show();
         xmppConnectionService.fetchMamPreferences(mAccount, this);
     }
@@ -1526,7 +1526,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ToastCompat.makeText(EditAccountActivity.this, resId, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(EditAccountActivity.this, resId, ToastCompat.LENGTH_SHORT).show();
             }
         });
     }
@@ -1558,7 +1558,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
             if (mFetchingMamPrefsToast != null) {
                 mFetchingMamPrefsToast.cancel();
             }
-            ToastCompat.makeText(EditAccountActivity.this, R.string.unable_to_fetch_mam_prefs, Toast.LENGTH_LONG).show();
+            ToastCompat.makeText(EditAccountActivity.this, R.string.unable_to_fetch_mam_prefs, ToastCompat.LENGTH_LONG).show();
         });
     }
 
@@ -1572,7 +1572,7 @@ public class EditAccountActivity extends OmemoActivity implements OnAccountUpdat
                         break;
                 }
             } else {
-                ToastCompat.makeText(this, R.string.no_storage_permission, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(this, R.string.no_storage_permission, ToastCompat.LENGTH_SHORT).show();
             }
         }
         if (readGranted(grantResults, permissions)) {

@@ -12,7 +12,6 @@ import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 
@@ -66,7 +65,7 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
             }
             ToastCompat.makeText(PublishProfilePictureActivity.this,
                     R.string.avatar_has_been_published,
-                    Toast.LENGTH_SHORT).show();
+                    ToastCompat.LENGTH_SHORT).show();
             finish();
         });
     }
@@ -143,7 +142,7 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
                 if (error != null) {
-                    ToastCompat.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    ToastCompat.makeText(this, error.getMessage(), ToastCompat.LENGTH_SHORT).show();
                 }
             }
         } else if (requestCode == REQUEST_CHOOSE_PICTURE) {

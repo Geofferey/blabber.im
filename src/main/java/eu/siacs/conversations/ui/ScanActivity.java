@@ -40,7 +40,6 @@ import android.view.TextureView;
 import android.view.TextureView.SurfaceTextureListener;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -292,7 +291,7 @@ public final class ScanActivity extends Activity implements SurfaceTextureListen
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 scan(activity);
             } else {
-                ToastCompat.makeText(activity, R.string.qr_code_scanner_needs_access_to_camera, Toast.LENGTH_SHORT).show();
+                ToastCompat.makeText(activity, R.string.qr_code_scanner_needs_access_to_camera, ToastCompat.LENGTH_SHORT).show();
             }
         }
     }
