@@ -142,10 +142,12 @@ public class HttpDownloadConnection implements Transferable {
     }
 
     private void download(final boolean interactive) {
+        changeStatus(STATUS_WAITING);
         FileTransferExecutor.execute(new FileDownloader(interactive));
     }
 
     private void checkFileSize(final boolean interactive) {
+        changeStatus(STATUS_WAITING);
         FileTransferExecutor.execute(new FileSizeChecker(interactive));
     }
 
@@ -366,7 +368,6 @@ public class HttpDownloadConnection implements Transferable {
 
         @Override
         public void run() {
-            changeStatus(STATUS_WAITING);
             try {
                 changeStatus(STATUS_DOWNLOADING);
                 download();

@@ -30,6 +30,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static eu.siacs.conversations.http.HttpConnectionManager.FileTransferExecutor;
+
 public class HttpUploadConnection implements Transferable, AbstractConnectionManager.ProgressListener {
 
     static final List<String> WHITE_LISTED_HEADERS = Arrays.asList(
@@ -136,8 +138,12 @@ public class HttpUploadConnection implements Transferable, AbstractConnectionMan
         Futures.addCallback(this.slotFuture, new FutureCallback<SlotRequester.Slot>() {
             @Override
             public void onSuccess(@NullableDecl SlotRequester.Slot result) {
-                HttpUploadConnection.this.slot = result;
-                HttpUploadConnection.this.upload();
+                changeStatus(STATUS_WAITING);
+                FileTransferExecutor.execute(() -> {
+                    changeStatus(STATUS_UPLOADING);
+                    HttpUploadConnection.this.slot = result;
+                    HttpUploadConnection.this.upload();
+                });
             }
 
             @Override
@@ -199,6 +205,11 @@ public class HttpUploadConnection implements Transferable, AbstractConnectionMan
 
     public Message getMessage() {
         return message;
+    }
+
+    private void changeStatus(int status) {
+        this.mStatus = status;
+        mHttpConnectionManager.updateConversationUi(true);
     }
 
     @Override
