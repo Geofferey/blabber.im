@@ -1166,6 +1166,9 @@ public class XmppConnectionService extends Service {
     }
 
     public boolean hasIndividualNotification(Conversation conversation) {
+        if (conversation == null) {
+            return false;
+        }
         return getIndividualNotificationPreference(conversation) > 0L;
     }
 
