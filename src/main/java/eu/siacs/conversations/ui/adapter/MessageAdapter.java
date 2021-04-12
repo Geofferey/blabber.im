@@ -568,7 +568,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         viewHolder.messageBody.setTypeface(null, Typeface.NORMAL);
         if (message.getBody() != null) {
             final SpannableString nick = UIHelper.getColoredUsername(activity.xmppConnectionService, message);
-            SpannableStringBuilder body = new SpannableStringBuilder(replaceYoutube(activity.getApplicationContext(),message.getMergedBody()));
+            SpannableStringBuilder body = new SpannableStringBuilder(replaceYoutube(activity.getApplicationContext(), message.getMergedBody()));
             if (message.getBody().equals(DELETED_MESSAGE_BODY)) {
                 body = body.replace(0, DELETED_MESSAGE_BODY.length(), activity.getString(R.string.message_deleted));
             } else if (message.getBody().equals(DELETED_MESSAGE_BODY_OLD)) {
@@ -766,7 +766,8 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         } else {
             url = removeTrackingParameter(Uri.parse(message.getWebUri())).toString();
         }
-        final SpannableStringBuilder body = new SpannableStringBuilder(replaceYoutube(activity.getApplicationContext(), url));
+        final String link = replaceYoutube(activity.getApplicationContext(), url);
+        Log.d(Config.LOGTAG, "Weburi body for preview: " + link);
         final boolean dataSaverDisabled = activity.xmppConnectionService.isDataSaverDisabled();
         viewHolder.richlinkview.setVisibility(mShowLinksInside ? View.VISIBLE : View.GONE);
         if (mShowLinksInside) {
@@ -784,11 +785,10 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             layoutParams.setMargins(0, (int) (metrics.density * 4), 0, (int) (metrics.density * 4));
             viewHolder.richlinkview.setLayoutParams(layoutParams);
             final String weburl;
-            final String lcUrl = body.toString();
-            if (lcUrl.startsWith("http://") || lcUrl.startsWith("https://")) {
-                weburl = removeTrailingBracket(url);
+            if (link.startsWith("http://") || link.startsWith("https://")) {
+                weburl = removeTrailingBracket(link);
             } else {
-                weburl = "http://" + removeTrailingBracket(url);
+                weburl = "http://" + removeTrailingBracket(link);
             }
             Log.d(Config.LOGTAG, "Weburi for preview: " + weburl);
             viewHolder.richlinkview.setLink(weburl, message.getUuid(), dataSaverDisabled, activity.xmppConnectionService, color, new RichPreview.ViewListener() {
