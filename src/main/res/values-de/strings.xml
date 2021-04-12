@@ -1118,8 +1118,8 @@
     <string name="videos">Videos</string>
     <string name="files">Dateien</string>
     <string name="all_media_files">Medien-Dateien</string>
-    <string name="memory_warning">Dein Messenger nutzt %1$s (%2$s) des internen Speicher.\n\nDu kannst das automatische Löschen von Nachrichten in Verbindung mit dem automatischen Löschen von Anhängen aktivieren oder gespeicherte Medien manuell löschen.</string>
-    <string name="memory_warning_force">Dein Messenger nutzt %1$s (%2$s) des internen Speicher.\n\nDu solltest das automatische Löschen von Nachrichten in Verbindung mit dem automatischen Löschen von Anhängen aktivieren oder gespeicherte Medien manuell löschen. Dein Gerät wird bald keinen freien Speicher mehr haben!</string>
+    <string name="memory_warning">Dein Messenger nutzt %1$s (%2$s) des internen Speichers.\n\nDu kannst das automatische Löschen von Anhängen aktivieren oder gespeicherte Medien manuell löschen.</string>
+    <string name="memory_warning_force">Dein Messenger nutzt %1$s (%2$s) des internen Speichers.\n\nDu solltest das automatische Löschen von Anhängen aktivieren oder gespeicherte Medien manuell löschen. Dein Gerät wird bald keinen freien Speicher mehr haben!</string>
     <string name="open_settings">Einstellungen öffnen</string>
     <string name="oldAndroidVersion">Alte Android-Version</string>
     <string name="oldAndroidVersionMessage">Du verwendest eine alte Android-Version, die in zukünftigen Updates nicht mehr unterstützt wird. Ab blabber.im Version 3.1.0 werden nur noch Geräte mit Android 5 oder höher unterstützt. Bitte aktualisiere deine Geräte-Firmware.</string>
@@ -1133,4 +1133,8 @@
     <string name="remove_all_individual_notifications_message">Möchtest du wirklich alle eingestellten individuellen Benachrichtigungen für Kontakte und Gruppen entfernen?</string>
     <string name="exit">Beenden</string>
     <string name="record_voice_mail">Sprachnachricht aufnehmen</string>
+    <string name="backup_started_message">Die Sicherung wurde gestartet. Du erhältst eine Benachrichtigung, sobald sie abgeschlossen ist.</string>
+    <string name="error_security_exception">Die App, die zum Freigeben dieser Datei verwendet wurde, hat nicht genügend Berechtigungen erteilt.</string>
+    <string name="unable_to_enable_video">Video kann nicht aktiviert werden.</string>
+    <string name="delete_recording_dialog_message">Soll die Aufnahme wirklich beendet und gelöscht werden?</string>
 </resources>

@@ -89,7 +89,7 @@
     <string name="send_unencrypted">Отправить незашифрованным</string>
     <string name="decryption_failed">Расшифровка не удалась. Возможно, у вас нет правильного приватного ключа.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">использует приложение <b>OpenKeychain</b> для шифрования/расшифровки сообщений и управления Вашими открытыми ключами.\n\nOpenKeychain лицензирован под GPLv3 и доступен в F-Droid и Google Play.\n\n<small>(После этого перезапустите.)</small></string>
+    <string name="openkeychain_required_long">%s использует приложение <b>OpenKeychain</b> для шифрования/расшифровки сообщений и управления Вашими открытыми ключами.\n\nOpenKeychain лицензирован под GPLv3 и доступен в F-Droid и Google Play.\n\n<small>(После этого %s перезапустите.)</small></string>
     <string name="restart">Перезапуск</string>
     <string name="install">Установка</string>
     <string name="offering">предложение…</string>
@@ -640,6 +640,12 @@
         <item quantity="many">%d месяцев</item>
         <item quantity="other">%d месяцев</item>
     </plurals>
+    <plurals name="years">
+        <item quantity="one">%d год</item>
+        <item quantity="few">%d года</item>
+        <item quantity="many">%d лет</item>
+        <item quantity="other">%d лет</item>
+    </plurals>
     <string name="today">Сегодня</string>
     <string name="pref_use_max_brightness_summary">Установить максимальную яркость при полноэкранном просмотре видео и изображений.</string>
     <string name="pref_use_max_brightness">Максимальная яркость</string>
@@ -1151,4 +1157,8 @@
     <string name="remove_all_individual_notifications_message">Вы действительно хотите удалить все индивидуальные уведомления, установленные для ваших контактов и групп?</string>
     <string name="exit">Выход</string>
     <string name="record_voice_mail">Запись голосового сообщения</string>
+    <string name="backup_started_message">Резервное копирование было запущено. Вы получите уведомление, как только оно будет завершено.</string>
+    <string name="error_security_exception">Приложение, которое вы использовали для совместного использования этого файла, не предоставило достаточных разрешений.</string>
+    <string name="unable_to_enable_video">Не удается включить видео.</string>
+    <string name="delete_recording_dialog_message">Вы действительно хотите отменить и удалить свою запись?</string>
 </resources>

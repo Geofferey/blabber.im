@@ -87,6 +87,7 @@
     <string name="send_unencrypted">Invia non cifrato</string>
     <string name="decryption_failed">Decifrazione fallita. Forse non disponi della chiave privata corretta.</string>
     <string name="openkeychain_required">OpenKeychain</string>
+    <string name="openkeychain_required_long">%s usa una app di terze parti chiamata <b>OpenKeychain</b> per cifrare e decifrare i messaggi e per gestire le tue chiavi pubbliche.\n\nOpenKeychain è rilasciato secondo i termini della licenza GPLv3 ed è disponibile sia su F-Droid che su Google Play.\n\n<small>(Per favore riavvia %s in seguito.)</small></string>
     <string name="restart">Riavvia</string>
     <string name="install">Installa</string>
     <string name="offering">offrendo…</string>
@@ -190,6 +191,8 @@
     <string name="openpgp_key_id">ID chiave OpenPGP</string>
     <string name="omemo_fingerprint">Impronta OMEMO</string>
     <string name="omemo_fingerprint_x509">v\\OMEMO impronta</string>
+    <string name="omemo_fingerprint_selected_message">Impronta OMEMO (origine messaggio)</string>
+    <string name="omemo_fingerprint_x509_selected_message">v\\Impronta OMEMO (origine messaggio)</string>
     <string name="other_devices">Altri dispositivi</string>
     <string name="trust_omemo_fingerprints">Fidati delle impronte OMEMO</string>
     <string name="fetching_keys">Ricezione chiavi...</string>
@@ -430,6 +433,8 @@
     <string name="account_status_host_unknown">Server non responsabile per il dominio</string>
     <string name="server_info_broken">Rotto</string>
     <string name="pref_presence_settings">Disponibilità</string>
+    <string name="pref_away_when_screen_off">Non disponibile quando il dispositivo è bloccato</string>
+    <string name="pref_away_when_screen_off_summary">Imposta la tua risorsa come non disponibile quando il dispositivo è bloccato</string>
     <string name="pref_dnd_on_silent_mode">\"Non disturbare\" in modalità silenziosa</string>
     <string name="update_info">blabber.im sta scaricando e installando la nuova versione automaticamente.\n\nAttendere prego…</string>
     <string name="pref_dnd_on_silent_mode_summary">Segna la tua risorsa come \"Non disturbare\" quando il dispositivo è in modalità silenziosa</string>
@@ -617,6 +622,10 @@
         <item quantity="one">%d mese</item>
         <item quantity="other">%d mesi</item>
     </plurals>
+    <plurals name="years">
+        <item quantity="one">%d anno</item>
+        <item quantity="other">%d anni</item>
+    </plurals>
     <string name="today">Oggi</string>
     <string name="pref_use_max_brightness_summary">Imposta la luminosità al massimo quando guardi video o immagini a schermo intero.</string>
     <string name="pref_use_max_brightness">Luminosità massima</string>
@@ -705,6 +714,7 @@
     <string name="edit_status_message_title">Modifica Messaggio di Stato</string>
     <string name="pref_automatically_delete_messages_description">Elimina automaticamente da questo dispositivo i messaggi più vecchi del lasso di tempo configurato.</string>
     <string name="pref_automatically_delete_messages">Eliminazione automatica dei messaggi</string>
+    <string name="pref_automatically_delete_attachments_description">Elimina automaticamente da questo dispositivo gli allegati più vecchi del lasso di tempo configurato.</string>
     <string name="pref_automatically_delete_files">Eliminazione automatica degli allegati</string>
     <string name="disable_encryption">Disabilita crittografia</string>
     <string name="error_trustkey_general">blabber.im non è in grado di inviare messaggi criptati a %1$s. Questo può essere causato dal tuo contatto che utilizza un server non aggiornato o da un client che non gestisce OMEMO.</string>
@@ -1108,8 +1118,6 @@
     <string name="videos">video</string>
     <string name="files">file</string>
     <string name="all_media_files">file multimediali</string>
-    <string name="memory_warning">L\'applicazione sta utilizzando %1$s (%2$s) di memoria interna.\n\nPuoi abilitare l\'eliminazione automatica dei messaggi in unione con l\'eliminazione automatica degli allegati o eliminare i file multimediali manualmente.</string>
-    <string name="memory_warning_force">L\'applicazione sta utilizzando %1$s (%2$s) di memoria interna.\n\nDovresti abilitare l\'eliminazione automatica dei messaggi in unione con l\'eliminazione automatica degli allegati o eliminare i file multimediali manualmente. Diversamente il tuo dispositivo finirà la memoria a disposizione!</string>
     <string name="open_settings">Apri impostazioni</string>
     <string name="oldAndroidVersion">Vecchia versione di Android</string>
     <string name="oldAndroidVersionMessage">Stai utilizzando una vecchia versione di Android che non sarà più supportata dagli aggiornamenti futuri. Da blabber.im versione 3.1.0 solo i dispositivi con Android 5 o superiore saranno supportati. Per favore aggiorna il firmware del tuo dispositivo.</string>
@@ -1121,4 +1129,6 @@
     <string name="remove_individual_notifications">Rimuovi notifiche individuali</string>
     <string name="remove_individual_notifications_message">Vuoi veramente rimuovere queste notifiche individuali impostate per %s?</string>
     <string name="remove_all_individual_notifications_message">Vuoi veramente rimuovere tutte le notifiche individuali impostate per i tuoi contatti e gruppi?</string>
+    <string name="exit">Esci</string>
+    <string name="record_voice_mail">Registra messaggio vocale</string>
 </resources>

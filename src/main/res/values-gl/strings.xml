@@ -87,6 +87,7 @@
     <string name="send_unencrypted">Enviar sen cifrar</string>
     <string name="decryption_failed">Fallou o descifrado. Quizábeis non teñas a clave privada apropiada.</string>
     <string name="openkeychain_required">OpenKeychain</string>
+    <string name="openkeychain_required_long">%s emprega unha aplicación de terceiros chamada <b>OpenKeychain</b> para cifrar e descifrar mensaxes e xestionar as túas claves públicas.\n\nOpenKeychain está publicado baixo licencia GPLv3 e disponible en F-Droid e Google Play.\n\n<small>(Por favor, reinicie %s despois.)</small></string>
     <string name="restart">Reiniciar</string>
     <string name="install">Instalar</string>
     <string name="offering">ofrecendo…</string>
@@ -190,6 +191,8 @@
     <string name="openpgp_key_id">ID da chave OpenPGP</string>
     <string name="omemo_fingerprint">Pegada OMEMO</string>
     <string name="omemo_fingerprint_x509">v\\pegada OMEMO </string>
+    <string name="omemo_fingerprint_selected_message">Pegada dixital de OMEMO (mensaxe orixinal)</string>
+    <string name="omemo_fingerprint_x509_selected_message">v\\Pegada dixital de OMEMO (mensaxe orixinal)</string>
     <string name="other_devices">Outros dispositivos</string>
     <string name="trust_omemo_fingerprints">Confiar en pegadas OMEMO</string>
     <string name="fetching_keys">Obtendo chaves...</string>
@@ -430,6 +433,8 @@
     <string name="account_status_host_unknown">O servidor non é responsable do dominio</string>
     <string name="server_info_broken">Roto</string>
     <string name="pref_presence_settings">Dispoñibilidade</string>
+    <string name="pref_away_when_screen_off">Ausente cando o dispositivo está bloqueado</string>
+    <string name="pref_away_when_screen_off_summary">Marcar o seu recurso como ausente cando o dispositivo está bloqueado</string>
     <string name="pref_dnd_on_silent_mode">\"Non molestar\" en modo silencioso</string>
     <string name="update_info">blabber.im está a descargarse e instalando a nova versión automaticamente.\n\nPor favor, espere…</string>
     <string name="pref_dnd_on_silent_mode_summary">Marca o seu recurso como \"Non molestar\" cando o dispositivo está en modo silencioso</string>
@@ -617,6 +622,10 @@
         <item quantity="one">%d mes</item>
         <item quantity="other">%d meses</item>
     </plurals>
+    <plurals name="years">
+        <item quantity="one">%d ano</item>
+        <item quantity="other">%d anos</item>
+    </plurals>
     <string name="today">Hoxe</string>
     <string name="pref_use_max_brightness_summary">Cambiar ao brillo máximo mentres ven vídeos ou imaxes en pantalla completa.</string>
     <string name="pref_use_max_brightness">Máxima luminosidade</string>
@@ -705,6 +714,7 @@
     <string name="edit_status_message_title">Editar mensaxe de estado</string>
     <string name="pref_automatically_delete_messages_description">Elimina automaticamente as mensaxes deste dispositivo que son máis antigos que o tempo configurado.</string>
     <string name="pref_automatically_delete_messages">Eliminación automática de mensaxes</string>
+    <string name="pref_automatically_delete_attachments_description">Eliminar automaticamente os arquivos adxuntos deste dispositivo que sexan máis antigos que o prazo configurado.</string>
     <string name="pref_automatically_delete_files">Eliminación automática de arquivos adxuntos</string>
     <string name="disable_encryption">Desactivar a encriptación</string>
     <string name="error_trustkey_general">blabber.im non pode enviar mensaxes encriptados a %1$s. Isto pode deberse a que o seu contacto utiliza un servidor ou cliente obsoleto que non pode manexar OMEMO.</string>
@@ -1108,8 +1118,6 @@
     <string name="videos">vídeos</string>
     <string name="files">arquivos</string>
     <string name="all_media_files">ficheiros multimedia</string>
-    <string name="memory_warning">O seu mensaxeiro está a utilizar %1$s (%2$s) de momoria interna.\n\nPode activar o borrado automático de mensaxes en relación co borrado automático de arquivos adxuntos ou borrar manualmente os medios almacenados.</string>
-    <string name="memory_warning_force">O seu mensaxeiro está a utilizar %1$s (%2$s) de momoria interna.\n\nDebería activar o borrado automático de mensaxes en relación co borrado automático de arquivos adxuntos ou borrar manualmente os medios almacenados. O seu dispositivo quedará sen memoria!</string>
     <string name="open_settings">Abrir axustes</string>
     <string name="oldAndroidVersion">Versión antiga de Android</string>
     <string name="oldAndroidVersionMessage">Está a utilizar unha versión antiga de Android que xa non será soportada en futuras actualizacións. A partir da versión 3.1.0 de blabber.im só admítense dispositivos con Android 5 ou superior. Por favor, actualice o firmware do teu dispositivo.</string>
@@ -1121,4 +1129,6 @@
     <string name="remove_individual_notifications">Eliminar as notificacións individuais</string>
     <string name="remove_individual_notifications_message">Realmente quere eliminar este conxunto de notificacións individuais para %s?</string>
     <string name="remove_all_individual_notifications_message">Realmente quere eliminar todas as notificacións individuais establecidas para os contactos e grupos?</string>
+    <string name="exit">Saír</string>
+    <string name="record_voice_mail">Gravar unha mensaxe de voz</string>
 </resources>

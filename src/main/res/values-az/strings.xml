@@ -362,7 +362,7 @@
     <string name="kick_from_conference">Qrup söhbətindən çıxarın</string>
     <string name="ban_from_public_conference_message">Siz ictimai kanaldan həmişəlik  %s qadağan etməyə çalışırsınız</string>
     <string name="ban_from_conference_message">Siz qrup çatdan həmişəlik  %s qadağan etməyə çalışırsınız</string>
-    <string name="kicking_from_public_conference">Siz ictimai kanaldan % - ı çıxarmağa çalışırsınız.</string>
+    <string name="kicking_from_public_conference">Siz ictimai kanaldan %s - ı çıxarmağa çalışırsınız.</string>
     <string name="kicking_from_conference">Siz qrup çatdan %s - ı çıxarmağa çalışırsınız.</string>
     <string name="ban_now">İndi qadağan etmək</string>
     <string name="kick_now">Indi çıxar</string>
@@ -538,7 +538,6 @@
     <string name="import_database">Nüsxəni idxal et</string>
     <string name="invite_again">Yenidən dəvət et</string>
     <string name="inviteUser_Subject">vasitəsilə sizi dəvət etdi</string>
-    <string name="InviteText">Salam, səni \n\nadlı istifadəçi blabber.im-ə dəvət etdi. yalnız aşağıdakı linki vurun…</string>
     <string name="pref_broadcast_last_activity">Son istifadəçinin qarşılıqlı əlaqəsi</string>
     <string name="pref_broadcast_last_activity_summary">Blabber.im-i istifadə etdiyiniz zaman bütün kontaktlarınızı bildirin</string>
     <string name="request_permissions_message">blabber.imr bir neçə icazə verməyinizi xahiş edəcəkdir. Bütün bu icazələrin bu mesenjerin bütün xüsusiyyətlərindən istifadə etməsinə icazə verməyiniz vacibdir. Bu icazələrin hər hansı birini inkar etsəniz, tətbiq özünü bağlayacaqdır.</string>
@@ -623,6 +622,10 @@
     <plurals name="months">
         <item quantity="one">%d ay</item>
         <item quantity="other">%d ay</item>
+    </plurals>
+    <plurals name="years">
+        <item quantity="one">%d il</item>
+        <item quantity="other">%d il</item>
     </plurals>
     <string name="today">Bugün</string>
     <string name="pref_use_max_brightness_summary">Tam ekranda video və ya görüntüləri seyr edərkən maksimum parlaqlığa keçin.</string>
@@ -1073,7 +1076,7 @@
     <string name="missed_call_from_x">%s şəxsindən cavabsız zəng</string>
     <string name="n_missed_calls_from_x">%2$s kontaktından %1$d cavabsız zəng</string>
     <string name="n_missed_calls">%d cavabsız zəng</string>
-    <string name="n_missed_calls_from_m_contacts">%2$s kontaktdan %1$d cavabsız zəng</string>
+    <string name="n_missed_calls_from_m_contacts">%2$d kontaktdan %1$d cavabsız zəng</string>
     <string name="pref_invidious_host_summary">Əlavə invidious hostun istifadəsi</string>
     <string name="pref_invidious_host">Invidious hostu</string>
     <string name="updated_to_blabber">Biz uğurla Pix-Art Messenger-dən blabber.im-ə keçdik\n\nİki layihənin əməkdaşlığı blabber.im- i düzəltdik. Pıx-Art Messenger isə 2020-ci ilin noyabrında genişləndirilib. Gələcəkdə Pıx-Art Messenger Android tətbiqi blabber adı altında davam edəcək.\n\nNə gözləmək olar:\n- Həmin funksiyalar qalır\n- Çat otağların köçürmə imkanı\n- Rənglər və loqotiplər blabber.im-ə uyğunlaşdırılmışdır\n- Tətbiq Google Play Store və F-Droid Store-da pulsuz olaraq mövcuddur\n\nSizin blabber.im Team</string>
@@ -1087,7 +1090,6 @@
     <string name="unable_to_parse_invite">Dəvəti açmaq olmur</string>
     <string name="server_does_not_support_easy_onboarding_invites">Server dəvət generasiyasını dəstəkləmir</string>
     <string name="your_server">Sizin provayder</string>
-    <string name="tap_share_button_send_invite">Kontaktınıza dəvəti göndərmək üçün Göndər düyməsini basın.</string>
     <string name="invite">Dəvət</string>
     <string name="if_contact_is_nearby_use_qr">Kontaktınız yaxınlıqdakı olduqda, dəvətinizi qəbul etmək üçün aşağıdakı kodu də tarayabilir.</string>
     <string name="easy_invite_share_text">%1$s-ə qoşulun və mənimlə əlaqə saxlayın: %2$s</string>
@@ -1117,7 +1119,7 @@
     <string name="files">fayllar</string>
     <string name="all_media_files">media fayllar</string>
     <string name="memory_warning">Mesenceriniz %1$s (%2$s) daxili yaddaşdan istifadə edir.\n\nSiz avtomatik qoşmanın silinməsi ilə əlaqədar avtomatik mesaj silinməsini aktivləşdirə və ya saxlanan medianı əl ilə silə bilərsiniz.</string>
-    <string name="memory_warning_force">Mesenceriniz %1$s (%2$s) daxili yaddaşdan istifadə edir.\n\nSiz avtomatik qoşmanın silinməsi ilə əlaqədar avtomatik mesaj silinməsini təmin etməli və ya saxlanan medianı əl ilə silməlisiniz. Cihazınız yaddaşdan çıxacaq!</string>
+    <string name="memory_warning_force">Mesenceriniz %1$s (%2$s) daxili yaddaşdan istifadə edir.\n\nSiz avtomatik qoşmanın silinməsi ilə əlaqədar avtomatik mesaj silinməsini təmin etməli və ya saxlanan medianı əl ilə silməlisiniz!</string>
     <string name="open_settings">Ayarları açın</string>
     <string name="oldAndroidVersion">Köhnə Android versiyası</string>
     <string name="oldAndroidVersionMessage">Gələcək yeniləmələrdə artıq dəstəklənməyəcək köhnə bir Android versiyasından istifadə edirsiniz. Blabber.im versiyası 3.1.0-dan yalnız Android 5 və ya daha yüksək olan cihazlara dəstək verilir. Zəhmət olmasa cihazınızın proqram təminatını yeniləyin.</string>
@@ -1131,4 +1133,8 @@
     <string name="remove_all_individual_notifications_message">Kontaktlarınız və qruplarınız üçün qurulmuş bütün fərdi bildirişləri silmək istəyirsiniz?</string>
     <string name="exit">Çıxış</string>
     <string name="record_voice_mail">Səsli mesajı yazın</string>
+    <string name="backup_started_message">Yedəkləmə başladıldı. Tamamlandıqdan sonra bildiriş alacaqsınız.</string>
+    <string name="error_security_exception">Bu faylı paylaşdığınız tətbiq kifayət qədər icazələrə malik deyil.</string>
+    <string name="unable_to_enable_video">Videonu aktiv etmək olmur.</string>
+    <string name="delete_recording_dialog_message">Həqiqətən yazını ləğv etmək və silmək istəyirsiniz?</string>
 </resources>

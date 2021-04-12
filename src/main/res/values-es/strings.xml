@@ -622,6 +622,10 @@
         <item quantity="one">%d mes</item>
         <item quantity="other">%d meses</item>
     </plurals>
+    <plurals name="years">
+        <item quantity="one">%d año</item>
+        <item quantity="other">%d años</item>
+    </plurals>
     <string name="today">Hoy</string>
     <string name="pref_use_max_brightness_summary">Cambiar el brillo al máximo cuando esté viendo videos o imágenes en pantalla completa.</string>
     <string name="pref_use_max_brightness">Brillo al máximo</string>
@@ -1114,8 +1118,8 @@
     <string name="videos">vídeos</string>
     <string name="files">ficheros</string>
     <string name="all_media_files">ficheros multimedia</string>
-    <string name="memory_warning">Tu aplicación está usando %1$s (%2$s) de memoria interna.\n\nPuedes habilitar el borrado automático de mensajes en relación con el borrado automático de adjuntos o borrar manualmente los medios almacenados.</string>
-    <string name="memory_warning_force">Tu aplicación está usando %1$s (%2$s) de memoria interna.\n\nDeberías habilitar el borrado automático de mensajes en relación con el borrado automático de adjuntos o borrar manualmente los medios almacenados. ¡Tu dispositivo se quedará sin memoria!</string>
+    <string name="memory_warning">Tu aplicación está usando %1$s (%2$s) de memoria interna.\n\nPuedes habilitar el borrado automático de adjuntos o borrar manualmente los medios almacenados.</string>
+    <string name="memory_warning_force">Tu aplicación está usando %1$s (%2$s) de memoria interna.\n\nDeberías habilitar el borrado automático de adjuntos o borrar manualmente los medios almacenados. ¡Tu dispositivo se quedará sin memoria!</string>
     <string name="open_settings">Abrir configuraciones</string>
     <string name="oldAndroidVersion">Versión antigua de Android</string>
     <string name="oldAndroidVersionMessage">Estás usando una versión de Android antigua que no será soportada en futuras actualizaciones. A partir de la versión 3.1.0 de blabber.im solo tendrán soporte los dispositivos con Android 5 o superior. Por favor actualiza el firmware de tu dispositivo.</string>
@@ -1129,4 +1133,8 @@
     <string name="remove_all_individual_notifications_message">¿Realmente quieres borrar todas las notificaciones individuales para tus contactos y grupos?</string>
     <string name="exit">Salir</string>
     <string name="record_voice_mail">Graba mensaje de voz</string>
+    <string name="backup_started_message">Ha comenzado la copia de seguridad. Se te notificará cuando haya terminado.</string>
+    <string name="error_security_exception">La aplicación que has usado para compartir este fichero no proporciona suficientes permisos.</string>
+    <string name="unable_to_enable_video">Incapaz de activar vídeo.</string>
+    <string name="delete_recording_dialog_message">¿Realmente quieres cancelar y borrar tu grabación?</string>
 </resources>
