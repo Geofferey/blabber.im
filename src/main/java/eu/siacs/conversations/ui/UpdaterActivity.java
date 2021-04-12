@@ -359,7 +359,7 @@ public class UpdaterActivity extends XmppActivity {
                 }
                 connection.setConnectTimeout(Config.SOCKET_TIMEOUT * 1000);
                 connection.setReadTimeout(Config.SOCKET_TIMEOUT * 1000);
-                connection.setRequestProperty("User-Agent", context.getString(R.string.app_name));
+                connection.setRequestProperty("User-agent", System.getProperty("http.agent"));
                 connection.connect();
 
                 // expect HTTP 200 OK, so we don't mistakenly save error report

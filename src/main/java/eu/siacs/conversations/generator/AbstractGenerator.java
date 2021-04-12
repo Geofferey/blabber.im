@@ -89,7 +89,7 @@ public abstract class AbstractGenerator {
     }
 
     public String getUserAgent() {
-        return mXmppConnectionService.getString(R.string.app_name) + '/' + getIdentityVersion();
+        return System.getProperty("http.agent");
     }
 
     String getIdentityType() {

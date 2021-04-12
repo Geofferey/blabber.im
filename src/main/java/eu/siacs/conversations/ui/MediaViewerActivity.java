@@ -35,7 +35,6 @@ import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 
 import java.io.File;
@@ -43,7 +42,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
 
-import eu.siacs.conversations.BuildConfig;
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.databinding.ActivityMediaViewerBinding;
@@ -325,7 +323,7 @@ public class MediaViewerActivity extends XmppActivity implements AudioManager.On
             });
             player.setRepeatMode(Player.REPEAT_MODE_OFF);
             binding.messageVideoView.setPlayer(player);
-            DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this, Util.getUserAgent(this, BuildConfig.APPLICATION_ID));
+            DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this, xmppConnectionService.getIqGenerator().getUserAgent());
             MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
             player.prepare(videoSource);
             requestAudioFocus();
