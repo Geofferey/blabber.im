@@ -32,7 +32,6 @@ package eu.siacs.conversations.ui;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,21 +42,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import com.google.common.collect.Collections2;
-
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.databinding.FragmentConversationsOverviewBinding;
-import eu.siacs.conversations.entities.Account;
 import eu.siacs.conversations.entities.Conversation;
 import eu.siacs.conversations.ui.adapter.ConversationAdapter;
 import eu.siacs.conversations.ui.interfaces.OnConversationSelected;
@@ -65,7 +59,6 @@ import eu.siacs.conversations.ui.util.PendingActionHelper;
 import eu.siacs.conversations.ui.util.PendingItem;
 import eu.siacs.conversations.ui.util.ScrollState;
 import eu.siacs.conversations.utils.MenuDoubleTabUtil;
-import eu.siacs.conversations.utils.EasyOnboardingInvite;
 
 public class ConversationsOverviewFragment extends XmppFragment {
 

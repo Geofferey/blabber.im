@@ -36,11 +36,11 @@ import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.utils.Namespace;
 import eu.siacs.conversations.xml.Element;
 import eu.siacs.conversations.xmpp.InvalidJid;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.OnIqPacketReceived;
 import eu.siacs.conversations.xmpp.OnUpdateBlocklist;
 import eu.siacs.conversations.xmpp.forms.Data;
 import eu.siacs.conversations.xmpp.stanzas.IqPacket;
-import eu.siacs.conversations.xmpp.Jid;
 
 public class IqParser extends AbstractParser implements OnIqPacketReceived {
 

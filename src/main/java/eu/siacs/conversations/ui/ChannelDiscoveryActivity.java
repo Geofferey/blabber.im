@@ -37,8 +37,8 @@ import eu.siacs.conversations.ui.adapter.ChannelSearchResultAdapter;
 import eu.siacs.conversations.ui.util.PendingItem;
 import eu.siacs.conversations.ui.util.SoftKeyboardUtils;
 import eu.siacs.conversations.utils.AccountUtils;
-import me.drakeet.support.toast.ToastCompat;
 import eu.siacs.conversations.xmpp.Jid;
+import me.drakeet.support.toast.ToastCompat;
 
 public class ChannelDiscoveryActivity extends XmppActivity implements MenuItem.OnActionExpandListener, TextView.OnEditorActionListener, ChannelDiscoveryService.OnChannelSearchResultsFound, ChannelSearchResultAdapter.OnChannelSearchResultSelected {
 

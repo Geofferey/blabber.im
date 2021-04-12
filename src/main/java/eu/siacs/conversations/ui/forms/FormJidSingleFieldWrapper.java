@@ -6,8 +6,8 @@ import android.text.InputType;
 import java.util.List;
 
 import eu.siacs.conversations.R;
-import eu.siacs.conversations.xmpp.forms.Field;
 import eu.siacs.conversations.xmpp.Jid;
+import eu.siacs.conversations.xmpp.forms.Field;
 
 public class FormJidSingleFieldWrapper extends FormTextFieldWrapper {
 

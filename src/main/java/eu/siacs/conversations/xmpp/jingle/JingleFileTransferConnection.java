@@ -44,6 +44,7 @@ import eu.siacs.conversations.services.AbstractConnectionManager;
 import eu.siacs.conversations.utils.CryptoHelper;
 import eu.siacs.conversations.utils.Namespace;
 import eu.siacs.conversations.xml.Element;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.OnIqPacketReceived;
 import eu.siacs.conversations.xmpp.jingle.stanzas.Content;
 import eu.siacs.conversations.xmpp.jingle.stanzas.FileTransferDescription;
@@ -53,7 +54,6 @@ import eu.siacs.conversations.xmpp.jingle.stanzas.JinglePacket;
 import eu.siacs.conversations.xmpp.jingle.stanzas.Reason;
 import eu.siacs.conversations.xmpp.jingle.stanzas.S5BTransportInfo;
 import eu.siacs.conversations.xmpp.stanzas.IqPacket;
-import eu.siacs.conversations.xmpp.Jid;
 
 public class JingleFileTransferConnection extends AbstractJingleConnection implements Transferable {
     private final SimpleDateFormat fileDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmssSSS", Locale.US);

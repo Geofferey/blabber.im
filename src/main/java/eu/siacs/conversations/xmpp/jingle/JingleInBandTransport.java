@@ -18,9 +18,9 @@ import eu.siacs.conversations.entities.DownloadableFile;
 import eu.siacs.conversations.persistance.FileBackend;
 import eu.siacs.conversations.services.AbstractConnectionManager;
 import eu.siacs.conversations.xml.Element;
+import eu.siacs.conversations.xmpp.Jid;
 import eu.siacs.conversations.xmpp.OnIqPacketReceived;
 import eu.siacs.conversations.xmpp.stanzas.IqPacket;
-import eu.siacs.conversations.xmpp.Jid;
 
 public class JingleInBandTransport extends JingleTransport {
 

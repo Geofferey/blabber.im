@@ -18,11 +18,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
-import com.google.common.base.Strings;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.google.common.base.Strings;
 
 import java.util.ArrayList;
 import java.util.Arrays;

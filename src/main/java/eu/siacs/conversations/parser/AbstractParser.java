@@ -13,8 +13,8 @@ import eu.siacs.conversations.entities.MucOptions;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.xml.Element;
 import eu.siacs.conversations.xmpp.InvalidJid;
-import eu.siacs.conversations.xmpp.stanzas.AbstractStanza;
 import eu.siacs.conversations.xmpp.Jid;
+import eu.siacs.conversations.xmpp.stanzas.AbstractStanza;
 
 public abstract class AbstractParser {
 

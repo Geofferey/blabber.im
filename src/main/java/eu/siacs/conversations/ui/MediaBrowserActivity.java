@@ -3,7 +3,6 @@ package eu.siacs.conversations.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +13,6 @@ import androidx.databinding.DataBindingUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.databinding.ActivityMediaBrowserBinding;
 import eu.siacs.conversations.entities.Account;

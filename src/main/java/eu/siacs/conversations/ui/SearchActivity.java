@@ -45,8 +45,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
-import com.google.common.base.Strings;
 
+import com.google.common.base.Strings;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

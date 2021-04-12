@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
@@ -29,8 +30,8 @@ import eu.siacs.conversations.ui.adapter.KnownHostsAdapter;
 import eu.siacs.conversations.ui.interfaces.OnBackendConnected;
 import eu.siacs.conversations.ui.util.DelayedHintHelper;
 import eu.siacs.conversations.utils.CryptoHelper;
-import eu.siacs.conversations.xmpp.XmppConnection;
 import eu.siacs.conversations.xmpp.Jid;
+import eu.siacs.conversations.xmpp.XmppConnection;
 
 public class CreatePublicChannelDialog extends DialogFragment implements OnBackendConnected {
 

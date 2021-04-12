@@ -6,11 +6,11 @@ import android.util.Base64;
 
 import androidx.annotation.NonNull;
 
+import com.google.common.base.Strings;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.google.common.base.Strings;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
