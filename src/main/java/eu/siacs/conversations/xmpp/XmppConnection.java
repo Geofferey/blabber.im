@@ -855,7 +855,12 @@ public class XmppConnection implements Runnable {
             throw new StateChangingException(Account.State.TLS_ERROR);
         }
         final InetAddress address = socket.getInetAddress();
-        final SSLSocket sslSocket = (SSLSocket) tlsFactoryVerifier.factory.createSocket(socket, address.getHostAddress(), socket.getPort(), true);
+        final SSLSocket sslSocket;
+        try {
+          sslSocket = (SSLSocket) tlsFactoryVerifier.factory.createSocket(socket, address.getHostAddress(), socket.getPort(), true);
+        } catch (Exception e) {
+            throw new StateChangingException(Account.State.TLS_ERROR);
+        }
         SSLSocketHelper.setSecurity(sslSocket);
         SSLSocketHelper.setHostname(sslSocket, IDN.toASCII(account.getServer()));
         SSLSocketHelper.setApplicationProtocol(sslSocket, "xmpp-client");
