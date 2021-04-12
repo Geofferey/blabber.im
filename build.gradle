@@ -129,9 +129,9 @@ android {
 
     packagingOptions {
         //X86
-        //exclude "lib/x86/**"
+        exclude "lib/x86/**"
         //X86_64
-        //exclude "lib/x86_64/**"
+        exclude "lib/x86_64/**"
         //armeabi
         //exclude "lib/armeabi/**"
     }
