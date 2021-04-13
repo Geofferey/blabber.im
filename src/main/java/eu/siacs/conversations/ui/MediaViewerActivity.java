@@ -323,7 +323,7 @@ public class MediaViewerActivity extends XmppActivity implements AudioManager.On
             });
             player.setRepeatMode(Player.REPEAT_MODE_OFF);
             binding.messageVideoView.setPlayer(player);
-            DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this, xmppConnectionService.getIqGenerator().getUserAgent());
+            DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this, System.getProperty("http.agent"));
             MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
             player.prepare(videoSource);
             requestAudioFocus();
