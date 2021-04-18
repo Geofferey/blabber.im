@@ -96,6 +96,7 @@ import eu.siacs.conversations.entities.Transferable;
 import eu.siacs.conversations.entities.TransferablePlaceholder;
 import eu.siacs.conversations.http.HttpDownloadConnection;
 import eu.siacs.conversations.persistance.FileBackend;
+import eu.siacs.conversations.services.AttachFileToConversationRunnable;
 import eu.siacs.conversations.services.MessageArchiveService;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.ui.adapter.MediaPreviewAdapter;
@@ -758,34 +759,6 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
     }
 
     private void attachPhotoToConversation(Conversation conversation, Uri uri) {
-        if (conversation == null) {
-            return;
-        }
-        final Toast prepareFileToast = ToastCompat.makeText(getActivity(), getText(R.string.preparing_image), ToastCompat.LENGTH_LONG);
-        prepareFileToast.show();
-        activity.delegateUriPermissionsToService(uri);
-        activity.xmppConnectionService.attachImageToConversation(conversation, uri,
-                new UiCallback<Message>() {
-
-                    @Override
-                    public void userInputRequired(PendingIntent pi, Message object) {
-                        hidePrepareFileToast(prepareFileToast);
-                    }
-
-                    @Override
-                    public void success(Message message) {
-                        hidePrepareFileToast(prepareFileToast);
-                    }
-
-                    @Override
-                    public void error(final int error, Message message) {
-                        hidePrepareFileToast(prepareFileToast);
-                        activity.runOnUiThread(() -> activity.replaceToast(getString(error)));
-                    }
-                });
-    }
-
-    private void attachImagesToConversation(Conversation conversation, Uri uri) {
         if (conversation == null) {
             return;
         }
@@ -2417,8 +2390,6 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
                         });
                 builder.create().show();
             });
-
-
             showSnackbar(R.string.no_write_access_in_public_muc, R.string.ok, clickToMuc);
         }
     }
@@ -2641,6 +2612,8 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
             } else {
                 hideSnackbar();
             }
+        } else if (conversation.getUuid().equalsIgnoreCase(AttachFileToConversationRunnable.isCompressingVideo)) {
+            showSnackbar(R.string.transcoding_video, 0, null);
         } else {
             hideSnackbar();
         }
@@ -2786,6 +2759,8 @@ public class ConversationFragment extends XmppFragment implements EditMessage.Ke
         if (activity != null) {
             this.binding.textSendButton.setImageResource(SendButtonTool.getSendButtonImageResource(activity, action, status));
         }
+        updateSnackBar(conversation);
+        updateChatMsgHint();
     }
 
     protected void updateStatusMessages() {

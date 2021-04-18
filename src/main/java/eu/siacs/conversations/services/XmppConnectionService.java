@@ -574,7 +574,7 @@ public class XmppConnectionService extends Service {
         }
         Log.d(Config.LOGTAG, "attachFile: type=" + message.getType());
         Log.d(Config.LOGTAG, "counterpart=" + message.getCounterpart());
-        final AttachFileToConversationRunnable runnable = new AttachFileToConversationRunnable(this, uri, type, message, callback, getMaxHttpUploadSize(conversation));
+        final AttachFileToConversationRunnable runnable = new AttachFileToConversationRunnable(this, uri, type, message, conversation, callback, getMaxHttpUploadSize(conversation));
         if (runnable.isVideoMessage()) {
             mVideoCompressionExecutor.execute(runnable);
         } else {
