@@ -1,5 +1,10 @@
 ### Changelog
 
+#### Version 3.0.6
+* show message in chat, during video transcoding (blabber.im)
+* Fixed 'No Connectivity' issues on Android 7.1
+* bug fixes
+
 #### Version 3.0.5
 * improve compatibility with non libwebrtc WebRTC implementations
 * improve memory management (blabber.im)

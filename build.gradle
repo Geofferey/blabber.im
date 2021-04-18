@@ -105,8 +105,8 @@ android {
         targetSdkVersion 29
 
         //versionNameSuffix " beta_(2021-04-10)" // " beta_(XXXX-XX-XX)" // activate for beta versions
-        versionCode 323
-        versionName "3.0.5"
+        versionCode 324
+        versionName "3.0.6"
         //resConfigs "en"
 
         archivesBaseName += "-$versionName"
@@ -198,8 +198,9 @@ android {
     }
 
     lintOptions {
+        error 'StringFormatInvalid' , 'StringFormatMatches'
         disable 'ExtraTranslation', 'MissingTranslation', 'InvalidPackage', 'MissingQuantity', 'AppCompatResource', 'RestrictedApi'
-        //abortOnError false
+        abortOnError true
     }
 
     subprojects {

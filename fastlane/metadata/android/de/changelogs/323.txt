@@ -1,0 +1,7 @@
+* improve compatibility with non libwebrtc WebRTC implementations
+* improve memory management (blabber.im)
+* ui improvements (blabber.im)
+* fix HTTP up/download for users that don’t trust system CAs
+* various bug fixes around Tor support
+* improve call compatibility with Dino
+* bug fixes
