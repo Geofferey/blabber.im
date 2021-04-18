@@ -1592,7 +1592,6 @@ public class NotificationService {
     Notification createForegroundNotification() {
         final Notification.Builder mBuilder = new Notification.Builder(mXmppConnectionService);
         mBuilder.setContentTitle(mXmppConnectionService.getString(R.string.conversations_foreground_service));
-        Account mAccount = null;
         String status;
         final List<Account> accounts = mXmppConnectionService.getAccounts();
         int enabled = 0;
@@ -1607,7 +1606,7 @@ public class NotificationService {
                 }
             }
             if (accounts.size() == 1) {
-                mAccount = accounts.get(0);
+                Account mAccount = accounts.get(0);
                 if (mAccount.getStatus() == Account.State.ONLINE) {
                     status = "(" + mXmppConnectionService.getString(R.string.account_status_online) + ")";
                     status = " " + status;
