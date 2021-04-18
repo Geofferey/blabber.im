@@ -251,32 +251,38 @@ public class FileBackend {
     }
 
     public void expireOldFiles(File dir, long timestamp) {
-        long start = SystemClock.elapsedRealtime();
-        int num = 0;
-        if (dir == null) {
-            return;
-        }
-        Stack<File> dirlist = new Stack<File>();
-        dirlist.clear();
-        dirlist.push(dir);
-        while (!dirlist.isEmpty()) {
-            File dirCurrent = dirlist.pop();
-            File[] fileList = dirCurrent.listFiles();
-            for (File file : fileList) {
-                if (file.isDirectory()) {
-                    dirlist.push(file);
-                } else {
-                    if (file.exists() && !file.getName().equalsIgnoreCase(".nomedia")) {
-                        long lastModified = file.lastModified();
-                        if (lastModified < timestamp) {
-                            num++;
-                            deleteFile(file);
+        try {
+            long start = SystemClock.elapsedRealtime();
+            int num = 0;
+            if (dir == null) {
+                return;
+            }
+            Stack<File> dirlist = new Stack<File>();
+            dirlist.clear();
+            dirlist.push(dir);
+            while (!dirlist.isEmpty()) {
+                File dirCurrent = dirlist.pop();
+                File[] fileList = dirCurrent.listFiles();
+                if (fileList != null) {
+                    for (File file : fileList) {
+                        if (file.isDirectory()) {
+                            dirlist.push(file);
+                        } else {
+                            if (file.exists() && !file.getName().equalsIgnoreCase(".nomedia")) {
+                                long lastModified = file.lastModified();
+                                if (lastModified < timestamp) {
+                                    num++;
+                                    deleteFile(file);
+                                }
+                            }
                         }
                     }
                 }
             }
+            Log.d(Config.LOGTAG, "deleted " + num + " expired files in " + (SystemClock.elapsedRealtime() - start) + "ms");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        Log.d(Config.LOGTAG, "deleted " + num + " expired files in " + (SystemClock.elapsedRealtime() - start) + "ms");
     }
 
     public void deleteFilesInDir(File dir) {
