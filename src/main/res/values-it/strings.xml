@@ -87,7 +87,7 @@
     <string name="send_unencrypted">Invia non cifrato</string>
     <string name="decryption_failed">Decifrazione fallita. Forse non disponi della chiave privata corretta.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">%s usa una app di terze parti chiamata <b>OpenKeychain</b> per cifrare e decifrare i messaggi e per gestire le tue chiavi pubbliche.\n\nOpenKeychain è rilasciato secondo i termini della licenza GPLv3 ed è disponibile sia su F-Droid che su Google Play.\n\n<small>(Per favore riavvia %s in seguito.)</small></string>
+    <string name="openkeychain_required_long">%1$s usa una app di terze parti chiamata <b>OpenKeychain</b> per cifrare e decifrare i messaggi e per gestire le tue chiavi pubbliche.\n\nOpenKeychain è rilasciato secondo i termini della licenza GPLv3 ed è disponibile sia su F-Droid che su Google Play.\n\n<small>(Per favore riavvia %1$s in seguito.)</small></string>
     <string name="restart">Riavvia</string>
     <string name="install">Installa</string>
     <string name="offering">offrendo…</string>
@@ -1118,6 +1118,8 @@
     <string name="videos">video</string>
     <string name="files">file</string>
     <string name="all_media_files">file multimediali</string>
+    <string name="memory_warning">L\'applicazione sta utilizzando %1$s (%2$s) di memoria interna.\n\nPuoi abilitare l\'eliminazione automatica degli allegati o eliminare i file multimediali manualmente.</string>
+    <string name="memory_warning_force">L\'applicazione sta utilizzando %1$s (%2$s) di memoria interna.\n\nDovresti abilitare l\'eliminazione automatica degli allegati o eliminare i file multimediali manualmente. Diversamente il tuo dispositivo finirà la memoria a disposizione!</string>
     <string name="open_settings">Apri impostazioni</string>
     <string name="oldAndroidVersion">Vecchia versione di Android</string>
     <string name="oldAndroidVersionMessage">Stai utilizzando una vecchia versione di Android che non sarà più supportata dagli aggiornamenti futuri. Da blabber.im versione 3.1.0 solo i dispositivi con Android 5 o superiore saranno supportati. Per favore aggiorna il firmware del tuo dispositivo.</string>
@@ -1131,4 +1133,8 @@
     <string name="remove_all_individual_notifications_message">Vuoi veramente rimuovere tutte le notifiche individuali impostate per i tuoi contatti e gruppi?</string>
     <string name="exit">Esci</string>
     <string name="record_voice_mail">Registra messaggio vocale</string>
+    <string name="backup_started_message">Il backup è iniziato. Arriverà una notifica una volta che sarà stato completato.</string>
+    <string name="error_security_exception">L\'applicazione che hai utilizzato per condividere questo file non ha fornito sufficienti permessi.</string>
+    <string name="unable_to_enable_video">Impossibile abilitare il video.</string>
+    <string name="delete_recording_dialog_message">Vuoi veramente annullare e eliminare la tua registrazione?</string>
 </resources>

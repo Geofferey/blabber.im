@@ -89,7 +89,7 @@
     <string name="send_unencrypted">Отправить незашифрованным</string>
     <string name="decryption_failed">Расшифровка не удалась. Возможно, у вас нет правильного приватного ключа.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">%s использует приложение <b>OpenKeychain</b> для шифрования/расшифровки сообщений и управления Вашими открытыми ключами.\n\nOpenKeychain лицензирован под GPLv3 и доступен в F-Droid и Google Play.\n\n<small>(После этого %s перезапустите.)</small></string>
+    <string name="openkeychain_required_long">%1$s использует приложение <b>OpenKeychain</b> для шифрования/расшифровки сообщений и управления Вашими открытыми ключами.\n\nOpenKeychain лицензирован под GPLv3 и доступен в F-Droid и Google Play.\n\n<small>(После этого %1$s перезапустите.)</small></string>
     <string name="restart">Перезапуск</string>
     <string name="install">Установка</string>
     <string name="offering">предложение…</string>

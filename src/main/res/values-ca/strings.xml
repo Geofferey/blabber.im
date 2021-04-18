@@ -87,7 +87,7 @@
     <string name="send_unencrypted">Enviar sense xifrar</string>
     <string name="decryption_failed">Error en el desxifrar. Pot ser no tinguis la clau privada apropiada.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">%s utiliza una aplicación de terceros llamada <b>OpenKeychain</b> per a xifrar i desxifrar missatges i gestionar les seves claus públiques.\n\nOpenKeychain té llicència GPLv3 i està disponible en F-Droid i Google Play.\n\n<small>(Si us plau, reiniciï %s després.)</small></string>
+    <string name="openkeychain_required_long">%1$s utiliza una aplicación de terceros llamada <b>OpenKeychain</b> per a xifrar i desxifrar missatges i gestionar les seves claus públiques.\n\nOpenKeychain té llicència GPLv3 i està disponible en F-Droid i Google Play.\n\n<small>(Si us plau, reiniciï %1$s després.)</small></string>
     <string name="restart">Reiniciar</string>
     <string name="install">Instal·lar</string>
     <string name="offering">Oferint…</string>

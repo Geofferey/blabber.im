@@ -87,7 +87,7 @@
     <string name="send_unencrypted">Şifrəsiz göndər</string>
     <string name="decryption_failed">Şifrəni açma uğursuz oldu. Bəlkə də, müvafiq özəl açarınız yoxdur.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">&amp;s mesajları şifrələmək və şifrəni açmaq və açıq açarlarınızı idarə etmək üçün <b>OpenKeychain</b>; adlı üçüncü bir tətbiqdən istifadə edir.\n\nOpenKeychain GPLv3-lə lisenziyalıdır və F-Droid və Google Play-də mövcuddur.\n\n<small>(Zəhmət olmasa %s sonra yenidən başladın.)</small></string>
+    <string name="openkeychain_required_long">%1$s mesajları şifrələmək və şifrəni açmaq və açıq açarlarınızı idarə etmək üçün <b>OpenKeychain</b>; adlı üçüncü bir tətbiqdən istifadə edir.\n\nOpenKeychain GPLv3-lə lisenziyalıdır və F-Droid və Google Play-də mövcuddur.\n\n<small>(Zəhmət olmasa %1$s sonra yenidən başladın.)</small></string>
     <string name="restart">Yenidən başlat</string>
     <string name="install">Quraşdır</string>
     <string name="offering">təklif edilir…</string>

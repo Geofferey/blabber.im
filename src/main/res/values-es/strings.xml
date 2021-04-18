@@ -87,7 +87,7 @@
     <string name="send_unencrypted">Enviar sin cifrar</string>
     <string name="decryption_failed">Falló el descifrado. Tal vez no tengas la clave privada apropiada.</string>
     <string name="openkeychain_required">OpenKeychain</string>
-    <string name="openkeychain_required_long">%s usa una aplicación de terceros llamada <b>OpenKeyChain</b> para cifrar y descifrar mensajes y para gestionar tus claves públicas.\n\nOpenKeyChain tiene licencia GPLv3 y está disponible en F-Droid y Google Play.\n\n<small>(Por favor reiniciar %s después.)</small></string>
+    <string name="openkeychain_required_long">%1$s usa una aplicación de terceros llamada <b>OpenKeyChain</b> para cifrar y descifrar mensajes y para gestionar tus claves públicas.\n\nOpenKeyChain tiene licencia GPLv3 y está disponible en F-Droid y Google Play.\n\n<small>(Por favor reiniciar %1$s después.)</small></string>
     <string name="restart">Reiniciar</string>
     <string name="install">Instalar</string>
     <string name="offering">ofreciendo…</string>
