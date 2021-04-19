@@ -48,3 +48,4 @@ src/standardPush/res/values/gcm.xml
 /.github/ISSUE_TEMPLATE.md
 crowdin.properties
 /languages.sh
+/google-services.json
