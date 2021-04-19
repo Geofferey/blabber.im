@@ -665,7 +665,7 @@
     <string name="application_found_to_open_website">Aucune application trouvée pour afficher le site web</string>
     <string name="open_website">Ouvrir le site web</string>
     <string name="pref_headsup_notifications">Notifications « pop-up »</string>
-    <string name="pref_headsup_notifications_summary">Afficher les notifications « pop-up ».</string>
+    <string name="pref_headsup_notifications_summary">Afficher les « pop-up » de notifications.</string>
     <string name="yesterday">Hier</string>
     <string name="pref_validate_hostname">Valider le nom de domaine avec DNSSEC</string>
     <string name="pref_validate_hostname_summary">Les certificats serveur qui comportent le nom de domaine validé sont considérés comme vérifiés.</string>
@@ -897,7 +897,7 @@
     <string name="password_forgotten_title">Mot de passe oublié</string>
     <string name="password_forgotten_text">Vous avez oublié le mot de passe de votre compte ? Nous allons maintenant essayer d\'ouvrir le site Web d\'assistance de votre fournisseur.</string>
     <string name="set_settings_intro">Vous pouvez définir ici les paramètres de confidentialité selon vos besoins. Tous les paramètres peuvent aussi être modifiés plus tard.</string>
-    <string name="pref_show_mappreview_inside_summary">Afficher des aperçus de cartes directement dans la vue du chat, une connexion au serveur blabber.im sera établie.</string>
+    <string name="pref_show_mappreview_inside_summary">Afficher les aperçus de cartes directement dans la discussion, une connexion au serveur blabber.im sera nécessaire.</string>
     <string name="pref_show_mappreview_inside">Afficher les aperçus de géolocalisation</string>
     <string name="pref_use_internal_updater_summary">Vérifier les mises à jour de l\'application quotidiennement.</string>
     <string name="pref_use_internal_updater">Vérifier les mises à jour</string>
@@ -1096,7 +1096,7 @@
     <string name="share_invite_with">Partager une invitation avec…</string>
     <string name="no_active_accounts_support_this">Aucun compte actif ne supporte cette fonction</string>
     <string name="server_info_easy_invite">XEP-0401: Easy User Onboarding</string>
-    <string name="pref_mappreview_host_summary">Utiliser un hôte pour visualiser la carte personnalisée</string>
+    <string name="pref_mappreview_host_summary">Utiliser un serveur hôte pour visualiser la carte personnalisée.</string>
     <string name="pref_mappreview_host">Hôte pour aperçu de la carte</string>
     <string name="webview_not_available">Aperçu web non disponible sur votre appareil.</string>
     <string name="pref_easy_downloader_summary">Télécharger automatiquement les pièces jointes des canaux publics et des inconnus au lieu d\'un téléchargement manuel.</string>
@@ -1118,6 +1118,8 @@
     <string name="videos">vidéos</string>
     <string name="files">fichiers</string>
     <string name="all_media_files">fichiers médias</string>
+    <string name="memory_warning">blabber.im utilise %1$s (%2$s) de mémoire interne. \n\nVous pouvez activer la suppression automatique des pièces jointes ou supprimer manuellement les médias stockés.</string>
+    <string name="memory_warning_force">blabber.im utilise %1$s (%2$s) de mémoire interne.\n\nVous devez activer la suppression automatique des pièces jointes ou supprimer manuellement les médias stockés. Votre appareil va se retrouver à court de mémoire !</string>
     <string name="open_settings">Ouvrir les paramètres</string>
     <string name="oldAndroidVersion">Ancienne version d\'Android</string>
     <string name="oldAndroidVersionMessage">Vous utilisez une ancienne version d\'Android qui ne sera plus prise en charge dans les futures mises à jour. À partir de la version 3.1.0 de blabber.im, seuls les appareils avec Android 5 ou supérieur sont pris en charge. Veuillez mettre à jour l\'OS de votre appareil.</string>
@@ -1131,4 +1133,8 @@
     <string name="remove_all_individual_notifications_message">Voulez-vous vraiment supprimer tout l\'ensemble de notifications individuelles pour vos contacts et groupes ?</string>
     <string name="exit">Quitter</string>
     <string name="record_voice_mail">Enregistrer un message audio</string>
+    <string name="backup_started_message">La sauvegarde a débuté. Vous recevrez une notification lorsqu\'elle sera terminée.</string>
+    <string name="error_security_exception">L\'application utilisée pour partager ce fichier n\'a pas fourni suffisamment d\'autorisations.</string>
+    <string name="unable_to_enable_video">Impossible d\'activer la vidéo.</string>
+    <string name="delete_recording_dialog_message">Voulez-vous vraiment annuler et effacer votre enregistrement ?</string>
 </resources>
