@@ -1,5 +1,8 @@
 ### Changelog
 
+#### Version 3.0.7
+* bug fixes for PlayStore version
+
 #### Version 3.0.6
 * show message in chat, during video transcoding (blabber.im)
 * Fixed 'No Connectivity' issues on Android 7.1
