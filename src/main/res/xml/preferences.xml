@@ -492,6 +492,11 @@
                 android:key="remove_trusted_certificates"
                 android:summary="@string/pref_remove_trusted_certificates_summary"
                 android:title="@string/pref_remove_trusted_certificates_title" />
+            <CheckBoxPreference
+                android:defaultValue="@bool/pause_voice"
+                android:key="pause_voice_on_move_from_ear"
+                android:summary="@string/pref_pause_voice_on_move_from_ear_summary"
+                android:title="@string/pref_pause_voice_on_move_from_ear" />
         </PreferenceCategory>
         <PreferenceCategory
             android:key="connection_options"

@@ -152,6 +152,10 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
+    public boolean autoPauseVoice() {
+        return activity.xmppConnectionService.pauseVoiceOnMoveFromEar();
+    }
+
     public void setVolumeControl(final int stream) {
         activity.setVolumeControlStream(stream);
     }

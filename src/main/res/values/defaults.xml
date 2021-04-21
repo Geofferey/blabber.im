@@ -90,6 +90,7 @@
     <integer name="high_video_res">1080</integer>
     <bool name="easy_downloader">true</bool>
     <bool name="hide_memory_warning">false</bool>
+    <bool name="pause_voice">false</bool>
     <integer name="individual_notification">0</integer>
 
     <string-array name="domains">

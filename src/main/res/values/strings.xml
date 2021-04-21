@@ -1139,4 +1139,6 @@
     <string name="error_security_exception">The app you used to share this file did not provide enough permissions.</string>
     <string name="unable_to_enable_video">Unable to enable video.</string>
     <string name="delete_recording_dialog_message">Do you really want to cancel and delete your recording?</string>
+    <string name="pref_pause_voice_on_move_from_ear">Pause voice message automatically</string>
+    <string name="pref_pause_voice_on_move_from_ear_summary">Pause the current voice message when you move your device away from your ear.</string>
 </resources>

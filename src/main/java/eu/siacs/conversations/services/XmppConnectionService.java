@@ -1055,6 +1055,10 @@ public class XmppConnectionService extends Service {
         }
     }
 
+    public boolean pauseVoiceOnMoveFromEar() {
+        return getBooleanPreference(SettingsActivity.PAUSE_VOICE, R.bool.pause_voice);
+    }
+
     public boolean easyDownloader() {
         return getBooleanPreference(SettingsActivity.EASY_DOWNLOADER, R.bool.easy_downloader);
     }

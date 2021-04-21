@@ -49,6 +49,7 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
     private final Sensor proximitySensor;
     private final PendingItem<WeakReference<ImageButton>> pendingOnClickView = new PendingItem<>();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private boolean isEarpieceBefore = false;
 
     private final Handler handler = new Handler();
 
@@ -162,7 +163,7 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
         if (player.isPlaying()) {
             viewHolder.progress.setEnabled(false);
             player.pause();
-            releaseAudiFocus();
+            releaseAudioFocus();
             messageAdapter.flagScreenOff();
             releaseProximityWakeLock();
             viewHolder.playPause.setImageResource(viewHolder.darkBackground ? R.drawable.ic_play_arrow_white_36dp : R.drawable.ic_play_arrow_black_36dp);
@@ -180,7 +181,11 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
 
     private void play(ViewHolder viewHolder, Message message, boolean earpiece, double progress) {
         if (play(viewHolder, message, earpiece)) {
+            if (messageAdapter.autoPauseVoice() && (isEarpieceBefore && !earpiece)) {
+                playPauseCurrent(viewHolder);
+            }
             AudioPlayer.player.seekTo((int) (AudioPlayer.player.getDuration() * progress));
+            isEarpieceBefore = earpiece;
         }
     }
 
@@ -233,7 +238,7 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
         if (AudioPlayer.player.isPlaying()) {
             AudioPlayer.player.stop();
         }
-        releaseAudiFocus();
+        releaseAudioFocus();
         AudioPlayer.player.release();
         messageAdapter.flagScreenOff();
         releaseProximityWakeLock();
@@ -379,7 +384,7 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
         if (AudioPlayer.player.getAudioStreamType() != streamType) {
             synchronized (AudioPlayer.LOCK) {
                 AudioPlayer.player.stop();
-                releaseAudiFocus();
+                releaseAudioFocus();
                 AudioPlayer.player.release();
                 AudioPlayer.player = null;
                 try {
@@ -457,7 +462,7 @@ public class AudioPlayer implements View.OnClickListener, MediaPlayer.OnCompleti
         }
     }
 
-    private void releaseAudiFocus() {
+    private void releaseAudioFocus() {
         AudioManager am = (AudioManager) messageAdapter.getActivity().getSystemService(Context.AUDIO_SERVICE);
         if (am != null) {
             am.abandonAudioFocus(this);
